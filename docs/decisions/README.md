@@ -32,8 +32,13 @@ record ends up deciding something that was never its own.
 | 0009 | Toolchain | What runs the code, what tests it, what builds it | Planned |
 | 0010 | Testing strategy | What is asserted by a command and what is only ever watched | Planned |
 | 0011 | Delivery | How it reaches the public URL, and when | Planned |
-| 0012 | Walking skeleton | What the first end-to-end slice contains | Planned |
 | 0013 | Origin of the core | Written here or taken from a package | Planned |
+
+**0012 is missing on purpose.** It was planned as a walking-skeleton record and
+dropped before it was written: a first end-to-end slice is work to be done, not
+a choice with alternatives. It becomes a ticket instead. **The number is not
+reused** — a number is how the rest of the project refers to a decision, and one
+that means something different later is worse than one that means nothing.
 
 `Planned` means the topic is fixed and the record is not yet written; it is the
 only status a row may carry without a file behind it. A `Planned` row is not a
