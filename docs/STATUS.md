@@ -17,9 +17,9 @@ anyone noticing one was on offer.
 
 ## The single clearest next step
 
-**Write decision 0001** — whether the simulation core is written here or taken
-from an existing package — and take it through the cycle to Accepted. Every
-other decision depends on the answer.
+**Answer the two open questions in [decision 0001](decisions/0001-write-the-simulation-core.md)**,
+which is `Proposed` and under review. Nothing else can start: 0006 depends on
+its answer, and every remaining decision depends on 0006.
 
 ## Implementation scale
 
@@ -28,7 +28,7 @@ that says whether anything exists:
 
 | Stage | Means |
 |---|---|
-| `planned` | Ticketed. Nothing written, not even the decision. |
+| `planned` | Nothing written. No decision, no ticket, no code. |
 | `decided` | The decision is Accepted. No code. |
 | `built` | Implemented, tested, and watched running. |
 | `live` | Deployed and reachable at the public URL. |

@@ -14,7 +14,7 @@ thing exists.** Implementation stage is tracked separately, in
 
 | # | Decision | Status |
 |---|---|---|
-| 0001 | Write the simulation core rather than take a package | Planned |
+| [0001](0001-write-the-simulation-core.md) | Write the simulation core rather than take a package | Proposed |
 | 0002 | Motion rules: bounded frame, minimum speed, no overlap | Planned |
 | 0003 | Pointer model, including touch | Planned |
 | 0004 | Neighbor search, and what triggers replacing it | Planned |
