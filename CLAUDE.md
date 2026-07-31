@@ -131,11 +131,11 @@ questions above the whole of the gate.
 Issues live at <https://github.com/nanatsusaya/dot-panic/issues>. Agents write
 tickets too, and are held to the same bar.
 
-- **Ready:** a scoped title; the goal and why it exists; concrete scope — the
-  decisions to make, or testable acceptance criteria; links to related
-  decisions.
-- **Done:** criteria met **and verified**; work and docs updated together; CI
-  green; merged; the ticket closed from the change description.
+The shape of a ticket, and what makes it ready and done, is
+[.github/ISSUE_TEMPLATE/task.md](.github/ISSUE_TEMPLATE/task.md) — the form an
+author actually sees. It is not restated here.
+
+Two labels, and no more: `type:decision` and `type:build`.
 
 ## Session rituals
 
