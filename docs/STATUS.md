@@ -8,9 +8,12 @@ The method has been adopted; nothing of the toy exists yet. The repository
 holds its operating rules, an empty decision set, and no simulation code at
 all.
 
-There is deliberately no `src/`, no `web/` and no deployment workflow. Which
-directories exist and what goes in them is settled by decisions 0001 and 0005,
-and inventing the layout before then would be implementing ahead of a decision.
+There is deliberately no `src/`, no `web/`, no deployment workflow and **no
+toolchain at all** — no runtime, no test runner, no package manifest. Which
+directories exist is settled by decisions 0001 and 0005; what runs and tests
+the code is decision 0006. Creating any of it before then would be
+implementing ahead of a decision, which is how a choice gets made without
+anyone noticing one was on offer.
 
 ## The single clearest next step
 
@@ -34,6 +37,7 @@ An accepted decision confers `decided` and nothing more.
 
 | Area | Stage |
 |---|---|
+| Toolchain | `planned` |
 | Simulation core | `planned` |
 | Rendering | `planned` |
 | Pointer handling | `planned` |

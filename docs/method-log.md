@@ -6,6 +6,35 @@ session would decide worse without it.
 
 Newest first.
 
+## 2026-07-31 — The agent built a toolchain nobody had decided on
+
+Setting up the repository, the agent wrote a `package.json` naming Node as the
+runtime, `node --test` as the test runner, ES modules as the module system and
+a minimum Node version. It then wrote those choices into the operating rules as
+settled conventions, alongside assertions about how the simulation core would
+be structured.
+
+None of it had been decided. The decider caught it and said so.
+
+What makes this worth an entry is not the mistake but its shape. Nothing about
+it looked like a decision while it was being made — it looked like ordinary
+setup, the kind of scaffolding that precedes the interesting work. A choice
+embodied in a config file does not announce itself, and by the time it appears
+in the operating rules as a convention it reads as something that was always
+true. That is exactly the failure the rule against implementing ahead of a
+decision describes, arriving in the least dramatic way available.
+
+Two consequences, kept:
+
+- **Scaffolding is not exempt.** A runtime, a test runner and a package manager
+  are decisions with alternatives and costs, whatever the ceremony of writing
+  them down feels like against how routine they seem.
+- **The operating-rules file is where pre-emption becomes invisible.** A
+  convention written there is read by every later session as established. It
+  may only state what a decision already owns.
+
+The toolchain question is now decision 0006, undecided.
+
 ## 2026-07-31 — The ceremony here is deliberately heavier than the stage warrants
 
 A toy this size would normally defer most of the decision and enforcement

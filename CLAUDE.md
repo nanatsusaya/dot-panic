@@ -24,15 +24,13 @@ read this repository and see how the work was actually run.
 
 ## Commands
 
-```bash
-npm test
-```
+**This project has no toolchain yet, and that is not an oversight.** No
+decision covers a runtime, a test runner, a package manager or a build step, so
+none of them exist here. Do not introduce one as a side effect of some other
+task; write the decision first.
 
-No build step and no dependencies. That is deliberate: the same ES modules must
-load in a browser and under `node --test`.
-
-To check this project against the method it declares in `method.json`, with the
-method repository cloned beside it:
+One command does exist, because it belongs to the method rather than to the
+toy. With the method repository cloned beside this one:
 
 ```bash
 node ../agent-driven-development/checks/check-method.mjs .
@@ -44,17 +42,18 @@ declaration, artifact, adaptation and decision-index checks — and still prints
 
 ## Working conventions specific to this project
 
-- **Zero dependencies, no build step.** Imports carry the `.js` extension so one
-  file works in both the browser and Node. Nothing may assume a bundler.
-- **The simulation core is pure.** State in, state out. It never touches the
-  DOM, never reads a clock, and never calls a random generator it was not
-  handed. Rendering reads the core; it never computes simulation state.
-- **A green test run is not evidence that the toy works.** The failures that
+- **A passing check is not evidence that the toy works.** The failures that
   matter here are visual. Anything touching motion is verified by watching it,
   and the change says what was watched and what was seen.
 - **Prefer the smaller, more boring artifact.** Someone judging the method reads
   these files, and length is the fastest way to make a method look like
   overhead.
+
+How the simulation is structured, what it is written against and how it is
+tested are open questions owned by the decisions in
+[docs/decisions/](docs/decisions/README.md). Until those are Accepted, this
+section stays short, because anything added to it would be a decision made by
+writing it down here rather than by deciding it.
 
 ## Decisions
 
@@ -82,9 +81,11 @@ declaration, artifact, adaptation and decision-index checks — and still prints
   questions about is a change that gets waved through.
 - **Commit messages** follow `type(scope): summary`, lowercase, describing what
   the change is rather than commanding. The body says why.
-- **Definition of done:** `npm test` green; anything with observable behavior
-  **exercised**, not merely built; docs changed in the same commit; CI green.
-  Report outcomes faithfully, including failures and skipped steps.
+- **Definition of done:** the criteria the task fixed **before it started**,
+  verified rather than assumed; anything with observable behavior **exercised**,
+  not merely built; docs changed in the same commit. There is no local command
+  chain to point at yet, and until a decision creates one this bullet is carried
+  by review alone — which is worth knowing rather than papering over.
 - **Hand work back only when you believe it is correct, complete and safe.**
   Below that bar, keep working or name the specific uncertainty — what exactly
   is unverified, and what would settle it.

@@ -19,6 +19,7 @@ thing exists.** Implementation stage is tracked separately, in
 | 0003 | Pointer model, including touch | Planned |
 | 0004 | Neighbor search, and what triggers replacing it | Planned |
 | 0005 | Performance budget, and what done means for the toy | Planned |
+| 0006 | Toolchain: what runs the code, what tests it, what builds it | Planned |
 
 `Planned` means ticketed and not yet written; it is the only status a row may
 carry without a file behind it.
