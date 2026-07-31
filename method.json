@@ -1,0 +1,17 @@
+{
+  "method": "agent-driven-development",
+  "version": "0.4",
+  "artefacts": {
+    "operating-rules": "CLAUDE.md",
+    "decisions": "docs/decisions/",
+    "state": "docs/STATUS.md",
+    "method-log": "docs/method-log.md"
+  },
+  "authorities": {
+    "gate": "https://github.com/nanatsusaya/dot-panic/settings/rules",
+    "tasks": "https://github.com/nanatsusaya/dot-panic/issues",
+    "secrets": null
+  },
+  "language": { "spelling": "american" },
+  "adaptations": []
+}

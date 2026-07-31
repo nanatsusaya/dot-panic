@@ -30,11 +30,24 @@ twitching confetti rather than a flock.
 That gap — between a passing build and a thing that actually works — is what
 this project is built to show.
 
+## How this project is run
+
+The method is declared in [`method.json`](method.json), which binds four roles
+to four files:
+
+| Question | File |
+|---|---|
+| How is work done here? | [CLAUDE.md](CLAUDE.md) |
+| What was decided, and why? | [docs/decisions/](docs/decisions/README.md) |
+| Where do we stand? | [docs/STATUS.md](docs/STATUS.md) |
+| Why does the way we work look like this? | [docs/method-log.md](docs/method-log.md) |
+
 ## Status
 
-Nothing is built yet. The method is being adopted first, which is the order
-the method asks for: decide before building.
+Nothing is built yet. The method was adopted first, which is the order it asks
+for: decide before building. [docs/STATUS.md](docs/STATUS.md) has the position
+and the single next step.
 
 ## License
 
-Not yet decided.
+[MIT](LICENSE).
