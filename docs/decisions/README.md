@@ -21,7 +21,7 @@ record ends up deciding something that was never its own.
 
 | # | Decision | Answers | Status |
 |---|---|---|---|
-| 0001 | Purpose, scope and success | What is this, who for, when is it good enough, what is explicitly out | Planned |
+| [0001](0001-purpose-scope-and-success.md) | Purpose, scope and success | What is this, who for, when is it good enough, what is explicitly out | Proposed |
 | 0002 | Overall architecture | Which layers exist, which may depend on which, what the core may not touch | Planned |
 | 0003 | Security and privacy by design | What is worth protecting, where the trust boundaries are, what never runs or is stored | Planned |
 | 0004 | Compliance, accessibility and rights | Motion and reduced-motion, license, provenance of the model, what law applies | Planned |
