@@ -6,6 +6,41 @@ session would decide worse without it.
 
 Newest first.
 
+## 2026-08-01 — The first decision started too low, and no ticket had scoped it
+
+The first record proposed for this project asked where the flocking code should
+come from: written here, or taken from one of four npm packages. It was
+researched, argued and opened for review before the decider pointed out that
+nothing above it had been decided — no purpose, no architecture, no stance on
+security, rights or accessibility.
+
+The record was closed unmerged.
+
+Two things produced it, and only the second is interesting.
+
+**The obvious one.** Build-or-buy is the question that sounds most concrete, so
+it is the one an agent reaches for first. Concreteness is not the same as
+precedence.
+
+**The one worth keeping.** No ticket existed. The record's scope was chosen by
+whoever wrote it, at the moment of writing it, which means the scope was chosen
+by the same judgment that then argued for it. A ticket written first would have
+had to state which questions the record must answer and which decisions it must
+not settle in passing — and that statement is exactly what was missing.
+
+Two consequences:
+
+- **A decision record is written against a ticket**, not against an index row.
+  The row fixes the topic; the ticket fixes the scope.
+- **Records are planned top-down and written in dependency order.** The set was
+  replanned from six topics to thirteen, and the build-or-buy question moved to
+  the end, where it largely answers itself once the architecture is fixed.
+
+The replanning also renumbered rows that were `Planned`. That is permitted —
+none was Accepted, and nothing referred to them — but it is the last moment at
+which it is permitted, and it is recorded here rather than left to look like
+drift.
+
 ## 2026-07-31 — The agent built a toolchain nobody had decided on
 
 Setting up the repository, the agent wrote a `package.json` naming Node as the
