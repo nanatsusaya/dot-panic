@@ -19,7 +19,11 @@ which is how a choice gets made without anyone noticing one was on offer.
 [0001](adr/0001-purpose-scope-and-success.md) is Accepted; the other eleven are
 `Planned`. Number 0012 is deliberately unused.
 
-Nothing is awaiting review, and no branch is parked.
+What is awaiting review is not repeated here. The
+[pull request list](https://github.com/nanatsusaya/dot-panic/pulls) is the
+authority for that, and a copy of it in this file would be wrong within a day.
+Parked branches **are** named here, because nothing else announces them.
+There are none.
 
 ## What the tickets hold
 

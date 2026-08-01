@@ -12,6 +12,37 @@ decision that supersedes it and flips this status. Never by editing.
 thing exists.** Implementation stage is tracked separately, in
 [STATUS.md](../STATUS.md).
 
+## The shape of a record
+
+Written down here because a session that has no session procedures installed
+otherwise has no way to know what a record in this project looks like.
+
+**Header:** status · date · deciders · the ticket it was written against ·
+what it depends on · what it supersedes or amends. Dependencies name the
+**sections** relied on, not only the record — "0002 §3" tells a reader what to
+go and check; "0002" tells them to read all of it.
+
+**Body, in this order:**
+
+| Section | What belongs in it |
+|---|---|
+| Context | The forces. What an earlier record already fixed, versus what is genuinely open. State the problem so a reader who disagrees with the outcome can still see it was the right problem. Include the repository state at the time of writing when the record is written against a blank slate. |
+| Decision | Numbered subsections, each making an actual choice. **Prefer formulations a command could decide** — a choice phrased as a principle becomes folklore by the third session. |
+| Consequences | Positive **and** negative. A record with no negative consequences has not been thought about, and a reader can tell. |
+| Alternatives considered | Each with a one-line "rejected because". |
+| Open questions | `O1..On`, the choices that genuinely belong to the decider, each with a recommended default. Never answered by the author. |
+| References | Primary sources, with the date they were read. |
+
+Once the open questions are answered they become **Resolved questions**,
+`R1..Rn`, recording what was decided and why — including what an earlier draft
+said, where the answer changed it.
+
+Two things this shape is deliberately strict about. A section that only
+surveys options is not a decision and does not belong under *Decision*. And a
+record that would be falsified by a choice another record owns has taken
+territory that is not its own — say so in *Consequences* rather than deciding
+it quietly.
+
 ## The set
 
 The numbers run top-down: what the thing is, then how it is shaped, then what

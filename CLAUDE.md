@@ -157,6 +157,8 @@ The five procedures are installed as the `agent-method` plugin.
   something a still-open decision owns, write the decision first.
 - **Do not restate a fact that has an authority.** Read it from there.
 - **If a claim is checkable by a command, run the command before writing the
-  claim.** Run it unpiped, so a failure can actually fail.
+  claim.** Run it **alone** — not in a pipeline, not chained to what comes
+  next. A pipeline reports the last command's exit status, so piping a check
+  into anything that trims its output hides both the finding and the failure.
 - **Never commit secrets, credentials or personal data.** This project needs
   none of them; anything that looks like one is a mistake.
