@@ -15,11 +15,11 @@ layout is comes from decision 0002; what runs and tests the code is decision
 which is how a choice gets made without anyone noticing one was on offer.
 
 Thirteen decisions are planned, in
-[docs/decisions/](decisions/README.md). None is written.
+[docs/adr/](adr/README.md). None is written.
 
 ## The single clearest next step
 
-**Write [decision 0002](decisions/README.md) — overall architecture** — against
+**Write [decision 0002](adr/README.md) — overall architecture** — against
 [its ticket](https://github.com/nanatsusaya/dot-panic/issues/6). 0001 is
 Accepted, which unblocks it; 0003 and 0004 follow in that order.
 

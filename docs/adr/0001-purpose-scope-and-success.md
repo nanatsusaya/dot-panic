@@ -148,5 +148,5 @@ section 5 and left open for its own record if it ever becomes a real question.
   Read 2026-08-01.
 - [`README.md`](../../README.md) — the informal description this record makes
   binding.
-- [`docs/decisions/README.md`](README.md) — the planned set and the order it is
+- [`docs/adr/README.md`](README.md) — the planned set and the order it is
   written in.

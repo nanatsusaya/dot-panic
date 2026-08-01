@@ -38,7 +38,7 @@ to four files:
 | Question | File |
 |---|---|
 | How is work done here? | [CLAUDE.md](CLAUDE.md) |
-| What was decided, and why? | [docs/decisions/](docs/decisions/README.md) |
+| What was decided, and why? | [docs/adr/](docs/adr/README.md) |
 | Where do we stand? | [docs/STATUS.md](docs/STATUS.md) |
 | Why does the way we work look like this? | [docs/method-log.md](docs/method-log.md) |
 
