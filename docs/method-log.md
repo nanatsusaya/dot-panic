@@ -6,6 +6,40 @@ session would decide worse without it.
 
 Newest first.
 
+## 2026-08-01 — Unready tickets were created on purpose, against an earlier rule
+
+Earlier in the same session the agent argued against creating tickets whose
+scope is not yet knowable: an unready ticket cannot state testable criteria, and
+a backlog full of them is what teaches people that tickets are decoration. That
+argument stands.
+
+It was overruled at the end of the session anyway, and three tickets were
+created for records that cannot be worked yet — motion rules, the pointer model,
+and where the core comes from.
+
+The reason is the premise the whole method rests on. Those three tickets carry
+research that existed **only in the conversation**: that separation is a
+steering force and non-overlap is a positional constraint applied after
+integration; that touch has no hover, so a pointer exists only while contact is
+held; that four npm packages were surveyed and what their registry metadata
+said. None of it was written anywhere. At the end of the session it would simply
+have been gone, and the next session would have redone the work or, worse,
+guessed at the conclusions.
+
+The resolution is not that the earlier rule was wrong, but that it was about a
+smaller cost:
+
+- **An unready ticket is cheaper than lost knowledge**, and the two are only in
+  tension because a ticket is the nearest available home. Anywhere else is
+  worse: a decision record cannot hold undecided research, and the state
+  artefact answers a different question.
+- **The unreadiness has to be stated in the ticket itself**, in the first line,
+  not inferred from an empty criteria list. Each of the three opens with
+  `Ready: no` and what blocks it.
+
+If a project later finds a better home for research that is not yet a decision,
+these three are the reason to look for one.
+
 ## 2026-08-01 — The first decision started too low, and no ticket had scoped it
 
 The first record proposed for this project asked where the flocking code should
