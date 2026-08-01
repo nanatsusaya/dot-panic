@@ -2,7 +2,7 @@
 
 This file holds the **stable operating rules**, not the current state. Where we
 stand is in [docs/STATUS.md](docs/STATUS.md); what was decided is in
-[docs/decisions/](docs/decisions/README.md). STATUS.md is always the same
+[docs/adr/](docs/adr/README.md). STATUS.md is always the same
 place, is brought current before a session ends, and names a **single** clearest
 next step — not everything outstanding.
 
@@ -51,7 +51,7 @@ declaration, artifact, adaptation and decision-index checks — and still prints
 
 How the simulation is structured, what it is written against and how it is
 tested are open questions owned by the decisions in
-[docs/decisions/](docs/decisions/README.md). Until those are Accepted, this
+[docs/adr/](docs/adr/README.md). Until those are Accepted, this
 section stays short, because anything added to it would be a decision made by
 writing it down here rather than by deciding it.
 

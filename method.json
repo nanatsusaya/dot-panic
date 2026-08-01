@@ -3,7 +3,7 @@
   "version": "0.4",
   "artefacts": {
     "operating-rules": "CLAUDE.md",
-    "decisions": "docs/decisions/",
+    "decisions": "docs/adr/",
     "state": "docs/STATUS.md",
     "method-log": "docs/method-log.md"
   },
