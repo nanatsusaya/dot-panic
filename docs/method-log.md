@@ -6,6 +6,54 @@ session would decide worse without it.
 
 Newest first.
 
+## 2026-08-01 — A wind-down was run on an announcement, not an instruction
+
+Daniel asked for a review of the open tickets, saying he intended to end the
+session soon. The agent read that as authorization, ran the wind-down procedure
+— branch hygiene, state artifact, method log, handoff summary — and reported
+the session closed. It was not.
+
+Nothing was destroyed and the work would have been done eventually. The error
+is the inference. *"I will want to do X shortly"* states an intention; it is not
+a request to do X. Treating them as the same thing takes a decision about
+sequencing away from the person it belongs to, and does it invisibly, because
+the resulting work looks exactly like work that was asked for.
+
+The shape matches the toolchain entry below: an action taken because it looked
+like the obvious next step. Named procedures make this **easier** to get wrong,
+not harder — a procedure with a name feels like something authorized in
+general, and none of them is.
+
+**Consequence.** A session procedure runs when it is asked for, or when the
+state artifact says it is due. Never on an inference from what someone said
+they intend to do later.
+
+## 2026-08-01 — A check reported green while failing, because its exit code was piped away
+
+Bringing the state artifact current, the agent ran roughly this:
+
+```
+node …/check-method.mjs . 2>&1 | tail -4 && git add -A && git commit …
+```
+
+The check failed on one finding. The pipeline reported `tail`'s exit code,
+which was zero, so the chain continued, the commit went out on a red check, and
+"the check passed" was then written into a pull request description.
+
+The operating rules already said to run a check unpiped so that a failure can
+fail. The rule was not forgotten. It was defeated by a shell detail unrelated
+to its subject: the intention was to trim the output to the last few lines, and
+those lines happened not to contain the finding.
+
+**Two consequences.**
+
+- **A verifying command never goes in a pipeline.** Run it alone, read all of
+  it, then act. Trimming the output is exactly what hid this.
+- **A rule that a shell detail can defeat needs the detail named.** "Run it
+  unpiped" is the rule; "a pipeline reports the last command's exit status, not
+  the first's" is why — and without the why it reads as fussiness and gets
+  optimized away by the next person in a hurry.
+
 ## 2026-08-01 — Unready tickets were created on purpose, against an earlier rule
 
 Earlier in the same session the agent argued against creating tickets whose
@@ -39,6 +87,54 @@ smaller cost:
 
 If a project later finds a better home for research that is not yet a decision,
 these three are the reason to look for one.
+
+## 2026-08-01 — Two concerns in one change, authorized rather than assumed
+
+Pull request #9 carried decision 0001 **and** the rename of `docs/decisions` to
+`docs/adr`. The operating rules say one concern per change.
+
+The agent proposed folding them rather than doing it quietly: the record being
+renamed had not reached the trunk yet, so a separate rename would have produced
+a commit moving a file that arrived hours earlier. Daniel authorized it.
+
+Recorded for the same reason as the first-push entry below. A later session
+reading that pull request finds a rule visibly broken, and the two available
+readings are "the rule is not really enforced" and "an exception was decided".
+Only one is true, and nothing else in the history distinguishes them.
+
+**Consequence.** Where a rule is set aside deliberately, the change says so in
+its own commit message **and** the reason lands here. An exception nobody
+recorded is indistinguishable from a rule nobody follows — and the second is
+contagious in a way the first is not.
+
+## 2026-08-01 — A record section arbitrated a conflict that does not occur
+
+The first draft of decision 0001 contained a section weighing two audiences —
+someone opening the page against someone reading the repository — and gave the
+reader priority where the two conflict. Asked to explain it, the agent produced
+three examples of that conflict. All three were invented.
+
+Daniel: *"das ist vollkommen unsinnig dieses ganze gedankenspiel."* This is an
+example project for the method; the documentation and a well-written
+implementation come first; the product is secondary. There was no conflict to
+arbitrate, only a fact to state.
+
+The pattern repeated immediately. Asked whether the page should carry settings,
+the agent answered in images — a panel turning the project into "a lab", a
+decision becoming "a shrug" — instead of naming the object, which is sliders on
+the finished page. Daniel supplied the plain version himself, as a question.
+
+**Three consequences.**
+
+- **Before writing a rule that resolves a trade-off, check that both sides
+  actually occur.** A rule for a conflict that does not happen reads like
+  thought and costs a reader real time to discover it decides nothing.
+- **Name the object, not a picture of it.** "Sliders on the finished page", not
+  "a settings surface". An explanation that needs an analogy to land is not
+  understood well enough to be written down yet.
+- **A section that survives being deleted should be deleted.** Section 2 of
+  0001 now states a fact in three lines and arbitrates nothing, which is what
+  it was for.
 
 ## 2026-08-01 — The first decision started too low, and no ticket had scoped it
 
