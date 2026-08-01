@@ -32,7 +32,7 @@ smaller cost:
 - **An unready ticket is cheaper than lost knowledge**, and the two are only in
   tension because a ticket is the nearest available home. Anywhere else is
   worse: a decision record cannot hold undecided research, and the state
-  artefact answers a different question.
+  artifact answers a different question.
 - **The unreadiness has to be stated in the ticket itself**, in the first line,
   not inferred from an empty criteria list. Each of the three opens with
   `Ready: no` and what blocks it.
