@@ -139,15 +139,21 @@ Two labels, and no more: `type:decision` and `type:build`.
 
 ## Session rituals
 
-The five procedures are installed as the `agent-method` plugin.
+Five procedures live in [`.claude/skills/`](.claude/skills/README.md) as
+adapted copies, not as an installed plugin. That file records where they came
+from, what was changed and why, and what to do when the source releases a new
+version. None of it is repeated here.
 
 | Procedure | When |
 |---|---|
-| `/agent-method:session-start` | Sitting down. Reads STATUS.md first and ends with a question, never an action. |
-| `/agent-method:after-merge` | A change just landed. Keeps context, re-verifies the outside world. |
-| `/agent-method:session-end` | Stopping. Parks unfinished work visibly and brings STATUS.md current. |
-| `/agent-method:decision-record` | Writing a decision and taking it through its cycle. |
-| `/agent-method:adopt` | Reviewing how well this project still fits the method. |
+| `/moin` | Sitting down. Reads STATUS.md first and ends with a question, never an action. |
+| `/weiterimtext` | A change just landed. Keeps context, re-verifies the outside world. |
+| `/feierabend` | Stopping. **Only when asked for by name** — never on an inference that the session is ending. |
+| `/adr` | Writing a decision and taking it through to Accepted. |
+| `/passtdas` | Checking whether `method.json` still matches how work is actually done. |
+
+The `agent-method` plugin is disabled for this repository. Two sets of the same
+procedures would be two authorities for one thing.
 
 ## Guardrails
 

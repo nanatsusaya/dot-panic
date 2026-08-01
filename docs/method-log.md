@@ -6,6 +6,40 @@ session would decide worse without it.
 
 Newest first.
 
+## 2026-08-01 — The session procedures were copied and adapted, not installed
+
+The five procedures were installed as a plugin at the start of the session and
+are now adapted copies in `.claude/skills/`, renamed to German. The plugin is
+disabled for this repository.
+
+Renaming was the visible reason and the least interesting one. Two others
+matter more.
+
+**A copy could be corrected; an installed one could not.** Two of the four
+adaptations exist because this project made a mistake the procedure did not
+prevent. The wind-down now refuses to run on an inference, because it once did.
+The check is now described as a command run on its own, with the reason, because
+piping it into `tail` once hid a failure. Neither correction was available while
+the procedures lived in a cache that the next plugin update overwrites.
+
+**The record shape had two authorities.** The plugin procedure defined the
+structure of a decision record, and so did `docs/adr/README.md`. Nothing failed,
+because the two agreed on the day they were written — which is exactly the
+condition under which a duplicated fact is invisible. The copy points at the
+repository's file and defines nothing.
+
+**The cost is real and is written down where it will be seen.** These files no
+longer track the source. `.claude/skills/README.md` names the version they were
+taken from, lists the four adaptations, and names the trigger: a release of the
+source repository means comparing the five files against it. Nothing will
+announce that. A calendar has no opinion about it either, which is why the
+trigger is an event and not a date.
+
+**What was not done:** the source repository keeps its English names. German
+skill names there would ship to everyone who installs the plugin, and its own
+README presents German as one of several options an adopter picks — not a
+default. The rename belongs to the adopter, which is this repository.
+
 ## 2026-08-01 — A wind-down was run on an announcement, not an instruction
 
 Daniel asked for a review of the open tickets, saying he intended to end the
