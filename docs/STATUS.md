@@ -7,7 +7,14 @@
 ## Position
 
 The method has been adopted. **Nothing of the toy exists yet** — no simulation
-code, no page, no rendering.
+code, no page, no rendering. Everything built so far is the way of working:
+the operating rules, the decision set, one accepted record, and the five
+session procedures in [`.claude/skills/`](../.claude/skills/README.md).
+
+**The renamed procedures have never been invoked.** They were copied in at the
+end of a session and load on the next one. Whether all five appear as `/moin`,
+`/weiterimtext`, `/feierabend`, `/adr` and `/passtdas` is the first thing to
+check, before relying on any of them.
 
 There is deliberately no `src/`, no `web/`, no deployment workflow and **no
 toolchain at all** — no runtime, no test runner, no package manifest. What the
