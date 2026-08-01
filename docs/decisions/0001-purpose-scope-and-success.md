@@ -1,6 +1,6 @@
 # 0001 — Purpose, scope and success
 
-- **Status:** Proposed
+- **Status:** Accepted
 - **Date:** 2026-08-01
 - **Deciders:** Daniel Wagner
 - **Ticket:** [#5](https://github.com/nanatsusaya/dot-panic/issues/5)
@@ -12,12 +12,7 @@
 
 The repository describes the toy in its README. A description is not a
 decision: the next session cannot tell a stated goal from an assumed one, and
-neither can a reviewer deciding whether a change moves toward the goal — which
-is half of what the review boundary is for.
-
-Two questions in particular have been answered informally in conversation and
-never written down. Who this is actually for, and what would make it finished.
-Both will be needed the first time a trade-off has to fall one way.
+neither can a reviewer deciding whether a change moves toward the goal.
 
 **Repository state at the time of writing.** No code, no runtime, no test
 runner, no rendering, no deployment. Twelve decisions are planned and none is
@@ -31,57 +26,59 @@ to constrain what gets built, which it cannot do after the fact.
 A web page showing a flock of dots that moves as a group, never comes to rest,
 and moves out of the way when the visitor's pointer approaches.
 
-That is the whole product. It is a toy, not a game: there is no goal, no score
-and no ending.
+It is a toy: no goal, no score, no ending.
 
-### 2. Two audiences, and which one wins
+### 2. This is an example project
 
-- **The visitor** opens the page and gets a few seconds of something that
-  looks alive.
-- **The reader of the repository** is deciding whether the method used to build
-  it is worth adopting, and reads the decisions, the tickets and the history to
-  find out.
+dot-panic exists to demonstrate agent-driven-development. **The priority is the
+documentation and a well-written implementation; the product itself is
+secondary.**
 
-**Where the two conflict, the reader wins.** A choice that would make the page
-better and the record of how it was built worse is decided against.
-
-This is a real ordering and not a diplomatic one. The page has no users to
-disappoint; the example has a job.
+Stated so that later work does not have to rediscover it. Where effort is
+limited, it goes to recording the work and to writing the code well, not to
+making the page do more.
 
 ### 3. What good enough means
-
-Four conditions. None of them is a number, and none contradicts a number that
-decision 0008 might set:
 
 1. **It reads as a flock**, not as independent particles that happen to share a
    screen. Judged by watching. No command decides this, now or later.
 2. **It responds to the pointer without perceptible lag.**
 3. **Motion is continuous** — no dot at rest, no visible stutter in ordinary
    use.
-4. **It works on a mid-range phone roughly three years old**, not only on the
-   machine it was built on.
+4. **Feature floor: Baseline "widely available".** Only web features that
+   reached Baseline widely available may be used — 30 months of support across
+   Chrome (desktop and Android), Edge, Firefox (desktop and Android) and Safari
+   (macOS and iOS).
+5. **Performance floor: a mid-range phone roughly three years old**, not only
+   the machine it was built on.
+
+Conditions 4 and 5 measure different things and are both needed. Baseline says
+which APIs may be used; it says nothing about how fast the device is. A phone
+from 2022 running a current browser satisfies 4 and can still fail 5.
 
 Condition 1 is the one the whole project is arranged around, and it is the one
 nothing can verify. That is the point rather than a gap.
 
-### 4. Explicitly out of scope
+### 4. What the page contains
 
-None of the following is built, and adding any of them requires superseding
-this record rather than extending it:
+The flock, an imprint, and a short explanation of what the page is.
+
+### 5. Explicitly out of scope
 
 - A goal, a score, a win or lose condition
-- Any settings surface — sliders, parameter panels, a control UI
-- Accounts, persistence, leaderboards, anything remembered between visits
+- Accounts, or anything remembered between visits
 - Sound
 - More than one scene
 - Any packaging beyond a web page
 
-### 5. Failure, ranked
+Adding any of these requires superseding this record rather than extending it.
 
-Ranked, because the ordering is what tells a later trade-off which way to fall:
+### 6. Failure, ranked
 
-1. **The artifacts read as bureaucracy**, and a reader concludes the method is
-   unusable at this size.
+Ranked, because the ordering tells a later trade-off which way to fall:
+
+1. **The documentation is poor**, and a reader learns nothing about the method
+   from it.
 2. **The toy is never finished** because the process ate the work.
 3. **It passes its checks and looks wrong on screen.**
 4. **It works only on the machine it was built on.**
@@ -92,65 +89,63 @@ Ranked, because the ordering is what tells a later trade-off which way to fall:
 
 - Decision 0008 has something to turn into numbers without also having to
   choose the goal.
-- The out-of-scope list has teeth: each item names superseding as the price of
-  changing it, so nothing on it can be added by drift.
-- The audience ordering in section 2 settles a whole class of future ties
-  without another decision.
+- Section 2 removes a recurring question — how much effort the toy deserves
+  against the documentation — from every later session.
+- The out-of-scope list names superseding as the price of changing it, so
+  nothing on it arrives by drift.
 
 **Negative, and these are real.**
 
-- **Section 2 will at some point produce a worse page than we could have
-  built**, and nobody will be able to point at the moment it happened. The rule
-  is only useful because it applies before the trade-off is visible.
-- **Ranking "reads as bureaucracy" above "looks wrong on screen" will feel
-  wrong** the first time polish is skipped to keep a document short. It is
-  deliberate, and it is the ordering most likely to be regretted.
-- **Ruling out a settings surface forecloses the cheapest fix** if the flock
-  turns out dull to watch. We have decided in advance not to solve that problem
-  that way.
+- **Section 2 makes it easy to justify a thin product.** "The documentation is
+  good" will at some point be offered as a reason not to finish something, and
+  that is failure 6.2. Section 3 is the floor: the conditions there hold
+  regardless of how good the records are.
 - **Condition 3.1 leans entirely on watching**, which is not repeatable between
-  two people and not repeatable by one person across two days.
+  two people, or by one person across two days.
+- **Condition 3.4 rules out anything newer than Baseline widely available**,
+  including features that would be well supported in practice. That is the cost
+  of a rule a command can decide.
+- **Section 4 commits to an imprint and an explanation**, which is page surface
+  that has nothing to do with the flock and still has to be built and
+  maintained.
 
 ## Alternatives considered
 
 - **Make it a game — a goal, a score, a win condition.** Rejected because it
   changes the question the project answers from *how was this built* to *is
   this fun*, and the second consumes the first.
-- **Serve only the repository reader; treat the page as a fixture.** Rejected
-  because a demonstration that is unpleasant to look at is evidence that the
-  method produces dead things.
-- **Serve only the visitor; treat the method work as overhead.** Rejected
-  because then it is overhead.
-- **Leave "good enough" to decision 0008 entirely.** Rejected because 0008
-  would then be choosing the goal as well as the budget, and a budget that also
-  sets the goal cannot be argued with.
-- **State no out-of-scope list.** Rejected because the features listed there
-  are exactly the ones that arrive one at a time, each individually reasonable.
+- **Set the feature floor by naming browser versions directly.** Rejected
+  because a version list is stale the month it is written, while Baseline is
+  maintained externally and moves on its own.
+- **Set only a feature floor and leave performance to 0008.** Rejected because
+  0008 would then be choosing the target device as well as the budget.
+- **State no out-of-scope list.** Rejected because the items on it are exactly
+  the ones that arrive one at a time, each individually reasonable.
 
-## Open questions
+## Resolved questions
 
-**O1 — Is a mid-range phone about three years old the right floor?**
-Condition 3.4 sets the weakest device the toy has to work on. A lower floor
-costs work in decision 0008; a higher one narrows who can open the page.
-*Recommended default: keep it, and test on a real device rather than a
-throttled desktop browser.* A simulated slow machine has different
-characteristics than a real one, and the difference lands exactly on animation.
+**R1 — The device and feature floors.** Both, as two separate conditions.
+Baseline "widely available" fixes which web features may be used; a mid-range
+phone roughly three years old fixes the performance target. They measure
+different things, and either alone leaves a real gap. *How* the feature floor
+is expressed in tooling belongs to decision 0009, not here.
 
-**O2 — Is the audience ordering in section 2 right?**
-Reader over visitor. The reverse is defensible: a demonstration nobody enjoys
-looking at persuades nobody.
-*Recommended default: keep reader first.* The toy has no users; the example
-has a purpose. But this is the record's most consequential sentence and it
-should be chosen deliberately rather than accepted by default.
+**R2 — Whose interests this project serves.** The earlier draft weighed a
+visitor against a reader of the repository and gave the reader priority. That
+framing was dropped: it invented a conflict that does not occur. dot-panic is an
+example project for the method, the documentation and a well-written
+implementation come first, and the product is secondary. Section 2 says that
+plainly instead.
 
-**O3 — Is ruling out a settings surface too strict?**
-A parameter panel would let a visitor find the interesting configuration
-themselves, and would be cheap.
-*Recommended default: keep it out.* It is surface area no check can hold, and
-it converts "we chose good values" into "the visitor can fix it".
+**R3 — A settings surface on the page.** Not decided here. The earlier draft
+ruled it out in the out-of-scope list; that was settling a question nothing had
+raised, at a point when no record existed to reason from. It is removed from
+section 5 and left open for its own record if it ever becomes a real question.
 
 ## References
 
+- [Baseline](https://web.dev/baseline) — the feature floor in condition 3.4.
+  Read 2026-08-01.
 - [`README.md`](../../README.md) — the informal description this record makes
   binding.
 - [`docs/decisions/README.md`](README.md) — the planned set and the order it is

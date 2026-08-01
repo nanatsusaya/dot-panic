@@ -19,10 +19,9 @@ Thirteen decisions are planned, in
 
 ## The single clearest next step
 
-**Answer the three open questions in
-[decision 0001](decisions/0001-purpose-scope-and-success.md)**, which is
-`Proposed` and under review. Nothing else starts until it is Accepted: 0002
-through 0004 are scoped against what it fixes.
+**Write [decision 0002](decisions/README.md) — overall architecture** — against
+[its ticket](https://github.com/nanatsusaya/dot-panic/issues/6). 0001 is
+Accepted, which unblocks it; 0003 and 0004 follow in that order.
 
 ## Implementation scale
 
