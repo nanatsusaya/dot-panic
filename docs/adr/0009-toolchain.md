@@ -1,6 +1,6 @@
 # 0009 — Toolchain
 
-- **Status:** Proposed
+- **Status:** Accepted
 - **Date:** 2026-08-02
 - **Deciders:** Daniel Wagner
 - **Ticket:** [#35](https://github.com/nanatsusaya/dot-panic/issues/35)
@@ -92,6 +92,13 @@ the correct thing to be deciding it.
 bundler no meaningful work, and the request count is 0011's subject rather than
 this record's.
 
+**The emitted files are not committed** — R1. Two copies of every module is what
+0001 §6.1 punishes, and a reader cannot tell which one is authoritative; 0003 §7
+applies the same instinct to a different datum in the words *it appears in one
+place*. **The cost lands on 0011**, which is not yet written: whatever publishes the
+page runs §8's build first, so publishing straight from a branch is closed before
+that record gets to consider it.
+
 ### 4. 0001 §3.4 becomes two compiler settings, and they hold only half of it
 
 This is what [0001](0001-purpose-scope-and-success.md) R1 sent here, and it is the
@@ -148,36 +155,47 @@ Two limits are recorded rather than met later:
   down-levels syntax, so the file a test proved correct is not the file a visitor
   executes. Nothing in this record closes that gap, and 0010 inherits it.
 
-### 7. Every dependency is a development dependency, and the list starts at two
+### 7. Every dependency is a development dependency, and this record names all three
 
 0003 §2 and §5 make a runtime dependency impossible — the page loads nothing it did
-not ship and makes no request after loading — so this is a description of what the
-accepted records already force, not a new rule.
+not ship and makes no request after loading — so the whole question is
+development-time. That is a description of what accepted records already force, not
+a new rule.
 
-**The list starts as `typescript` and `@types/bun`**: the first because Bun does not
-typecheck, the second because a test file naming `bun:test` needs declarations for
-it.
+**Three, and each is named for what it decides:**
 
-**The test for admitting another one:** it makes a claim in some record's asserted
-list decidable by a command. A tool that only changes how the source looks does not
-meet it. **This record does not lift CLAUDE.md's stop-and-ask** — deciding the
-policy is not authorizing an install, and each further dependency is still asked
-about.
+- **`typescript`** — because *"Bun does not perform typechecking"*, and because §2
+  makes it the emitter as well.
+- **`@types/bun`** — because a test file naming `bun:test` needs declarations for
+  it.
+- **`@biomejs/biome`** — R2. *"One toolchain for your web project"*, which formats
+  and lints in one run.
 
-### 8. The chain is three checks, and the strings that invoke them are not here
+**The rule is the count, not the category**, and Biome is why it has to be stated
+that way: a formatter changes nothing a command could otherwise decide, so a rule
+admitting only tools that make an asserted claim decidable would forbid it. **One
+tool covering two jobs beats two tools covering one each** — that is what this
+record admits, and the list above is what a reviewer checks a manifest against.
 
-A person checking this project runs three things, each **alone**:
+**This record does not lift CLAUDE.md's stop-and-ask.** Deciding the policy is not
+authorizing an install, and a fourth dependency is asked about like the first three
+were.
+
+### 8. The chain is four checks, and the strings that invoke them are not here
+
+A person checking this project runs four things, each **alone**:
 
 1. **The method check** — the coherence check that already exists and is named in
    CLAUDE.md.
 2. **A type check that emits nothing** — §4's settings are worth nothing unless
    something reads them.
-3. **The test run** — §6.
+3. **Biome** — §7, deciding format and lint in one run.
+4. **The test run** — §6.
 
-**The literal invocations belong to the ticket that creates the files**, on 0008
-R1's reasoning: a command string in a record is stale the first time a script is
-renamed, and nothing checks it. What this record fixes is that there are three,
-what each decides, and that none of them is run inside a pipeline — a pipeline
+**The literal invocations belong to [#71](https://github.com/nanatsusaya/dot-panic/issues/71)**,
+on 0008 R1's reasoning: a command string in a record is stale the first time a
+script is renamed, and nothing checks it. What this record fixes is that there are
+four, what each decides, and that none of them runs inside a pipeline — a pipeline
 reports the last command's exit status, which this project has already been caught
 by once.
 
@@ -194,7 +212,7 @@ The division 0006 §10, 0007 §9, 0014 §9, 0008 §9 and 0015 §8 make.
 | §5 | No import specifier under `core/`, `shell/` or `view/` ends in `.ts` or lacks an extension |
 | §7 | The manifest names no runtime dependency, and no development dependency this record or a later authorized change has not named |
 
-**Decidable by running the chain:** §8's three checks pass.
+**Decidable by running the chain:** §8's four checks pass, each alone.
 
 **Nothing here is decided by watching.** This is a record about what runs the code,
 and none of it appears on a screen — the first record carrying this division whose
@@ -249,33 +267,47 @@ watched half is empty, and the emptiness is deliberate rather than an omission.
   project with no feature floor, and this is neither.
 - **Bun emits, `tsc --noEmit` checks.** Rejected in §2: two tools with two answers
   to what syntax is allowed, and the one that emits is the one that cannot be told.
-- **A linter, a formatter, or a browser-compatibility rule now.** Not rejected on
-  its merits — O2 asks it. §7's test is what any of them has to meet.
+- **A separate linter and a separate formatter.** Rejected in §7: one tool covering
+  both jobs is the rule, and Biome is one package.
+- **A browser-compatibility lint rule, to hold what §4 cannot.** Unavailable from
+  the tool this project has. R2 records the check.
+- **The emitted JavaScript committed beside its source.** Rejected in §3 and R1.
 
-## Open questions
+## Resolved questions
 
-**O1 — Is the emitted JavaScript committed to the repository, or produced when it
-is needed?**
+**R1 — The emitted JavaScript is not committed.**
 
-Recommended default: **not committed.** Two copies of every file is what 0001 §6.1
-punishes, and a reader cannot tell which one is authoritative; 0003 §7 applies the
-same instinct to the imprint in the words *it appears in one place*.
+Confirmed as recommended. Daniel: *"wir folgen deiner empfehlung."* The cost was
+stated with the recommendation and is accepted with it — 0011 inherits a build step
+before anything can be published, and publishing straight from a branch is closed
+before that record exists to weigh it.
 
-**The cost is real and lands on 0011.** If the output is not in the repository,
-whatever publishes the page has to run §8's build first, which rules out publishing
-straight from a branch. That constrains a record that is not yet written, which is
-why this is asked rather than assumed.
+**R2 — The apparatus is wanted, and the formatter is Biome.**
 
-**O2 — What else belongs to *alles was dazu gehört*?**
+The recommendation was *nothing further now*, and it was overturned. Daniel:
+*"schreib die tickets dazu, und ja ich will linter, formatter (verwende biome),
+cli, usw."*
 
-A linter, a formatter and a workflow that runs §8's chain are each plausible
-readings of the answer that produced §1, and none of them is in this record.
+**The answer falsified a rule this record had already written**, and that is the
+part worth keeping. §7's first draft admitted a dependency only if *it makes a claim
+in some record's asserted list decidable by a command*, and added that *a tool that
+only changes how the source looks does not meet it.* **A formatter does not meet
+it.** The test had been written while the expected answer was *no more tools*, and
+it turned that expectation into a principle — one that would have forbidden the next
+thing the decider asked for. §7 now bounds the count rather than the category.
 
-Recommended default: **nothing further now**, each on its own ticket, each meeting
-§7's test. The one with the strongest case is a browser-compatibility rule, because
-it would take the half of 0001 §3.4 that §4 leaves with a person and give it
-something that fails — and it is also the one that would need a data source, which
-is a decision rather than an install.
+**Biome was checked for the thing §4 cannot hold, and does not have it.** Its
+linter groups are accessibility, complexity, correctness, nursery, performance,
+security, style and suspicious; none concerns browser support. So the browser half
+of 0001 §3.4 is not closed by this answer, and no tool named here closes it.
+
+**What *cli* and *usw.* are taken to mean.**
+[#71](https://github.com/nanatsusaya/dot-panic/issues/71) reads *cli* as §8's chain
+existing as commands a person actually runs rather than as a description in a
+record. ***usw.* is deliberately left unread.** Three tickets exist for what was
+named — [#69](https://github.com/nanatsusaya/dot-panic/issues/69),
+[#70](https://github.com/nanatsusaya/dot-panic/issues/70) and #71 — and anything
+beyond them is named by the decider rather than guessed at here.
 
 ## References
 
@@ -295,6 +327,18 @@ is a decision rather than an install.
   `"target": "ESNext"`, `"lib": ["ESNext"]` and `"allowImportingTsExtensions": true`,
   which §4 and §5 decline. <https://bun.com/docs/runtime/typescript>, read
   2026-08-02.
+- Biome — what it is. *"One toolchain for your web project"* and *"Format, lint,
+  and more in a fraction of a second."* Covers JavaScript, TypeScript, JSX, TSX,
+  JSON, HTML, CSS and GraphQL. The one-tool-two-jobs claim §7 rests on.
+  <https://biomejs.dev/>, read 2026-08-02.
+- Biome — installation. *"Biome is best installed as a development dependency of
+  your projects, but it is also available as a standalone executable that doesn't
+  require Node.js."* One package, `@biomejs/biome`.
+  <https://biomejs.dev/guides/getting-started/>, read 2026-08-02.
+- Biome — the linter's rule groups: accessibility, complexity, correctness,
+  nursery, performance, security, style and suspicious. **None concerns browser
+  support**, which is the check R2 records and the reason §4's second half stays
+  with a person. <https://biomejs.dev/linter/>, read 2026-08-02.
 - TypeScript — `target`. *"The `target` setting changes which JS features are
   downleveled and which are left intact."*
   <https://www.typescriptlang.org/tsconfig/target.html>, read 2026-08-02.
@@ -313,7 +357,7 @@ is a decision rather than an install.
 - [0002](0002-overall-architecture.md) §2, §3, §7 — the three parts, the Core's
   forbidden names, and the naming handed here. Read 2026-08-02.
 - [0003](0003-security-and-privacy-by-design.md) §2, §5, §7 — what the page may
-  load, what it may request, and the *appears in one place* O1 borrows. Read
+  load, what it may request, and the *appears in one place* §3 borrows. Read
   2026-08-02.
 - [0008](0008-performance-budget.md) §8, R1 — a floor recorded with its date, and
   where numbers live. Read 2026-08-02.
