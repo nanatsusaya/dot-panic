@@ -1,6 +1,6 @@
 # 0015 — Settings surface
 
-- **Status:** Proposed
+- **Status:** Accepted
 - **Date:** 2026-08-02
 - **Deciders:** Daniel Wagner
 - **Ticket:** [#53](https://github.com/nanatsusaya/dot-panic/issues/53)
@@ -58,7 +58,7 @@ accepted record fixes, and that exists because it was wanted.**
 What the values would be is not open either. 0006 fixes relations and no numbers,
 0008 §5 and §6 fix the count as one number against a ratio, and 0008 R1 puts every
 number in the code and in the ticket that fixed the criteria. This record decides
-what may be exposed and what bounds it.
+what may be exposed, what bounds it, and — R1 — that nothing is.
 
 **Repository state at the time of writing.** No code, no page, no toolchain. Ten
 records accepted, four of them carrying an amendment. Nothing here has been on a
@@ -66,7 +66,32 @@ screen.
 
 ## Decision
 
-### 1. A preference the platform already carries is read there, and no control duplicates it
+### 1. The page has no settings surface
+
+**Nothing on the page changes a value or a rule an accepted record fixes.** The
+page carries two controls and no third: 0004 §5's, which stops the motion, and
+0014 §2's, which opens the dialog. Both are obligations. Neither is a setting, and
+none is added.
+
+The dialog's third section stays empty. That is the pressure 0014 named, and this
+is the answer to it rather than an oversight.
+
+**§2 through §7 are why**, and each of them was already true before this section
+was written: the value everyone reaches for first is closed by another record, the
+first control costs an amendment, a range is a contract rather than a widget
+property, nothing survives a reload, and no control here can be adjusted by
+watching. [0001](0001-purpose-scope-and-success.md) §6.2 ranks *the toy is never
+finished because the process ate the work* as the second-worst outcome, and a
+settings surface is the increment that adds a control, a bound, an invariant, a
+thing to watch and two amendments.
+
+**This is a no for now, not a no forever**, and R1 records the decider's words for
+it. The route to a later yes is a record superseding this one — R3 — and **§2
+through §7 are its terms.** They are written as conditions rather than as reasons
+so that the record which reopens this starts from a price list instead of a blank
+page.
+
+### 2. A preference the platform already carries is read there, and no control duplicates it
 
 Two of the settings a visitor might want, they already have. `prefers-reduced-motion`
 is a hard requirement of every motion change under 0004 §4, and `prefers-color-scheme`
@@ -83,7 +108,7 @@ have never set one, and **both are required, for different people.** That argume
 is about an obligation. It does not extend to a preference nobody is obliged to
 offer.
 
-### 2. The dot count is not exposable, and this record is not what closes it
+### 3. The dot count is not exposable, and this record is not what closes it
 
 [0008](0008-performance-budget.md) §5 fixes that the count **is chosen before the
 loop starts and does not change during a visit.** It is an argument to the world,
@@ -95,7 +120,7 @@ control over the count needs a record superseding 0008 rather than an answer her
 Stated plainly because *the slider that changes how many dots there are* is what
 the phrase *settings surface* will suggest to everyone who reads it.
 
-### 3. Any setting costs an amendment to an accepted record, and this record grants none
+### 4. Any setting costs an amendment to an accepted record, and this record grants none
 
 [0002](0002-overall-architecture.md) §2 lists the Shell's jobs: the loop, the
 clock, input events, the size of the frame, the choice of seed, the wiring, and
@@ -115,10 +140,10 @@ Anything that changes the page's appearance rather than the world costs a second
 one. 0014 §5 holds that **nothing else on the page is opened, closed or toggled by
 script**, and 0014 §9 makes it an invariant a reader decides from the source.
 
-This record does not grant either amendment. Authorizing one is the decider's, and
-O1 is where it is asked.
+This record grants neither amendment, and §1 is why there is nothing to grant one
+for.
 
-### 4. No control may offer a value that makes an accepted record false
+### 5. No control may offer a value that makes an accepted record false
 
 The range is part of the Core's contract, not a property of the widget.
 
@@ -132,12 +157,15 @@ relative radius `r` in a frame of area `A`, the constraint is unsatisfiable unle
 a setting.** Checkable without a browser: each endpoint of an exposed range is a
 value that leaves every invariant in 0006 §10 satisfiable.
 
-### 5. A setting lasts one visit, and no URL carries one
+Under §1 no range is exposed, so this binds the record that reopens the question
+rather than this page.
+
+### 6. A setting lasts one visit, and no URL carries one
 
 0003 §4 stores nothing on the visitor's device, and 0001 §5 puts *anything
 remembered between visits* out of scope by a different route to the same outcome.
-Every visit therefore starts from the same values, and a control is a thing the
-visitor does to this visit.
+Every visit therefore starts from the same values, and a control would be a thing
+the visitor does to this visit.
 
 **A query string is closed as well**, and it is worth naming because it is the
 loophole a later session finds: it stores nothing on the device, so 0003 §4's
@@ -149,25 +177,30 @@ lists `history.pushState` *used to carry state* for the same reason.
 visitor's device, and 0003 §4 is a device list. It is recorded here so that a later
 change meets an answer rather than a gap.
 
-### 6. No control whose value can only be chosen by watching
+**This half of the record survives §1.** The page reads no query string whether or
+not it has settings, and that is an invariant now rather than a term of a later
+yes.
+
+### 7. No control whose value can only be chosen by watching
 
 [0008](0008-performance-budget.md) §10 stops the flock while the dialog is open,
 and [0014](0014-page-layout.md) §2 gives the strip exactly two controls and nothing
-else. Every setting therefore sits inside the dialog, **which is open exactly when
-the flock is not moving.**
+else. Every setting would therefore sit inside the dialog, **which is open exactly
+when the flock is not moving.**
 
-So a value is chosen against a still picture, and its effect appears when the
-dialog closes. Comparing two values costs a stop each time. **A slider dragged
-while watching the flock respond is not available here**, and it is the natural
-design for every value this record could expose — 0001 §3.1 makes *it reads as a
-flock* something only watching decides, so the one feedback loop a settings
-surface exists to provide is the one the layout forbids.
+So a value would be chosen against a still picture, and its effect would appear
+when the dialog closes. Comparing two values costs a stop each time. **A slider
+dragged while watching the flock respond is not available here**, and it is the
+natural design for every value this record could have exposed — 0001 §3.1 makes
+*it reads as a flock* something only watching decides, so the one feedback loop a
+settings surface exists to provide is the one the layout forbids.
 
-What survives is a control whose value is meaningful before it is seen: a small
-number of named choices, judged after the dialog closes. **A control that needs
-live feedback needs the strip**, which is an amendment to 0014 §2 on top of §3's.
+What would survive is a control whose value is meaningful before it is seen: a
+small number of named choices, judged after the dialog closes. **A control that
+needs live feedback needs the strip**, which is an amendment to 0014 §2 on top of
+§4's.
 
-### 7. What is asserted, and what is only ever watched
+### 8. What is asserted, and what is only ever watched
 
 The same division 0006 §10, 0007 §9, 0014 §9 and 0008 §9 make.
 
@@ -175,21 +208,24 @@ The same division 0006 §10, 0007 §9, 0014 §9 and 0008 §9 make.
 
 | | Invariant |
 |---|---|
-| §1 | No control on the page sets a color mode or a motion preference |
-| §2 | No control on the page changes the dot count |
-| §3 | The Shell reads no control except the one 0014 §5 permits, unless an amendment names it |
-| §5 | Nothing on the page reads or writes a query string |
+| §1 | The page contains exactly two controls — 0004 §5's and 0014 §2's — and no other element changes what the Core or the View is given |
+| §4 | The Shell reads no control's value, and makes no call except 0014 §5's `showModal()` |
+| §6 | Nothing on the page reads or writes a query string |
 
-**Decidable by a test over the Core**, wherever a range is exposed:
+§2's and §3's noes are specific cases of §1's and get no row of their own, because
+one invariant that a reviewer reads once is worth more than three that overlap.
+
+**Decidable by a test over the Core**, and binding only on a record that reopens
+this one:
 
 | | Invariant |
 |---|---|
-| §4 | Each endpoint of an exposed range leaves every 0006 §10 invariant satisfiable |
+| §5 | Each endpoint of an exposed range leaves every 0006 §10 invariant satisfiable |
 
 **Only watching decides this**, under 0012 §5:
 
-- Whether a control whose effect appears only after the dialog closes reads as a
-  setting at all, rather than as a control that did nothing
+- Whether the dialog's two sections read as complete, or as a page missing the
+  third one 0014 predicted a reader would notice
 
 ## Consequences
 
@@ -198,30 +234,34 @@ The same division 0006 §10, 0007 §9, 0014 §9 and 0008 §9 make.
 - **0001 R3 is answered in the record the index made for it.** The condition R3
   named — *if it ever becomes a real question* — occurred, and it is answered
   rather than deferred a second time.
-- **The price is named once.** Any later setting knows what it costs before anyone
-  designs one, and §3 names the instrument rather than leaving it to be invented.
-- **Bounds are a Core contract.** §4 turns *what range should the slider have* from
-  a UI question into an invariant a test decides.
+- **Nothing on the page exists because someone wanted a knob.** Both controls are
+  obligations, which makes the page's surface exactly 0001 §4's three things plus
+  what the law and WCAG require.
+- **A later yes starts from a price list.** §4 through §7 are written as terms
+  rather than as reasons, so the record that reopens this has conditions to satisfy
+  instead of a blank page.
+- **Bounds are a Core contract.** §5 turns *what range should the slider have* from
+  a UI question into an invariant a test decides, whenever it arrives.
 - **The boundary 0002 A1 moved by one call stays moved by one call.** No part gains
   a job here.
-- **The visitor's own settings keep working.** §1 leaves `prefers-reduced-motion`
+- **The visitor's own settings keep working.** §2 leaves `prefers-reduced-motion`
   and `prefers-color-scheme` as the settings surface the page already obeys.
 
 **Negative, and these are real.**
 
-- **This record raises the price of a setting without paying it.** If O1 is
-  answered *yes*, the first one costs an amendment to 0002 and possibly to 0014,
-  and this record is what made that explicit rather than something anyone could
-  have done quietly.
-- **§6 forecloses the natural design for a reason nobody wrote with settings in
+- **The dialog's third section stays empty and nothing on the page says why.** 0014
+  predicted a reader would notice its shape, and this record decides the reader is
+  right and gets no explanation. The same shape as 0007 R2's parked cursor:
+  correct, and indistinguishable from unfinished.
+- **§7 forecloses the natural design for a reason nobody wrote with settings in
   mind.** 0008 §10 was decided as a performance and accessibility question earlier
   the same day, and it now shapes an area it never mentioned.
-- **§5's second half is a reading**, and a later session meeting 0001 §5 cold could
+- **§6's second half is a reading**, and a later session meeting 0001 §5 cold could
   reach the other one. The record says so rather than hiding it, which is the most
   that can be done about it.
-- **The page's two controls are both ones nobody chose.** Both arrived as
-  obligations. A visitor who wants to change the toy is told by §1 to change their
-  operating system, and by §2 that the interesting number is fixed.
+- **A visitor who wants to change the toy is told by §2 to change their operating
+  system, and by §3 that the interesting number is fixed.** Neither is a good
+  answer to give someone; they are the true ones.
 - **A record that mostly says what may not happen is easy to read as pessimism.**
   Every no here traces to a record that was accepted for its own reasons, and none
   of them was written to prevent settings — which is exactly why the pile is worth
@@ -231,71 +271,79 @@ The same division 0006 §10, 0007 §9, 0014 §9 and 0008 §9 make.
 
 ## Alternatives considered
 
-- **A slider for the dot count.** Rejected in §2: 0008 §5 closed it before this
+- **One control, offering a small number of named choices.** Not rejected on its
+  merits — R1 answered the prior question and R2 never reached this one. It remains
+  the shape §7 would permit if the question is reopened.
+- **A slider for the dot count.** Rejected in §3: 0008 §5 closed it before this
   record existed, and reopening it needs a record superseding 0008.
-- **A slider for anything else, dragged while watching.** Rejected in §6: the flock
+- **A slider for anything else, dragged while watching.** Rejected in §7: the flock
   does not move while the dialog is open, and the strip has no room for a third
   control.
-- **A dark-mode toggle on the page.** Rejected in §1: 0005 §4 already honors
+- **A dark-mode toggle on the page.** Rejected in §2: 0005 §4 already honors
   `prefers-color-scheme`, and a page control that disagrees with the platform is a
   second authority for one fact.
 - **A control that reseeds the world.** Rejected: it changes no value a record
-  fixes, so it is a restart rather than a setting — and it fails §6 anyway, because
+  fixes, so it is a restart rather than a setting — and it fails §7 anyway, because
   a new world appears only once the dialog closes and there is nothing to compare
   it against.
-- **Settings carried in a query string.** Rejected in §5: it evades 0003 §4's
+- **Settings carried in a query string.** Rejected in §6: it evades 0003 §4's
   mechanism list and lands on 0001 §5's outcome.
 - **Deferring the question again.** Rejected: deferring is what 0001 R3 did, and it
   named the condition under which that stops being available. 0014 §4 met it.
-- **A settings surface decided here and built later.** Rejected: §3's amendment is
-  the decider's to authorize, and a record that assumed it would be deciding
-  something that is not its own — which the record shape forbids in those words.
+- **Adding *no settings* to 0001 §5's out-of-scope list.** Rejected in R3: that list
+  requires superseding 0001 to change, which would price the later addition the
+  decider left open against the project's founding record.
 
-## Open questions
+## Resolved questions
 
-**O1 — Are there any settings at all?**
+**R1 — There are no settings, and that is a decision rather than a deferral.**
 
-Recommended default: **no.** Five things point the same way, and none of them is a
-preference about settings:
+Decided as recommended. Daniel: *"wir machen keine einstellungen. wenn überhaupt
+könnten wir die später hinzufügen."*
 
-- §3 — the first one costs an amendment to an accepted record.
-- §6 — it cannot be tuned by watching, and watching is what 0001 §3.1 makes the
-  judge of the only thing this toy is trying to be.
-- §5 — it is forgotten on reload, so it is a per-visit gesture rather than a
-  preference.
-- §2 — the value everyone would reach for first is already closed.
-- 0001 §6.2 ranks *the toy is never finished because the process ate the work* as
-  the second-worst outcome, and a settings surface is the increment that adds a
-  control, a bound, an invariant, a thing to watch and two amendments.
+**The second sentence is what §1's last paragraph is built on.** A no that stays
+open to a later yes is not the same artifact as a no that closes the topic: it
+means the reasons have to be written as **conditions** — something a later record
+can satisfy or fail — rather than as an argument nobody can act on. §4 through §7
+were drafted before the answer and needed no rewriting for it, which is the sign
+they were the right sections.
 
-Against it, honestly: it is a toy, turning a knob is how a visitor finds out what
-makes the dots read as a flock, and this project is a worked example where one more
-increment has value beyond the product.
+**What the answer does not rest on.** None of the five reasons in §1 is a
+preference about settings. Each is an accepted record that was written for its own
+purpose and happens to constrain this one — which is why the record states them as
+a pile in one place rather than arguing from taste.
 
-**O2 — If yes, which one, and is it exactly one?**
+**R2 — Which setting, and how many: not reached.**
 
-Recommended default, conditional on O1: **one control, offering a small number of
-named choices rather than a continuous range.** §6 is why — a discrete choice can
-be meaningful before it is seen, and a range cannot. Which value it governs is then
-a second question, and §2 removes the count from the candidates.
+This question was asked conditionally — *if yes, which one* — and R1 answered *no*,
+so it lapses. It is recorded rather than deleted because its recommended default
+still binds a later record: **a small number of named choices rather
+than a continuous range**, for §7's reason — a discrete choice can be meaningful
+before it is seen, and a range cannot. A record that reopens this starts there.
 
-**O3 — If no, is the question closed here or added to 0001 §5?**
+**R3 — The question is closed here, not added to 0001 §5.**
 
-Recommended default: **closed here.** This record becomes the authority, and
-reopening takes a record superseding it — the ordinary route, the one 0005 R2 fixed
-for exactly this shape. Adding a line to 0001 §5 would need a record superseding
-0001, which is a heavy instrument for a question that already has its own row in
-the index.
+Confirmed as recommended, and R1's second sentence is what makes it the only
+sensible instrument rather than merely the lighter one. 0001 §5 states that adding
+to it *"requires superseding this record rather than extending it"* — so putting
+settings on that list would price the *später* the decider left open against
+0001, the record everything else in the project rests on.
+
+Closed here, the same *später* costs a record superseding **this** one, which is
+the ordinary route and the one 0005 R2 fixed for exactly this shape. The index row
+for 0015 is what a later session finds; nothing is hidden by the lighter
+instrument.
 
 ## References
 
 - [0001](0001-purpose-scope-and-success.md) §3.1, §4, §5, §6, R3 — what watching
-  decides, what the page contains, what is out of scope, the ranked failures, and
-  the question this record was left. Read 2026-08-02.
+  decides, what the page contains, what is out of scope and what changing that list
+  costs, the ranked failures, and the question this record was left. Read
+  2026-08-02.
 - [0002](0002-overall-architecture.md) §2, §5, §6, A1 — the Shell's enumerated
   jobs, no domain logic outside the Core, and the one call, with what authorizing
   it cost. Read 2026-08-02.
-- [0003](0003-security-and-privacy-by-design.md) §4 — the mechanism list §5 reads,
+- [0003](0003-security-and-privacy-by-design.md) §4 — the mechanism list §6 reads,
   including `history.pushState`. Read 2026-08-02.
 - [0004](0004-compliance-accessibility-and-rights.md) §4, §5 — the reduced-motion
   requirement, and the control whose record says what it settles about 0001 R3.
@@ -303,16 +351,16 @@ the index.
 - [0005](0005-rendering-and-visual-design.md) §3, §4, §7 — the colors the View is
   told, `prefers-color-scheme`, and the shape of the control that is not a setting.
   Read 2026-08-02.
-- [0006](0006-motion-rules.md) §2, §8, §9, §10 — the constraint §4 bounds against,
-  the two ways the Core is not stepped, and the invariant list §7 refers to. Read
+- [0006](0006-motion-rules.md) §2, §8, §9, §10 — the constraint §5 bounds against,
+  the two ways the Core is not stepped, and the invariant list §8 refers to. Read
   2026-08-02.
 - [0007](0007-pointer-and-input-model.md) §9 — one of the four asserted-and-watched
-  divisions §7 follows. Nothing here depends on it. Read 2026-08-02.
+  divisions §8 follows. Nothing here depends on it. Read 2026-08-02.
 - [0008](0008-performance-budget.md) §5, §6, §10, R1 — the count fixed for a visit,
   the packing ratio, the dialog stopping the steps, and where numbers live. Read
   2026-08-02.
 - [0014](0014-page-layout.md) §2, §4, §5, §9 — the strip's two controls, the dialog
-  this record's surface would sit in, and the sentence §3 relies on. Read
+  this record's surface would have sat in, and the sentence §4 relies on. Read
   2026-08-02.
 - [Ticket #53](https://github.com/nanatsusaya/dot-panic/issues/53) — the scope this
   record is written against. Read 2026-08-02.
