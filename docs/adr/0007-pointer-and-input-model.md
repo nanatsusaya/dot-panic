@@ -17,6 +17,7 @@
   always visible, not hover-revealed) ·
   [0012](0012-how-software-gets-developed.md) §4, §5
 - **Supersedes:** nothing
+- **Amended:** 2026-08-02 — A1
 
 ## Context
 
@@ -245,7 +246,7 @@ ticket before the work starts, under 0012 §5:
   proximity, and it will look like a bug to somebody.
 - **Nothing owns the page's layout, and §8 now needs it to.** The requirement
   that the imprint stay reachable on touch belongs to a record that does not
-  exist and is not planned. This record states it and cannot enforce it — O1.
+  exist and is not planned. This record states it and cannot enforce it — R1.
 - **§4 puts pointer state in the world**, so the Core's world grows a last
   position and a strength that exist only because input exists. 0002 §5 leaves no
   alternative, and it is still a larger world and a larger test surface.
@@ -327,6 +328,27 @@ and comes back to a permanent gap has no way to tell an intended behavior from a
 stuck one, and nothing on the page explains it. Recorded here so that the first
 person to notice it finds a decision rather than an oversight — and so that
 changing it later is understood as reversing this, not as fixing something.
+
+## Amendments
+
+**A1 — one reference to an open question that no longer exists. 2026-08-02.**
+
+*Consequences*, the second negative, ended:
+
+> exist and is not planned. This record states it and cannot enforce it — O1.
+
+`O1` now reads `R1`. That question was answered before this record was accepted,
+and the answer is the R1 above: the page's layout gets a record of its own, and
+it is 0014. The reference was left pointing at a section this record no longer
+has.
+
+**Nothing this record decides changes.** The sentence points at the same answer
+it always pointed at, under the name that answer now has.
+
+Authorized by Daniel on 2026-08-02, against
+[#58](https://github.com/nanatsusaya/dot-panic/issues/58): *"wir folgen bei allen
+drei deinen empfehlungen"* — of which the first was one authorized amendment per
+affected record, quoting the superseded wording verbatim.
 
 ## References
 
