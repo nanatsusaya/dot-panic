@@ -146,7 +146,12 @@ The shape of a ticket, and what makes it ready and done, is
 [.github/ISSUE_TEMPLATE/task.md](.github/ISSUE_TEMPLATE/task.md) — the form an
 author actually sees. It is not restated here.
 
-Two labels, and no more: `type:decision` and `type:build`.
+Three labels, and no more: `type:decision`, `type:build` and `type:epic`.
+
+`type:epic` goes on the issue that **is** the epic — the one listing its
+tickets — and never on a member ticket. One label, not one per epic. What an
+epic is, and what it deliberately is not, is
+[0012](docs/adr/0012-how-software-gets-developed.md) §7.
 
 ## Session rituals
 
