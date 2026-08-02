@@ -6,7 +6,40 @@ session would decide worse without it.
 
 Newest first.
 
-## 2026-08-02 — A recommendation was approved, and part of its reason was false
+## 2026-08-02 — A record said something was impossible, and one unstated premise made it so
+
+0014's first draft described a scrolling page: canvas, then the control, then the
+explanation and the imprint below it in normal flow. Its §4 argued that a page
+which never scrolls was not available here — the text has to go somewhere, the
+floor device is a phone, and a visitor who enlarges text is using an
+accessibility mechanism that no layout may fight.
+
+The decider did not answer the open questions. He described a different page: a
+strip carrying a button, and a popup behind it holding the settings, the imprint
+and the explanation under collapsible sections.
+
+**The argument was valid and its conclusion was false**, because it rested on a
+premise nobody had written down: that the text had to be in the page's flow. Put
+it in a dialog that scrolls inside itself and the impossibility is gone — and
+0007 §8's `touch-action: none` stops costing anything at all, because a page with
+nowhere to scroll to loses nothing by refusing to scroll. The premise was not
+defended anywhere in the draft. It was never visible enough to defend.
+
+**Two consequences.**
+
+- **A record that rejects an alternative as impossible names the premise the
+  impossibility rests on.** [The record shape](adr/README.md) asks each
+  alternative for a one-line *rejected because*, and *it cannot be done* satisfies
+  that while giving a reader nothing to push against. A preference stated as a
+  constraint reads exactly like a constraint.
+  [0014](adr/0014-page-layout.md) §1 names the move that dissolves this one and
+  says plainly that an earlier draft concluded the opposite.
+- **The window before Accepted is the only place a record's arrangement is cheap
+  to change.** This was the first time review replaced the substance of a record
+  rather than answering its questions, and it cost one rewrite on the same branch
+  because the record was still `Proposed`. After the merge the same change would
+  have needed a superseding record, and 0014 would stand permanently as the
+  reasoning that got it wrong.
 
 0007's O1 asked whether the page's layout should get a record of its own. It
 recommended yes, and it recommended writing that record **after 0008**, *so it
