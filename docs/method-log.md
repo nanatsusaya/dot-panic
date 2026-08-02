@@ -6,6 +6,39 @@ session would decide worse without it.
 
 Newest first.
 
+## 2026-08-02 — A status update named a gap the same session then closed
+
+STATUS.md was brought current after 0004 and, being honest about what it found,
+recorded a gap: eight of the thirteen planned decisions had no ticket, and every
+record between there and a deployed page was among them. The change went into
+review.
+
+The next instruction was to close that gap. Five tickets were written, and the
+sentence was false within the hour — along with the issue count and a paragraph
+naming a missing ticket that now existed. The change merged while the correction
+was still being typed, so it merged carrying only the false version. One change
+became two, and the second existed only to repair the first.
+
+**Two consequences.**
+
+- **The state artifact is the only document that describes the work being done
+  right now.** That is what makes a finding recorded in it worth acting on, and
+  it is the same property that lets acting on the finding falsify the record.
+  Every other document here describes something that holds still while it is
+  written about. So when a status update finds a gap that is cheap to close,
+  close it first and let the update describe the closed state. Naming a gap you
+  are about to fix buys a second change.
+- **A branch is not its pull request.** Pushing a second commit to a branch does
+  not add it to a change that has already merged, and nothing warns you — the
+  push succeeds and looks ordinary. Check the state of the change, not the state
+  of the branch, before believing a commit landed where it was aimed.
+
+**This one was checkable, and nothing checked it.** Unlike the reading error
+below, *ten issues are open* is a claim a command settles in a second. The
+coherence check does not make it: it reads this repository, and the ticket
+tracker is not in it. Worth knowing before a green check is read as covering a
+count.
+
 ## 2026-08-02 — A rule was read by its wording, and nearly bought an adaptation
 
 The draft of decision 0003 recommended narrowing P1 — *no credential, token, key
