@@ -6,6 +6,51 @@ session would decide worse without it.
 
 Newest first.
 
+## 2026-08-02 — A rule was read by its wording, and nearly bought an adaptation
+
+The draft of decision 0003 recommended narrowing P1 — *no credential, token, key
+or personal datum is ever committed* — by a recorded adaptation. Its argument was
+that the rule had never held here: every commit in this repository carries a real
+name and a real email address, in the author and in the committer field, since
+the first one.
+
+The observation is correct, and it was checked rather than assumed:
+
+```bash
+git log --format='%an <%ae> | %cn <%ce>' | sort -u
+```
+
+Daniel: *"wir unterschieden doch zwischen zwei verschiedenen dingen."* The person
+responsible for a published project is attached to it by name, deliberately.
+What is never stored is anything about a **visitor** — an address, a cookie, a
+count. Two parties, one word.
+
+P1's stated reason settles it in a line: a pushed secret is **compromised** the
+moment it exists in the history. Compromise is the test, and something published
+on purpose cannot be compromised by being published. P1 needed no narrowing. It
+was never the rule in question.
+
+**Three consequences.**
+
+- **Read a rule by its reason before proposing to change it.** Every rule in the
+  catalog carries a *Why*, and the binding line is its lossy short form — it has
+  to be short enough to remember. A rule that appears to forbid something absurd
+  is far more often a reading error than a rule error.
+- **A recorded adaptation is the most expensive way to be wrong.** A2 requires
+  one, and it should: an unexplained gap gets helpfully restored by the next
+  session. But the permanence cuts both ways. An adaptation reads to every later
+  session as considered, and nothing revisits it. A wrong one does not decay back
+  into a question — it hardens into how things are done here.
+- **Where a rule names a kind of data, ask whose.** P1 says *personal datum* and
+  does not say whose. The whole error lives in that gap: an operator's identity
+  and a visitor's address are both personal data, and only one of them is what
+  the rule protects.
+
+**What found it was not a check.** The coherence check passed on the draft, as it
+passes on anything whose links resolve and whose spelling is American — it does
+not read an argument. What found it was Daniel reading a recommendation and
+refusing its premise, which is what found the drifted failure list as well.
+
 ## 2026-08-02 — A number that carries two jobs ran out of room
 
 0012 was planned as a walking-skeleton record, dropped before it was written,
