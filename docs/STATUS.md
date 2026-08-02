@@ -38,7 +38,9 @@ increment has a row of its own, and the two phases at the end are named without
 being decided. **The word *epic* enters the project with it** — a named group of
 tickets, grouping by subject and nothing else, never the thing a change is made
 against. The recommendation had been against all of it, on A3's *do not build for
-a scale you do not have*; A1 records that and what overruled it.
+a scale you do not have*; A1 records that and what overruled it. **The two end
+phases now have a row**, [0016](adr/README.md), which is where their content goes
+and why A1 was allowed to name them and nothing more.
 
 **What the page may never do is decided.**
 [0003](adr/0003-security-and-privacy-by-design.md) forbids loading anything off
@@ -303,7 +305,7 @@ chosen rather than overlooked:** the public URL will serve a poor toy for a
 while, and it is the artifact most likely to be judged without the records beside
 it.
 
-**Fifteen decisions are planned** in [docs/adr/](adr/README.md).
+**Sixteen decisions are planned** in [docs/adr/](adr/README.md).
 [0001](adr/0001-purpose-scope-and-success.md),
 [0002](adr/0002-overall-architecture.md),
 [0012](adr/0012-how-software-gets-developed.md),
@@ -317,11 +319,11 @@ it.
 [0008](adr/0008-performance-budget.md),
 [0009](adr/0009-toolchain.md),
 [0010](adr/0010-testing-strategy.md) and
-[0011](adr/0011-delivery.md) are Accepted; the fifteenth,
-[0013](adr/README.md), is `Planned`. **The table runs by meaning and not by
-number**, and three
+[0011](adr/0011-delivery.md) are Accepted; the two that are not,
+[0013](adr/README.md) and [0016](adr/README.md), are `Planned`. **The table runs
+by meaning and not by number**, and four
 numbers have a history it carries rather than this file: 0012 was reserved as
-unused until 2026-08-02, and 0014 and 0015 were both added after the set was
+unused until 2026-08-02, and 0014, 0015 and 0016 were all added after the set was
 planned.
 
 What is awaiting review is not repeated here. The
@@ -332,7 +334,7 @@ There are none.
 
 ## What the tickets hold
 
-Eight issues are open. One of them still carries research that would otherwise
+Nine issues are open. One of them still carries research that would otherwise
 have existed only in the conversation that produced it, and each ticket says in
 its own header how ready it is.
 
@@ -346,18 +348,20 @@ its own header how ready it is.
 | [#70](https://github.com/nanatsusaya/dot-panic/issues/70) Biome | waits on #69 |
 | [#71](https://github.com/nanatsusaya/dot-panic/issues/71) The check chain as commands | waits on #69 and #70 |
 | [#77](https://github.com/nanatsusaya/dot-panic/issues/77) The hosting notice 0011 §4 puts beside the imprint | not ready — waits on #13 for a dialog to sit in |
+| [#83](https://github.com/nanatsusaya/dot-panic/issues/83) 0016 Maintainability and maintenance | not ready — waits on 0013 |
 
 **The ticket gap is closed.** Every planned decision has one. Five were filed on
 2026-08-02 — 0008, 0009, 0010, 0011 and the repository notes — because the four
 records written so far were each written against one, and the next would have
 been the first without. 0005's was written alongside its record rather than ahead
-of it, and closed with it. **Neither row added since then opened the gap again:**
-[#49](https://github.com/nanatsusaya/dot-panic/issues/49) for 0014 and
-[#53](https://github.com/nanatsusaya/dot-panic/issues/53) for 0015 were each
+of it, and closed with it. **No row added since then has opened the gap again:**
+[#49](https://github.com/nanatsusaya/dot-panic/issues/49) for 0014,
+[#53](https://github.com/nanatsusaya/dot-panic/issues/53) for 0015 and
+[#83](https://github.com/nanatsusaya/dot-panic/issues/83) for 0016 were each
 filed in the same change that added the row, because a planned row without a
 ticket is the state those five were filed to end.
 
-**Four of the eight were asked for by a record rather than noticed in passing.**
+**Five of the nine were asked for by a record rather than noticed in passing.**
 [#69](https://github.com/nanatsusaya/dot-panic/issues/69) creates what 0009
 decides, [#70](https://github.com/nanatsusaya/dot-panic/issues/70) configures
 Biome, and [#71](https://github.com/nanatsusaya/dot-panic/issues/71) turns 0009
@@ -365,7 +369,9 @@ Biome, and [#71](https://github.com/nanatsusaya/dot-panic/issues/71) turns 0009
 where the decider asked for them by name. The fourth is
 [#77](https://github.com/nanatsusaya/dot-panic/issues/77), which writes the two
 sentences 0011 §4 puts beside the imprint, and it was filed before that record
-was accepted so that the reference inside it would point at something real.
+was accepted so that the reference inside it would point at something real. The
+fifth is [#83](https://github.com/nanatsusaya/dot-panic/issues/83), which 0012 §1
+asked for by naming two phases and handing their content away.
 **#69 has since grown a requirement it was not filed with**: 0010 §7 puts the
 coverage floor and its two exclusions in `bunfig.toml`, so the file that ticket
 creates now carries a number as well as a toolchain. **None of them starts by
@@ -443,8 +449,9 @@ What a change description must contain is no longer among the gaps here.
 
 **Bring [#12](https://github.com/nanatsusaya/dot-panic/issues/12) to ready**, so
 that [decision 0013](adr/README.md) — origin of the core — can be written. It is
-the last planned record and the only thing between the decision set and being
-finished; every other row is Accepted.
+no longer the last planned record, but it is the one the other waits on:
+[0016](adr/README.md) cannot say what keeps this project maintainable while it is
+open whether the core is written here or taken from a package.
 
 **Half of what makes that ticket not ready has expired.** Its header gives two
 reasons, *blocked by 0002* and *"Scope is not final"*. 0002 was Accepted on

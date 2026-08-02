@@ -88,6 +88,7 @@ longer supports.
 | [0010](0010-testing-strategy.md) | Testing strategy | What is asserted by a command, what a person measures, and what is only ever watched | Accepted |
 | [0011](0011-delivery.md) | Delivery | How it reaches the public URL, and when | Accepted |
 | 0013 | Origin of the core | Written here or taken from a package | Planned |
+| 0016 | Maintainability and maintenance | What keeps this maintainable, who re-reads the commitments that depend on time, and what the project is once delivery ends | Planned |
 
 0012 sits third because it decides how everything below it gets built. Its
 number says when it was written, which is a different question.
@@ -121,9 +122,15 @@ page, which is where one would go — so it became one. Two accepted records bou
 it before it is written: 0003 §4 stores nothing on the visitor's device, and 0006
 §2 makes a dot count that cannot be packed into the frame unsatisfiable.
 
-**Two rows have now been added after the set was planned**, and that is the
-mechanism working rather than the plan failing. Both came from a record finding a
-topic no existing row owned, both took the next free number, and both arrived
+**0016 was added by [0012](0012-how-software-gets-developed.md) §1**, which names
+seven phases and says of the last two that what being maintainable requires, and
+what the project is once delivery ends, needs a record of its own. It sits last
+because it is about the project after everything above it has been built, which
+is the one position in this table that is chronological rather than by meaning.
+
+**Three rows have now been added after the set was planned**, and that is the
+mechanism working rather than the plan failing. Each came from a record finding a
+topic no existing row owned, each took the next free number, and each arrived
 with a ticket in the same change. It is the numbering in
 [0012](0012-how-software-gets-developed.md)'s paragraph above that is closed, not
 the set.
