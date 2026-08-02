@@ -86,7 +86,7 @@ longer supports.
 | [0008](0008-performance-budget.md) | Performance budget | How many dots at what frame rate on which device | Accepted |
 | [0009](0009-toolchain.md) | Toolchain | What runs the code, what tests it, what builds it | Accepted |
 | [0010](0010-testing-strategy.md) | Testing strategy | What is asserted by a command, what a person measures, and what is only ever watched | Accepted |
-| 0011 | Delivery | How it reaches the public URL, and when | Planned |
+| [0011](0011-delivery.md) | Delivery | How it reaches the public URL, and when | Accepted |
 | 0013 | Origin of the core | Written here or taken from a package | Planned |
 
 0012 sits third because it decides how everything below it gets built. Its
