@@ -23,10 +23,13 @@ names the project; it does not define it.
 
 ## Commands
 
-**This project has no toolchain yet, and that is not an oversight.** No
-decision covers a runtime, a test runner, a package manager or a build step, so
-none of them exist here. Do not introduce one as a side effect of some other
-task; write the decision first.
+**This project has no toolchain yet, and that is not an oversight.** It is now
+decided rather than open — [0009](docs/adr/0009-toolchain.md) fixes Bun,
+TypeScript, `bun test`, `tsc` and Biome — and **deciding is not building.** There
+is no manifest, no `tsconfig`, no `node_modules` and no build output, and
+creating any of it is work with its own ticket. Do not introduce a piece of it as
+a side effect of some other task, and do not add a dependency 0009 §7 does not
+name; §7 explicitly leaves the stop-and-ask below in force.
 
 One command does exist, because it belongs to the method rather than to the
 toy. It runs out of the method repository, which is not vendored here and has
