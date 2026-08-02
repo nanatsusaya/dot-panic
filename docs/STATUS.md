@@ -11,9 +11,13 @@ code, no page, no rendering. Everything built so far is the way of working:
 the operating rules, the decision set, fifteen accepted records, and the five
 session procedures in [`.claude/skills/`](../.claude/skills/README.md).
 
-The procedures have now been used. `/moin`, `/weiterimtext` and `/adr` all ran
-on 2026-08-02 and behaved as their files describe. `/feierabend` and `/passtdas`
-have still never been invoked.
+The procedures have now been used. `/moin`, `/weiterimtext` and `/adr` ran on
+2026-08-02 and `/feierabend` on 2026-08-03, all behaving as their files
+describe — `/feierabend`'s first run is what added this sentence's other half
+and #114 to the ticket list, by reading the documents it asks to be brought
+current. **`/passtdas` has still never been invoked**, and `method.json`
+declares no adaptations while this week added seven phases, an epic and a third
+label to how work is actually done.
 
 **The architecture is decided and none of it is built.**
 [0002](adr/0002-overall-architecture.md) fixes a functional core inside an
@@ -362,10 +366,12 @@ There are none.
 
 ## What the tickets hold
 
-**Thirty-one issues are open, and the breakdown is why.** There were eight on
-2026-08-02. 0012 §1's phase 3 — cutting the epics visible in the accepted records
-into tickets — was run on the decider's instruction, and it produced four epics
-and twenty-one tickets.
+**Thirty-two issues are open, and the breakdown is most of why.** There were
+eight on 2026-08-02. 0012 §1's phase 3 — cutting the epics visible in the
+accepted records into tickets — was run on the decider's instruction, and it
+produced four epics and twenty-one tickets. The thirty-second is
+[#114](https://github.com/nanatsusaya/dot-panic/issues/114), which the breakdown
+did not produce and reading the operating rules did.
 
 **This file no longer lists every ticket, and that is not an answer to
 [#46](https://github.com/nanatsusaya/dot-panic/issues/46).** An epic is now the
@@ -394,6 +400,7 @@ Outside the epics:
 | [#77](https://github.com/nanatsusaya/dot-panic/issues/77) The hosting notice 0011 §4 puts beside the imprint | not ready — waits on #96 for a dialog to sit in |
 | [#83](https://github.com/nanatsusaya/dot-panic/issues/83) 0016 Maintainability and maintenance | ready — 0013 was what it waited on |
 | [#90](https://github.com/nanatsusaya/dot-panic/issues/90) The real imprint address | not ready — the decider supplies the content |
+| [#114](https://github.com/nanatsusaya/dot-panic/issues/114) CLAUDE.md's working conventions wait on decisions that are Accepted | ready |
 
 **[#90](https://github.com/nanatsusaya/dot-panic/issues/90) is the one thing
 nobody here can work, and it stops the URL rather than the code.** 0004 R2 makes
@@ -429,9 +436,14 @@ ticket is the state those five were filed to end.
 number has stopped being informative.** It was five of eight. After the
 breakdown it is essentially all of them: every ticket phase 3 produced was cut
 from an accepted record and cites the sections it serves. What is worth naming
-now is the other direction — the only open ticket nobody's record asked for is
-[#46](https://github.com/nanatsusaya/dot-panic/issues/46), which was noticed in
-passing when this table drifted twice within an hour.
+now is the other direction — **two** open tickets were noticed in passing rather
+than asked for by a record.
+[#46](https://github.com/nanatsusaya/dot-panic/issues/46) came from this table
+drifting twice within an hour, and
+[#114](https://github.com/nanatsusaya/dot-panic/issues/114) from reading
+CLAUDE.md at the end of the session that produced the breakdown. Both are
+defects in how this project describes itself, which is what noticing in passing
+tends to find.
 
 **#69 has grown a requirement it was not filed with**: 0010 §7 puts the coverage
 floor and its two exclusions in `bunfig.toml`, so the file that ticket creates
@@ -511,21 +523,32 @@ What a change description must contain is no longer among the gaps here.
 
 ## The single clearest next step
 
-**Write [0016](adr/README.md) against
-[#83](https://github.com/nanatsusaya/dot-panic/issues/83).** It is the last row
-in the index with no file behind it, and what its ticket was waiting on —
-0013 — was accepted on 2026-08-02.
+**Fix CLAUDE.md against
+[#114](https://github.com/nanatsusaya/dot-panic/issues/114).** Its *Working
+conventions* section ends by saying that how the simulation is structured, what
+it is written against and how it is tested *"are open questions"*, and that the
+section stays short **until those are Accepted**. All three are — 0002, 0009 and
+0010 — so the condition it names has been satisfied and the paragraph now
+misdescribes the project.
 
-**What it has to decide is not abstract, and the list got longer this week.**
-Three commitments here depend on time and no record owns re-reading them: 0008
-§8's slowdown factor with the date it was read, 0014's `showModal()` bridge whose
-end date is 2028-06-12, and 0009 §4's browser APIs. 0013 §8 added a fourth —
-provenance, and both halves of its §7 — so the set 0011 §6 was shrinking one at
-a time is growing again.
+**It goes first because it is a defect rather than a gap**, and because of where
+it sits. CLAUDE.md is what a session with no memory reads first, and this is the
+section that would tell it how code is written here. The first session to write
+code is the first one this paragraph sends nowhere, which is 0001 §6.1 — the
+failure this project ranks above every other.
 
-**The breakdown is done and did not need it.** 0016 constrains that work only
-through D4 — a ticket that would settle something a still-open record owns is
-not ready — and nothing about the toy settles what maintenance means.
+**Then write [0016](adr/README.md) against
+[#83](https://github.com/nanatsusaya/dot-panic/issues/83)**, the last row in the
+index with no file behind it. What it has to decide is not abstract: three
+commitments here depend on time and no record owns re-reading them — 0008 §8's
+slowdown factor with the date it was read, 0014's `showModal()` bridge whose end
+date is 2028-06-12, and 0009 §4's browser APIs — and 0013 §8 added a fourth, so
+the set 0011 §6 was shrinking one at a time is growing again.
+
+**Neither gates the other, and neither gated the breakdown.** 0016 constrains
+that work only through D4 — a ticket that would settle something a still-open
+record owns is not ready — and nothing about the toy settles what maintenance
+means.
 
 **What stands between here and code is one activity, and it is not this one.**
 0012 §2 makes a sprint a set of tickets brought to Definition of Ready
