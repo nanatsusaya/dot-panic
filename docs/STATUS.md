@@ -2,13 +2,13 @@
 
 *Brought current before a session ends. Read first when one starts.*
 
-*Last brought current: 2026-08-02.*
+*Last brought current: 2026-08-03.*
 
 ## Position
 
 The method has been adopted. **Nothing of the toy exists yet** — no simulation
 code, no page, no rendering. Everything built so far is the way of working:
-the operating rules, the decision set, fourteen accepted records, and the five
+the operating rules, the decision set, fifteen accepted records, and the five
 session procedures in [`.claude/skills/`](../.claude/skills/README.md).
 
 The procedures have now been used. `/moin`, `/weiterimtext` and `/adr` all ran
@@ -300,10 +300,37 @@ required will not find one.
 [#13](https://github.com/nanatsusaya/dot-panic/issues/13), and not at the point
 0001 §3 calls the toy good enough. The argument is 0001 §6.2 — *the toy is never
 finished because the process ate the work* — which is the failure this project is
-most exposed to, fourteen records in with nothing on a screen. **The cost is
+most exposed to, fifteen records in with nothing on a screen. **The cost is
 chosen rather than overlooked:** the public URL will serve a poor toy for a
 while, and it is the artifact most likely to be judged without the records beside
 it.
+
+**Where the Core comes from is decided, and it was already decided before the
+record asked.** [0013](adr/0013-origin-of-the-core.md) writes the simulation in
+this repository. A package reaches a browser by three routes and accepted
+records had closed all of them: 0003 §2 and §5 the runtime import, 0009 §3 and
+§5 the bundle, and **0012 §4 the last one** — test-first without exception
+cannot be satisfied by code that arrives already written, so copying source into
+`core/` costs an amendment to 0012 and a second one to 0004 §12. The option had
+shrunk to one route before the record began.
+
+**That makes the package survey irrelevant rather than decisive**, and its §4
+says so instead of leaning on it. The metadata was re-read from the registry on
+2026-08-02 and one number in it was wrong; **no package's source has ever been
+read**, so the older claim that none of them addresses 0006 §2, §3 and §6 is an
+expectation and not a finding. Its §6 generalizes the answer to everything that
+enters the Core, because the routes are about code rather than about boids —
+which closes a later spatial index to a proven implementation, and that cost
+falls on whoever writes it.
+
+**Reading someone else's implementation is allowed; copying it is not.** §7 and
+R1: nothing is copied, and anything actually consulted is named in the ticket
+that produced the code. The clean-room alternative was rejected because nothing
+can check either rule, and an obligation that leaves a trace beats a prohibition
+nobody can enforce — at the price of a sentence this project can no longer use,
+which R1 keeps rather than argues away. **Its §8 counts the cost:** provenance
+and both halves of §7 are decided by no command, so 0011 §6's shrinking set of
+remembered rules gains a fourth.
 
 **Sixteen decisions are planned** in [docs/adr/](adr/README.md).
 [0001](adr/0001-purpose-scope-and-success.md),
@@ -319,8 +346,9 @@ it.
 [0008](adr/0008-performance-budget.md),
 [0009](adr/0009-toolchain.md),
 [0010](adr/0010-testing-strategy.md) and
-[0011](adr/0011-delivery.md) are Accepted; the two that are not,
-[0013](adr/README.md) and [0016](adr/README.md), are `Planned`. **The table runs
+[0011](adr/0011-delivery.md) and
+[0013](adr/0013-origin-of-the-core.md) are Accepted; the one that is not,
+[0016](adr/README.md), is `Planned`. **The table runs
 by meaning and not by number**, and four
 numbers have a history it carries rather than this file: 0012 was reserved as
 unused until 2026-08-02, and 0014, 0015 and 0016 were all added after the set was
@@ -334,13 +362,16 @@ There are none.
 
 ## What the tickets hold
 
-Nine issues are open. One of them still carries research that would otherwise
-have existed only in the conversation that produced it, and each ticket says in
-its own header how ready it is.
+Eight issues are open, and each says in its own header how ready it is.
+
+**The ticket that held research no longer has to.** #12 carried a survey of four
+npm packages so that it would not be lost with the session that produced it, and
+that was the last thing in this project living only in the tracker. 0013 §4 has
+it now — re-read from the registry, one number corrected, and recorded as
+something that did **not** decide the record it sits in.
 
 | Ticket | State |
 |---|---|
-| [#12](https://github.com/nanatsusaya/dot-panic/issues/12) 0013 Origin of the core | not ready — holds the package survey |
 | [#13](https://github.com/nanatsusaya/dot-panic/issues/13) Walking skeleton | not ready — 0012 §2 makes it the first increment |
 | [#38](https://github.com/nanatsusaya/dot-panic/issues/38) The two repository notes 0004 §2 assumes | ready |
 | [#46](https://github.com/nanatsusaya/dot-panic/issues/46) Ticket readiness is stated in two places | ready — and this table is one of the two |
@@ -348,7 +379,7 @@ its own header how ready it is.
 | [#70](https://github.com/nanatsusaya/dot-panic/issues/70) Biome | waits on #69 |
 | [#71](https://github.com/nanatsusaya/dot-panic/issues/71) The check chain as commands | waits on #69 and #70 |
 | [#77](https://github.com/nanatsusaya/dot-panic/issues/77) The hosting notice 0011 §4 puts beside the imprint | not ready — waits on #13 for a dialog to sit in |
-| [#83](https://github.com/nanatsusaya/dot-panic/issues/83) 0016 Maintainability and maintenance | not ready — waits on 0013 |
+| [#83](https://github.com/nanatsusaya/dot-panic/issues/83) 0016 Maintainability and maintenance | ready — 0013 was what it waited on |
 
 **The ticket gap is closed.** Every planned decision has one. Five were filed on
 2026-08-02 — 0008, 0009, 0010, 0011 and the repository notes — because the four
@@ -361,7 +392,7 @@ of it, and closed with it. **No row added since then has opened the gap again:**
 filed in the same change that added the row, because a planned row without a
 ticket is the state those five were filed to end.
 
-**Five of the nine were asked for by a record rather than noticed in passing.**
+**Five of the eight were asked for by a record rather than noticed in passing.**
 [#69](https://github.com/nanatsusaya/dot-panic/issues/69) creates what 0009
 decides, [#70](https://github.com/nanatsusaya/dot-panic/issues/70) configures
 Biome, and [#71](https://github.com/nanatsusaya/dot-panic/issues/71) turns 0009
@@ -447,38 +478,26 @@ What a change description must contain is no longer among the gaps here.
 
 ## The single clearest next step
 
-**Bring [#12](https://github.com/nanatsusaya/dot-panic/issues/12) to ready**, so
-that [decision 0013](adr/README.md) — origin of the core — can be written. It is
-no longer the last planned record, but it is the one the other waits on:
-[0016](adr/README.md) cannot say what keeps this project maintainable while it is
-open whether the core is written here or taken from a package.
+**Write [0016](adr/README.md) against
+[#83](https://github.com/nanatsusaya/dot-panic/issues/83).** It is the last row
+in the index with no file behind it, and what its ticket was waiting on —
+0013 — was accepted on 2026-08-02.
 
-**Half of what makes that ticket not ready has expired.** Its header gives two
-reasons, *blocked by 0002* and *"Scope is not final"*. 0002 was Accepted on
-2026-08-02, the day after the ticket was filed, so the first is gone. The second
-is a judgement rather than a blocker, and the ticket predicted how it would
-resolve: *"once 0002 fixes the architecture, this question is largely answered by
-it."* Establishing whether that came true is the work.
+**What it has to decide is not abstract, and the list got longer this week.**
+Three commitments here depend on time and no record owns re-reading them: 0008
+§8's slowdown factor with the date it was read, 0014's `showModal()` bridge whose
+end date is 2028-06-12, and 0009 §4's browser APIs. 0013 §8 added a fourth —
+provenance, and both halves of its §7 — so the set 0011 §6 was shrinking one at
+a time is growing again.
 
-**Records accepted since reach into two of its three scope items**, one of them
-all the way. It asks whether anything shipped to the browser may have a runtime
-dependency at all — 0009 §7 answers no, and calls that a description of what 0003
-§2 and §5 already force rather than a new rule. And it asks which package to take,
-while
-0009 §3 emits one `.js` beside each `.ts` with no bundler, which is not how an
-installed package reaches a browser. **Whether that leaves *taken from a package*
-meaning anything is 0013's to work out**, not this file's — and it is why the
-ticket needs rereading rather than answering.
+**It does not gate the breakdown.** 0012 §1 puts a cut into epics and tickets
+after the records, and 0016 constrains that work only through D4: a ticket that
+would settle something a still-open record owns is not ready. Nothing about the
+toy settles what maintenance means, so the two can run in either order.
 
-**What the ticket carries is a survey, and it is not evidence.** The four npm
-packages in it are metadata read from the registry on 2026-07-31; no package's
-source was read, and the argument recorded against them was never code quality
-but scope — none addresses 0006's speed floor, bounded frame or non-overlap.
-
-**Nothing here says to start building.**
-[#69](https://github.com/nanatsusaya/dot-panic/issues/69) creates what 0009 and
-0010 §7 decide, and 0012 §1's analysis phase has no end condition — leaving it is
-the decider's call, not something a record becoming Accepted does on its own.
+**Nothing here says to start building.** 0012 §1's analysis phase has no end
+condition, and leaving it is the decider's call rather than something a record
+becoming Accepted does on its own.
 
 ## Implementation scale
 
@@ -494,11 +513,17 @@ that says whether anything exists:
 
 An accepted decision confers `decided` and nothing more.
 
-**The simulation core does not move off `planned`, and 0006 is the reason it
-looks as though it should.** 0006 decides the rules the core runs, but
-[0013](adr/README.md) still owns whether that core is written here or taken from
-a package, and it is `Planned`. Rendering moved because 0005 is the whole of that
-question; the core is two records and only one of them exists.
+**The simulation core moves to `decided`, and with it every row on this scale
+is there.** It was held on `planned` because the core is two records — 0006
+decides the rules it runs, and [0013](adr/0013-origin-of-the-core.md) owned where
+the code comes from. Both exist now.
+
+**Six areas at `decided` and none at `built` is the state this table was built to
+make visible**, and it is the one 0001 §6.2 warns about: a project that has
+decided everything and made nothing. It is also why 0011 §7 puts the first
+deployment at the walking skeleton rather than at *good enough*.
+[#13](https://github.com/nanatsusaya/dot-panic/issues/13) is what moves the first
+row off `decided`, and it moves several at once.
 
 **Pointer handling moves for the same reason rendering did**, and one thing it
 leaves open is not part of it: 0007 §8's requirement that the imprint stay
@@ -545,7 +570,7 @@ this scale reaches `live`.
 | Area | Stage |
 |---|---|
 | Toolchain | `decided` |
-| Simulation core | `planned` |
+| Simulation core | `decided` |
 | Rendering | `decided` |
 | Pointer handling | `decided` |
 | Page layout | `decided` |
