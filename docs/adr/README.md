@@ -63,7 +63,7 @@ longer supports.
 | [0001](0001-purpose-scope-and-success.md) | Purpose, scope and success | What is this, who for, when is it good enough, what is explicitly out | Accepted |
 | [0002](0002-overall-architecture.md) | Overall architecture | Which layers exist, which may depend on which, what the core may not touch | Accepted |
 | [0012](0012-how-software-gets-developed.md) | How software gets developed here | Analysis then increments; where test-first applies and what replaces it where it cannot; when work may run in parallel | Accepted |
-| 0003 | Security and privacy by design | What is worth protecting, where the trust boundaries are, what never runs or is stored | Planned |
+| [0003](0003-security-and-privacy-by-design.md) | Security and privacy by design | What is worth protecting, where the trust boundaries are, what never runs or is stored | Proposed |
 | 0004 | Compliance, accessibility and rights | Motion and reduced-motion, license, provenance of the model, what law applies | Planned |
 | 0005 | Rendering and visual design | Canvas, SVG or DOM; color, light and dark, pixel density | Planned |
 | 0006 | Motion rules | Bounded frame, minimum speed, non-overlap as a constraint | Planned |
