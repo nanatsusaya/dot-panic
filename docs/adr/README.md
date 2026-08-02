@@ -85,7 +85,7 @@ longer supports.
 | [0015](0015-settings-surface.md) | Settings surface | Whether the visitor may change the flock, which values are exposed, and what bounds them | Accepted |
 | [0008](0008-performance-budget.md) | Performance budget | How many dots at what frame rate on which device | Accepted |
 | [0009](0009-toolchain.md) | Toolchain | What runs the code, what tests it, what builds it | Accepted |
-| [0010](0010-testing-strategy.md) | Testing strategy | What is asserted by a command, what a person measures, and what is only ever watched | Proposed |
+| [0010](0010-testing-strategy.md) | Testing strategy | What is asserted by a command, what a person measures, and what is only ever watched | Accepted |
 | 0011 | Delivery | How it reaches the public URL, and when | Planned |
 | 0013 | Origin of the core | Written here or taken from a package | Planned |
 

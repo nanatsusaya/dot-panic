@@ -1,6 +1,6 @@
 # 0010 — Testing strategy
 
-- **Status:** Proposed
+- **Status:** Accepted
 - **Date:** 2026-08-02
 - **Deciders:** Daniel Wagner
 - **Ticket:** [#36](https://github.com/nanatsusaya/dot-panic/issues/36)
@@ -8,7 +8,8 @@
   reading as a flock is judged by watching, and no command decides it), §6 (the
   ranked failures) · [0002](0002-overall-architecture.md) §3 (the purity list,
   in a form a command can decide), §4 (the Core is deterministic), §5 (no domain
-  logic outside the Core) · [0006](0006-motion-rules.md) §10 ·
+  logic outside the Core), §7 (the three directories) ·
+  [0006](0006-motion-rules.md) §10 ·
   [0007](0007-pointer-and-input-model.md) §9 ·
   [0008](0008-performance-budget.md) §9 (three registers, and the measured one
   handed here) · [0009](0009-toolchain.md) §1 (`bun test` is the runner), §3
@@ -196,27 +197,56 @@ What replaces them is [0012](0012-how-software-gets-developed.md) §5, unchanged
 and not restated here.
 
 **The View is therefore the part of this project with no test coverage at all**,
-by construction and not by neglect. [0002](0002-overall-architecture.md) §5 is
+by construction and not by neglect — which is why §7 excludes it by name instead
+of letting one number average it together with the Core.
+[0002](0002-overall-architecture.md) §5 is
 what makes that tolerable: the View draws exactly the world it was handed and
 computes nothing, so there is no logic in it for a test to protect. If that ever
 stops being true, this section stops being safe — and §5 of that record, not this
 one, is what would have been broken.
 
-### 7. Coverage is not tracked
+### 7. Coverage is measured, and the floor is 90 percent over the Core
 
-No coverage number is produced, reported, or made a condition of anything.
+`bunfig.toml` carries `coverageThreshold = { lines = 0.9, functions = 0.9,
+statements = 0.9 }`. Bun documents that *"Setting any of these thresholds enables
+`fail_on_low_coverage`, causing the test run to fail if coverage is below the
+threshold"* — so the floor is enforced by the same command that runs the tests,
+not by a second one, and not by a gate that does not exist.
 
-This is not an argument that coverage is worthless. It is that in this project
-the number would be actively misleading: the Core would sit near the top because
-it is pure and exhaustively testable, the View would sit at zero by §6, and the
-figure for the whole would move mostly with the ratio of the two. A reader would
-learn the shape of the architecture, which [0002](0002-overall-architecture.md)
-already states, and nothing about whether the toy works.
+**No fourth dependency.** Coverage is built into `bun test`, so
+[0009](0009-toolchain.md) §7's three survive this section intact. That was the
+condition this decision had to clear, and it clears it on Bun's own
+documentation rather than on expectation.
 
-The condition that replaces it is [0012](0012-how-software-gets-developed.md) §4,
-which is stricter than any threshold: every rule of the simulation is written as
-a failing test first, so a rule with no test is a rule that was not written the
-way this project writes rules.
+**The number is over the Core, and by declaration rather than by luck.** Bun
+documents that *"Coverage only tracks files that are loaded"*, and
+[0012](0012-how-software-gets-developed.md) §5 leaves the Shell verified by the
+increment running at all and the View judged by watching — so no test imports
+either, and neither would reach the report on its own. **Leaving it there would
+make the scope an accident of what nobody happened to write.** `shell/` and
+`view/` ([0002](0002-overall-architecture.md) §7) are therefore named in
+`coveragePathIgnorePatterns`, because Bun documents no per-directory threshold and
+a declared exclusion is the only way to say which part the floor is about.
+
+**What the floor is for is maintainability, not correctness.** A percentage
+cannot tell you the flock reads right — §2 and §6 are unmoved, and this section
+adds no fourth kind of asserted claim. What it does say is that a Core function
+no test ever enters is a function the next agent cannot change safely: it has no
+executable description of what it was for, and this project is a worked example of
+being maintained by agents rather than by the person who wrote it. **The floor
+buys legibility to whoever comes next**, and that is a different good from the one
+tests usually get bought for.
+
+**It also gives [0002](0002-overall-architecture.md) §5 the enforcement it never
+had.** *No domain logic outside the Core* was a rule review had to carry by
+reading. With a floor on the Core and the other two excluded, logic moved into the
+Shell or the View to dodge a test now shrinks the numerator and leaves the
+denominator alone — the number falls, and the run goes red. The pressure points
+the same way the architecture already did.
+
+**Ninety and not a hundred, deliberately.** A hundred makes the last few percent
+the point and invites tests written to reach code rather than to assert anything.
+Ninety leaves room for the branch that exists only because a type says it could.
 
 ### 8. A watched or measured result is recorded in the change that produced it
 
@@ -272,7 +302,11 @@ the browser runs matches what the tests passed.
   three lists with the same headings and no shared definition; §1 supplies it
   without amending any of them.
 - **Nothing here adds a dependency.** [0009](0009-toolchain.md) §7's three survive
-  this record intact, and §5 and §6 are where the pressure to add a fourth was.
+  this record intact. §5 and §6 were where the pressure to add a fourth was, and
+  §7 would have been a third if `bun test` did not carry coverage itself.
+- **[0002](0002-overall-architecture.md) §5 acquires an enforcement mechanism.**
+  *No domain logic outside the Core* was carried by review alone; §7 makes dodging
+  a test show up as a falling number in a red run.
 
 **Negative.**
 
@@ -288,6 +322,14 @@ the browser runs matches what the tests passed.
 - **A whole register depends on people writing things down.** §8 is a discipline
   with no command behind it, which is the same class of control this project has
   already watched fail.
+- **Ninety percent is reachable without asserting anything.** A test that calls a
+  function and checks nothing covers every line it touches. §7 says what the floor
+  is for and cannot make it mean more than it does; what keeps the tests honest is
+  [0012](0012-how-software-gets-developed.md) §4, which is not a number.
+- **§7's exclusions hide a Shell test if one is ever written.** `shell/` is named
+  in `coveragePathIgnorePatterns` because [0012](0012-how-software-gets-developed.md)
+  §5 says there is little in it to unit test, so a later test of it would count for
+  nothing until someone remembers this line.
 
 ## Alternatives considered
 
@@ -303,8 +345,16 @@ the browser runs matches what the tests passed.
 - **Pixel or snapshot testing of the View** — rejected because it converts a
   judgment [0001](0001-purpose-scope-and-success.md) §3.1 reserves for a person
   into a red-or-green fact, and its repair path blesses whatever was rendered.
-- **A coverage threshold as a condition of merge** — rejected because the number
-  would track the Core-to-View ratio rather than anything about correctness (§7).
+- **No coverage number at all** — this record's own draft, rejected by R2. The
+  objection it rested on was real and is answered by scoping the number rather
+  than by dropping it.
+- **A floor over the whole repository** — rejected because reaching it would mean
+  unit-testing the Shell and the View, which
+  [0012](0012-how-software-gets-developed.md) §5 and
+  [0001](0001-purpose-scope-and-success.md) §3.1 do not allow. The number would
+  fall as the parts that are correct to leave untested grow.
+- **A separate coverage tool** — rejected because it is a fourth dependency
+  against [0009](0009-toolchain.md) §7 for something `bun test` already does.
 - **Building the emitted tree in the test suite** — rejected because it makes
   every test-first cycle pay for a build (§9), for a defect class no one has
   seen here.
@@ -312,23 +362,49 @@ the browser runs matches what the tests passed.
   amend two accepted records to add an empty heading, and §1 makes the empty case
   readable without touching them.
 
-## Open questions
+## Resolved questions
 
-**O1 — Does anything in the repository measure a running page, or is §5 the
-answer?** §5 as drafted says nobody does, and six invariants across two accepted
-records take that answer. The alternative is a browser under program control,
-which is a fourth dependency and a body of apparatus larger than the toy.
-*Recommended default:* keep §5. If the frame budget later proves to drift
-unnoticed, that is a real finding and earns its own ticket and its own record —
-which is a better trigger than building the apparatus now against a problem
-nobody has had.
+**R1 — Nothing in the repository measures a running page.** Answered *"wir folgen
+deiner empfehlung"* on 2026-08-02. §5 stands as drafted, and the six invariants
+[0008](0008-performance-budget.md) §9 and [0014](0014-page-layout.md) §9 sent here
+are checked by a person or by nobody.
 
-**O2 — Is coverage tracked?** §7 says no, and gives the reason that the figure
-would describe the architecture rather than the code's health. *Recommended
-default:* keep §7. Note that reversing it is cheap in tooling terms and expensive
-in a way that does not show up for months: a number on a page invites being
-optimized, and the part of this project that would be easiest to optimize it
-against is the Core, which is already the best-tested part.
+The reasoning is in §5 and is not repeated. What the answer settles beyond §5 is
+the **trigger**: apparatus gets built when the budget is found to have drifted
+unnoticed, not before. That is a finding with a ticket and possibly a record of
+its own, and it is a better reason to build a browser harness than a fear of not
+having one.
+
+**R2 — Coverage is measured, with a floor of 90 percent.** Answered on 2026-08-02:
+*"ich will eine mindest testabdeckung von 90%, der code soll entsprechend
+geschrieben werden das er testbar und somit von KI wartbar ist."*
+
+**This reverses what the draft decided, and the argument that reversed it is not
+one the draft had considered.** The draft said no, on the grounds that a single
+percentage over this repository would move with the ratio of Core to View and so
+describe the architecture rather than the health of the code. **That objection is
+correct and it survives** — §7 answers it by scoping the number to the Core and
+excluding the other two by name, rather than by pretending a whole-repository
+figure would have meant something.
+
+What the draft never weighed is the reason given: **testability as
+maintainability, for agents.** This project is a worked example of being developed
+and maintained by agents, and an agent changing a Core function with no test
+around it has no executable description of what it was for. That is a different
+good from catching regressions, it is not covered by
+[0012](0012-how-software-gets-developed.md) §4's test-first rule — which governs
+rules of the simulation, not every function — and on this project's own terms it
+is the stronger of the two arguments.
+
+The second clause is a design instruction and is taken as one: **code is written
+to be testable.** In this architecture that is not a new rule but pressure behind
+an existing one, and §7 says where the pressure lands —
+[0002](0002-overall-architecture.md) §5 stops being carried by review alone.
+
+Three things were verified before the number was written down rather than
+assumed: that `bun test` measures coverage without a fourth dependency, that a
+threshold can fail the run, and that no per-directory threshold exists — which is
+why the scope is set by exclusion. The sources are below.
 
 ## References
 
@@ -337,6 +413,13 @@ against is the Core, which is already the best-tested part.
   file resolves to `flock.ts`, which is what lets `bun test` run the source while
   the emitted tree carries the same specifiers — the mechanism §9 describes and
   [0009](0009-toolchain.md) §5 fixes.
+- [Bun — Test coverage](https://bun.com/docs/test/coverage), read 2026-08-02.
+  Coverage is built into `bun test`. *"Setting any of these thresholds enables
+  `fail_on_low_coverage`, causing the test run to fail if coverage is below the
+  threshold."* · *"Coverage only tracks files that are loaded."* ·
+  `coveragePathIgnorePatterns` excludes paths by glob. The page documents a single
+  global `coverageThreshold` and no per-directory variant, which is what makes §7's
+  exclusions the only way to scope the floor.
 - [Biome](https://biomejs.dev/), read 2026-08-02. Cited in *Alternatives* only as
   the tool a lint-based purity check would have used; no claim is made here about
   which rules it provides.
