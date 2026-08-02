@@ -2,28 +2,30 @@
 
 *Brought current before a session ends. Read first when one starts.*
 
-*Last brought current: 2026-08-01.*
+*Last brought current: 2026-08-02.*
 
 ## Position
 
 The method has been adopted. **Nothing of the toy exists yet** — no simulation
 code, no page, no rendering. Everything built so far is the way of working:
-the operating rules, the decision set, one accepted record, and the five
+the operating rules, the decision set, two accepted records, and the five
 session procedures in [`.claude/skills/`](../.claude/skills/README.md).
 
-**The renamed procedures have never been invoked.** They were copied in at the
-end of a session and load on the next one. Whether all five appear as `/moin`,
-`/weiterimtext`, `/feierabend`, `/adr` and `/passtdas` is the first thing to
-check, before relying on any of them.
+The procedures have now been used. `/moin`, `/weiterimtext` and `/adr` all ran
+on 2026-08-02 and behaved as their files describe. `/feierabend` and `/passtdas`
+have still never been invoked.
 
-There is deliberately no `src/`, no `web/`, no deployment workflow and **no
-toolchain at all** — no runtime, no test runner, no package manifest. What the
-layout is comes from decision 0002; what runs and tests the code is decision
-0009. Creating any of it before then would be implementing ahead of a decision,
-which is how a choice gets made without anyone noticing one was on offer.
+**The architecture is decided and none of it is built.**
+[0002](adr/0002-overall-architecture.md) fixes a functional core inside an
+imperative shell, three parts, and the directory layout that goes with them —
+but `core/`, `shell/` and `view/` do not exist, and creating them is work that
+needs a ticket, not a side effect of reading the record. There is still **no
+toolchain at all**: no runtime, no test runner, no package manifest. That is
+decision 0009.
 
 **Twelve decisions are planned** in [docs/adr/](adr/README.md).
-[0001](adr/0001-purpose-scope-and-success.md) is Accepted; the other eleven are
+[0001](adr/0001-purpose-scope-and-success.md) and
+[0002](adr/0002-overall-architecture.md) are Accepted; the other ten are
 `Planned`. Number 0012 is deliberately unused.
 
 What is awaiting review is not repeated here. The
@@ -34,15 +36,14 @@ There are none.
 
 ## What the tickets hold
 
-Seven issues are open, and three of them exist for a reason worth knowing: they
+Six issues are open, and three of them exist for a reason worth knowing: they
 are **not ready to be worked**, and they carry research that would otherwise
 have existed only in the conversation that produced it.
 
 | Ticket | State |
 |---|---|
-| [#6](https://github.com/nanatsusaya/dot-panic/issues/6) 0002 Overall architecture | ready — this is the next one |
-| [#7](https://github.com/nanatsusaya/dot-panic/issues/7) 0003 Security and privacy | blocked by 0002 |
-| [#8](https://github.com/nanatsusaya/dot-panic/issues/8) 0004 Compliance, accessibility, rights | blocked by 0002 |
+| [#7](https://github.com/nanatsusaya/dot-panic/issues/7) 0003 Security and privacy | ready — this is the next one |
+| [#8](https://github.com/nanatsusaya/dot-panic/issues/8) 0004 Compliance, accessibility, rights | ready — unblocked by 0002 |
 | [#10](https://github.com/nanatsusaya/dot-panic/issues/10) 0006 Motion rules | not ready — holds the motion research |
 | [#11](https://github.com/nanatsusaya/dot-panic/issues/11) 0007 Pointer and input model | not ready — holds the touch research |
 | [#12](https://github.com/nanatsusaya/dot-panic/issues/12) 0013 Origin of the core | not ready — holds the package survey |
@@ -54,11 +55,20 @@ says real personal data never enters the repository. #8 owns resolving it, and
 `method.json` still declares `"secrets": null` on an assumption that is no
 longer true.
 
+**Two things about how work is run have no authority yet.** There is no pull
+request template, so nothing fixes what a change description must contain. And
+the definition of done is stated twice — in
+[the ticket template](../.github/ISSUE_TEMPLATE/task.md) and in
+[CLAUDE.md](../CLAUDE.md) — in two versions that do not match: one requires the
+change to be merged, the other requires observable behavior to be exercised.
+Neither has a ticket.
+
 ## The single clearest next step
 
-**Write [decision 0002](adr/README.md) — overall architecture** — against
-[its ticket](https://github.com/nanatsusaya/dot-panic/issues/6). It is the only
-unblocked record, and eight of the eleven remaining wait on it.
+**Write [decision 0003](adr/README.md) — security and privacy by design** —
+against [its ticket](https://github.com/nanatsusaya/dot-panic/issues/7). 0002
+unblocked it and #8 together; 0003 comes first because the decision set is
+written top-down and 0004 reasons about what 0003 fixes.
 
 ## Implementation scale
 
