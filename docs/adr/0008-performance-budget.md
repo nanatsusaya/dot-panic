@@ -21,9 +21,10 @@
   of the frame's shorter side) ·
   [0012](0012-how-software-gets-developed.md) §4 (test-first in the Core), §5
   (watch-first where no command can decide) ·
-  [0014](0014-page-layout.md) §2 (the canvas takes what the strip leaves)
+  [0014](0014-page-layout.md) §2 (the canvas takes what the strip leaves), R6
+  (whether the flock steps while the dialog covers it belongs here)
 - **Supersedes:** nothing
-- **Amended:** 2026-08-02 — A1
+- **Amended:** 2026-08-02 — A1, A2
 
 ## Context
 
@@ -230,6 +231,7 @@ split the same way for the same reason.
 |---|---|
 | §1 | Steps due plus one draw, against the frame interval, at the §8 factor |
 | §4 | That the cap is reached rather than the loop spiraling |
+| §10 | No step runs while the dialog is open, and the world after it closes is the world it stopped on |
 
 **Only watching decides these**, under 0012 §5, with the expected picture written
 into the ticket before the work starts:
@@ -239,6 +241,37 @@ into the ticket before the work starts:
 - Whether slow motion under §4 reads as a slow flock rather than as a broken page
 - Whether the flock reads as a flock at both a phone's size and a desktop's,
   which is what §6 claims and cannot show
+- Whether the flock stopping behind the dialog under §10 reads as intended rather
+  than as a page that has hung
+
+### 10. The Shell does not step the Core while the dialog is open
+
+**While [0014](0014-page-layout.md) §4's dialog is open, the Shell stops calling
+the Core, and resumes when it closes.** Added by A2; it follows §9 because
+renumbering would move references other records already make.
+
+0014 R6 sent this question here, and gave a reason: *work done for nothing on a
+device with a battery.* **That reason is false.** The standard's own rendering
+rules give a modal dialog `dialog::backdrop { background: rgba(0,0,0,0.1); }` —
+ten percent — so the flock stays plainly visible behind the text. The work is
+seen. The record stops the stepping anyway, on the two reasons R6 did not name:
+
+- **Motion behind text somebody is reading** is what 0004 §5 exists to mitigate,
+  and 0014 rejected text overlaid on the canvas in those words.
+- **The control that would stop it cannot be reached.** Content outside a modal
+  dialog is inert, so 0004 §5's button on the strip is unpressable exactly while
+  the motion is at its most unwelcome. 0005 §7 rejected a control revealed only on
+  focus because it *hides the control from the visitor who most needs it*; this is
+  that failure arriving through the layout instead.
+
+**Nothing is built for this.** 0006 §9 already makes stopping the absence of
+steps, and the Core never learns there was a pause. This is a third trigger for
+one mechanism, beside 0004 §5's control and `prefers-reduced-motion`.
+
+**Resuming is decided by §4 and needs no rule of its own.** Steps past the cap
+are abandoned rather than deferred, so a dialog left open for a minute costs one
+frame's catch-up and not a minute's. The flock continues from the world it
+stopped on, so there is no jump to hide.
 
 ## Consequences
 
@@ -273,7 +306,16 @@ into the ticket before the work starts:
   part 0001 §2 asks to be well-written, justified by a cost nobody has measured.
 - **§8 pins the floor to whatever machine is doing the measuring**, so the number
   is only as honest as that machine, and it moves when the machine is replaced.
-- **This record cannot be run.** Nine sections, no numbers, and §9 says which of
+- **§10 freezes the flock behind the one screen that explains it.** A visitor who
+  opens the dialog to read what the page is reads it beside a still picture of the
+  thing being described. Nothing on the page says the stillness is deliberate, and
+  it is the same shape as 0007 R2's parked cursor: correct, and it will look like
+  a bug to somebody.
+- **§10 constrains 0015 before that record is written.** A control inside the
+  dialog changes a flock that is not moving, so its effect is seen when the dialog
+  closes rather than while the visitor is operating it. That is a real limit on
+  what a settings surface can be here, and it arrives without 0015 being consulted.
+- **This record cannot be run.** Ten sections, no numbers, and §9 says which of
   its own claims will still be undecided when there is finally something to run.
 
 ## Alternatives considered
@@ -393,6 +435,37 @@ Authorized by Daniel on 2026-08-02, against
 drei deinen empfehlungen"* — of which the first was one authorized amendment per
 affected record, quoting the superseded wording verbatim.
 
+**A2 — the question 0014 R6 sent here, taken. 2026-08-02.**
+
+Nothing is superseded. **§10 is new, and its absence was the defect**:
+[0014](0014-page-layout.md) R6 says *"What 0008 decides is whether it is worth
+noticing"*, and this record decided nothing about it. The word *dialog* did not
+appear in it, its *Depends on* named 0014 §2 rather than R6, and its *What is not
+open here* handed the question nowhere else. It was missed on the day both
+records were written.
+
+Four things moved with the new section: the header's *Depends on* now names R6
+beside 0014 §2, §9's measured list gains one row, its watched list gains one, and
+*Consequences* gains two negatives — the flock frozen behind the screen that
+explains it, and the limit §10 puts on 0015 before that record exists. The
+*Alternatives* list is unchanged, because nothing was rejected here: R6 framed it
+as a question and this is the answer.
+
+**R6's stated reason does not survive the answer.** *Work done for nothing on a
+device with a battery* assumes the flock is hidden while the dialog is open, and
+the standard's rendering rules give a modal dialog a ten percent backdrop. §10
+gives the two reasons that hold instead. This is the second time in this project
+that a conclusion outlived the argument for it — 0007 R1 was the first, and the
+[method log](../method-log.md) carries both.
+
+Authorized by Daniel on 2026-08-02, against
+[#60](https://github.com/nanatsusaya/dot-panic/issues/60), in two steps. The
+instrument first — an amendment adding one section to this record rather than a
+later record taking a question this one reserved: *"wir folgen bei allen drei
+deinen empfehlungen."* Then the substance, on a recommendation of stopping the
+stepping, made on the two reasons in §10 and not on R6's: *"wir folgen mit o7
+deiner empfehlung."*
+
 ## References
 
 - `requestAnimationFrame()` — Baseline widely available, available 2015-07-29,
@@ -416,7 +489,14 @@ affected record, quoting the superseded wording verbatim.
 - [0007](0007-pointer-and-input-model.md) §6 — the radius tied to the frame, which
   §6 generalizes. Read 2026-08-02.
 - [0014](0014-page-layout.md) §2 — the canvas as the viewport minus the strip.
-  Read 2026-08-02.
+  R6, the question §10 answers, read 2026-08-02.
+- HTML Standard, rendering — `dialog::backdrop { background: rgba(0,0,0,0.1); }`,
+  which is why R6's premise does not hold.
+  <https://html.spec.whatwg.org/multipage/rendering.html>, read 2026-08-02.
+- HTML Standard, modal dialogs — content outside a modal dialog is rendered
+  inert, which is §10's second reason.
+  <https://html.spec.whatwg.org/multipage/interactive-elements.html>, read
+  2026-08-02.
 - [Ticket #34](https://github.com/nanatsusaya/dot-panic/issues/34) — the scope
   this record is written against, including the neighbor-search topic that
   arrived from 0002 §2. Read 2026-08-02.
