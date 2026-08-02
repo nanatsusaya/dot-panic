@@ -9,6 +9,7 @@
   judged by watching), §3.5 (the performance floor), §4 (the page carries three
   things), §5 (what is out of scope), §6 (the ranked failures)
 - **Supersedes:** nothing
+- **Amended:** 2026-08-02 — A1
 
 ## Context
 
@@ -65,7 +66,7 @@ part, and the pure part knows nothing about them.
 | Part | Kind | Owns |
 |---|---|---|
 | **Core** | pure | The world, and the rules that advance it |
-| **Shell** | impure | The loop, the clock, input events, the size of the frame, the choice of seed, and the wiring of the other two |
+| **Shell** | impure | The loop, the clock, input events, the size of the frame, the choice of seed, the wiring of the other two, and the one call §6 permits |
 | **View** | impure | Given a world, drawing it |
 
 **Dependency direction: Shell → Core, Shell → View, and nothing else.** The Core
@@ -134,6 +135,18 @@ What counts as motion is 0006's. That it lives in the Core is this record's.
 document markup: no part owns them, no part creates or changes them, and they do
 not pass through the drawing path. They neither move nor hold state, and pulling
 them inside would invent a part that otherwise would not exist.
+
+**One exception, and it is exactly one call.** The Shell may call `showModal()`
+on the element that holds them, because [0014](0014-page-layout.md) §5 puts them
+in a dialog and no markup mechanism this project may use opens one. **What that
+call changes is the dialog's open state, not them**: the imprint and the
+explanation are still markup no part creates, changes or draws, and the Shell
+never reads them.
+
+Stated as one named call rather than as *the Shell may own page chrome*, because
+the second is a category and the first is a thing a command can count. It is the
+only exception in this record, and §2's list carries it so that a reader of the
+parts table does not have to find it here.
 
 ### 7. Layout
 
@@ -231,6 +244,49 @@ neighbors are found, how the pointer decays into the simulation, and what the
 drawing may animate. Those belong to 0006, 0007 and 0008. What survives here is
 only which part owns each question — an architecture record that specifies
 behavior is a design document wearing the wrong header.
+
+## Amendments
+
+**A1 — the Shell gains one call, and §6's boundary is read rather than moved.
+2026-08-02.**
+
+§2's parts table gave the Shell:
+
+> The loop, the clock, input events, the size of the frame, the choice of seed,
+> and the wiring of the other two
+
+§6 ended:
+
+> They neither move nor hold state, and pulling them inside would invent a part
+> that otherwise would not exist.
+
+[0014](0014-page-layout.md) §5 put the imprint and the explanation in a
+`<dialog>` on the strength of a markup mechanism that does not exist — see that
+record's A1. Correcting it needs one `showModal()` call, and this record is where
+its cost is paid: §2's list now names it, and §6 says what it does and does not
+touch.
+
+**The reading is this record's, and it is deliberately narrow.** *No part creates
+or changes them* is about the imprint and the explanation. A call that opens their
+container changes neither: no part creates that markup, changes it, reads it or
+draws it. What the reading does **not** license is page chrome as a category —
+§2 names one call so that a later session counts rather than argues.
+
+**Nothing else changes.** §1, §3, §4, §5 and §7 stand as accepted, and R1 through
+R4 are untouched. In particular §5 — *no domain logic outside the Core* — is
+unaffected: the call computes nothing about the world.
+
+**What it costs is real.** The Shell was the part with no page in it, and now it
+has one line of page in it. The line between *one call* and *the Shell owns the
+chrome* is held by this paragraph and by review, and nothing else. 0014 §5 gives
+the count a command can check.
+
+Authorized by Daniel on 2026-08-02, against
+[#62](https://github.com/nanatsusaya/dot-panic/issues/62), on a recommendation of
+`showModal()` bounded to one call — in preference to loosening
+[0001](0001-purpose-scope-and-success.md) §3.4, which every record here leans
+on — carried by amendment rather than by a superseding record: *"wir folgen
+deiner empfehlung."*
 
 ## References
 

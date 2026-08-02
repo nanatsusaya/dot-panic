@@ -119,11 +119,25 @@ at the bottom carries 0004 §5's control and a second button that opens a dialog
 holding the explanation and the imprint; everything above it is canvas, and the
 dialog scrolls where the page does not. The strip's top edge is the frame's
 boundary rather than an obstacle inside it, so 0006 §6 turns the flock there and
-the Core gains no fourth force. Heights are measured in `svh`, there is no
-breakpoint and no container query, and **no script opens, closes or toggles
-anything** — `<dialog>` and `<details>` are both Baseline widely available, and
-the dialog opens by a form submission targeting it, because `showModal()` would
-be script and 0002 §2 gives the Shell no page chrome.
+the Core gains no fourth force. Heights are measured in `svh`, and there is no
+breakpoint and no container query.
+
+**How that dialog opens was wrong, and correcting it moved a boundary.** 0014 §5
+said the dialog opens by a form submission targeting it, and no such mechanism
+exists — `method="dialog"` *closes* the dialog a form sits in. The one markup
+mechanism that opens one, invoker commands, is Baseline *newly available* and
+does not reach 0001 §3.4's floor until **2028-06-12**. Both of §5's reasons for
+markup rested on the `showModal()` call it forbade, because the backdrop, the
+focus containment and the `Escape` key belong only to a modal dialog. **The Shell
+now makes that one call**, and 0002 A1 is where the cost is paid: its parts table
+names the call, and its §6 is read as being about the imprint and the explanation
+rather than about the open state of their container. The call is a bridge with an
+end date — on 2028-06-12 the markup becomes permitted and the handler can go.
+
+**Its price is on the page and nothing mitigates it:** a browser that runs no
+script now shows a button that does nothing, and the imprint behind it is a legal
+obligation. The alternative failed in the same direction and worse — invoker
+commands are silent on exactly the device 0001 §3.5 makes the floor.
 
 **Two of its findings outlive the layout.** The label of the button that opens
 the dialog must name the imprint, because behind a control the label is the whole
@@ -285,19 +299,29 @@ expose.
 question*, and 0014 §4 put a dialog on the page, which is where one would go —
 so it became one. *No settings* remains an answer that record is allowed to give.
 
-**It cannot start yet, and the reason arrived with this change.**
-[#60](https://github.com/nanatsusaya/dot-panic/issues/60) is unanswered: whether
-the flock keeps stepping while the dialog covers it. Every control 0014 §4 could
-hold sits **inside** that dialog, so a visitor operating one is looking at a
-covered canvas — and whether they see anything happen is exactly what #60
-decides. Scoping 0015 against that would be scoping a record against an
-unanswered question, which the index names as how a record ends up deciding
-something that was never its own.
+**One question stands in front of it**, and it is
+[#60](https://github.com/nanatsusaya/dot-panic/issues/60): whether the flock
+keeps stepping while the dialog covers it. Every control 0014 §4 could hold sits
+**inside** that dialog, so a visitor operating one is looking at a covered
+canvas — and whether they see anything happen is exactly what #60 decides.
+Scoping 0015 against that would be scoping a record against an unanswered
+question, which the index names as how a record ends up deciding something that
+was never its own.
 
-**If #60 stays open, [0009](adr/README.md) is what moves instead**, against
+**#60 is short, and the amendment to 0014 §5 is what made it answerable.** It
+was blocked while the dialog's modality was in question; now the dialog is
+modal, and two facts follow from the HTML Standard. A modal dialog dims the page
+by ten percent — `dialog::backdrop { background: rgba(0,0,0,0.1); }` — so the
+flock stays plainly visible behind the text, and 0014 R6's premise *work done for
+nothing* is false. And the rest of the page is inert, so 0004 §5's control cannot
+be pressed while the dialog is open: a visitor bothered by motion behind what
+they are reading would have no mechanism, which is what 0005 §7 and 0004 §5 exist
+to prevent. Both point one way, on a reason R6 did not name.
+
+**[0009](adr/README.md) is what moves instead if #60 waits**, against
 [#35](https://github.com/nanatsusaya/dot-panic/issues/35). It needs nothing from
-either open ticket. Which of the two goes first is Daniel's, and it is not
-recorded here until it is answered.
+any open ticket. Which of the two goes first is Daniel's, and it is not recorded
+here until it is answered.
 
 **0009 is the other ready ticket**, and it is the only one that unblocks others:
 [#36](https://github.com/nanatsusaya/dot-panic/issues/36) and
