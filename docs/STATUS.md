@@ -69,7 +69,7 @@ There are none.
 
 ## What the tickets hold
 
-Ten issues are open. Three of them exist for a reason worth knowing: they are
+Nine issues are open. Three of them exist for a reason worth knowing: they are
 **not ready to be worked**, and they carry research that would otherwise have
 existed only in the conversation that produced it.
 
@@ -79,7 +79,6 @@ existed only in the conversation that produced it.
 | [#11](https://github.com/nanatsusaya/dot-panic/issues/11) 0007 Pointer and input model | not ready — holds the touch research |
 | [#12](https://github.com/nanatsusaya/dot-panic/issues/12) 0013 Origin of the core | not ready — holds the package survey |
 | [#13](https://github.com/nanatsusaya/dot-panic/issues/13) Walking skeleton | not ready — 0012 §2 makes it the first increment |
-| [#23](https://github.com/nanatsusaya/dot-panic/issues/23) One authority for the definition of done | ready — see below |
 | [#34](https://github.com/nanatsusaya/dot-panic/issues/34) 0008 Performance budget | waits on 0005 — the drawing choice changes the numbers |
 | [#35](https://github.com/nanatsusaya/dot-panic/issues/35) 0009 Toolchain | ready |
 | [#36](https://github.com/nanatsusaya/dot-panic/issues/36) 0010 Testing strategy | waits on 0009 |
@@ -106,34 +105,30 @@ adaptation is declared, the imprint text lives here as ordinary page content,
 and `method.json` binds `secrets` to the platform scanner instead of `null`. The
 legal half was 0004's, and it is answered above.
 
-**The definition of done is still stated twice** — in
-[the ticket template](../.github/ISSUE_TEMPLATE/task.md) and in
-[CLAUDE.md](../CLAUDE.md) — in two versions that do not match: one requires the
-change to be merged, the other requires observable behavior to be exercised.
-[#23](https://github.com/nanatsusaya/dot-panic/issues/23) owns resolving it, and
-owns recording why *the build is green* is not among the conditions: there is no
-build. That waits on 0009 for a command chain and 0011 for somewhere to run it.
+**The definition of done has one authority**, and it is
+[the ticket template](../.github/ISSUE_TEMPLATE/task.md). It was stated in three
+places, not the two [#23](https://github.com/nanatsusaya/dot-panic/issues/23)
+knew about: `/feierabend` carried a copy as well, and that one required a green
+local check chain this project has never had. Four conditions survive as one
+list, `0009` is named as what would make any of them decidable by a command, and
+CLAUDE.md and `/feierabend` now refer to it and state nothing.
 
 What a change description must contain is no longer among the gaps here.
 [The pull request template](../.github/pull_request_template.md) fixes it.
 
 ## The single clearest next step
 
-**Resolve [#23](https://github.com/nanatsusaya/dot-panic/issues/23) — one
-authority for the definition of done.** It is the oldest defect in this
-repository and the one that misinforms most directly: two versions of when work
-is finished, each omitting what the other has.
+**Write [decision 0005](adr/README.md) — rendering and visual design**, and its
+ticket as part of the same work rather than ahead of it. It is the next record
+by the index's own ordering, everything it depends on is Accepted, and the
+constraints it has to work inside are all written down:
+[0003](adr/0003-security-and-privacy-by-design.md) forbids loading a font or
+anything else off the origin, and
+[0004](adr/0004-compliance-accessibility-and-rights.md) §4 and §5 mean whatever
+is chosen has to be able to stop moving.
 
-**Which one wins is fixed by a rule, not by a preference.** CLAUDE.md's Tickets
-section names [the ticket template](../.github/ISSUE_TEMPLATE/task.md) as the
-authority for what makes a ticket ready and done, and says it is not restated
-there — and then its Delivery section restates it. The rule was written down and
-broken in the same file, so the template is the authority and CLAUDE.md refers
-to it. What has to survive the merge is the exercising condition, which is the
-one that carries weight here.
-
-Then **[decision 0005](adr/README.md) — rendering and visual design**, whose
-ticket is written as part of that work rather than ahead of it.
+It is the last planned decision without a ticket, and the first one whose answer
+shows up on screen.
 
 ## Implementation scale
 

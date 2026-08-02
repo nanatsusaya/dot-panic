@@ -90,11 +90,10 @@ writing it down here rather than by deciding it.
 - **The shape of a change description** is
   [.github/pull_request_template.md](.github/pull_request_template.md) — the
   form an author actually sees. It is not restated here.
-- **Definition of done:** the criteria the task fixed **before it started**,
-  verified rather than assumed; anything with observable behavior **exercised**,
-  not merely built; docs changed in the same commit. There is no local command
-  chain to point at yet, and until a decision creates one this bullet is carried
-  by review alone — which is worth knowing rather than papering over.
+- **The definition of done** is
+  [.github/ISSUE_TEMPLATE/task.md](.github/ISSUE_TEMPLATE/task.md) — the same
+  authority the Tickets section names, for the same reason. It is not restated
+  here. It was, in a version that disagreed with it.
 - **Hand work back only when you believe it is correct, complete and safe.**
   Below that bar, keep working or name the specific uncertainty — what exactly
   is unverified, and what would settle it.

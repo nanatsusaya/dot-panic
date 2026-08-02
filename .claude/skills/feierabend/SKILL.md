@@ -48,13 +48,15 @@ nothing else; anything you leave unsaid is lost.
 
 ## 2. Finish what is finishable
 
-Apply the project's definition of done before calling anything done:
+**The definition of done is
+[`.github/ISSUE_TEMPLATE/task.md`](../../../.github/ISSUE_TEMPLATE/task.md), and
+it is not restated here.** Read it and apply it before calling anything done.
+This section used to carry its own copy, which required a green local check
+chain — something this project does not have and says so.
 
-- The local check chain is green. Report any red honestly.
-- Anything with observable behavior has been **exercised**, not merely built. A
-  passing build says the thing compiles.
-- The work and its documentation changed together. Stale documentation is a
-  defect.
+One thing this procedure adds, because it is about stopping rather than about a
+ticket:
+
 - Claim a task done only if you believe it is correct, complete and safe. If
   you are not there, park it and hand off the **specific** uncertainty — what
   exactly is unverified, and what would settle it — rather than declaring it
