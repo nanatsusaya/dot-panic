@@ -5,12 +5,14 @@
 - **Deciders:** Daniel Wagner
 - **Ticket:** [#24](https://github.com/nanatsusaya/dot-panic/issues/24)
 - **Depends on:** [0001](0001-purpose-scope-and-success.md) §2 (documentation and
-  a well-written implementation come before the product), §3.1 (a flock is
+  a well-written implementation come before the product), §3 (what good enough
+  means, and therefore where §1's delivery phase ends), §3.1 (a flock is
   judged by watching), §6 (the ranked failures) ·
   [0002](0002-overall-architecture.md) §2 (the Core is exercisable without a
   screen, the View is not), §3 (purity), §5 (no domain logic outside the Core)
 - **Supersedes:** nothing. It takes the number 0012, which the index had
   reserved as unused; see *Alternatives considered*.
+- **Amended:** 2026-08-02 — A1
 
 ## Context
 
@@ -43,13 +45,23 @@ it can.
 
 ## Decision
 
-### 1. Two phases, and the first one has no end condition
+### 1. Seven phases, and the analysis phase has no end condition
 
-**Analysis.** Decision records are written until the decider judges that enough
-is decided. **Then delivery**, in increments.
+| | Phase | What it is |
+|---|---|---|
+| 1 | Adoption | The goal is fixed and agent-driven-development is adopted. |
+| 2 | Analysis | Decision records are written until the decider judges that enough is decided. |
+| 3 | Breakdown | The epics visible in the accepted records are cut into tickets. *Epic* is §7's. |
+| 4 | First increment | One sprint (§2), producing the walking skeleton. |
+| 5 | Delivery | Sprint after sprint, until 0001 §3 is satisfied. |
+| 6 | Maintainability | Making the project maintainable for as long as it stands. |
+| 7 | Maintenance | What the project is after that. |
 
-There is deliberately **no time box and no completion criterion** on the
-analysis phase. Daniel judges when it is too much.
+**There is deliberately no time box and no completion criterion on the analysis
+phase, and naming six phases around it gives it none.** Daniel judges when it is
+too much. The list says what comes next, not when the judgment falls, and *3
+follows 2* is an order rather than a trigger — a later session must not read a
+record becoming Accepted as the end of a phase.
 
 Stated as a decision rather than left blank, because the absence would otherwise
 read as an oversight and the next session would invent a criterion. The cost is
@@ -59,6 +71,20 @@ The phases do not overlap in scope: during delivery, a ticket that would settle
 something a still-open record owns is not ready, which is the existing rule
 [D4](https://github.com/nanatsusaya/agent-driven-development/blob/main/method/rules.md#d4)
 and not a new one. Work proceeds on what is decided; the rest waits.
+
+**Phases 1 and 2 are named for the arc rather than because anything hangs on
+them.** Phase 1 is history: it produced 0001 and the adapted procedures, and
+nothing in this project turns on it having a number.
+
+**Phase 3 does not move the activity §6 puts at the start of every sprint.** It
+cuts the visible work into epics and tickets once. Establishing that a particular
+set of tickets is *independent* still happens when that set is brought to
+Definition of Ready, every time, and phase 3 is not that.
+
+**Phases 6 and 7 are named here and not decided here.** What being maintainable
+requires of this project, and what the project is once delivery ends, needs a
+record of its own; this section names the two phases and stops. A reader looking
+for their content will not find it here.
 
 ### 2. A sprint is a bundle of tickets, and it produces one increment
 
@@ -139,8 +165,8 @@ judgment it replaces is the thing that fails.
 ### 7. The vocabulary, and what is deliberately not borrowed
 
 Borrowed, because each names something that exists here: **Definition of Ready**
-and **Definition of Done** (both already written down), **increment**, and
-**sprint** (both §2).
+and **Definition of Done** (both already written down), **increment** and
+**sprint** (both §2), and **epic** (§1's phase 3).
 
 Not borrowed: daily stand-up, retrospective, velocity, story points, product
 owner, scrum master. Each solves a coordination problem among several people.
@@ -154,6 +180,20 @@ meeting and no review event. Borrowing the word for a smaller thing is a real
 cost — a reader who knows Scrum will assume the rest of it — which is why this
 paragraph exists rather than the word standing alone.
 
+**Epic is borrowed as narrowly, and it divides the same tickets along a
+different axis.** An epic is a **named group of tickets that together deliver one
+recognizable part of the toy**, and grouping by subject is the whole of it. It
+carries no estimate, no commitment and no time box. It is never what a change is
+made against, because a change is always against a ticket. An epic with no
+tickets under it is a heading and not work. Where a sprint is a set worked
+**together**, an epic is a set that belongs **together**, and a ticket is
+normally in one of each.
+
+**The cost here is larger than the one sprint carries**, and *Consequences* says
+why rather than this section: a project with eight open tickets does not
+obviously need a layer above them, the recommendation was against introducing
+one, and A1 records what overruled it.
+
 ## Consequences
 
 **Positive.**
@@ -166,6 +206,13 @@ paragraph exists rather than the word standing alone.
   produces.
 - §6 makes parallel agents a property of how tickets are cut rather than a
   question asked when two changes collide.
+- **§1's table shows the arc in one place**, which nothing here previously did.
+  0001 §2 makes the demonstration the point of this repository, and a reader who
+  can see where a project of this shape goes learns something the record set
+  alone did not tell them.
+- **The end of the project has a name.** Nothing said what dot-panic is once
+  0001 §3 is satisfied. Phases 6 and 7 say there is something, and hand it to a
+  record rather than leaving delivery to trail off.
 
 **Negative, and these are real.**
 
@@ -174,9 +221,23 @@ paragraph exists rather than the word standing alone.
   names explicitly:** a decision phase with no end condition is how a project
   accumulates impressive documentation and builds nothing. This project is more
   exposed than most, because every further record *feels* like progress here in
-  a way it would not elsewhere. Two records are accepted and no line of code
+  a way it would not elsewhere. Fourteen records are accepted and no line of code
   exists. The judgment replacing the criterion is one person's, and nothing will
   contradict it.
+- **Phase 3 sits exactly where 0001 §6.2 lives.** A breakdown phase between the
+  records and the first increment is more planning before anything is on a
+  screen, and 0011 §7 had just chosen the opposite pressure by putting the first
+  deployment at the walking skeleton. Nothing here bounds how long phase 3 may
+  take, for the same reason §1 bounds nothing else.
+- **A layer above eight tickets is ceremony this project does not yet have work
+  for**, which is what
+  [A3](https://github.com/nanatsusaya/agent-driven-development/blob/main/method/rules.md#a3)
+  tells an adopter not to build. The cost lands on 0001 §6's *first* failure —
+  a reader concluding the method is unusable at this size — and that is the
+  failure this repository can least afford, since being read is what it is for.
+- **Seven phases are six more things to be wrong about.** §1 was two words and is
+  now a table; every row that turns out to describe the project badly costs an
+  amendment rather than an edit.
 - **§4 is a bet that the Core stays pure.** Test-first in the Core is cheap only
   while 0002 §3 holds. The first time something needs a clock or a real random
   source, the cost of this record rises sharply — and the pressure will be to
@@ -231,6 +292,69 @@ worth of work and still small enough to read in a sitting. It is a starting
 value, not a finding — raising it is a change to this record like any other, and
 should be made on evidence about how long a review here actually takes rather
 than on how it feels during a busy session.
+
+## Amendments
+
+**A1 — two phases become seven, and *epic* joins the vocabulary. 2026-08-02.**
+
+§1 was headed:
+
+> ### 1. Two phases, and the first one has no end condition
+
+and opened:
+
+> **Analysis.** Decision records are written until the decider judges that enough
+> is decided. **Then delivery**, in increments.
+>
+> There is deliberately **no time box and no completion criterion** on the
+> analysis phase. Daniel judges when it is too much.
+
+The seven-phase table replaces those two paragraphs. **Nothing that section
+decided is reversed.** Analysis still ends by one person's judgment and by no
+criterion, delivery is still increments, and the sentence saying so is now
+emphatic rather than incidental — because a list of seven numbered phases is
+read as a schedule, and the phase this project has been in for its whole life is
+the one that has no schedule.
+
+The four phases 0012 already had are the same four: phase 2 is *Analysis*, phases
+4 and 5 are *delivery, in increments* with §2's first increment named separately
+because §2 and 0011 §7 both single it out. Phases 1, 3, 6 and 7 are new. §1's
+three closing paragraphs are new and say what the table would otherwise leave a
+later session to guess: that phase 1 is history, that phase 3 does not take over
+the per-sprint activity §6 owns, and that phases 6 and 7 are named without being
+decided.
+
+§7's first sentence read:
+
+> Borrowed, because each names something that exists here: **Definition of Ready**
+> and **Definition of Done** (both already written down), **increment**, and
+> **sprint** (both §2).
+
+*Epic* is added to it, with a paragraph defining it as narrowly as the one
+sprint already had. Three further things moved: the header gains its `Amended`
+field, which it did not carry; *Depends on* now names 0001 §3, because phase 5
+ends there; and *Consequences* gains two positives and three negatives. One
+sentence in the existing negative was stale and is corrected with it —
+
+> Two records are accepted and no line of code exists.
+
+now reads *fourteen*, which is the same argument against a larger number.
+
+**What was recommended, and what was decided instead.** Three options were put on
+2026-08-02, and the recommended default in each case was the one **not** taken:
+that 0012 §1 already decides the phases and STATUS need only name which one we
+are in; that a backlog is a list of tickets and needs no layer above them; and,
+for the end of the project, a `Planned` row rather than content here. The
+arguments against were A3 — *do not build for a scale you do not have* — and
+0001 §6's ranking, and they are recorded in *Consequences* rather than argued
+again here. The third recommendation was accepted and is a separate change.
+
+Authorized by Daniel on 2026-08-02, against
+[#79](https://github.com/nanatsusaya/dot-panic/issues/79): *"zu O1: b, zu O2: c,
+zu O3: a"* — where O1(b) was an amendment to this record extending the phases to
+seven, and O2(c) was introducing the epic as a third issue label. **The label
+itself is not decided here**; CLAUDE.md fixes *two labels, and no more*, and
+changing that line is work that follows this record.
 
 ## References
 

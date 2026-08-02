@@ -25,10 +25,20 @@ is no longer an open question. 0009 decides it and
 [#69](https://github.com/nanatsusaya/dot-panic/issues/69) is the work.
 
 **How the work gets built is decided as well, and nothing has been built under
-it.** [0012](adr/0012-how-software-gets-developed.md) fixes an analysis phase
-with no end condition, then increments; test-first in the Core without
-exception; watch-first in the View, where no command can decide; and at most
-three changes open for review at once.
+it.** [0012](adr/0012-how-software-gets-developed.md) fixes seven phases running
+from adoption to maintenance, of which the analysis phase — the one this project
+has been in for its whole life — still has no end condition; test-first in the
+Core without exception; watch-first in the View, where no command can decide;
+and at most three changes open for review at once.
+
+**A1 is what made it seven, and it reversed nothing the record had decided.**
+Adoption is history given a number, a breakdown into epics is new work between
+the records and the first increment, delivery is split so that §2's first
+increment has a row of its own, and the two phases at the end are named without
+being decided. **The word *epic* enters the project with it** — a named group of
+tickets, grouping by subject and nothing else, never the thing a change is made
+against. The recommendation had been against all of it, on A3's *do not build for
+a scale you do not have*; A1 records that and what overruled it.
 
 **What the page may never do is decided.**
 [0003](adr/0003-security-and-privacy-by-design.md) forbids loading anything off
