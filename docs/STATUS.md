@@ -11,9 +11,13 @@ code, no page, no rendering. Everything built so far is the way of working:
 the operating rules, the decision set, fifteen accepted records, and the five
 session procedures in [`.claude/skills/`](../.claude/skills/README.md).
 
-The procedures have now been used. `/moin`, `/weiterimtext` and `/adr` all ran
-on 2026-08-02 and behaved as their files describe. `/feierabend` and `/passtdas`
-have still never been invoked.
+The procedures have now been used. `/moin`, `/weiterimtext` and `/adr` ran on
+2026-08-02 and `/feierabend` on 2026-08-03, all behaving as their files
+describe — `/feierabend`'s first run is what added this sentence's other half
+and #114 to the ticket list, by reading the documents it asks to be brought
+current. **`/passtdas` has still never been invoked**, and `method.json`
+declares no adaptations while this week added seven phases, an epic and a third
+label to how work is actually done.
 
 **The architecture is decided and none of it is built.**
 [0002](adr/0002-overall-architecture.md) fixes a functional core inside an
