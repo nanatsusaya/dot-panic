@@ -67,7 +67,8 @@ longer supports.
 | [0004](0004-compliance-accessibility-and-rights.md) | Compliance, accessibility and rights | Motion and reduced-motion, license, provenance of the model, what law applies | Accepted |
 | [0005](0005-rendering-and-visual-design.md) | Rendering and visual design | Canvas, SVG or DOM; color, light and dark, pixel density | Accepted |
 | [0006](0006-motion-rules.md) | Motion rules | Bounded frame, minimum speed, non-overlap as a constraint | Accepted |
-| 0007 | Pointer and input model | Mouse and touch, radius of effect, how it decays | Planned |
+| [0007](0007-pointer-and-input-model.md) | Pointer and input model | Mouse and touch, radius of effect, how it decays | Accepted |
+| 0014 | Page layout | How the flock, the imprint and the explanation are arranged; how the canvas is sized against them | Planned |
 | 0008 | Performance budget | How many dots at what frame rate on which device | Planned |
 | 0009 | Toolchain | What runs the code, what tests it, what builds it | Planned |
 | 0010 | Testing strategy | What is asserted by a command and what is only ever watched | Planned |
@@ -90,6 +91,14 @@ frame the original topic sits inside rather than something unrelated. **This doe
 not open the numbers generally.** It was the only gap, there is not a second, and
 renumbering is unavailable while 0002 is accepted and names six planned numbers.
 The reasoning is in the [method log](../method-log.md).
+
+**0014 was added after the set was planned**, by
+[0007](0007-pointer-and-input-model.md) R1: its §8 requires that the imprint stay
+reachable by a gesture that does not begin on the canvas, and no existing row
+owned that. It takes the next free number rather than being folded into a
+neighbor, because widening a planned row changes a topic this table has already
+fixed. Its position between 0007 and 0008 is by meaning and says nothing about
+the order the two are written in — R1 covers that.
 
 `Planned` means the topic is fixed and the record is not yet written; it is the
 only status a row may carry without a file behind it. A `Planned` row is not a
