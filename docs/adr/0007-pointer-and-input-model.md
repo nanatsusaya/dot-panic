@@ -1,6 +1,6 @@
 # 0007 — Pointer and input model
 
-- **Status:** Proposed
+- **Status:** Accepted
 - **Date:** 2026-08-02
 - **Deciders:** Daniel Wagner
 - **Ticket:** [#11](https://github.com/nanatsusaya/dot-panic/issues/11)
@@ -291,33 +291,42 @@ ticket before the work starts, under 0012 §5:
   gesture, `pointercancel` arrives mid-stroke, and the toy does not work on
   touch at all.
 
-## Open questions
+## Resolved questions
 
-**O1 — Does the page's layout need a record of its own?** §8 requires that the
-imprint and the explanation stay reachable by a gesture that does not begin on
-the canvas. Nothing owns that. 0005 decided the drawing surface and the control's
-appearance; no planned record covers how the three things in 0001 §4 are arranged
-on a page, how the canvas is sized against them, or what happens on a narrow
-screen.
+Both confirmed as recommended — Daniel: *"bei beiden folgen wir deinen
+empfehlungen."* No decision section changed. R1 does change the planned set, and
+it corrects part of the recommendation it is confirming.
 
-*Recommended default:* yes, a new record — the last free number, written after
-0008 so it knows the frame it is arranging. The alternative is to widen an
-existing planned record, which means changing a topic the index has already
-fixed. But a new number changes the planned set, and the index is explicit that
-where a record belongs is a decision rather than a consequence of counting,
-which makes this yours rather than mine.
+**R1 — The page's layout gets a record of its own, and it is 0014.** §8's
+requirement — that the imprint and the explanation stay reachable by a gesture
+that does not begin on the canvas — now has an owner. The index carries the row.
 
-**O2 — Should a parked cursor keep pushing forever?** §3 reacts to position, so
-it does: leave the mouse on the page and the flock keeps a hole around it for as
-long as it sits there. The alternative is influence that fades even while the
-pointer is present, so a motionless cursor eventually stops mattering and a
-moving one always does.
+**The recommendation's reasoning was wrong about the ordering, and the row does
+not follow it.** It proposed writing 0014 after 0008 *so it knows the frame it is
+arranging*, which is not a thing 0008 decides: 0002 §2 gives the size of the
+frame to the Shell, and 0008 decides how many dots move inside it and how fast.
+0014's actual dependencies — 0001 §4, 0004, 0005 and this record — are all
+Accepted the moment this one is, so it is writable immediately and waits on
+nothing.
 
-*Recommended default:* as written — keep pushing. The hole is the flock avoiding
-something, which is what the page is about, and a pointer that fades while
-visibly present is a rule the visitor cannot see the reason for. But whether that
-reads as *alive* or as *broken* is exactly the judgment 0001 §3.1 puts beyond any
-command, and therefore yours.
+**The influence runs the other way**, weakly. 0006 §2 makes non-overlap a
+constraint that ties dot count, radius and frame area together, so knowing what
+share of the page the canvas takes helps 0008 — but 0008 can state its answer as
+a relation without it, exactly as 0006 §2 did. Neither blocks the other. The
+table places 0014 between 0007 and 0008 because it runs top-down by meaning and
+layout is a question about the shape of the thing.
+
+**R2 — A parked cursor keeps pushing, for as long as it sits there.** The draft
+asked whether influence should fade even while the pointer is present. It does
+not: the hole a resting cursor leaves is the flock avoiding something, which is
+what 0001 §1 describes, and a force that faded while its cause was visibly
+present is a rule the visitor cannot see a reason for.
+
+**This is the record's most likely bug report.** A visitor who parks the mouse
+and comes back to a permanent gap has no way to tell an intended behavior from a
+stuck one, and nothing on the page explains it. Recorded here so that the first
+person to notice it finds a decision rather than an oversight — and so that
+changing it later is understood as reversing this, not as fixing something.
 
 ## References
 
