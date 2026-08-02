@@ -9,18 +9,17 @@ next step — not everything outstanding.
 ## What this is
 
 A small browser toy — a flock of dots that scatters when your pointer comes
-near — and at the same time a worked example of the method it is built under.
-No goal, no score, no ending. A toy, not a game.
+near — built as a worked example of
+[agent-driven-development](https://github.com/nanatsusaya/agent-driven-development),
+a published ruleset for running projects with AI agents. Demonstrating the
+method is what this project is for: the documentation and a well-written
+implementation come first, and the toy itself is secondary.
 
-Three ways it fails, in order of how likely they are:
-
-1. The artifacts here read as bureaucracy, and a reader concludes the method
-   is unusable at this size.
-2. The toy is never finished because the process ate the work.
-3. It passes its tests and still looks wrong on screen.
-
-The bar is not data correctness or legal exposure. It is that a stranger can
-read this repository and see how the work was actually run.
+What it is, what good enough means, what is out of scope, and the ranked ways
+it fails are fixed by
+[decision 0001](docs/adr/0001-purpose-scope-and-success.md) — including which
+way to fall when two of them are in tension. Read them there. This section
+names the project; it does not define it.
 
 ## Commands
 
@@ -30,7 +29,14 @@ none of them exist here. Do not introduce one as a side effect of some other
 task; write the decision first.
 
 One command does exist, because it belongs to the method rather than to the
-toy. With the method repository cloned beside this one:
+toy. It runs out of the method repository, which is not vendored here and has
+to be cloned beside this one:
+
+```bash
+git clone https://github.com/nanatsusaya/agent-driven-development ../agent-driven-development
+```
+
+Then, from the root of this repository:
 
 ```bash
 node ../agent-driven-development/checks/check-method.mjs .
