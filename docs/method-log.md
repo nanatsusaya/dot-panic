@@ -6,6 +6,39 @@ session would decide worse without it.
 
 Newest first.
 
+## 2026-08-02 — A number that carries two jobs ran out of room
+
+0012 was planned as a walking-skeleton record, dropped before it was written,
+and the index says the number is not reused — with a reason: a number that later
+means something different is worse than one that means nothing. It is now in use
+for the record that decides how software gets developed here.
+
+The narrow justification holds and Daniel authorized it. That record makes the
+walking skeleton a consequence of itself, so 0012 comes to mean the larger frame
+the original topic sits inside, rather than something unrelated — which is the
+case the index rule guards against.
+
+The part worth keeping is why the question came up at all.
+
+**The number does two jobs.** It is the identity every reference uses, which is
+why it must never move. It is also a position in a list the index describes as
+running top-down, from what the thing is to how it is built — which makes it a
+statement about where a topic belongs. That coupling is invisible while the set
+is complete. It becomes load-bearing the moment a topic turns out to be both
+important and unforeseen: identity says take the next free number, ordering says
+put it near the front, and no number does both.
+
+**This resolution works exactly once.** 0012 was the only gap and there is not
+another. Renumbering is not a fallback either: 0002 is Accepted, immutable, and
+names six planned numbers at fourteen places, so moving them would falsify a
+record that may not be edited.
+
+A later session meeting this again therefore has no cheap option, and the
+expensive one is invisible from the index. It will have to decouple the two jobs
+— number as identity, index position as meaning — rather than look for a gap.
+Written down now, while the reasoning is intact, because at that moment the
+obvious move will be to renumber.
+
 ## 2026-08-02 — A duplicated fact had already drifted, and no command could find it
 
 The operating rules carried their own ranked list of the ways this project
