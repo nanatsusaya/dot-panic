@@ -39,6 +39,20 @@ expensive one is invisible from the index. It will have to decouple the two jobs
 Written down now, while the reasoning is intact, because at that moment the
 obvious move will be to renumber.
 
+**Added the same day.** There was no later session. The decoupling happened
+within hours, because taking the gap did not solve the problem: 0012 is a lower
+number than 0014 and still sits second-to-last, so the record meant to frame how
+everything gets built was filed between *Delivery* and *Origin of the core*. The
+index is now ordered by meaning and the number is identity only.
+
+The diagnosis above was right and the conclusion drawn from it was wrong. *A
+later session will have to decouple* should have read *we have to decouple now*.
+What produced the error is worth more than the correction: **a cheap workaround
+was available, and its availability was mistaken for a reason to defer the
+expensive fix.** The gap did not make the problem smaller. It made it invisible
+for exactly as long as it took to write the record and look at where it had
+landed.
+
 ## 2026-08-02 — A duplicated fact had already drifted, and no command could find it
 
 The operating rules carried their own ranked list of the ways this project
