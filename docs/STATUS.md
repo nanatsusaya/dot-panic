@@ -69,9 +69,9 @@ There are none.
 
 ## What the tickets hold
 
-Five issues are open, and three of them exist for a reason worth knowing: they
-are **not ready to be worked**, and they carry research that would otherwise
-have existed only in the conversation that produced it.
+Ten issues are open. Three of them exist for a reason worth knowing: they are
+**not ready to be worked**, and they carry research that would otherwise have
+existed only in the conversation that produced it.
 
 | Ticket | State |
 |---|---|
@@ -80,18 +80,23 @@ have existed only in the conversation that produced it.
 | [#12](https://github.com/nanatsusaya/dot-panic/issues/12) 0013 Origin of the core | not ready — holds the package survey |
 | [#13](https://github.com/nanatsusaya/dot-panic/issues/13) Walking skeleton | not ready — 0012 §2 makes it the first increment |
 | [#23](https://github.com/nanatsusaya/dot-panic/issues/23) One authority for the definition of done | ready — see below |
+| [#34](https://github.com/nanatsusaya/dot-panic/issues/34) 0008 Performance budget | waits on 0005 — the drawing choice changes the numbers |
+| [#35](https://github.com/nanatsusaya/dot-panic/issues/35) 0009 Toolchain | ready |
+| [#36](https://github.com/nanatsusaya/dot-panic/issues/36) 0010 Testing strategy | waits on 0009 |
+| [#37](https://github.com/nanatsusaya/dot-panic/issues/37) 0011 Delivery | waits on 0009 |
+| [#38](https://github.com/nanatsusaya/dot-panic/issues/38) The two repository notes 0004 §2 assumes | ready |
 
-**Eight of the thirteen decisions have no ticket** — 0005, 0008, 0009, 0010,
-0011 among them, which is every record between here and a deployed page. Only
-0006, 0007 and 0013 do. The four written so far were each written against one,
-so this is a gap rather than a change of practice, and the next record runs into
-it first.
+**The ticket gap is closed except for one.** Every planned decision now has a
+ticket but 0005, and that is deliberate: it gets written when the record does,
+rather than twice. Five were filed on 2026-08-02 — 0008, 0009, 0010, 0011 and
+the repository notes — because the four records written so far were each written
+against one, and the next record would have been the first without.
 
-**Two files 0004 §2 assumes are missing.** It says the repository carries what
-the decider's other projects carry — a README and the conventional security and
-conduct notes — and calls creating them ordinary work with its own ticket. The
-README exists. `SECURITY.md` and `CODE_OF_CONDUCT.md` do not, and neither does
-the ticket.
+**0004 §2 assumes two files that do not exist.** It says the repository carries
+what the decider's other projects carry — a README and the conventional security
+and conduct notes — and calls creating them ordinary work with its own ticket.
+The README exists; `SECURITY.md` and `CODE_OF_CONDUCT.md` do not.
+[#38](https://github.com/nanatsusaya/dot-panic/issues/38) is now that ticket.
 
 **The imprint conflict this section used to name is settled**, and it turned out
 not to be a conflict. 0003 R1 tells two parties apart: the person responsible
@@ -114,18 +119,21 @@ What a change description must contain is no longer among the gaps here.
 
 ## The single clearest next step
 
-**Write [decision 0005](adr/README.md) — rendering and visual design.** It is
-the next record by the index's own ordering, everything it depends on is
-Accepted, and the constraints it has to work inside are now all written down:
-[0003](adr/0003-security-and-privacy-by-design.md) forbids loading a font or
-anything else off the origin, and
-[0004](adr/0004-compliance-accessibility-and-rights.md) §4 and §5 mean whatever
-is chosen has to be able to stop moving.
+**Resolve [#23](https://github.com/nanatsusaya/dot-panic/issues/23) — one
+authority for the definition of done.** It is the oldest defect in this
+repository and the one that misinforms most directly: two versions of when work
+is finished, each omitting what the other has.
 
-**It has no ticket, and one has to be written first.** Every record so far was
-written against one. What the ticket has to cover is fixed by the index —
-Canvas, SVG or DOM; color, light and dark; pixel density — so writing it is
-ordinary work rather than a decision in disguise.
+**Which one wins is fixed by a rule, not by a preference.** CLAUDE.md's Tickets
+section names [the ticket template](../.github/ISSUE_TEMPLATE/task.md) as the
+authority for what makes a ticket ready and done, and says it is not restated
+there — and then its Delivery section restates it. The rule was written down and
+broken in the same file, so the template is the authority and CLAUDE.md refers
+to it. What has to survive the merge is the exercising condition, which is the
+one that carries weight here.
+
+Then **[decision 0005](adr/README.md) — rendering and visual design**, whose
+ticket is written as part of that work rather than ahead of it.
 
 ## Implementation scale
 
