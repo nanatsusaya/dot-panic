@@ -23,6 +23,7 @@
   (watch-first where no command can decide) ·
   [0014](0014-page-layout.md) §2 (the canvas takes what the strip leaves)
 - **Supersedes:** nothing
+- **Amended:** 2026-08-02 — A1
 
 ## Context
 
@@ -100,7 +101,7 @@ it open.
   arrived.
 
 **The step rate is a number and it is not fixed here** — 0006 §5 sends it, and
-O1 is why it is still not a number.
+R1 is why it is still not a number.
 
 ### 4. When the device cannot keep up, the simulation runs slow
 
@@ -160,7 +161,7 @@ records the choice because what it costs is visible.
 **0006 §2's ceiling becomes a ratio.** With `n` dots of relative radius `r` in a
 frame of area `A`, non-overlap is unsatisfiable unless `n·πr²` is below `A`, and
 unsatisfiable *with room to move* well below it. The record fixes that the
-choice of `n` and `r` is one choice against that ratio, and no number — O1.
+choice of `n` and `r` is one choice against that ratio, and no number — R1.
 
 ### 7. Neighbor search is one spatial index, and the naive search survives as its oracle
 
@@ -364,6 +365,33 @@ fail and no command to run, so a factor recorded without its date leaves the flo
 rolling and nothing says so — the same shape as the imprint address that 0004 R2
 made a precondition of publishing and nothing checks. Worth knowing now rather
 than discovering when the first number is a year old.
+
+## Amendments
+
+**A1 — two references to an open question that no longer exists. 2026-08-02.**
+
+§3 ended:
+
+> **The step rate is a number and it is not fixed here** — 0006 §5 sends it, and
+> O1 is why it is still not a number.
+
+§6 ended:
+
+> The record fixes that the choice of `n` and `r` is one choice against that
+> ratio, and no number — O1.
+
+Both `O1` now read `R1`. The question was answered before this record was
+accepted, and R1 is the answer: this record fixes relations and no numbers.
+Every other reference to the four questions was migrated at acceptance; these two
+sat inside decision sections and were missed.
+
+**Nothing this record decides changes.** Both sentences point at the same answer
+they always pointed at, under the name that answer now has.
+
+Authorized by Daniel on 2026-08-02, against
+[#58](https://github.com/nanatsusaya/dot-panic/issues/58): *"wir folgen bei allen
+drei deinen empfehlungen"* — of which the first was one authorized amendment per
+affected record, quoting the superseded wording verbatim.
 
 ## References
 

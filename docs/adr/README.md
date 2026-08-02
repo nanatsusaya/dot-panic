@@ -18,9 +18,10 @@ Written down here because a session that has no session procedures installed
 otherwise has no way to know what a record in this project looks like.
 
 **Header:** status · date · deciders · the ticket it was written against ·
-what it depends on · what it supersedes or amends. Dependencies name the
-**sections** relied on, not only the record — "0002 §3" tells a reader what to
-go and check; "0002" tells them to read all of it.
+what it depends on · what it supersedes or amends · whether it **has been**
+amended, and when. Dependencies name the **sections** relied on, not only the
+record — "0002 §3" tells a reader what to go and check; "0002" tells them to
+read all of it.
 
 **Body, in this order:**
 
@@ -31,11 +32,23 @@ go and check; "0002" tells them to read all of it.
 | Consequences | Positive **and** negative. A record with no negative consequences has not been thought about, and a reader can tell. |
 | Alternatives considered | Each with a one-line "rejected because". |
 | Open questions | `O1..On`, the choices that genuinely belong to the decider, each with a recommended default. Never answered by the author. |
+| Amendments | Only in a record that has been amended. `A1..An`, each quoting the superseded wording verbatim, naming what replaced it, and quoting the decider's authorization with its date. |
 | References | Primary sources, with the date they were read. |
 
 Once the open questions are answered they become **Resolved questions**,
 `R1..Rn`, recording what was decided and why — including what an earlier draft
-said, where the answer changed it.
+said, where the answer changed it. **Every reference in the body moves with
+them**, and nothing checks that it did: `check-method.mjs` resolves links between
+documents, not a record's references to its own sections. The whole of the rule
+is that an Accepted record contains no `O`-number, and review is what carries it.
+
+**An amendment changes the body in place and logs itself at the bottom.** The
+sections above *Amendments* always state what is true now, so a reader who starts
+at the top is never reading superseded wording — which is why the log sits near
+the end, with the other provenance, rather than as a warning at the front. The
+header is what announces that a record has one. An amendment exists only with the
+decider's explicit authorization, and quoting it is not ceremony: it is the only
+evidence a later session has that the authorization was ever given.
 
 Two things this shape is deliberately strict about. A section that only
 surveys options is not a decision and does not belong under *Decision*. And a

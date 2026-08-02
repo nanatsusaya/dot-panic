@@ -182,7 +182,7 @@ There are none.
 
 ## What the tickets hold
 
-Ten issues are open. One of them still carries research that would otherwise
+Nine issues are open. One of them still carries research that would otherwise
 have existed only in the conversation that produced it, and each ticket says in
 its own header how ready it is.
 
@@ -196,7 +196,6 @@ its own header how ready it is.
 | [#38](https://github.com/nanatsusaya/dot-panic/issues/38) The two repository notes 0004 §2 assumes | ready |
 | [#46](https://github.com/nanatsusaya/dot-panic/issues/46) Ticket readiness is stated in two places | ready — and this table is one of the two |
 | [#53](https://github.com/nanatsusaya/dot-panic/issues/53) 0015 Settings surface | ready — every record it depends on is Accepted |
-| [#58](https://github.com/nanatsusaya/dot-panic/issues/58) Three references to questions that no longer exist | not ready — the repair route is the decider's |
 | [#60](https://github.com/nanatsusaya/dot-panic/issues/60) 0014 R6 handed a question to 0008, and 0008 did not take it | not ready — the route is the decider's, and it gates #53 |
 
 **The ticket gap is closed.** Every planned decision has one. Five were filed on
@@ -217,16 +216,20 @@ here, because that ticket has a real question underneath it — the tracker is
 outside this repository, and a session reading only this file would lose the
 picture — and answering it by editing is the thing tickets exist to stop.
 
-**Two accepted records refer to open questions they no longer have.** 0007's
-*Consequences* and 0008 §3 and §6 each point at an `O1` that became an `R1` when
-the record was accepted, and the reference did not move with it.
-[#58](https://github.com/nanatsusaya/dot-panic/issues/58) holds all three. It is
-not ready, and deliberately so: **repairing an accepted record is the one thing
-this project does not do quietly**, so the route is Daniel's to name. The check
-prints `OK` over both, because it does not read a record's internal
-cross-references — and the `/adr` procedure accepts a record on its branch, so
-the moment such a slip becomes expensive is the moment the record stops being
-editable.
+**The first amendments in this project's history have been written**, and
+[#58](https://github.com/nanatsusaya/dot-panic/issues/58) is what caused them.
+0007's *Consequences* and 0008 §3 and §6 each pointed at an `O1` that became an
+`R1` when the record was accepted, and the reference did not move with it. Daniel
+authorized one amendment per record on 2026-08-02; each quotes the superseded
+wording, and neither changes anything either record decides.
+
+**What that established is bigger than three characters.** There was no form for
+an amendment until one was needed: [docs/adr/](adr/README.md) now fixes where the
+log sits, what it must quote, and that the body above it always states current
+truth — so a reader starting at the top is never reading superseded wording.
+**Nothing checks the migration that caused this.** The check resolves links
+between documents, not a record's references to its own sections, and the whole
+of the rule is that an Accepted record contains no `O`-number.
 
 **One accepted record asks another for something it never gave.**
 [0014](adr/0014-page-layout.md) R6 says whether the flock keeps stepping while
