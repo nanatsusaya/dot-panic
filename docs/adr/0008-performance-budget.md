@@ -1,6 +1,6 @@
 # 0008 — Performance budget
 
-- **Status:** Proposed
+- **Status:** Accepted
 - **Date:** 2026-08-02
 - **Deciders:** Daniel Wagner
 - **Ticket:** [#34](https://github.com/nanatsusaya/dot-panic/issues/34)
@@ -37,7 +37,8 @@ where it gets measured**.
 **Nothing has been measured, and nothing here measures it.** There is no code, no
 toolchain, no page and no device. This record is in the same position as the four
 before it, with one difference that matters: for those, numbers were a section.
-Here they are the subject. What that leaves the record able to decide is O1.
+Here they are the subject. What that leaves the record able to decide was asked
+of the decider and is R1.
 
 **Ranked failure 4 in [0001](0001-purpose-scope-and-success.md) §6 is *it works
 only on the machine it was built on*,** which is what a project with no stated
@@ -153,8 +154,8 @@ reason that a fixed distance clears a phone screen and barely dents a desktop
 one. This record extends it to every length, and gets the budget as a
 consequence: work per step depends on the count, the count does not depend on
 the window, so **a maximized window on a weak machine is not a worse case than a
-small one.** That is the case the alternative gets exactly backwards, and it is
-in O2 because what it costs is visible.
+small one.** That is the case the alternative gets exactly backwards, and R2
+records the choice because what it costs is visible.
 
 **0006 §2's ceiling becomes a ratio.** With `n` dots of relative radius `r` in a
 frame of area `A`, non-overlap is unsatisfiable unless `n·πr²` is below `A`, and
@@ -202,7 +203,7 @@ a budget measured against it gets easier every year without anyone deciding to
 loosen anything. Freezing the reading at a date is not a reinterpretation of
 0001 §3.5 — the sentence still means what it says, and a **pinned** floor would
 need a record superseding 0001, by the route 0005 R2 fixed. This records which
-reading was measured, so a later session can see that the floor moved. O4.
+reading was measured, so a later session can see that the floor moved. R4.
 
 **What applies the factor is 0009's**, and #34 says so: no benchmark harness is
 created here.
@@ -256,8 +257,8 @@ into the ticket before the work starts:
 
 - **The subject of this record is numbers and it contains none.** That is the
   fourth record running, and the first where it is the whole point rather than a
-  deferral. O1 puts it to the decider instead of arguing it away, because
-  0012's own §1 names where this ends.
+  deferral. R1 confirms it deliberately, which does not make 0012 §1's failure —
+  impressive documentation and nothing built — any less the shape of it.
 - **0002 R2's measurement is still not made.** That record said the allocation
   cost of a new world per step gets measured here. §1 says what would measure it
   and nothing does.
@@ -285,9 +286,9 @@ into the ticket before the work starts:
 - **A variable timestep.** Rejected on 0002 R1, which chose determinism over
   smoothness and named the cost.
 - **Running every due step, with no cap.** Rejected in §4 as the spiral.
-- **A fixed dot size with the count growing to fill the window.** Rejected in §6,
-  and it is O2: it makes the worst case a large window on a weak machine, which
-  is the one combination nothing can detect.
+- **A fixed dot size with the count growing to fill the window.** Rejected in §6
+  and confirmed in R2: it makes the worst case a large window on a weak machine,
+  which is the one combination nothing can detect.
 - **Naming a phone model as the floor device.** Rejected in §8: stale within a
   year, and unowned by anyone here.
 - **Benchmarking the device at load and choosing the count from the result.**
@@ -306,64 +307,63 @@ into the ticket before the work starts:
   anything has run is decided by writing rather than by measuring, and this
   project exists to show the difference.
 
-## Open questions
+## Resolved questions
 
-**O1 — Does this record fix numbers, or only relations?**
+All four were confirmed as recommended — Daniel: *"wir folgen deiner
+empfehlung."* **No decision section changed.** What follows records what was
+chosen against, and what it would take to choose differently later.
 
-Every record since 0005 has fixed structure and deferred its numbers to watching,
-and each had a good reason. This is the record whose subject is the numbers, so
-the pattern is worth stopping on rather than continuing by habit.
+**R1 — This record fixes relations and no numbers, and that is now a rule about
+where numbers live.**
 
-*Recommended default:* **relations only, as written.** A step rate, a dot count
-and a slowdown factor invented today would be three numbers nobody measured,
-sitting in an accepted record that is immutable — and the first measurement would
-then need an amendment or a superseding record to correct them. Deferring costs
-nothing except that this record cannot be run, which is already true of 0005,
-0006, 0007 and 0014.
+The draft asked whether the record whose subject is numbers should keep deferring
+them, and recommended that it should. Confirmed.
 
-*What argues the other way, and it is not weak:* 0012 §1 puts no end condition on
-the analysis phase and names the failure — impressive documentation and nothing
-built. Five records that fix no number is what that failure looks like from
-inside. If the answer is that numbers belong here, the honest form is a starting
-value marked as a starting value, the way 0012 R2 did with the number three.
+**Said once here, because five records is a pattern rather than five
+coincidences:** the numbers in this project live in the code and in the ticket
+that fixed the criteria before the work started, not in a record. 0005 R1
+established the reason — a value argued into a document before anything has been
+on a screen is decided by writing rather than by looking — and 0012 §5 makes that
+the working method rather than a preference.
 
-**O2 — Does the flock scale with the screen, or does the dot stay one size?**
+**The consequence is that a measured number never needs an amendment.** Nothing
+in an accepted record is falsified by learning what the step rate should be,
+because no accepted record claims one. What does need a record is changing a
+**relation** — that the count is one number rather than a function of the window
+(§6), or that the two neighbor implementations must agree (§7). That line is the
+useful half of this answer.
 
-§6 says every length is a fraction of the frame: one count everywhere, the same
-picture larger or smaller, and a budget that does not depend on the window. The
-alternative is a dot of fixed apparent size with the count growing to fill the
-area: a phone shows few dots, a desktop many, and the budget becomes a function
-of the window.
+**R2 — The flock scales with the screen.** Confirmed as recommended. The
+alternative was a dot of fixed apparent size with the count growing to fill the
+area, and it is rejected because it makes the worst case *a large window on a
+weak machine*, which nothing on the page can detect.
 
-*Recommended default:* **§6 as written.** It is the only version in which the
-worst case is bounded, and 0007 §6 already tied the pointer's radius to the frame
-for the same reason. The cost is visible and belongs to you: on a large screen
-the dots are large, and *it reads as a flock* is 0001 §3.1, which no argument
-here settles.
+**The likely complaint has a cheap answer and an expensive one, and they are
+different acts.** If watching says the dots look too large on a desktop, the
+relative radius is a number and R1 puts it in the code — change it and look
+again. If watching says the *count* should differ between a phone and a desktop,
+that is §6's relation, and it takes a record.
 
-**O3 — Under budget pressure, does the toy run slow?**
+**R3 — Under budget pressure the toy runs slow.** Confirmed as recommended.
+Both alternatives were already closed by accepted records, so what was confirmed
+is that the visible consequence is acceptable: a visitor on an old phone gets a
+slower flock than a visitor on a new one, and nothing on the page says so.
 
-§4 abandons steps and lets simulation time fall behind, so the flock moves in
-slow motion rather than stuttering or thinning out.
+**This is the second decision here that can never be checked against reality.**
+0006 R1 was the first. Whether the cap in §4 is ever reached in the wild is
+exactly the kind of fact [0003](0003-security-and-privacy-by-design.md) forbids
+the page to learn, and it leaves no mechanism by which anyone could. Recorded so
+a later session does not go looking for evidence that cannot exist.
 
-*Recommended default:* **§4 as written.** Both alternatives are closed by
-accepted records — dropping dots by 0002 §5, stuttering by 0001 §3.3 — so this is
-less a choice among three than a confirmation that the visible consequence is
-acceptable. It is outward-facing, which is why it is here: a visitor on an old
-phone sees a slower toy than a visitor on a new one, and nothing on the page says
-so.
+**R4 — 0001 §3.5's rolling floor is frozen by recording a date, not superseded.**
+Confirmed as recommended. 0001 stands as written; §8 is a record of which year
+was measured and not a reading of that sentence.
 
-**O4 — Is the floor device's rolling definition frozen or superseded?**
-
-0001 §3.5 says *roughly three years old*, which moves every year. §8 freezes the
-reading by recording the date the factor was chosen, and leaves 0001 untouched.
-
-*Recommended default:* **freeze, do not supersede.** 0005 R2 fixed the route for
-loosening an accepted rule — a record that supersedes it, never a reinterpretation
-inside a later one — and §8 is deliberately not a reading of 0001 §3.5 at all,
-only a record of which year was measured. Superseding 0001 to pin a device class
-is available and would cost a record to gain a floor that stops tracking the
-phones people actually carry.
+**What holds the freeze is a person writing the date down.** There is no build to
+fail and no command to run, so a factor recorded without its date leaves the floor
+rolling and nothing says so — the same shape as the imprint address that 0004 R2
+made a precondition of publishing and nothing checks. Worth knowing now rather
+than discovering when the first number is a year old.
 
 ## References
 

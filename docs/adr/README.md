@@ -70,7 +70,7 @@ longer supports.
 | [0007](0007-pointer-and-input-model.md) | Pointer and input model | Mouse and touch, radius of effect, how it decays | Accepted |
 | [0014](0014-page-layout.md) | Page layout | How the flock, the imprint and the explanation are arranged; how the canvas is sized against them | Accepted |
 | 0015 | Settings surface | Whether the visitor may change the flock, which values are exposed, and what bounds them | Planned |
-| [0008](0008-performance-budget.md) | Performance budget | How many dots at what frame rate on which device | Proposed |
+| [0008](0008-performance-budget.md) | Performance budget | How many dots at what frame rate on which device | Accepted |
 | 0009 | Toolchain | What runs the code, what tests it, what builds it | Planned |
 | 0010 | Testing strategy | What is asserted by a command and what is only ever watched | Planned |
 | 0011 | Delivery | How it reaches the public URL, and when | Planned |
