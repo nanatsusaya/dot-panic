@@ -1,6 +1,6 @@
 # 0011 — Delivery
 
-- **Status:** Proposed
+- **Status:** Accepted
 - **Date:** 2026-08-02
 - **Deciders:** Daniel Wagner
 - **Ticket:** [#37](https://github.com/nanatsusaya/dot-panic/issues/37)
@@ -120,8 +120,24 @@ serving a file over the internet means somebody's server sees who asked.
 it, [0003](0003-security-and-privacy-by-design.md) §4 is untouched because nothing
 is stored on the visitor's device, and 0004's decision against a consent banner is
 untouched because security logging by a host is not something a visitor is asked
-to agree to. What is not settled here is whether the page must *say* so — that is
-O1, and it is the one question this record could not answer by reading a document.
+to agree to.
+
+**The page says so.** Two sentences sit with the imprint: that the site is hosted
+by GitHub, that GitHub logs visitors' IP addresses for security, and a link to
+GitHub's privacy statement. It is information and not a request for consent, so
+0004's decision against a banner stands as written.
+
+**This amends nothing, and the reasoning matters more than the two sentences.**
+The notice is not part of the imprint — § 18 MStV asks for the operator, and who
+hosts the operator's page is a different fact — so
+[0004](0004-compliance-accessibility-and-rights.md) R2's *name, email and address*
+is unchanged and [0003](0003-security-and-privacy-by-design.md) §7's *one place*
+is not duplicated. It goes **inside** the imprint section of
+[0014](0014-page-layout.md) §4's dialog rather than becoming a section of its own,
+which is what keeps 0014's shape and [0015](0015-settings-surface.md) §1's empty
+third section out of it. **Writing the sentences is not this record's work**; it
+is [#77](https://github.com/nanatsusaya/dot-panic/issues/77), because a decision
+record that writes page content has stopped being one.
 
 ### 5. The policy ships as a `meta` element alone
 
@@ -183,7 +199,13 @@ The registers are [0010](0010-testing-strategy.md) §1's.
 |---|---|
 | §6 | The deployed artifact does not contain `Musterstadt` |
 | §5 | The deployed page carries the 0003 §6 policy as a `meta` element |
+| §4 | The deployed page links GitHub's privacy statement |
 | §2 | Deployment runs only after the 0009 §8 checks pass |
+
+The third is there because §4's two sentences are the kind of thing a page rewrite
+drops without anyone noticing, and a link is the one part of them a command can
+recognize. **What it cannot decide is whether the sentences still say anything
+true** — that is a person reading them, like the address above.
 
 **Measured** — nothing. This record adds no quantity to
 [0008](0008-performance-budget.md) §9's list.
@@ -219,8 +241,12 @@ The registers are [0010](0010-testing-strategy.md) §1's.
 - **The page cannot deliver three directives, and this record does not fix it.**
   §5 leaves `report-uri`, `frame-ancestors` and `sandbox` unsent. 0003 §6
   permitted exactly this, which makes it accepted rather than harmless.
-- **The visitor's IP is logged and nothing on the page can stop it.** §4 states
-  it; whether the page must disclose it is unanswered until O1.
+- **The visitor's IP is logged and nothing on the page can stop it.** §4 discloses
+  it, which is the only response available and is not a remedy. A visitor who
+  minds has one option, which is not to visit.
+- **The disclosure rests on no legal determination.** R4 chose the cheap side of
+  an asymmetry rather than establishing a duty, so a later reader looking for the
+  reasoning that makes it *required* will not find one here.
 - **Deploying early means the public URL will serve a poor toy for a while.**
   §7 chooses that deliberately, and it is still a real cost: the URL is the
   artifact most likely to be judged without the records beside it.
@@ -248,28 +274,10 @@ The registers are [0010](0010-testing-strategy.md) §1's.
   source is meant to carry the placeholder until a real address exists; gating
   commits would make 0004 §3's deliberate stand-in unusable.
 
-## Open questions
-
-**O1 — Does the page have to say that the host logs the visitor's IP address?**
-§4 establishes the fact and that nothing on the page causes or can prevent it.
-What it does not establish is whether the operator of the site is, for that
-logging, a controller with an information duty — a legal determination this record
-does not make, and one that
-[0004](0004-compliance-accessibility-and-rights.md) §13 did not reach because no
-host was chosen when it was written.
-
-*Recommended default:* **add two sentences beside the imprint** saying that the
-site is hosted by GitHub, that GitHub logs visitors' IP addresses for security,
-and linking GitHub's privacy statement. It is information rather than consent, so
-0004's decision against a banner is untouched; it costs no mechanism, no request
-and no stored data; and it is the cheap side of a question whose expensive side is
-being wrong about a duty. If it is wanted, it needs a ticket and it touches 0014's
-dialog — this record does not write page content.
-
 ## Resolved questions
 
-Three questions were answered before this record was drafted, which is why this
-section sits beside an open one rather than replacing it.
+Three of these were answered before the record was drafted and the fourth while it
+was being written, which is why they are not all of one kind.
 
 **R1 — GitHub Pages, deployed by a GitHub Actions workflow that runs the checks
 first.** Answered *"wir folgen in allen punkten deiner empfehlung"* on 2026-08-02,
@@ -283,6 +291,24 @@ from it — a stale answer would have taken most of the record with it.
 
 **R3 — Live at the walking skeleton, not at good enough.** Same authorization.
 §7, whose argument is 0001 §6.2 rather than a preference for shipping early.
+
+**R4 — The page says that its host logs the visitor's IP address.** Answered *"wir
+folgen deiner Empfehlung"* on 2026-08-02. §4 is that answer, and
+[#77](https://github.com/nanatsusaya/dot-panic/issues/77) is the work.
+
+**The question was not whether to disclose but whether disclosure was owed**, and
+that is a legal determination this record still does not make. It was the only
+question here no document could settle: [0004](0004-compliance-accessibility-and-rights.md)
+§13 read twenty-two instruments and its GDPR row reached nothing on the page,
+correctly, because no host was chosen then. Choosing one puts processing at a
+layer the page cannot touch, and whether the operator is a controller for it is
+contestable in a way the fact is not.
+
+**So the answer is the cheap side of an asymmetry rather than a finding.** Two
+sentences and a link cost no mechanism, no request and nothing stored; being wrong
+in the other direction costs a duty unmet. That is why the recommendation was made
+without the determination behind it, and why the record says so instead of
+dressing the choice up as settled law.
 
 ## References
 
