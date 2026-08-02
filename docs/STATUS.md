@@ -182,7 +182,7 @@ There are none.
 
 ## What the tickets hold
 
-Nine issues are open. One of them still carries research that would otherwise
+Ten issues are open. One of them still carries research that would otherwise
 have existed only in the conversation that produced it, and each ticket says in
 its own header how ready it is.
 
@@ -197,6 +197,7 @@ its own header how ready it is.
 | [#46](https://github.com/nanatsusaya/dot-panic/issues/46) Ticket readiness is stated in two places | ready — and this table is one of the two |
 | [#53](https://github.com/nanatsusaya/dot-panic/issues/53) 0015 Settings surface | ready — every record it depends on is Accepted |
 | [#58](https://github.com/nanatsusaya/dot-panic/issues/58) Three references to questions that no longer exist | not ready — the repair route is the decider's |
+| [#60](https://github.com/nanatsusaya/dot-panic/issues/60) 0014 R6 handed a question to 0008, and 0008 did not take it | not ready — the route is the decider's, and it gates #53 |
 
 **The ticket gap is closed.** Every planned decision has one. Five were filed on
 2026-08-02 — 0008, 0009, 0010, 0011 and the repository notes — because the four
@@ -226,6 +227,16 @@ prints `OK` over both, because it does not read a record's internal
 cross-references — and the `/adr` procedure accepts a record on its branch, so
 the moment such a slip becomes expensive is the moment the record stops being
 editable.
+
+**One accepted record asks another for something it never gave.**
+[0014](adr/0014-page-layout.md) R6 says whether the flock keeps stepping while
+the dialog covers it *belongs to 0008* — and 0008 does not mention it. The word
+*dialog* is not in that record, and its dependency list names 0014 §2 rather than
+R6. [#60](https://github.com/nanatsusaya/dot-panic/issues/60) holds it. This is
+not the same defect as #58: that one is three wrong references, this one is **a
+question nobody owns**, and it was missed on the day both records were written.
+Nothing catches it — the check resolves that the link works, not that the record
+behind it answered anything.
 
 **0004 §2 assumes two files that do not exist.** It says the repository carries
 what the decider's other projects carry — a README and the conventional security
@@ -270,6 +281,20 @@ expose.
 0001 R3 left a settings surface to its own record *if it ever becomes a real
 question*, and 0014 §4 put a dialog on the page, which is where one would go —
 so it became one. *No settings* remains an answer that record is allowed to give.
+
+**It cannot start yet, and the reason arrived with this change.**
+[#60](https://github.com/nanatsusaya/dot-panic/issues/60) is unanswered: whether
+the flock keeps stepping while the dialog covers it. Every control 0014 §4 could
+hold sits **inside** that dialog, so a visitor operating one is looking at a
+covered canvas — and whether they see anything happen is exactly what #60
+decides. Scoping 0015 against that would be scoping a record against an
+unanswered question, which the index names as how a record ends up deciding
+something that was never its own.
+
+**If #60 stays open, [0009](adr/README.md) is what moves instead**, against
+[#35](https://github.com/nanatsusaya/dot-panic/issues/35). It needs nothing from
+either open ticket. Which of the two goes first is Daniel's, and it is not
+recorded here until it is answered.
 
 **0009 is the other ready ticket**, and it is the only one that unblocks others:
 [#36](https://github.com/nanatsusaya/dot-panic/issues/36) and
