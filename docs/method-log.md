@@ -38,6 +38,23 @@ person, and only one of the two understands *not*.
   when the two disagree; the issue's own state is the only evidence. This one
   survived overnight because nothing gave the next session a reason to look.
 
+**It happened again while this entry was being written, and that is the more
+useful half.** The ticket was reopened, and then a second pull request — the one
+bringing the state artifact current — explained the accident in its own
+description **by quoting the offending sentence verbatim.** The quotation carries
+the keyword. Merging it shut the ticket a second time, two seconds after the
+merge, and the change that introduced the rule above merged nineteen seconds
+later.
+
+**A rule introduced in one change does not repair a description already open in
+another.** Both were open at the same time; writing the rule in one of them did
+nothing for the other, and nothing ever will — a description is read at merge
+time by a parser that has never seen this repository. So a rule about change
+descriptions is only in force for descriptions **written after it**, and the ones
+already in review are swept by hand or not at all. The same holds for every rule
+this project writes about how a change is described rather than about what is in
+it.
+
 ## 2026-08-02 — A rule was written down, and the next two records broke it
 
 The afternoon repaired a defect by amendment: two accepted records still pointed
