@@ -1,6 +1,6 @@
 # 0004 — Compliance, accessibility and rights
 
-- **Status:** Proposed
+- **Status:** Accepted
 - **Date:** 2026-08-02
 - **Deciders:** Daniel Wagner
 - **Ticket:** [#8](https://github.com/nanatsusaya/dot-panic/issues/8), including
@@ -13,7 +13,7 @@
   outside the application) ·
   [0003](0003-security-and-privacy-by-design.md) §4 (nothing is stored on the
   visitor's device), §5 (no network request after load), §7 (the imprint is
-  readable on the page and lives here)
+  readable on the page, lives here, and appears in exactly one place)
 - **Supersedes:** nothing
 
 ## Context
@@ -41,7 +41,7 @@ ticket describes the license as unrecorded rather than absent.
 
 **What is not open here.** What the flock actually does under reduced motion is
 0006. What the pause control looks like and how the page is drawn is 0005. Which
-host serves the page is 0011, and §7 constrains it. The mechanisms 0003 fixed are
+host serves the page is 0011, and §8 constrains it. The mechanisms 0003 fixed are
 pointed at, never restated.
 
 ## Decision
@@ -63,26 +63,46 @@ entry, no VAT number, no supervisory authority, and no required email address.
 public without restriction, in order to be read by people judging a method
 (0001 §2). Whatever that is, it is not exclusively a personal or family purpose.
 
-So the imprint carries **Name und Anschrift**, and that is the whole of what it
-must carry. Anything beyond it is voluntary — O1.
+So the imprint must carry **Name und Anschrift**, and that is the whole of what
+it must carry. It also carries an email address, which is voluntary — R1.
 
 The three delivery words are already satisfied more strictly than they ask.
 0003 §7 puts the imprint on the page itself, readable without following any
 link, which was decided for a different reason and happens to exceed *leicht
 erkennbar, unmittelbar erreichbar und ständig verfügbar*.
 
-### 2. The values are not in this repository, and this record does not invent them
+### 2. The obligation attaches to the page, not to the repository
 
-This record names what must be published. It does not contain a name or an
-address, and neither does anything else here: the postal address exists in no
-file in this repository and none in the method repository either.
+The imprint goes on the page. **The repository carries no imprint file.** What it
+carries is what the decider's other projects carry: a README and the conventional
+security and conduct notes. Creating those here is ordinary work with its own
+ticket, not this record's.
 
-Recorded because the opposite assumption is the natural one — 0003 §7 says the
-imprint lives here, which reads as though it already does. Building the page is
-blocked on a value only the decider can supply, and that is better known now
-than discovered by whoever writes the first increment.
+The reason is which thing is published as a service. The page is offered to
+anyone who opens the URL. The repository is source, hosted on someone else's
+platform, and reached by people who went looking for it.
 
-### 3. `prefers-reduced-motion: reduce` is honored, and it is a hard requirement
+**This record does not settle whether a public repository is itself a Telemedium
+under § 18.** It settles what this project does, and the decider decided it. The
+asymmetry with §1 is deliberate and worth seeing: if §1's reading is wrong, an
+address is published that need not have been, and that cannot be taken back. If
+this one is wrong, the remedy is a file.
+
+### 3. This record names the values; it does not contain them
+
+The postal address exists in no file in this repository, and in none in the
+method repository either. It has to be supplied when the page is built, and
+building the page is blocked until it is.
+
+The email address does exist: the method repository publishes it in its code of
+conduct, and R1 makes it this project's contact address as well.
+
+**Neither value is written into this record**, and that is not squeamishness:
+0003 §7 puts the imprint in exactly one place and names a decision record as
+somewhere it does not appear. That place is the page. Everything else, this
+record included, points at it.
+
+### 4. `prefers-reduced-motion: reduce` is honored, and it is a hard requirement
 
 The media feature is Baseline widely available — across browsers since January
 2020 — so 0001 §3.4 permits it.
@@ -96,7 +116,7 @@ behaves correctly under `reduce`. Deferring it would defer it forever, and on a
 page whose entire content is motion it is not a refinement — it is whether the
 page works at all for the people it affects most.
 
-### 4. The page carries a control that stops the motion
+### 5. The page carries a control that stops the motion
 
 **WCAG 2.2 Success Criterion 2.2.2 *Pause, Stop, Hide*, Level A**, applies. Its
 three conditions are each met by decisions already accepted:
@@ -120,14 +140,14 @@ So the page has a **mechanism to pause, stop or hide the motion, operable
 without a pointing device.** What it looks like is 0005's; what the flock does
 while stopped is 0006's.
 
-**§3 does not cover this and the two are not interchangeable.** A browser or
+**§4 does not cover this and the two are not interchangeable.** A browser or
 operating-system setting is not a mechanism on the page, and most visitors have
 never set one. Both are required, for different people.
 
 This is the question 0001 R3 left open — whether the page carries a settings
 surface — and it is answered by an obligation rather than by anyone wanting one.
 
-### 5. No consent banner and no cookie notice
+### 6. No consent banner and no cookie notice
 
 **§ 25 Abs. 1 TDDDG** requires consent for *"die Speicherung von Informationen in
 der Endeinrichtung des Endnutzers oder der Zugriff auf Informationen, die bereits
@@ -141,7 +161,7 @@ either.
 **No banner, no notice, no consent surface**, and nothing on the page asks the
 visitor a question it has no reason to ask.
 
-### 6. The page publishes personal data; it collects none
+### 7. The page publishes personal data; it collects none
 
 The ticket asks for this in writing rather than left to be worked out. An imprint
 is a **publication** of personal data, not a collection of it. The only personal
@@ -151,7 +171,7 @@ requires it.
 There is nothing to distinguish it from, because 0003 §4 and §5 left no
 collection anywhere: the page stores nothing and, once loaded, sends nothing.
 
-### 7. What a host records is 0011's, and 0011 must say so
+### 8. What a host records is 0011's, and 0011 must say so
 
 Serving a page necessarily involves the host seeing a request. Access logs and
 addresses at that layer are the host's processing, not the page's, and this
@@ -161,7 +181,7 @@ record does not reach them because the host is not chosen.
 records and what follows from it. Named here so that it arrives as a question
 0011 has to answer rather than as something nobody noticed.
 
-### 8. The Barrierefreiheitsstärkungsgesetz does not apply
+### 9. The Barrierefreiheitsstärkungsgesetz does not apply
 
 **§ 1 BFSG** binds products and services offered to consumers after 28 June 2025,
 and its service list is commercial throughout: telecommunications services,
@@ -172,15 +192,15 @@ relationship is none of them.
 Obligations that attach to public bodies are not examined, because this is not
 one.
 
-**§3 and §4 therefore rest on 0001 §2 and on WCAG, not on a statute.** Said
+**§4 and §5 therefore rest on 0001 §2 and on WCAG, not on a statute.** Said
 plainly, because "it is required by law" is the reason people expect, and it is
 not the reason here.
 
-### 9. Accessibility beyond motion: what is in, and what is deliberately out
+### 10. Accessibility beyond motion: what is in, and what is deliberately out
 
 **In.**
 
-- §3 and §4, above.
+- §4 and §5, above.
 - **The imprint and the explanation are text in the document, never drawn.**
   0002 §6 already puts them outside the application; this is the reason that
   matters. Text baked into a canvas cannot be read by a screen reader, resized,
@@ -190,14 +210,14 @@ not the reason here.
 
 - **Keyboard operation of the flock.** There is nothing to operate. 0001 §5 rules
   out a goal, a score and a win condition, so the flock has no state a visitor
-  can change. The control in §4 is keyboard-operable; the dots are not a control.
+  can change. The control in §5 is keyboard-operable; the dots are not a control.
 - **A screen-reader description of the flock's state.** It conveys no
   information. Describing where the dots are would invent content that the
   sighted visitor does not receive either.
 - **Contrast requirements on the dots.** WCAG's contrast criteria are about text
   and about user-interface components. The flock is neither, and 0005 owns color.
 
-### 10. The license is MIT, and it covers everything in this repository
+### 11. The license is MIT, and it covers everything in this repository
 
 Recorded rather than assumed. `LICENSE` already holds it; what was missing was
 the decision and the statement of what it covers.
@@ -210,7 +230,7 @@ prose with checks attached to it. Here the documentation exists to explain code
 sitting beside it in the same repository, and a boundary between them would be
 drawn arbitrarily and argued about later.
 
-### 11. The flocking model is reimplemented from its published description
+### 12. The flocking model is reimplemented from its published description
 
 The model is Reynolds' (1987). It is read from the published paper and
 reimplemented; **no third-party source is copied.** Stated so that a later reader
@@ -228,7 +248,7 @@ a question — and it is 0013's, not this record's.
   what people reproduce, and reproducing it here would publish more personal data
   than any statute asks for.
 - No banner, no cookie notice and no consent surface, because 0003 left nothing
-  to consent to. §5 costs one paragraph to establish and removes a whole page
+  to consent to. §6 costs one paragraph to establish and removes a whole page
   element.
 - 0006 inherits reduced motion as a constraint rather than a preference, before
   any motion exists to retrofit it into.
@@ -237,14 +257,20 @@ a question — and it is 0013's, not this record's.
 
 **Negative, and these are real.**
 
-- **§4 puts a control on a page that 0001 described as a toy with nothing to
+- **§5 puts a control on a page that 0001 described as a toy with nothing to
   operate.** 0001 R3 left that surface open for its own record; this is that
   record, and it opens it for an obligation rather than because anyone wanted a
   button. The first thing on the page besides the flock will be a way to stop it.
-- **§3 and §4 make every motion change more expensive**, permanently. Two more
+- **§4 and §5 make every motion change more expensive**, permanently. Two more
   criteria on every ticket that touches movement, for a page with no users yet.
-- **§2 blocks the first increment on a value only the decider holds.** The
+- **§3 blocks the first increment on a value only the decider holds.** The postal
   address is not here and cannot be derived.
+- **The email address will exist in two repositories.** 0003 §7 keeps the imprint
+  to one place so that changing an address is one edit; §2 then puts conventional
+  contact notes in this repository, as the decider's other projects have. A
+  reporting channel in a security or conduct file is not the imprint, and the
+  value is still the same string in more than one file. Whoever changes that
+  address changes it in several places, and nothing will remind them.
 - **The load-bearing legal reading is that § 18's personal-or-family exception
   does not apply.** The quotes are primary and the reasoning is visible, and it
   is still a reading by someone who is not a lawyer. If it is wrong in the other
@@ -259,6 +285,9 @@ a question — and it is 0013's, not this record's.
 - **Copy a conventional commercial imprint.** Rejected because it publishes more
   personal data than § 18 requires, for obligations under § 5 DDG that do not
   reach this page.
+- **Put an imprint file in the repository as well.** Rejected by the decider: the
+  service published to the public is the page, and a repository is served by the
+  conventional README and security notes, as in this decider's other projects.
 - **Treat `prefers-reduced-motion` as satisfying SC 2.2.2.** Rejected because an
   operating-system setting is not a mechanism on the page, and the visitors it
   would leave out are the ones who never found the setting.
@@ -276,33 +305,31 @@ a question — and it is 0013's, not this record's.
   already decided the stricter thing for its own reasons, and § 18's *unmittelbar
   erreichbar* is satisfied either way.
 - **Write a privacy policy anyway, describing that nothing is processed.**
-  Rejected as a page element that exists to look diligent. §6 says it in this
+  Rejected as a page element that exists to look diligent. §7 says it in this
   record, and the explanation 0001 §4 already puts on the page is where a visitor
   would read it.
 
-## Open questions
+## Resolved questions
 
-**O1 — Does the imprint carry a contact channel beyond Name und Anschrift, and
-which one?**
+**R1 — The imprint carries an email address, and it is the one the method
+repository already publishes.**
 
-**A finding first, because it changes the question.** The instruction was to take
-the contact details from the agent-driven-development repository. **There are
-none there.** No email address appears in any of its documents, its
-`package.json` has no author contact, and its `SECURITY.md` routes contact
-through GitHub's private vulnerability reporting and its issue tracker. Nothing
-can be copied across, so this is a choice rather than a lookup.
+The draft asked whether anything beyond *Name und Anschrift* belongs in the
+imprint, and it asked the question on a false finding: it reported that the
+method repository carries no contact address at all. **It does.** The address is
+in that repository's code of conduct, has been public the whole time, and the
+draft's search missed it by looking for a pattern one character too specific.
+Recorded rather than quietly fixed, because the finding was the reason the
+question was framed as a choice with no default.
 
-- **(a) An email address in the imprint. Recommended.** § 18 requires none, and a
-  postal address with no electronic channel invites paper mail about a toy.
-  **Which address is the decider's to name** — the one in this repository's
-  commit history is already public, but it was never chosen for publication, and
-  an address in an imprint is harvested far harder than one in commit metadata.
-- **(b) Nothing beyond Name und Anschrift.** Exactly what the statute asks and
-  not one word more, which is the most defensible position on personal data. The
-  cost is that the only way to reach the operator about the page is post.
-- **(c) A GitHub link, matching the method repository.** Costs nothing, fits the
-  readers this project is aimed at, and is useless to a visitor without an
-  account.
+The decision is a **normal imprint on the page** — name, address, email — with
+the same address the method repository uses, so that a person who encounters
+either project reaches the same place. § 18 requires none of the email; nothing
+forbids it either, and a postal address with no electronic channel invites paper
+mail about a toy.
+
+**§2 is the other half of the same answer.** The repository gets no imprint. It
+gets what a repository gets, and that is a separate piece of work.
 
 ## References
 
@@ -313,24 +340,27 @@ can be copied across, so this is a choice rather than a lookup.
   — the obligation that does apply, and its personal-or-family exception. Read
   2026-08-02.
 - [§ 25 TDDDG — Schutz der Privatsphäre bei Endeinrichtungen](https://www.gesetze-im-internet.de/ttdsg/__25.html),
-  Bundesministerium der Justiz — the consent trigger §5 shows is never reached.
+  Bundesministerium der Justiz — the consent trigger §6 shows is never reached.
   Read 2026-08-02.
 - [§ 1 BFSG — Anwendungsbereich](https://www.gesetze-im-internet.de/bfsg/__1.html),
-  Bundesministerium der Justiz — the covered product and service list in §8. Read
+  Bundesministerium der Justiz — the covered product and service list in §9. Read
   2026-08-02.
 - [WCAG 2.2, Success Criterion 2.2.2 *Pause, Stop, Hide*](https://www.w3.org/TR/WCAG22/),
-  W3C — quoted in §4. Read 2026-08-02.
+  W3C — quoted in §5. Read 2026-08-02.
 - [`prefers-reduced-motion`](https://developer.mozilla.org/en-US/docs/Web/CSS/@media/prefers-reduced-motion),
   MDN — Baseline widely available, across browsers since January 2020. Read
   2026-08-02.
 - Craig W. Reynolds, *Flocks, Herds, and Schools: A Distributed Behavioral
   Model*, Computer Graphics **21(4)** (SIGGRAPH '87 Conference Proceedings),
   pages 25–34 — [the paper](https://www.red3d.com/cwr/papers/1987/boids.html).
-  The model named in §11. Read 2026-08-02.
+  The model named in §12. Read 2026-08-02.
+- [`CODE_OF_CONDUCT.md`](https://github.com/nanatsusaya/agent-driven-development/blob/main/CODE_OF_CONDUCT.md),
+  agent-driven-development — where the email address in R1 is already published.
+  Read 2026-08-02.
 - [0001](0001-purpose-scope-and-success.md) — purpose, scope and success,
   including R3 on a settings surface. Read 2026-08-02.
 - [0003](0003-security-and-privacy-by-design.md) — what the page stores and
-  sends, and where the imprint lives. Read 2026-08-02.
+  sends, and the one place the imprint appears. Read 2026-08-02.
 - [Ticket #8](https://github.com/nanatsusaya/dot-panic/issues/8) — the scope this
   record is written against, and the correction after 0003 was accepted. Read
   2026-08-02.
