@@ -1,6 +1,6 @@
 # 0005 — Rendering and visual design
 
-- **Status:** Proposed
+- **Status:** Accepted
 - **Date:** 2026-08-02
 - **Deciders:** Daniel Wagner
 - **Ticket:** [#42](https://github.com/nanatsusaya/dot-panic/issues/42)
@@ -82,6 +82,14 @@ from the Shell, which 0002 §2 makes the part that wires the other two. §4 is
 then free, because a mode change is a different argument rather than a different
 View.
 
+**No value is fixed here, and that is a decision rather than a gap.** 0001 §3.1
+puts *it reads as a flock* beyond what any command can decide, and 0012 §5 makes
+the View watch-first for the same reason. A palette chosen in a document, before
+anything has ever been on a screen, would be settled by writing rather than by
+looking — which is the move this project exists to avoid. What this record fixes
+is the structure: three roles, one place, passed in. The values are chosen when
+there is something to watch, and R1 records that this was asked and answered.
+
 ### 4. `prefers-color-scheme` is honored, and it is not a hard requirement
 
 Baseline widely available — available since 2020-01-15, widely as of
@@ -109,9 +117,8 @@ the device where a canvas sized in CSS pixels looks soft.
 compatibility data: Safari (from version 3) and Safari iOS (from version 2)
 carry it as a *partial implementation*, because `devicePixelRatio` does not
 change when the page is zoomed. 0001 §3.4 admits only what has reached Baseline
-widely available, so this record does not reach for it. See O2 — whether §3.4 is
-meant to be read that strictly is a question this record raises and does not
-answer.
+widely available, so this record does not reach for it — and R2 records why that
+is not a judgment call anyone here gets to make.
 
 **The `resolution` media feature is widely available** and expresses the same
 fact — Safari 16 and Safari iOS 16, both 2022-09-12, widely as of 2025-03-12.
@@ -183,10 +190,17 @@ considered or forgotten.
 - **A Safari visitor who zooms the page may see a soft canvas.** That is the
   concrete cost of §5's finding, and it lands on exactly the people who zoom in
   order to read. Naming it is not fixing it.
-- **This record fixes no palette.** O1 is open, so nothing can be built to look
-  like anything until it is answered — and 0006 and 0008 both sit behind it.
+- **Nothing here says what the page looks like.** §3 fixes the structure of
+  color and deliberately no value, so the first implementation chooses them
+  under 0012 §5's watch-first, with no criterion written down beforehand beyond
+  both modes existing. That is the right way round for something only an eye can
+  judge, and it still means a reader of this record cannot predict the page.
 - **The dot radius is deferred to 0008**, which means 0008 is now deciding
   something visual as well as something numerical.
+- **A workaround is carried for a flaw this page never meets.** §5 avoids
+  `devicePixelRatio` over zoom behavior nothing here depends on, which leaves a
+  less obvious route to a number every canvas needs. R2 takes that cost
+  deliberately rather than by not noticing it.
 
 ## Alternatives considered
 
@@ -202,36 +216,47 @@ considered or forgotten.
   keeps it a function of its arguments.
 - **Using `devicePixelRatio` anyway, on the grounds that the partial
   implementation concerns zoom rather than density.** Rejected because 0001 §3.4
-  is a floor, not a guideline, and this record may not read it down. O2 puts the
-  question where it belongs.
+  is a floor, not a guideline, and this record may not read it down — see R2.
+- **Fixing a palette here.** Rejected in §3: the one thing 0001 §3.1 says no
+  command can decide should not be decided by a document either.
 - **A control revealed on focus only.** Rejected in §7: it passes the letter of
   0004 §5 and fails the person.
 
-## Open questions
+## Resolved questions
 
-**O1 — The palette.** Three colors, plus their light-mode counterparts. This is
-taste and it is what the page looks like to everyone who opens it, so it is not
-the author's to pick.
+**R1 — The palette is not fixed here. Only that both modes exist.** The draft
+asked which three colors, and recommended a dark surface with light dots.
 
-*Recommended default:* a dark surface with light dots, and a light mode that is
-a genuine light design rather than an inversion. The dark mode is
-recommended-first because the dots are the content and a dark field is where
-small bright shapes read as a group most readily — but 0001 §3.1 makes that a
-claim to be watched rather than argued.
+Daniel: *"das einzige was ich jetzt bestimmen würde, ist dass wir ein hell und
+dunkel modus unterstützen, mehr nicht."*
 
-**O2 — How is 0001 §3.4 read when Baseline says *limited* for a reason that
-does not apply to this page?** `devicePixelRatio` is limited because Safari does
-not update it on zoom. This page has a live workaround, so nothing is lost
-today. **The question will recur**, because the Baseline dataset marks a feature
-by its worst implementation and this project will keep meeting features that are
-limited for reasons irrelevant to it.
+**The question was the wrong shape, not merely premature**, and the reason is
+this project's own: 0001 §3.1 puts how the flock reads beyond what any command
+can decide, and 0012 §5 makes the View watch-first because of it. A palette
+argued into a document before anything has been on a screen is that judgment
+made by writing instead of by looking. §3 keeps what 0004 §10 actually handed
+over — the structure of color — and leaves the values to the first
+implementation, where they can be seen.
 
-*Recommended default:* **(a) strictly** — a feature that is not Baseline widely
-available is not used, whatever the reason, and the record says what was used
-instead. It costs a workaround occasionally and it keeps §3.4 a line a command
-could one day check. The alternative, (b) reading §3.4 by its purpose, turns
-every such case into an argument, and an argument that has to be had again each
-time is not a floor.
+**R2 — The second question dissolved on re-reading 0001 §3.4, and was withdrawn
+rather than answered.** The draft asked whether §3.4 should be read strictly
+when Baseline marks a feature *limited* for a reason that does not affect this
+page, and put it to the decider.
+
+It is not the decider's, because it is not open. §3.4 reads: *"Only web features
+that reached Baseline widely available may be used."* That names a status, and
+`devicePixelRatio` does not have it. There is no second test in the sentence for
+a reading to choose between.
+
+**What the draft was really proposing was to loosen 0001**, and that is a
+different act with a different route: a record that supersedes §3.4, never a
+reinterpretation inside a later record. Nothing here justifies one — the
+`resolution` media feature costs a paragraph and settles it.
+
+Recorded rather than deleted, because the case recurs. **Baseline marks a
+feature by its worst implementation**, so a feature that is limited for reasons
+irrelevant to this page will come up again, and the next session should find the
+route already named instead of reopening the question.
 
 ## References
 
