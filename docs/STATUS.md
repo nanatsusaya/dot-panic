@@ -8,7 +8,7 @@
 
 The method has been adopted. **Nothing of the toy exists yet** — no simulation
 code, no page, no rendering. Everything built so far is the way of working:
-the operating rules, the decision set, six accepted records, and the five
+the operating rules, the decision set, seven accepted records, and the five
 session procedures in [`.claude/skills/`](../.claude/skills/README.md).
 
 The procedures have now been used. `/moin`, `/weiterimtext` and `/adr` all ran
@@ -72,14 +72,34 @@ that this is not a reading of [0001](adr/0001-purpose-scope-and-success.md) §3.
 but the plain text of it: the sentence names a status, and loosening that floor
 would need a record superseding 0001 rather than an argument about what it meant.
 
+**How the dots move is decided.** [0006](adr/0006-motion-rules.md) takes
+Reynolds' three steering behaviors as the base and drops his angular
+neighborhood deliberately, makes non-overlap a hard constraint on the world a
+step returns rather than a steering force among the others, puts every dot's
+speed in a band whose floor is above zero, and bounds how far a velocity may
+change in one step. Under `prefers-reduced-motion` the page shows one frame and
+0004 §5's control starts the flock rather than stopping it. Its §10 names which
+of its own claims a command decides — six invariants — and which only an eye can.
+
+**Two of its rules are derived rather than chosen**, which is what to know before
+touching them. A wall at the frame edge reverses a velocity by `2v` in one step
+and therefore cannot coexist with a bound on acceleration, so the edge is a
+turning force because nothing else is left. And pausing needs no concept in the
+Core: the Shell stops calling it, which is exactly what reduced motion does, so
+the two are one mechanism. **No number is fixed here either**, and one relation
+runs the unusual way — dots that cannot be packed into the frame without
+overlapping make §2 unsatisfiable, so 0008 inherits a ceiling it cannot
+negotiate.
+
 **Thirteen decisions are planned** in [docs/adr/](adr/README.md).
 [0001](adr/0001-purpose-scope-and-success.md),
 [0002](adr/0002-overall-architecture.md),
 [0012](adr/0012-how-software-gets-developed.md),
-[0003](adr/0003-security-and-privacy-by-design.md) and
-[0004](adr/0004-compliance-accessibility-and-rights.md) and
-[0005](adr/0005-rendering-and-visual-design.md) are Accepted; the other
-seven are `Planned`. Number 0012 was reserved as unused until 2026-08-02; the
+[0003](adr/0003-security-and-privacy-by-design.md),
+[0004](adr/0004-compliance-accessibility-and-rights.md),
+[0005](adr/0005-rendering-and-visual-design.md) and
+[0006](adr/0006-motion-rules.md) are Accepted; the other
+six are `Planned`. Number 0012 was reserved as unused until 2026-08-02; the
 index says why it is not, and why the table is no longer ordered by number.
 
 What is awaiting review is not repeated here. The
@@ -90,14 +110,13 @@ There are none.
 
 ## What the tickets hold
 
-Nine issues are open. Three of them exist for a reason worth knowing: they carry
-research that would otherwise have existed only in the conversation that produced
-it, and each says in its own header how ready it is.
+Eight issues are open. Two of them carry research that would otherwise have
+existed only in the conversation that produced it, and each ticket says in its
+own header how ready it is.
 
 | Ticket | State |
 |---|---|
-| [#10](https://github.com/nanatsusaya/dot-panic/issues/10) 0006 Motion rules | holds the motion research — its stated blocker, 0004, is now Accepted |
-| [#11](https://github.com/nanatsusaya/dot-panic/issues/11) 0007 Pointer and input model | not ready — holds the touch research |
+| [#11](https://github.com/nanatsusaya/dot-panic/issues/11) 0007 Pointer and input model | holds the touch research — both stated blockers, 0002 and 0006, are Accepted |
 | [#12](https://github.com/nanatsusaya/dot-panic/issues/12) 0013 Origin of the core | not ready — holds the package survey |
 | [#13](https://github.com/nanatsusaya/dot-panic/issues/13) Walking skeleton | not ready — 0012 §2 makes it the first increment |
 | [#34](https://github.com/nanatsusaya/dot-panic/issues/34) 0008 Performance budget | ready — 0005 answered the drawing choice it waited on |
@@ -139,16 +158,16 @@ What a change description must contain is no longer among the gaps here.
 
 ## The single clearest next step
 
-**Write [decision 0006](adr/README.md) — motion rules**, against
-[#10](https://github.com/nanatsusaya/dot-panic/issues/10). It is the next record
-by the index's ordering, the one thing its ticket names as blocking it is
-Accepted, and the research is already written down there: Reynolds' three
-steering behaviors, the three properties a textbook implementation does not give
-this flock, and the speed profile decided on 2026-08-02.
+**Write [decision 0007](adr/README.md) — pointer and input model**, against
+[#11](https://github.com/nanatsusaya/dot-panic/issues/11). It is the next record
+by the index's ordering, both blockers its ticket names are Accepted, and the
+research is already written down there: on touch there is no hover, so a pointer
+position exists only while a finger is down, and what the flock does when it
+stops existing is a design decision rather than a detail.
 
-**Its ticket header still says it is not ready**, and the reason that header
-gives is 0004. Whether anything else stands in the way is a call that belongs to
-the decider rather than something to read out of a line the world has moved past.
+It is also the last record standing between the decision set and
+[#34](https://github.com/nanatsusaya/dot-panic/issues/34) — 0008 is blocked by
+0007 and by nothing else.
 
 ## Implementation scale
 
@@ -163,6 +182,12 @@ that says whether anything exists:
 | `live` | Deployed and reachable at the public URL. |
 
 An accepted decision confers `decided` and nothing more.
+
+**The simulation core does not move off `planned`, and 0006 is the reason it
+looks as though it should.** 0006 decides the rules the core runs, but
+[0013](adr/README.md) still owns whether that core is written here or taken from
+a package, and it is `Planned`. Rendering moved because 0005 is the whole of that
+question; the core is two records and only one of them exists.
 
 | Area | Stage |
 |---|---|
