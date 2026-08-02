@@ -1,6 +1,6 @@
 # 0012 — How software gets developed here
 
-- **Status:** Proposed
+- **Status:** Accepted
 - **Date:** 2026-08-02
 - **Deciders:** Daniel Wagner
 - **Ticket:** [#24](https://github.com/nanatsusaya/dot-panic/issues/24)
@@ -60,9 +60,19 @@ something a still-open record owns is not ready, which is the existing rule
 [D4](https://github.com/nanatsusaya/agent-driven-development/blob/main/method/rules.md#d4)
 and not a new one. Work proceeds on what is decided; the rest waits.
 
-### 2. What an increment is
+### 2. A sprint is a bundle of tickets, and it produces one increment
 
-An increment is finished, verified, and leaves the page **deployable** — it
+**A sprint is a set of tickets brought to Definition of Ready together, worked,
+and finished as one increment.** It is bounded by that set and by nothing else —
+no time box, per §1.
+
+The bundle exists for one reason, and it is not rhythm: §6 requires the tickets
+worked in parallel to be *independent of each other*, and independence is a
+property of a set rather than of any one ticket. Establishing it is an activity,
+and an activity needs a moment to happen in. That moment is the start of a
+sprint.
+
+**An increment is finished, verified, and leaves the page deployable** — it
 loads, something works, and nothing half-built is visible.
 
 It does **not** mean a feature is complete. The first increment cannot be a
@@ -114,28 +124,35 @@ touch no file in common, and neither one's criteria depend on the other's
 result.
 
 Independence is a property of the tickets, so it is settled when they are
-brought to Definition of Ready — before any agent starts, not discovered by a
-merge conflict afterward.
+brought to Definition of Ready — at the start of a sprint (§2), before any agent
+starts, and not discovered by a merge conflict afterward.
 
-The limit is not the number of agents. It is that
+**At most three changes may be open for review at once.** The limit is not the
+number of agents: it exists because
 [G1](https://github.com/nanatsusaya/agent-driven-development/blob/main/method/rules.md#g1)
 sends every change through one human, and
 [G3](https://github.com/nanatsusaya/agent-driven-development/blob/main/method/rules.md#g3)
 warns that a reviewer facing more than they can read stops being the gate
-without noticing. How many changes may be open at once is **O2**.
+without noticing — by approving, not by refusing. A number can be counted; the
+judgment it replaces is the thing that fails.
 
 ### 7. The vocabulary, and what is deliberately not borrowed
 
 Borrowed, because each names something that exists here: **Definition of Ready**
-and **Definition of Done** (both already written down), and **increment** (§2).
+and **Definition of Done** (both already written down), **increment**, and
+**sprint** (both §2).
 
-Not borrowed: sprint planning, daily stand-up, retrospective, velocity, story
-points, product owner, scrum master. Each solves a coordination problem among
-several people. Importing them into a one-person project costs the ceremony and
-buys none of the coordination — and produces failure 1 in 0001 §6, where a
-reader concludes the method is unusable at this size.
+Not borrowed: daily stand-up, retrospective, velocity, story points, product
+owner, scrum master. Each solves a coordination problem among several people.
+Importing them into a one-person project costs the ceremony and buys none of the
+coordination — and produces failure 1 in 0001 §6, where a reader concludes the
+method is unusable at this size.
 
-Whether the word **sprint** is borrowed depends on **O1**.
+**Sprint is borrowed narrowly and means less here than in Scrum.** It is a
+bundle of tickets, not a time box, and it carries no commitment, no planning
+meeting and no review event. Borrowing the word for a smaller thing is a real
+cost — a reader who knows Scrum will assume the rest of it — which is why this
+paragraph exists rather than the word standing alone.
 
 ## Consequences
 
@@ -196,25 +213,24 @@ Whether the word **sprint** is borrowed depends on **O1**.
 - **A fixed-length time box for cycles.** Rejected by the decider under §1: a
   time box on a project with no fixed hours measures nothing.
 
-## Open questions
+## Resolved questions
 
-**O1 — Is a cycle a named bundle of tickets, or is there no cycle at all?** With
-the time box gone (§1), a "sprint" is a set of tickets brought to Ready
-together, worked, and finished as one increment. The alternative is continuous
-flow: tickets are brought to Ready when they are next, and an increment is
-declared whenever the page is deployable again. *Recommended default:* the named
-bundle. Not for rhythm, which a one-person project does not need, but because
-§6 requires independence to be settled across a set of tickets at once — and
-that is an activity, which wants a moment to happen in. If the bundle is chosen,
-the word *sprint* is borrowed with it (§7).
+**R1 — A cycle is a named bundle of tickets, and the word is *sprint*.** The
+alternative was continuous flow, with an increment declared whenever the page is
+deployable again. The bundle wins, but not for the usual reason: a one-person
+project has no use for rhythm, and rhythm is most of what a sprint is for
+elsewhere. It wins because §6 requires independence to be established across a
+*set* of tickets, which is an activity and therefore needs a moment to happen
+in. §2 states the bundle; §7 records that the word is borrowed for something
+smaller than Scrum means by it, and what that costs.
 
-**O2 — How many changes may be open for review at once?** G3's failure is
-silent: the reviewer approves rather than refuses, and stops being the gate
-without announcing it. A number is arbitrary but checkable; a judgment call is
-accurate but is the thing that fails. *Recommended default:* **three**. It is
-more than one agent's worth of work, small enough to read in a sitting, and it
-can be raised once there is evidence about how long a review here actually
-takes.
+**R2 — At most three changes may be open for review at once.** Any number here
+is arbitrary; the point is that it can be counted, and the judgment it replaces
+is precisely the one G3 says fails silently. Three is more than one agent's
+worth of work and still small enough to read in a sitting. It is a starting
+value, not a finding — raising it is a change to this record like any other, and
+should be made on evidence about how long a review here actually takes rather
+than on how it feels during a busy session.
 
 ## References
 

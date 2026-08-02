@@ -63,7 +63,7 @@ record ends up deciding something that was never its own.
 | 0009 | Toolchain | What runs the code, what tests it, what builds it | Planned |
 | 0010 | Testing strategy | What is asserted by a command and what is only ever watched | Planned |
 | 0011 | Delivery | How it reaches the public URL, and when | Planned |
-| [0012](0012-how-software-gets-developed.md) | How software gets developed here | Analysis then increments; where test-first applies and what replaces it where it cannot; when work may run in parallel | Proposed |
+| [0012](0012-how-software-gets-developed.md) | How software gets developed here | Analysis then increments; where test-first applies and what replaces it where it cannot; when work may run in parallel | Accepted |
 | 0013 | Origin of the core | Written here or taken from a package | Planned |
 
 **0012 sits out of order, and knowingly.** It constrains 0009, 0010 and 0011

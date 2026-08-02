@@ -24,11 +24,11 @@ toolchain at all**: no runtime, no test runner, no package manifest. That is
 decision 0009.
 
 **Thirteen decisions are planned** in [docs/adr/](adr/README.md).
-[0001](adr/0001-purpose-scope-and-success.md) and
-[0002](adr/0002-overall-architecture.md) are Accepted,
-[0012](adr/0012-how-software-gets-developed.md) is Proposed, and the other ten
-are `Planned`. Number 0012 was reserved as unused until 2026-08-02; the index
-says why it is not.
+[0001](adr/0001-purpose-scope-and-success.md),
+[0002](adr/0002-overall-architecture.md) and
+[0012](adr/0012-how-software-gets-developed.md) are Accepted; the other ten are
+`Planned`. Number 0012 was reserved as unused until 2026-08-02; the index says
+why it is not.
 
 What is awaiting review is not repeated here. The
 [pull request list](https://github.com/nanatsusaya/dot-panic/pulls) is the
