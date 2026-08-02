@@ -68,7 +68,8 @@ longer supports.
 | [0005](0005-rendering-and-visual-design.md) | Rendering and visual design | Canvas, SVG or DOM; color, light and dark, pixel density | Accepted |
 | [0006](0006-motion-rules.md) | Motion rules | Bounded frame, minimum speed, non-overlap as a constraint | Accepted |
 | [0007](0007-pointer-and-input-model.md) | Pointer and input model | Mouse and touch, radius of effect, how it decays | Accepted |
-| 0014 | Page layout | How the flock, the imprint and the explanation are arranged; how the canvas is sized against them | Planned |
+| [0014](0014-page-layout.md) | Page layout | How the flock, the imprint and the explanation are arranged; how the canvas is sized against them | Accepted |
+| 0015 | Settings surface | Whether the visitor may change the flock, which values are exposed, and what bounds them | Planned |
 | 0008 | Performance budget | How many dots at what frame rate on which device | Planned |
 | 0009 | Toolchain | What runs the code, what tests it, what builds it | Planned |
 | 0010 | Testing strategy | What is asserted by a command and what is only ever watched | Planned |
@@ -99,6 +100,20 @@ owned that. It takes the next free number rather than being folded into a
 neighbor, because widening a planned row changes a topic this table has already
 fixed. Its position between 0007 and 0008 is by meaning and says nothing about
 the order the two are written in — R1 covers that.
+
+**0015 was added the same way**, by [0014](0014-page-layout.md) R5.
+[0001](0001-purpose-scope-and-success.md) R3 left a settings surface to its own
+record *if it ever becomes a real question*, and 0014 §4 puts a dialog on the
+page, which is where one would go — so it became one. Two accepted records bound
+it before it is written: 0003 §4 stores nothing on the visitor's device, and 0006
+§2 makes a dot count that cannot be packed into the frame unsatisfiable.
+
+**Two rows have now been added after the set was planned**, and that is the
+mechanism working rather than the plan failing. Both came from a record finding a
+topic no existing row owned, both took the next free number, and both arrived
+with a ticket in the same change. It is the numbering in
+[0012](0012-how-software-gets-developed.md)'s paragraph above that is closed, not
+the set.
 
 `Planned` means the topic is fixed and the record is not yet written; it is the
 only status a row may carry without a file behind it. A `Planned` row is not a
