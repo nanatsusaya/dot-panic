@@ -362,24 +362,57 @@ There are none.
 
 ## What the tickets hold
 
-Eight issues are open, and each says in its own header how ready it is.
+**Thirty-one issues are open, and the breakdown is why.** There were eight on
+2026-08-02. 0012 §1's phase 3 — cutting the epics visible in the accepted records
+into tickets — was run on the decider's instruction, and it produced four epics
+and twenty-one tickets.
+
+**This file no longer lists every ticket, and that is not an answer to
+[#46](https://github.com/nanatsusaya/dot-panic/issues/46).** An epic is now the
+authority for its own members, which is what 0012 §7 makes it, so restating
+twenty-one rows here would duplicate a list that has a home. The duplication
+#46 names — readiness stated both in a ticket and in this table — is unchanged
+for the rows below, and answering that by editing is what that ticket exists to
+stop.
+
+| Epic | Holds | State |
+|---|---|---|
+| [#13](https://github.com/nanatsusaya/dot-panic/issues/13) Walking skeleton | 8 tickets | not ready — 0012 §2 makes it the first increment, and no set has been brought to Ready |
+| [#87](https://github.com/nanatsusaya/dot-panic/issues/87) The flock's motion | 6 tickets | not ready — every member waits on #91 |
+| [#88](https://github.com/nanatsusaya/dot-panic/issues/88) The pointer | 3 tickets | not ready — waits on the Shell and the page |
+| [#89](https://github.com/nanatsusaya/dot-panic/issues/89) The finished page | 3 tickets | not ready — two of the three can only be chosen by watching |
+
+Outside the epics:
+
+| Ticket | State |
+|---|---|
+| [#38](https://github.com/nanatsusaya/dot-panic/issues/38) The two repository notes 0004 §2 assumes | ready |
+| [#46](https://github.com/nanatsusaya/dot-panic/issues/46) Ticket readiness is stated in two places | ready — and this section is still one of the two |
+| [#69](https://github.com/nanatsusaya/dot-panic/issues/69) Create the toolchain 0009 decides | ready — and starting it is the decider's call |
+| [#70](https://github.com/nanatsusaya/dot-panic/issues/70) Biome | waits on #69 |
+| [#71](https://github.com/nanatsusaya/dot-panic/issues/71) The check chain as commands | waits on #69 and #70 |
+| [#77](https://github.com/nanatsusaya/dot-panic/issues/77) The hosting notice 0011 §4 puts beside the imprint | not ready — waits on #96 for a dialog to sit in |
+| [#83](https://github.com/nanatsusaya/dot-panic/issues/83) 0016 Maintainability and maintenance | ready — 0013 was what it waited on |
+| [#90](https://github.com/nanatsusaya/dot-panic/issues/90) The real imprint address | not ready — the decider supplies the content |
+
+**[#90](https://github.com/nanatsusaya/dot-panic/issues/90) is the one thing
+nobody here can work, and it stops the URL rather than the code.** 0004 R2 makes
+a real address a precondition of publishing and 0011 §6 turns that into a check
+over the built artifact, so the first increment can be finished and cannot be
+deployed until the decider supplies one. It is the only hand-off in the whole
+breakdown.
+
+**What phase 3 deliberately did not do is establish readiness.** 0012 §6 puts
+that at the moment a set is brought to Definition of Ready **together**, every
+time, and says phase 3 is not that. So every ticket below carries a header
+saying what it waits on, and none of them has been through the activity that
+opens a sprint.
 
 **The ticket that held research no longer has to.** #12 carried a survey of four
 npm packages so that it would not be lost with the session that produced it, and
 that was the last thing in this project living only in the tracker. 0013 §4 has
 it now — re-read from the registry, one number corrected, and recorded as
 something that did **not** decide the record it sits in.
-
-| Ticket | State |
-|---|---|
-| [#13](https://github.com/nanatsusaya/dot-panic/issues/13) Walking skeleton | not ready — 0012 §2 makes it the first increment |
-| [#38](https://github.com/nanatsusaya/dot-panic/issues/38) The two repository notes 0004 §2 assumes | ready |
-| [#46](https://github.com/nanatsusaya/dot-panic/issues/46) Ticket readiness is stated in two places | ready — and this table is one of the two |
-| [#69](https://github.com/nanatsusaya/dot-panic/issues/69) Create the toolchain 0009 decides | ready — and starting it is the decider's call |
-| [#70](https://github.com/nanatsusaya/dot-panic/issues/70) Biome | waits on #69 |
-| [#71](https://github.com/nanatsusaya/dot-panic/issues/71) The check chain as commands | waits on #69 and #70 |
-| [#77](https://github.com/nanatsusaya/dot-panic/issues/77) The hosting notice 0011 §4 puts beside the imprint | not ready — waits on #13 for a dialog to sit in |
-| [#83](https://github.com/nanatsusaya/dot-panic/issues/83) 0016 Maintainability and maintenance | ready — 0013 was what it waited on |
 
 **The ticket gap is closed.** Every planned decision has one. Five were filed on
 2026-08-02 — 0008, 0009, 0010, 0011 and the repository notes — because the four
@@ -392,22 +425,22 @@ of it, and closed with it. **No row added since then has opened the gap again:**
 filed in the same change that added the row, because a planned row without a
 ticket is the state those five were filed to end.
 
-**Five of the eight were asked for by a record rather than noticed in passing.**
-[#69](https://github.com/nanatsusaya/dot-panic/issues/69) creates what 0009
-decides, [#70](https://github.com/nanatsusaya/dot-panic/issues/70) configures
-Biome, and [#71](https://github.com/nanatsusaya/dot-panic/issues/71) turns 0009
-§8's four checks into commands a person runs — those three came with 0009 R2,
-where the decider asked for them by name. The fourth is
-[#77](https://github.com/nanatsusaya/dot-panic/issues/77), which writes the two
-sentences 0011 §4 puts beside the imprint, and it was filed before that record
-was accepted so that the reference inside it would point at something real. The
-fifth is [#83](https://github.com/nanatsusaya/dot-panic/issues/83), which 0012 §1
-asked for by naming two phases and handing their content away.
-**#69 has since grown a requirement it was not filed with**: 0010 §7 puts the
-coverage floor and its two exclusions in `bunfig.toml`, so the file that ticket
-creates now carries a number as well as a toolchain. **None of them starts by
-existing:** 0012 §1's analysis phase has no end condition, and leaving it is a
-decision rather than a consequence of a record being Accepted.
+**This section used to count how many tickets a record had asked for, and that
+number has stopped being informative.** It was five of eight. After the
+breakdown it is essentially all of them: every ticket phase 3 produced was cut
+from an accepted record and cites the sections it serves. What is worth naming
+now is the other direction — the only open ticket nobody's record asked for is
+[#46](https://github.com/nanatsusaya/dot-panic/issues/46), which was noticed in
+passing when this table drifted twice within an hour.
+
+**#69 has grown a requirement it was not filed with**: 0010 §7 puts the coverage
+floor and its two exclusions in `bunfig.toml`, so the file that ticket creates
+carries a number as well as a toolchain. It was missing from its criteria while
+this file already claimed it, and the breakdown is what caught that.
+
+**None of it starts by existing.** 0012 §1's analysis phase has no end
+condition, and leaving it is a decision rather than a consequence of a record
+being Accepted — or of a ticket being written.
 
 **This table restates something the tickets already say**, and
 [#46](https://github.com/nanatsusaya/dot-panic/issues/46) is the ticket for it.
@@ -490,14 +523,18 @@ end date is 2028-06-12, and 0009 §4's browser APIs. 0013 §8 added a fourth —
 provenance, and both halves of its §7 — so the set 0011 §6 was shrinking one at
 a time is growing again.
 
-**It does not gate the breakdown.** 0012 §1 puts a cut into epics and tickets
-after the records, and 0016 constrains that work only through D4: a ticket that
-would settle something a still-open record owns is not ready. Nothing about the
-toy settles what maintenance means, so the two can run in either order.
+**The breakdown is done and did not need it.** 0016 constrains that work only
+through D4 — a ticket that would settle something a still-open record owns is
+not ready — and nothing about the toy settles what maintenance means.
 
-**Nothing here says to start building.** 0012 §1's analysis phase has no end
-condition, and leaving it is the decider's call rather than something a record
-becoming Accepted does on its own.
+**What stands between here and code is one activity, and it is not this one.**
+0012 §2 makes a sprint a set of tickets brought to Definition of Ready
+**together**, and §6 puts establishing their independence at that same moment.
+[#13](https://github.com/nanatsusaya/dot-panic/issues/13)'s eight members have
+never been through it. That is phase 4's opening move rather than more phase 3,
+and it starts when the decider says so — 0012 §1's analysis phase has no end
+condition, and neither a record becoming Accepted nor a ticket being written
+supplies one.
 
 ## Implementation scale
 
