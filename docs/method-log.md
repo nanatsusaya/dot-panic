@@ -6,6 +6,37 @@ session would decide worse without it.
 
 Newest first.
 
+## 2026-08-02 — A duplicated fact had already drifted, and no command could find it
+
+The operating rules carried their own ranked list of the ways this project
+fails. So does decision 0001, in §6, and that is the authority. The two no
+longer matched: three entries against four, and a first entry that said
+something different — *the artifacts read as bureaucracy* against *the
+documentation is poor*.
+
+The entry below, written the day before, described a duplicated fact as
+invisible **because the two copies agreed**. This is the next stage of the same
+failure, and the finding is that it stays invisible once they stop agreeing.
+Nothing raises a hand. The coherence check resolves references and scans
+spelling; it does not read two passages and notice they contradict each other,
+and it says so itself — twenty-one rules in force are marked `manual` and depend
+on review.
+
+What found it was Daniel asking whether the documentation says clearly enough
+that this is an example project for the method. Reading a document against an
+expectation, not running anything.
+
+**Two consequences.**
+
+- **A document that retells what a record decides is a defect when it is
+  written, not when it drifts.** The drift is the symptom. CLAUDE.md now names
+  the project and points at 0001 for what it is, what good enough means, and how
+  it fails.
+- **Before amending an accepted record, read it.** The proposal here was to
+  write into 0001 that this is an example project. It already said so three
+  times — §2, §6.1 and R2. An amendment quoting superseded wording verbatim, to
+  insert a repetition, spends a mechanism that exists for real changes.
+
 ## 2026-08-01 — The session procedures were copied and adapted, not installed
 
 The five procedures were installed as a plugin at the start of the session and
