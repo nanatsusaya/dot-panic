@@ -24,7 +24,7 @@ procedures themselves stay in English, like every other file.
 
 ## What was changed
 
-Five adaptations, and each exists for a reason this project ran into:
+Six adaptations, and each exists for a reason this project ran into:
 
 1. **`/adr` no longer defines the shape of a record.** It points at
    [`docs/adr/README.md`](../../docs/adr/README.md), which is the only
@@ -43,8 +43,13 @@ Five adaptations, and each exists for a reason this project ran into:
    which is the only authority for it. Its own copy was a third version and the
    worst of the three: it required a green local check chain, and there is no
    check chain.
+6. **`/adr` runs a grep before a record is merged.** The rule that an Accepted
+   record carries no `O`-number was written down and then broken four times in
+   the next two records. A sentence in a document was not what held it; a command
+   with a known result is. The [method log](../../docs/method-log.md) has the
+   incident.
 
-A fifth change was not a choice. Copying these files made them documents of
+A seventh change was not a choice. Copying these files made them documents of
 this repository, so they fall under its spelling regime and were rewritten from
 British to American. The check found all twenty-five instances; it was not
 noticed by reading. One word had to be put back by hand: `artefacts` is the
@@ -58,4 +63,4 @@ it, and nothing will announce that.
 
 **The trigger is a release of `agent-driven-development`.** Compare these five
 files against the new version, take what applies, and leave what was adapted on
-purpose. The five changes above are the list of what not to overwrite.
+purpose. The six changes above are the list of what not to overwrite.
