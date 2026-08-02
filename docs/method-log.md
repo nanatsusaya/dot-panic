@@ -6,6 +6,48 @@ session would decide worse without it.
 
 Newest first.
 
+## 2026-08-02 — A link that resolves is not a fact that is true
+
+Three defects were found in accepted records inside one hour, none of them by a
+command:
+
+- Two records pointed at an `O1` that had become an `R1` when they were accepted.
+- [0014](adr/0014-page-layout.md) R6 said a question *belongs to 0008*, and 0008
+  never took it — a question owned by nobody, in a set where every question has an
+  owner by construction.
+- 0014 §5 opened the dialog **by a form submission that does not exist**. The HTML
+  Standard defines `method="dialog"` as closing the dialog a form sits in.
+
+`check-method.mjs` printed `OK` over all three, correctly. It resolves that a
+reference points at something. **It cannot know whether the something says what
+the reference claims** — and all three defects live in exactly that gap. A green
+check is evidence about links, and this project had been reading it as evidence
+about records.
+
+The third one is the instructive one. 0014 cited Baseline status for every
+*feature* it used — `<dialog>`, `<details>`, `svh`, container queries — and cited
+nothing for the *mechanism* that was supposed to tie them together. It then
+argued **for** markup using the backdrop, the focus containment and the `Escape`
+key, all of which belong only to a modal dialog, which exists only through the
+`showModal()` call the same paragraph forbade. The record refuted itself in four
+sentences, and it read as careful because every citation in it was real.
+
+**Two consequences.**
+
+- **Cite the mechanism, not only the features.** *This element is widely
+  available* and *this is how the page uses it* are two claims, and the record
+  shape asks for a source for the first. The second is where the error was, and it
+  is the one a session can only get from the standard. 0014 A1 now cites
+  `method="dialog"`, modal dialogs and invoker commands, none of which is a
+  feature the page uses — they are the reasons the mechanism is what it is.
+- **Amending an accepted record is cheap, and that is the thing to watch.** The
+  rule reads as though immutability were friction; in practice one sentence from
+  the decider unlocks it, and this afternoon produced three amendments across
+  three records. What holds the line is not difficulty but visibility: each one
+  quotes the wording it replaces and the authorization that permitted it, in the
+  record itself. A later session should read that as neither forbidden nor
+  routine — it is ordinary, and it leaves a trail on purpose.
+
 ## 2026-08-02 — A record said something was impossible, and one unstated premise made it so
 
 0014's first draft described a scrolling page: canvas, then the control, then the
