@@ -8,7 +8,7 @@
 
 The method has been adopted. **Nothing of the toy exists yet** — no simulation
 code, no page, no rendering. Everything built so far is the way of working:
-the operating rules, the decision set, eleven accepted records, and the five
+the operating rules, the decision set, twelve accepted records, and the five
 session procedures in [`.claude/skills/`](../.claude/skills/README.md).
 
 The procedures have now been used. `/moin`, `/weiterimtext` and `/adr` all ran
@@ -20,8 +20,9 @@ have still never been invoked.
 imperative shell, three parts, and the directory layout that goes with them —
 but `core/`, `shell/` and `view/` do not exist, and creating them is work that
 needs a ticket, not a side effect of reading the record. There is still **no
-toolchain at all**: no runtime, no test runner, no package manifest. That is
-decision 0009.
+toolchain at all** — no runtime, no test runner, no package manifest — but that
+is no longer an open question. 0009 decides it and
+[#69](https://github.com/nanatsusaya/dot-panic/issues/69) is the work.
 
 **How the work gets built is decided as well, and nothing has been built under
 it.** [0012](adr/0012-how-software-gets-developed.md) fixes an analysis phase
@@ -196,6 +197,26 @@ closes the question in 0015 rather than on 0001 §5's out-of-scope list, so that
 the later addition the decider left open costs a record superseding 0015 and not
 one superseding 0001.
 
+**What runs the code is decided, and none of it is installed.**
+[0009](adr/0009-toolchain.md) fixes Bun, TypeScript and `bun test` — the decider's
+choice, taken against a recommendation of no toolchain at all. **Its §4 is the
+load-bearing part**, because 0001 R1 sent the Baseline floor there and the two
+tools disagree about it: Bun's bundler does not down-convert syntax, so it cannot
+hold the floor, while `tsc`'s `target` does and its `lib` bounds the APIs that
+type-check. So `tsc` emits and `bun build` does not — one answer to what syntax is
+allowed instead of two that can differ — and **Bun's own recommended `tsconfig` is
+declined** in exactly those two settings. One `.js` beside each `.ts`, no bundler,
+and R1 keeps the output out of the repository, which closes publishing straight
+from a branch before 0011 exists to weigh it.
+
+**Two gaps are named in the record rather than left to be found.** `lib` is
+versioned by ECMAScript year and the DOM library is not versioned at all, so every
+browser feature an accepted record names sits outside what any setting can
+decide — **the third rule here held by a person remembering**, beside the imprint
+address and 0008 §8's factor. Biome was checked for it and has no browser-support
+rule group. And `bun test` runs the source while the browser runs the down-leveled
+output, so a passing test is a statement about the source; 0010 inherits that.
+
 **Fifteen decisions are planned** in [docs/adr/](adr/README.md).
 [0001](adr/0001-purpose-scope-and-success.md),
 [0002](adr/0002-overall-architecture.md),
@@ -206,9 +227,10 @@ one superseding 0001.
 [0006](adr/0006-motion-rules.md),
 [0007](adr/0007-pointer-and-input-model.md),
 [0014](adr/0014-page-layout.md),
-[0015](adr/0015-settings-surface.md) and
-[0008](adr/0008-performance-budget.md) are Accepted; the other
-four are `Planned`. **The table runs by meaning and not by number**, and three
+[0015](adr/0015-settings-surface.md),
+[0008](adr/0008-performance-budget.md) and
+[0009](adr/0009-toolchain.md) are Accepted; the other
+three are `Planned`. **The table runs by meaning and not by number**, and three
 numbers have a history it carries rather than this file: 0012 was reserved as
 unused until 2026-08-02, and 0014 and 0015 were both added after the set was
 planned.
@@ -221,7 +243,7 @@ There are none.
 
 ## What the tickets hold
 
-Seven issues are open. One of them still carries research that would otherwise
+Nine issues are open. One of them still carries research that would otherwise
 have existed only in the conversation that produced it, and each ticket says in
 its own header how ready it is.
 
@@ -229,11 +251,13 @@ its own header how ready it is.
 |---|---|
 | [#12](https://github.com/nanatsusaya/dot-panic/issues/12) 0013 Origin of the core | not ready — holds the package survey |
 | [#13](https://github.com/nanatsusaya/dot-panic/issues/13) Walking skeleton | not ready — 0012 §2 makes it the first increment |
-| [#35](https://github.com/nanatsusaya/dot-panic/issues/35) 0009 Toolchain | ready |
-| [#36](https://github.com/nanatsusaya/dot-panic/issues/36) 0010 Testing strategy | waits on 0009 |
-| [#37](https://github.com/nanatsusaya/dot-panic/issues/37) 0011 Delivery | waits on 0009 |
+| [#36](https://github.com/nanatsusaya/dot-panic/issues/36) 0010 Testing strategy | ready — 0009 was its blocker |
+| [#37](https://github.com/nanatsusaya/dot-panic/issues/37) 0011 Delivery | ready — 0009 was its blocker |
 | [#38](https://github.com/nanatsusaya/dot-panic/issues/38) The two repository notes 0004 §2 assumes | ready |
 | [#46](https://github.com/nanatsusaya/dot-panic/issues/46) Ticket readiness is stated in two places | ready — and this table is one of the two |
+| [#69](https://github.com/nanatsusaya/dot-panic/issues/69) Create the toolchain 0009 decides | ready — and starting it is the decider's call |
+| [#70](https://github.com/nanatsusaya/dot-panic/issues/70) Biome | waits on #69 |
+| [#71](https://github.com/nanatsusaya/dot-panic/issues/71) The check chain as commands | waits on #69 and #70 |
 
 **The ticket gap is closed.** Every planned decision has one. Five were filed on
 2026-08-02 — 0008, 0009, 0010, 0011 and the repository notes — because the four
@@ -244,6 +268,15 @@ of it, and closed with it. **Neither row added since then opened the gap again:*
 [#53](https://github.com/nanatsusaya/dot-panic/issues/53) for 0015 were each
 filed in the same change that added the row, because a planned row without a
 ticket is the state those five were filed to end.
+
+**Three of the nine are the first work here that is not a document.**
+[#69](https://github.com/nanatsusaya/dot-panic/issues/69) creates what 0009
+decides, [#70](https://github.com/nanatsusaya/dot-panic/issues/70) configures
+Biome, and [#71](https://github.com/nanatsusaya/dot-panic/issues/71) turns 0009
+§8's four checks into commands a person runs. They came with 0009 R2, where the
+decider asked for them by name. **None of them starts by existing:** 0012 §1's
+analysis phase has no end condition, and leaving it is a decision rather than a
+consequence of a record being Accepted.
 
 **This table restates something the tickets already say**, and
 [#46](https://github.com/nanatsusaya/dot-panic/issues/46) is the ticket for it.
@@ -298,45 +331,41 @@ legal half was 0004's, and it is answered above.
 places, not the two [#23](https://github.com/nanatsusaya/dot-panic/issues/23)
 knew about: `/feierabend` carried a copy as well, and that one required a green
 local check chain this project has never had. Four conditions survive as one
-list, `0009` is named as what would make any of them decidable by a command, and
-CLAUDE.md and `/feierabend` now refer to it and state nothing.
+list, and what would make any of them decidable by a command is no longer only a
+number: 0009 §8 fixes four checks and
+[#71](https://github.com/nanatsusaya/dot-panic/issues/71) is what turns them into
+commands. CLAUDE.md and `/feierabend` refer to the template and state nothing.
 
 What a change description must contain is no longer among the gaps here.
 [The pull request template](../.github/pull_request_template.md) fixes it.
 
 ## The single clearest next step
 
-**Write [decision 0009](adr/README.md) — toolchain**, against
-[#35](https://github.com/nanatsusaya/dot-panic/issues/35). It is the only ready
-ticket that unblocks others —
-[#36](https://github.com/nanatsusaya/dot-panic/issues/36) and
-[#37](https://github.com/nanatsusaya/dot-panic/issues/37) both wait on it, and
-nothing waits on the two that are left.
+**Write [decision 0010](adr/README.md) — testing strategy**, against
+[#36](https://github.com/nanatsusaya/dot-panic/issues/36). 0009 was its blocker,
+and it did not only unblock it — **it handed it a problem no other record owns.**
+0009 §6 records that `bun test` runs the source while the browser runs the
+down-leveled output, so a passing test is a statement about the source and not
+about the file a visitor executes.
 
-**It is where four accepted records have been sending work.**
-[0002](adr/0002-overall-architecture.md) §7 fixes the three directories and then
-hands over file names, extensions and module format.
-[0012](adr/0012-how-software-gets-developed.md) §4 requires every rule of the
-simulation to be written as a failing test first, which needs something that runs
-tests. [0001](adr/0001-purpose-scope-and-success.md) R1 sends *how the feature
-floor is expressed in tooling* here. And
-[0008](adr/0008-performance-budget.md) §8 hands over what applies the floor
-device's slowdown factor — the one thing standing between §9's measured list and
-a number.
+**It inherits more than it decides**, which is what makes it the clearest rather
+than merely the next. 0012 §4 already fixes test-first in the Core without
+exception and §5 watch-first in the View. Six records already carry the division
+between what a command decides and what only an eye can — 0006 §10, 0007 §9, 0014
+§9, 0008 §9, 0015 §8 and now 0009 §9, whose watched half is empty because nothing
+in a toolchain appears on a screen. 0008 §7 already keeps the naive search as the
+oracle the grid is tested against. So 0010 is not choosing any of that: it decides
+what a test here may assume, and how the watched half is recorded so that *watched
+and seen* in a ticket means something a second person could repeat.
 
-**The tension to name before it is discovered halfway through** is in the ticket
-already: 0003 forbids the page to load or run anything it did not ship and says
-nothing about build-time tools, while a project whose point is being readable is
-one where a dependency has to earn its place. CLAUDE.md makes adding any
-dependency a stop-and-ask. The record may decide the *policy*; the first actual
-dependency still gets asked about.
+**0011 is the other unblocked decision**, and what holds it back has nothing to do
+with 0009: 0004 R2 makes a real imprint address a precondition of publishing, and
+that address does not exist.
 
-**Accepted will not create a file.** 0009 decides what runs the code, what tests
-it and what builds it; installing any of it is separate work with its own ticket,
-and the analysis phase 0012 §1 fixes has no end condition yet. **What is tested
-is not this record's** — that is 0010, and what is asserted versus only watched is
-already fixed record by record, in the five lists 0006 §10, 0007 §9, 0014 §9, 0008
-§9 and 0015 §8 carry.
+**Nothing here says to start building.**
+[#69](https://github.com/nanatsusaya/dot-panic/issues/69) creates what 0009
+decides, and 0012 §1's analysis phase has no end condition — leaving it is the
+decider's call, not something a record becoming Accepted does on its own.
 
 ## Implementation scale
 
@@ -368,6 +397,14 @@ until a record owned it, and 0014 is the whole of that question the way 0005 is
 for rendering. 0015 has since decided that nothing joins what 0014 put in the
 dialog, which leaves this row exactly where it was.
 
+**Toolchain moves to `decided`, and it is the row where that word is easiest to
+misread.** 0009 is the whole of that question the way 0005 is for rendering, so
+the move is the ordinary one — but *decided* here means there is no `package.json`
+and no `node_modules`, not that a `bun install` has been run. CLAUDE.md carries the
+same sentence for the same reason.
+[#69](https://github.com/nanatsusaya/dot-panic/issues/69) is what would move it
+again.
+
 **0015 adds no row and moves none**, for a reason no other record has had: it
 decided that the area does not exist. There is nothing to build, so there is
 nothing to track. Its one lasting invariant — nothing on the page reads or writes
@@ -381,7 +418,7 @@ running page and whatever applies §8's slowdown factor — which §8 hands to 0
 
 | Area | Stage |
 |---|---|
-| Toolchain | `planned` |
+| Toolchain | `decided` |
 | Simulation core | `planned` |
 | Rendering | `decided` |
 | Pointer handling | `decided` |
