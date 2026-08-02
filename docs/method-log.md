@@ -6,6 +6,50 @@ session would decide worse without it.
 
 Newest first.
 
+## 2026-08-02 — A rule was written down, and the next two records broke it
+
+The afternoon repaired a defect by amendment: two accepted records still pointed
+at an `O1` that had become an `R1` when they were accepted. The same change wrote
+the rule into [`docs/adr/README.md`](adr/README.md) — an Accepted record contains
+no `O`-number, `check-method.mjs` cannot see it, review is what carries it. And
+[0008](adr/0008-performance-budget.md) A1 diagnosed the failure exactly: *"Every
+other reference to the four questions was migrated at acceptance; these two sat
+inside decision sections and were missed."*
+
+**The next two records written did it again — four more times.** Three in
+[0015](adr/0015-settings-surface.md), one in [0009](adr/0009-toolchain.md), all in
+freshly written prose, all in the same session that had written the rule down
+hours earlier. None reached a commit, because a grep was run on purpose. Nothing
+failed; nothing would have.
+
+So the entry is not *this defect exists* — it was known, named, repaired and
+documented before it recurred. The entry is that **writing it down did nothing**,
+and the useful part is what the fix costs:
+
+```
+grep -n "O[1-9]" docs/adr/*.md
+```
+
+It has a known result, which is what makes it a check rather than a prompt to be
+careful. Everything it returns should be a quotation inside an *Amendments*
+section, plus the README's own table row. Today that is exactly what it returns.
+It is now the first item on `/adr`'s pre-merge list.
+
+**The same shape, in the same session, without a grep to catch it.** The change
+description for [#67](https://github.com/nanatsusaya/dot-panic/pull/67) said in
+so many words that its next-step section would be false as soon as
+[#68](https://github.com/nanatsusaya/dot-panic/pull/68) landed — #68 was open at
+the same time and accepted the very record #67 pointed forward to. Both were
+merged in that order, and for just under ten minutes the trunk's single clearest
+next step named work that was already done. The prediction was accurate, it was
+written where the decider would read it, and it prevented nothing.
+
+**A warning in a change description is not a control, and neither is a rule in a
+README.** The author's move was available and not taken: a change whose document
+a change already in review will falsify should not be opened — it waits, or it is
+folded into the one that falsifies it. That half has no command behind it, which
+makes it the half to watch.
+
 ## 2026-08-02 — A link that resolves is not a fact that is true
 
 Three defects were found in accepted records inside one hour, none of them by a

@@ -114,6 +114,12 @@ says the thing exists.
 
 ## Before it is merged
 
+- **Run `grep -n "O[1-9]" docs/adr/*.md` and read every hit.** An Accepted record
+  contains no `O`-number; the only legitimate ones are quotations inside an
+  *Amendments* section, plus the index's own description of the section. This is
+  not covered by the coherence check, and prose that has just been written is
+  where it hides — a reference migrated at acceptance everywhere obvious still
+  sits in the sentences added last.
 - Are the open questions now **Resolved questions**, with `R1..Rn`?
 - Is the status `Accepted` in the record **and** in the index, so that nothing
   is left for a follow-up change to correct?
