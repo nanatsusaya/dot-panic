@@ -8,7 +8,7 @@
 
 The method has been adopted. **Nothing of the toy exists yet** — no simulation
 code, no page, no rendering. Everything built so far is the way of working:
-the operating rules, the decision set, nine accepted records, and the five
+the operating rules, the decision set, ten accepted records, and the five
 session procedures in [`.claude/skills/`](../.claude/skills/README.md).
 
 The procedures have now been used. `/moin`, `/weiterimtext` and `/adr` all ran
@@ -135,6 +135,29 @@ against it, which is 0003 §7's own stated reason. 0003 stands as written, and t
 route 0005 R2 fixes for loosening an accepted rule — a record that supersedes
 it — has not been taken.
 
+**How much work one frame may do is decided, and there is no number in it.**
+[0008](adr/0008-performance-budget.md) makes the budget a comparison the Shell
+already holds: the steps that are due plus one draw finish before the next frame
+is due. The `requestAnimationFrame` callback carries the time, so there is no
+second clock anywhere in the project. When the device cannot keep up, the flock
+runs **slow** — steps past a cap are abandoned rather than deferred, because
+dropping dots is closed by 0002 §5 and stuttering is what 0001 §3.3 names by
+name. Every length in the world is a fraction of the frame, which makes the dot
+count one number instead of a function of the window; neighbor search is a
+uniform grid, and the naive scan is never deleted, because it is the oracle the
+grid is tested against.
+
+**Its R1 says where numbers live in this project**, which is the half of that
+record that outlives it: in the code and in the ticket that fixed the criteria
+before the work started, never in a record. Five records now defer a number, and
+saying it once makes that a rule rather than five coincidences. **No measurement
+can falsify an accepted record**, because none claims a number — but changing a
+*relation*, such as the single dot count, still takes one. Two things it leaves
+open are worth knowing before the first measurement: 0002 R2's allocation cost
+was to be measured here and still is not, and §8 freezes 0001 §3.5's rolling
+floor by recording a date beside the slowdown factor — held by a person writing
+it down, with nothing to check it, the same shape as the imprint address.
+
 **Fifteen decisions are planned** in [docs/adr/](adr/README.md).
 [0001](adr/0001-purpose-scope-and-success.md),
 [0002](adr/0002-overall-architecture.md),
@@ -143,9 +166,10 @@ it — has not been taken.
 [0004](adr/0004-compliance-accessibility-and-rights.md),
 [0005](adr/0005-rendering-and-visual-design.md),
 [0006](adr/0006-motion-rules.md),
-[0007](adr/0007-pointer-and-input-model.md) and
-[0014](adr/0014-page-layout.md) are Accepted; the other
-six are `Planned`. **The table runs by meaning and not by number**, and three
+[0007](adr/0007-pointer-and-input-model.md),
+[0014](adr/0014-page-layout.md) and
+[0008](adr/0008-performance-budget.md) are Accepted; the other
+five are `Planned`. **The table runs by meaning and not by number**, and three
 numbers have a history it carries rather than this file: 0012 was reserved as
 unused until 2026-08-02, and 0014 and 0015 were both added after the set was
 planned.
@@ -158,7 +182,7 @@ There are none.
 
 ## What the tickets hold
 
-Nine issues are open. One of them still carries research that would otherwise
+Ten issues are open. One of them still carries research that would otherwise
 have existed only in the conversation that produced it, and each ticket says in
 its own header how ready it is.
 
@@ -166,13 +190,14 @@ its own header how ready it is.
 |---|---|
 | [#12](https://github.com/nanatsusaya/dot-panic/issues/12) 0013 Origin of the core | not ready — holds the package survey |
 | [#13](https://github.com/nanatsusaya/dot-panic/issues/13) Walking skeleton | not ready — 0012 §2 makes it the first increment |
-| [#34](https://github.com/nanatsusaya/dot-panic/issues/34) 0008 Performance budget | ready — 0007, the last record blocking it, is Accepted |
 | [#35](https://github.com/nanatsusaya/dot-panic/issues/35) 0009 Toolchain | ready |
 | [#36](https://github.com/nanatsusaya/dot-panic/issues/36) 0010 Testing strategy | waits on 0009 |
 | [#37](https://github.com/nanatsusaya/dot-panic/issues/37) 0011 Delivery | waits on 0009 |
 | [#38](https://github.com/nanatsusaya/dot-panic/issues/38) The two repository notes 0004 §2 assumes | ready |
 | [#46](https://github.com/nanatsusaya/dot-panic/issues/46) Ticket readiness is stated in two places | ready — and this table is one of the two |
 | [#53](https://github.com/nanatsusaya/dot-panic/issues/53) 0015 Settings surface | ready — every record it depends on is Accepted |
+| [#58](https://github.com/nanatsusaya/dot-panic/issues/58) Three references to questions that no longer exist | not ready — the repair route is the decider's |
+| [#60](https://github.com/nanatsusaya/dot-panic/issues/60) 0014 R6 handed a question to 0008, and 0008 did not take it | not ready — the route is the decider's, and it gates #53 |
 
 **The ticket gap is closed.** Every planned decision has one. Five were filed on
 2026-08-02 — 0008, 0009, 0010, 0011 and the repository notes — because the four
@@ -191,6 +216,27 @@ tickets whose blockers had been Accepted. It is left standing rather than remove
 here, because that ticket has a real question underneath it — the tracker is
 outside this repository, and a session reading only this file would lose the
 picture — and answering it by editing is the thing tickets exist to stop.
+
+**Two accepted records refer to open questions they no longer have.** 0007's
+*Consequences* and 0008 §3 and §6 each point at an `O1` that became an `R1` when
+the record was accepted, and the reference did not move with it.
+[#58](https://github.com/nanatsusaya/dot-panic/issues/58) holds all three. It is
+not ready, and deliberately so: **repairing an accepted record is the one thing
+this project does not do quietly**, so the route is Daniel's to name. The check
+prints `OK` over both, because it does not read a record's internal
+cross-references — and the `/adr` procedure accepts a record on its branch, so
+the moment such a slip becomes expensive is the moment the record stops being
+editable.
+
+**One accepted record asks another for something it never gave.**
+[0014](adr/0014-page-layout.md) R6 says whether the flock keeps stepping while
+the dialog covers it *belongs to 0008* — and 0008 does not mention it. The word
+*dialog* is not in that record, and its dependency list names 0014 §2 rather than
+R6. [#60](https://github.com/nanatsusaya/dot-panic/issues/60) holds it. This is
+not the same defect as #58: that one is three wrong references, this one is **a
+question nobody owns**, and it was missed on the day both records were written.
+Nothing catches it — the check resolves that the link works, not that the record
+behind it answered anything.
 
 **0004 §2 assumes two files that do not exist.** It says the repository carries
 what the decider's other projects carry — a README and the conventional security
@@ -219,22 +265,36 @@ What a change description must contain is no longer among the gaps here.
 
 ## The single clearest next step
 
-**Write [decision 0008](adr/README.md) — performance budget**, against
-[#34](https://github.com/nanatsusaya/dot-panic/issues/34). Everything it depends
-on is Accepted, and 0006 §2 hands it a ceiling it cannot negotiate: dots that
-cannot be packed into the frame without overlapping make that section
-unsatisfiable, whatever a budget would prefer. Its ticket also carries a second
-topic that arrived from 0002 §2 — how the Core finds a dot's neighbors is
-internal to the Core, and naive neighbor search is quadratic, so the dot count
-and the search strategy are one question.
+**Write [decision 0015](adr/README.md) — settings surface**, against
+[#53](https://github.com/nanatsusaya/dot-panic/issues/53). It is where the index
+places it, and the record it was deferred behind is now Accepted.
+[0014](adr/0014-page-layout.md) R5 makes bounds the substance of that record
+rather than a detail of it, and all three are now fixed: 0003 §4 stores nothing
+on the visitor's device, 0006 §2 makes a count that cannot be packed into the
+frame unsatisfiable, and [0008](adr/0008-performance-budget.md) §6 makes the
+count a single number rather than a function of the window. **The third of those
+changed while 0015 waited**, and in the direction that matters — what it inherits
+from 0008 is a relation, not a number, so there is no ceiling to read off and
+expose.
 
-**It is written before 0015, which the index places first.** The index orders by
-meaning and says nothing about the order of writing, and here the dependency runs
-one way only. [0014](adr/0014-page-layout.md) R5 makes bounds the substance of
-0015 rather than a detail of it; one of those bounds is 0006 §2, which is
-Accepted, and the other is performance, which is 0008's whole subject. 0008 needs
-nothing from 0015 in return — the maximum count it has to name is the same number
-whether or not a visitor may move it. Decided on 2026-08-02.
+**The question underneath it is whether a visitor may change anything at all.**
+0001 R3 left a settings surface to its own record *if it ever becomes a real
+question*, and 0014 §4 put a dialog on the page, which is where one would go —
+so it became one. *No settings* remains an answer that record is allowed to give.
+
+**It cannot start yet, and the reason arrived with this change.**
+[#60](https://github.com/nanatsusaya/dot-panic/issues/60) is unanswered: whether
+the flock keeps stepping while the dialog covers it. Every control 0014 §4 could
+hold sits **inside** that dialog, so a visitor operating one is looking at a
+covered canvas — and whether they see anything happen is exactly what #60
+decides. Scoping 0015 against that would be scoping a record against an
+unanswered question, which the index names as how a record ends up deciding
+something that was never its own.
+
+**If #60 stays open, [0009](adr/README.md) is what moves instead**, against
+[#35](https://github.com/nanatsusaya/dot-panic/issues/35). It needs nothing from
+either open ticket. Which of the two goes first is Daniel's, and it is not
+recorded here until it is answered.
 
 **0009 is the other ready ticket**, and it is the only one that unblocks others:
 [#36](https://github.com/nanatsusaya/dot-panic/issues/36) and
@@ -270,6 +330,12 @@ input model. The model itself is one record and that record is Accepted.
 until a record owned it, and 0014 is the whole of that question the way 0005 is
 for rendering. 0015 decides what goes inside the dialog 0014 places, not where
 anything sits.
+
+**0008 adds no row and moves none**, which is worth saying because a record about
+how fast things run looks as though it should. A budget is not an area that gets
+built; it is a constraint on the areas that are. Its three Core invariants arrive
+wherever the simulation core arrives, and the two things it measures need a
+running page and whatever applies §8's slowdown factor — which §8 hands to 0009.
 
 | Area | Stage |
 |---|---|
