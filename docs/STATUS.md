@@ -8,7 +8,7 @@
 
 The method has been adopted. **Nothing of the toy exists yet** — no simulation
 code, no page, no rendering. Everything built so far is the way of working:
-the operating rules, the decision set, ten accepted records, and the five
+the operating rules, the decision set, eleven accepted records, and the five
 session procedures in [`.claude/skills/`](../.claude/skills/README.md).
 
 The procedures have now been used. `/moin`, `/weiterimtext` and `/adr` all ran
@@ -172,6 +172,30 @@ was to be measured here and still is not, and §8 freezes 0001 §3.5's rolling
 floor by recording a date beside the slowdown factor — held by a person writing
 it down, with nothing to check it, the same shape as the imprint address.
 
+**Whether the visitor may change anything is decided, and the answer is no.**
+[0015](adr/0015-settings-surface.md) gives the page no settings surface. Two
+controls, both obligations, and the third section of 0014's dialog stays empty —
+which is the pressure 0014 named answered rather than left. Its §1 is the answer
+and §2 through §8 are **the terms of a later yes**, because the decision was *no
+for now*: a no that stays open has to state its reasons as conditions a later
+record can satisfy or fail. **None of those reasons was written to prevent
+settings.** 0008 §5 closed the dot count before 0015 existed; 0002 §2's
+enumerated job list makes the first control an amendment on the precedent of 0002
+A1; 0003 §4 forgets it on reload.
+
+**Its §7 is the one that decided it**, and it came from a record about
+performance. 0008 §10 stops the flock exactly while the dialog holding any
+control is open, and 0014 §2 leaves the strip no room for a third — so a value
+would be chosen against a still picture, and **a slider dragged while watching is
+not available on this page.** 0001 §3.1 makes watching the judge of the only
+thing the toy is trying to be, so the one feedback loop a settings surface exists
+to provide is the one the layout forbids. **Two readings are recorded as
+readings:** §6 closes a query string, which stores nothing on the device and so is
+not reached by 0003 §4's mechanism list, on 0001 §5's outcome instead; and R3
+closes the question in 0015 rather than on 0001 §5's out-of-scope list, so that
+the later addition the decider left open costs a record superseding 0015 and not
+one superseding 0001.
+
 **Fifteen decisions are planned** in [docs/adr/](adr/README.md).
 [0001](adr/0001-purpose-scope-and-success.md),
 [0002](adr/0002-overall-architecture.md),
@@ -181,9 +205,10 @@ it down, with nothing to check it, the same shape as the imprint address.
 [0005](adr/0005-rendering-and-visual-design.md),
 [0006](adr/0006-motion-rules.md),
 [0007](adr/0007-pointer-and-input-model.md),
-[0014](adr/0014-page-layout.md) and
+[0014](adr/0014-page-layout.md),
+[0015](adr/0015-settings-surface.md) and
 [0008](adr/0008-performance-budget.md) are Accepted; the other
-five are `Planned`. **The table runs by meaning and not by number**, and three
+four are `Planned`. **The table runs by meaning and not by number**, and three
 numbers have a history it carries rather than this file: 0012 was reserved as
 unused until 2026-08-02, and 0014 and 0015 were both added after the set was
 planned.
@@ -196,7 +221,7 @@ There are none.
 
 ## What the tickets hold
 
-Eight issues are open. One of them still carries research that would otherwise
+Seven issues are open. One of them still carries research that would otherwise
 have existed only in the conversation that produced it, and each ticket says in
 its own header how ready it is.
 
@@ -209,7 +234,6 @@ its own header how ready it is.
 | [#37](https://github.com/nanatsusaya/dot-panic/issues/37) 0011 Delivery | waits on 0009 |
 | [#38](https://github.com/nanatsusaya/dot-panic/issues/38) The two repository notes 0004 §2 assumes | ready |
 | [#46](https://github.com/nanatsusaya/dot-panic/issues/46) Ticket readiness is stated in two places | ready — and this table is one of the two |
-| [#53](https://github.com/nanatsusaya/dot-panic/issues/53) 0015 Settings surface | ready — every record it depends on is Accepted |
 
 **The ticket gap is closed.** Every planned decision has one. Five were filed on
 2026-08-02 — 0008, 0009, 0010, 0011 and the repository notes — because the four
@@ -282,35 +306,37 @@ What a change description must contain is no longer among the gaps here.
 
 ## The single clearest next step
 
-**Write [decision 0015](adr/README.md) — settings surface**, against
-[#53](https://github.com/nanatsusaya/dot-panic/issues/53). It is where the index
-places it, and the record it was deferred behind is now Accepted.
-[0014](adr/0014-page-layout.md) R5 makes bounds the substance of that record
-rather than a detail of it, and all three are now fixed: 0003 §4 stores nothing
-on the visitor's device, 0006 §2 makes a count that cannot be packed into the
-frame unsatisfiable, and [0008](adr/0008-performance-budget.md) §6 makes the
-count a single number rather than a function of the window. **The third of those
-changed while 0015 waited**, and in the direction that matters — what it inherits
-from 0008 is a relation, not a number, so there is no ceiling to read off and
-expose.
-
-**The question underneath it is whether a visitor may change anything at all.**
-0001 R3 left a settings surface to its own record *if it ever becomes a real
-question*, and 0014 §4 put a dialog on the page, which is where one would go —
-so it became one. *No settings* remains an answer that record is allowed to give.
-
-**Nothing stands in front of it any more, and it starts under a constraint it
-did not have this morning.** 0008 §10 stops the flock while the dialog is open,
-and every control 0014 §4 could hold sits **inside** that dialog. So a setting is
-changed against a still picture and its effect is seen when the dialog closes.
-That is not a detail 0015 can arrange around: it decides what a settings surface
-can usefully be here, and it is the strongest argument this project has yet
-produced for *no settings* being the answer.
-
-**0009 is the other ready ticket**, and it is the only one that unblocks others:
+**Write [decision 0009](adr/README.md) — toolchain**, against
+[#35](https://github.com/nanatsusaya/dot-panic/issues/35). It is the only ready
+ticket that unblocks others —
 [#36](https://github.com/nanatsusaya/dot-panic/issues/36) and
-[#37](https://github.com/nanatsusaya/dot-panic/issues/37) both wait on
-[#35](https://github.com/nanatsusaya/dot-panic/issues/35).
+[#37](https://github.com/nanatsusaya/dot-panic/issues/37) both wait on it, and
+nothing waits on the two that are left.
+
+**It is where four accepted records have been sending work.**
+[0002](adr/0002-overall-architecture.md) §7 fixes the three directories and then
+hands over file names, extensions and module format.
+[0012](adr/0012-how-software-gets-developed.md) §4 requires every rule of the
+simulation to be written as a failing test first, which needs something that runs
+tests. [0001](adr/0001-purpose-scope-and-success.md) R1 sends *how the feature
+floor is expressed in tooling* here. And
+[0008](adr/0008-performance-budget.md) §8 hands over what applies the floor
+device's slowdown factor — the one thing standing between §9's measured list and
+a number.
+
+**The tension to name before it is discovered halfway through** is in the ticket
+already: 0003 forbids the page to load or run anything it did not ship and says
+nothing about build-time tools, while a project whose point is being readable is
+one where a dependency has to earn its place. CLAUDE.md makes adding any
+dependency a stop-and-ask. The record may decide the *policy*; the first actual
+dependency still gets asked about.
+
+**Accepted will not create a file.** 0009 decides what runs the code, what tests
+it and what builds it; installing any of it is separate work with its own ticket,
+and the analysis phase 0012 §1 fixes has no end condition yet. **What is tested
+is not this record's** — that is 0010, and what is asserted versus only watched is
+already fixed record by record, in the five lists 0006 §10, 0007 §9, 0014 §9, 0008
+§9 and 0015 §8 carry.
 
 ## Implementation scale
 
@@ -339,8 +365,13 @@ input model. The model itself is one record and that record is Accepted.
 
 **Page layout is a new row, not a moved one.** It was not an area on this scale
 until a record owned it, and 0014 is the whole of that question the way 0005 is
-for rendering. 0015 decides what goes inside the dialog 0014 places, not where
-anything sits.
+for rendering. 0015 has since decided that nothing joins what 0014 put in the
+dialog, which leaves this row exactly where it was.
+
+**0015 adds no row and moves none**, for a reason no other record has had: it
+decided that the area does not exist. There is nothing to build, so there is
+nothing to track. Its one lasting invariant — nothing on the page reads or writes
+a query string — arrives wherever the page arrives, which is the row above.
 
 **0008 adds no row and moves none**, which is worth saying because a record about
 how fast things run looks as though it should. A budget is not an area that gets
