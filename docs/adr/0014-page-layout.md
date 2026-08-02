@@ -25,6 +25,7 @@
   [0012](0012-how-software-gets-developed.md) §5 (watch-first where no command
   can decide)
 - **Supersedes:** nothing
+- **Amended:** 2026-08-02 — A1
 
 ## Context
 
@@ -129,24 +130,34 @@ characters, and which number reads well is watched.
 than a plain consequence of it. R1 records the reading, whose it is, and the
 argument against it.
 
-### 5. The dialog and its sections are native elements, so that no part owns them
+### 5. The dialog and its sections are native elements, and one call opens it
 
 `<dialog>` — **Baseline widely available**, available 2022-03-14, widely as of
 2024-09-14. `<details>` — widely as of 2022-07-15.
 
-**No script opens, closes or toggles anything on this page.**
+**The Shell opens the dialog with `showModal()`, from one click handler, and that
+is the whole of the page chrome any part of this project owns.** Nothing else
+here is opened, closed or toggled by script: the sections inside are `<details>`,
+and the dialog closes by a `<form method="dialog">` from inside itself.
 
-That is not economy, it is 0002. The architecture has three parts, and 0002 §2
-gives the Shell the loop, the clock, input events, the frame and the wiring —
-page chrome is not among them. A scripted dialog would make the Shell own a
-second job that no record gives it, or invent a fourth part. Native elements make
-the question disappear: the markup is static, 0002 §6 keeps holding, and nothing
-in the application knows the dialog exists.
+**Markup cannot do it.** `method="dialog"` *closes* the dialog a form finds itself
+in, and opens nothing. The one markup mechanism that opens a dialog is invoker
+commands — `command="show-modal"` with `commandfor` — and it is Baseline **newly
+available**: 2025-12-12, no widely date, which under Baseline's thirty-month rule
+falls on **2028-06-12**. 0001 §3.4 admits only widely available. **The call is a
+bridge with a known end date**: on that date the markup becomes permitted and the
+handler can go, without anyone deciding anything.
 
-`showModal()` would be script. **The dialog is opened by a form submission
-targeting it**, which is markup. Focus containment and dismissal by `Escape` come
-with the element rather than being reimplemented, which is the second reason and
-would have been enough on its own.
+**And it has to be modal.** Focus containment, dismissal by `Escape`, the
+backdrop and the inertness of the rest of the page are properties of a modal
+dialog only, and a dialog is modal only through `showModal()`. `<dialog open>` in
+the markup has none of them, and once closed nothing can reopen it.
+
+**What the call costs is recorded in 0002 A1**, which is where it belongs: that
+record's list of the Shell's jobs gains exactly one call, and its §6 — *no part
+creates or changes them* — is read as being about the imprint and the explanation
+rather than about the open state of their container. This record uses that
+reading; it does not make it.
 
 ### 6. The control that opens the dialog names the imprint
 
@@ -201,7 +212,7 @@ The same division 0006 §10 and 0007 §9 make.
 
 | | Invariant |
 |---|---|
-| §5 | No script opens, closes or toggles the dialog |
+| §5 | The Shell contains exactly one `showModal()` call, and nothing else on the page is opened, closed or toggled by script |
 | §6 | The label of the control that opens the dialog names the imprint |
 | §8 | The stylesheet contains no width breakpoint and no container query |
 
@@ -230,8 +241,8 @@ into the ticket before the work starts:
   nothing rather than working around it.
 - **0005 §7 becomes true.** *Always visible* was a claim about a button that
   layout had to make good on, and §2 does. Nothing else could.
-- **No script outside the three parts.** §5 keeps 0002 intact at the first point
-  where a page would normally grow a fourth concern.
+- **No fourth part.** §5 costs the Shell one call rather than a component that
+  owns page chrome, and 0002 A1 bounds it to that one call.
 - **The page still loads nothing.** 0003 §2 survives another visible record: no
   image, no font, no second layout, and now no dialog library either.
 - **One screen means one thing to watch**, which is the only currency 0012 §5
@@ -257,6 +268,12 @@ into the ticket before the work starts:
 - **The dialog creates the place where settings would go, before 0015 decides
   whether there are any.** A reader who opens it and finds two sections will
   notice the shape of a third.
+- **A page whose script fails has no reachable imprint.** §5 puts the only opener
+  in the Shell, so a browser that runs no script shows a button that does nothing.
+  0004 §13 reads § 18 MStV, whose standard includes *ständig verfügbar*. The
+  alternative fails in the same direction and worse — invoker commands are silent
+  on exactly the device 0001 §3.5 makes the floor — but this is a real cost and
+  nothing on the page mitigates it.
 - **Nothing here can be run.** Nine sections, no numbers, nothing on a screen —
   the same position 0005, 0006 and 0007 are in.
 
@@ -278,8 +295,11 @@ into the ticket before the work starts:
   dots vanishing under an opaque strip.
 - **The strip at the top.** Rejected in R3: the bottom is thumb-reachable on the
   floor device, and it keeps the flock the first thing on the page.
-- **A dialog opened by script.** Rejected in §5: it gives the Shell a job 0002 §2
-  does not give it, to reimplement what the element already does.
+- **A dialog opened from markup.** Rejected in §5, and not for preference:
+  `method="dialog"` closes rather than opens, and invoker commands are not
+  Baseline widely available until 2028-06-12.
+- **`<dialog open>` in the markup, never modal.** Rejected in §5: no backdrop, no
+  focus containment, no `Escape`, and nothing can reopen it once it is closed.
 - **Text overlaid on the canvas.** Rejected: reading text over a moving field is
   the failure 0004 §5 exists to prevent, and the overlay would need dismissing,
   which is another control.
@@ -367,11 +387,86 @@ a layout.
 the Core never learns there was a pause. What 0008 decides is whether it is worth
 noticing.
 
+## Amendments
+
+**A1 — §5 opened the dialog by a mechanism that does not exist. 2026-08-02.**
+
+§5 said:
+
+> **No script opens, closes or toggles anything on this page.**
+>
+> That is not economy, it is 0002. The architecture has three parts, and 0002 §2
+> gives the Shell the loop, the clock, input events, the frame and the wiring —
+> page chrome is not among them. A scripted dialog would make the Shell own a
+> second job that no record gives it, or invent a fourth part. Native elements
+> make the question disappear: the markup is static, 0002 §6 keeps holding, and
+> nothing in the application knows the dialog exists.
+>
+> `showModal()` would be script. **The dialog is opened by a form submission
+> targeting it**, which is markup. Focus containment and dismissal by `Escape`
+> come with the element rather than being reimplemented, which is the second
+> reason and would have been enough on its own.
+
+**There is no such form submission.** The HTML Standard defines `method="dialog"`
+as *"intended to close the dialog box in which the form finds itself, if any, and
+otherwise not submit."* It closes; nothing in form submission opens. The one
+markup mechanism that does is invoker commands, which 0001 §3.4 does not admit
+until 2028-06-12.
+
+**The second half of the paragraph fell with the first.** Focus containment,
+`Escape`, the backdrop and the inertness of the rest of the page belong to a
+*modal* dialog, and a dialog is modal only through the `showModal()` call the
+same paragraph forbids. Both of §5's reasons rested on the call it ruled out.
+
+§5 is replaced above, and three things moved with it:
+
+- **§9's invariant** was *No script opens, closes or toggles the dialog*. It now
+  names the one call and holds everything else to the old rule.
+- **A positive consequence** was *No script outside the three parts. §5 keeps
+  0002 intact at the first point where a page would normally grow a fourth
+  concern.* 0002 is no longer intact — it is amended, deliberately and by one
+  call — so the consequence is now that no fourth part exists.
+- **A rejected alternative** was *A dialog opened by script. Rejected in §5: it
+  gives the Shell a job 0002 §2 does not give it, to reimplement what the element
+  already does.* That reason was wrong twice over: it is now the chosen route, and
+  `showModal()` does not reimplement anything — it is what supplies the behavior.
+  The alternatives now reject markup-only opening and a non-modal `<dialog open>`.
+
+**A negative consequence is new**, because the choice creates one: a page whose
+script fails has no reachable imprint.
+
+**Nothing else in this record changes.** §1, §2, §3, §4, §6, §7 and §8 stand as
+accepted, and R1 through R6 are untouched.
+
+Authorized by Daniel on 2026-08-02, against
+[#62](https://github.com/nanatsusaya/dot-panic/issues/62), in two steps. The
+element: *"ich mag `<dialog>` und finde es sinnvoll darin `<details>` zu
+verwenden … das bestimme ich jetzt."* Then the opener and the instrument, against
+a recommendation of `showModal()` bounded to one call rather than loosening 0001
+§3.4, and of an amendment rather than a superseding record: *"wir folgen deiner
+empfehlung."*
+
 ## References
 
 - `<dialog>` — Baseline widely available, available 2022-03-14, widely
   2024-09-14; Chrome 37, Edge 79, Firefox 98, Safari 15.4, Safari iOS 15.4.
   <https://api.webstatus.dev/v1/features/dialog>, read 2026-08-02.
+- HTML Standard, `method="dialog"` — *"Indicates the form is intended to close
+  the dialog box in which the form finds itself, if any, and otherwise not
+  submit."* The mechanism A1 removes.
+  <https://html.spec.whatwg.org/multipage/form-control-infrastructure.html>, read
+  2026-08-02.
+- HTML Standard, modal dialogs — a modal dialog is placed in the top layer with a
+  `::backdrop`, and content outside it is rendered inert; the properties §5 needs.
+  <https://html.spec.whatwg.org/multipage/interactive-elements.html>, read
+  2026-08-02.
+- Invoker commands — Baseline newly available, low 2025-12-12, no high date;
+  Chrome 135, Edge 135, Firefox 144, Safari 26.2, Safari iOS 26.2. The markup
+  mechanism §5 may not use yet.
+  <https://api.webstatus.dev/v1/features/invoker-commands>, read 2026-08-02.
+- Baseline, *widely available* — *"30 months have passed since the newly
+  interoperable date"*, which puts invoker commands at 2028-06-12.
+  <https://web.dev/baseline>, read 2026-08-02.
 - `<details>` — Baseline widely available, available 2020-01-15, widely
   2022-07-15; Chrome 12, Edge 79, Firefox 49, Safari 6, Safari iOS 6.
   <https://api.webstatus.dev/v1/features/details>, read 2026-08-02.
