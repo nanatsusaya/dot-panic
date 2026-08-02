@@ -8,7 +8,7 @@
 
 The method has been adopted. **Nothing of the toy exists yet** — no simulation
 code, no page, no rendering. Everything built so far is the way of working:
-the operating rules, the decision set, seven accepted records, and the five
+the operating rules, the decision set, eight accepted records, and the five
 session procedures in [`.claude/skills/`](../.claude/skills/README.md).
 
 The procedures have now been used. `/moin`, `/weiterimtext` and `/adr` all ran
@@ -91,16 +91,38 @@ runs the unusual way — dots that cannot be packed into the frame without
 overlapping make §2 unsatisfiable, so 0008 inherits a ceiling it cannot
 negotiate.
 
-**Thirteen decisions are planned** in [docs/adr/](adr/README.md).
+**The one interaction the toy has is decided.**
+[0007](adr/0007-pointer-and-input-model.md) puts mouse and finger on one code
+path — Pointer Events, not two sets of listeners — and has the Shell hand the
+Core a raw fact: a position, or the fact that there is no pointer. Everything
+derived from it, including the decay after a touch ends, is the Core's and lives
+in the world. The flock reacts to where the pointer is rather than to how it
+moves; the force falls to exactly zero at a finite radius, which is a fraction of
+the frame's shorter side; and it is a force throughout, never a rule about where
+a dot may be. Containment needed no new rule, because 0006's caps hold whatever
+the forces are.
+
+**Its §8 asked for something no record owned**, and that is what added
+[0014](adr/README.md) to the set. `touch-action: none` is required or touch does
+not work at all, and the cost is that a canvas filling the viewport traps a touch
+visitor away from the imprint. The requirement is stated in 0007 and enforced
+nowhere until 0014 exists. **The record's own most likely bug report is in R2:** a
+parked cursor pushes forever, so a visitor who leaves the mouse still comes back
+to a permanent hole in the flock, and nothing on the page explains that it is
+intended.
+
+**Fourteen decisions are planned** in [docs/adr/](adr/README.md).
 [0001](adr/0001-purpose-scope-and-success.md),
 [0002](adr/0002-overall-architecture.md),
 [0012](adr/0012-how-software-gets-developed.md),
 [0003](adr/0003-security-and-privacy-by-design.md),
 [0004](adr/0004-compliance-accessibility-and-rights.md),
-[0005](adr/0005-rendering-and-visual-design.md) and
-[0006](adr/0006-motion-rules.md) are Accepted; the other
-six are `Planned`. Number 0012 was reserved as unused until 2026-08-02; the
-index says why it is not, and why the table is no longer ordered by number.
+[0005](adr/0005-rendering-and-visual-design.md),
+[0006](adr/0006-motion-rules.md) and
+[0007](adr/0007-pointer-and-input-model.md) are Accepted; the other
+six are `Planned`. **The table runs by meaning and not by number**, and two
+numbers have a history it carries rather than this file: 0012 was reserved as
+unused until 2026-08-02, and 0014 was added after the set was planned.
 
 What is awaiting review is not repeated here. The
 [pull request list](https://github.com/nanatsusaya/dot-panic/pulls) is the
@@ -110,26 +132,38 @@ There are none.
 
 ## What the tickets hold
 
-Eight issues are open. Two of them carry research that would otherwise have
-existed only in the conversation that produced it, and each ticket says in its
-own header how ready it is.
+Nine issues are open. One of them still carries research that would otherwise
+have existed only in the conversation that produced it, and each ticket says in
+its own header how ready it is.
 
 | Ticket | State |
 |---|---|
-| [#11](https://github.com/nanatsusaya/dot-panic/issues/11) 0007 Pointer and input model | holds the touch research — both stated blockers, 0002 and 0006, are Accepted |
 | [#12](https://github.com/nanatsusaya/dot-panic/issues/12) 0013 Origin of the core | not ready — holds the package survey |
 | [#13](https://github.com/nanatsusaya/dot-panic/issues/13) Walking skeleton | not ready — 0012 §2 makes it the first increment |
-| [#34](https://github.com/nanatsusaya/dot-panic/issues/34) 0008 Performance budget | ready — 0005 answered the drawing choice it waited on |
+| [#34](https://github.com/nanatsusaya/dot-panic/issues/34) 0008 Performance budget | ready — 0007, the last record blocking it, is Accepted |
 | [#35](https://github.com/nanatsusaya/dot-panic/issues/35) 0009 Toolchain | ready |
 | [#36](https://github.com/nanatsusaya/dot-panic/issues/36) 0010 Testing strategy | waits on 0009 |
 | [#37](https://github.com/nanatsusaya/dot-panic/issues/37) 0011 Delivery | waits on 0009 |
 | [#38](https://github.com/nanatsusaya/dot-panic/issues/38) The two repository notes 0004 §2 assumes | ready |
+| [#46](https://github.com/nanatsusaya/dot-panic/issues/46) Ticket readiness is stated in two places | ready — and this table is one of the two |
+| [#49](https://github.com/nanatsusaya/dot-panic/issues/49) 0014 Page layout | ready — depends on nothing that is not Accepted |
 
 **The ticket gap is closed.** Every planned decision has one. Five were filed on
 2026-08-02 — 0008, 0009, 0010, 0011 and the repository notes — because the four
 records written so far were each written against one, and the next would have
 been the first without. 0005's was written alongside its record rather than ahead
-of it, and closed with it.
+of it, and closed with it. **0014 never opened the gap again:**
+[#49](https://github.com/nanatsusaya/dot-panic/issues/49) was filed in the same
+change that added the row, because a planned row without a ticket is the state
+those five were filed to end.
+
+**This table restates something the tickets already say**, and
+[#46](https://github.com/nanatsusaya/dot-panic/issues/46) is the ticket for it.
+The readiness column drifted twice within an hour on 2026-08-02, against two
+tickets whose blockers had been Accepted. It is left standing rather than removed
+here, because that ticket has a real question underneath it — the tracker is
+outside this repository, and a session reading only this file would lose the
+picture — and answering it by editing is the thing tickets exist to stop.
 
 **0004 §2 assumes two files that do not exist.** It says the repository carries
 what the decider's other projects carry — a README and the conventional security
@@ -158,16 +192,20 @@ What a change description must contain is no longer among the gaps here.
 
 ## The single clearest next step
 
-**Write [decision 0007](adr/README.md) — pointer and input model**, against
-[#11](https://github.com/nanatsusaya/dot-panic/issues/11). It is the next record
-by the index's ordering, both blockers its ticket names are Accepted, and the
-research is already written down there: on touch there is no hover, so a pointer
-position exists only while a finger is down, and what the flock does when it
-stops existing is a design decision rather than a detail.
+**Write [decision 0014](adr/README.md) — page layout**, against
+[#49](https://github.com/nanatsusaya/dot-panic/issues/49). It is the next record
+by the index's ordering, and it depends on nothing that is not already Accepted.
+0007 §8 is why it exists: `touch-action: none` on the canvas is required or touch
+does not work, and a canvas filling the viewport then traps a touch visitor away
+from the imprint 0004 requires. That is a requirement 0007 states and cannot
+enforce.
 
-It is also the last record standing between the decision set and
-[#34](https://github.com/nanatsusaya/dot-panic/issues/34) — 0008 is blocked by
-0007 and by nothing else.
+**It is not the only record that could be written now.**
+[#34](https://github.com/nanatsusaya/dot-panic/issues/34) (0008) and
+[#35](https://github.com/nanatsusaya/dot-panic/issues/35) (0009) are both ready
+and neither waits on 0014 — 0014 and 0008 interact without blocking each other,
+which 0007 R1 works out. The index's ordering is the reason to take this one
+first, not a dependency.
 
 ## Implementation scale
 
@@ -189,10 +227,15 @@ looks as though it should.** 0006 decides the rules the core runs, but
 a package, and it is `Planned`. Rendering moved because 0005 is the whole of that
 question; the core is two records and only one of them exists.
 
+**Pointer handling moves for the same reason rendering did**, and one thing it
+leaves open is not part of it: 0007 §8's requirement that the imprint stay
+reachable on touch is 0014's, and 0014 arranges the page rather than deciding the
+input model. The model itself is one record and that record is Accepted.
+
 | Area | Stage |
 |---|---|
 | Toolchain | `planned` |
 | Simulation core | `planned` |
 | Rendering | `decided` |
-| Pointer handling | `planned` |
+| Pointer handling | `decided` |
 | Deployment | `planned` |
