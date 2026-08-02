@@ -45,15 +45,24 @@ it quietly.
 
 ## The set
 
-The numbers run top-down: what the thing is, then how it is shaped, then what
-constrains it, then how it is built. A record is written only once the decisions
-it depends on are Accepted — scoping one against an unanswered question is how a
-record ends up deciding something that was never its own.
+**The table runs top-down by meaning, not by number:** what the thing is, then
+how the work is done, then how the thing is shaped, then what constrains it,
+then how it is built. A record is written only once the decisions it depends on
+are Accepted — scoping one against an unanswered question is how a record ends
+up deciding something that was never its own.
+
+**A number is an identity and nothing else.** It is what every reference in the
+project uses, so it never moves; it says nothing about where a record belongs.
+The two used to coincide, because the first numbers were handed out in the order
+above — and they came apart the first time a topic turned out to be important
+and unforeseen. Reading position out of a number is a mistake this table no
+longer supports.
 
 | # | Decision | Answers | Status |
 |---|---|---|---|
 | [0001](0001-purpose-scope-and-success.md) | Purpose, scope and success | What is this, who for, when is it good enough, what is explicitly out | Accepted |
 | [0002](0002-overall-architecture.md) | Overall architecture | Which layers exist, which may depend on which, what the core may not touch | Accepted |
+| [0012](0012-how-software-gets-developed.md) | How software gets developed here | Analysis then increments; where test-first applies and what replaces it where it cannot; when work may run in parallel | Accepted |
 | 0003 | Security and privacy by design | What is worth protecting, where the trust boundaries are, what never runs or is stored | Planned |
 | 0004 | Compliance, accessibility and rights | Motion and reduced-motion, license, provenance of the model, what law applies | Planned |
 | 0005 | Rendering and visual design | Canvas, SVG or DOM; color, light and dark, pixel density | Planned |
@@ -63,13 +72,10 @@ record ends up deciding something that was never its own.
 | 0009 | Toolchain | What runs the code, what tests it, what builds it | Planned |
 | 0010 | Testing strategy | What is asserted by a command and what is only ever watched | Planned |
 | 0011 | Delivery | How it reaches the public URL, and when | Planned |
-| [0012](0012-how-software-gets-developed.md) | How software gets developed here | Analysis then increments; where test-first applies and what replaces it where it cannot; when work may run in parallel | Accepted |
 | 0013 | Origin of the core | Written here or taken from a package | Planned |
 
-**0012 sits out of order, and knowingly.** It constrains 0009, 0010 and 0011
-rather than following them, so by the top-down rule it belongs above them. It is
-listed by number anyway, because the number is what every reference uses and a
-table sorted two ways is sorted none.
+0012 sits third because it decides how everything below it gets built. Its
+number says when it was written, which is a different question.
 
 **0012 was reserved as unused and is now in use.** It was planned as a
 walking-skeleton record and dropped before it was written — a first end-to-end
