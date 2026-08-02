@@ -8,7 +8,7 @@
 
 The method has been adopted. **Nothing of the toy exists yet** — no simulation
 code, no page, no rendering. Everything built so far is the way of working:
-the operating rules, the decision set, thirteen accepted records, and the five
+the operating rules, the decision set, fourteen accepted records, and the five
 session procedures in [`.claude/skills/`](../.claude/skills/README.md).
 
 The procedures have now been used. `/moin`, `/weiterimtext` and `/adr` all ran
@@ -49,9 +49,11 @@ Two of them put anything here: § 18 MStV and § 69a UrhG.
 
 **The imprint is the one thing 0004 decided and could not finish.** Its address
 is a placeholder, chosen to be unmistakably fake, and 0004 R2 makes a real one a
-precondition of publishing — a constraint 0011 inherits. **Nothing checks it.**
-There is no build to fail and no command to run; a person remembering is the
-whole of that gate, which is worth knowing rather than discovering later.
+precondition of publishing. **Something checks it now.** 0011 §6 fails the
+deployment if the built artifact carries `Musterstadt`, so the gate that used to
+be a person remembering is a command — on publishing rather than on committing,
+because the source is supposed to carry the placeholder until a real address
+exists. What no command decides is an address that is real and wrong.
 
 **What it looks like on screen is decided, and what color it is deliberately is
 not.** [0005](adr/0005-rendering-and-visual-design.md) puts everything that moves
@@ -171,7 +173,8 @@ can falsify an accepted record**, because none claims a number — but changing 
 open are worth knowing before the first measurement: 0002 R2's allocation cost
 was to be measured here and still is not, and §8 freezes 0001 §3.5's rolling
 floor by recording a date beside the slowdown factor — held by a person writing
-it down, with nothing to check it, the same shape as the imprint address.
+it down, with nothing to check it. That used to be the shape the imprint address
+had as well; 0011 §6 has since taken the address out of its company.
 
 **Whether the visitor may change anything is decided, and the answer is no.**
 [0015](adr/0015-settings-surface.md) gives the page no settings surface. Two
@@ -212,8 +215,9 @@ from a branch before 0011 exists to weigh it.
 **Two gaps are named in the record rather than left to be found.** `lib` is
 versioned by ECMAScript year and the DOM library is not versioned at all, so every
 browser feature an accepted record names sits outside what any setting can
-decide — **the third rule here held by a person remembering**, beside the imprint
-address and 0008 §8's factor. Biome was checked for it and has no browser-support
+decide — **one of the rules here held by a person remembering**, beside 0008 §8's
+factor. There were three of them; 0011 §6 closed the imprint address and these
+two are what is left. Biome was checked for it and has no browser-support
 rule group. And `bun test` runs the source while the browser runs the down-leveled
 output, so a passing test is a statement about the source. **0010 took that and
 did not close it** — see below.
@@ -251,6 +255,44 @@ first enforcement it has ever had — logic moved out of the Core to dodge a tes
 shrinks the numerator and reddens the run. What it does not do is prove anything:
 90 percent is reachable by tests that assert nothing, and the record says so.
 
+**How it reaches the public is decided, and nothing is deployed.**
+[0011](adr/0011-delivery.md) puts the page on GitHub Pages at
+`https://nanatsusaya.github.io/dot-panic/`, with no custom domain and nothing
+bought or registered. An Actions workflow publishes it rather than a branch,
+because a branch leaves 0009 §8's checks with nothing to gate: the checks run,
+`tsc` emits, and `actions/deploy-pages` runs only if everything before it passed,
+so a red check produces no deployment rather than a deployed page with a warning
+beside it. **This is not continuous integration** — what gates a merge is still
+review — and **the workflow is a file nobody has written**, so that ordering is a
+claim about a file rather than a property of the project. Its §5 settles 0003
+§6's conditional the unwanted way: GitHub's documentation provides no way to set
+response headers, stated as what was found rather than as a capability claim, so
+the policy ships as a `meta` element alone and `report-uri`, `frame-ancestors`
+and `sandbox` stay unsent.
+
+**The host logs the visitor's IP address, and the page will say so.** GitHub
+documents it plainly, which answers what 0004 §8 handed forward and contradicts
+nothing 0004 decided — the page still collects nothing, and the host does, before
+a line of the page runs. Two sentences and a link go **inside** the imprint
+section of 0014 §4's dialog rather than becoming a section of their own, which is
+what leaves 0004 R2's imprint content, 0003 §7's *one place* and 0015 §1's
+deliberately empty third section untouched; writing them is
+[#77](https://github.com/nanatsusaya/dot-panic/issues/77). **The disclosure rests
+on no legal determination.** R4 records that the question was whether disclosure
+was *owed*, that 0004 §13's GDPR row reached nothing on the page because no host
+was chosen then, and that the answer is the cheap side of an asymmetry rather
+than a finding — so a later reader looking for the reasoning that makes it
+required will not find one.
+
+**It goes live at the walking skeleton**,
+[#13](https://github.com/nanatsusaya/dot-panic/issues/13), and not at the point
+0001 §3 calls the toy good enough. The argument is 0001 §6.2 — *the toy is never
+finished because the process ate the work* — which is the failure this project is
+most exposed to, fourteen records in with nothing on a screen. **The cost is
+chosen rather than overlooked:** the public URL will serve a poor toy for a
+while, and it is the artifact most likely to be judged without the records beside
+it.
+
 **Fifteen decisions are planned** in [docs/adr/](adr/README.md).
 [0001](adr/0001-purpose-scope-and-success.md),
 [0002](adr/0002-overall-architecture.md),
@@ -263,9 +305,11 @@ shrinks the numerator and reddens the run. What it does not do is prove anything
 [0014](adr/0014-page-layout.md),
 [0015](adr/0015-settings-surface.md),
 [0008](adr/0008-performance-budget.md),
-[0009](adr/0009-toolchain.md) and
-[0010](adr/0010-testing-strategy.md) are Accepted; the other
-two are `Planned`. **The table runs by meaning and not by number**, and three
+[0009](adr/0009-toolchain.md),
+[0010](adr/0010-testing-strategy.md) and
+[0011](adr/0011-delivery.md) are Accepted; the fifteenth,
+[0013](adr/README.md), is `Planned`. **The table runs by meaning and not by
+number**, and three
 numbers have a history it carries rather than this file: 0012 was reserved as
 unused until 2026-08-02, and 0014 and 0015 were both added after the set was
 planned.
@@ -286,12 +330,12 @@ its own header how ready it is.
 |---|---|
 | [#12](https://github.com/nanatsusaya/dot-panic/issues/12) 0013 Origin of the core | not ready — holds the package survey |
 | [#13](https://github.com/nanatsusaya/dot-panic/issues/13) Walking skeleton | not ready — 0012 §2 makes it the first increment |
-| [#37](https://github.com/nanatsusaya/dot-panic/issues/37) 0011 Delivery | ready — 0009 was its blocker |
 | [#38](https://github.com/nanatsusaya/dot-panic/issues/38) The two repository notes 0004 §2 assumes | ready |
 | [#46](https://github.com/nanatsusaya/dot-panic/issues/46) Ticket readiness is stated in two places | ready — and this table is one of the two |
 | [#69](https://github.com/nanatsusaya/dot-panic/issues/69) Create the toolchain 0009 decides | ready — and starting it is the decider's call |
 | [#70](https://github.com/nanatsusaya/dot-panic/issues/70) Biome | waits on #69 |
 | [#71](https://github.com/nanatsusaya/dot-panic/issues/71) The check chain as commands | waits on #69 and #70 |
+| [#77](https://github.com/nanatsusaya/dot-panic/issues/77) The hosting notice 0011 §4 puts beside the imprint | not ready — waits on #13 for a dialog to sit in |
 
 **The ticket gap is closed.** Every planned decision has one. Five were filed on
 2026-08-02 — 0008, 0009, 0010, 0011 and the repository notes — because the four
@@ -303,17 +347,20 @@ of it, and closed with it. **Neither row added since then opened the gap again:*
 filed in the same change that added the row, because a planned row without a
 ticket is the state those five were filed to end.
 
-**Three of the eight are the first work here that is not a document.**
+**Four of the eight were asked for by a record rather than noticed in passing.**
 [#69](https://github.com/nanatsusaya/dot-panic/issues/69) creates what 0009
 decides, [#70](https://github.com/nanatsusaya/dot-panic/issues/70) configures
 Biome, and [#71](https://github.com/nanatsusaya/dot-panic/issues/71) turns 0009
-§8's four checks into commands a person runs. They came with 0009 R2, where the
-decider asked for them by name. **#69 has since grown a requirement it was not
-filed with**: 0010 §7 puts the coverage floor and its two exclusions in
-`bunfig.toml`, so the file that ticket creates now carries a number as well as a
-toolchain. **None of them starts by existing:** 0012 §1's
-analysis phase has no end condition, and leaving it is a decision rather than a
-consequence of a record being Accepted.
+§8's four checks into commands a person runs — those three came with 0009 R2,
+where the decider asked for them by name. The fourth is
+[#77](https://github.com/nanatsusaya/dot-panic/issues/77), which writes the two
+sentences 0011 §4 puts beside the imprint, and it was filed before that record
+was accepted so that the reference inside it would point at something real.
+**#69 has since grown a requirement it was not filed with**: 0010 §7 puts the
+coverage floor and its two exclusions in `bunfig.toml`, so the file that ticket
+creates now carries a number as well as a toolchain. **None of them starts by
+existing:** 0012 §1's analysis phase has no end condition, and leaving it is a
+decision rather than a consequence of a record being Accepted.
 
 **This table restates something the tickets already say**, and
 [#46](https://github.com/nanatsusaya/dot-panic/issues/46) is the ticket for it.
@@ -384,25 +431,32 @@ What a change description must contain is no longer among the gaps here.
 
 ## The single clearest next step
 
-**Write [decision 0011](adr/README.md) — delivery**, against
-[#37](https://github.com/nanatsusaya/dot-panic/issues/37). It is the only ready
-decision ticket left: 0009 was its blocker, and the one other planned record,
-[0013](adr/README.md), sits behind
-[#12](https://github.com/nanatsusaya/dot-panic/issues/12), which is not ready.
+**Bring [#12](https://github.com/nanatsusaya/dot-panic/issues/12) to ready**, so
+that [decision 0013](adr/README.md) — origin of the core — can be written. It is
+the last planned record and the only thing between the decision set and being
+finished; every other row is Accepted.
 
-**It arrives already constrained by three records, which is unusual for a
-record that has not been written.** 0009 R1 keeps the emitted output out of the
-repository, so publishing straight from a branch was closed before 0011 existed to
-weigh it. 0010 §9 leaves watching the built page as the only evidence that what
-the browser runs matches what the tests passed, and whether that happens before
-publishing rather than after is named there as 0011's. And 0003 §2 forbids loading
-anything off the page's own origin, which bounds where it can be hosted.
+**Half of what makes that ticket not ready has expired.** Its header gives two
+reasons, *blocked by 0002* and *"Scope is not final"*. 0002 was Accepted on
+2026-08-02, the day after the ticket was filed, so the first is gone. The second
+is a judgement rather than a blocker, and the ticket predicted how it would
+resolve: *"once 0002 fixes the architecture, this question is largely answered by
+it."* Establishing whether that came true is the work.
 
-**What actually holds it up is not a decision.** 0004 R2 makes a real imprint
-address a precondition of publishing, and the address in the repository is a
-deliberate placeholder. Nothing checks it. That is the decider's to supply and it
-is personal data, so the record can be written around it — the question belongs in
-0011 as an open one, not in a commit.
+**Records accepted since reach into two of its three scope items**, one of them
+all the way. It asks whether anything shipped to the browser may have a runtime
+dependency at all — 0009 §7 answers no, and calls that a description of what 0003
+§2 and §5 already force rather than a new rule. And it asks which package to take,
+while
+0009 §3 emits one `.js` beside each `.ts` with no bundler, which is not how an
+installed package reaches a browser. **Whether that leaves *taken from a package*
+meaning anything is 0013's to work out**, not this file's — and it is why the
+ticket needs rereading rather than answering.
+
+**What the ticket carries is a survey, and it is not evidence.** The four npm
+packages in it are metadata read from the registry on 2026-07-31; no package's
+source was read, and the argument recorded against them was never code quality
+but scope — none addresses 0006's speed floor, bounded frame or non-overlap.
 
 **Nothing here says to start building.**
 [#69](https://github.com/nanatsusaya/dot-panic/issues/69) creates what 0009 and
@@ -464,6 +518,13 @@ of it does arrive with a row, though, and it is the toolchain — 0010 §7's cov
 floor is a line in `bunfig.toml`, so it reaches `built` when
 [#69](https://github.com/nanatsusaya/dot-panic/issues/69) does and not before.
 
+**Deployment moves to `decided`**, which is the ordinary move: 0011 is the whole
+of that question the way 0005 is for rendering. *Decided* here means there is no
+workflow file and nothing has ever been deployed. What moves it again is
+[#13](https://github.com/nanatsusaya/dot-panic/issues/13) — 0011 §7 fixes the
+first deployment at the walking skeleton, which is also the first time any row on
+this scale reaches `live`.
+
 | Area | Stage |
 |---|---|
 | Toolchain | `decided` |
@@ -471,4 +532,4 @@ floor is a line in `bunfig.toml`, so it reaches `built` when
 | Rendering | `decided` |
 | Pointer handling | `decided` |
 | Page layout | `decided` |
-| Deployment | `planned` |
+| Deployment | `decided` |
