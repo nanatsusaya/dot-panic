@@ -8,7 +8,7 @@
 
 The method has been adopted. **Nothing of the toy exists yet** — no simulation
 code, no page, no rendering. Everything built so far is the way of working:
-the operating rules, the decision set, twelve accepted records, and the five
+the operating rules, the decision set, thirteen accepted records, and the five
 session procedures in [`.claude/skills/`](../.claude/skills/README.md).
 
 The procedures have now been used. `/moin`, `/weiterimtext` and `/adr` all ran
@@ -215,7 +215,41 @@ browser feature an accepted record names sits outside what any setting can
 decide — **the third rule here held by a person remembering**, beside the imprint
 address and 0008 §8's factor. Biome was checked for it and has no browser-support
 rule group. And `bun test` runs the source while the browser runs the down-leveled
-output, so a passing test is a statement about the source; 0010 inherits that.
+output, so a passing test is a statement about the source. **0010 took that and
+did not close it** — see below.
+
+**What a test may claim is decided, and one whole register has nobody in it.**
+[0010](adr/0010-testing-strategy.md) names three registers for the entire set —
+asserted, measured, watched — and fixes that a command asserts three kinds of
+claim and nothing else: invariants of the world, determinism, and facts about the
+source text. **Its §5 answers a question two accepted records had each handed
+forward.** 0008 §9 and 0014 §9 both wrote that whether anything measures a running
+page is 0010's; six invariants sat on that answer, and the answer is **nobody**. A
+person reads the number off the browser's own tools, and R1 fixes the trigger for
+ever building a harness: a budget found to have drifted, not the absence of one.
+**The frame budget is the only number in this project and after this record
+nothing guards it.**
+
+**Two things it says it cannot show.** 0002 §4 claims the same world and steps
+produce the same result *in any environment that can do arithmetic*; §3 asserts
+determinism as two runs compared to each other, under one runtime, and states that
+the cross-environment half is exercised by nothing. And §9 leaves 0009 §6's gap
+open rather than closing it: the output is not committed, so there is nothing for
+a test to read, and **watching the built page is the sole evidence that what the
+browser runs matches what the tests passed.**
+
+**Its §7 is the one the record argued against and lost.**
+[0010](adr/0010-testing-strategy.md) proposed tracking no coverage, on the grounds
+that one percentage over this repository would describe the ratio of Core to View.
+R2 reverses it for a reason the draft never weighed — **testability as
+maintainability for agents**, which is what this project is a worked example of —
+and answers the objection by scoping instead of dropping: **90 percent over the
+Core**, with `shell/` and `view/` excluded by name because Bun offers no
+per-directory threshold. It costs no fourth dependency, `bun test` carrying
+coverage itself, and it hands [0002](adr/0002-overall-architecture.md) §5 the
+first enforcement it has ever had — logic moved out of the Core to dodge a test
+shrinks the numerator and reddens the run. What it does not do is prove anything:
+90 percent is reachable by tests that assert nothing, and the record says so.
 
 **Fifteen decisions are planned** in [docs/adr/](adr/README.md).
 [0001](adr/0001-purpose-scope-and-success.md),
@@ -228,9 +262,10 @@ output, so a passing test is a statement about the source; 0010 inherits that.
 [0007](adr/0007-pointer-and-input-model.md),
 [0014](adr/0014-page-layout.md),
 [0015](adr/0015-settings-surface.md),
-[0008](adr/0008-performance-budget.md) and
-[0009](adr/0009-toolchain.md) are Accepted; the other
-three are `Planned`. **The table runs by meaning and not by number**, and three
+[0008](adr/0008-performance-budget.md),
+[0009](adr/0009-toolchain.md) and
+[0010](adr/0010-testing-strategy.md) are Accepted; the other
+two are `Planned`. **The table runs by meaning and not by number**, and three
 numbers have a history it carries rather than this file: 0012 was reserved as
 unused until 2026-08-02, and 0014 and 0015 were both added after the set was
 planned.
@@ -243,7 +278,7 @@ There are none.
 
 ## What the tickets hold
 
-Nine issues are open. One of them still carries research that would otherwise
+Eight issues are open. One of them still carries research that would otherwise
 have existed only in the conversation that produced it, and each ticket says in
 its own header how ready it is.
 
@@ -251,7 +286,6 @@ its own header how ready it is.
 |---|---|
 | [#12](https://github.com/nanatsusaya/dot-panic/issues/12) 0013 Origin of the core | not ready — holds the package survey |
 | [#13](https://github.com/nanatsusaya/dot-panic/issues/13) Walking skeleton | not ready — 0012 §2 makes it the first increment |
-| [#36](https://github.com/nanatsusaya/dot-panic/issues/36) 0010 Testing strategy | ready — 0009 was its blocker |
 | [#37](https://github.com/nanatsusaya/dot-panic/issues/37) 0011 Delivery | ready — 0009 was its blocker |
 | [#38](https://github.com/nanatsusaya/dot-panic/issues/38) The two repository notes 0004 §2 assumes | ready |
 | [#46](https://github.com/nanatsusaya/dot-panic/issues/46) Ticket readiness is stated in two places | ready — and this table is one of the two |
@@ -269,12 +303,15 @@ of it, and closed with it. **Neither row added since then opened the gap again:*
 filed in the same change that added the row, because a planned row without a
 ticket is the state those five were filed to end.
 
-**Three of the nine are the first work here that is not a document.**
+**Three of the eight are the first work here that is not a document.**
 [#69](https://github.com/nanatsusaya/dot-panic/issues/69) creates what 0009
 decides, [#70](https://github.com/nanatsusaya/dot-panic/issues/70) configures
 Biome, and [#71](https://github.com/nanatsusaya/dot-panic/issues/71) turns 0009
 §8's four checks into commands a person runs. They came with 0009 R2, where the
-decider asked for them by name. **None of them starts by existing:** 0012 §1's
+decider asked for them by name. **#69 has since grown a requirement it was not
+filed with**: 0010 §7 puts the coverage floor and its two exclusions in
+`bunfig.toml`, so the file that ticket creates now carries a number as well as a
+toolchain. **None of them starts by existing:** 0012 §1's
 analysis phase has no end condition, and leaving it is a decision rather than a
 consequence of a record being Accepted.
 
@@ -297,9 +334,15 @@ wording, and neither changes anything either record decides.
 an amendment until one was needed: [docs/adr/](adr/README.md) now fixes where the
 log sits, what it must quote, and that the body above it always states current
 truth — so a reader starting at the top is never reading superseded wording.
-**Nothing checks the migration that caused this.** The check resolves links
-between documents, not a record's references to its own sections, and the whole
-of the rule is that an Accepted record contains no `O`-number.
+**The coherence check still cannot see this**, because it resolves links between
+documents and not a record's references to its own sections. What changed on
+2026-08-02 is that something else can: the rule was written down, **the next two
+records broke it four more times**, and `/adr` now runs
+`grep -n "O[1-9]" docs/adr/*.md` before a record is merged. The expected result is
+known — quotations inside an *Amendments* section, plus the index's own row — which
+is what makes it a check rather than a reminder to be careful. It is the sixth
+adaptation of the copied procedures and the [method log](method-log.md) carries
+why.
 
 **The question nobody owned has an owner.**
 [0014](adr/0014-page-layout.md) R6 said whether the flock keeps stepping while
@@ -341,31 +384,30 @@ What a change description must contain is no longer among the gaps here.
 
 ## The single clearest next step
 
-**Write [decision 0010](adr/README.md) — testing strategy**, against
-[#36](https://github.com/nanatsusaya/dot-panic/issues/36). 0009 was its blocker,
-and it did not only unblock it — **it handed it a problem no other record owns.**
-0009 §6 records that `bun test` runs the source while the browser runs the
-down-leveled output, so a passing test is a statement about the source and not
-about the file a visitor executes.
+**Write [decision 0011](adr/README.md) — delivery**, against
+[#37](https://github.com/nanatsusaya/dot-panic/issues/37). It is the only ready
+decision ticket left: 0009 was its blocker, and the one other planned record,
+[0013](adr/README.md), sits behind
+[#12](https://github.com/nanatsusaya/dot-panic/issues/12), which is not ready.
 
-**It inherits more than it decides**, which is what makes it the clearest rather
-than merely the next. 0012 §4 already fixes test-first in the Core without
-exception and §5 watch-first in the View. Six records already carry the division
-between what a command decides and what only an eye can — 0006 §10, 0007 §9, 0014
-§9, 0008 §9, 0015 §8 and now 0009 §9, whose watched half is empty because nothing
-in a toolchain appears on a screen. 0008 §7 already keeps the naive search as the
-oracle the grid is tested against. So 0010 is not choosing any of that: it decides
-what a test here may assume, and how the watched half is recorded so that *watched
-and seen* in a ticket means something a second person could repeat.
+**It arrives already constrained by three records, which is unusual for a
+record that has not been written.** 0009 R1 keeps the emitted output out of the
+repository, so publishing straight from a branch was closed before 0011 existed to
+weigh it. 0010 §9 leaves watching the built page as the only evidence that what
+the browser runs matches what the tests passed, and whether that happens before
+publishing rather than after is named there as 0011's. And 0003 §2 forbids loading
+anything off the page's own origin, which bounds where it can be hosted.
 
-**0011 is the other unblocked decision**, and what holds it back has nothing to do
-with 0009: 0004 R2 makes a real imprint address a precondition of publishing, and
-that address does not exist.
+**What actually holds it up is not a decision.** 0004 R2 makes a real imprint
+address a precondition of publishing, and the address in the repository is a
+deliberate placeholder. Nothing checks it. That is the decider's to supply and it
+is personal data, so the record can be written around it — the question belongs in
+0011 as an open one, not in a commit.
 
 **Nothing here says to start building.**
-[#69](https://github.com/nanatsusaya/dot-panic/issues/69) creates what 0009
-decides, and 0012 §1's analysis phase has no end condition — leaving it is the
-decider's call, not something a record becoming Accepted does on its own.
+[#69](https://github.com/nanatsusaya/dot-panic/issues/69) creates what 0009 and
+0010 §7 decide, and 0012 §1's analysis phase has no end condition — leaving it is
+the decider's call, not something a record becoming Accepted does on its own.
 
 ## Implementation scale
 
@@ -415,6 +457,12 @@ how fast things run looks as though it should. A budget is not an area that gets
 built; it is a constraint on the areas that are. Its three Core invariants arrive
 wherever the simulation core arrives, and the two things it measures need a
 running page and whatever applies §8's slowdown factor — which §8 hands to 0009.
+
+**0010 adds no row and moves none either**, for 0008's reason: a testing strategy
+is a constraint on the areas that get built rather than an area itself. One part
+of it does arrive with a row, though, and it is the toolchain — 0010 §7's coverage
+floor is a line in `bunfig.toml`, so it reaches `built` when
+[#69](https://github.com/nanatsusaya/dot-panic/issues/69) does and not before.
 
 | Area | Stage |
 |---|---|
