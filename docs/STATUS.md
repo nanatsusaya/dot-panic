@@ -8,7 +8,7 @@
 
 The method has been adopted. **Nothing of the toy exists yet** — no simulation
 code, no page, no rendering. Everything built so far is the way of working:
-the operating rules, the decision set, five accepted records, and the five
+the operating rules, the decision set, six accepted records, and the five
 session procedures in [`.claude/skills/`](../.claude/skills/README.md).
 
 The procedures have now been used. `/moin`, `/weiterimtext` and `/adr` all ran
@@ -52,13 +52,34 @@ precondition of publishing — a constraint 0011 inherits. **Nothing checks it.*
 There is no build to fail and no command to run; a person remembering is the
 whole of that gate, which is worth knowing rather than discovering later.
 
+**What it looks like on screen is decided, and what color it is deliberately is
+not.** [0005](adr/0005-rendering-and-visual-design.md) puts everything that moves
+on one canvas drawn in immediate mode, makes a dot a plain filled circle, honors
+`prefers-color-scheme` — explicitly weaker than 0004 §4, because a color mode is
+comfort and reduced motion is health — and gives 0004 §5's control a shape: a
+real button, always visible, labeled with words. It leaves the
+Content-Security-Policy alone, which 0003 §6 had permitted it to widen. **No
+color value is fixed**, and R1 says why: 0001 §3.1 and 0012 §5 put *it reads as a
+flock* beyond what any document can settle, so a palette argued onto a page
+before anything has been on a screen would be decided by writing rather than by
+looking.
+
+**`devicePixelRatio` is not Baseline widely available**, so 0005 §5 sizes the
+drawing through the `resolution` media feature, which is. Safari has shipped
+`devicePixelRatio` since version 3, but as a partial implementation — it does not
+change when the page is zoomed — and Baseline does not count partials. R2 records
+that this is not a reading of [0001](adr/0001-purpose-scope-and-success.md) §3.4
+but the plain text of it: the sentence names a status, and loosening that floor
+would need a record superseding 0001 rather than an argument about what it meant.
+
 **Thirteen decisions are planned** in [docs/adr/](adr/README.md).
 [0001](adr/0001-purpose-scope-and-success.md),
 [0002](adr/0002-overall-architecture.md),
 [0012](adr/0012-how-software-gets-developed.md),
 [0003](adr/0003-security-and-privacy-by-design.md) and
-[0004](adr/0004-compliance-accessibility-and-rights.md) are Accepted; the other
-eight are `Planned`. Number 0012 was reserved as unused until 2026-08-02; the
+[0004](adr/0004-compliance-accessibility-and-rights.md) and
+[0005](adr/0005-rendering-and-visual-design.md) are Accepted; the other
+seven are `Planned`. Number 0012 was reserved as unused until 2026-08-02; the
 index says why it is not, and why the table is no longer ordered by number.
 
 What is awaiting review is not repeated here. The
@@ -69,27 +90,27 @@ There are none.
 
 ## What the tickets hold
 
-Nine issues are open. Three of them exist for a reason worth knowing: they are
-**not ready to be worked**, and they carry research that would otherwise have
-existed only in the conversation that produced it.
+Nine issues are open. Three of them exist for a reason worth knowing: they carry
+research that would otherwise have existed only in the conversation that produced
+it, and each says in its own header how ready it is.
 
 | Ticket | State |
 |---|---|
-| [#10](https://github.com/nanatsusaya/dot-panic/issues/10) 0006 Motion rules | not ready — holds the motion research |
+| [#10](https://github.com/nanatsusaya/dot-panic/issues/10) 0006 Motion rules | holds the motion research — its stated blocker, 0004, is now Accepted |
 | [#11](https://github.com/nanatsusaya/dot-panic/issues/11) 0007 Pointer and input model | not ready — holds the touch research |
 | [#12](https://github.com/nanatsusaya/dot-panic/issues/12) 0013 Origin of the core | not ready — holds the package survey |
 | [#13](https://github.com/nanatsusaya/dot-panic/issues/13) Walking skeleton | not ready — 0012 §2 makes it the first increment |
-| [#34](https://github.com/nanatsusaya/dot-panic/issues/34) 0008 Performance budget | waits on 0005 — the drawing choice changes the numbers |
+| [#34](https://github.com/nanatsusaya/dot-panic/issues/34) 0008 Performance budget | ready — 0005 answered the drawing choice it waited on |
 | [#35](https://github.com/nanatsusaya/dot-panic/issues/35) 0009 Toolchain | ready |
 | [#36](https://github.com/nanatsusaya/dot-panic/issues/36) 0010 Testing strategy | waits on 0009 |
 | [#37](https://github.com/nanatsusaya/dot-panic/issues/37) 0011 Delivery | waits on 0009 |
 | [#38](https://github.com/nanatsusaya/dot-panic/issues/38) The two repository notes 0004 §2 assumes | ready |
 
-**The ticket gap is closed except for one.** Every planned decision now has a
-ticket but 0005, and that is deliberate: it gets written when the record does,
-rather than twice. Five were filed on 2026-08-02 — 0008, 0009, 0010, 0011 and
-the repository notes — because the four records written so far were each written
-against one, and the next record would have been the first without.
+**The ticket gap is closed.** Every planned decision has one. Five were filed on
+2026-08-02 — 0008, 0009, 0010, 0011 and the repository notes — because the four
+records written so far were each written against one, and the next would have
+been the first without. 0005's was written alongside its record rather than ahead
+of it, and closed with it.
 
 **0004 §2 assumes two files that do not exist.** It says the repository carries
 what the decider's other projects carry — a README and the conventional security
@@ -118,17 +139,16 @@ What a change description must contain is no longer among the gaps here.
 
 ## The single clearest next step
 
-**Write [decision 0005](adr/README.md) — rendering and visual design**, and its
-ticket as part of the same work rather than ahead of it. It is the next record
-by the index's own ordering, everything it depends on is Accepted, and the
-constraints it has to work inside are all written down:
-[0003](adr/0003-security-and-privacy-by-design.md) forbids loading a font or
-anything else off the origin, and
-[0004](adr/0004-compliance-accessibility-and-rights.md) §4 and §5 mean whatever
-is chosen has to be able to stop moving.
+**Write [decision 0006](adr/README.md) — motion rules**, against
+[#10](https://github.com/nanatsusaya/dot-panic/issues/10). It is the next record
+by the index's ordering, the one thing its ticket names as blocking it is
+Accepted, and the research is already written down there: Reynolds' three
+steering behaviors, the three properties a textbook implementation does not give
+this flock, and the speed profile decided on 2026-08-02.
 
-It is the last planned decision without a ticket, and the first one whose answer
-shows up on screen.
+**Its ticket header still says it is not ready**, and the reason that header
+gives is 0004. Whether anything else stands in the way is a call that belongs to
+the decider rather than something to read out of a line the world has moved past.
 
 ## Implementation scale
 
@@ -148,6 +168,6 @@ An accepted decision confers `decided` and nothing more.
 |---|---|
 | Toolchain | `planned` |
 | Simulation core | `planned` |
-| Rendering | `planned` |
+| Rendering | `decided` |
 | Pointer handling | `planned` |
 | Deployment | `planned` |
