@@ -6,6 +6,38 @@ session would decide worse without it.
 
 Newest first.
 
+## 2026-08-03 — A denial of a closing keyword closed the ticket
+
+A pull request that added an index row said, in its own description, that it did
+not close the ticket it had created in the same change:
+
+> **This does not close #83, and no keyword in this description does.**
+
+GitHub reads `close #83` and does not read the negation in front of it. The
+merge closed #83, and the sentence written to prevent exactly that is what did
+it.
+
+**The sentence was right and said the wrong way.** The distinction it drew was
+real: that change added the row for a planned record, while #83 is the ticket
+for *writing* the record and had nothing done in it. Two earlier tickets here
+failed in the opposite direction — #36 and #37 stayed open after their work
+merged, because those descriptions named the issue without a keyword. Both come
+from one place: a change description is read by a machine as well as by a
+person, and only one of the two understands *not*.
+
+**Two consequences.**
+
+- **A closing keyword never appears beside an issue number unless the merge
+  should close it** — not in a denial, not in a quotation, not in an explanation
+  of what the change is not doing. To mention an issue otherwise, name it with
+  no verb in front of it. That is now in
+  [the pull request template](../.github/pull_request_template.md), which is the
+  authority for what a change description contains.
+- **What a change closed is checked after the merge**, not read off the
+  description. The tracker is outside this repository and nothing here can fail
+  when the two disagree; the issue's own state is the only evidence. This one
+  survived overnight because nothing gave the next session a reason to look.
+
 ## 2026-08-02 — A rule was written down, and the next two records broke it
 
 The afternoon repaired a defect by amendment: two accepted records still pointed

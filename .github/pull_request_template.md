@@ -5,6 +5,13 @@ are visual; and "Verified" names the one command this project has.
 
 One concern per change. Delete any section that is genuinely not applicable —
 an empty heading reads as "considered and found empty".
+
+A closing keyword next to an issue number — closes, fixes, resolves — closes
+that issue when this merges, and the parser does not read a negation in front
+of it. "This does not close #83" closes #83. Write one only when the merge
+should close the ticket; to mention an issue otherwise, name it with no verb
+in front of it. Then check the issue's state after the merge rather than
+trusting the description.
 -->
 
 ## What
