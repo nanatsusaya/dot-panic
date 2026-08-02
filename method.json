@@ -10,7 +10,7 @@
   "authorities": {
     "gate": "https://github.com/nanatsusaya/dot-panic/settings/rules",
     "tasks": "https://github.com/nanatsusaya/dot-panic/issues",
-    "secrets": null
+    "secrets": "https://github.com/nanatsusaya/dot-panic/settings/security_analysis"
   },
   "language": { "spelling": "american" },
   "adaptations": []
