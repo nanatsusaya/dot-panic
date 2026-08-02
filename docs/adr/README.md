@@ -63,13 +63,27 @@ record ends up deciding something that was never its own.
 | 0009 | Toolchain | What runs the code, what tests it, what builds it | Planned |
 | 0010 | Testing strategy | What is asserted by a command and what is only ever watched | Planned |
 | 0011 | Delivery | How it reaches the public URL, and when | Planned |
+| [0012](0012-how-software-gets-developed.md) | How software gets developed here | Analysis then increments; where test-first applies and what replaces it where it cannot; when work may run in parallel | Accepted |
 | 0013 | Origin of the core | Written here or taken from a package | Planned |
 
-**0012 is missing on purpose.** It was planned as a walking-skeleton record and
-dropped before it was written: a first end-to-end slice is work to be done, not
-a choice with alternatives. It becomes a ticket instead. **The number is not
-reused** — a number is how the rest of the project refers to a decision, and one
-that means something different later is worse than one that means nothing.
+**0012 sits out of order, and knowingly.** It constrains 0009, 0010 and 0011
+rather than following them, so by the top-down rule it belongs above them. It is
+listed by number anyway, because the number is what every reference uses and a
+table sorted two ways is sorted none.
+
+**0012 was reserved as unused and is now in use.** It was planned as a
+walking-skeleton record and dropped before it was written — a first end-to-end
+slice is work to be done, not a choice with alternatives — and the number was
+then declared never to be reused, on the grounds that a number meaning something
+different later is worse than one meaning nothing.
+
+That was set aside on 2026-08-02 with the decider's authorization, because the
+reason does not apply: [0012](0012-how-software-gets-developed.md) §2 makes the
+walking skeleton a consequence of itself, so the number came to mean the larger
+frame the original topic sits inside rather than something unrelated. **This does
+not open the numbers generally.** It was the only gap, there is not a second, and
+renumbering is unavailable while 0002 is accepted and names six planned numbers.
+The reasoning is in the [method log](../method-log.md).
 
 `Planned` means the topic is fixed and the record is not yet written; it is the
 only status a row may carry without a file behind it. A `Planned` row is not a
