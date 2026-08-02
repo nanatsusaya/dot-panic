@@ -6,6 +6,41 @@ session would decide worse without it.
 
 Newest first.
 
+## 2026-08-02 — A recommendation was approved, and part of its reason was false
+
+0007's O1 asked whether the page's layout should get a record of its own. It
+recommended yes, and it recommended writing that record **after 0008**, *so it
+knows the frame it is arranging*. Daniel approved both at once: *"bei beiden
+folgen wir deinen empfehlungen."*
+
+The ordering reason is false. 0008 does not decide the frame — 0002 §2 gives its
+size to the Shell, and 0008 decides how many dots move inside it and how fast.
+0014's real dependencies were all Accepted the moment 0007 was, so it waits on
+nothing and could be written the same day.
+
+The choice was right and the argument for half of it was not. R1 states the
+correction in the record, the change under review said so at the top rather than
+letting a corrected version land quietly, and the index row is placed by meaning
+with a sentence saying it implies no order of writing.
+
+**Two consequences.**
+
+- **An approval attaches to the choice, not to the author's argument for it.** A
+  reason found wrong before the change lands is corrected in the resolution and
+  named as a correction. Reopening the question would hand back a decision that
+  was actually made; leaving the reason standing would preserve a false claim
+  about which record decides the frame, in the one place a later session looks to
+  find out — and R1 is read by everyone who reads 0014.
+- **A recommended default is the only argument in a record that nothing checks.**
+  [The record shape](adr/README.md) requires a dependency to name the **section**
+  relied on, and every decision section here does — which is what makes a wrong
+  dependency claim cheap to catch. Open questions carry no such requirement, and
+  the false claim lived exactly in that gap: *so it knows the frame it is
+  arranging* names no section, and following it to one is what falsified it.
+
+Whether the shape should require it is not settled here. It is an open question
+on the change that carries this entry.
+
 ## 2026-08-02 — A status update named a gap the same session then closed
 
 STATUS.md was brought current after 0004 and, being honest about what it found,
