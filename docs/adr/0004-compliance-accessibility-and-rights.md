@@ -1,6 +1,6 @@
 # 0004 — Compliance, accessibility and rights
 
-- **Status:** Accepted
+- **Status:** Proposed
 - **Date:** 2026-08-02
 - **Deciders:** Daniel Wagner
 - **Ticket:** [#8](https://github.com/nanatsusaya/dot-panic/issues/8), including
@@ -59,12 +59,23 @@ entry, no VAT number, no supervisory authority, and no required email address.
 > Zwecken dienen, haben folgende Informationen leicht erkennbar, unmittelbar
 > erreichbar und ständig verfügbar zu halten: 1. Name und Anschrift […]
 
-**The personal-or-family exception does not apply.** The page is published to the
-public without restriction, in order to be read by people judging a method
-(0001 §2). Whatever that is, it is not exclusively a personal or family purpose.
+**The personal-or-family exception does not apply**, on the supervising
+authorities' own criteria. The Landesanstalt für Medien NRW gives the exempt case
+as *"eine Seite mit Urlaubsbildern der Familie Müller"*, and the line the
+guidance draws is whether an offering addresses friends and family or a broad
+public. This page is published without restriction, to be read by people judging
+a method (0001 §2).
+
+**The counter-argument is real, and it belongs here rather than in a footnote.**
+The same authority describes the obligation as catching offerings with *"eine
+gewisse meinungsbildende Kraft und Breitenwirkung"*, and a page of moving dots
+has neither. That is an argument about what the rule is **for**. The statute's
+own text asks the narrower question — personal or family purposes, or not — and
+the narrower question is the one this section answers.
 
 So the imprint must carry **Name und Anschrift**, and that is the whole of what
-it must carry. It also carries an email address, which is voluntary — R1.
+it must carry. It also carries an email address, which is voluntary — R1. Which
+postal address, or whether the page publishes one at all, is **O2**.
 
 The three delivery words are already satisfied more strictly than they ask.
 0003 §7 puts the imprint on the page itself, readable without following any
@@ -90,17 +101,19 @@ this one is wrong, the remedy is a file.
 
 ### 3. This record names the values; it does not contain them
 
-The postal address exists in no file in this repository, and in none in the
-method repository either. It has to be supplied when the page is built, and
-building the page is blocked until it is.
-
-The email address does exist: the method repository publishes it in its code of
-conduct, and R1 makes it this project's contact address as well.
-
 **Neither value is written into this record**, and that is not squeamishness:
 0003 §7 puts the imprint in exactly one place and names a decision record as
 somewhere it does not appear. That place is the page. Everything else, this
 record included, points at it.
+
+The email address exists already — the method repository publishes it in its code
+of conduct, and R1 makes it this project's contact address as well.
+
+**The postal address exists nowhere, and the decider has said it will not be his
+own.** Nothing in §1 requires that it is. An *Anschrift* has to be one at which
+service can be effected — a Postfach does not qualify — and it does not have to
+be where somebody lives. Which address, or whether the page carries one at all,
+is **O2**, and the first increment is blocked until that is answered.
 
 ### 4. `prefers-reduced-motion: reduce` is honored, and it is a hard requirement
 
@@ -263,8 +276,9 @@ a question — and it is 0013's, not this record's.
   button. The first thing on the page besides the flock will be a way to stop it.
 - **§4 and §5 make every motion change more expensive**, permanently. Two more
   criteria on every ticket that touches movement, for a page with no users yet.
-- **§3 blocks the first increment on a value only the decider holds.** The postal
-  address is not here and cannot be derived.
+- **§3 blocks the first increment on a value that does not exist yet.** The
+  postal address is in neither repository, will not be the decider's own, and
+  cannot be derived. O2 sits on the path to there being a page at all.
 - **The email address will exist in two repositories.** 0003 §7 keeps the imprint
   to one place so that changing an address is one edit; §2 then puts conventional
   contact notes in this repository, as the decider's other projects have. A
@@ -272,10 +286,12 @@ a question — and it is 0013's, not this record's.
   value is still the same string in more than one file. Whoever changes that
   address changes it in several places, and nothing will remind them.
 - **The load-bearing legal reading is that § 18's personal-or-family exception
-  does not apply.** The quotes are primary and the reasoning is visible, and it
-  is still a reading by someone who is not a lawyer. If it is wrong in the other
-  direction the page publishes an address it need not have published — and that
-  is not undoable.
+  does not apply.** The quotes are primary, the supervising authorities' own
+  examples point the same way, and the counter-argument is stated in §1 — and it
+  is still a reading by someone who is not a lawyer. **The two ways of being
+  wrong do not cost the same.** Publishing an address that was not required
+  cannot be taken back. Not publishing one that was required is a defect, and a
+  defect can be fixed by fixing it.
 - **MIT on `docs/` is unusual.** Documentation is more often CC BY, and the
   method repository does exactly that. One license was chosen to remove a
   boundary question, not because MIT fits prose well.
@@ -309,6 +325,31 @@ a question — and it is 0013's, not this record's.
   record, and the explanation 0001 §4 already puts on the page is where a visitor
   would read it.
 
+## Open questions
+
+**O2 — Which postal address does the imprint carry, if any?**
+
+The decider has said it will not be his own. §1 does not require that it is: an
+*Anschrift* must be one at which service can be effected — the Landesanstalt für
+Medien NRW states plainly that *"Postfach reicht nicht aus (nicht ladungsfähig)"*
+— but nothing requires it to be a home. The same guidance names the alternatives
+itself: authorizing a trusted person to accept service, or a commercial
+service-address provider.
+
+- **(a) A service address that is not his own** — a trusted person, or a paid
+  provider. **Recommended**, because it is the only option that satisfies both
+  the obligation as §1 reads it and the decider's constraint, instead of trading
+  one against the other. It costs money, or it costs asking somebody.
+- **(b) Name and email, and no address at all.** The record would then say
+  plainly that the page departs from its own reading of § 18 and why — a
+  departure recorded is not the same as one nobody noticed. The argument for it
+  is the one already in §1: a toy with no opinion-forming reach is not what the
+  rule was written to catch. The argument against it is that the statute asks a
+  narrower question than the rule's purpose does, and §1 answers the statute's.
+- **(c) No public page.** Removes the obligation by removing the thing. It
+  contradicts 0001 §3 and §4 and would need a record superseding them. Listed
+  because a question about publishing should show what not publishing costs.
+
 ## Resolved questions
 
 **R1 — The imprint carries an email address, and it is the one the method
@@ -339,6 +380,11 @@ gets what a repository gets, and that is a separate piece of work.
 - [§ 18 MStV — Informationspflichten und Auskunftsrechte](https://lxgesetze.de/mstv/18)
   — the obligation that does apply, and its personal-or-family exception. Read
   2026-08-02.
+- [*Transparenz im Internet*, Landesanstalt für Medien NRW](https://www.medienanstalt-nrw.de/aufsicht/transparenz-im-internet.html)
+  — the supervising authority's own account of the personal-or-family exception,
+  and that a Postfach is not a sufficient *Anschrift*. Read 2026-08-02.
+- [*Impressumspflicht*, Medienanstalt Hamburg / Schleswig-Holstein](https://www.ma-hsh.de/aufsicht/impressumspflicht.html)
+  — the same obligation from a second authority. Read 2026-08-02.
 - [§ 25 TDDDG — Schutz der Privatsphäre bei Endeinrichtungen](https://www.gesetze-im-internet.de/ttdsg/__25.html),
   Bundesministerium der Justiz — the consent trigger §6 shows is never reached.
   Read 2026-08-02.
