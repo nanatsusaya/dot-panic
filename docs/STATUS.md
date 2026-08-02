@@ -8,7 +8,7 @@
 
 The method has been adopted. **Nothing of the toy exists yet** — no simulation
 code, no page, no rendering. Everything built so far is the way of working:
-the operating rules, the decision set, two accepted records, and the five
+the operating rules, the decision set, three accepted records, and the five
 session procedures in [`.claude/skills/`](../.claude/skills/README.md).
 
 The procedures have now been used. `/moin`, `/weiterimtext` and `/adr` all ran
@@ -22,6 +22,12 @@ but `core/`, `shell/` and `view/` do not exist, and creating them is work that
 needs a ticket, not a side effect of reading the record. There is still **no
 toolchain at all**: no runtime, no test runner, no package manifest. That is
 decision 0009.
+
+**How the work gets built is decided as well, and nothing has been built under
+it.** [0012](adr/0012-how-software-gets-developed.md) fixes an analysis phase
+with no end condition, then increments; test-first in the Core without
+exception; watch-first in the View, where no command can decide; and at most
+three changes open for review at once.
 
 **Thirteen decisions are planned** in [docs/adr/](adr/README.md).
 [0001](adr/0001-purpose-scope-and-success.md),
@@ -38,7 +44,7 @@ There are none.
 
 ## What the tickets hold
 
-Six issues are open, and three of them exist for a reason worth knowing: they
+Seven issues are open, and three of them exist for a reason worth knowing: they
 are **not ready to be worked**, and they carry research that would otherwise
 have existed only in the conversation that produced it.
 
@@ -49,7 +55,8 @@ have existed only in the conversation that produced it.
 | [#10](https://github.com/nanatsusaya/dot-panic/issues/10) 0006 Motion rules | not ready — holds the motion research |
 | [#11](https://github.com/nanatsusaya/dot-panic/issues/11) 0007 Pointer and input model | not ready — holds the touch research |
 | [#12](https://github.com/nanatsusaya/dot-panic/issues/12) 0013 Origin of the core | not ready — holds the package survey |
-| [#13](https://github.com/nanatsusaya/dot-panic/issues/13) Walking skeleton | not ready — was ADR 0012 |
+| [#13](https://github.com/nanatsusaya/dot-panic/issues/13) Walking skeleton | not ready — 0012 §2 makes it the first increment |
+| [#23](https://github.com/nanatsusaya/dot-panic/issues/23) One authority for the definition of done | ready — see below |
 
 **One conflict is open and belongs to nobody yet.** ADR 0001 §4 puts an imprint
 on the page; an imprint carries a real name and postal address; the method's P1
@@ -57,13 +64,17 @@ says real personal data never enters the repository. #8 owns resolving it, and
 `method.json` still declares `"secrets": null` on an assumption that is no
 longer true.
 
-**Two things about how work is run have no authority yet.** There is no pull
-request template, so nothing fixes what a change description must contain. And
-the definition of done is stated twice — in
+**The definition of done is still stated twice** — in
 [the ticket template](../.github/ISSUE_TEMPLATE/task.md) and in
 [CLAUDE.md](../CLAUDE.md) — in two versions that do not match: one requires the
 change to be merged, the other requires observable behavior to be exercised.
-Neither has a ticket.
+[#23](https://github.com/nanatsusaya/dot-panic/issues/23) owns resolving it, and
+owns recording why *the build is green* is not among the conditions: there is no
+build. That waits on 0009 for a command chain and 0011 for somewhere to run it.
+
+The other gap this section used to name is closed. What a change description
+must contain has an authority now —
+[the pull request template](../.github/pull_request_template.md).
 
 ## The single clearest next step
 
