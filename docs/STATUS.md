@@ -196,7 +196,7 @@ There are none.
 
 ## What the tickets hold
 
-Nine issues are open. One of them still carries research that would otherwise
+Eight issues are open. One of them still carries research that would otherwise
 have existed only in the conversation that produced it, and each ticket says in
 its own header how ready it is.
 
@@ -210,7 +210,6 @@ its own header how ready it is.
 | [#38](https://github.com/nanatsusaya/dot-panic/issues/38) The two repository notes 0004 §2 assumes | ready |
 | [#46](https://github.com/nanatsusaya/dot-panic/issues/46) Ticket readiness is stated in two places | ready — and this table is one of the two |
 | [#53](https://github.com/nanatsusaya/dot-panic/issues/53) 0015 Settings surface | ready — every record it depends on is Accepted |
-| [#60](https://github.com/nanatsusaya/dot-panic/issues/60) 0014 R6 handed a question to 0008, and 0008 did not take it | not ready — the route is the decider's, and it gates #53 |
 
 **The ticket gap is closed.** Every planned decision has one. Five were filed on
 2026-08-02 — 0008, 0009, 0010, 0011 and the repository notes — because the four
@@ -245,15 +244,16 @@ truth — so a reader starting at the top is never reading superseded wording.
 between documents, not a record's references to its own sections, and the whole
 of the rule is that an Accepted record contains no `O`-number.
 
-**One accepted record asks another for something it never gave.**
-[0014](adr/0014-page-layout.md) R6 says whether the flock keeps stepping while
-the dialog covers it *belongs to 0008* — and 0008 does not mention it. The word
-*dialog* is not in that record, and its dependency list names 0014 §2 rather than
-R6. [#60](https://github.com/nanatsusaya/dot-panic/issues/60) holds it. This is
-not the same defect as #58: that one is three wrong references, this one is **a
-question nobody owns**, and it was missed on the day both records were written.
-Nothing catches it — the check resolves that the link works, not that the record
-behind it answered anything.
+**The question nobody owned has an owner.**
+[0014](adr/0014-page-layout.md) R6 said whether the flock keeps stepping while
+the dialog covers it *belongs to 0008*, and 0008 did not mention it. Its new §10
+does: **the Shell stops calling the Core while the dialog is open.** R6's own
+reason for asking — *work done for nothing on a device with a battery* — is
+false, because a modal dialog's backdrop is ten percent black and the flock stays
+visible. The two reasons that hold are that motion sits behind text somebody is
+reading, and that 0004 §5's control is inert exactly then, so a visitor bothered
+by it has no mechanism. Nothing was built for it: 0006 §9 already makes stopping
+the absence of steps, and 0008 §4 already decides the resume.
 
 **0004 §2 assumes two files that do not exist.** It says the repository carries
 what the decider's other projects carry — a README and the conventional security
@@ -299,29 +299,13 @@ expose.
 question*, and 0014 §4 put a dialog on the page, which is where one would go —
 so it became one. *No settings* remains an answer that record is allowed to give.
 
-**One question stands in front of it**, and it is
-[#60](https://github.com/nanatsusaya/dot-panic/issues/60): whether the flock
-keeps stepping while the dialog covers it. Every control 0014 §4 could hold sits
-**inside** that dialog, so a visitor operating one is looking at a covered
-canvas — and whether they see anything happen is exactly what #60 decides.
-Scoping 0015 against that would be scoping a record against an unanswered
-question, which the index names as how a record ends up deciding something that
-was never its own.
-
-**#60 is short, and the amendment to 0014 §5 is what made it answerable.** It
-was blocked while the dialog's modality was in question; now the dialog is
-modal, and two facts follow from the HTML Standard. A modal dialog dims the page
-by ten percent — `dialog::backdrop { background: rgba(0,0,0,0.1); }` — so the
-flock stays plainly visible behind the text, and 0014 R6's premise *work done for
-nothing* is false. And the rest of the page is inert, so 0004 §5's control cannot
-be pressed while the dialog is open: a visitor bothered by motion behind what
-they are reading would have no mechanism, which is what 0005 §7 and 0004 §5 exist
-to prevent. Both point one way, on a reason R6 did not name.
-
-**[0009](adr/README.md) is what moves instead if #60 waits**, against
-[#35](https://github.com/nanatsusaya/dot-panic/issues/35). It needs nothing from
-any open ticket. Which of the two goes first is Daniel's, and it is not recorded
-here until it is answered.
+**Nothing stands in front of it any more, and it starts under a constraint it
+did not have this morning.** 0008 §10 stops the flock while the dialog is open,
+and every control 0014 §4 could hold sits **inside** that dialog. So a setting is
+changed against a still picture and its effect is seen when the dialog closes.
+That is not a detail 0015 can arrange around: it decides what a settings surface
+can usefully be here, and it is the strongest argument this project has yet
+produced for *no settings* being the answer.
 
 **0009 is the other ready ticket**, and it is the only one that unblocks others:
 [#36](https://github.com/nanatsusaya/dot-panic/issues/36) and
