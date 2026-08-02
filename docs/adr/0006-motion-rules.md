@@ -1,6 +1,6 @@
 # 0006 — Motion rules
 
-- **Status:** Proposed
+- **Status:** Accepted
 - **Date:** 2026-08-02
 - **Deciders:** Daniel Wagner
 - **Ticket:** [#10](https://github.com/nanatsusaya/dot-panic/issues/10)
@@ -292,7 +292,11 @@ and no color.
   and §2 deliberately leaves the route open rather than bounding the cost.
 - **A visitor under `reduce` sees a still picture and may never press the
   button.** §8 is the right trade and it still means the page's entire content is
-  withheld from the people 0004 §4 exists to protect, until they act.
+  withheld from the people 0004 §4 exists to protect, until they act. **And
+  nothing will ever say whether they did.**
+  [0003](0003-security-and-privacy-by-design.md) records nothing about a visitor
+  and leaves no mechanism by which it could, so this choice cannot be checked
+  against what actually happens — by anyone, ever. R1 takes that knowingly.
 - **This record cannot be run.** Ten sections, no numbers, and §10 says so
   plainly. It constrains an implementation that will make every visible choice
   itself, and a reader who wants to know what the flock looks like will not find
@@ -322,39 +326,53 @@ and no color.
 - **Fixing the weights here.** Rejected in §1 for the reason 0005 R1 gives: the
   numbers that decide whether it reads as a flock are not decided by writing.
 
-## Open questions
+## Resolved questions
 
-**O1 — Under `reduce`, is a still picture with an opt-in button the right trade?**
-§8 shows the starting arrangement and does nothing until the visitor asks. The
-alternative is a flock that never moves on its own but does respond to the
-pointer, so the page is alive under the visitor's own hand and never without it.
+All three were confirmed rather than redirected — Daniel: *"wir folgen bei allen
+deinen empfehlungen."* No decision section changed as a result, which is worth
+stating plainly: these record what was **chosen against**, and what it would take
+to choose differently later.
 
-*Recommended default:* the still picture, as written. Motion triggered by the
-visitor's own pointer is still motion they did not ask for when they only meant
-to read the imprint, and the button makes the choice explicit. But this is a
-judgment about people with a health reason for the setting, and 0004 §4 made
-that the decider's rather than the author's.
+**R1 — Under `reduce` the page shows one frame, and the control starts it.** The
+draft asked whether that was the right trade, against a flock that never moves on
+its own but does respond to the pointer. The still picture stands: motion
+triggered by the visitor's own pointer is still motion they did not ask for when
+they only meant to read the imprint, and a button makes the choice explicit
+rather than incidental.
 
-**O2 — Should a dot have a character of its own?** The ticket records a decision
-of yours: dots have an average speed with variation above and below it —
-walking, running, sprinting — with smooth transitions. §4 reads that as an
-*observable* and produces it from the forces, rather than giving each dot a
-temperament it carries. Both satisfy the words; they differ in whether one dot is
-reliably livelier than another across the whole session.
+**This is the one decision in the record that can never be checked against
+reality.** Whether visitors press the button is exactly the kind of fact
+[0003](0003-security-and-privacy-by-design.md) forbids the page to learn, and it
+leaves no mechanism by which anyone could. Every other choice here is eventually
+settled by watching or by a test. This one is settled by argument and stays that
+way. Recorded so that a later session does not go looking for evidence that
+cannot exist.
 
-*Recommended default:* as written — emergent. It keeps the world small and the
-Core's test surface with it. Say so if you meant the other thing, because it is
-a different flock: with carried gaits a visitor can follow one dot, and without
-them every dot is interchangeable.
+**R2 — A gait is a consequence of the forces, and no dot carries one.** The
+draft read the decider's speed profile — an average speed with variation,
+walking, running, sprinting, with smooth transitions — as an *observable* and
+produced it from §1 and §3 rather than from per-dot state. That reading is
+confirmed.
 
-**O3 — Is the corner pileup tolerated?** §7 lets it happen and requires only
-that it dissolves. The alternative is a rule that keeps the flock off the corners
-in the first place.
+**The alternative is not closed by argument, and it is closed by §4.** If
+watching shows a settled flock moving uniformly, the fix is a preferred speed per
+dot drawn from the seed — and §4 decides against exactly that, so it arrives by
+an authorized amendment or a superseding record, never by adding a field to the
+world because the flock looked flat. This is the one place where the record's
+softest claim and its firmest prohibition sit on the same question, which is why
+it is written down rather than left to be worked out.
 
-*Recommended default:* tolerate. Preventing it is a force with no counterpart in
-the model, and the visitor can feel it pushing back. A flock that gets cornered
-and then works its way out is the more honest behavior — but it is a question
-about how the toy feels, and 0001 §3.1 makes that yours.
+**R3 — The corner pileup is tolerated, and required to dissolve.** The draft
+asked whether to prevent it instead. Tolerating stands: a corner-avoidance force
+has no counterpart in the model §1 names, and the visitor feels it as the page
+pushing back rather than as a flock behaving.
+
+§7 is the record's softest section and this answer does not firm it up. What
+holds the pile open is the speed floor in §3 and nothing else, and the assertion
+§7 offers — that a cornered flock disperses within a bounded number of steps —
+is the first thing worth writing as a failing test under
+[0012](0012-how-software-gets-developed.md) §4, because it is the claim here most
+likely to be wrong.
 
 ## References
 
