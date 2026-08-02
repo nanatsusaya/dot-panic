@@ -87,6 +87,9 @@ writing it down here rather than by deciding it.
   questions about is a change that gets waved through.
 - **Commit messages** follow `type(scope): summary`, lowercase, describing what
   the change is rather than commanding. The body says why.
+- **The shape of a change description** is
+  [.github/pull_request_template.md](.github/pull_request_template.md) — the
+  form an author actually sees. It is not restated here.
 - **Definition of done:** the criteria the task fixed **before it started**,
   verified rather than assumed; anything with observable behavior **exercised**,
   not merely built; docs changed in the same commit. There is no local command
