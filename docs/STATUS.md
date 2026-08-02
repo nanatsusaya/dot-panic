@@ -8,7 +8,7 @@
 
 The method has been adopted. **Nothing of the toy exists yet** — no simulation
 code, no page, no rendering. Everything built so far is the way of working:
-the operating rules, the decision set, eight accepted records, and the five
+the operating rules, the decision set, nine accepted records, and the five
 session procedures in [`.claude/skills/`](../.claude/skills/README.md).
 
 The procedures have now been used. `/moin`, `/weiterimtext` and `/adr` all ran
@@ -103,26 +103,52 @@ a dot may be. Containment needed no new rule, because 0006's caps hold whatever
 the forces are.
 
 **Its §8 asked for something no record owned**, and that is what added
-[0014](adr/README.md) to the set. `touch-action: none` is required or touch does
-not work at all, and the cost is that a canvas filling the viewport traps a touch
-visitor away from the imprint. The requirement is stated in 0007 and enforced
-nowhere until 0014 exists. **The record's own most likely bug report is in R2:** a
-parked cursor pushes forever, so a visitor who leaves the mouse still comes back
-to a permanent hole in the flock, and nothing on the page explains that it is
-intended.
+[0014](adr/0014-page-layout.md) to the set. `touch-action: none` is required or
+touch does not work at all, and the cost is that a canvas filling the viewport
+traps a touch visitor away from the imprint. 0014 now owns that requirement, and
+dissolved it rather than working around it. **The record's own most likely bug
+report is in R2:** a parked cursor pushes forever, so a visitor who leaves the
+mouse still comes back to a permanent hole in the flock, and nothing on the page
+explains that it is intended.
 
-**Fourteen decisions are planned** in [docs/adr/](adr/README.md).
+**How the page is arranged is decided.**
+[0014](adr/0014-page-layout.md) makes the document exactly as tall as the
+viewport at every size, so nothing is ever below a fold and 0007 §8 costs
+nothing — `touch-action: none` takes away a capability nothing was using. A strip
+at the bottom carries 0004 §5's control and a second button that opens a dialog
+holding the explanation and the imprint; everything above it is canvas, and the
+dialog scrolls where the page does not. The strip's top edge is the frame's
+boundary rather than an obstacle inside it, so 0006 §6 turns the flock there and
+the Core gains no fourth force. Heights are measured in `svh`, there is no
+breakpoint and no container query, and **no script opens, closes or toggles
+anything** — `<dialog>` and `<details>` are both Baseline widely available, and
+the dialog opens by a form submission targeting it, because `showModal()` would
+be script and 0002 §2 gives the Shell no page chrome.
+
+**Two of its findings outlive the layout.** The label of the button that opens
+the dialog must name the imprint, because behind a control the label is the whole
+of what 0004 §10 calls a person finding it — a question that could not arise
+while the imprint sat directly on the page. And the imprint being one press away
+is a **reading** of 0003 §7 rather than a plain consequence of it: R1 records the
+decider's reading that a dialog is no navigation, together with the argument
+against it, which is 0003 §7's own stated reason. 0003 stands as written, and the
+route 0005 R2 fixes for loosening an accepted rule — a record that supersedes
+it — has not been taken.
+
+**Fifteen decisions are planned** in [docs/adr/](adr/README.md).
 [0001](adr/0001-purpose-scope-and-success.md),
 [0002](adr/0002-overall-architecture.md),
 [0012](adr/0012-how-software-gets-developed.md),
 [0003](adr/0003-security-and-privacy-by-design.md),
 [0004](adr/0004-compliance-accessibility-and-rights.md),
 [0005](adr/0005-rendering-and-visual-design.md),
-[0006](adr/0006-motion-rules.md) and
-[0007](adr/0007-pointer-and-input-model.md) are Accepted; the other
-six are `Planned`. **The table runs by meaning and not by number**, and two
+[0006](adr/0006-motion-rules.md),
+[0007](adr/0007-pointer-and-input-model.md) and
+[0014](adr/0014-page-layout.md) are Accepted; the other
+six are `Planned`. **The table runs by meaning and not by number**, and three
 numbers have a history it carries rather than this file: 0012 was reserved as
-unused until 2026-08-02, and 0014 was added after the set was planned.
+unused until 2026-08-02, and 0014 and 0015 were both added after the set was
+planned.
 
 What is awaiting review is not repeated here. The
 [pull request list](https://github.com/nanatsusaya/dot-panic/pulls) is the
@@ -146,16 +172,17 @@ its own header how ready it is.
 | [#37](https://github.com/nanatsusaya/dot-panic/issues/37) 0011 Delivery | waits on 0009 |
 | [#38](https://github.com/nanatsusaya/dot-panic/issues/38) The two repository notes 0004 §2 assumes | ready |
 | [#46](https://github.com/nanatsusaya/dot-panic/issues/46) Ticket readiness is stated in two places | ready — and this table is one of the two |
-| [#49](https://github.com/nanatsusaya/dot-panic/issues/49) 0014 Page layout | ready — depends on nothing that is not Accepted |
+| [#53](https://github.com/nanatsusaya/dot-panic/issues/53) 0015 Settings surface | ready — every record it depends on is Accepted |
 
 **The ticket gap is closed.** Every planned decision has one. Five were filed on
 2026-08-02 — 0008, 0009, 0010, 0011 and the repository notes — because the four
 records written so far were each written against one, and the next would have
 been the first without. 0005's was written alongside its record rather than ahead
-of it, and closed with it. **0014 never opened the gap again:**
-[#49](https://github.com/nanatsusaya/dot-panic/issues/49) was filed in the same
-change that added the row, because a planned row without a ticket is the state
-those five were filed to end.
+of it, and closed with it. **Neither row added since then opened the gap again:**
+[#49](https://github.com/nanatsusaya/dot-panic/issues/49) for 0014 and
+[#53](https://github.com/nanatsusaya/dot-panic/issues/53) for 0015 were each
+filed in the same change that added the row, because a planned row without a
+ticket is the state those five were filed to end.
 
 **This table restates something the tickets already say**, and
 [#46](https://github.com/nanatsusaya/dot-panic/issues/46) is the ticket for it.
@@ -192,20 +219,26 @@ What a change description must contain is no longer among the gaps here.
 
 ## The single clearest next step
 
-**Write [decision 0014](adr/README.md) — page layout**, against
-[#49](https://github.com/nanatsusaya/dot-panic/issues/49). It is the next record
-by the index's ordering, and it depends on nothing that is not already Accepted.
-0007 §8 is why it exists: `touch-action: none` on the canvas is required or touch
-does not work, and a canvas filling the viewport then traps a touch visitor away
-from the imprint 0004 requires. That is a requirement 0007 states and cannot
-enforce.
+**Write [decision 0015](adr/README.md) — settings surface**, against
+[#53](https://github.com/nanatsusaya/dot-panic/issues/53). It is the next record
+by the index's ordering, and every record it depends on is Accepted: 0014 §4
+places the dialog a settings surface would live in, 0003 §4 and 0001 §5 each
+independently mean nothing survives a reload, and 0006 §2 makes a dot count that
+cannot be packed into the frame unsatisfiable.
 
-**It is not the only record that could be written now.**
+**Its ordering against 0008 is a real question rather than a formality.** If the
+visitor may change the number of dots, what bounds that range is 0006 §2 at one
+end and performance at the other — and performance is 0008's whole subject. Either
+0015 goes first and defers the number the way 0005 and 0006 deferred theirs, or
+0008 goes first and hands 0015 a ceiling. The index puts 0015 first and nothing
+in it makes that binding.
+
+**Two other records are ready and wait on nothing.**
 [#34](https://github.com/nanatsusaya/dot-panic/issues/34) (0008) and
-[#35](https://github.com/nanatsusaya/dot-panic/issues/35) (0009) are both ready
-and neither waits on 0014 — 0014 and 0008 interact without blocking each other,
-which 0007 R1 works out. The index's ordering is the reason to take this one
-first, not a dependency.
+[#35](https://github.com/nanatsusaya/dot-panic/issues/35) (0009). 0009 is the only
+ready ticket that unblocks others —
+[#36](https://github.com/nanatsusaya/dot-panic/issues/36) and
+[#37](https://github.com/nanatsusaya/dot-panic/issues/37) both wait on it.
 
 ## Implementation scale
 
@@ -232,10 +265,16 @@ leaves open is not part of it: 0007 §8's requirement that the imprint stay
 reachable on touch is 0014's, and 0014 arranges the page rather than deciding the
 input model. The model itself is one record and that record is Accepted.
 
+**Page layout is a new row, not a moved one.** It was not an area on this scale
+until a record owned it, and 0014 is the whole of that question the way 0005 is
+for rendering. 0015 decides what goes inside the dialog 0014 places, not where
+anything sits.
+
 | Area | Stage |
 |---|---|
 | Toolchain | `planned` |
 | Simulation core | `planned` |
 | Rendering | `decided` |
 | Pointer handling | `decided` |
+| Page layout | `decided` |
 | Deployment | `planned` |
