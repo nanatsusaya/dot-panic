@@ -87,7 +87,7 @@ longer supports.
 | [0009](0009-toolchain.md) | Toolchain | What runs the code, what tests it, what builds it | Accepted |
 | [0010](0010-testing-strategy.md) | Testing strategy | What is asserted by a command, what a person measures, and what is only ever watched | Accepted |
 | [0011](0011-delivery.md) | Delivery | How it reaches the public URL, and when | Accepted |
-| [0013](0013-origin-of-the-core.md) | Origin of the core | Written here or taken from a package | Proposed |
+| [0013](0013-origin-of-the-core.md) | Origin of the core | Written here or taken from a package, and what may be read while it is written | Accepted |
 | 0016 | Maintainability and maintenance | What keeps this maintainable, who re-reads the commitments that depend on time, and what the project is once delivery ends | Planned |
 
 0012 sits third because it decides how everything below it gets built. Its

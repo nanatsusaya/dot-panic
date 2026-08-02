@@ -1,6 +1,6 @@
 # 0013 — Origin of the core
 
-- **Status:** Proposed
+- **Status:** Accepted
 - **Date:** 2026-08-02
 - **Deciders:** Daniel Wagner
 - **Ticket:** [#12](https://github.com/nanatsusaya/dot-panic/issues/12)
@@ -142,7 +142,19 @@ close the same routes for every file that reaches the browser; the Core is only
 where the question happened to be asked. Stated as a consequence of those
 records rather than decided here, on 0009 §7's precedent.
 
-### 7. What is asserted, and what nothing decides
+### 7. A third-party implementation may be read; nothing is copied from it
+
+Reading one is permitted. §1 and 0004 §12 are rules about source entering this
+repository, not about what anyone has looked at, and R1 fixes that they are not
+read as reaching further than that.
+
+**An implementation actually consulted is named in the ticket that produced the
+code.** Not as a legal precaution — § 69a Abs. 2 UrhG puts the ideas outside
+protection and 0004 §13 is where that reading lives — but because a later reader
+asking where a piece of the Core came from should find the answer written down
+instead of having to trust that the question was ever asked.
+
+### 8. What is asserted, and what nothing decides
 
 0010 §1's registers, applied to this record:
 
@@ -150,10 +162,11 @@ records rather than decided here, on 0009 §7's precedent.
   reviewer checks a manifest against, and 0010 §4's purity test reads the Core's
   source for a different reason.
 - **Measured.** Nothing.
-- **Neither.** **Provenance.** No command can tell code written here from code
-  copied in, and none is proposed. This record is held by a person remembering,
-  which is the class 0011 §6 has been shrinking — it named three, closed one, and
-  this adds a fourth.
+- **Neither.** **Provenance**, and both halves of §7. No command can tell code
+  written here from code copied in, none can tell whether anything was read, and
+  none can tell whether what was read was named. No check is proposed for any of
+  them. This record is held by a person remembering, which is the class 0011 §6
+  has been shrinking — it named three, closed one, and this adds a fourth.
 
 Said out loud rather than left to be discovered, and it is
 [#83](https://github.com/nanatsusaya/dot-panic/issues/83)'s to decide who
@@ -194,6 +207,11 @@ re-reads it.
 - **A genuinely hard sub-problem is closed to a proven implementation.** §6 is
   the right generalization and its cost falls later, on whoever writes the
   spatial index that 0008's grid needs.
+- **§7 buys nothing a command can defend.** R1 chose an obligation to name what
+  was consulted over a prohibition nobody could check, and both halves rest on a
+  person doing them. The stronger sentence — *nobody opened anyone's code* — is
+  no longer available to this project, and that was the whole of the argument
+  against the rule it chose.
 
 ## Alternatives considered
 
@@ -212,24 +230,29 @@ re-reads it.
   as a rule, and CLAUDE.md's test is exactly this: anything a later change could
   silently reverse gets written down.
 - **Read the four packages' source before deciding.** Rejected because it would
-  change nothing — and, under O1, it may be the thing this project should not
-  do.
+  change nothing: §2 and §3 close every route whatever the code inside them is
+  like. §7 permits the reading; it does not make it useful.
 
-## Open questions
+## Resolved questions
 
-**O1 — May a third-party implementation be read while ours is written?** 0004
-§12 forbids *copying*, and says nothing about reading. The two available rules
-are a clean-room one — the published description only, no implementation opened
-— and a permissive one, where reading is allowed, nothing is copied, and any
-implementation actually consulted is named in the ticket that produced the code.
-Nothing can check either.
+**R1 — a third-party implementation may be read, and what was consulted is
+named.** The question was whether 0004 §12's *no third-party source is copied*
+reaches reading as well, since it says nothing about it. Two rules were put: a
+clean-room one, where only the published description is ever opened, and a
+permissive one, where reading is allowed, nothing is copied, and anything
+actually consulted is recorded. Nothing can check either, which is why the
+question could not be settled by preferring the more decidable rule.
 
-*Recommended default:* the permissive rule. A prohibition nothing can check
-becomes folklore by the third session, and naming what was consulted at least
-leaves a record. The argument the other way is that this project is a worked
-example whose output is meant to be defensible, and *nobody opened anyone's
-code* is a stronger sentence than *we wrote down what we looked at*. This is
-legal posture, so it is not the author's.
+**The decider chose the permissive rule on 2026-08-02**, in the words *"wir
+folgen deiner Empfehlung"*, and §7 is where it now lives. The reason is that the
+choice was between a prohibition nothing enforces and an obligation that at
+least leaves a trace: a rule with no check becomes folklore by the third
+session, and a note in a ticket outlives the session that wrote it.
+
+**What was argued against it is kept rather than dropped.** This project is a
+worked example meant to be defensible, and *nobody opened anyone's code* is a
+stronger sentence than *we wrote down what we looked at*. That sentence is now
+unavailable, and the cost is in *Consequences* rather than argued away here.
 
 ## References
 
