@@ -219,26 +219,27 @@ What a change description must contain is no longer among the gaps here.
 
 ## The single clearest next step
 
-**Write [decision 0015](adr/README.md) — settings surface**, against
-[#53](https://github.com/nanatsusaya/dot-panic/issues/53). It is the next record
-by the index's ordering, and every record it depends on is Accepted: 0014 §4
-places the dialog a settings surface would live in, 0003 §4 and 0001 §5 each
-independently mean nothing survives a reload, and 0006 §2 makes a dot count that
-cannot be packed into the frame unsatisfiable.
+**Write [decision 0008](adr/README.md) — performance budget**, against
+[#34](https://github.com/nanatsusaya/dot-panic/issues/34). Everything it depends
+on is Accepted, and 0006 §2 hands it a ceiling it cannot negotiate: dots that
+cannot be packed into the frame without overlapping make that section
+unsatisfiable, whatever a budget would prefer. Its ticket also carries a second
+topic that arrived from 0002 §2 — how the Core finds a dot's neighbors is
+internal to the Core, and naive neighbor search is quadratic, so the dot count
+and the search strategy are one question.
 
-**Its ordering against 0008 is a real question rather than a formality.** If the
-visitor may change the number of dots, what bounds that range is 0006 §2 at one
-end and performance at the other — and performance is 0008's whole subject. Either
-0015 goes first and defers the number the way 0005 and 0006 deferred theirs, or
-0008 goes first and hands 0015 a ceiling. The index puts 0015 first and nothing
-in it makes that binding.
+**It is written before 0015, which the index places first.** The index orders by
+meaning and says nothing about the order of writing, and here the dependency runs
+one way only. [0014](adr/0014-page-layout.md) R5 makes bounds the substance of
+0015 rather than a detail of it; one of those bounds is 0006 §2, which is
+Accepted, and the other is performance, which is 0008's whole subject. 0008 needs
+nothing from 0015 in return — the maximum count it has to name is the same number
+whether or not a visitor may move it. Decided on 2026-08-02.
 
-**Two other records are ready and wait on nothing.**
-[#34](https://github.com/nanatsusaya/dot-panic/issues/34) (0008) and
-[#35](https://github.com/nanatsusaya/dot-panic/issues/35) (0009). 0009 is the only
-ready ticket that unblocks others —
+**0009 is the other ready ticket**, and it is the only one that unblocks others:
 [#36](https://github.com/nanatsusaya/dot-panic/issues/36) and
-[#37](https://github.com/nanatsusaya/dot-panic/issues/37) both wait on it.
+[#37](https://github.com/nanatsusaya/dot-panic/issues/37) both wait on
+[#35](https://github.com/nanatsusaya/dot-panic/issues/35).
 
 ## Implementation scale
 
