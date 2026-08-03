@@ -12,7 +12,7 @@
   screen, the View is not), §3 (purity), §5 (no domain logic outside the Core)
 - **Supersedes:** nothing. It takes the number 0012, which the index had
   reserved as unused; see *Alternatives considered*.
-- **Amended:** 2026-08-02 — A1
+- **Amended:** 2026-08-02 — A1 · 2026-08-03 — A2
 
 ## Context
 
@@ -181,8 +181,9 @@ cost — a reader who knows Scrum will assume the rest of it — which is why th
 paragraph exists rather than the word standing alone.
 
 **Epic is borrowed as narrowly, and it divides the same tickets along a
-different axis.** An epic is a **named group of tickets that together deliver one
-recognizable part of the toy**, and grouping by subject is the whole of it. It
+different axis.** An epic is a **named group of tickets that belong together as
+one recognizable piece of work** — a part of the toy, or a bounded effort beside
+it — and grouping by subject is the whole of it. It
 carries no estimate, no commitment and no time box. It is never what a change is
 made against, because a change is always against a ticket. An epic with no
 tickets under it is a heading and not work. Where a sprint is a set worked
@@ -355,6 +356,34 @@ zu O3: a"* — where O1(b) was an amendment to this record extending the phases 
 seven, and O2(c) was introducing the epic as a third issue label. **The label
 itself is not decided here**; CLAUDE.md fixes *two labels, and no more*, and
 changing that line is work that follows this record.
+
+**A2 — an epic may group work that is not part of the toy. 2026-08-03.**
+
+§7's definition read:
+
+> An epic is a **named group of tickets that together deliver one
+> recognizable part of the toy**, and grouping by subject is the whole of it.
+
+It now names **one recognizable piece of work — a part of the toy, or a bounded
+effort beside it**. Nothing else §7 decides changes: no estimate, no commitment,
+no time box, an epic is never what a change is made against, and an epic with no
+tickets under it is still a heading and not work.
+
+**What forced it.** A meta-audit of this repository (2026-08-03, run against
+`2130fb3`) produced a set of correction tickets — governance, documentation and
+ticket hygiene — that belong together by subject and deliver no part of the toy.
+Under the old wording the label could not carry that group, and carrying it on a
+plain ticket would have been an epic in everything but name: two shapes for one
+thing.
+
+**The cost is the word widening.** The label no longer tells a reader that an
+epic is product work; an epic's members have to say what they are. Named here
+rather than argued away.
+
+Authorized by Daniel on 2026-08-03, against
+[#116](https://github.com/nanatsusaya/dot-panic/issues/116), choosing the
+amendment route over an unlabeled tracking ticket and over an unrecorded
+exception.
 
 ## References
 
