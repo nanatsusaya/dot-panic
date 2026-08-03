@@ -366,12 +366,18 @@ There are none.
 
 ## What the tickets hold
 
-**Thirty-two issues are open, and the breakdown is most of why.** There were
-eight on 2026-08-02. 0012 §1's phase 3 — cutting the epics visible in the
-accepted records into tickets — was run on the decider's instruction, and it
-produced four epics and twenty-one tickets. The thirty-second is
-[#114](https://github.com/nanatsusaya/dot-panic/issues/114), which the breakdown
-did not produce and reading the operating rules did.
+**How many issues are open is the tracker's to say, and this file has stopped
+counting.** The last count written here merged wrong — thirty-two, against a
+tracker that held thirty-three — and a number a command settles in a second has
+no business being prose that goes stale;
+[#131](https://github.com/nanatsusaya/dot-panic/issues/131) carries the lesson.
+What belongs here is where the volume came from: eight issues became four epics
+and twenty-one tickets when 0012 §1's phase 3 ran on 2026-08-02,
+[#114](https://github.com/nanatsusaya/dot-panic/issues/114) came from reading
+the operating rules rather than from the breakdown, and a meta-audit of this
+project added a fifth epic on 2026-08-03 —
+[#117](https://github.com/nanatsusaya/dot-panic/issues/117) — holding its
+correction tickets, with the audits attached to it.
 
 **This file no longer lists every ticket, and that is not an answer to
 [#46](https://github.com/nanatsusaya/dot-panic/issues/46).** An epic is now the
@@ -387,6 +393,7 @@ stop.
 | [#87](https://github.com/nanatsusaya/dot-panic/issues/87) The flock's motion | 6 tickets | not ready — every member waits on #91 |
 | [#88](https://github.com/nanatsusaya/dot-panic/issues/88) The pointer | 3 tickets | not ready — waits on the Shell and the page |
 | [#89](https://github.com/nanatsusaya/dot-panic/issues/89) The finished page | 3 tickets | not ready — two of the three can only be chosen by watching |
+| [#117](https://github.com/nanatsusaya/dot-panic/issues/117) The meta-audit corrections | 16 tickets | its own table carries each member's state — 0012 §7 applied rather than restated here |
 
 Outside the epics:
 
