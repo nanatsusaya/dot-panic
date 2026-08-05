@@ -4,6 +4,14 @@ Five procedures, one per directory. They are **adapted copies** of the
 `agent-method` plugin, version `0.4.0`, taken on 2026-08-01 from
 [agent-project-rules](https://github.com/nanatsusaya/agent-project-rules).
 
+**They match `0.5.0`, compared on 2026-08-05 against
+[#147](https://github.com/nanatsusaya/dot-panic/issues/147).** Between the two
+versions the plugin changed nothing in these five files except the method's own
+name, and [#146](https://github.com/nanatsusaya/dot-panic/pull/146) had already
+carried that through them. Nothing was taken, because there was nothing to
+take — which is a result of the comparison rather than a reason to skip the
+next one.
+
 Copying rather than installing is what that repository recommends for anyone
 who wants to change them, and it is what makes this project self-supporting:
 the procedures are here, in the repository, whether or not anything is
@@ -55,6 +63,22 @@ British to American. The check found all twenty-five instances; it was not
 noticed by reading. One word had to be put back by hand: `artefacts` is the
 literal key in `method.json` and keeps the spelling of the interface it names,
 not the one this project writes in.
+
+**Two values in one template are ours, and neither is a word.** `/passtdas`
+shows a `method.json` template, and this copy of it carries the declaration
+this project actually holds rather than the plugin's example:
+
+- `"language"` reads `"american"` where the plugin's reads `"british"`, which
+  is the spelling regime above reaching a value.
+- `"version"` reads `"0.5"` where the plugin's still reads `"0.4"`. The
+  decider's call on 2026-08-05: a procedure of this repository shows the
+  catalog this repository declares. **It moves when `method.json` moves**, and
+  nothing checks that — the version is in no link, so the coherence check
+  cannot see it.
+
+Both are named here because the comparison of 2026-08-05 found them outside the
+six above, and a difference nothing accounts for is one a later comparison
+overwrites.
 
 ## The cost
 

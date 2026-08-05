@@ -36,9 +36,25 @@ rename.
 enabled at user scope under its new identity while `.claude/settings.json`
 disabled only the old one — so its five procedures ran beside the five adapted
 copies, which is the second authority CLAUDE.md exists to prevent. Both
-identities are disabled now. **Comparing the copies against plugin `0.5.0` is
-separate work** and has a ticket; the copies still say `0.4.0`, because that is
-still where they came from.
+identities are disabled now.
+
+**The copies have since been compared against plugin `0.5.0`, and they match
+it.** Between the version they were taken from and that release the plugin
+changed nothing in the five files except the method's own name, which the
+rename had already carried through them — so the first case of 0016 §6's fourth
+kind of maintenance work took nothing, which is a result rather than a reason to
+skip the next one.
+
+**What the comparison did find is two values the six adaptations did not
+account for**, both in the `method.json` template inside `/passtdas`, and
+[`.claude/skills/README.md`](../.claude/skills/README.md) now names them. Its
+`"language"` line declares American spelling here and British upstream. Its
+`"version"` line reads `0.5` here and `0.4` upstream, on the decider's call
+that a procedure of this repository shows the catalog this repository
+declares — **which is a commitment nothing can check**, because a version
+number sits in no link and the coherence check reads links. It is not a row in
+[maintenance.md](maintenance.md) either: that list holds what depends on time,
+and this depends on a release.
 
 **The record set was read from outside on 2026-08-03, and no decision was
 reversed.** Two independent audits and a meta-audit that verified both against
@@ -481,7 +497,6 @@ Outside the epics:
 | [#71](https://github.com/nanatsusaya/dot-panic/issues/71) The check chain as commands | waits on #69 and #70 |
 | [#77](https://github.com/nanatsusaya/dot-panic/issues/77) The hosting notice 0011 §4 puts beside the imprint | not ready — waits on #96 for a dialog to sit in |
 | [#90](https://github.com/nanatsusaya/dot-panic/issues/90) The real imprint address | not ready — the decider supplies the content |
-| [#147](https://github.com/nanatsusaya/dot-panic/issues/147) Compare the five procedure copies against plugin `0.5.0` | ready — the trigger fired on 2026-08-05 |
 
 **[#90](https://github.com/nanatsusaya/dot-panic/issues/90) is the one thing
 nobody here can work, and it stops the URL rather than the code.** 0004 R2 makes
@@ -611,26 +626,26 @@ What a change description must contain is no longer among the gaps here.
 
 ## The single clearest next step
 
-**Compare the five procedure copies against plugin `0.5.0`, against
-[#147](https://github.com/nanatsusaya/dot-panic/issues/147).**
-[`.claude/skills/README.md`](../.claude/skills/README.md) names a release of
-the method as the trigger, and it fired on 2026-08-05 — the same day
-[0016](adr/0016-maintainability-and-maintenance.md) §6 made that the fourth
-kind of maintenance work this project admits. The copies still say `0.4.0`,
-because that is still where they came from.
+**Run `/passtdas`, against
+[#122](https://github.com/nanatsusaya/dot-panic/issues/122).** It is the one
+procedure this project has never invoked, and the gap it would close is the one
+this file names about itself two paragraphs into *Position*: `method.json`
+declares no adaptations, while seven phases, an epic and a third label have
+since entered how work is actually done. **The green check cannot settle
+it** — it says so in its own output, where twenty-one rules in force are marked
+`manual` — because whether those additions are project layer or adaptations in
+the method's sense is a judgment and not a scan.
 
-**A diff cannot simply be taken, and that is the whole of the job.** The copies
-are adapted rather than vendored, and
-[`.claude/skills/README.md`](../.claude/skills/README.md) records each
-divergence and why — so a `0.5.0` that touched the same lines needs the
-adaptation re-applied rather than the copy replaced. That file owns what to do
-and this one does not restate it.
+**It ends in a proposal, and that is the point rather than a limitation.** The
+procedure adopts nothing on its own authority, so what this step produces is a
+finding for the decider and a `method.json` that changes only on an answer.
+#122 puts it *at or before* the phase transition, which is what makes now a
+legitimate moment rather than a premature one.
 
-**What moved this step is that the one before it closed.**
-[#145](https://github.com/nanatsusaya/dot-panic/issues/145) turned two
-procedure steps with no object into steps with a file to read; #147 is the
-other half of the same question — whether the procedures themselves are still
-the ones the method publishes.
+**The ready alternative is
+[#38](https://github.com/nanatsusaya/dot-panic/issues/38)**, the two repository
+notes 0004 §2 assumes and this repository does not have. It is smaller and
+decision-free, and it is not what any other work is waiting on.
 
 **What stands between here and code is one activity, and it is still not this
 one.**
