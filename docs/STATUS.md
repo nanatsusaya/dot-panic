@@ -408,14 +408,21 @@ for as long as the page is up**, with nothing watching for it, because §1
 creates no monitoring. **What that promises is attention, not uptime** — the
 only one of the two a single person can keep.
 
-**The list its §2 decides does not exist.** Every commitment that depends on
-time is one row carrying what it is, which record owns it, whether it is dated
-or standing, when it was last read and what makes it due — and creating the
-file is a ticket rather than a side effect of the record. Both session
-procedures already read it: `/moin` step 5 reports what is due and
-`/feierabend` step 4 runs it, so until it exists both steps are instructions
-with no object. **The list decides nothing**; a row that disagrees with the
-record it names is wrong by construction.
+**The list its §2 decides exists now.**
+[docs/maintenance.md](maintenance.md) carries the four commitments that depend
+on time, each pointing at the record that owns it, so `/moin` step 5 and
+`/feierabend` step 4 have an object for the first time. **The list decides
+nothing**; a row that disagrees with the record it names is wrong by
+construction.
+
+**Writing it split the four rows two and two, not three and one.** 0016's
+*Context* counts three commitments that move with time, but §3 splits on
+whether a **date** makes a row due, and 2028-06-12 is the only such date any
+record carries — so which browser features are Baseline widely available is a
+standing row, and calling it dated would have meant inventing the review
+interval §3 refuses for the standing row it names. **One dated row carries no
+date at all**: no slowdown factor has been chosen, because nothing has been
+measured and there is no toolchain to measure with.
 
 **Sixteen decisions are planned in [docs/adr/](adr/README.md), and all sixteen
 are Accepted.** There is no `Planned` row left, which has not been true
@@ -474,7 +481,6 @@ Outside the epics:
 | [#71](https://github.com/nanatsusaya/dot-panic/issues/71) The check chain as commands | waits on #69 and #70 |
 | [#77](https://github.com/nanatsusaya/dot-panic/issues/77) The hosting notice 0011 §4 puts beside the imprint | not ready — waits on #96 for a dialog to sit in |
 | [#90](https://github.com/nanatsusaya/dot-panic/issues/90) The real imprint address | not ready — the decider supplies the content |
-| [#145](https://github.com/nanatsusaya/dot-panic/issues/145) The maintenance list 0016 §2 decides | ready — the record fixes the columns and names the rows |
 | [#147](https://github.com/nanatsusaya/dot-panic/issues/147) Compare the five procedure copies against plugin `0.5.0` | ready — the trigger fired on 2026-08-05 |
 
 **[#90](https://github.com/nanatsusaya/dot-panic/issues/90) is the one thing
@@ -605,29 +611,26 @@ What a change description must contain is no longer among the gaps here.
 
 ## The single clearest next step
 
-**Create `docs/maintenance.md` against
-[#145](https://github.com/nanatsusaya/dot-panic/issues/145).**
-[0016](adr/0016-maintainability-and-maintenance.md) §2 fixes its five columns
-and its *Context* names the four rows that go in it, so nothing about the work
-is open. What makes it the clearest step rather than only the smallest is that
-both session procedures already read a list this project has never had —
-`/moin` step 5 reports what is due and `/feierabend` step 4 runs it — and
-until the file exists, both steps are instructions with no object.
+**Compare the five procedure copies against plugin `0.5.0`, against
+[#147](https://github.com/nanatsusaya/dot-panic/issues/147).**
+[`.claude/skills/README.md`](../.claude/skills/README.md) names a release of
+the method as the trigger, and it fired on 2026-08-05 — the same day
+[0016](adr/0016-maintainability-and-maintenance.md) §6 made that the fourth
+kind of maintenance work this project admits. The copies still say `0.4.0`,
+because that is still where they came from.
 
-**The record that decides it landed on 2026-08-05 and closed the last `Planned`
-row**, so nothing sits between this file and a decision that has not been
-written. Deliberately not creating the file is 0016 §2's own sentence, on the
-precedent [#49](https://github.com/nanatsusaya/dot-panic/issues/49),
-[#53](https://github.com/nanatsusaya/dot-panic/issues/53) and
-[#83](https://github.com/nanatsusaya/dot-panic/issues/83) set: the ticket is
-filed in the change that accepts the record.
+**A diff cannot simply be taken, and that is the whole of the job.** The copies
+are adapted rather than vendored, and
+[`.claude/skills/README.md`](../.claude/skills/README.md) records each
+divergence and why — so a `0.5.0` that touched the same lines needs the
+adaptation re-applied rather than the copy replaced. That file owns what to do
+and this one does not restate it.
 
-**[#147](https://github.com/nanatsusaya/dot-panic/issues/147) is ready too, and
-it is not this one.** Comparing the five procedure copies against plugin
-`0.5.0` is 0016 §6's fourth kind of maintenance work having its first case, on
-the day the record was accepted — but it is a reading job against another
-repository, while #145 is what turns an existing instruction into something a
-session can carry out.
+**What moved this step is that the one before it closed.**
+[#145](https://github.com/nanatsusaya/dot-panic/issues/145) turned two
+procedure steps with no object into steps with a file to read; #147 is the
+other half of the same question — whether the procedures themselves are still
+the ones the method publishes.
 
 **What stands between here and code is one activity, and it is still not this
 one.**
