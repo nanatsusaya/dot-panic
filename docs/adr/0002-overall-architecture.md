@@ -9,7 +9,7 @@
   judged by watching), §3.5 (the performance floor), §4 (the page carries three
   things), §5 (what is out of scope), §6 (the ranked failures)
 - **Supersedes:** nothing
-- **Amended:** 2026-08-02 — A1 · 2026-08-05 — A2, A3
+- **Amended:** 2026-08-02 — A1 · 2026-08-05 — A2, A3, A4
 
 ## Context
 
@@ -69,18 +69,29 @@ part, and the pure part knows nothing about them.
 | **Shell** | impure | The loop, the clock, input events, the size of the frame, the choice of seed, the wiring of the other two, and the one call §6 permits |
 | **View** | impure | Given a world, drawing it |
 
-**Dependency direction: Shell → Core, Shell → View, and nothing else.** The Core
-imports nothing from this project. The View receives a world as an argument and
-makes **no value import** from this project; the Shell is the only file that
-does. To name the world's type the View may write a whole
-`import type { … } from …` statement and nothing else — such a statement is
-erased from the emitted JavaScript, so the file the browser loads imports
-nothing and the direction holds where it executes. The inline specifier form,
-`import { type World }`, is not permitted — see A2 — even though it names no
-value either.
+**Dependency direction: Shell → Core, Shell → View, and nothing else.** The rule
+is about the three parts and not about every file: what it forbids is a **value
+import crossing a part boundary** in the wrong direction. The Core imports
+nothing from the Shell or the View. The View receives a world as an argument and
+makes **no value import** from either of the others; the Shell is the only part
+that crosses a boundary at all. **A file importing another file of its own part
+is not what this section is about** — see A4. To name the world's type the View
+may write a whole `import type { … } from …` statement and nothing else — such a
+statement is erased from the emitted JavaScript, so the file the browser loads
+imports nothing and the direction holds where it executes. The inline specifier
+form, `import { type World }`, is not permitted — see A2 — even though it names
+no value either.
 
-**Checkable by reading:** under `view/`, every import statement naming a path
-inside this project begins `import type`.
+**A test belongs to no part.** 0010 §4 has a test read the Core's source and 0012
+§4 puts a failing test before every rule of the simulation, so a file that is not
+the Shell has to import the Core. This section never governed that, and where
+such a file sits is not its question either.
+
+**Checkable by reading a path.** Under `core/`, every import specifier names a
+path inside `core/`. Under `view/`, every import statement naming a path outside
+`view/` begins `import type`. Under `shell/`, anything. A test file is outside
+all three, by the paragraph above; what makes a file a test is
+[0009](0009-toolchain.md) §6's discovery patterns.
 
 The View is separate from the Shell rather than part of it because it is the one
 part that can only be judged by watching (0001 §3.1). Keeping it alone in its own
@@ -391,6 +402,70 @@ of correcting the citation by amendment — on the precedent of
 [#58](https://github.com/nanatsusaya/dot-panic/issues/58), where three characters
 cost two — rather than leaving a premise that resolves to the wrong section:
 *"wir folgen deiner empfehlung bei beiden."*
+
+**A4 — the direction is between the three parts, not between every file.
+2026-08-05.**
+
+§2 read:
+
+> **Dependency direction: Shell → Core, Shell → View, and nothing else.** The
+> Core imports nothing from this project. The View receives a world as an
+> argument and makes **no value import** from this project; the Shell is the
+> only file that does.
+
+and its checkable form read:
+
+> **Checkable by reading:** under `view/`, every import statement naming a path
+> inside this project begins `import type`.
+
+**Read as a rule about every file, that sentence forbids two things nobody asked
+it about.** The first is a Core of more than one module: `core/world.ts`
+importing `core/random.js` is a value import from this project by a file that is
+not the Shell. That runs against [0008](0008-performance-budget.md) §7, which
+keeps two implementations of one query forever, and
+[0013](0013-origin-of-the-core.md) §6, which anticipates a spatial index and a
+vector helper; and it empties [0009](0009-toolchain.md) §5's own checkable form,
+which is about *import specifiers under `core/`* and would be about nothing.
+
+**The second is a test importing the Core at all**, which is what
+[0010](0010-testing-strategy.md) §4 and
+[0012](0012-how-software-gets-developed.md) §4 both require. That one has no way
+around it — there is no test-first Core under the literal reading — so the
+reading is forced rather than chosen. It was met the moment the first Core file
+was written, in [#91](https://github.com/nanatsusaya/dot-panic/issues/91), and
+this amendment is what writes it down instead of leaving it as something review
+carried once.
+
+**Three things move.** The sentence now forbids a value import **crossing a part
+boundary**, and says that a file importing its own part is not its subject. A
+test belongs to no part, and where one sits is not this section's question —
+that is [#181](https://github.com/nanatsusaya/dot-panic/issues/181)'s, and this
+amendment deliberately leaves it free rather than deciding it in passing a second
+time. And the checkable form widens from `view/` alone to one line per
+directory, because a rule about crossing a boundary is decidable by reading a
+path and the old form decided a third of it. **Nothing runs that check today**,
+which is the same state it was in before.
+
+**Nothing else changes.** §1, §3, §4, §5, §6 and §7 stand as accepted, A1, A2
+and A3 stand, and R1 through R4 are untouched. The direction is the same
+direction: the Core still imports nothing from the Shell or the View, the View
+still makes no value import from either, and the Shell is still the only part
+that crosses. **A2 in particular is untouched** — its subject is the View's
+type-only import and the form it may take, and this neither widens nor narrows
+it. That A2 closes by saying *the Core's sentence is not touched* is a statement
+about what A2 did, which is what an amendments log is for.
+
+**What it costs is a rule that used to fit in one sentence.** *The Core imports
+nothing from this project* was memorable and, read as written, wrong. What
+replaces it is accurate and longer, and a reader now has to know what a part is
+before they can apply it. The checkable form is what keeps that from being a
+judgment call.
+
+Authorized by Daniel on 2026-08-05, against
+[#176](https://github.com/nanatsusaya/dot-panic/issues/176), on a recommendation
+of an amendment on A2's precedent — carried by a ticket of its own rather than
+folded into the change that met the question: *"wir folgen deiner empfehlung bei
+O1."*
 
 ## References
 

@@ -375,16 +375,25 @@ them on a frame also needs a speed to leave at, and no record fixes one. It is
 are scattered over one square of the frame's shorter side, because the frame
 itself is [#103](https://github.com/nanatsusaya/dot-panic/issues/103)'s.
 
-**One sentence in 0002 §2 had to be read rather than applied**, and this change
-could not avoid it. *The Core imports nothing from this project*, with *the
-Shell is the only file that does* beside it, is the direction between the three
-parts. Read as a rule about every file, it forbids `core/world.ts` importing
-`core/random.js` — and it forbids a test importing the Core at all, which is
-what 0010 §4 and 0012 §4 both require. So the reading is forced rather than
-chosen, and what it costs is an amendment on 0002 A2's precedent — authorized on
-2026-08-05 and carried by
-[#176](https://github.com/nanatsusaya/dot-panic/issues/176) rather than folded
-into the change that found it.
+**One sentence in 0002 §2 had to be read rather than applied**, and #91 could
+not avoid it. *The Core imports nothing from this project*, with *the Shell is
+the only file that does* beside it, read as a rule about every file forbids
+`core/world.ts` importing `core/random.js` — and forbids a test importing the
+Core at all, which is what 0010 §4 and 0012 §4 both require. The reading was
+therefore forced rather than chosen, and **0002 A4 is where it is written down**,
+authorized on 2026-08-05 against
+[#176](https://github.com/nanatsusaya/dot-panic/issues/176) and carried by a
+change of its own rather than folded into the one that met the question.
+
+**What A4 moves is the subject of the rule, not the rule.** The direction still
+runs Shell → Core, Shell → View and nowhere else; what it now forbids is a value
+import **crossing a part boundary**, so a file importing its own part is outside
+it. **A test belongs to no part**, which is stated so that
+[#181](https://github.com/nanatsusaya/dot-panic/issues/181) stays free to put one
+anywhere rather than colliding with this section a second time. And the checkable
+form widens from `view/` alone to one line per directory — `core/` imports only
+inside `core/`, `view/` crosses only as a whole `import type` statement, `shell/`
+anything. **Nothing runs that check**, which is what it was before.
 
 **How code documents itself is written down now, and the form came from outside
 this repository.** CLAUDE.md carried one sentence — *comments explain why, not
@@ -1091,20 +1100,33 @@ What a change description must contain is no longer among the gaps here.
 
 ## The single clearest next step
 
-**[#94](https://github.com/nanatsusaya/dot-panic/issues/94) with
-[#97](https://github.com/nanatsusaya/dot-panic/issues/97), coupled — the Shell,
-and the control that stops the flock.** Step 3 of the order #13 carries, and
-everything it waits on is merged: a Core to step, a View to draw and a page to
-draw onto. The two are one increment because #94 is the first thing that moves
-and 0004 §4 binds every motion change, so neither is done until both hold.
+**[#171](https://github.com/nanatsusaya/dot-panic/issues/171) — adopt the
+consolidated pull-request shape, and stop answering a question by editing it.**
+Not because it builds anything, but because
+[CLAUDE.md](../CLAUDE.md)'s *Working with the decider* still says *once answered,
+rewrite them in place as `R1..Rn`* — and nothing has done that since #174, which
+answers by a comment and a one-line pointer with the question left standing. **A
+session starting fresh reads the rule and does the old thing**, which is the
+defect that file itself calls the most expensive kind.
 
-**The other half of step 2 is blocked, and not by an epic member.**
-[#92](https://github.com/nanatsusaya/dot-panic/issues/92) reads the Core's
-source for 0002 §3's fifteen names, and where a test like that lives is
-[#181](https://github.com/nanatsusaya/dot-panic/issues/181) — the decider's, and
-answering it also unblocks #96. Writing #92 first would settle #181 by typing,
-which is what that ticket exists to prevent. **Which of the two goes first is
-sequencing**, and that is the decider's rather than this file's.
+**Two things are the decider's and one of them gates three tickets.**
+[#181](https://github.com/nanatsusaya/dot-panic/issues/181) decides where a
+source-reading test lives, and until it is answered
+[#92](https://github.com/nanatsusaya/dot-panic/issues/92),
+[#96](https://github.com/nanatsusaya/dot-panic/issues/96)'s label check and
+[#178](https://github.com/nanatsusaya/dot-panic/issues/178) all wait on it —
+writing any of them first would settle #181 by typing. And **G1's binding has
+still never been verified**, which the coherence check says it cannot decide and
+names the address for.
+
+**[#94](https://github.com/nanatsusaya/dot-panic/issues/94) with
+[#97](https://github.com/nanatsusaya/dot-panic/issues/97) is step 3** and
+everything it waits on is merged. **Its scope is short of three criteria**,
+found while watching #93: who sets the canvas's backing-store size, who reads
+0005 §3's three colors from the stylesheet and hands them to the View — #94 does
+not mention colors at all — and what happens when the viewport or the text size
+changes. Adding them after the work starts is what condition 1 of Done forbids,
+so they go in first.
 
 **Three small things are open outside the epic and none of them blocks this.**
 [#178](https://github.com/nanatsusaya/dot-panic/issues/178) waits on
