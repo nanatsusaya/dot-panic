@@ -43,9 +43,9 @@ should say which choice was made and why the alternatives were not.
 - **A new decision** → a new record at the next free number. Numbers are never
   reused.
 - **A change to an accepted decision** → **stop and ask.** An accepted decision
-  is immutable except with explicit authorisation, recorded in that decision's
+  is immutable except with explicit authorization, recorded in that decision's
   *Amendments* section with the superseded wording quoted verbatim. Without that
-  authorisation, a changed decision needs a **superseding** record, not an edit.
+  authorization, a changed decision needs a **superseding** record, not an edit.
 - **Superseding** → a new record naming what it supersedes; set the old one's
   status to `Superseded` in both the file and the index.
 

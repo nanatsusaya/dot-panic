@@ -66,8 +66,12 @@ Seven adaptations, and each exists for a reason this project ran into:
 
 An eighth change was not a choice. Copying these files made them documents of
 this repository, so they fall under its spelling regime and were rewritten from
-British to American. The check found all twenty-five instances; it was not
-noticed by reading. One word had to be put back by hand: `artefacts` is the
+British to American. The check found twenty-five instances that reading had
+missed — **and it missed four of its own**, corrected on 2026-08-05 against
+[#130](https://github.com/nanatsusaya/dot-panic/issues/130): `authorisation`
+twice in `/adr`, `Summarise` in `/moin`, `judgement` in `/weiterimtext`. It
+scans a list of word pairs and not the general `-ise` ending, and it prints that
+limit on every run. One word had to be put back by hand: `artefacts` is the
 literal key in `method.json` and keeps the spelling of the interface it names,
 not the one this project writes in.
 
