@@ -25,6 +25,7 @@
   nothing else), §4 (the dialog), §5 (nothing else on the page is toggled by
   script)
 - **Supersedes:** nothing
+- **Amended:** 2026-08-05 — A1
 
 ## Context
 
@@ -208,8 +209,8 @@ The same division 0006 §10, 0007 §9, 0014 §9 and 0008 §9 make.
 
 | | Invariant |
 |---|---|
-| §1 | The page contains exactly two controls — 0004 §5's and 0014 §2's — and no other element changes what the Core or the View is given |
-| §4 | The Shell reads no control's value, and makes no call except 0014 §5's `showModal()` |
+| §1 | The strip [0014](0014-page-layout.md) §2 fixes contains exactly two controls, 0004 §5's and 0014 §2's, and no element anywhere on the page changes what the Core or the View is given |
+| §4 | The Shell reads no control's value and hands nothing from one to the Core or the View |
 | §6 | Nothing on the page reads or writes a query string |
 
 §2's and §3's noes are specific cases of §1's and get no row of their own, because
@@ -333,6 +334,62 @@ Closed here, the same *später* costs a record superseding **this** one, which i
 the ordinary route and the one 0005 R2 fixed for exactly this shape. The index row
 for 0015 is what a later session finds; nothing is hidden by the lighter
 instrument.
+
+## Amendments
+
+**A1 — two rows in §8 promised what no command could decide. 2026-08-05.**
+
+§8's first table read:
+
+> | §1 | The page contains exactly two controls — 0004 §5's and 0014 §2's — and no other element changes what the Core or the View is given |
+> | §4 | The Shell reads no control's value, and makes no call except 0014 §5's `showModal()` |
+
+**Nothing this record decides changes.** There is still no settings surface, §6's
+query-string invariant stands, and §2 through §7 are the same price list. What
+moves is two claims about what a reader can decide from the source.
+
+**The §4 row was false, and it was also a copy.** The Shell runs the loop
+([0002](0002-overall-architecture.md) §2), calls `requestAnimationFrame`
+([0008](0008-performance-budget.md) §2) and listens for four pointer events
+([0007](0007-pointer-and-input-model.md) §1) — so *makes no call except* was
+contradicted by three accepted records the day it was written. That half was also
+[0014](0014-page-layout.md) §9's row already, in the form that is actually true:
+*the Shell contains exactly one `showModal()` call, and nothing else on the page
+is opened, closed or toggled by script.* It is dropped here rather than repaired,
+because two authorities for one fact is what C2 forbids and 0014 owns page
+chrome. What remains is what §4 decides.
+
+**The §1 row was not false but was unusable as a count.** §1's prose means
+controls that change something, and nothing in the dialog does. A reviewer
+applying the row literally counts `<details>` sections and the close button
+0014 §5 puts inside a `<form method="dialog">`, and fails the page on first read.
+The count is now anchored to the strip, which is where 0014 §2 already put
+it — *the strip holds two things and nothing else* — and the half that reaches
+the whole page keeps reaching it, because it is about changing what the Core or
+the View is given rather than about being a control.
+
+**Anchored rather than defined**, and that was a choice. Defining *control* in
+this record would put a term in the record that uses it instead of the record
+that owns the page's elements. 0014 §2 already carries the count.
+
+**One thing was checked and needed no change.** §4's argument leans on
+[0002](0002-overall-architecture.md) §2's list of the Shell's jobs being
+exhaustive, and [0005](0005-rendering-and-visual-design.md) §3 has the Shell hand
+the View three colors — a job the list does not name. It is not an exception:
+0005 §3 already reads it as wiring, in the record's own words, *from the Shell,
+which 0002 §2 makes the part that wires the other two*. And §4 says *changing*
+what the View is told, not handing it. So no amendment to 0002's list is
+authorized here and none is needed; this paragraph exists because the question
+was asked and the answer would otherwise have to be worked out again.
+
+**The prose of §1 and §4 is untouched.** They said what they meant; the rows
+turned one of them into a number and the other into a superset.
+
+Authorized by Daniel on 2026-08-05, against
+[#125](https://github.com/nanatsusaya/dot-panic/issues/125), on a recommendation
+of anchoring the count to 0014 §2 rather than defining *control* here, of
+dropping the duplicated half rather than repairing it, and of the colors sitting
+inside *wiring*: *"wir folgen deiner empfehlung bei beiden."*
 
 ## References
 
