@@ -450,9 +450,16 @@ which [#71](https://github.com/nanatsusaya/dot-panic/issues/71) had already
 replaced with a script; it now points at CLAUDE.md's *Commands* rather than
 carrying a string that goes stale the first time one is renamed. The other two
 are American spelling and the closing-keyword warning, which the handbook has
-none of — and that warning quoted a live issue number, so a pull request opened
-from the template through the web interface would have closed
-[#83](https://github.com/nanatsusaya/dot-panic/issues/83). It reads `#NN` now.
+none of.
+
+**That warning records a trap and was carrying a third round of it.** The
+tracker's own timeline says
+[#83](https://github.com/nanatsusaya/dot-panic/issues/83) was closed
+accidentally **twice** on 2026-08-02, at 21:46 and again at 22:17, and reopened
+within sixteen minutes and three; it closed for real on 2026-08-05 when 0016
+landed. The warning written afterwards quoted the live number, so a pull request
+opened from the template through the web interface would have done it a third
+time. It reads `#NN` now.
 
 **The commit rule names the `Assisted-by:` trailer**, which is the catalog's and
 comes from curl's keyword list. A commit written by an agent here carries
