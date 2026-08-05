@@ -189,5 +189,11 @@ procedures would be two authorities for one thing.
   claim.** Run it **alone** — not in a pipeline, not chained to what comes
   next. A pipeline reports the last command's exit status, so piping a check
   into anything that trims its output hides both the finding and the failure.
-- **Never commit secrets, credentials or personal data.** This project needs
-  none of them; anything that looks like one is a mistake.
+- **Never commit secrets, credentials or personal data.** This project needs no
+  secret and no credential; anything that looks like one is a mistake. Personal
+  data is where the rule has to be read rather than applied: whom it protects
+  here is the visitor, about whom nothing is recorded anywhere, and the
+  operator's identity in the imprint is the other party — decided page content,
+  committed like any other text.
+  [0003](docs/adr/0003-security-and-privacy-by-design.md) R1 is what tells the
+  two apart, and it narrows nothing.
