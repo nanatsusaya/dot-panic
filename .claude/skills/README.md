@@ -32,7 +32,7 @@ procedures themselves stay in English, like every other file.
 
 ## What was changed
 
-Six adaptations, and each exists for a reason this project ran into:
+Seven adaptations, and each exists for a reason this project ran into:
 
 1. **`/adr` no longer defines the shape of a record.** It points at
    [`docs/adr/README.md`](../../docs/adr/README.md), which is the only
@@ -56,8 +56,13 @@ Six adaptations, and each exists for a reason this project ran into:
    the next two records. A sentence in a document was not what held it; a command
    with a known result is. The [method log](../../docs/method-log.md) has the
    incident.
+7. **`/feierabend` no longer states the bar for handing work back.** It points
+   at [CLAUDE.md](../../CLAUDE.md#delivery), where that bar governs every
+   hand-back rather than only a wind-down. Its copy introduced itself as
+   something the procedure *adds*, which is how it went on reading as an
+   addition through three merged changes that each named it and left it.
 
-A seventh change was not a choice. Copying these files made them documents of
+An eighth change was not a choice. Copying these files made them documents of
 this repository, so they fall under its spelling regime and were rewritten from
 British to American. The check found all twenty-five instances; it was not
 noticed by reading. One word had to be put back by hand: `artefacts` is the
@@ -87,4 +92,4 @@ it, and nothing will announce that.
 
 **The trigger is a release of `agent-project-rules`.** Compare these five
 files against the new version, take what applies, and leave what was adapted on
-purpose. The six changes above are the list of what not to overwrite.
+purpose. The seven changes above are the list of what not to overwrite.
