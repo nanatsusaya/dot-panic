@@ -567,23 +567,7 @@ What a change description must contain is no longer among the gaps here.
 
 ## The single clearest next step
 
-**Fix CLAUDE.md against
-[#118](https://github.com/nanatsusaya/dot-panic/issues/118).** Its *Guardrails*
-still say this project needs no personal data, and
-[#90](https://github.com/nanatsusaya/dot-panic/issues/90) makes that false: the
-operator's name and a serviceable address are page content, required by 0004 R2
-and gated by 0011 §6. #90 predicts its own refusal by a session that reads only
-CLAUDE.md, which is 0001 §6.1 in the file every session reads first. The
-distinction it has to refer to rather than restate is 0003 R1 — the visitor,
-about whom nothing is recorded, against the person a published project is
-attached to by name.
-
-**It is the second concern in the file the first one left alone.** #114 landed
-on 2026-08-05 and took the expired *Working conventions* paragraph with it; the
-guardrail was deliberately not touched in the same change, because two concerns
-in one file are still two changes.
-
-**Then write [0016](adr/README.md) against
+**Write [0016](adr/README.md) against
 [#83](https://github.com/nanatsusaya/dot-panic/issues/83)**, the last row in the
 index with no file behind it. What it has to decide is not abstract: three
 commitments here depend on time and no record owns re-reading them — 0008 §8's
@@ -591,10 +575,24 @@ slowdown factor with the date it was read, 0014's `showModal()` bridge whose end
 date is 2028-06-12, and 0009 §4's browser APIs — and 0013 §8 added a fourth, so
 the set 0011 §6 was shrinking one at a time is growing again.
 
-**Neither gates the other, and neither gated the breakdown.** 0016 constrains
-that work only through D4 — a ticket that would settle something a still-open
-record owns is not ready — and nothing about the toy settles what maintenance
-means.
+**CLAUDE.md is what this replaces, and both halves of it landed on 2026-08-05.**
+[#114](https://github.com/nanatsusaya/dot-panic/issues/114) took the expired
+*Working conventions* paragraph, and
+[#118](https://github.com/nanatsusaya/dot-panic/issues/118) the guardrail
+sentence that said this project needs no personal data — which is why
+[#90](https://github.com/nanatsusaya/dot-panic/issues/90) no longer predicts its
+own refusal by a session that reads only that file. Both were 0001 §6.1 sitting
+in the document every session reads first.
+
+**[#119](https://github.com/nanatsusaya/dot-panic/issues/119) could take
+precedence, and that is the decider's to say.** It corrects a claim 0010 makes
+in three places and this file repeats once, and it is an amendment, so it does
+not begin without authorization. 0016 is the step here because it is the older
+gap, not because the defect was weighed and ranked below it.
+
+**0016 gates nothing that follows it.** It constrains the breakdown only through
+D4 — a ticket that would settle something a still-open record owns is not
+ready — and nothing about the toy settles what maintenance means.
 
 **What stands between here and code is one activity, and it is not this one.**
 0012 §2 makes a sprint a set of tickets brought to Definition of Ready
