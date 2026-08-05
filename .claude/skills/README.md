@@ -5,11 +5,13 @@ Five procedures, one per directory. They are **adapted copies** of the
 [agent-project-rules](https://github.com/nanatsusaya/agent-project-rules).
 
 **They match `0.5.0`, compared on 2026-08-05 against
-[#147](https://github.com/nanatsusaya/dot-panic/issues/147).** Between the two
-versions the plugin changed nothing in these five files except the method's own
-name, and [#146](https://github.com/nanatsusaya/dot-panic/pull/146) had already
-carried that through them. Nothing was taken, because there was nothing to
-take — which is a result of the comparison rather than a reason to skip the
+[#147](https://github.com/nanatsusaya/dot-panic/issues/147) and re-checked
+against the plugin later the same day.** Two things changed in these five files
+since the version they were taken from: the method's own name, which
+[#146](https://github.com/nanatsusaya/dot-panic/pull/146) had already carried
+through them, and the catalog number in the template `/passtdas` shows, which
+this copy had been given half an hour earlier for the same reason. Nothing was
+taken either time — a result of the comparison rather than a reason to skip the
 next one.
 
 Copying rather than installing is what that repository recommends for anyone
@@ -69,21 +71,20 @@ noticed by reading. One word had to be put back by hand: `artefacts` is the
 literal key in `method.json` and keeps the spelling of the interface it names,
 not the one this project writes in.
 
-**Two values in one template are ours, and neither is a word.** `/passtdas`
-shows a `method.json` template, and this copy of it carries the declaration
-this project actually holds rather than the plugin's example:
-
-- `"language"` reads `"american"` where the plugin's reads `"british"`, which
-  is the spelling regime above reaching a value.
-- `"version"` reads `"0.5"` where the plugin's still reads `"0.4"`. The
-  decider's call on 2026-08-05: a procedure of this repository shows the
-  catalog this repository declares. **It moves when `method.json` moves**, and
-  nothing checks that — the version is in no link, so the coherence check
-  cannot see it.
-
-Both are named here because the comparison of 2026-08-05 found them outside the
-six above, and a difference nothing accounts for is one a later comparison
+**One value in one template is ours, and it is not a word.** `/passtdas` shows
+a `method.json` template, and this copy of it declares American spelling where
+the plugin's declares British — the spelling regime above reaching a value. It
+is named here because the comparison of 2026-08-05 found it outside the
+adaptations, and a difference nothing accounts for is one a later comparison
 overwrites.
+
+**A second value was ours for half an afternoon.** The same template's
+`"version"` read `0.5` here and `0.4` upstream, on the decider's call that a
+procedure of this repository shows the catalog this repository declares. The
+plugin then made the same change for the same reason, and put a command behind
+it, so there is no longer a difference to keep. It is written down because **a
+recorded divergence is a claim about somebody else's file** — it goes stale the
+way any other claim does, and the next comparison would have protected it.
 
 ## The cost
 

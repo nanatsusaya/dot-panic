@@ -58,22 +58,22 @@ copies, which is the second authority CLAUDE.md exists to prevent. Both
 identities are disabled now.
 
 **The copies have since been compared against plugin `0.5.0`, and they match
-it.** Between the version they were taken from and that release the plugin
-changed nothing in the five files except the method's own name, which the
-rename had already carried through them — so the first case of 0016 §6's fourth
-kind of maintenance work took nothing, which is a result rather than a reason to
-skip the next one.
+it.** In the five files the plugin changed only the method's own name, which the
+rename had already carried through them, and the catalog number in the template
+`/passtdas` shows, which this repository had already set to the same value — so
+the first case of 0016 §6's fourth kind of maintenance work took nothing, which
+is a result rather than a reason to skip the next one.
 
-**What the comparison did find is two values the six adaptations did not
-account for**, both in the `method.json` template inside `/passtdas`, and
-[`.claude/skills/README.md`](../.claude/skills/README.md) now names them. Its
-`"language"` line declares American spelling here and British upstream. Its
-`"version"` line reads `0.5` here and `0.4` upstream, on the decider's call
-that a procedure of this repository shows the catalog this repository
-declares — **which is a commitment nothing can check**, because a version
-number sits in no link and the coherence check reads links. It is not a row in
-[maintenance.md](maintenance.md) either: that list holds what depends on time,
-and this depends on a release.
+**What the comparison found outside the adaptations was two values**, both in
+the `method.json` template inside `/passtdas`, and
+[`.claude/skills/README.md`](../.claude/skills/README.md) is where they are
+read. One is still ours: the `"language"` line declares American spelling here
+and British upstream. **The other closed the same afternoon.** The `"version"`
+line was set to `0.5` here on the decider's call; the plugin made the same
+change for the same reason half an hour later and put a command behind it, so
+what this repository had written down as a divergence to preserve is no longer a
+divergence. Nothing here would have caught that — a version number sits in no
+link, and the coherence check reads links.
 
 **The record set was read from outside on 2026-08-03, and no decision was
 reversed.** Two independent audits and a meta-audit that verified both against
