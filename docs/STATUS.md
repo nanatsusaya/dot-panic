@@ -210,6 +210,18 @@ criterion is what the label list returns, and the sentence above is a claim abou
 somebody else's system rather than about this repository — the class
 [#46](https://github.com/nanatsusaya/dot-panic/issues/46) exists for.
 
+**One of the three surviving labels described itself in wording an amendment had
+replaced.** `type:epic` still read *delivering one recognizable part of the toy*,
+which is §7 as first accepted — and
+[0012](adr/0012-how-software-gets-developed.md) A2 widened it on 2026-08-03 to
+one recognizable piece of work, *a part of the toy or a bounded effort beside
+it*, for [#117](https://github.com/nanatsusaya/dot-panic/issues/117), which
+carried the label saying it did not qualify. Corrected on the decider's call the
+same day #129 ran. **A2's sentence does not fit**: GitHub rejects a label
+description over 100 characters, which is a limit found by being refused rather
+than recalled, so the description carries the disjunction and drops the word
+*recognizable*. The record is where the wording is read; a label is a handle.
+
 **The architecture is decided and none of it is built.**
 [0002](adr/0002-overall-architecture.md) fixes a functional core inside an
 imperative shell, three parts, and the directory layout that goes with them —
