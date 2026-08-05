@@ -4,6 +4,14 @@ Five procedures, one per directory. They are **adapted copies** of the
 `agent-method` plugin, version `0.4.0`, taken on 2026-08-01 from
 [agent-project-rules](https://github.com/nanatsusaya/agent-project-rules).
 
+**They match `0.5.0`, compared on 2026-08-05 against
+[#147](https://github.com/nanatsusaya/dot-panic/issues/147).** Between the two
+versions the plugin changed nothing in these five files except the method's own
+name, and [#146](https://github.com/nanatsusaya/dot-panic/pull/146) had already
+carried that through them. Nothing was taken, because there was nothing to
+take — which is a result of the comparison rather than a reason to skip the
+next one.
+
 Copying rather than installing is what that repository recommends for anyone
 who wants to change them, and it is what makes this project self-supporting:
 the procedures are here, in the repository, whether or not anything is
@@ -55,6 +63,13 @@ British to American. The check found all twenty-five instances; it was not
 noticed by reading. One word had to be put back by hand: `artefacts` is the
 literal key in `method.json` and keeps the spelling of the interface it names,
 not the one this project writes in.
+
+The same regime reaches one value rather than a word. `/passtdas` shows a
+`method.json` template, and its `"language"` line reads `"american"` here where
+the plugin's reads `"british"` — a copy of that file declaring the other regime
+would contradict the declaration this project actually carries. Named here
+because the comparison of 2026-08-05 found it outside the six above, and a
+difference nothing accounts for is one a later comparison overwrites.
 
 ## The cost
 
