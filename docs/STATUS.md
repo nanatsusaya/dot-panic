@@ -303,6 +303,20 @@ does not exist. Both failure modes were triggered on purpose instead:
 `correctness/noUnusedVariables` and `suspicious/noDoubleEquals` on one throwaway
 file, and a formatter refusing eight-space indentation, each exiting 1.
 
+**The four checks are commands now, and the toolchain is finished.** 0009 §8
+fixed that there are four and what each decides, and deliberately kept the
+strings out of the record; [CLAUDE.md](../CLAUDE.md)'s *Commands* is where they
+live, each with what it decides and what its failure means rather than only what
+it is called. `bun run check` runs all four in order and stops at the first
+failure. **Each was broken on purpose, one at a time, and the aggregate failed
+each time** — a dangling link for the method check, a type error, a `==` for
+Biome, a wrong assertion for the tests, with a green run between each pair.
+
+**Two of the four are red on the tree this leaves**, and CLAUDE.md says so where
+somebody meets them: `check:types` on *no inputs were found*, `check:test` on *0
+test files matching*, both for the same reason and both ending at
+[#91](https://github.com/nanatsusaya/dot-panic/issues/91).
+
 **The architecture is decided and none of it is built.**
 [0002](adr/0002-overall-architecture.md) fixes a functional core inside an
 imperative shell, three parts, and the directory layout that goes with them.
@@ -743,7 +757,6 @@ Outside the epics:
 
 | Ticket | Why it exists |
 |---|---|
-| [#71](https://github.com/nanatsusaya/dot-panic/issues/71) The check chain as commands | 0009 §8's four checks, as commands a person can run |
 | [#77](https://github.com/nanatsusaya/dot-panic/issues/77) The hosting notice 0011 §4 puts beside the imprint | the host logs the visitor's IP address, and the page says so inside 0014 §4's dialog |
 
 **[#90](https://github.com/nanatsusaya/dot-panic/issues/90) is the one thing
@@ -886,11 +899,12 @@ legal half was 0004's, and it is answered above.
 [the ticket template](../.github/ISSUE_TEMPLATE/task.md). It was stated in three
 places, not the two [#23](https://github.com/nanatsusaya/dot-panic/issues/23)
 knew about: `/feierabend` carried a copy as well, and that one required a green
-local check chain this project has never had. Four conditions survive as one
-list, and what would make any of them decidable by a command is no longer only a
-number: 0009 §8 fixes four checks and
-[#71](https://github.com/nanatsusaya/dot-panic/issues/71) is what turns them into
-commands. CLAUDE.md and `/feierabend` refer to the template and state nothing.
+local check chain this project has never had. **The chain exists now and still
+decides none of the four**, which is the answer that section had been waiting to
+be able to give: none of 0009 §8's checks reads a criterion, watches anything,
+pairs a commit with its documentation, or merges. They decide the work a
+criterion points at, which is a different thing, and the template says so.
+CLAUDE.md and `/feierabend` refer to the template and state nothing.
 
 **The bar beside it now has one authority too.** *Correct, complete and safe, or
 name the specific uncertainty* was in CLAUDE.md's *Delivery* and in
@@ -907,24 +921,27 @@ What a change description must contain is no longer among the gaps here.
 
 ## The single clearest next step
 
-**[#71](https://github.com/nanatsusaya/dot-panic/issues/71) — 0009 §8's four
-checks, as commands a person can run.** It is the last piece of the toolchain and
-the only one left whose absence is felt every session: the four exist as a
-description in a record, and what invokes them is remembered rather than written.
-§8 fixes that there are four, what each decides, and that **none of them runs
-inside a pipeline** — a rule this project has been caught by twice, most recently
-while working #70. Its own ticket also carries the note that 0009 §9's row over
-the emitted tree cannot be checked until a build has run.
+**[#132](https://github.com/nanatsusaya/dot-panic/issues/132) — bring
+[#13](https://github.com/nanatsusaya/dot-panic/issues/13)'s members to Definition
+of Ready, together.** 0012 §2 makes a sprint exactly that and §6 puts the set's
+independence at the same moment; the activity has never run here, and it is the
+one Ready condition [the template](../.github/ISSUE_TEMPLATE/task.md) says no
+ticket can acquire by being edited. It is what stands between here and
+[#91](https://github.com/nanatsusaya/dot-panic/issues/91) writing the first Core
+file, and **there is no longer a toolchain ticket to do instead**: #69, #70 and
+#71 are all merged, and 0001 §6.2 — *the toy is never finished because the
+process ate the work* — is the argument that has been getting stronger with each
+of them.
 
-**[#132](https://github.com/nanatsusaya/dot-panic/issues/132) is the other thing
-now open, and the order between them is the decider's.** 0012 §2 makes a sprint
-a set of tickets brought to Definition of Ready **together** and §6 puts their
-independence at that same moment; that activity has never run, and it is what
-stands between here and [#91](https://github.com/nanatsusaya/dot-panic/issues/91)
-writing the first Core file. The argument for #71 first is that it is small and
-finishes the toolchain, so the first code arrives into a chain that can check it.
-The argument for #132 first is 0001 §6.2 — *the toy is never finished because the
-process ate the work* — and it gets stronger with every ticket spent on tools.
+**One thing it should know before it starts** is that its own scope says *#13's
+eight members* while that epic's table has held nine since #90 joined it;
+[#166](https://github.com/nanatsusaya/dot-panic/issues/166) is where that is
+settled, and it is small.
+
+**Outside it, [#171](https://github.com/nanatsusaya/dot-panic/issues/171) is
+newly unblocked.** The method repository accepted the pull-request shape it
+copies on 2026-08-05, so the ticket that was waiting on a record now waits only
+on being worked.
 
 ## Implementation scale
 

@@ -30,32 +30,71 @@ Biome. `package.json`, `tsconfig.json` and `bunfig.toml` are here and
 not add a dependency §7 does not name**; §7 explicitly leaves the stop-and-ask
 below in force, and deciding a policy is not authorizing an install.
 
-**What is here is the toolchain and not the toy.** `core/`, `shell/` and `view/`
-are empty, so the type check and the test run each end on *nothing to read* until
-the first Core file arrives with its test — which is
-[#91](https://github.com/nanatsusaya/dot-panic/issues/91), under 0012 §4. That is
-the state, not a fault to hunt. **The strings that invoke the four checks are
-deliberately not here**: 0009 §8 fixes that there are four and what each decides,
-and [#71](https://github.com/nanatsusaya/dot-panic/issues/71) is where they
-become commands.
-
-One command does exist, because it belongs to the method rather than to the
-toy. It runs out of the method repository, which is not vendored here and has
-to be cloned beside this one:
+**The method check needs a repository that is not vendored here**, so clone it
+beside this one before running anything:
 
 ```bash
 git clone https://github.com/nanatsusaya/agent-project-rules ../agent-project-rules
 ```
 
-Then, from the root of this repository:
+### The four checks
+
+0009 §8 fixes that there are four and what each decides. These are the strings,
+and the record deliberately does not carry them — a command in a record is stale
+the first time a script is renamed, and nothing checks it.
+
+**Run one at a time.** None of them goes in a pipeline: a pipeline reports the
+last command's exit status, so piping a check into anything that trims its output
+hides both the finding and the failure. That has happened here more than once.
 
 ```bash
-node ../agent-project-rules/checks/check-method.mjs .
+bun run check:method
 ```
 
-Do not add `--lint`. That flag runs the document scans **only** and skips the
-declaration, artifact, adaptation and decision-index checks — and still prints
-`OK`. The spelling regime comes from `method.json`, so it needs no flag either.
+Decides whether the documents still describe the project: the declaration, the
+artifacts it names, the adaptations and the decision index, plus every link
+between markdown files and the American-spelling word list. A failure means a
+document is wrong, never that the toy is. **Do not add `--lint`** — that flag
+runs the document scans only, skips the declaration, artifact, adaptation and
+decision-index checks, and still prints `OK`.
+
+```bash
+bun run check:types
+```
+
+Decides whether the source type-checks under the settings 0009 §4 fixes, and
+emits nothing while deciding it. A failure is either a type error or a rule of
+§4's holding: `target` and `lib` are bounded versions, so an API newer than
+ES2023 fails here rather than in a browser.
+
+```bash
+bun run check:lint
+```
+
+Decides format and lint in one run — 0009 §7's one-tool-two-jobs. A failure is
+one of seven enabled rule groups, or a file the formatter would have written
+differently. Neither is advisory.
+
+```bash
+bun run check:test
+```
+
+Decides that the tests pass **and** that coverage clears 0010 §7's floor. Read
+the exit status rather than the summary: a run can print `1 pass 0 fail` and
+still exit 1, because the floor is what failed.
+
+```bash
+bun run check
+```
+
+Runs all four in that order and stops at the first failure, carrying its exit
+status. It is not a substitute for reading which one failed.
+
+**Two of them are red today, and that is the state rather than a fault to
+hunt.** `core/`, `shell/` and `view/` are empty, so `check:types` ends on *no
+inputs were found* and `check:test` on *0 test files matching*. Both end when the
+first Core file arrives with its test, which is
+[#91](https://github.com/nanatsusaya/dot-panic/issues/91) under 0012 §4.
 
 ## Working conventions specific to this project
 
