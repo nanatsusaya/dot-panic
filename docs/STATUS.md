@@ -425,6 +425,40 @@ carries it.
 would — presence rather than quality, which is 0010 §2's third kind of claim and
 needs no record to permit it.
 
+**Answering a question by editing it has stopped, and the operating rules no
+longer tell the next session to do it.**
+[#171](https://github.com/nanatsusaya/dot-panic/issues/171) brought
+[the pull-request template](../.github/pull_request_template.md) onto the shape
+[agent-project-rules#13](https://github.com/nanatsusaya/agent-project-rules/issues/13)
+fixed on 2026-08-05: five headings, with **Watched** as this project's one
+declared section, which is the one the handbook permits. An answer now arrives as
+a comment naming the `O`-number and the section keeps a single line pointing at
+it. The reason lives in the template rather than here — an answer edited into a
+description has no permalink, notifies nobody, carries no timestamp except a
+typed one, and races whoever else is editing.
+
+**The rule that caused it did not say where it applied.** CLAUDE.md said *once
+answered, rewrite them in place as `R1..Rn`* and named no artifact, so it was
+carried from records to pull requests by analogy. It now says both, and which is
+which. **Practice had moved on 2026-08-05 with #174 and every change since; the
+operating rules had not** — a session starting fresh would have read the old rule
+and followed it, which is the seam this closes.
+
+**Three divergences from the published file are declared, and one of them was
+stale.** *Verified* named `node ../agent-project-rules/checks/check-method.mjs`,
+which [#71](https://github.com/nanatsusaya/dot-panic/issues/71) had already
+replaced with a script; it now points at CLAUDE.md's *Commands* rather than
+carrying a string that goes stale the first time one is renamed. The other two
+are American spelling and the closing-keyword warning, which the handbook has
+none of — and that warning quoted a live issue number, so a pull request opened
+from the template through the web interface would have closed
+[#83](https://github.com/nanatsusaya/dot-panic/issues/83). It reads `#NN` now.
+
+**The commit rule names the `Assisted-by:` trailer**, which is the catalog's and
+comes from curl's keyword list. A commit written by an agent here carries
+`Co-Authored-By:` as well because its harness requires one, and CLAUDE.md says so
+rather than leaving a reader to read two trailers against a rule naming one.
+
 **The architecture is decided and one of its three parts has been started.**
 [0002](adr/0002-overall-architecture.md) fixes a functional core inside an
 imperative shell, three parts, and the directory layout that goes with them.
@@ -1100,14 +1134,15 @@ What a change description must contain is no longer among the gaps here.
 
 ## The single clearest next step
 
-**[#171](https://github.com/nanatsusaya/dot-panic/issues/171) — adopt the
-consolidated pull-request shape, and stop answering a question by editing it.**
-Not because it builds anything, but because
-[CLAUDE.md](../CLAUDE.md)'s *Working with the decider* still says *once answered,
-rewrite them in place as `R1..Rn`* — and nothing has done that since #174, which
-answers by a comment and a one-line pointer with the question left standing. **A
-session starting fresh reads the rule and does the old thing**, which is the
-defect that file itself calls the most expensive kind.
+**[#94](https://github.com/nanatsusaya/dot-panic/issues/94) with
+[#97](https://github.com/nanatsusaya/dot-panic/issues/97), coupled — and three
+criteria go into #94 before the work starts.** They were found while watching
+#93: who sets the canvas's backing-store size, who reads 0005 §3's three colors
+from the stylesheet and hands them to the View — that ticket does not mention
+colors at all — and what happens when the viewport or the text size changes.
+Adding them afterwards is what condition 1 of Done forbids. Everything the pair
+waits on is merged, and they are one increment because #94 is the first thing
+that moves and 0004 §4 binds every motion change.
 
 **Two things are the decider's and one of them gates three tickets.**
 [#181](https://github.com/nanatsusaya/dot-panic/issues/181) decides where a
@@ -1119,14 +1154,11 @@ writing any of them first would settle #181 by typing. And **G1's binding has
 still never been verified**, which the coherence check says it cannot decide and
 names the address for.
 
-**[#94](https://github.com/nanatsusaya/dot-panic/issues/94) with
-[#97](https://github.com/nanatsusaya/dot-panic/issues/97) is step 3** and
-everything it waits on is merged. **Its scope is short of three criteria**,
-found while watching #93: who sets the canvas's backing-store size, who reads
-0005 §3's three colors from the stylesheet and hands them to the View — #94 does
-not mention colors at all — and what happens when the viewport or the text size
-changes. Adding them after the work starts is what condition 1 of Done forbids,
-so they go in first.
+**What is left outside all of that is small and named**:
+[#166](https://github.com/nanatsusaya/dot-panic/issues/166),
+[#167](https://github.com/nanatsusaya/dot-panic/issues/167) and
+[#170](https://github.com/nanatsusaya/dot-panic/issues/170) under #117, and #13's
+own table, which still shows four closed members as waiting on something.
 
 **Three small things are open outside the epic and none of them blocks this.**
 [#178](https://github.com/nanatsusaya/dot-panic/issues/178) waits on
