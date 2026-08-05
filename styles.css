@@ -71,9 +71,58 @@ body {
 /*
  * 0014 §2 gives the strip the height its two controls need and refuses a
  * fraction of the viewport, because a visitor who enlarges text is using an
- * accessibility mechanism and a fixed fraction fights it. Its controls arrive
- * with #96 and #97, so today it has no height at all.
+ * accessibility mechanism and a fixed fraction fights it. So every length here
+ * is in `em` and the strip is as tall as what it holds. The second control
+ * arrives with #96.
  */
 #strip {
+  display: flex;
   flex: 0 0 auto;
+  gap: 0.5em;
+  padding: 0.5em;
 }
+
+/*
+ * 0005 §7's four requirements, and the first three are structural rather than
+ * decorative: the element is a real button in the document, it is here at every
+ * size rather than revealed on hover or on focus, and its label is words. Only
+ * the fourth needs a rule of its own, below.
+ *
+ * `font: inherit` is what keeps the third true when the visitor enlarges text.
+ * A button does not inherit the page's font by default, so without this the
+ * label is the browser's small default and 0014 §9's *doubling the text size
+ * leaves both controls on screen* would be measuring the wrong thing.
+ *
+ * The colors are the page's two, and provisional for the same reason every
+ * value in `:root` is — #109 chooses them by looking.
+ */
+#motion {
+  background: var(--surface);
+  border: 1px solid var(--text);
+  color: var(--text);
+  font: inherit;
+  padding: 0.25em 0.75em;
+}
+
+/*
+ * 0005 §7's fourth bullet. The default indicator is often the one the browser
+ * draws against its own assumed background, which is not this page's, so it is
+ * replaced rather than relied on.
+ *
+ * `:focus-visible` rather than `:focus`: Baseline widely available since
+ * 2024-09-14, so 0001 §3.4 permits it, and it shows the ring to the visitor
+ * navigating by keyboard without putting one around a button that was clicked.
+ */
+#motion:focus-visible {
+  outline: 2px solid var(--text);
+  outline-offset: 2px;
+}
+
+/*
+ * There is no transition, animation or easing anywhere in this file, and that
+ * is 0004 §4 rather than restraint: that record is about the page and not only
+ * about the flock, so a `reduce` visitor must meet no motion at all. Nothing is
+ * wrapped in a `prefers-reduced-motion` query here, because a rule that does
+ * not exist cannot be honored conditionally — which is the cheaper way to be
+ * right, and the one that stays right when somebody adds a control.
+ */
