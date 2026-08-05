@@ -423,6 +423,30 @@ imperative shell, three parts, and the directory layout that goes with them.
 directories #69 created, and what goes in them is work that needs a ticket
 rather than a side effect of reading the record.
 
+**The View exists, and the world has been on a screen.**
+[#93](https://github.com/nanatsusaya/dot-panic/issues/93) put one function in
+`view/`: a world and a 2D context in, the surface cleared and every dot drawn as
+the same filled circle, nothing kept between calls (0005 §1, §2). **200 of 200
+dot centers landed on the pixel the world said**, at 1280×720 and again at
+1280×800; at 375×812 it was 199, the odd one out being a dot whose center falls
+on an anti-aliased rim at a radius of 1.88 pixels. Nothing was painted outside
+the square the world occupies, across 80,000 sampled pixels.
+
+**The emitted `view/draw.js` contains no import statement at all**, which is
+0002 A2's premise observed rather than argued: the type-only import of `World`
+is erased, so the file the browser loads imports nothing and the dependency
+direction holds where it runs.
+
+**Two things the watch found for [#94](https://github.com/nanatsusaya/dot-panic/issues/94).**
+The policy forbids **any** inline script — `script-src` falls back to
+`default-src 'self'` and an inline module is not `'self'` — so the Shell has to
+be a file the page loads, and the one `showModal()` handler 0014 §5 names has to
+live there with it. And a canvas drawn twice from one world is not always
+byte-identical: 5,529 pixels of 921,600 change once, shortly after load, and
+never again. Every one of them is a rim pixel between the surface color and the
+dot color; no dot moves. It is the browser settling its rasterization, and a
+later session comparing frames should know that before calling it a defect.
+
 **The page exists, and it is one screen.**
 [#95](https://github.com/nanatsusaya/dot-panic/issues/95) put `index.html` and
 `styles.css` at the root: a canvas taking everything a strip at the bottom
@@ -1067,16 +1091,20 @@ What a change description must contain is no longer among the gaps here.
 
 ## The single clearest next step
 
-**[#93](https://github.com/nanatsusaya/dot-panic/issues/93) — the View draws a
-world onto one canvas.** Step 1 is finished, and this is the half of step 2 that
-puts something on a screen: there is a world to draw and a canvas to draw it on,
-and after it the picture stops being a description. It is watch-first under
-0012 §5, and the expected picture goes in the ticket before the work.
+**[#94](https://github.com/nanatsusaya/dot-panic/issues/94) with
+[#97](https://github.com/nanatsusaya/dot-panic/issues/97), coupled — the Shell,
+and the control that stops the flock.** Step 3 of the order #13 carries, and
+everything it waits on is merged: a Core to step, a View to draw and a page to
+draw onto. The two are one increment because #94 is the first thing that moves
+and 0004 §4 binds every motion change, so neither is done until both hold.
 
-**[#92](https://github.com/nanatsusaya/dot-panic/issues/92) may be worked beside
-it and nothing else may.** It reads the Core's source for 0002 §3's fifteen
-names, and 0012 §6's activity found the two independent of each other. It also
-carries a comment naming three things the first Core files put in its way.
+**The other half of step 2 is blocked, and not by an epic member.**
+[#92](https://github.com/nanatsusaya/dot-panic/issues/92) reads the Core's
+source for 0002 §3's fifteen names, and where a test like that lives is
+[#181](https://github.com/nanatsusaya/dot-panic/issues/181) — the decider's, and
+answering it also unblocks #96. Writing #92 first would settle #181 by typing,
+which is what that ticket exists to prevent. **Which of the two goes first is
+sequencing**, and that is the decider's rather than this file's.
 
 **Three small things are open outside the epic and none of them blocks this.**
 [#178](https://github.com/nanatsusaya/dot-panic/issues/178) waits on
