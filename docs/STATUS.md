@@ -136,6 +136,20 @@ one sentence into a number and another into a superset. A1 also records one
 thing that was checked and needed nothing: 0005 §3's color hand-off sits inside
 0002 §2's *wiring* by that record's own reading, so 0002's list is not amended.
 
+**Four British spellings survived the sweep, and two claims said none had.**
+`authorisation` twice in `/adr`, `Summarise` in `/moin`, `judgement` in
+`/weiterimtext`, and `monetised` twice in 0004 §13 — all corrected against
+[#130](https://github.com/nanatsusaya/dot-panic/issues/130), the record's two by
+0004 A1. They survived because the check scans a list of word pairs and not the
+general `-ise` ending, a limit it prints on every run. **The claims were the
+larger defect.** The skills README said the check *found all twenty-five
+instances* while three of the four survivors sat in exactly the files that
+sentence is about, and CLAUDE.md called the regime *machine-checked* with no
+qualifier; both now say what the command does and leave the rest with review.
+0004 A1 also records that Recital 18 of the Regulation spells the word the
+British way, so a later session reading the mismatch finds the reason instead of
+restoring it.
+
 **The architecture is decided and none of it is built.**
 [0002](adr/0002-overall-architecture.md) fixes a functional core inside an
 imperative shell, three parts, and the directory layout that goes with them —
@@ -739,23 +753,25 @@ What a change description must contain is no longer among the gaps here.
 
 ## The single clearest next step
 
-**[#130](https://github.com/nanatsusaya/dot-panic/issues/130) — four British
-spellings survived, and a claim says none did.** `monetised` twice in 0004 §13's
-own prose, `authorisation` twice in `/adr`, `Summarise` in `/moin`, `judgement`
-in `/weiterimtext`. The skills README says *the check found all twenty-five
-instances*, and three of the four survivors sit in the files that sentence is
-about.
+**[#127](https://github.com/nanatsusaya/dot-panic/issues/127) — three stale
+references and a lost heading.** 0002 §6 cites 0014 §5 for putting the imprint
+and the explanation in a dialog; the section that does that is 0014 §4. The
+[method log](method-log.md) says the toolchain question *is now decision 0006,
+undecided*, true under the six-topic plan and wrong since 0009 was accepted, and
+says the skills README *lists the four adaptations*, which has been seven since
+[#153](https://github.com/nanatsusaya/dot-panic/pull/153) — the ticket says six,
+because it was written before that.
 
-**It is the next step because the false claim is about verification itself.** A
-document that overstates what a command checks is worse than the four words: it
-tells every later session the regime is machine-held when the check prints its
-own limit — word pairs are scanned, the general `-ise` ending is not. CLAUDE.md's
-*machine-checked* needs the same softening.
+**The heading is the part that is damage rather than drift.** One entry's `##`
+line was replaced when a newer entry was inserted above it, so two entries now
+sit fused under one title with two *Two consequences.* blocks — and the fused
+one is the entry that ends by parking an open question. That question, from
+PR #51, has no home; the ticket puts its disposition to the decider rather than
+answering it.
 
-**It is a build ticket with one decision inside it.** The three skill files are
-ordinary documentation; 0004's two instances sit in an accepted record and need
-an authorized amendment on the #58 precedent, which the ticket asks for rather
-than assumes.
+**It carries one record touch**, 0002 §6's citation, and that needs an
+authorized amendment like the two before it. Everything else is ordinary
+documentation.
 
 **The two tickets that need nobody are
 [#123](https://github.com/nanatsusaya/dot-panic/issues/123) and

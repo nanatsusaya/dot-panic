@@ -124,8 +124,9 @@ questions above the whole of the gate.
 - **Verify external facts from primary sources** and cite them. Do not assert
   capabilities, limits or interface details from memory.
 - **Language — two separate decisions.** Everything committed here is written in
-  **English, American spelling**, and that is machine-checked. Conversation with
-  Daniel happens in **German**.
+  **English, American spelling**, and a command checks part of that: it scans a
+  list of word pairs, not the general `-ise` ending, and prints that limit on
+  every run. The rest is review. Conversation with Daniel happens in **German**.
 
 ## Documentation
 

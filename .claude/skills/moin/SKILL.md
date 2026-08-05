@@ -81,7 +81,7 @@ methodological moment from the method log only if it bears on today.
   change awaiting review. Fetch first, so this reflects the shared state rather
   than a stale local view.
 - **Project state:** the *where we stand* section of the state artifact.
-  Summarise; do not paste it.
+  Summarize; do not paste it.
 
 ## 5. Maintenance that has come due — flag, do not run
 

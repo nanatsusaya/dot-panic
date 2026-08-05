@@ -15,6 +15,7 @@
   visitor's device), §5 (no network request after load), §7 (the imprint is
   readable on the page, lives here, and appears in exactly one place)
 - **Supersedes:** nothing
+- **Amended:** 2026-08-05 — A1
 
 ## Context
 
@@ -283,8 +284,8 @@ Rows are ordered by how close they come to biting, not by date.
 | [GDPR, Reg. (EU) 2016/679](https://eur-lex.europa.eu/legal-content/EN/TXT/HTML/?uri=CELEX:32016R0679) | Art. 2(1), 3(1) | **Applies in principle and reaches nothing on the page.** It triggers on processing personal data; 0003 §4 and §5 leave none. What a host logs is §8. |
 | [ePrivacy Directive 2002/58/EC](https://eur-lex.europa.eu/legal-content/EN/TXT/HTML/?uri=CELEX:32002L0058) | Art. 3(1) | **Reaches the page only through its German transposition.** The operative norm is § 25 TDDDG — §6. |
 | [AI Act, Reg. (EU) 2024/1689](https://eur-lex.europa.eu/legal-content/EN/TXT/HTML/?uri=CELEX:32024R1689) | Art. 2(1), 2(10), 2(12), 3(1), 4, 50(4) | **Does not apply, on two independent grounds.** The product contains no AI system: Art. 3(1) requires one that *infers* how to generate outputs, and 0002 §4 makes the Core a deterministic function. On the other side, the agents that write this project make the decider a *deployer* — and Art. 2(10) excludes natural persons using AI systems in a purely personal non-professional activity, which R1's answer establishes. Art. 4 (AI literacy) binds providers and deployers and falls with it. |
-| [Cyber Resilience Act, Reg. (EU) 2024/2847](https://eur-lex.europa.eu/legal-content/EN/TXT/HTML/?uri=CELEX:32024R2847) | Art. 2(1), 3(22), 71 | **Does not apply.** Art. 2(1) binds products *made available on the market*, and Art. 3(22) defines that as supply *"in the course of a commercial activity"*. Recital 18 says free and open-source software not monetised by its manufacturers is not one. Dated for whoever revisits this: the Regulation applies from 11 December 2027, Art. 14 from 11 September 2026, Chapter IV from 11 June 2026. |
-| [Product Liability Directive (EU) 2024/2853](https://eur-lex.europa.eu/legal-content/EN/TXT/HTML/?uri=CELEX:32024L2853) | Art. 2(1), 2(2), 4(1) | **Does not apply, and it is the closest call in this table.** Art. 4(1) makes software a product outright, and Art. 2(1) catches products placed on the market after 9 December 2026. Art. 2(2) is the exit, at article level rather than in a recital: it *"does not apply to free and open-source software that is developed or supplied outside the course of a commercial activity"*. A monetised version of this same repository would be inside. |
+| [Cyber Resilience Act, Reg. (EU) 2024/2847](https://eur-lex.europa.eu/legal-content/EN/TXT/HTML/?uri=CELEX:32024R2847) | Art. 2(1), 3(22), 71 | **Does not apply.** Art. 2(1) binds products *made available on the market*, and Art. 3(22) defines that as supply *"in the course of a commercial activity"*. Recital 18 says free and open-source software not monetized by its manufacturers is not one. Dated for whoever revisits this: the Regulation applies from 11 December 2027, Art. 14 from 11 September 2026, Chapter IV from 11 June 2026. |
+| [Product Liability Directive (EU) 2024/2853](https://eur-lex.europa.eu/legal-content/EN/TXT/HTML/?uri=CELEX:32024L2853) | Art. 2(1), 2(2), 4(1) | **Does not apply, and it is the closest call in this table.** Art. 4(1) makes software a product outright, and Art. 2(1) catches products placed on the market after 9 December 2026. Art. 2(2) is the exit, at article level rather than in a recital: it *"does not apply to free and open-source software that is developed or supplied outside the course of a commercial activity"*. A monetized version of this same repository would be inside. |
 | [Digital Services Act, Reg. (EU) 2022/2065](https://eur-lex.europa.eu/legal-content/EN/TXT/HTML/?uri=CELEX:32022R2065) | Art. 2(1), 2(2), 3(g) | **Does not apply.** It binds intermediary services — mere conduit, caching, hosting — and Art. 2(2) says so in the negative as well. This page stores no information provided by anyone else. The host is a different question, and it is 0011's. |
 | [Digital Markets Act, Reg. (EU) 2022/1925](https://eur-lex.europa.eu/legal-content/EN/TXT/HTML/?uri=CELEX:32022R1925) | Art. 1(2) | **Does not apply.** Core platform services offered by designated gatekeepers. |
 | [Data Act, Reg. (EU) 2023/2854](https://eur-lex.europa.eu/legal-content/EN/TXT/HTML/?uri=CELEX:32023R2854) | Art. 1(3) | **Does not apply.** Manufacturers of connected products, data holders, providers of data processing services. |
@@ -441,6 +442,51 @@ The two instruments that could have produced one — the Cyber Resilience Act an
 NIS2 — both fall outside on their own scope provisions (§13), so 0003 stands
 untouched and the question has no object. Recorded because a question that
 dissolves is worth distinguishing from one nobody asked.
+
+## Amendments
+
+**A1 — two words in §13 follow this project's spelling and not the source's.
+2026-08-05.**
+
+§13's Cyber Resilience Act row read:
+
+> Recital 18 says free and open-source software not monetised by its
+> manufacturers is not one.
+
+Its Product Liability Directive row read:
+
+> A monetised version of this same repository would be inside.
+
+Both now read *monetized*. **Nothing in the register changes** — the two
+instruments still fall outside on the same scope provisions, and §13's silences
+still mean what R3 says they mean.
+
+**Why it needed an amendment at all.** `method.json` declares American spelling
+and CLAUDE.md makes it a rule of this repository, but the coherence check scans a
+list of word pairs rather than the general `-ise` ending, so these two survived
+the sweep that caught twenty-five in the copied procedures.
+[#130](https://github.com/nanatsusaya/dot-panic/issues/130) found them by
+reading. A record is not edited, so a spelling correction inside one costs this
+log entry — the precedent is
+[#58](https://github.com/nanatsusaya/dot-panic/issues/58).
+
+**The source spells it the other way, and that is not an argument to change it
+back.** Recital 18 of Regulation (EU) 2024/2847 reads *"free and open-source
+software that are not monetised by their manufacturers"* — EU English, British
+spelling, verified against EUR-Lex on 2026-08-05. **Neither sentence above is a
+quotation**, and both rows quote what they mean to quote in quotation marks. A
+paraphrase is this record's prose and follows this record's regime, and a later
+session finding the mismatch should read this paragraph rather than restore it.
+
+Turning the first sentence into a real quotation was considered and declined
+here: that would be a better citation rather than a spelling correction, and
+improving citations is
+[#127](https://github.com/nanatsusaya/dot-panic/issues/127)'s.
+
+Authorized by Daniel on 2026-08-05, against
+[#130](https://github.com/nanatsusaya/dot-panic/issues/130), on a recommendation
+of correcting both and of leaving the paraphrase a paraphrase: *"wir folgen
+deiner empfehlung bei beiden."*
 
 ## References
 

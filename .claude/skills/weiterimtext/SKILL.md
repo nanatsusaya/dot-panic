@@ -42,7 +42,7 @@ you worked out this session and prevents nothing.
 
 - **Gated autonomy — the crux.** Steps 1 to 3 run autonomously. Starting the
   next task in step 5 does not. Begin only if the task is genuinely ready and
-  decision-free. If it needs a judgement that belongs to the decider, is too
+  decision-free. If it needs a judgment that belongs to the decider, is too
   large to start without agreeing its shape first, or is ambiguous — **stop and
   ask.**
 - **Never merge.** This runs *after* a merge someone else performed. Step 1
