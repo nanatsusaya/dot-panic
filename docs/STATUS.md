@@ -198,6 +198,30 @@ checks and what each decides, and neither reaches a rule group — so
 [#71](https://github.com/nanatsusaya/dot-panic/issues/71)'s constraint now says
 where the set is decided instead of implying a record does.
 
+**The tracker carries three labels, which is the number the rule allows.** GitHub
+creates nine of its own with every repository — `bug`, `documentation`,
+`duplicate`, `enhancement`, `good first issue`, `help wanted`, `invalid`,
+`question`, `wontfix` — and they had sat there since the first day. None was on
+any issue or any pull request, so deleting them moved no ticket;
+[#129](https://github.com/nanatsusaya/dot-panic/issues/129) removed nine things a
+fresh session had to read and classify before finding out they mean nothing here.
+**It is the first ticket in this project whose done state no file records.** The
+criterion is what the label list returns, and the sentence above is a claim about
+somebody else's system rather than about this repository — the class
+[#46](https://github.com/nanatsusaya/dot-panic/issues/46) exists for.
+
+**One of the three surviving labels described itself in wording an amendment had
+replaced.** `type:epic` still read *delivering one recognizable part of the toy*,
+which is §7 as first accepted — and
+[0012](adr/0012-how-software-gets-developed.md) A2 widened it on 2026-08-03 to
+one recognizable piece of work, *a part of the toy or a bounded effort beside
+it*, for [#117](https://github.com/nanatsusaya/dot-panic/issues/117), which
+carried the label saying it did not qualify. Corrected on the decider's call the
+same day #129 ran. **A2's sentence does not fit**: GitHub rejects a label
+description over 100 characters, which is a limit found by being refused rather
+than recalled, so the description carries the disjunction and drops the word
+*recognizable*. The record is where the wording is read; a label is a handle.
+
 **The architecture is decided and none of it is built.**
 [0002](adr/0002-overall-architecture.md) fixes a functional core inside an
 imperative shell, three parts, and the directory layout that goes with them —
@@ -633,7 +657,7 @@ stop.
 | [#87](https://github.com/nanatsusaya/dot-panic/issues/87) The flock's motion | 6 tickets | not ready — every member waits on #91, and #103 and #104 each on one thing more |
 | [#88](https://github.com/nanatsusaya/dot-panic/issues/88) The pointer | 3 tickets | not ready — waits on the Shell and the page |
 | [#89](https://github.com/nanatsusaya/dot-panic/issues/89) The finished page | 3 tickets | not ready — two of the three can only be chosen by watching |
-| [#117](https://github.com/nanatsusaya/dot-panic/issues/117) The meta-audit corrections | 16 tickets | its own table carries each member's state — 0012 §7 applied rather than restated here |
+| [#117](https://github.com/nanatsusaya/dot-panic/issues/117) The meta-audit corrections | 16 tickets | one member still open — #132, which waits on the phase call. Membership is its own table's to say, 0012 §7 |
 
 Outside the epics:
 
@@ -802,22 +826,24 @@ What a change description must contain is no longer among the gaps here.
 
 ## The single clearest next step
 
-**[#129](https://github.com/nanatsusaya/dot-panic/issues/129) — nine default
-labels the rule says do not exist.** CLAUDE.md admits three labels and no more;
-the tracker carries twelve, because GitHub creates nine of its own with every
-repository. None of them is on any issue, so deleting them moves no ticket — it
-removes nine things a fresh session has to look at and classify before finding
-out they mean nothing here.
+**[#46](https://github.com/nanatsusaya/dot-panic/issues/46) — ticket readiness is
+stated in two places.** Every ticket says it in its own header block, and the
+table above restates it in a `State` column. It drifted twice within an hour on
+2026-08-02, against two tickets whose blockers were already Accepted, and it is
+the last open ticket that is ready and needs no phase call.
 
-**It needs nobody, and it is the last member of
-[#117](https://github.com/nanatsusaya/dot-panic/issues/117) that does.** What
-remains after it is [#132](https://github.com/nanatsusaya/dot-panic/issues/132),
-which waits on the phase call below — so this epic ends where the analysis phase
-does.
+**It is a decision ticket, and the decision is not obvious**, which is why it has
+survived this long. The tracker is outside this repository, so a session reading
+only this file would otherwise have to make an API call to learn that three
+tickets exist to hold research rather than to be worked — that is worth something
+real. And readiness is the one kind of fact that goes stale on **somebody else's
+merge** rather than on a change to the thing it describes. Its three questions
+are the decider's; working it means putting them, not answering them.
 
-**It happens in the tracker rather than in the repository**, which makes it the
-first ticket here whose done state no file records. The criterion is what the
-label list returns.
+**Nothing else is available without a call that is yours.**
+[#69](https://github.com/nanatsusaya/dot-panic/issues/69) is ready and starting
+it leaves the analysis phase; #70 and #71 wait on it; #77 and #90 wait on a page
+that does not exist; and every epic member waits on one of those.
 
 **What stands between here and code is one activity, and it is still not this
 one.**
