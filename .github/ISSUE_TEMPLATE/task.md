@@ -71,6 +71,13 @@ activity, not the result of it.** 0012 §1 says phase 3 cut the work into
 tickets and did not establish readiness. Read such a header as *nothing known
 to block this yet*.
 
+**That header is where a ticket's readiness is stated, and it is the only
+place.** No other document carries a copy; CLAUDE.md's rule that a fact has one
+authority reaches them from here. **It goes stale on somebody else's merge** —
+the one kind of fact that does, because nothing about a ticket changes when its
+blocker closes — and what re-reads it is the §2 activity conditions 4 to 6 hang
+on. Nothing checks it: the tracker is outside the repository.
+
 **Done** when all four of these hold:
 
 1. The criteria above are **met and verified**, not assumed — and they were

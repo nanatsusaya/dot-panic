@@ -208,7 +208,7 @@ fresh session had to read and classify before finding out they mean nothing here
 **It is the first ticket in this project whose done state no file records.** The
 criterion is what the label list returns, and the sentence above is a claim about
 somebody else's system rather than about this repository — the class
-[#46](https://github.com/nanatsusaya/dot-panic/issues/46) exists for.
+[#46](https://github.com/nanatsusaya/dot-panic/issues/46) was filed for.
 
 **One of the three surviving labels described itself in wording an amendment had
 replaced.** `type:epic` still read *delivering one recognizable part of the toy*,
@@ -221,6 +221,30 @@ same day #129 ran. **A2's sentence does not fit**: GitHub rejects a label
 description over 100 characters, which is a limit found by being refused rather
 than recalled, so the description carries the disjunction and drops the word
 *recognizable*. The record is where the wording is read; a label is a handle.
+
+**Readiness has one place now, and this file is no longer the second.** Every
+ticket says in its own `Ready:` header what it waits on, and the table below said
+it again in a `State` column — which drifted twice within an hour on 2026-08-02,
+against two tickets whose blockers were already Accepted.
+[#46](https://github.com/nanatsusaya/dot-panic/issues/46) removed the column
+rather than repairing it. [The ticket
+template](../.github/ISSUE_TEMPLATE/task.md) was already the authority for what
+makes a ticket ready, so that is where the header is named as the one place
+readiness is stated, and CLAUDE.md's existing one-authority rule reaches this
+file from there without a new rule being written. **What the tables say instead
+is what each row is for**, which is the thing a session reading only this file
+would otherwise call the tracker to learn.
+
+**The template concedes that the header drifts**, because an answer that
+pretended otherwise would be unenforceable: the tracker is outside this
+repository and no command here reaches it. Readiness is the one fact that goes
+stale on **somebody else's merge**, and 0012 §2's activity — a set brought to
+Ready together — is what re-reads it. **The proof arrived while the ticket was
+being worked.** [#132](https://github.com/nanatsusaya/dot-panic/issues/132)'s
+header still named #120, #121 and #124 as blockers, all three closed the same
+day, while this file's row for it was right — the same drift as 2026-08-02, from
+the other side. That is why *the ticket is simply the reliable one* was not the
+answer: it moves the staleness rather than ending it. The header is corrected.
 
 **The architecture is decided and none of it is built.**
 [0002](adr/0002-overall-architecture.md) fixes a functional core inside an
@@ -643,31 +667,29 @@ project added a fifth epic on 2026-08-03 —
 [#117](https://github.com/nanatsusaya/dot-panic/issues/117) — holding its
 correction tickets, with the audits attached to it.
 
-**This file no longer lists every ticket, and that is not an answer to
-[#46](https://github.com/nanatsusaya/dot-panic/issues/46).** An epic is now the
-authority for its own members, which is what 0012 §7 makes it, so restating
-twenty-one rows here would duplicate a list that has a home. The duplication
-#46 names — readiness stated both in a ticket and in this table — is unchanged
-for the rows below, and answering that by editing is what that ticket exists to
-stop.
+**This file no longer lists every ticket, and it no longer says which of them are
+ready.** An epic is the authority for its own members, which is what 0012 §7
+makes it, so restating twenty-one rows here would duplicate a list that has a
+home — and readiness is the ticket's own header's, which is what
+[#46](https://github.com/nanatsusaya/dot-panic/issues/46) settled. What is left
+is why each row exists, which nothing else here says.
 
-| Epic | Holds | State |
+| Epic | Holds | Why it exists |
 |---|---|---|
-| [#13](https://github.com/nanatsusaya/dot-panic/issues/13) Walking skeleton | 9 tickets | not ready — 0012 §2 makes it the first increment, and no set has been brought to Ready |
-| [#87](https://github.com/nanatsusaya/dot-panic/issues/87) The flock's motion | 6 tickets | not ready — every member waits on #91, and #103 and #104 each on one thing more |
-| [#88](https://github.com/nanatsusaya/dot-panic/issues/88) The pointer | 3 tickets | not ready — waits on the Shell and the page |
-| [#89](https://github.com/nanatsusaya/dot-panic/issues/89) The finished page | 3 tickets | not ready — two of the three can only be chosen by watching |
-| [#117](https://github.com/nanatsusaya/dot-panic/issues/117) The meta-audit corrections | 16 tickets | one member still open — #132, which waits on the phase call. Membership is its own table's to say, 0012 §7 |
+| [#13](https://github.com/nanatsusaya/dot-panic/issues/13) Walking skeleton | 9 tickets | 0012 §2 makes it the first increment, and 0011 §7 puts the first deployment here |
+| [#87](https://github.com/nanatsusaya/dot-panic/issues/87) The flock's motion | 6 tickets | 0006's motion rules, cut one per ticket |
+| [#88](https://github.com/nanatsusaya/dot-panic/issues/88) The pointer | 3 tickets | 0007's input model — the toy's one interaction |
+| [#89](https://github.com/nanatsusaya/dot-panic/issues/89) The finished page | 3 tickets | 0005's rendering, plus the palette and the dot count no record fixes |
+| [#117](https://github.com/nanatsusaya/dot-panic/issues/117) The meta-audit corrections | 17 tickets | the 2026-08-03 audits' findings; it builds nothing, which is what 0012 A2 widened *epic* to allow |
 
 Outside the epics:
 
-| Ticket | State |
+| Ticket | Why it exists |
 |---|---|
-| [#46](https://github.com/nanatsusaya/dot-panic/issues/46) Ticket readiness is stated in two places | ready — and this section is still one of the two |
-| [#69](https://github.com/nanatsusaya/dot-panic/issues/69) Create the toolchain 0009 decides | ready — and starting it is the decider's call |
-| [#70](https://github.com/nanatsusaya/dot-panic/issues/70) Biome | waits on #69 |
-| [#71](https://github.com/nanatsusaya/dot-panic/issues/71) The check chain as commands | waits on #69 and #70 |
-| [#77](https://github.com/nanatsusaya/dot-panic/issues/77) The hosting notice 0011 §4 puts beside the imprint | not ready — waits on #96 for a dialog to sit in |
+| [#69](https://github.com/nanatsusaya/dot-panic/issues/69) Create the toolchain 0009 decides | 0009 is Accepted and none of it is installed |
+| [#70](https://github.com/nanatsusaya/dot-panic/issues/70) Biome | 0009 §7's third development dependency, deciding format and lint in one run |
+| [#71](https://github.com/nanatsusaya/dot-panic/issues/71) The check chain as commands | 0009 §8's four checks, as commands a person can run |
+| [#77](https://github.com/nanatsusaya/dot-panic/issues/77) The hosting notice 0011 §4 puts beside the imprint | the host logs the visitor's IP address, and the page says so inside 0014 §4's dialog |
 
 **[#90](https://github.com/nanatsusaya/dot-panic/issues/90) is the one thing
 nobody here can work, and it stops the URL rather than the code.** 0004 R2 makes
@@ -736,13 +758,15 @@ this file already claimed it, and the breakdown is what caught that.
 condition, and leaving it is a decision rather than a consequence of a record
 being Accepted — or of a ticket being written.
 
-**This table restates something the tickets already say**, and
-[#46](https://github.com/nanatsusaya/dot-panic/issues/46) is the ticket for it.
-The readiness column drifted twice within an hour on 2026-08-02, against two
-tickets whose blockers had been Accepted. It is left standing rather than removed
-here, because that ticket has a real question underneath it — the tracker is
-outside this repository, and a session reading only this file would lose the
-picture — and answering it by editing is the thing tickets exist to stop.
+**The tables above used to restate what the tickets already say**, and
+[#46](https://github.com/nanatsusaya/dot-panic/issues/46) is what took the column
+out. What that ticket had underneath it was real — the tracker is outside this
+repository, so a session reading only this file would lose the picture — and the
+answer keeps the tables and drops the one column that had a home elsewhere.
+**Neither side was the reliable one.** Both were wrong about #10 and #11 on
+2026-08-02; on 2026-08-05 the ticket was wrong and this file was right. So the
+template names an authority and states that it drifts, rather than promising a
+freshness nothing can enforce.
 
 **The first amendments in this project's history have been written**, and
 [#58](https://github.com/nanatsusaya/dot-panic/issues/58) is what caused them.
@@ -826,34 +850,24 @@ What a change description must contain is no longer among the gaps here.
 
 ## The single clearest next step
 
-**[#46](https://github.com/nanatsusaya/dot-panic/issues/46) — ticket readiness is
-stated in two places.** Every ticket says it in its own header block, and the
-table above restates it in a `State` column. It drifted twice within an hour on
-2026-08-02, against two tickets whose blockers were already Accepted, and it is
-the last open ticket that is ready and needs no phase call.
+**It is a call rather than a ticket, and the call is the decider's.** #46 was the
+last open ticket that was ready and needed no phase call. Everything still open
+is behind 0012 §1's analysis phase, which has no end condition — and neither a
+record becoming Accepted, nor a ticket being written, nor this file supplies one.
 
-**It is a decision ticket, and the decision is not obvious**, which is why it has
-survived this long. The tracker is outside this repository, so a session reading
-only this file would otherwise have to make an API call to learn that three
-tickets exist to hold research rather than to be worked — that is worth something
-real. And readiness is the one kind of fact that goes stale on **somebody else's
-merge** rather than on a change to the thing it describes. Its three questions
-are the decider's; working it means putting them, not answering them.
+**[#132](https://github.com/nanatsusaya/dot-panic/issues/132) is what runs the
+moment the call comes.** 0012 §2 makes a sprint a set of tickets brought to
+Definition of Ready **together** and §6 puts their independence at that same
+moment, and that activity has never run here. It is the sixth Ready condition —
+the one [the template](../.github/ISSUE_TEMPLATE/task.md) says no ticket can
+acquire by being edited — so it cannot be reached by editing tickets, which is
+exactly why it is an activity. It is phase 4's opening move rather than more
+phase 3.
 
-**Nothing else is available without a call that is yours.**
-[#69](https://github.com/nanatsusaya/dot-panic/issues/69) is ready and starting
-it leaves the analysis phase; #70 and #71 wait on it; #77 and #90 wait on a page
-that does not exist; and every epic member waits on one of those.
-
-**What stands between here and code is one activity, and it is still not this
-one.**
-0012 §2 makes a sprint a set of tickets brought to Definition of Ready
-**together**, and §6 puts establishing their independence at that same moment.
-[#13](https://github.com/nanatsusaya/dot-panic/issues/13)'s eight members have
-never been through it. That is phase 4's opening move rather than more phase 3,
-and it starts when the decider says so — 0012 §1's analysis phase has no end
-condition, and neither a record becoming Accepted nor a ticket being written
-supplies one.
+**[#69](https://github.com/nanatsusaya/dot-panic/issues/69) is the same call from
+the other side**: it is ready, nothing blocks it, and starting it is what leaves
+the analysis phase. #70 and #71 wait on it; #77 and #90 wait on a page that does
+not exist; every epic member waits on one of those.
 
 ## Implementation scale
 
