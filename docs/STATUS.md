@@ -680,7 +680,7 @@ is why each row exists, which nothing else here says.
 | [#87](https://github.com/nanatsusaya/dot-panic/issues/87) The flock's motion | 6 tickets | 0006's motion rules, cut one per ticket |
 | [#88](https://github.com/nanatsusaya/dot-panic/issues/88) The pointer | 3 tickets | 0007's input model — the toy's one interaction |
 | [#89](https://github.com/nanatsusaya/dot-panic/issues/89) The finished page | 3 tickets | 0005's rendering, plus the palette and the dot count no record fixes |
-| [#117](https://github.com/nanatsusaya/dot-panic/issues/117) The meta-audit corrections | 17 tickets | the 2026-08-03 audits' findings; it builds nothing, which is what 0012 A2 widened *epic* to allow |
+| [#117](https://github.com/nanatsusaya/dot-panic/issues/117) The meta-audit corrections | 18 tickets | the 2026-08-03 audits' findings; it builds nothing, which is what 0012 A2 widened *epic* to allow |
 
 Outside the epics:
 
