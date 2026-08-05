@@ -110,6 +110,19 @@ Authorized on 2026-08-05 against
 [#134](https://github.com/nanatsusaya/dot-panic/issues/134), which was itself an
 offer made in the comment on PR #52 and left unanswered until now.
 
+**And the word *asserted* has one meaning again.** 0010 §2 fixed three kinds of
+claim *and nothing else*, while 0011 §8 filled an asserted list with four claims
+decided in the deploy workflow — three of them about the built artifact, which
+0010 §9 said nothing asserts. **0010 A2 names the missing distinction as context
+rather than kind**: the kinds say what a claim is about, and the deploy gate is
+the second place a command runs. One of 0011's four was kind three all along —
+*deployment runs only after the checks pass* is decidable by reading a workflow
+file, so only its context was unaccounted for. §9 keeps its load-bearing half and
+loses one word: watching is still the only evidence that the artifact matches
+what the tests passed, because four named properties are not a match. The
+vocabulary moved in 0010 rather than 0011 because §1 says every record uses these
+names, and no check changes either way.
+
 **The architecture is decided and none of it is built.**
 [0002](adr/0002-overall-architecture.md) fixes a functional core inside an
 imperative shell, three parts, and the directory layout that goes with them —
@@ -713,23 +726,23 @@ What a change description must contain is no longer among the gaps here.
 
 ## The single clearest next step
 
-**Answer [#126](https://github.com/nanatsusaya/dot-panic/issues/126) — the word
-*asserted* has two extensions.** 0010 §2 fixes that a command asserts three
-kinds of claim *and nothing else*; 0011 §8 then fills its asserted list with four
-claims about a deployed artifact and about workflow ordering, none of which is
-one of the three. Two accepted records now use one word for two things, which is
-what 0010 §1 was written to prevent.
+**Answer [#125](https://github.com/nanatsusaya/dot-panic/issues/125) — two rows
+in 0015's asserted table promise what no command can decide.** One says the
+Shell *makes no call except* `showModal()`, which three accepted records
+contradict: it runs the loop (0002 §2), calls `requestAnimationFrame` (0008 §2)
+and listens for four pointer events (0007 §1). The other counts the page's
+controls without defining *control*, and 0014 §5's markup contains `<details>`
+sections and a close button.
 
-**It is the next step because it is the smallest and it comes first in order.**
-One sentence settles it, no check changes either way, and
-[#125](https://github.com/nanatsusaya/dot-panic/issues/125) then re-scopes an
-asserted table in 0015 — doing that before the vocabulary is settled would
-rewrite rows in a word whose meaning is still open.
+**It is the next step because the vocabulary it needs is now settled.** 0010 A2
+fixed what *asserted* means, which is what #126 was for; re-scoping an asserted
+table was the thing waiting on it.
 
 **It is a decision ticket, so what a session does with it is put the question
-and stop.** #125 is the same shape and larger: two rows no command can decide,
-plus one sentence on whether 0005 §3's color hand-off sits inside 0002 §2's
-*wiring* or costs a list amendment there.
+and stop.** It carries a second question the first one drags in: whether 0005
+§3's color hand-off sits inside 0002 §2's *wiring* or costs an amendment to that
+list — 0015 §4's argument leans on the list being exhaustive, and it is not
+obviously so.
 
 **The two tickets that need nobody are
 [#123](https://github.com/nanatsusaya/dot-panic/issues/123) and
