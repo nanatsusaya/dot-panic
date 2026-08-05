@@ -133,6 +133,14 @@ and also what [0009](0009-toolchain.md) §7 makes true of the toolchain. A
 commitment comes due when a person sits down, and if nobody sits down for a year
 then nothing was due to anybody.
 
+**A session re-reads and reports; the change that follows is the decider's.**
+Running a due row means reading the source it points at and writing down what
+was found, together with the date — that much any session does unasked. What it
+does **not** do is act on a reading that came out the wrong way: every row in
+§2's list points at an accepted record, so a floor that moved or a feature that
+changed status is an amendment, and CLAUDE.md already makes that a stop-and-ask.
+R2.
+
 ### 5. The rules no command decides are enumerated here, and this is the enumeration
 
 | Rule | Owner | What would decide it |
@@ -174,6 +182,17 @@ feature half by superseding-only, and this section closes the rest — a project
 that is *good enough* by a definition it wrote down is finished being improved,
 and continuing to improve it is [0001](0001-purpose-scope-and-success.md) §6.2's
 failure arriving after delivery instead of before it.
+
+**And the phase does not end, because this repository is the demonstration.**
+It stays visible for as long as
+[agent-driven-development](https://github.com/nanatsusaya/agent-driven-development)
+points at it, so there is no archived state, no final commit and no last
+session — the fourth kind of work above is the one that recurs, and a larger
+release of the method brings **this project** up to date and not only the five
+procedure copies. Which copies change and how is
+[`.claude/skills/README.md`](../../.claude/skills/README.md)'s, untouched here;
+what this section adds is that the toy and its records are in scope for the same
+trigger. R1.
 
 ### 7. The decision set is not archived, rewritten or retired
 
@@ -259,32 +278,47 @@ what happens to them once nobody is building: nothing happens to them.
 
 ## Open questions
 
-**O1 — Does this project ever end, and in what state?** §6 says what work happens
-during maintenance and deliberately does not say whether maintenance stops.
-Options: **(a)** it never formally ends — the page stays up, the repository stays
-open, and work simply becomes rare; **(b)** the repository is archived on the
-decider's word once the last dated commitment is closed, with the page left
-serving; **(c)** archived and the page taken down. *Recommended default: (b)* —
-archiving is reversible, it makes the state legible to a stranger, and taking the
-page down would destroy the only artifact anyone can look at without reading
-sixteen records.
+**O3 — When the platform moves under a page that was correct when it shipped, how
+far does the obligation reach?** The subject is the platform changing under this
+project — a browser altering behavior an accepted record relies on, or the host
+changing what it serves — and not this project moving to another platform, which
+[0011](0011-delivery.md) §1 and §3 already close. §6.3 admits the work and does
+not bound it, and R1 has removed the boundary the earlier options leaned on:
+there is no archived state to end it at. Options: **(a)** it is fixed whenever it
+is noticed, for as long as the page is up, and nothing watches for it — §1
+creates no monitoring, so *noticed* means somebody opened the page; **(b)** it is
+fixed while the method this project demonstrates is itself maintained, and left
+standing or broken afterwards, with the records carrying the demonstration on
+their own. *Recommended default: (a)* — it follows R1, since a broken page is
+worse here than in an ordinary toy, and it promises attention rather than uptime,
+which is the only thing one person can promise.
 
-**O2 — May an agent work a due commitment without asking?** §4 has `/feierabend`
-running what is due, which was written for interval chores rather than for
-re-reading a Baseline status and possibly finding that a floor moved. Options:
-**(a)** any session may re-read and report, and only the decider authorizes the
-change that follows; **(b)** a session may also make the change when the outcome
-is only a date moving. *Recommended default: (a)* — reading is cheap and reversible,
-and every commitment in §2's table touches an accepted record if the reading
-comes out the wrong way.
+## Resolved questions
 
-**O3 — Does a platform change get fixed for as long as the page is up?** §6.3
-admits the work without bounding it. Options: **(a)** yes, indefinitely, which is
-an open-ended commitment on one person; **(b)** yes until the repository is
-archived under O1, and after that the page stands or breaks as it will.
-*Recommended default: (b)* — it is the only version that does not quietly promise
-somebody's attention forever, and it makes O1's archiving the one decision that
-ends the obligations rather than leaving them implicit.
+**R1 — The project does not end, because the project is the demonstration.**
+Decided by Daniel on 2026-08-05: *"das projekt bleibt immer ersichtlich, da es das
+demo repo zum agent driven development ist. wenn dieser größere updates bekommt,
+werden wir auch dot panic aktualisieren"*. §6's closing paragraph is the answer,
+and §7 already said the matching half for the records.
+
+**The recommendation was against it and the reason it lost is the right one.**
+The draft recommended archiving the repository once the last dated commitment
+closed, on the grounds that an open-ended state promises somebody's attention
+forever. That treats this repository as a finished product, and it is not one:
+[agent-driven-development](https://github.com/nanatsusaya/agent-driven-development)
+points at it, so a repository marked archived would be the method's worked example
+carrying a badge that says *nobody works this way anymore*. The cost is real and
+stays: **no state ever ends the obligations §6 admits**, which is why O3 has to
+answer that on its own rather than by leaning on an archiving date.
+
+**R2 — A session re-reads and reports; the decider authorizes what follows.**
+Answered with the recommendation on 2026-08-05: *"zu O2: wir folgen deiner
+Empfehlung"*. §4's closing paragraph is the answer. Reading a source and writing
+down what it said is cheap and reversible, and it is also the whole of what a
+`/feierabend` step written for interval chores can safely mean here — every row
+in §2's list points at an accepted record, so a reading that comes out the wrong
+way produces an amendment, and CLAUDE.md makes that a stop-and-ask rather than a
+consequence.
 
 ## References
 
