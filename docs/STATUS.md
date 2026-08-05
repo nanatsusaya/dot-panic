@@ -6,9 +6,11 @@
 
 ## Position
 
-The method has been adopted, and **the first thing here that is not a document
-now exists**: the toolchain [0009](adr/0009-toolchain.md) decides.
-**Nothing of the toy exists yet** — no simulation code, no page, no rendering.
+The method has been adopted, the toolchain [0009](adr/0009-toolchain.md)
+decides exists, and **the first file of the toy exists now**: `core/` holds a
+world, a step and a seeded generator. **Nothing is on a screen** — there is no
+page and no rendering, so nothing here has ever been watched, which is the half
+of this project that no command reaches.
 The rest of what is built is the way of working: the operating rules, the
 decision set, seventeen accepted records, and the five session procedures in
 [`.claude/skills/`](../.claude/skills/README.md).
@@ -254,7 +256,7 @@ person's judgment;
 [#69](https://github.com/nanatsusaya/dot-panic/issues/69) is what he named on
 2026-08-05. `package.json`, `tsconfig.json` and `bunfig.toml` are here, the three
 development dependencies 0009 §7 names are installed and pinned exactly, and
-`core/`, `shell/` and `view/` exist and are empty.
+`core/`, `shell/` and `view/` exist — empty, until #91 wrote into the first.
 
 **`target` and `lib` are ES2023, and the reasoning is worth more than the
 value.** A year is only as available as its **last** feature. ES2024 looks a
@@ -266,13 +268,13 @@ floor on 2026-01-04, on *Change Array by Copy*. The Baseline data was read on
 list](maintenance.md) carries the date. One line is unverified and says so: the
 feature catalog has no row for *Symbols as WeakMap keys*.
 
-**Two of 0009 §8's four checks are red, and that is the toolchain existing
-before the toy does.** `tsc` ends on *no inputs were found* and `bun test` on *0
-test files matching*, because the three directories are empty — both end when
-[#91](https://github.com/nanatsusaya/dot-panic/issues/91) writes the first Core
-file with its test, which is 0012 §4. **A placeholder would have made both green
-and said nothing**, which is the trade 0010 §7 already warns about in its own
-terms.
+**Two of 0009 §8's four checks were red on the tree #69 left, and that was the
+toolchain existing before the toy did.** `tsc` ended on *no inputs were found*
+and `bun test` on *0 test files matching*, because the three directories were
+empty. **A placeholder would have made both green and said nothing**, which is
+the trade 0010 §7 warns about in its own terms; what ended it instead was
+[#91](https://github.com/nanatsusaya/dot-panic/issues/91) writing the first Core
+files with their tests, under 0012 §4.
 
 **Building it turned two written rules into machine-held ones and found one
 collision.** `moduleResolution: node16` rejects an import specifier that lacks an
@@ -312,10 +314,10 @@ failure. **Each was broken on purpose, one at a time, and the aggregate failed
 each time** — a dangling link for the method check, a type error, a `==` for
 Biome, a wrong assertion for the tests, with a green run between each pair.
 
-**Two of the four are red on the tree this leaves**, and CLAUDE.md says so where
-somebody meets them: `check:types` on *no inputs were found*, `check:test` on *0
-test files matching*, both for the same reason and both ending at
-[#91](https://github.com/nanatsusaya/dot-panic/issues/91).
+**All four are green now**, which they had never been: the two that were red
+were reading empty directories, and
+[#91](https://github.com/nanatsusaya/dot-panic/issues/91) gave them something.
+CLAUDE.md says that where somebody meets them.
 
 **The walking-skeleton set is Ready, and that is the sentence this file has never
 been able to write.** 0012 §2's sprint-opening activity ran on 2026-08-05 under
@@ -343,12 +345,53 @@ neither done until both hold**, because 0004 §4 binds every motion change and #
 is the first one — so a merge order cannot be what decides whether the flock ever
 moves unhonored.
 
-**The architecture is decided and none of it is built.**
+**The first Core files exist, and the first thing they had to be was red.** 0012
+§4 requires every rule of the simulation to be written as a failing test before
+it is written as code, and nothing checks that it was — so
+[#91](https://github.com/nanatsusaya/dot-panic/issues/91) put the four test
+files in a commit of their own, reporting *0 pass, 4 fail*, and the code in the
+next one. The [method log](method-log.md) carries why the commit sequence is
+where that rule leaves its trace, and that it is evidence rather than a check.
+
+**What `core/` holds is the shape every later ticket adds to, and no rule of the
+flock.** A world of dots with a position and a velocity each, a step taking a
+world and a time and returning a new one, and the generator's state carried in
+the world — 0002 §4 entire. Nothing steers, nothing holds a speed in a band,
+nothing separates, and there is no frame; each of those arrives with its own
+ticket under [#87](https://github.com/nanatsusaya/dot-panic/issues/87). **The
+generator is SplitMix64, named rather than invented** — 0013 §5 permits taking a
+published algorithm where §1 forbids taking anyone's file, and §7's obligation
+to name what was consulted is met in the ticket. It is that generator and not
+one of the xoshiro family because its whole state is a single 64-bit word, so
+*deriving a generator from a seed* is the seed itself rather than a second
+algorithm chosen only to expand it.
+
+**The ticket fixed two numbers and the work needed a third.** 200 dots of radius
+0.005 were settled before the work started, which is what 0008 R1 asks; putting
+them on a frame also needs a speed to leave at, and no record fixes one. It is
+0.1 shorter sides per second, provisional, and
+[#100](https://github.com/nanatsusaya/dot-panic/issues/100) supersedes it with
+0006 §3's band. The starting arrangement is provisional in the same way: dots
+are scattered over one square of the frame's shorter side, because the frame
+itself is [#103](https://github.com/nanatsusaya/dot-panic/issues/103)'s.
+
+**One sentence in 0002 §2 had to be read rather than applied**, and this change
+could not avoid it. *The Core imports nothing from this project*, with *the
+Shell is the only file that does* beside it, is the direction between the three
+parts. Read as a rule about every file, it forbids `core/world.ts` importing
+`core/random.js` — and it forbids a test importing the Core at all, which is
+what 0010 §4 and 0012 §4 both require. So the reading is forced rather than
+chosen, and what it costs is an amendment on 0002 A2's precedent — authorized on
+2026-08-05 and carried by
+[#176](https://github.com/nanatsusaya/dot-panic/issues/176) rather than folded
+into the change that found it.
+
+**The architecture is decided and one of its three parts has been started.**
 [0002](adr/0002-overall-architecture.md) fixes a functional core inside an
 imperative shell, three parts, and the directory layout that goes with them.
-**The three directories exist now and hold nothing**, which #69 created and
-0002 §7 fixes; what goes in them is still work that needs a ticket rather than a
-side effect of reading the record.
+`core/` holds three modules now; `shell/` and `view/` are still the empty
+directories #69 created, and what goes in them is work that needs a ticket
+rather than a side effect of reading the record.
 
 **0002 §2 now says what a type-only import is**, which is the first thing the
 architecture record has had to settle about a language rather than about parts.
@@ -736,7 +779,7 @@ all**: no slowdown factor has been chosen, because nothing has been measured.
 **Seventeen decisions stand in [docs/adr/](adr/README.md), and all seventeen
 are Accepted.** There is no `Planned` row left, which has not been true
 before — and it says nothing about what exists: every area on the scale at the
-end of this file is `decided` and none is `built`. Which record answers what is
+end of this file is `decided` but one. Which record answers what is
 the index's to say, and enumerating them here would be a second copy of it.
 **The table runs by meaning and not by number**, and five numbers have a
 history it carries rather than this file: 0012 was reserved as unused until
@@ -777,7 +820,7 @@ is why each row exists, which nothing else here says.
 | [#87](https://github.com/nanatsusaya/dot-panic/issues/87) The flock's motion | 6 tickets | 0006's motion rules, cut one per ticket |
 | [#88](https://github.com/nanatsusaya/dot-panic/issues/88) The pointer | 3 tickets | 0007's input model — the toy's one interaction |
 | [#89](https://github.com/nanatsusaya/dot-panic/issues/89) The finished page | 3 tickets | 0005's rendering, plus the palette and the dot count no record fixes |
-| [#117](https://github.com/nanatsusaya/dot-panic/issues/117) The meta-audit corrections | 19 tickets | the 2026-08-03 audits' findings; it builds nothing, which is what 0012 A2 widened *epic* to allow |
+| [#117](https://github.com/nanatsusaya/dot-panic/issues/117) The meta-audit corrections | 20 tickets | the 2026-08-03 audits' findings, and two of the same class found by building instead; it builds nothing, which is what 0012 A2 widened *epic* to allow |
 
 Outside the epics:
 
@@ -948,16 +991,19 @@ What a change description must contain is no longer among the gaps here.
 
 ## The single clearest next step
 
-**[#91](https://github.com/nanatsusaya/dot-panic/issues/91) — the world, the
-step, and the seeded generator. The first file of the toy.** It is step 1 of the
-order #13 now carries, it is Ready, its numbers are fixed, and nothing is left
-between it and being started. Under 0012 §4 it begins with a failing test, and
-under 0013 §5 it names the published algorithm its generator comes from.
+**[#95](https://github.com/nanatsusaya/dot-panic/issues/95) — the page is one
+screen, and it carries the policy.** It is the other half of step 1 in the order
+#13 carries, it was the one ticket that could be worked beside #91 all along,
+and nothing has ever been between it and being started. It is also the first
+work here that a person judges by looking rather than a command by running,
+which is 0012 §5.
 
-**[#95](https://github.com/nanatsusaya/dot-panic/issues/95) may be worked beside
-it and nothing else may.** They are the one independent pair 0012 §6's activity
-found: one writes `core/`, the other `index.html` and the stylesheet, and neither
-reads the other.
+**Step 2 is a pair, and #91 is what unblocked it.**
+[#92](https://github.com/nanatsusaya/dot-panic/issues/92) reads the Core's
+source for 0002 §3's fifteen names;
+[#93](https://github.com/nanatsusaya/dot-panic/issues/93) draws a world onto one
+canvas. 0012 §6's activity found those two independent of each other, and
+nothing else in the epic may be worked beside them.
 
 **Two small things are open outside the epic and neither blocks this.**
 [#166](https://github.com/nanatsusaya/dot-panic/issues/166) asks whether the
@@ -985,6 +1031,12 @@ An accepted decision confers `decided` and nothing more.
 is there.** It was held on `planned` because the core is two records — 0006
 decides the rules it runs, and [0013](adr/0013-origin-of-the-core.md) owned where
 the code comes from. Both exist now.
+
+**It stays at `decided` with code in it, which is the first time this scale has
+had to say that.** `built` asks for implemented, tested **and** watched running,
+and `core/` after [#91](https://github.com/nanatsusaya/dot-panic/issues/91) is
+the first two and cannot be the third: nothing draws a world yet, so there is
+nothing to watch. A row does not move by being started.
 
 **Five areas at `decided` and one at `built` is the first time this table has not
 read as the warning it was made to carry.** Six at `decided` and none at `built`
@@ -1015,11 +1067,12 @@ percent with every test green. **The third word in this scale's definition of
 0009 §9 says nothing it decides appears on a screen, and calls that emptiness
 deliberate. It is the only row for which that can be true.
 
-**What `built` does not mean here is that the chain is green.** Two of 0009 §8's
-four checks end on having nothing to read, because the three directories are
-empty; [#91](https://github.com/nanatsusaya/dot-panic/issues/91) is what gives
-them something. **Biome's is the one that passes**, and on five JSON files
-rather than on any code.
+**What `built` did not mean for that row is that the chain was green.** Two of
+0009 §8's four checks ended on having nothing to read while the three
+directories were empty, and Biome's was the one that passed — over five JSON
+files rather than over any code.
+[#91](https://github.com/nanatsusaya/dot-panic/issues/91) is what gave the other
+two something to read, and all four pass now.
 
 **0015 adds no row and moves none**, for a reason no other record has had: it
 decided that the area does not exist. There is nothing to build, so there is

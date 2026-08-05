@@ -90,11 +90,10 @@ bun run check
 Runs all four in that order and stops at the first failure, carrying its exit
 status. It is not a substitute for reading which one failed.
 
-**Two of them are red today, and that is the state rather than a fault to
-hunt.** `core/`, `shell/` and `view/` are empty, so `check:types` ends on *no
-inputs were found* and `check:test` on *0 test files matching*. Both end when the
-first Core file arrives with its test, which is
-[#91](https://github.com/nanatsusaya/dot-panic/issues/91) under 0012 §4.
+**All four are green today**, which they have not been before.
+[#91](https://github.com/nanatsusaya/dot-panic/issues/91) gave `check:types` and
+`check:test` something to read; until it landed they ended on *no inputs were
+found* and *0 test files matching*, because the three directories were empty.
 
 ## Working conventions specific to this project
 

@@ -6,6 +6,25 @@ session would decide worse without it.
 
 Newest first.
 
+## 2026-08-05 — The failing test is its own commit
+
+[0012](adr/0012-how-software-gets-developed.md) §4 requires every rule of the
+simulation to be written as a failing test before it is written as code, and
+that record's own *Consequences* say of its neighbor §5 that nothing checks
+whether the expectation came first, *"and the difference is invisible in the
+result"*. §4 sits in exactly that position. A change arriving with its tests and
+its code together is indistinguishable from one that wrote the tests afterward
+to match what was built.
+
+**So the first Core change split them**: one commit carrying four red test files
+and nothing else, then one carrying the code that turns them green. The commit
+sequence is the only trace the rule can leave, and it costs one `git commit`.
+
+**It is evidence and not a check**, which is the part worth not overstating.
+Nothing enforces the split, and a session that wanted to could write the tests
+last and commit them first. What it buys is that the honest case leaves a
+record, where before it left none.
+
 ## 2026-08-05 — What a project adds is not what it adapts
 
 The first `/passtdas` run existed to answer one question: whether this week's

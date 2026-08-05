@@ -44,9 +44,10 @@ to four files:
 
 ## Status
 
-Nothing is built yet. The method was adopted first, which is the order it asks
-for: decide before building. [docs/STATUS.md](docs/STATUS.md) has the position
-and the single next step.
+The toolchain exists, and so does the first file of the simulation. Nothing is
+on a screen yet: the method was adopted first, which is the order it asks for —
+decide before building. [docs/STATUS.md](docs/STATUS.md) has the position and
+the single next step.
 
 ## License
 
