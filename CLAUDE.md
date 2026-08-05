@@ -10,7 +10,7 @@ next step — not everything outstanding.
 
 A small browser toy — a flock of dots that scatters when your pointer comes
 near — built as a worked example of
-[agent-driven-development](https://github.com/nanatsusaya/agent-driven-development),
+[agent-project-rules](https://github.com/nanatsusaya/agent-project-rules),
 a published ruleset for running projects with AI agents. Demonstrating the
 method is what this project is for: the documentation and a well-written
 implementation come first, and the toy itself is secondary.
@@ -36,13 +36,13 @@ toy. It runs out of the method repository, which is not vendored here and has
 to be cloned beside this one:
 
 ```bash
-git clone https://github.com/nanatsusaya/agent-driven-development ../agent-driven-development
+git clone https://github.com/nanatsusaya/agent-project-rules ../agent-project-rules
 ```
 
 Then, from the root of this repository:
 
 ```bash
-node ../agent-driven-development/checks/check-method.mjs .
+node ../agent-project-rules/checks/check-method.mjs .
 ```
 
 Do not add `--lint`. That flag runs the document scans **only** and skips the

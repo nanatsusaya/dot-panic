@@ -1,5 +1,5 @@
 <!--
-Adapted from agent-manual/pull-request.md in agent-driven-development. Two
+Adapted from agent-manual/pull-request.md in agent-project-rules. Two
 changes: the "Watched" section is ours, because the failures that matter here
 are visual; and "Verified" names the one command this project has.
 
@@ -29,7 +29,7 @@ trusting the description.
      not what they would have returned. State what you did NOT verify.
 
      The method check, run alone and never in a pipeline:
-     node ../agent-driven-development/checks/check-method.mjs . -->
+     node ../agent-project-rules/checks/check-method.mjs . -->
 
 ## Watched
 

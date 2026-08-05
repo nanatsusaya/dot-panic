@@ -12,7 +12,7 @@ you approach with a mouse or a finger. There is no goal, no score and no
 ending — this is a toy, not a game.
 
 **A worked example of a method.** It is built under
-[agent-driven-development](https://github.com/nanatsusaya/agent-driven-development),
+[agent-project-rules](https://github.com/nanatsusaya/agent-project-rules),
 a published ruleset for running projects with AI agents. The interesting
 question here is not what gets built but how: which decisions were written
 down before any code existed, what "done" meant before the work started, and

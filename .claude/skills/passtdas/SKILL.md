@@ -1,7 +1,7 @@
 ---
 name: passtdas
 description: >-
-  Use to review how well this project still fits the agent-driven-development method — the
+  Use to review how well this project still fits the agent-project-rules method — the
   declaration in method.json against how work is actually done here. This project has already
   adopted the method, so the introduce-it-for-the-first-time path cannot apply; it is kept only
   because the procedure decides for itself which of the two it is.
@@ -14,7 +14,7 @@ description: >-
 # Adopting the method into a project
 
 *Carries out rules A1, A2 and C1. The
-[catalog](https://github.com/nanatsusaya/agent-driven-development/blob/main/method/rules.md)
+[catalog](https://github.com/nanatsusaya/agent-project-rules/blob/main/method/rules.md)
 is the authority; this file is only the procedure.*
 
 Adoption is a proposal, not an installation. What the method looks like here is
@@ -109,7 +109,7 @@ Once the shape is agreed, write `method.json` at the project root:
 
 ```json
 {
-  "method": "agent-driven-development",
+  "method": "agent-project-rules",
   "version": "0.4",
   "artefacts": {
     "operating-rules": "CLAUDE.md",
@@ -147,13 +147,13 @@ Like every change, this goes through review.
 The method repository is expected beside this one. If it is not there:
 
 ```bash
-git clone https://github.com/nanatsusaya/agent-driven-development ../agent-driven-development
+git clone https://github.com/nanatsusaya/agent-project-rules ../agent-project-rules
 ```
 
 Then, **as a command on its own** — not in a pipeline, not chained to anything:
 
 ```bash
-node ../agent-driven-development/checks/check-method.mjs .
+node ../agent-project-rules/checks/check-method.mjs .
 ```
 
 Running it alone is not fussiness. A pipeline reports the last command's exit

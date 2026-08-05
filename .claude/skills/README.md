@@ -2,7 +2,7 @@
 
 Five procedures, one per directory. They are **adapted copies** of the
 `agent-method` plugin, version `0.4.0`, taken on 2026-08-01 from
-[agent-driven-development](https://github.com/nanatsusaya/agent-driven-development).
+[agent-project-rules](https://github.com/nanatsusaya/agent-project-rules).
 
 Copying rather than installing is what that repository recommends for anyone
 who wants to change them, and it is what makes this project self-supporting:
@@ -61,6 +61,6 @@ not the one this project writes in.
 These are copies. When the plugin releases a new version they no longer match
 it, and nothing will announce that.
 
-**The trigger is a release of `agent-driven-development`.** Compare these five
+**The trigger is a release of `agent-project-rules`.** Compare these five
 files against the new version, take what applies, and leave what was adapted on
 purpose. The six changes above are the list of what not to overwrite.
