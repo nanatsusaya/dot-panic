@@ -317,6 +317,32 @@ somebody meets them: `check:types` on *no inputs were found*, `check:test` on *0
 test files matching*, both for the same reason and both ending at
 [#91](https://github.com/nanatsusaya/dot-panic/issues/91).
 
+**The walking-skeleton set is Ready, and that is the sentence this file has never
+been able to write.** 0012 §2's sprint-opening activity ran on 2026-08-05 under
+[#132](https://github.com/nanatsusaya/dot-panic/issues/132): nine tickets brought
+to Definition of Ready together, with §6's independence settled at the same
+moment. **The order lives in [#13](https://github.com/nanatsusaya/dot-panic/issues/13)**,
+because 0012 §7 makes that epic's table the authority for its own members and a
+copy here would be a second one. Only two pairs may be worked at once — #91 with
+#95, then #92 with #93 — and everywhere else a ticket reads or writes what the
+one before it produced.
+
+**Six numbers were fixed before the work rather than during it**, which is what
+0008 R1 asks and what no ticket had. All six are provisional and each names what
+supersedes it: 200 dots of radius 0.005 of the frame's shorter side, a step rate
+of 60 per second with a catch-up cap of 3 steps per draw, a 66-character line in
+the dialog, and a strip roughly 8 percent of the viewport tall. **The count and
+the radius are one choice against a ratio, not two numbers** — 0008 §6 derives
+the ceiling from 0006 §2, and 200 at 0.005 puts `n·πr²` near 0.9 percent of a
+16:9 frame, which is the *well below* that section asks for rather than the edge.
+
+**The one contradiction in the epic is resolved by coupling.** #13's prose said
+#97 lands with the first thing that moves; its table said #97 waits on #94. Both
+were right and neither yielded. They are now **two tickets in one increment,
+neither done until both hold**, because 0004 §4 binds every motion change and #94
+is the first one — so a merge order cannot be what decides whether the flock ever
+moves unhonored.
+
 **The architecture is decided and none of it is built.**
 [0002](adr/0002-overall-architecture.md) fixes a functional core inside an
 imperative shell, three parts, and the directory layout that goes with them.
@@ -768,11 +794,12 @@ breakdown — and it is a **member of #13** rather than a row here, decided on
 2026-08-05: that epic's prose already called it the single hand-off in the whole
 epic while its table left it out, and 0012 §7 makes the table the authority.
 
-**What phase 3 deliberately did not do is establish readiness.** 0012 §6 puts
-that at the moment a set is brought to Definition of Ready **together**, every
-time, and says phase 3 is not that. So every ticket below carries a header
-saying what it waits on, and none of them has been through the activity that
-opens a sprint.
+**What phase 3 deliberately did not do is establish readiness**, and the walking
+skeleton has now been through the activity that does. 0012 §6 puts it at the
+moment a set is brought to Definition of Ready **together**, every time, and says
+phase 3 is not that. [#13](https://github.com/nanatsusaya/dot-panic/issues/13)'s
+nine members went through it on 2026-08-05, under
+[#132](https://github.com/nanatsusaya/dot-panic/issues/132); no other set has.
 
 **Definition of Ready now says that itself**, which it did not.
 [The ticket template](../.github/ISSUE_TEMPLATE/task.md) named three conditions,
@@ -921,27 +948,24 @@ What a change description must contain is no longer among the gaps here.
 
 ## The single clearest next step
 
-**[#132](https://github.com/nanatsusaya/dot-panic/issues/132) — bring
-[#13](https://github.com/nanatsusaya/dot-panic/issues/13)'s members to Definition
-of Ready, together.** 0012 §2 makes a sprint exactly that and §6 puts the set's
-independence at the same moment; the activity has never run here, and it is the
-one Ready condition [the template](../.github/ISSUE_TEMPLATE/task.md) says no
-ticket can acquire by being edited. It is what stands between here and
-[#91](https://github.com/nanatsusaya/dot-panic/issues/91) writing the first Core
-file, and **there is no longer a toolchain ticket to do instead**: #69, #70 and
-#71 are all merged, and 0001 §6.2 — *the toy is never finished because the
-process ate the work* — is the argument that has been getting stronger with each
-of them.
+**[#91](https://github.com/nanatsusaya/dot-panic/issues/91) — the world, the
+step, and the seeded generator. The first file of the toy.** It is step 1 of the
+order #13 now carries, it is Ready, its numbers are fixed, and nothing is left
+between it and being started. Under 0012 §4 it begins with a failing test, and
+under 0013 §5 it names the published algorithm its generator comes from.
 
-**One thing it should know before it starts** is that its own scope says *#13's
-eight members* while that epic's table has held nine since #90 joined it;
-[#166](https://github.com/nanatsusaya/dot-panic/issues/166) is where that is
-settled, and it is small.
+**[#95](https://github.com/nanatsusaya/dot-panic/issues/95) may be worked beside
+it and nothing else may.** They are the one independent pair 0012 §6's activity
+found: one writes `core/`, the other `index.html` and the stylesheet, and neither
+reads the other.
 
-**Outside it, [#171](https://github.com/nanatsusaya/dot-panic/issues/171) is
-newly unblocked.** The method repository accepted the pull-request shape it
-copies on 2026-08-05, so the ticket that was waiting on a record now waits only
-on being worked.
+**Two small things are open outside the epic and neither blocks this.**
+[#166](https://github.com/nanatsusaya/dot-panic/issues/166) asks whether the
+Definition-of-Ready activity covered #90 or the eight build tickets alone — the
+activity found the answer changes nothing it produced, since #90 is not-ready
+either way and in the order either way.
+[#171](https://github.com/nanatsusaya/dot-panic/issues/171) is newly unblocked:
+the method repository accepted the pull-request shape it copies on 2026-08-05.
 
 ## Implementation scale
 
