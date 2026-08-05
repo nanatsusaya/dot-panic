@@ -509,7 +509,6 @@ Outside the epics:
 
 | Ticket | State |
 |---|---|
-| [#38](https://github.com/nanatsusaya/dot-panic/issues/38) The two repository notes 0004 §2 assumes | ready |
 | [#46](https://github.com/nanatsusaya/dot-panic/issues/46) Ticket readiness is stated in two places | ready — and this section is still one of the two |
 | [#69](https://github.com/nanatsusaya/dot-panic/issues/69) Create the toolchain 0009 decides | ready — and starting it is the decider's call |
 | [#70](https://github.com/nanatsusaya/dot-panic/issues/70) Biome | waits on #69 |
@@ -612,11 +611,22 @@ reading, and that 0004 §5's control is inert exactly then, so a visitor bothere
 by it has no mechanism. Nothing was built for it: 0006 §9 already makes stopping
 the absence of steps, and 0008 §4 already decides the resume.
 
-**0004 §2 assumes two files that do not exist.** It says the repository carries
-what the decider's other projects carry — a README and the conventional security
-and conduct notes — and calls creating them ordinary work with its own ticket.
-The README exists; `SECURITY.md` and `CODE_OF_CONDUCT.md` do not.
-[#38](https://github.com/nanatsusaya/dot-panic/issues/38) is now that ticket.
+**0004 §2's two files exist now**, and they are in
+[`.github/`](../.github/) rather than at the root. GitHub recognizes a
+community health file in the root, in `docs/` or in `.github/`, so the choice
+is free — and putting them where the issue and pull request templates already
+live keeps the root at the four things a reader of this project came for.
+Neither file carries a postal address or reads as an imprint, which 0004 §2
+decided the repository does not hold.
+
+**The security note says what is here to attack, and today the answer is
+nothing.** It points at [0003](adr/0003-security-and-privacy-by-design.md)
+rather than restating it, names the three consequences a reader would otherwise
+have to infer — no supply chain in the shipped page, nothing recorded about
+anybody, no server and no credential — and promises **no response time**,
+because one person reads that mailbox. Private vulnerability reporting was
+confirmed enabled before the file named it, so the route it gives is real
+rather than assumed.
 
 **The imprint conflict this section used to name is settled**, and it turned out
 not to be a conflict. 0003 R1 tells two parties apart: the person responsible
@@ -645,25 +655,23 @@ What a change description must contain is no longer among the gaps here.
 
 ## The single clearest next step
 
-**Write the two repository notes 0004 §2 assumes, against
-[#38](https://github.com/nanatsusaya/dot-panic/issues/38).** `SECURITY.md` and
-`CODE_OF_CONDUCT.md` do not exist, and
-[0004](adr/0004-compliance-accessibility-and-rights.md) §2 calls creating them
-ordinary work with its own ticket. It is ready, it is decision-free, and its
-contact address is already decided — 0004 R1, the same one the method
-repository publishes.
+**Give the hand-back bar one authority, against
+[#128](https://github.com/nanatsusaya/dot-panic/issues/128).** *Correct,
+complete and safe, or name the specific uncertainty* is stated in both
+CLAUDE.md and [the ticket template](../.github/ISSUE_TEMPLATE/task.md), which
+is the one-authority rule broken inside the file that states it. It waits on
+nothing, it needs no decision, and it was named as a leftover in three merged
+changes before it was finally ticketed.
 
-**What makes it the clearest step is that it is the last one with nothing in
-front of it.** Everything else ready either waits on the toolchain
-[#69](https://github.com/nanatsusaya/dot-panic/issues/69) opens, or sits under
-[#117](https://github.com/nanatsusaya/dot-panic/issues/117) where
-[#130](https://github.com/nanatsusaya/dot-panic/issues/130) needs an authorized
-amendment to 0004 before it can finish.
-
-**Its two constraints are the whole of the risk.** The files must not become an
-imprint — 0004 §2 decided this repository carries none, and a name and address
-in a conduct file reverses that quietly — and they must not promise a
-disclosure process one person cannot honor.
+**What makes it the clearest of the four that wait on nothing** — the others
+are [#123](https://github.com/nanatsusaya/dot-panic/issues/123),
+[#124](https://github.com/nanatsusaya/dot-panic/issues/124) and
+[#129](https://github.com/nanatsusaya/dot-panic/issues/129) — is that it is a
+defect in the operating rules rather than in what they describe. Everything
+else ready either waits on the toolchain
+[#69](https://github.com/nanatsusaya/dot-panic/issues/69) opens, or needs an
+authorized amendment first, which is
+[#130](https://github.com/nanatsusaya/dot-panic/issues/130)'s position.
 
 **What stands between here and code is one activity, and it is still not this
 one.**
