@@ -9,7 +9,7 @@
   judged by watching), §3.5 (the performance floor), §4 (the page carries three
   things), §5 (what is out of scope), §6 (the ranked failures)
 - **Supersedes:** nothing
-- **Amended:** 2026-08-02 — A1
+- **Amended:** 2026-08-02 — A1 · 2026-08-05 — A2
 
 ## Context
 
@@ -71,8 +71,16 @@ part, and the pure part knows nothing about them.
 
 **Dependency direction: Shell → Core, Shell → View, and nothing else.** The Core
 imports nothing from this project. The View receives a world as an argument and
-imports nothing from this project. The Shell imports both, and is the only file
-that does. A command can decide this by reading imports.
+makes **no value import** from this project; the Shell is the only file that
+does. To name the world's type the View may write a whole
+`import type { … } from …` statement and nothing else — such a statement is
+erased from the emitted JavaScript, so the file the browser loads imports
+nothing and the direction holds where it executes. The inline specifier form,
+`import { type World }`, is not permitted — see A2 — even though it names no
+value either.
+
+**Checkable by reading:** under `view/`, every import statement naming a path
+inside this project begins `import type`.
 
 The View is separate from the Shell rather than part of it because it is the one
 part that can only be judged by watching (0001 §3.1). Keeping it alone in its own
@@ -288,6 +296,63 @@ Authorized by Daniel on 2026-08-02, against
 on — carried by amendment rather than by a superseding record: *"wir folgen
 deiner empfehlung."*
 
+**A2 — a type-only import is not an import for this rule. 2026-08-05.**
+
+§2 read:
+
+> The View receives a world as an argument and imports nothing from this
+> project. The Shell imports both, and is the only file that does. A command can
+> decide this by reading imports.
+
+The View is TypeScript ([0009](0009-toolchain.md) §1), so typing its world
+argument ordinarily means `import type { World } from '../core/world.js'` — an
+import statement in the source text. The sentence above forbade it without ever
+having been asked about it, and left the first line of View code to settle an
+architecture boundary in passing.
+
+**The rule is about value imports, and the reason is that nothing is imported.**
+TypeScript guarantees a type-only import is elided from the emitted JavaScript,
+and §3 of 0009 means the browser loads exactly that emitted file, unbundled. The
+direction was never at risk where it runs; only the reading of the source was.
+So §2 now says *no value import*, and the sentence that stated the same rule a
+second time — the Shell being *the only file that does* — moves with it, because
+leaving it would have made the record disagree with itself.
+
+**The whole statement, not the inline specifier.** `import { type World }` is
+legal TypeScript, names no value, and is refused here anyway. The guarantee this
+amendment rests on is the one *References* quotes for an `import type`
+declaration; a statement that merely carries a type specifier is a different
+case, and [0009](0009-toolchain.md) §4 fixes `target` and `lib` and no other
+compiler setting. Refusing the form keeps the check at *does this statement begin
+`import type`* rather than a reading of every specifier, and costs the View
+nothing it needs.
+
+**What it costs is a distinction that lives in one keyword.** Two imports that
+look alike are now on opposite sides of the rule, and deleting five characters
+moves one across without touching anything else. That is what the checkable form
+above is for; a principle would not have survived it.
+
+**The alternative this record rejected is not the one now permitted.** *Let the
+View import the Core* was rejected above because the drawing would then depend on
+the shape of the simulation. It already does — the View is handed a world and
+reads it to draw, so that dependency exists whether or not a statement records
+it, and the honest reading is that a type-only import writes down a coupling
+rather than creating one. What changes is who checks it: the compiler, instead of
+nobody. The entry stands as written, because what it refuses is a View that can
+*call* the simulation.
+
+**Nothing else changes.** §1, §3, §4, §5, §6 and §7 stand as accepted, A1 stands,
+and R1 through R4 are untouched. The Core's sentence is not touched either: it
+still imports nothing from this project, and this amendment was not asked about
+it.
+
+Authorized by Daniel on 2026-08-05, against
+[#120](https://github.com/nanatsusaya/dot-panic/issues/120), on a recommendation
+of permitting the type-only import — in preference to a render-snapshot type
+owned by the Core or a structural duplicate with its own authority, both of which
+buy a second description of the world to avoid a statement that emits nothing:
+*"wir folgen bei O1 und O2 deiner empfehlung."*
+
 ## References
 
 - [*Boundaries*, Gary Bernhardt, SCNA 2012](https://www.destroyallsoftware.com/talks/boundaries)
@@ -301,3 +366,6 @@ deiner empfehlung."*
   2026-08-02.
 - [Ticket #6](https://github.com/nanatsusaya/dot-panic/issues/6), including the
   comment that widened its scope after 0001 was accepted. Read 2026-08-02.
+- [*Modules — Reference*, the TypeScript handbook](https://www.typescriptlang.org/docs/handbook/modules/reference.html)
+  — *"guaranteed to be elided from the output JavaScript"*, the sentence A2
+  rests on. Read 2026-08-05.

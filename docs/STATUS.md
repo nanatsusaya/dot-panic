@@ -106,6 +106,20 @@ toolchain at all** — no runtime, no test runner, no package manifest — but t
 is no longer an open question. 0009 decides it and
 [#69](https://github.com/nanatsusaya/dot-panic/issues/69) is the work.
 
+**0002 §2 now says what a type-only import is**, which is the first thing the
+architecture record has had to settle about a language rather than about parts.
+The View makes no **value** import from this project and may write a whole
+`import type { … } from …` statement to name the world's type — permitted
+because TypeScript erases such a statement from the emitted JavaScript, so the
+file the browser loads imports nothing and the direction holds where it runs.
+The inline `import { type World }` form is refused, which keeps the check
+reading statements rather than specifiers. 0002 A2 carries it, authorized on
+2026-08-05 against [#120](https://github.com/nanatsusaya/dot-panic/issues/120),
+and [#93](https://github.com/nanatsusaya/dot-panic/issues/93) cites it.
+**No ticket owns the command that would decide it.** §2 says one can, and the
+purity test [#92](https://github.com/nanatsusaya/dot-panic/issues/92) plans is a
+different command — it reads `core/` for fifteen names, not `view/` for imports.
+
 **How the work gets built is decided as well, and nothing has been built under
 it.** [0012](adr/0012-how-software-gets-developed.md) fixes seven phases running
 from adoption to maintenance, of which the analysis phase — the one this project
@@ -671,25 +685,24 @@ What a change description must contain is no longer among the gaps here.
 
 ## The single clearest next step
 
-**Answer [#120](https://github.com/nanatsusaya/dot-panic/issues/120) — whether
-a type-only import is an import.** 0002 §2 says the View *imports nothing from
-this project* and that a command can decide it by reading imports. Under
-TypeScript, typing the world argument ordinarily means
-`import type { World } from '../core/world.js'`, which is an import statement
-in the source text, and no record says whether that violates the rule.
+**Answer [#121](https://github.com/nanatsusaya/dot-panic/issues/121) — the
+page's language, its `lang` value, and where canonical copy lives.** Nothing
+decides any of the three. #77 says so in its own words, and
+[#95](https://github.com/nanatsusaya/dot-panic/issues/95) and
+[#96](https://github.com/nanatsusaya/dot-panic/issues/96) both need visible copy
+before anything can be written for them.
 
-**It is the next step because skipping it is not neutral.** Without an answer
-the first line of View code settles an architecture boundary silently, which is
-the failure D1 exists to prevent, and the import-reading command
-[#92](https://github.com/nanatsusaya/dot-panic/issues/92) plans cannot be
-written, because nobody has said what it must reject.
+**It is the next step for the reason #120 was**, one ticket earlier on the same
+path: without an answer the first page ticket decides it silently, and a later
+change then touches copy, accessibility and watch criteria across three tickets
+at once. This one is outward-facing as well, which puts it in the decider's
+domain by CLAUDE.md rather than only by D1.
 
 **It is a decision ticket, so what a session does with it is put the question
-and stop.** The recommendation is in the ticket, and one of the three options
-costs an authorized amendment to 0002 §2 — a stop-and-ask by CLAUDE.md, not
-something a change carries quietly.
-[#121](https://github.com/nanatsusaya/dot-panic/issues/121) is the same shape
-on the same path: the page's language and where its copy lives.
+and stop.** The recommendation is in the ticket. It carries a second choice
+under the first — whether the answer becomes a small record of its own or an
+authorized addition to an existing one — and that one is worth settling before
+the writing starts rather than after.
 
 **The two tickets that need nobody are
 [#123](https://github.com/nanatsusaya/dot-panic/issues/123) and
