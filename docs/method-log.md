@@ -6,6 +6,44 @@ session would decide worse without it.
 
 Newest first.
 
+## 2026-08-05 — What a project adds is not what it adapts
+
+The first `/passtdas` run existed to answer one question: whether this week's
+additions — seven phases, epics, a third label, a cap on open changes — had to
+be declared in `method.json` as adaptations. They did not, and the boundary is
+worth one entry because the question is cheap to ask and the wrong answer is
+expensive.
+
+**An adaptation is a catalog rule narrowed, replaced, dropped or deferred.
+Nothing else is one.** The method splits every project into the catalog, which
+holds regardless of what the project is, and the project layer, which is
+everything true only here — and it expects the second to grow: a project
+*gains* rules the catalog does not have, and those belong in the layer rather
+than in the declaration. A rule this project invented is therefore not a
+deviation to record. `"adaptations": []` is correct, and thirty-two rules in
+force with none adapted is the right result rather than an unexamined one.
+
+**The sharp case is the one the decider asked about.** The five procedures
+carry German names, and German is not the language everything committed here is
+written in. That is not a narrowing of L1 either: L1 has two halves, and the
+method puts a skill name on the conversation half rather than the artifact
+half — the plugin's own README says so in a section written for it, and its
+table supplies these exact five names. What it asks in return is that the
+choice does not leak the other way, and it does not: headings, descriptions and
+every document stay in the one language everybody reads.
+
+**Two edges, because the next session will find them.** L1's own enumeration
+covers a committed identifier, and the document carving the skill name out of
+it is not the normative one — so this rests on the method author's published
+reading of his own rule rather than on the rule's text. And nothing checks the
+condition: the spelling scan compares British and American word pairs, and a
+German heading would be in neither list.
+
+Recorded because the other answer is the damaging one. Declaring an adaptation
+that is not one costs more than tidiness: `dropped`, `replaced` and `deferred`
+each switch a rule's check off, so the tidy-looking declaration would stop
+verifying rules that are in force.
+
 ## 2026-08-05 — The method was renamed, and the records keep the old name
 
 `agent-driven-development` became

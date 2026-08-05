@@ -15,11 +15,30 @@ The procedures have now been used. `/moin`, `/weiterimtext` and `/adr` ran on
 2026-08-02 and `/feierabend` on 2026-08-03, all behaving as their files
 describe — `/feierabend`'s first run is what added this sentence's other half
 and #114 to the ticket list, by reading the documents it asks to be brought
-current. **`/passtdas` has still never been invoked**, and `method.json`
-declares no adaptations while this week added seven phases, an epic and a third
-label to how work is actually done. It has a ticket now —
-[#122](https://github.com/nanatsusaya/dot-panic/issues/122) — which does not
-make it run.
+current. **`/passtdas` ran on 2026-08-05 and was the last one outstanding.**
+
+**It found nothing to declare, and that is the answer rather than a shrug.**
+Seven phases, epics, a third label and a cap on open changes are **project
+layer**, not adaptations: an adaptation is a catalog rule narrowed, replaced,
+dropped or deferred, and none of them touches one. So `"adaptations": []`
+stands, and the check reporting thirty-two rules in force and none adapted is
+the right answer rather than an oversight. The [method log](method-log.md)
+carries the boundary, because a session answering it the other way would
+declare adaptations that switch checks off for rules that are in force.
+
+**What the review did find is one rule in force and failing, and one nobody has
+verified.** A3 — *scale ceremony to the stage* — describes this project in the
+catalog's own words: *a decision phase with no end condition* is how a project
+accumulates a complete architecture and no running code. Sixteen records, no
+code, and [0012](adr/0012-how-software-gets-developed.md) §1 says the analysis
+phase has no end condition. None of that is news here —
+[0001](adr/0001-purpose-scope-and-success.md) §6.2 ranks it as a failure and
+[0011](adr/0011-delivery.md) §7 puts the first deployment at the walking
+skeleton because of it — and supplying the end condition belongs to the decider
+rather than to a review. **G1's binding has never been checked**: the catalog
+asks for trunk protection that binds administrators too, and for a deliberate
+zero on required approvals where one account both writes and merges. The check
+states that it can decide neither and names the address; the decider is looking.
 
 **The method this project demonstrates was renamed on 2026-08-05**, and
 `method.json` follows it: `agent-project-rules`, catalog `0.5`. None of the
@@ -626,26 +645,25 @@ What a change description must contain is no longer among the gaps here.
 
 ## The single clearest next step
 
-**Run `/passtdas`, against
-[#122](https://github.com/nanatsusaya/dot-panic/issues/122).** It is the one
-procedure this project has never invoked, and the gap it would close is the one
-this file names about itself two paragraphs into *Position*: `method.json`
-declares no adaptations, while seven phases, an epic and a third label have
-since entered how work is actually done. **The green check cannot settle
-it** — it says so in its own output, where twenty-one rules in force are marked
-`manual` — because whether those additions are project layer or adaptations in
-the method's sense is a judgment and not a scan.
+**Write the two repository notes 0004 §2 assumes, against
+[#38](https://github.com/nanatsusaya/dot-panic/issues/38).** `SECURITY.md` and
+`CODE_OF_CONDUCT.md` do not exist, and
+[0004](adr/0004-compliance-accessibility-and-rights.md) §2 calls creating them
+ordinary work with its own ticket. It is ready, it is decision-free, and its
+contact address is already decided — 0004 R1, the same one the method
+repository publishes.
 
-**It ends in a proposal, and that is the point rather than a limitation.** The
-procedure adopts nothing on its own authority, so what this step produces is a
-finding for the decider and a `method.json` that changes only on an answer.
-#122 puts it *at or before* the phase transition, which is what makes now a
-legitimate moment rather than a premature one.
+**What makes it the clearest step is that it is the last one with nothing in
+front of it.** Everything else ready either waits on the toolchain
+[#69](https://github.com/nanatsusaya/dot-panic/issues/69) opens, or sits under
+[#117](https://github.com/nanatsusaya/dot-panic/issues/117) where
+[#130](https://github.com/nanatsusaya/dot-panic/issues/130) needs an authorized
+amendment to 0004 before it can finish.
 
-**The ready alternative is
-[#38](https://github.com/nanatsusaya/dot-panic/issues/38)**, the two repository
-notes 0004 §2 assumes and this repository does not have. It is smaller and
-decision-free, and it is not what any other work is waiting on.
+**Its two constraints are the whole of the risk.** The files must not become an
+imprint — 0004 §2 decided this repository carries none, and a name and address
+in a conduct file reverses that quietly — and they must not promise a
+disclosure process one person cannot honor.
 
 **What stands between here and code is one activity, and it is still not this
 one.**
