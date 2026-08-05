@@ -529,6 +529,16 @@ time, and says phase 3 is not that. So every ticket below carries a header
 saying what it waits on, and none of them has been through the activity that
 opens a sprint.
 
+**Definition of Ready now says that itself**, which it did not.
+[The ticket template](../.github/ISSUE_TEMPLATE/task.md) named three conditions,
+all of them about one ticket, so a header reading *waits on #91* satisfied Ready
+as written — the gap an outside audit read as *the sprint can never open*. Three
+more conditions are there now, by reference to 0012 §2 and §6 rather than
+restating them: blockers cleared or sequenced, the numbers the records defer
+fixed in the ticket, and independence and order settled for the whole set at
+once. **The sixth is the one no ticket can acquire by being edited**, which is
+what makes the activity an activity.
+
 **The ticket that held research no longer has to.** #12 carried a survey of four
 npm packages so that it would not be lost with the session that produced it, and
 that was the last thing in this project living only in the tracker. 0013 §4 has
@@ -661,22 +671,31 @@ What a change description must contain is no longer among the gaps here.
 
 ## The single clearest next step
 
-**Put into Definition of Ready what 0012 hangs on it, against
-[#124](https://github.com/nanatsusaya/dot-panic/issues/124).**
-[0012](adr/0012-how-software-gets-developed.md) §2 makes a sprint a set of
-tickets brought to Ready **together** and §6 settles their independence at that
-same moment — while the sole authority for Ready, [the ticket
-template](../.github/ISSUE_TEMPLATE/task.md), names three conditions and none
-of them is about blockers, deferred numbers or the set. A ticket whose header
-says *waits on #91* satisfies Ready as written.
+**Answer [#120](https://github.com/nanatsusaya/dot-panic/issues/120) — whether
+a type-only import is an import.** 0002 §2 says the View *imports nothing from
+this project* and that a command can decide it by reading imports. Under
+TypeScript, typing the world argument ordinarily means
+`import type { World } from '../core/world.js'`, which is an import statement
+in the source text, and no record says whether that violates the rule.
 
-**It is the one of the three remaining that something else waits on.**
+**It is the next step because skipping it is not neutral.** Without an answer
+the first line of View code settles an architecture boundary silently, which is
+the failure D1 exists to prevent, and the import-reading command
+[#92](https://github.com/nanatsusaya/dot-panic/issues/92) plans cannot be
+written, because nobody has said what it must reject.
+
+**It is a decision ticket, so what a session does with it is put the question
+and stop.** The recommendation is in the ticket, and one of the three options
+costs an authorized amendment to 0002 §2 — a stop-and-ask by CLAUDE.md, not
+something a change carries quietly.
+[#121](https://github.com/nanatsusaya/dot-panic/issues/121) is the same shape
+on the same path: the page's language and where its copy lives.
+
+**The two tickets that need nobody are
 [#123](https://github.com/nanatsusaya/dot-panic/issues/123) and
-[#129](https://github.com/nanatsusaya/dot-panic/issues/129) also wait on
-nothing and unblock nothing;
-[#132](https://github.com/nanatsusaya/dot-panic/issues/132) — the last ticket
-before phase 4 — waits on #124. **Closing it is referencing rather than
-deciding**, and 0012 is not amended: the template catches up to it.
+[#129](https://github.com/nanatsusaya/dot-panic/issues/129)**, and neither
+unblocks anything. They are the ones to take if the answer above is not
+available.
 
 **What stands between here and code is one activity, and it is still not this
 one.**
