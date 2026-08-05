@@ -584,11 +584,11 @@ sentence that said this project needs no personal data — which is why
 own refusal by a session that reads only that file. Both were 0001 §6.1 sitting
 in the document every session reads first.
 
-**[#119](https://github.com/nanatsusaya/dot-panic/issues/119) could take
-precedence, and that is the decider's to say.** It corrects a claim 0010 makes
-in three places and this file repeats once, and it is an amendment, so it does
-not begin without authorization. 0016 is the step here because it is the older
-gap, not because the defect was weighed and ranked below it.
+**It is what follows
+[#119](https://github.com/nanatsusaya/dot-panic/issues/119)**, which the decider
+put first on 2026-08-05 and authorized as an amendment the same day. Until that
+change lands, the paragraph above about the surviving defect is the one to read
+rather than this one.
 
 **0016 gates nothing that follows it.** It constrains the breakdown only through
 D4 — a ticket that would settle something a still-open record owns is not
