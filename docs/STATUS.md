@@ -17,7 +17,30 @@ describe — `/feierabend`'s first run is what added this sentence's other half
 and #114 to the ticket list, by reading the documents it asks to be brought
 current. **`/passtdas` has still never been invoked**, and `method.json`
 declares no adaptations while this week added seven phases, an epic and a third
-label to how work is actually done.
+label to how work is actually done. It has a ticket now —
+[#122](https://github.com/nanatsusaya/dot-panic/issues/122) — which does not
+make it run.
+
+**The record set was read from outside on 2026-08-03, and no decision was
+reversed.** Two independent audits and a meta-audit that verified both against
+the records went through every record, ticket and pull request. **The three
+release blockers one of them raised each dissolved against the sources**: the
+imprint's model is coherent across 0003 §7, 0004 §3 and 0011 §6 — a stand-in
+that the source carries until #90 replaces it, gated on publishing — P1's
+reading is 0003 R1's and the decider's, and 0012 §6 asks independence of tickets
+worked *in parallel* rather than of a whole set at once. A later session finding
+those conflicts again should read the resolved questions before believing them.
+
+**What did survive is a defect no command here can see.** 0010 §7 claims the
+coverage floor gives 0002 §5 its first enforcement — logic moved out of the Core
+*"shrinks the numerator and leaves the denominator alone"* — and the arithmetic
+does not work: lines leaving `core/` leave both, and logic written straight into
+the Shell is never measured, because §7 excludes it by name.
+[#119](https://github.com/nanatsusaya/dot-panic/issues/119) carries the
+amendment. **Until it lands, *no domain logic outside the Core* is carried by
+review exactly as it was before 0010 existed**, and a green run says nothing
+about it. The rest of what the audits found is
+[#117](https://github.com/nanatsusaya/dot-panic/issues/117)'s.
 
 **The architecture is decided and none of it is built.**
 [0002](adr/0002-overall-architecture.md) fixes a functional core inside an
@@ -45,6 +68,14 @@ against. The recommendation had been against all of it, on A3's *do not build fo
 a scale you do not have*; A1 records that and what overruled it. **The two end
 phases now have a row**, [0016](adr/README.md), which is where their content goes
 and why A1 was allowed to name them and nothing more.
+
+**A2 widened that word on 2026-08-03**, and it is the first amendment this
+project made to hold something it was already doing. An epic now groups one
+recognizable piece of **work** — a part of the toy, or a bounded effort beside
+it — because the audit corrections belong together and build nothing, and
+carrying them on an ordinary ticket would have been an epic without the label.
+The cost is that the label no longer tells a reader an epic is product work; an
+epic's members have to say what they are.
 
 **What the page may never do is decided.**
 [0003](adr/0003-security-and-privacy-by-design.md) forbids loading anything off
@@ -443,14 +474,17 @@ ticket is the state those five were filed to end.
 number has stopped being informative.** It was five of eight. After the
 breakdown it is essentially all of them: every ticket phase 3 produced was cut
 from an accepted record and cites the sections it serves. What is worth naming
-now is the other direction — **two** open tickets were noticed in passing rather
-than asked for by a record.
-[#46](https://github.com/nanatsusaya/dot-panic/issues/46) came from this table
-drifting twice within an hour, and
+now is the other direction — the open tickets **no record asked for**. Two were
+noticed in passing: [#46](https://github.com/nanatsusaya/dot-panic/issues/46)
+came from this table drifting twice within an hour, and
 [#114](https://github.com/nanatsusaya/dot-panic/issues/114) from reading
-CLAUDE.md at the end of the session that produced the breakdown. Both are
-defects in how this project describes itself, which is what noticing in passing
-tends to find.
+CLAUDE.md at the end of the session that produced the breakdown. The audits of
+2026-08-03 added sixteen more under
+[#117](https://github.com/nanatsusaya/dot-panic/issues/117). All of them are
+defects in how this project describes itself, which is what looking at it from
+outside tends to find — and one of the sixteen,
+[#134](https://github.com/nanatsusaya/dot-panic/issues/134), exists because
+three readers misread one section three different ways.
 
 **#69 has grown a requirement it was not filed with**: 0010 §7 puts the coverage
 floor and its two exclusions in `bunfig.toml`, so the file that ticket creates
@@ -524,6 +558,10 @@ list, and what would make any of them decidable by a command is no longer only a
 number: 0009 §8 fixes four checks and
 [#71](https://github.com/nanatsusaya/dot-panic/issues/71) is what turns them into
 commands. CLAUDE.md and `/feierabend` refer to the template and state nothing.
+**One bar beside it is still stated twice**, though — *correct, complete and
+safe, or name the specific uncertainty* is in both, named as a leftover in three
+merged changes and finally ticketed as
+[#128](https://github.com/nanatsusaya/dot-panic/issues/128).
 
 What a change description must contain is no longer among the gaps here.
 [The pull request template](../.github/pull_request_template.md) fixes it.
@@ -542,7 +580,14 @@ misdescribes the project.
 it sits. CLAUDE.md is what a session with no memory reads first, and this is the
 section that would tell it how code is written here. The first session to write
 code is the first one this paragraph sends nowhere, which is 0001 §6.1 — the
-failure this project ranks above every other.
+failure this project ranks above every other. The audits agreed on this order,
+which is the one place they agreed on everything.
+
+**[#118](https://github.com/nanatsusaya/dot-panic/issues/118) follows it in the
+same file and is a separate change.** CLAUDE.md's guardrail still says this
+project needs no personal data, which #90 makes false — and #90 says so about
+itself, that a session reading only CLAUDE.md will refuse it. Two concerns, one
+file, in that order.
 
 **Then write [0016](adr/README.md) against
 [#83](https://github.com/nanatsusaya/dot-panic/issues/83)**, the last row in the
