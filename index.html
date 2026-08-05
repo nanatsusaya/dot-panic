@@ -31,6 +31,22 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>dot-panic</title>
     <link rel="stylesheet" href="styles.css" />
+
+    <!--
+      The Shell. A module is deferred by definition, so it runs after the
+      document is parsed and the two elements it looks up are there.
+
+      It is a file rather than an inline block because the policy above allows
+      `'self'` and nothing else: `script-src` falls back to `default-src`, and
+      an inline block is not `'self'`. The browser blocks it and reports
+      nothing, which cost this project an afternoon before it was understood.
+
+      The `.js` is not in the repository. 0009 R1 keeps the emitted JavaScript
+      out of it and 0009 §3 puts each emitted file beside its own source, so
+      what the page loads is a compiler's output and a checkout alone will not
+      serve it. No script emits it yet; #98 is the ticket that builds.
+    -->
+    <script type="module" src="shell/main.js"></script>
   </head>
 
   <body>
@@ -44,11 +60,25 @@
 
     <!--
       The strip. It carries 0004 §5's control and the button that opens
-      0014 §4's dialog, and nothing else; both arrive with their own tickets,
-      #97 and #96. Until then it is empty and has no height, because 0014 §2
-      gives it the height its controls need and refuses a fraction of the
-      viewport.
+      0014 §4's dialog, and nothing else. The second of the two arrives with
+      #96; 0014 §2 gives the strip the height its controls need rather than a
+      fraction of the viewport, so it grows when that one lands.
     -->
-    <footer id="strip"></footer>
+    <footer id="strip">
+      <!--
+        0005 §7: a real button in the document, never drawn on the canvas,
+        always visible rather than revealed on hover or on focus, and labeled
+        with words. The label is written by the Shell because it says what the
+        press will do and that depends on whether the flock is moving — under
+        `prefers-reduced-motion: reduce` the page starts stopped and this
+        control starts it (0006 §8).
+
+        The label written here is the one the ordinary case ends on, so a page
+        whose script never runs still shows a labeled control rather than an
+        empty box. 0014's consequences already name what such a page costs; an
+        unlabeled button would add to it for nothing.
+      -->
+      <button id="motion" type="button">Stop the flock</button>
+    </footer>
   </body>
 </html>

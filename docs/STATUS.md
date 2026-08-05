@@ -469,9 +469,9 @@ rather than leaving a reader to read two trailers against a rule naming one.
 **The architecture is decided and one of its three parts has been started.**
 [0002](adr/0002-overall-architecture.md) fixes a functional core inside an
 imperative shell, three parts, and the directory layout that goes with them.
-`core/` holds three modules now; `shell/` and `view/` are still the empty
-directories #69 created, and what goes in them is work that needs a ticket
-rather than a side effect of reading the record.
+**All three directories hold something now**: three modules in `core/`, one
+function in `view/`, and one file in `shell/` that imports both of them and is
+the only file that may.
 
 **The View exists, and the world has been on a screen.**
 [#93](https://github.com/nanatsusaya/dot-panic/issues/93) put one function in
@@ -522,6 +522,37 @@ page with no surface color cannot be watched at all and 0005 R1 fixes none — t
 colors ticket under #89 chooses them. And `prefers-color-scheme` is not honored
 yet, which is a gap rather than a defect only because 0005 §4 says in terms that
 a change may ship in one mode and follow with the other.
+
+**The flock moves, and the control that stops it landed with it.**
+[#94](https://github.com/nanatsusaya/dot-panic/issues/94) and
+[#97](https://github.com/nanatsusaya/dot-panic/issues/97) are one increment
+because 0004 §4 forbids the other order. `shell/main.ts` runs the loop on
+`requestAnimationFrame`'s own timestamp, steps at a fixed 60 per second, draws
+at whatever rate the display offers, and abandons anything past **three steps in
+one draw** rather than deferring it (0008 §4). Under
+`prefers-reduced-motion: reduce` it does not step at all and the button starts
+the flock instead of stopping it (0006 §8); stopping is the Shell not calling
+the Core, so the world gains no paused field (0006 §9).
+
+**The loop was driven by a clock this project supplied, because the browser pane
+would not composite.** It reported `visibilityState: "hidden"` throughout, and a
+hidden document never runs a `requestAnimationFrame` callback — so the shipped
+module was imported with `requestAnimationFrame` replaced by a collector and its
+callback called with chosen timestamps. **That decides the arithmetic and not
+the picture.** What it decided: a 60-second gap between two frames advances the
+flock by 3 pixels rather than by 4,000, which is the cap doing exactly what
+0008 §4 asks; a press stops the world dead and a second press resumes it from
+where it stood, with no burst of owed time; and under a faked `reduce` the world
+does not advance until the button is pressed. **Smoothness is still unwatched**,
+and it is the one thing on #94's list that no clock decides.
+
+**The flock occupies a square, not the frame.** At 1280×673 the dots span 674
+pixels across and stop. That is not the View: `createWorld` scatters over a unit
+square because the Core has no frame yet, and 0006 §6 — the bounded frame whose
+edge is a turning force — is [#103](https://github.com/nanatsusaya/dot-panic/issues/103),
+unbuilt. 0008 §6 makes every length a fraction of the shorter side, so the
+world's own extent has to become the frame's when that ticket lands. Worth
+knowing before someone reads the empty band on the right as a drawing bug.
 
 **One thing this change could not do is assert its own criterion.** 0014 §9
 makes *the stylesheet contains no width breakpoint and no container query*
@@ -1141,15 +1172,27 @@ What a change description must contain is no longer among the gaps here.
 
 ## The single clearest next step
 
-**[#94](https://github.com/nanatsusaya/dot-panic/issues/94) with
-[#97](https://github.com/nanatsusaya/dot-panic/issues/97), coupled — and three
-criteria go into #94 before the work starts.** They were found while watching
-#93: who sets the canvas's backing-store size, who reads 0005 §3's three colors
-from the stylesheet and hands them to the View — that ticket does not mention
-colors at all — and what happens when the viewport or the text size changes.
-Adding them afterwards is what condition 1 of Done forbids. Everything the pair
-waits on is merged, and they are one increment because #94 is the first thing
-that moves and 0004 §4 binds every motion change.
+**[#108](https://github.com/nanatsusaya/dot-panic/issues/108) — the drawing
+sized in device pixels, and re-sized when the frame changes.** #94 sizes the
+canvas's backing store once, in CSS pixels, from the box the canvas already
+occupies; #108 owns both halves of what is missing, and its scope carries them
+in its own words — the `resolution` route 0005 §5 fixes in place of
+`devicePixelRatio`, and *it re-sizes when the window changes and when the page is
+zoomed*. Until it lands, a window resized after load leaves the flock drawn at
+the old size, which is the most visible thing wrong with the page.
+
+[#109](https://github.com/nanatsusaya/dot-panic/issues/109) is the other half of
+the same pair and is now genuinely ready: its header waited on *something worth
+looking at*, and there is something worth looking at. Both are part of #89
+rather than of #13, so which comes first is a sequencing call rather than a
+dependency.
+
+**Three criteria were expected here and are not needed.** They were written down
+while watching #93 — who sizes the backing store, who reads 0005 §3's colors and
+hands them to the View, and what happens on a resize — as criteria missing from
+#94. They are not missing: #108 and #109 own all three, in tickets written on
+2026-08-02. What was actually missing was a reading of the tracker before the
+claim, and the claim stood in this file for a day.
 
 **Two things are the decider's and one of them gates three tickets.**
 [#181](https://github.com/nanatsusaya/dot-panic/issues/181) decides where a
@@ -1174,8 +1217,11 @@ own table, which still shows four closed members as waiting on something.
 Definition-of-Ready activity covered #90 or the eight build tickets alone — the
 activity found the answer changes nothing it produced, since #90 is not-ready
 either way and in the order either way.
-[#171](https://github.com/nanatsusaya/dot-panic/issues/171) is newly unblocked:
-the method repository accepted the pull-request shape it copies on 2026-08-05.
+[#185](https://github.com/nanatsusaya/dot-panic/issues/185) and
+[#186](https://github.com/nanatsusaya/dot-panic/issues/186) are both one edit to
+CLAUDE.md and both about a rule with no home: *do not edit a merged pull
+request*, which lives only in #171's constraints, and which of the four checks
+decides 0009 §5, which the *Commands* section does not say.
 
 ## Implementation scale
 
