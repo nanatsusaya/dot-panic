@@ -1,0 +1,54 @@
+<!doctype html>
+<!--
+  The page. One screen, and it carries the policy.
+
+  It holds two regions and nothing else: a canvas, and a strip along the bottom
+  for the two controls 0014 §2 puts there. The controls themselves arrive with
+  #96 and #97, and the flock with #93 and #94 — this file is the container all
+  four land in.
+-->
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+
+    <!--
+      As early as it can be, which is second. CSP3 §3.3 says a policy delivered
+      in a meta element does not apply to content preceding it, and the encoding
+      declaration has to sit inside the document's first 1024 bytes or the
+      document is decoded wrong before anything else matters.
+
+      The floor is 0003 §6's, verbatim, and that record forbids widening it:
+      only 'self' and 'none' may appear, never a scheme or a host. `report-uri`,
+      `frame-ancestors` and `sandbox` are absent because a meta element cannot
+      carry them — 0011 §5 found that GitHub Pages sets no response headers, so
+      the meta element is the whole of what ships rather than half of it.
+    -->
+    <meta
+      http-equiv="Content-Security-Policy"
+      content="default-src 'self'; connect-src 'none'; object-src 'none'; base-uri 'none'; form-action 'none'"
+    />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>dot-panic</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+
+  <body>
+    <!--
+      The canvas takes everything the strip leaves (0014 §2), and its bottom
+      edge is the frame's boundary rather than an obstacle inside it (0014 §3) —
+      which is why the Core needs no fourth force to keep the flock out of the
+      strip.
+    -->
+    <canvas id="flock"></canvas>
+
+    <!--
+      The strip. It carries 0004 §5's control and the button that opens
+      0014 §4's dialog, and nothing else; both arrive with their own tickets,
+      #97 and #96. Until then it is empty and has no height, because 0014 §2
+      gives it the height its controls need and refuses a fraction of the
+      viewport.
+    -->
+    <footer id="strip"></footer>
+  </body>
+</html>

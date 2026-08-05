@@ -1,0 +1,79 @@
+/*
+ * The page's one arrangement, from the floor device to a desktop.
+ *
+ * 0014 §8 refuses a breakpoint and a container query — both are available and
+ * neither is used — so nothing here switches on width. A second layout costs
+ * three things to watch rather than two, because the switch between them is its
+ * own failure and it happens at a width nobody is looking at.
+ */
+
+:root {
+  /*
+   * 0005 §3 puts the page's three colors in one place, as custom properties,
+   * and has the Shell hand them to the View rather than the View read them.
+   *
+   * Every value here is provisional. 0005 R1 fixes no color and says why: a
+   * palette argued into a file before anything has been on a screen is settled
+   * by writing rather than by looking, which is the move this project exists to
+   * avoid. The colors ticket under #89 is where they are chosen.
+   */
+  --surface: #101014;
+  --dot: #e8e8ec;
+  --text: #e8e8ec;
+}
+
+/*
+ * 0014 §1: the document is exactly as tall as the viewport at every size, so
+ * nothing is ever below a fold. §7 measures that in `svh` rather than `vh`,
+ * because `100vh` on a phone is the viewport with the browser's chrome
+ * retracted — a layout sized against it is taller than the screen exactly when
+ * the chrome is showing, which is on load.
+ *
+ * There is deliberately no `overflow: hidden` here. It would guarantee the page
+ * cannot scroll while hiding the case where it should not have been able to,
+ * and 0014 §9 makes *the document's scrollable height equals the viewport's* a
+ * claim somebody measures. A rule that makes its own failure invisible is worth
+ * less than the failure being visible.
+ */
+html,
+body {
+  height: 100svh;
+  margin: 0;
+}
+
+body {
+  background: var(--surface);
+  color: var(--text);
+  display: flex;
+  flex-direction: column;
+
+  /*
+   * Whatever the visitor already has. 0003 §2 forbids the page loading anything
+   * it does not ship and 0005 §6 accepts what that costs — an inconsistent look
+   * across platforms, on a page whose text is an imprint and a paragraph.
+   */
+  font-family: system-ui, sans-serif;
+}
+
+/*
+ * The canvas takes what the strip leaves (0014 §2). `min-height: 0` is what
+ * lets a flex item shrink below its content instead of pushing the strip off
+ * the bottom, and `display: block` removes the line-box gap an inline element
+ * leaves underneath itself.
+ */
+#flock {
+  display: block;
+  flex: 1 1 auto;
+  min-height: 0;
+  width: 100%;
+}
+
+/*
+ * 0014 §2 gives the strip the height its two controls need and refuses a
+ * fraction of the viewport, because a visitor who enlarges text is using an
+ * accessibility mechanism and a fixed fraction fights it. Its controls arrive
+ * with #96 and #97, so today it has no height at all.
+ */
+#strip {
+  flex: 0 0 auto;
+}

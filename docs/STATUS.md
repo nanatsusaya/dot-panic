@@ -423,6 +423,49 @@ imperative shell, three parts, and the directory layout that goes with them.
 directories #69 created, and what goes in them is work that needs a ticket
 rather than a side effect of reading the record.
 
+**The page exists, and it is one screen.**
+[#95](https://github.com/nanatsusaya/dot-panic/issues/95) put `index.html` and
+`styles.css` at the root: a canvas taking everything a strip at the bottom
+leaves, heights in `svh`, no breakpoint and no container query, and 0003 §6's
+policy verbatim in a `meta` element — which is the whole of what ships, because
+0011 §5 found that GitHub Pages sets no response headers. **Watched at 1280×720
+and at 375×812**: the document's scrollable height equals the viewport's at
+both, which is the first of 0014 §9's three measured claims. The other two need
+controls on the strip and wait for #96 and #97.
+
+**The strip is empty and has no height, which is 0014 §2 rather than an
+omission.** That section gives it the height its two controls need and refuses a
+fraction of the viewport, because a visitor who enlarges text is using an
+accessibility mechanism and a fixed fraction fights it. And **`overflow: hidden`
+is deliberately absent**: it would guarantee the page cannot scroll while hiding
+the case where it should not have been able to, and 0014 §9 makes the scrollable
+height something a person measures. A rule that makes its own failure invisible
+is worth less than the failure being visible.
+
+**Two things the ticket had not listed arrived with it.** The three colors 0005
+§3 puts in the stylesheet as custom properties exist, provisional, because a
+page with no surface color cannot be watched at all and 0005 R1 fixes none — the
+colors ticket under #89 chooses them. And `prefers-color-scheme` is not honored
+yet, which is a gap rather than a defect only because 0005 §4 says in terms that
+a change may ship in one mode and follow with the other.
+
+**One thing this change could not do is assert its own criterion.** 0014 §9
+makes *the stylesheet contains no width breakpoint and no container query*
+decidable by reading the source, which is 0010 §2's third kind — but
+`tsconfig.json` includes `core`, `shell` and `view`, so a test about a root file
+would run under `bun test` and never be type-checked. Two of 0014 §9's three
+asserted invariants are about root files, and
+[#96](https://github.com/nanatsusaya/dot-panic/issues/96) meets the same wall.
+
+**It turned out to be one question asked four times**, and
+[#181](https://github.com/nanatsusaya/dot-panic/issues/181) carries it, to be
+answered before #96 because that ticket's version of it is the label the imprint
+obligation runs through. The fourth asking is the sharpest:
+[#92](https://github.com/nanatsusaya/dot-panic/issues/92)'s test fails if any of
+0002 §3's fifteen names appears under `core/`, and **its own file has to contain
+all fifteen**, because they are what it searches for. A test cannot naively sit
+inside its own subject.
+
 **0002 §2 now says what a type-only import is**, which is the first thing the
 architecture record has had to settle about a language rather than about parts.
 The View makes no **value** import from this project and may write a whole
@@ -859,6 +902,7 @@ Outside the epics:
 | [#77](https://github.com/nanatsusaya/dot-panic/issues/77) The hosting notice 0011 §4 puts beside the imprint | the host logs the visitor's IP address, and the page says so inside 0014 §4's dialog |
 | [#177](https://github.com/nanatsusaya/dot-panic/issues/177) The code documentation convention | CLAUDE.md said why-not-what and nothing about form, and #91's files showed what that leaves open |
 | [#178](https://github.com/nanatsusaya/dot-panic/issues/178) A test that decides the convention is followed | #177's rule has no command behind it; presence is 0010 §2's third kind and needs no record |
+| [#181](https://github.com/nanatsusaya/dot-panic/issues/181) Where a test lives when its subject is source text | four such tests are owed and none has a place; #92's cannot sit inside its own subject |
 
 **[#90](https://github.com/nanatsusaya/dot-panic/issues/90) is the one thing
 nobody here can work, and it stops the URL rather than the code.** 0004 R2 makes
@@ -1023,19 +1067,16 @@ What a change description must contain is no longer among the gaps here.
 
 ## The single clearest next step
 
-**[#95](https://github.com/nanatsusaya/dot-panic/issues/95) — the page is one
-screen, and it carries the policy.** It is the other half of step 1 in the order
-#13 carries, it was the one ticket that could be worked beside #91 all along,
-and nothing has ever been between it and being started. It is also the first
-work here that a person judges by looking rather than a command by running,
-which is 0012 §5.
+**[#93](https://github.com/nanatsusaya/dot-panic/issues/93) — the View draws a
+world onto one canvas.** Step 1 is finished, and this is the half of step 2 that
+puts something on a screen: there is a world to draw and a canvas to draw it on,
+and after it the picture stops being a description. It is watch-first under
+0012 §5, and the expected picture goes in the ticket before the work.
 
-**Step 2 is a pair, and #91 is what unblocked it.**
-[#92](https://github.com/nanatsusaya/dot-panic/issues/92) reads the Core's
-source for 0002 §3's fifteen names;
-[#93](https://github.com/nanatsusaya/dot-panic/issues/93) draws a world onto one
-canvas. 0012 §6's activity found those two independent of each other, and
-nothing else in the epic may be worked beside them.
+**[#92](https://github.com/nanatsusaya/dot-panic/issues/92) may be worked beside
+it and nothing else may.** It reads the Core's source for 0002 §3's fifteen
+names, and 0012 §6's activity found the two independent of each other. It also
+carries a comment naming three things the first Core files put in its way.
 
 **Three small things are open outside the epic and none of them blocks this.**
 [#178](https://github.com/nanatsusaya/dot-panic/issues/178) waits on
