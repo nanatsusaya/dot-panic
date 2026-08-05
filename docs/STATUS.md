@@ -282,6 +282,27 @@ collision is between §3 and §6: emitting a `.js` beside every `.ts` produces
 `*.test.js`, which §6's discovery patterns also match, so a build doubled the
 suite until `pathIgnorePatterns` was set. Neither record saw it.
 
+**Biome is configured, and the set of rules is a ticket's call rather than a
+record's.** Seven groups on, `nursery` off — a rule still under development turns
+a check from a finding into churn, and it can change under a pinned version. Each
+group's one line is in [#70](https://github.com/nanatsusaya/dot-panic/issues/70),
+written before the file was, and `style` is named there as the one carrying real
+risk. Nothing turns on a rule outside the recommended subset.
+
+**The question that ticket was filed to settle turned out to rest on a capability
+Biome does not have.** Whether the formatter reflows `docs/` mattered because an
+accepted record is immutable — but **Biome cannot format Markdown**: its own
+language table lists that as *In progress*, and Markdown linting as *Not in
+progress*. So the exclusion changes nothing today and is written for the day it
+lands, which is the opposite of discovering it by finding a record reflowed.
+
+**The first formatting pass touched no file.** It reads five — `package.json`,
+`tsconfig.json`, `biome.jsonc`, `method.json` and `.claude/settings.json` — and
+all five were already conformant, so the commit the ticket reserved for that pass
+does not exist. Both failure modes were triggered on purpose instead:
+`correctness/noUnusedVariables` and `suspicious/noDoubleEquals` on one throwaway
+file, and a formatter refusing eight-space indentation, each exiting 1.
+
 **The architecture is decided and none of it is built.**
 [0002](adr/0002-overall-architecture.md) fixes a functional core inside an
 imperative shell, three parts, and the directory layout that goes with them.
@@ -722,7 +743,6 @@ Outside the epics:
 
 | Ticket | Why it exists |
 |---|---|
-| [#70](https://github.com/nanatsusaya/dot-panic/issues/70) Biome | 0009 §7's third development dependency is installed and unconfigured; this decides its rule groups |
 | [#71](https://github.com/nanatsusaya/dot-panic/issues/71) The check chain as commands | 0009 §8's four checks, as commands a person can run |
 | [#77](https://github.com/nanatsusaya/dot-panic/issues/77) The hosting notice 0011 §4 puts beside the imprint | the host logs the visitor's IP address, and the page says so inside 0014 §4's dialog |
 
@@ -887,25 +907,24 @@ What a change description must contain is no longer among the gaps here.
 
 ## The single clearest next step
 
-**[#70](https://github.com/nanatsusaya/dot-panic/issues/70) — Biome's rule
-groups, and the configuration that follows from them.** The package is installed
-and configured by nothing, which is the one part of 0009 §7 that #69 left half
-done. **No record fixes the set** — §7 names the dependency, §8 fixes that there
-are four checks and what each decides, and neither reaches a rule group — so #70
-decides it and lists each group with one line saying why it is on, before the
-file is written. Then [#71](https://github.com/nanatsusaya/dot-panic/issues/71)
-turns 0009 §8's four into commands.
+**[#71](https://github.com/nanatsusaya/dot-panic/issues/71) — 0009 §8's four
+checks, as commands a person can run.** It is the last piece of the toolchain and
+the only one left whose absence is felt every session: the four exist as a
+description in a record, and what invokes them is remembered rather than written.
+§8 fixes that there are four, what each decides, and that **none of them runs
+inside a pipeline** — a rule this project has been caught by twice, most recently
+while working #70. Its own ticket also carries the note that 0009 §9's row over
+the emitted tree cannot be checked until a build has run.
 
 **[#132](https://github.com/nanatsusaya/dot-panic/issues/132) is the other thing
 now open, and the order between them is the decider's.** 0012 §2 makes a sprint
 a set of tickets brought to Definition of Ready **together** and §6 puts their
 independence at that same moment; that activity has never run, and it is what
 stands between here and [#91](https://github.com/nanatsusaya/dot-panic/issues/91)
-writing the first Core file. The argument for #70 and #71 first is that they are
-small, they finish what #69 started, and they mean the first code arrives into a
-chain that can check it. The argument for #132 first is 0001 §6.2 — *the toy is
-never finished because the process ate the work* — and it is the stronger one if
-the toolchain starts growing.
+writing the first Core file. The argument for #71 first is that it is small and
+finishes the toolchain, so the first code arrives into a chain that can check it.
+The argument for #132 first is 0001 §6.2 — *the toy is never finished because the
+process ate the work* — and it gets stronger with every ticket spent on tools.
 
 ## Implementation scale
 
@@ -958,8 +977,8 @@ deliberate. It is the only row for which that can be true.
 **What `built` does not mean here is that the chain is green.** Two of 0009 §8's
 four checks end on having nothing to read, because the three directories are
 empty; [#91](https://github.com/nanatsusaya/dot-panic/issues/91) is what gives
-them something. And Biome is installed and configured by nothing, which is
-[#70](https://github.com/nanatsusaya/dot-panic/issues/70).
+them something. **Biome's is the one that passes**, and on five JSON files
+rather than on any code.
 
 **0015 adds no row and moves none**, for a reason no other record has had: it
 decided that the area does not exist. There is nothing to build, so there is

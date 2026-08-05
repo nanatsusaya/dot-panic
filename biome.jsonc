@@ -1,0 +1,43 @@
+{
+  "$schema": "https://biomejs.dev/schemas/2.5.7/schema.json",
+
+  // `.gitignore` already lists what must not be read: `node_modules/` and, by
+  // 0009 R1, the emitted `.js` beside every `.ts`. Pointing Biome at that file
+  // keeps one list instead of two that drift.
+  "vcs": {
+    "enabled": true,
+    "clientKind": "git",
+    "useIgnoreFile": true
+  },
+
+  // No Markdown, anywhere. Biome cannot format it today, so this changes
+  // nothing now — it is written for the day it can. An accepted record is
+  // immutable, so a formatter reflowing one is an amendment question rather
+  // than a formatting preference, and 0001 §6.1 makes these files the ones
+  // this project is judged on.
+  "files": {
+    "includes": ["**", "!**/*.md"]
+  },
+
+  // Spaces over Biome's default tab, because much of this repository is read
+  // on a web page where a tab is whatever width the reader's setting says.
+  // 80 because every prose file here is hand-wrapped near it.
+  "formatter": {
+    "enabled": true,
+    "indentStyle": "space",
+    "indentWidth": 2,
+    "lineWidth": 80
+  },
+
+  // The recommended subset of seven groups. `nursery` is off because a rule
+  // still under development turns a check from a finding into churn, and it
+  // can change under a pinned version. The set and the reason for each group
+  // are in #70.
+  "linter": {
+    "enabled": true,
+    "rules": {
+      "preset": "recommended",
+      "nursery": "off"
+    }
+  }
+}
