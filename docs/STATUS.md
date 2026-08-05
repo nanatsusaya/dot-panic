@@ -456,7 +456,15 @@ decidable by reading the source, which is 0010 §2's third kind — but
 would run under `bun test` and never be type-checked. Two of 0014 §9's three
 asserted invariants are about root files, and
 [#96](https://github.com/nanatsusaya/dot-panic/issues/96) meets the same wall.
-Where such a test lives is a question this change put and did not answer.
+
+**It turned out to be one question asked four times**, and
+[#181](https://github.com/nanatsusaya/dot-panic/issues/181) carries it, to be
+answered before #96 because that ticket's version of it is the label the imprint
+obligation runs through. The fourth asking is the sharpest:
+[#92](https://github.com/nanatsusaya/dot-panic/issues/92)'s test fails if any of
+0002 §3's fifteen names appears under `core/`, and **its own file has to contain
+all fifteen**, because they are what it searches for. A test cannot naively sit
+inside its own subject.
 
 **0002 §2 now says what a type-only import is**, which is the first thing the
 architecture record has had to settle about a language rather than about parts.
@@ -894,6 +902,7 @@ Outside the epics:
 | [#77](https://github.com/nanatsusaya/dot-panic/issues/77) The hosting notice 0011 §4 puts beside the imprint | the host logs the visitor's IP address, and the page says so inside 0014 §4's dialog |
 | [#177](https://github.com/nanatsusaya/dot-panic/issues/177) The code documentation convention | CLAUDE.md said why-not-what and nothing about form, and #91's files showed what that leaves open |
 | [#178](https://github.com/nanatsusaya/dot-panic/issues/178) A test that decides the convention is followed | #177's rule has no command behind it; presence is 0010 §2's third kind and needs no record |
+| [#181](https://github.com/nanatsusaya/dot-panic/issues/181) Where a test lives when its subject is source text | four such tests are owed and none has a place; #92's cannot sit inside its own subject |
 
 **[#90](https://github.com/nanatsusaya/dot-panic/issues/90) is the one thing
 nobody here can work, and it stops the URL rather than the code.** 0004 R2 makes
