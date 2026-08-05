@@ -9,7 +9,7 @@
   judged by watching), §3.5 (the performance floor), §4 (the page carries three
   things), §5 (what is out of scope), §6 (the ranked failures)
 - **Supersedes:** nothing
-- **Amended:** 2026-08-02 — A1 · 2026-08-05 — A2
+- **Amended:** 2026-08-02 — A1 · 2026-08-05 — A2, A3
 
 ## Context
 
@@ -145,10 +145,10 @@ not pass through the drawing path. They neither move nor hold state, and pulling
 them inside would invent a part that otherwise would not exist.
 
 **One exception, and it is exactly one call.** The Shell may call `showModal()`
-on the element that holds them, because [0014](0014-page-layout.md) §5 puts them
-in a dialog and no markup mechanism this project may use opens one. **What that
-call changes is the dialog's open state, not them**: the imprint and the
-explanation are still markup no part creates, changes or draws, and the Shell
+on the element that holds them, because [0014](0014-page-layout.md) §4 puts them
+in a dialog and its §5 finds no markup mechanism this project may use opens one.
+**What that call changes is the dialog's open state, not them**: the imprint and
+the explanation are still markup no part creates, changes or draws, and the Shell
 never reads them.
 
 Stated as one named call rather than as *the Shell may own page chrome*, because
@@ -352,6 +352,45 @@ of permitting the type-only import — in preference to a render-snapshot type
 owned by the Core or a structural duplicate with its own authority, both of which
 buy a second description of the world to avoid a statement that emits nothing:
 *"wir folgen bei O1 und O2 deiner empfehlung."*
+
+**A3 — §6 gave one section credit for two things. 2026-08-05.**
+
+§6 read:
+
+> The Shell may call `showModal()` on the element that holds them, because
+> [0014](0014-page-layout.md) §5 puts them in a dialog and no markup mechanism
+> this project may use opens one.
+
+The sentence states two premises and cites one section for both.
+[0014](0014-page-layout.md) §4 is what puts the imprint and the explanation in a
+dialog; §5 decides the elements, finds that markup cannot open one, and names the
+call. §6 now cites each half where it is decided.
+
+**What makes a citation worth an amendment here is what this one carries.** It is
+the premise under the only page-chrome call this project owns, and A1 is where
+that call was paid for. A reader checking whether the exception is earned was sent
+to the section that decides the call, to find it assuming the thing it was meant
+to establish. [0008](0008-performance-budget.md) §10 already cites §4 for the same
+fact, so the repository held two citations for one thing and one of them was
+wrong — which is the defect [CLAUDE.md](../../CLAUDE.md#documentation) names when
+it says every fact has exactly one authority.
+
+**A1 is untouched, and its own mention of §5 is right where it stands.** That
+paragraph records what was authorized on 2026-08-02 and sends the reader to 0014
+A1, which is an amendment to §5. An *Amendments* log says what was decided then;
+only the body above it says what is true now, and that division is fixed by
+[the record shape](README.md).
+
+**Nothing else changes.** §1 through §5 and §7 stand as accepted, A1 and A2 stand,
+and R1 through R4 are untouched. The exception is the same exception, it is still
+exactly one call, and nothing §6 permits or forbids moves.
+
+Authorized by Daniel on 2026-08-05, against
+[#127](https://github.com/nanatsusaya/dot-panic/issues/127), on a recommendation
+of correcting the citation by amendment — on the precedent of
+[#58](https://github.com/nanatsusaya/dot-panic/issues/58), where three characters
+cost two — rather than leaving a premise that resolves to the wrong section:
+*"wir folgen deiner empfehlung bei beiden."*
 
 ## References
 
