@@ -19,7 +19,7 @@
   the Core without exception), §5 (watch-first in the View) ·
   [0014](0014-page-layout.md) §9 (the same question, about a rendered page)
 - **Supersedes / amends:** nothing
-- **Amended:** 2026-08-05 — A1
+- **Amended:** 2026-08-05 — A1, A2
 
 ## Context
 
@@ -105,6 +105,19 @@ is still the value they chose. A claim that fits none of the three kinds belongs
 in the measured or the watched register, and moving it into a test to get a green
 tick is the specific mistake [0001](0001-purpose-scope-and-success.md) §6 ranks
 third.
+
+**The three kinds say what a claim is about; they do not say where the command
+runs.** Every one above runs in the `bun test` suite (§4,
+[0009](0009-toolchain.md) §1). **The deploy gate is the second context**: a
+command in the workflow that publishes, deciding a claim about the built
+artifact, whose failure stops a deployment instead of reddening a suite.
+[0011](0011-delivery.md) §8's asserted list is that context and §6 is why it
+exists — the subject there is the artifact, which is why §9 below could not
+already cover it.
+
+**Two contexts, and this is not an opening for a third.** A claim a command can
+decide in the suite is decided in the suite. The gate exists because its subject
+does not exist until a build has run.
 
 ### 3. Determinism is asserted by comparing two runs, never against a stored result
 
@@ -267,7 +280,7 @@ require of their watched lists. This record generalizes it to the measured
 register and adds nothing else: a number read after the fact, with no prior
 expectation, is a description rather than a check.
 
-### 9. The tests run the source; nothing asserts the emitted output
+### 9. The tests run the source; no test asserts the emitted output
 
 [0009](0009-toolchain.md) §6 states the gap and says this record inherits it.
 `bun test` executes TypeScript directly; the browser executes what `tsc` emitted.
@@ -281,12 +294,16 @@ first, which makes the suite depend on a build step that
 [0012](0012-how-software-gets-developed.md) §4's test-first loop runs hundreds of
 times.
 
-**What covers it is watching the built page, and only that.** The emitted output
-is exercised exactly once per change that reaches the page, by a person looking
-at it. Whether that happens before publishing rather than after is
-[0011](0011-delivery.md)'s to decide, and this record does not decide it —
-it only states that after this record, watching is the sole evidence that what
-the browser runs matches what the tests passed.
+**What covers it is watching the built page, and four named claims at the gate.**
+The emitted output is exercised once per change that reaches the page, by a
+person looking at it. [0011](0011-delivery.md) §8 adds commands in the deploy
+workflow — §2's second context — deciding four properties of the artifact; they
+run once per deployment, so the test-first loop pays nothing for them. Whether
+the watching happens before publishing rather than after is
+[0011](0011-delivery.md)'s to decide, and this record does not decide it — it
+only states that after this record, **watching is still the sole evidence that
+what the browser runs matches what the tests passed.** Four named properties are
+not a match.
 
 ## Consequences
 
@@ -480,6 +497,55 @@ Authorized by Daniel on 2026-08-05, against
 [#119](https://github.com/nanatsusaya/dot-panic/issues/119): *"#119 zuerst, das
 Amendment ist autorisiert"*, and the batched repair on the same day: *"zu O1:
 wir folgen deiner Empfehlung"*.
+
+**A2 — the register says what a claim is about, not where the command runs.
+2026-08-05.**
+
+§2 ended at *Nothing else is asserted*, and §9's heading read:
+
+> ### 9. The tests run the source; nothing asserts the emitted output
+
+Its third paragraph read:
+
+> **What covers it is watching the built page, and only that.** The emitted
+> output is exercised exactly once per change that reaches the page, by a person
+> looking at it.
+
+**Two accepted records were using one word for two things.**
+[0011](0011-delivery.md) §8 fills an *asserted* list with four claims, three of
+them about the deployed artifact and all four decided in the deploy workflow
+rather than in the suite. §2 said a command asserts three kinds *and nothing
+else*, and §9 said nothing asserts the emitted output. That is the situation §1
+exists to prevent — *the registers have one vocabulary* — and it was found by
+the audits of 2026-08-03 rather than by any check.
+
+**The distinction that was missing is context, not kind.** Three of 0011's four
+have a subject the three kinds do not cover: the built artifact. The fourth —
+*deployment runs only after the checks pass* — is decidable by reading a
+workflow file, so it was kind three all along and only its context was
+unaccounted for. [#126](https://github.com/nanatsusaya/dot-panic/issues/126)
+called the gap a fourth *kind* because it was counting the three; §2 now names it
+as the **second context**, which is what it is.
+
+**The vocabulary is extended here rather than in 0011**, because §1 says every
+record uses these names. A fourth register invented in the record that uses the
+names would be a register defined outside the record that owns them — the same
+defect, one level up.
+
+**What §9 keeps is the load-bearing half.** Four named properties of an artifact
+are not evidence that the artifact matches what the tests passed, so watching is
+still the only thing that gives that. What it loses is the word *only*, which was
+true when it was written and stopped being true when 0011 §8 was accepted.
+
+**Nothing else changes.** The three kinds are the same three, §1's registers are
+still three, the suite still asserts nothing about emitted output, and no check
+moves — [#98](https://github.com/nanatsusaya/dot-panic/issues/98) builds the same
+workflow either way. A1 stands.
+
+Authorized by Daniel on 2026-08-05, against
+[#126](https://github.com/nanatsusaya/dot-panic/issues/126), on a recommendation
+of extending 0010 in preference to giving 0011's list a name of its own:
+*"wir folgen deiner empfehlung."*
 
 ## References
 
