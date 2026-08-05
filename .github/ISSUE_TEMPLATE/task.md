@@ -93,6 +93,8 @@ same for all of them. What a ticket adds is its own criteria, above — that is
 [W1](https://github.com/nanatsusaya/agent-project-rules/blob/main/method/rules.md#w1),
 and it is a different thing from this list.
 
-**No command decides any of the four.** There is no build, no test runner and no
-check chain — that is decision 0009 — so until one exists they are carried by
-review alone. Worth knowing rather than papering over.
+**No command decides any of the four**, and that is unchanged by the check chain
+existing. CLAUDE.md's *Commands* carries all four checks now, and none of them
+reads a criterion, watches anything, pairs a commit with its documentation, or
+merges. What they decide is the work; these four are about the ticket. They are
+carried by review alone, which is worth knowing rather than papering over.
