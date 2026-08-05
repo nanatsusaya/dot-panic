@@ -295,6 +295,8 @@ defended anywhere in the draft. It was never visible enough to defend.
   have needed a superseding record, and 0014 would stand permanently as the
   reasoning that got it wrong.
 
+## 2026-08-02 — A recommendation was approved, and part of its reason was false
+
 0007's O1 asked whether the page's layout should get a record of its own. It
 recommended yes, and it recommended writing that record **after 0008**, *so it
 knows the frame it is arranging*. Daniel approved both at once: *"bei beiden
@@ -327,6 +329,17 @@ with a sentence saying it implies no order of writing.
 
 Whether the shape should require it is not settled here. It is an open question
 on the change that carries this entry.
+
+[Answered 2026-08-05, against
+[#127](https://github.com/nanatsusaya/dot-panic/issues/127): **no.** The shape is
+left alone and this entry is the record. A requirement there would be
+unenforceable in exactly the way the existing one is — nothing checks either, and
+review catches both — so it would add a line to the shape without adding a
+mechanism. The counter-argument above stands as written: this failed because
+nothing made the author look up a section. The question was in the description of
+[PR #51](https://github.com/nanatsusaya/dot-panic/pull/51) and merged with it, and
+nothing carried it anywhere — which is how a question stated in a change survives
+a closed change.]
 
 ## 2026-08-02 — A status update named a gap the same session then closed
 
@@ -517,6 +530,12 @@ trigger is an event and not a date.
 skill names there would ship to everyone who installs the plugin, and its own
 README presents German as one of several options an adopter picks — not a
 default. The rename belongs to the adopter, which is this repository.
+
+[Corrected 2026-08-05, against
+[#127](https://github.com/nanatsusaya/dot-panic/issues/127): four was the count
+that day, and this entry states it twice. The README lists **seven** adaptations
+now, and the two named above — the wind-down, and the check as a command on its
+own — are among them.]
 
 ## 2026-08-01 — A wind-down was run on an announcement, not an instruction
 
@@ -711,6 +730,12 @@ Two consequences, kept:
   may only state what a decision already owns.
 
 The toolchain question is now decision 0006, undecided.
+
+[Corrected 2026-08-05, against
+[#127](https://github.com/nanatsusaya/dot-panic/issues/127): true under the
+six-topic plan this entry was written against. The set was replanned on
+2026-08-02, and the toolchain is [0009](adr/0009-toolchain.md) — Accepted, and
+still not installed. 0006 is [motion rules](adr/0006-motion-rules.md).]
 
 ## 2026-07-31 — The ceremony here is deliberately heavier than the stage warrants
 

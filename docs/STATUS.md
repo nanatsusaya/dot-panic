@@ -150,6 +150,31 @@ qualifier; both now say what the command does and leave the rest with review.
 British way, so a later session reading the mismatch finds the reason instead of
 restoring it.
 
+**Three stale references are repaired, and one of them was load-bearing.** 0002
+§6 gave one section credit for two things: [0014](adr/0014-page-layout.md) §4 is
+what puts the imprint and the explanation in a dialog, and §5 is where markup
+turns out not to open one. That citation is the premise under the only
+page-chrome call this project owns, and 0008 §10 already cited §4 for the same
+fact — so one fact had two citations and one was wrong. 0002 A3 splits it,
+authorized on 2026-08-05 against
+[#127](https://github.com/nanatsusaya/dot-panic/issues/127), and **nothing §6
+permits or forbids moves.** The [method log](method-log.md)'s two stale
+statements gain dated corrections rather than rewrites, because a log entry stays
+historically true: the toolchain is 0009 and not the 0006 of the six-topic plan,
+and the skills README lists seven adaptations and not four — a count that entry
+states twice, where the ticket found it once.
+
+**The heading was damage rather than drift.** Inserting a newer entry replaced
+the `##` line of *A recommendation was approved, and part of its reason was
+false*, so two entries had sat fused under one title, with two *Two consequences.*
+blocks, since 2026-08-02. The line is restored verbatim from the commit that
+added it. **And the question that entry parks now has an answer**: PR #51 asked
+whether a record's recommended default should cite sections the way a dependency
+must, and merged without the question being put to anyone. The answer is **no** —
+nothing checks either kind of citation, so the requirement would add a line to the
+shape without adding a mechanism, and review is what catches both. The disposition
+sits where the entry promised one, counter-argument included.
+
 **The architecture is decided and none of it is built.**
 [0002](adr/0002-overall-architecture.md) fixes a functional core inside an
 imperative shell, three parts, and the directory layout that goes with them —
@@ -753,31 +778,31 @@ What a change description must contain is no longer among the gaps here.
 
 ## The single clearest next step
 
-**[#127](https://github.com/nanatsusaya/dot-panic/issues/127) — three stale
-references and a lost heading.** 0002 §6 cites 0014 §5 for putting the imprint
-and the explanation in a dialog; the section that does that is 0014 §4. The
-[method log](method-log.md) says the toolchain question *is now decision 0006,
-undecided*, true under the six-topic plan and wrong since 0009 was accepted, and
-says the skills README *lists the four adaptations*, which has been seven since
-[#153](https://github.com/nanatsusaya/dot-panic/pull/153) — the ticket says six,
-because it was written before that.
+**[#123](https://github.com/nanatsusaya/dot-panic/issues/123) — the breakdown's
+ticket metadata disagrees with itself.** Thirteen items, every one of them
+quoted: a header and its own *Related* section naming different blockers, an epic
+table disagreeing with a member's header and with the row here, a
+cross-reference to a ticket that touches nothing it claims, a constraint pointing
+at an epic where 0012 §7 says a change is never made against one, a duty cited to
+0013 §7 that belongs to §5, and a set of tickets the breakdown left without the
+`Ready:` block every other one carries. **No record is touched and no criterion
+is invented**, which is what makes it the ticket to take without an answer
+waiting.
 
-**The heading is the part that is damage rather than drift.** One entry's `##`
-line was replaced when a newer entry was inserted above it, so two entries now
-sit fused under one title with two *Two consequences.* blocks — and the fused
-one is the entry that ends by parking an open question. That question, from
-PR #51, has no home; the ticket puts its disposition to the decider rather than
-answering it.
+**Two of its items are the decider's**, and they are marked as such rather than
+guessed: whether [#90](https://github.com/nanatsusaya/dot-panic/issues/90) joins
+[#13](https://github.com/nanatsusaya/dot-panic/issues/13)'s table — that epic's
+prose already calls it the single hand-off while the table omits it and this file
+files it outside the epics — and whether the enabled lint rule set is
+[#70](https://github.com/nanatsusaya/dot-panic/issues/70)'s call or
+[#71](https://github.com/nanatsusaya/dot-panic/issues/71)'s, because each ticket
+currently says it is the other's.
 
-**It carries one record touch**, 0002 §6's citation, and that needs an
-authorized amendment like the two before it. Everything else is ordinary
-documentation.
-
-**The two tickets that need nobody are
-[#123](https://github.com/nanatsusaya/dot-panic/issues/123) and
-[#129](https://github.com/nanatsusaya/dot-panic/issues/129)**, and neither
-unblocks anything. They are the ones to take if the answer above is not
-available.
+**[#129](https://github.com/nanatsusaya/dot-panic/issues/129) needs nobody at
+all** — nine default labels the rule says do not exist — and after those two,
+[#117](https://github.com/nanatsusaya/dot-panic/issues/117) holds only
+[#132](https://github.com/nanatsusaya/dot-panic/issues/132), which waits on the
+phase call below.
 
 **What stands between here and code is one activity, and it is still not this
 one.**
