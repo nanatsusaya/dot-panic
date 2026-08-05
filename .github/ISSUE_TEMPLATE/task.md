@@ -6,7 +6,7 @@ labels: ''
 ---
 
 <!--
-Adapted from agent-manual/issue-templates/task.md in agent-driven-development.
+Adapted from agent-manual/issue-templates/task.md in agent-project-rules.
 Two changes: the handbook's "CI is green" condition is dropped, because there is
 no CI here and no check chain to be green — decision 0009 owns creating one; and
 the "Watched and seen" criterion is ours, because the failures that matter here
@@ -60,7 +60,7 @@ constraints name what this ticket may not decide.
 
 These four are the conditions every ticket is finished under, and they are the
 same for all of them. What a ticket adds is its own criteria, above — that is
-[W1](https://github.com/nanatsusaya/agent-driven-development/blob/main/method/rules.md#w1),
+[W1](https://github.com/nanatsusaya/agent-project-rules/blob/main/method/rules.md#w1),
 and it is a different thing from this list.
 
 **No command decides any of the four.** There is no build, no test runner and no

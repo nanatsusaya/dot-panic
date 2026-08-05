@@ -1,6 +1,6 @@
 {
-  "method": "agent-driven-development",
-  "version": "0.4",
+  "method": "agent-project-rules",
+  "version": "0.5",
   "artefacts": {
     "operating-rules": "CLAUDE.md",
     "decisions": "docs/adr/",

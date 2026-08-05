@@ -6,6 +6,36 @@ session would decide worse without it.
 
 Newest first.
 
+## 2026-08-05 — The method was renamed, and the records keep the old name
+
+`agent-driven-development` became
+[agent-project-rules](https://github.com/nanatsusaya/agent-project-rules) on
+2026-08-05, and the check hard-fails on the old value, so following it was not
+optional. This repository followed it in every document that may be edited and
+left it standing in the five accepted records that carry it — twenty-five
+occurrences across 0001, 0003, 0004, 0012 and 0016.
+
+**That is a decision and not an oversight.** A record is immutable, so the two
+routes are an amendment or a superseding record, and neither fits: no record
+decides anything different under the new name. Five amendments for one string
+would be ceremony that corrects nothing, in the artifact this project can least
+afford to make look like overhead.
+
+**What holds those links is GitHub's redirect, and it is conditional.** It
+survives only while the old name stays free — a new repository under the old
+name would break all of them at once, including the ones in documents that may
+no longer be edited. The method's own 0.5 changelog says so, which is exactly
+why it is written down here: the promise is kept in the other repository, and
+this one now depends on it.
+
+The two lines in the 2026-07-31 entry below are left alone for the same kind of
+reason. A dated entry records which command worked on that date, and correcting
+it would falsify the moment it exists to hold.
+
+Recorded because a session reading the record set will find two names for one
+thing, and the readings available are "the rename was left half-done" and "the
+records may not be touched". Only one of them is true.
+
 ## 2026-08-03 — Two audits agreed, and the agreement was worth nothing
 
 The decider had the project read from outside twice, and then had the two

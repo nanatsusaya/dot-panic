@@ -1,5 +1,6 @@
 {
   "enabledPlugins": {
-    "agent-method@agent-driven-development": false
+    "agent-method@agent-driven-development": false,
+    "agent-method@agent-project-rules": false
   }
 }
