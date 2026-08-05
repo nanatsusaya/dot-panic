@@ -186,10 +186,46 @@ questions above the whole of the gate.
 - **Docs change in the same commit as what they describe.** Stale documentation
   is a defect, and the most expensive kind: it does not fail, it misinforms
   every session that follows.
-- Comments explain **why**, not what.
 - [docs/method-log.md](docs/method-log.md) records *why the way we work looks
   like this*. Write an entry only for a genuinely methodological moment. The
   test: would an agent with no memory of that session decide worse without it?
+
+### What the code says about itself
+
+Comments explain **why**, not what — the reason, the constraint, who needs
+it — never a paraphrase of what the line plainly does. The form below is the one
+the decider already keeps in
+[grimora](https://github.com/nanatsusaya/grimora/blob/main/CLAUDE.md), adapted
+rather than copied on his call of 2026-08-05.
+
+- **Every file, and every exported function, type and constant, carries a block
+  header.** Always the multi-line JSDoc form, never the single-line
+  `/** … */`. A function header documents **every parameter** with `@param`,
+  plus `@returns` where the name does not already answer it.
+- **A property of a type may be one line**, as long as it gives the why or the
+  contract rather than paraphrasing the type. A purely structural one — a
+  vector's `x` and `y` — needs nothing, because the type's own header carries
+  it.
+- **A test file's header names the claim it asserts and the record asking for
+  it.** That is the whole of why such a file exists.
+- **The why usually ends at a record.** A line is there because something was
+  decided, so cite the section — `(0008 §6)` — rather than restating what it
+  says. The same rule the documents follow, applied to code.
+- **One to three lines use `//`. Longer goes in a `/* … */` block.**
+- **Length is not the thing to optimize here.** Verbose is fine where it buys
+  the next session clarity. *Prefer the smaller, more boring artifact* is about
+  the documents above, not about a comment that saves someone reading three
+  records.
+- **Nothing under `core/` may name one of 0002 §3's fifteen, and a comment is
+  source too.** The purity test reads that directory as text, so writing *do not
+  reach for `Math.random` here* is a line that reddens it. **It is easier to hit
+  than it sounds**: 0008 §6's own reasoning is about screen size and the window,
+  and quoting it inside `core/` is what this rule was written after.
+
+**No command decides any of this.**
+[#178](https://github.com/nanatsusaya/dot-panic/issues/178) is the one that
+would, and it would decide presence rather than quality — whether a why is a why
+is review's either way.
 
 ## Tickets
 

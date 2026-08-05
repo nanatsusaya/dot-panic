@@ -1,3 +1,10 @@
+/**
+ * A step returns a new world and changes nothing in the one it was given
+ * (0002 §4), and the count it was given survives it — a row in 0008 §9's
+ * asserted list. What a step does *not* do is asserted here as well, because
+ * every rule of the flock is still absent and its arrival must be visible.
+ */
+
 import { describe, expect, test } from "bun:test";
 
 import { step } from "./step.js";

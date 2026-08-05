@@ -1,3 +1,9 @@
+/**
+ * The seed is the whole of what a run depends on, and the generator holds no
+ * state of its own — which is what 0002 §4 asks of it and what the world and
+ * the step both rest on.
+ */
+
 import { describe, expect, test } from "bun:test";
 
 import { nextFraction, randomFromSeed } from "./random.js";

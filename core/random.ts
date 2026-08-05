@@ -1,13 +1,26 @@
-// SplitMix64, written here from the published algorithm. 0013 §5 permits
-// taking a named generator's algorithm and §1 forbids taking anyone's file;
-// what was consulted is named in the change that produced this, per §7.
-//
-// It is this generator rather than one of the xoshiro family because its whole
-// state is a single 64-bit word. Deriving a generator from a seed — which
-// 0002 §4 requires — is then the seed itself, with no second algorithm chosen
-// only to expand it.
+/**
+ * The pseudorandom generator, which is the only source of variation the Core
+ * has: 0002 §3 leaves it no clock and no ambient randomness, so everything a
+ * world differs by comes through a seed.
+ *
+ * It is SplitMix64, written here from the published algorithm — 0013 §5 permits
+ * taking a named generator's algorithm where §1 forbids taking anyone's file,
+ * and §7 asks that whatever was consulted is named in the ticket that produced
+ * the code, which #91 does.
+ *
+ * It is this generator and not one of the xoshiro family because its whole
+ * state is a single 64-bit word. Deriving a generator from a seed, which 0002
+ * §4 requires, is then the seed itself rather than a second algorithm chosen
+ * only to expand it.
+ */
 
-/** The generator's entire state. A world carries one (0002 §4). */
+/**
+ * The generator's entire state.
+ *
+ * A world carries one (0002 §4), which is what lets a world be the whole of
+ * what a run depends on. A caller advances it by taking the state that comes
+ * back from each draw.
+ */
 export type Random = bigint;
 
 const SIXTY_FOUR_BITS = 0xffffffffffffffffn;
@@ -20,15 +33,27 @@ const SECOND_MULTIPLIER = 0x94d049bb133111ebn;
 const DISCARDED_BITS = 11n;
 const FRACTIONS = 2 ** 53;
 
-/** The generator a seed derives. Any integer is a seed (0002 §4). */
+/**
+ * Derive a generator from a seed.
+ *
+ * @param seed  any integer. The Shell is the only part that chooses one
+ *              (0002 §4), and where it gets one is not the Core's question
+ * @returns the state that seed starts from
+ */
 export function randomFromSeed(seed: number): Random {
   return BigInt(seed) & SIXTY_FOUR_BITS;
 }
 
 /**
- * One fraction in [0, 1), and the state that follows it. The same state always
- * gives the same pair, which is what lets the world carry the state rather
- * than the generator keep it.
+ * Draw one fraction.
+ *
+ * The state comes back beside the value rather than being kept here, because a
+ * generator holding its own state would be the one impure thing in a pure part
+ * (0002 §1) and would put a world's future outside the world.
+ *
+ * @param random  the state to draw from. The same state always gives the same
+ *                pair, which is the property 0010 §3's determinism test rests on
+ * @returns the fraction, in [0, 1), and the state that follows it
  */
 export function nextFraction(random: Random): readonly [number, Random] {
   const next = (random + INCREMENT) & SIXTY_FOUR_BITS;

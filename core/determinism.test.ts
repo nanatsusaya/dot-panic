@@ -1,3 +1,8 @@
+/**
+ * Determinism, asserted as its own test rather than assumed by the others —
+ * which is 0010 §2's second kind of claim, and the property 0002 §4 fixes.
+ */
+
 import { describe, expect, test } from "bun:test";
 
 import { step } from "./step.js";
