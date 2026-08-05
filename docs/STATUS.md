@@ -8,7 +8,7 @@
 
 The method has been adopted. **Nothing of the toy exists yet** — no simulation
 code, no page, no rendering. Everything built so far is the way of working:
-the operating rules, the decision set, fifteen accepted records, and the five
+the operating rules, the decision set, sixteen accepted records, and the five
 session procedures in [`.claude/skills/`](../.claude/skills/README.md).
 
 The procedures have now been used. `/moin`, `/weiterimtext` and `/adr` ran on
@@ -20,6 +20,25 @@ declares no adaptations while this week added seven phases, an epic and a third
 label to how work is actually done. It has a ticket now —
 [#122](https://github.com/nanatsusaya/dot-panic/issues/122) — which does not
 make it run.
+
+**The method this project demonstrates was renamed on 2026-08-05**, and
+`method.json` follows it: `agent-project-rules`, catalog `0.5`. None of the
+thirty-two rules moved — none added, withdrawn or renumbered — but the check
+hard-fails on the old name rather than warning about it, so following was not
+optional. **The five accepted records carrying the old name keep it**, because
+a record is immutable and none of them decides anything different under the new
+one. GitHub's redirect is what holds those links, and it survives only while
+the old name stays free. The [method log](method-log.md) has the reasoning, and
+a session finding two names for one thing should read it before *finishing* the
+rename.
+
+**That change found a live defect no count would have shown.** The plugin was
+enabled at user scope under its new identity while `.claude/settings.json`
+disabled only the old one — so its five procedures ran beside the five adapted
+copies, which is the second authority CLAUDE.md exists to prevent. Both
+identities are disabled now. **Comparing the copies against plugin `0.5.0` is
+separate work** and has a ticket; the copies still say `0.4.0`, because that is
+still where they came from.
 
 **The record set was read from outside on 2026-08-03, and no decision was
 reversed.** Two independent audits and a meta-audit that verified both against
@@ -67,8 +86,9 @@ being decided. **The word *epic* enters the project with it** — a named group 
 tickets, grouping by subject and nothing else, never the thing a change is made
 against. The recommendation had been against all of it, on A3's *do not build for
 a scale you do not have*; A1 records that and what overruled it. **The two end
-phases now have a row**, [0016](adr/README.md), which is where their content goes
-and why A1 was allowed to name them and nothing more.
+phases now have a record**, [0016](adr/0016-maintainability-and-maintenance.md),
+which is where their content goes and why A1 was allowed to name them and
+nothing more.
 
 **A2 widened that word on 2026-08-03**, and it is the first amendment this
 project made to hold something it was already doing. An epic now groups one
@@ -368,27 +388,43 @@ which R1 keeps rather than argues away. **Its §8 counts the cost:** provenance
 and both halves of §7 are decided by no command, so 0011 §6's shrinking set of
 remembered rules gains a fourth.
 
-**Sixteen decisions are planned** in [docs/adr/](adr/README.md).
-[0001](adr/0001-purpose-scope-and-success.md),
-[0002](adr/0002-overall-architecture.md),
-[0012](adr/0012-how-software-gets-developed.md),
-[0003](adr/0003-security-and-privacy-by-design.md),
-[0004](adr/0004-compliance-accessibility-and-rights.md),
-[0005](adr/0005-rendering-and-visual-design.md),
-[0006](adr/0006-motion-rules.md),
-[0007](adr/0007-pointer-and-input-model.md),
-[0014](adr/0014-page-layout.md),
-[0015](adr/0015-settings-surface.md),
-[0008](adr/0008-performance-budget.md),
-[0009](adr/0009-toolchain.md),
-[0010](adr/0010-testing-strategy.md) and
-[0011](adr/0011-delivery.md) and
-[0013](adr/0013-origin-of-the-core.md) are Accepted; the one that is not,
-[0016](adr/README.md), is `Planned`. **The table runs
-by meaning and not by number**, and four
-numbers have a history it carries rather than this file: 0012 was reserved as
-unused until 2026-08-02, and 0014, 0015 and 0016 were all added after the set was
-planned.
+**What happens after everything above is built is decided, and most of the
+answer is *nothing*.** [0016](adr/0016-maintainability-and-maintenance.md)
+maintains nothing operational — no monitoring, no uptime target, nobody on
+call — and names four kinds of work that count as maintenance and no others: a
+dated commitment coming due, a defect on the live page, a platform change
+breaking it, and a release of the method this project demonstrates.
+**Everything else is not maintenance and is not done**, which closes polish,
+refactors and rewrites the way 0001 §5 already closed features. Its §5 turns
+0011 §6's shrinking set of rules no command decides into a routing table, which
+is a more useful thing than a count.
+
+**Its two hardest answers came from the decider, and both widen the record.**
+The project **does not end**: this repository is the demonstration, so it stays
+visible for as long as the method points at it, and a larger release of the
+method brings the toy and its records up to date and not only the five
+procedure copies. And a platform change is repaired **whenever it is noticed,
+for as long as the page is up**, with nothing watching for it, because §1
+creates no monitoring. **What that promises is attention, not uptime** — the
+only one of the two a single person can keep.
+
+**The list its §2 decides does not exist.** Every commitment that depends on
+time is one row carrying what it is, which record owns it, whether it is dated
+or standing, when it was last read and what makes it due — and creating the
+file is a ticket rather than a side effect of the record. Both session
+procedures already read it: `/moin` step 5 reports what is due and
+`/feierabend` step 4 runs it, so until it exists both steps are instructions
+with no object. **The list decides nothing**; a row that disagrees with the
+record it names is wrong by construction.
+
+**Sixteen decisions are planned in [docs/adr/](adr/README.md), and all sixteen
+are Accepted.** There is no `Planned` row left, which has not been true
+before — and it says nothing about what exists: every area on the scale at the
+end of this file is `decided` and none is `built`. Which record answers what is
+the index's to say, and enumerating them here would be a second copy of it.
+**The table runs by meaning and not by number**, and four numbers have a
+history it carries rather than this file: 0012 was reserved as unused until
+2026-08-02, and 0014, 0015 and 0016 were all added after the set was planned.
 
 What is awaiting review is not repeated here. The
 [pull request list](https://github.com/nanatsusaya/dot-panic/pulls) is the
@@ -437,8 +473,9 @@ Outside the epics:
 | [#70](https://github.com/nanatsusaya/dot-panic/issues/70) Biome | waits on #69 |
 | [#71](https://github.com/nanatsusaya/dot-panic/issues/71) The check chain as commands | waits on #69 and #70 |
 | [#77](https://github.com/nanatsusaya/dot-panic/issues/77) The hosting notice 0011 §4 puts beside the imprint | not ready — waits on #96 for a dialog to sit in |
-| [#83](https://github.com/nanatsusaya/dot-panic/issues/83) 0016 Maintainability and maintenance | ready — 0013 was what it waited on |
 | [#90](https://github.com/nanatsusaya/dot-panic/issues/90) The real imprint address | not ready — the decider supplies the content |
+| [#145](https://github.com/nanatsusaya/dot-panic/issues/145) The maintenance list 0016 §2 decides | ready — the record fixes the columns and names the rows |
+| [#147](https://github.com/nanatsusaya/dot-panic/issues/147) Compare the five procedure copies against plugin `0.5.0` | ready — the trigger fired on 2026-08-05 |
 
 **[#90](https://github.com/nanatsusaya/dot-panic/issues/90) is the one thing
 nobody here can work, and it stops the URL rather than the code.** 0004 R2 makes
@@ -568,33 +605,32 @@ What a change description must contain is no longer among the gaps here.
 
 ## The single clearest next step
 
-**Write [0016](adr/README.md) against
-[#83](https://github.com/nanatsusaya/dot-panic/issues/83)**, the last row in the
-index with no file behind it. What it has to decide is not abstract: three
-commitments here depend on time and no record owns re-reading them — 0008 §8's
-slowdown factor with the date it was read, 0014's `showModal()` bridge whose end
-date is 2028-06-12, and 0009 §4's browser APIs — and 0013 §8 added a fourth, so
-the set 0011 §6 was shrinking one at a time is growing again.
+**Create `docs/maintenance.md` against
+[#145](https://github.com/nanatsusaya/dot-panic/issues/145).**
+[0016](adr/0016-maintainability-and-maintenance.md) §2 fixes its five columns
+and its *Context* names the four rows that go in it, so nothing about the work
+is open. What makes it the clearest step rather than only the smallest is that
+both session procedures already read a list this project has never had —
+`/moin` step 5 reports what is due and `/feierabend` step 4 runs it — and
+until the file exists, both steps are instructions with no object.
 
-**CLAUDE.md is what this replaces, and both halves of it landed on 2026-08-05.**
-[#114](https://github.com/nanatsusaya/dot-panic/issues/114) took the expired
-*Working conventions* paragraph, and
-[#118](https://github.com/nanatsusaya/dot-panic/issues/118) the guardrail
-sentence that said this project needs no personal data — which is why
-[#90](https://github.com/nanatsusaya/dot-panic/issues/90) no longer predicts its
-own refusal by a session that reads only that file. Both were 0001 §6.1 sitting
-in the document every session reads first.
+**The record that decides it landed on 2026-08-05 and closed the last `Planned`
+row**, so nothing sits between this file and a decision that has not been
+written. Deliberately not creating the file is 0016 §2's own sentence, on the
+precedent [#49](https://github.com/nanatsusaya/dot-panic/issues/49),
+[#53](https://github.com/nanatsusaya/dot-panic/issues/53) and
+[#83](https://github.com/nanatsusaya/dot-panic/issues/83) set: the ticket is
+filed in the change that accepts the record.
 
-**It follows [#119](https://github.com/nanatsusaya/dot-panic/issues/119)**, which
-the decider put first on 2026-08-05, authorized as an amendment the same day, and
-which landed as 0010 A1 — so nothing sits between this file and the record that
-has no file.
+**[#147](https://github.com/nanatsusaya/dot-panic/issues/147) is ready too, and
+it is not this one.** Comparing the five procedure copies against plugin
+`0.5.0` is 0016 §6's fourth kind of maintenance work having its first case, on
+the day the record was accepted — but it is a reading job against another
+repository, while #145 is what turns an existing instruction into something a
+session can carry out.
 
-**0016 gates nothing that follows it.** It constrains the breakdown only through
-D4 — a ticket that would settle something a still-open record owns is not
-ready — and nothing about the toy settles what maintenance means.
-
-**What stands between here and code is one activity, and it is not this one.**
+**What stands between here and code is one activity, and it is still not this
+one.**
 0012 §2 makes a sprint a set of tickets brought to Definition of Ready
 **together**, and §6 puts establishing their independence at that same moment.
 [#13](https://github.com/nanatsusaya/dot-panic/issues/13)'s eight members have
