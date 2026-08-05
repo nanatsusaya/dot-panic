@@ -585,11 +585,10 @@ sentence that said this project needs no personal data — which is why
 own refusal by a session that reads only that file. Both were 0001 §6.1 sitting
 in the document every session reads first.
 
-**It is what follows
-[#119](https://github.com/nanatsusaya/dot-panic/issues/119)**, which the decider
-put first on 2026-08-05 and authorized as an amendment the same day. Until that
-change lands, the paragraph above about the surviving defect is the one to read
-rather than this one.
+**It follows [#119](https://github.com/nanatsusaya/dot-panic/issues/119)**, which
+the decider put first on 2026-08-05, authorized as an amendment the same day, and
+which landed as 0010 A1 — so nothing sits between this file and the record that
+has no file.
 
 **0016 gates nothing that follows it.** It constrains the breakdown only through
 D4 — a ticket that would settle something a still-open record owns is not
