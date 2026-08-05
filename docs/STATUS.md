@@ -2,7 +2,7 @@
 
 *Brought current before a session ends. Read first when one starts.*
 
-*Last brought current: 2026-08-03.*
+*Last brought current: 2026-08-05.*
 
 ## Position
 
@@ -438,7 +438,6 @@ Outside the epics:
 | [#77](https://github.com/nanatsusaya/dot-panic/issues/77) The hosting notice 0011 §4 puts beside the imprint | not ready — waits on #96 for a dialog to sit in |
 | [#83](https://github.com/nanatsusaya/dot-panic/issues/83) 0016 Maintainability and maintenance | ready — 0013 was what it waited on |
 | [#90](https://github.com/nanatsusaya/dot-panic/issues/90) The real imprint address | not ready — the decider supplies the content |
-| [#114](https://github.com/nanatsusaya/dot-panic/issues/114) CLAUDE.md's working conventions wait on decisions that are Accepted | ready |
 
 **[#90](https://github.com/nanatsusaya/dot-panic/issues/90) is the one thing
 nobody here can work, and it stops the URL rather than the code.** 0004 R2 makes
@@ -474,7 +473,7 @@ ticket is the state those five were filed to end.
 number has stopped being informative.** It was five of eight. After the
 breakdown it is essentially all of them: every ticket phase 3 produced was cut
 from an accepted record and cites the sections it serves. What is worth naming
-now is the other direction — the open tickets **no record asked for**. Two were
+now is the other direction — the tickets **no record asked for**. Two were
 noticed in passing: [#46](https://github.com/nanatsusaya/dot-panic/issues/46)
 came from this table drifting twice within an hour, and
 [#114](https://github.com/nanatsusaya/dot-panic/issues/114) from reading
@@ -569,25 +568,20 @@ What a change description must contain is no longer among the gaps here.
 ## The single clearest next step
 
 **Fix CLAUDE.md against
-[#114](https://github.com/nanatsusaya/dot-panic/issues/114).** Its *Working
-conventions* section ends by saying that how the simulation is structured, what
-it is written against and how it is tested *"are open questions"*, and that the
-section stays short **until those are Accepted**. All three are — 0002, 0009 and
-0010 — so the condition it names has been satisfied and the paragraph now
-misdescribes the project.
+[#118](https://github.com/nanatsusaya/dot-panic/issues/118).** Its *Guardrails*
+still say this project needs no personal data, and
+[#90](https://github.com/nanatsusaya/dot-panic/issues/90) makes that false: the
+operator's name and a serviceable address are page content, required by 0004 R2
+and gated by 0011 §6. #90 predicts its own refusal by a session that reads only
+CLAUDE.md, which is 0001 §6.1 in the file every session reads first. The
+distinction it has to refer to rather than restate is 0003 R1 — the visitor,
+about whom nothing is recorded, against the person a published project is
+attached to by name.
 
-**It goes first because it is a defect rather than a gap**, and because of where
-it sits. CLAUDE.md is what a session with no memory reads first, and this is the
-section that would tell it how code is written here. The first session to write
-code is the first one this paragraph sends nowhere, which is 0001 §6.1 — the
-failure this project ranks above every other. The audits agreed on this order,
-which is the one place they agreed on everything.
-
-**[#118](https://github.com/nanatsusaya/dot-panic/issues/118) follows it in the
-same file and is a separate change.** CLAUDE.md's guardrail still says this
-project needs no personal data, which #90 makes false — and #90 says so about
-itself, that a session reading only CLAUDE.md will refuse it. Two concerns, one
-file, in that order.
+**It is the second concern in the file the first one left alone.** #114 landed
+on 2026-08-05 and took the expired *Working conventions* paragraph with it; the
+guardrail was deliberately not touched in the same change, because two concerns
+in one file are still two changes.
 
 **Then write [0016](adr/README.md) against
 [#83](https://github.com/nanatsusaya/dot-panic/issues/83)**, the last row in the
