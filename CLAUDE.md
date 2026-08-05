@@ -59,10 +59,17 @@ declaration, artifact, adaptation and decision-index checks — and still prints
   overhead.
 
 How the simulation is structured, what it is written against and how it is
-tested are open questions owned by the decisions in
-[docs/adr/](docs/adr/README.md). Until those are Accepted, this
-section stays short, because anything added to it would be a decision made by
-writing it down here rather than by deciding it.
+tested are decided. [0002](docs/adr/0002-overall-architecture.md) owns the
+first, [0009](docs/adr/0009-toolchain.md) the second and
+[0010](docs/adr/0010-testing-strategy.md) the third, and each is where its own
+answer is read. How a change begins is
+[0012](docs/adr/0012-how-software-gets-developed.md) — §4 for the Core, §5
+for the View. That the Core is written in this repository rather than taken
+from a package is [0013](docs/adr/0013-origin-of-the-core.md) §1.
+
+**None of it is restated here.** A summary in this file would be a second
+authority for a fact that already has one, and it is the copy a session reads
+first.
 
 ## Decisions
 
