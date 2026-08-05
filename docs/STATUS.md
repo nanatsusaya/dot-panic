@@ -97,6 +97,19 @@ carried by review, exactly as before 0010 existed, and a green run says nothing
 about it. The rest of what the audits found is
 [#117](https://github.com/nanatsusaya/dot-panic/issues/117)'s.
 
+**The section three readers misread now names what it rejects.** 0003 §7's
+second bullet said *no placeholder, no injection at deploy time*, and its fourth
+kept the imprint to one place with no copy *in a decision record, none in a
+ticket*. Both still forbid what they forbade; 0003 A1 adds to each the boundary
+it already had somewhere else. **The fourth bullet was the one actually
+failing** — `Musterstadt` sits in 0004 §3 and is the target of 0011 §6's check,
+and the contact address sits in two files under `.github/` by 0004 §2, each
+excused by an argument in a different record, which is the route
+[0005](adr/0005-rendering-and-visual-design.md) R2 calls the wrong one.
+Authorized on 2026-08-05 against
+[#134](https://github.com/nanatsusaya/dot-panic/issues/134), which was itself an
+offer made in the comment on PR #52 and left unanswered until now.
+
 **The architecture is decided and none of it is built.**
 [0002](adr/0002-overall-architecture.md) fixes a functional core inside an
 imperative shell, three parts, and the directory layout that goes with them —
@@ -700,23 +713,23 @@ What a change description must contain is no longer among the gaps here.
 
 ## The single clearest next step
 
-**Answer [#134](https://github.com/nanatsusaya/dot-panic/issues/134) — whether
-0003 §7 stays a reading.** Three professional readers misread that one section
-three different ways during the audits, and separately the decider once called
-it *zu extrem und zu streng*. The comment on PR #52 offered to file a ticket for
-that and recorded no answer anywhere; this ticket is that offer, filed on
-2026-08-03 on the decider's instruction.
+**Answer [#126](https://github.com/nanatsusaya/dot-panic/issues/126) — the word
+*asserted* has two extensions.** 0010 §2 fixes that a command asserts three
+kinds of claim *and nothing else*; 0011 §8 then fills its asserted list with four
+claims about a deployed artifact and about workflow ordering, none of which is
+one of the three. Two accepted records now use one word for two things, which is
+what 0010 §1 was written to prevent.
 
-**It is the next step because it is the oldest thing nobody has answered**, and
-because one of its three options is the only one left in the ticket list that
-would change a decision: (c) loosens §7 by a superseding record, never an edit.
-(a) and (b) change none, and (b) is the recommendation.
+**It is the next step because it is the smallest and it comes first in order.**
+One sentence settles it, no check changes either way, and
+[#125](https://github.com/nanatsusaya/dot-panic/issues/125) then re-scopes an
+asserted table in 0015 — doing that before the vocabulary is settled would
+rewrite rows in a word whose meaning is still open.
 
 **It is a decision ticket, so what a session does with it is put the question
-and stop.** [#126](https://github.com/nanatsusaya/dot-panic/issues/126) and
-[#125](https://github.com/nanatsusaya/dot-panic/issues/125) are the same shape
-and both smaller — two records giving the word *asserted* two extensions, and
-two rows in 0015's table that no command can decide.
+and stop.** #125 is the same shape and larger: two rows no command can decide,
+plus one sentence on whether 0005 §3's color hand-off sits inside 0002 §2's
+*wiring* or costs a list amendment there.
 
 **The two tickets that need nobody are
 [#123](https://github.com/nanatsusaya/dot-panic/issues/123) and

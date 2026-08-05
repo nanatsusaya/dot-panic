@@ -12,6 +12,7 @@
   [0002](0002-overall-architecture.md) §3 (the identifiers the Core may not
   name), §6 (the imprint and the explanation are outside the application)
 - **Supersedes:** nothing
+- **Amended:** 2026-08-05 — A1
 
 ## Context
 
@@ -186,15 +187,21 @@ Whatever 0004 decides the imprint must contain:
   repository and no link anywhere else. A link is a step, and a step is a place
   to give up.
 - **It lives in the repository**, as part of the page, edited like any other page
-  content. No placeholder, no injection at deploy time, no second copy held by a
-  host.
+  content. **What is rejected is an architecture, not a value**: a placeholder in
+  the source that a deploy step fills from something the host holds. A stand-in
+  carried in the source until the real value replaces it is page content like any
+  other — 0004 §3 carries one — and no second copy is held by a host.
 - **It is not confidential.** It exists in order to be read, and nothing here
   treats it as a credential — §8.
-- **It appears in one place.** No copy in the README, none in the repository
-  description, none in a decision record, none in a ticket. That is
+- **The published imprint appears in one place.** No copy in the README, none in
+  the repository description, none in a decision record, none in a ticket. That is
   [C2](https://github.com/nanatsusaya/agent-driven-development/blob/main/method/rules.md#c2)
   applied to a datum rather than to a fact, and it makes a change of address one
-  edit instead of a search.
+  edit instead of a search. **Three things are not it**: a stand-in value, which
+  stops existing when the real one arrives; a string a check looks for, which is a
+  fixture rather than an address (0011 §6); and a contact address reached for
+  another purpose, such as a security or conduct file, which is a reporting
+  channel — 0004's *Consequences* own that cost, and nothing here reduces it.
 - **Nothing derived from it is stored, sent or logged**, because nothing here
   could do so — §4 and §5.
 
@@ -320,6 +327,68 @@ host that supports it gains this at no cost. The argument for the other answer
 was authorship rather than security — a framed page is a copy presented as
 somebody else's — and it was not judged worth constraining a record that is not
 yet written.
+
+## Amendments
+
+**A1 — two bullets in §7 name what they reject. 2026-08-05.**
+
+§7's second bullet read:
+
+> **It lives in the repository**, as part of the page, edited like any other page
+> content. No placeholder, no injection at deploy time, no second copy held by a
+> host.
+
+Its fourth read:
+
+> **It appears in one place.** No copy in the README, none in the repository
+> description, none in a decision record, none in a ticket. That is C2 applied to
+> a datum rather than to a fact, and it makes a change of address one edit
+> instead of a search.
+
+**No decision changes.** Both bullets forbid what they forbade. What is added is
+the boundary each already had, stated somewhere other than here.
+
+**The second bullet was misread three times.** During the audits of 2026-08-02
+and 2026-08-03, three independent professional readers read this section three
+different ways: one called 0004 §3's stand-in a release blocker; one read *none
+in a decision record* against that same stand-in; one read *none in a ticket*
+against the contact address in
+[#38](https://github.com/nanatsusaya/dot-panic/issues/38). Each dissolves on a
+full read, and R1 is where — what it rejects is *a placeholder with deploy-time
+injection*, which is an architecture. Three stumbles over one section is evidence
+about the wording rather than about the readers.
+
+**The fourth bullet was the one actually failing.** Read literally it is failed
+today by things nobody treats as defects: `Musterstadt` is in this project's
+records because 0004 §3 names the stand-in and 0011 §6 makes the same string a
+check's target, and the contact address is in two files under `.github/` because
+0004 §2 put conventional contact notes there. Each is excused by an argument in a
+different record — the pattern
+[0005](0005-rendering-and-visual-design.md) R2 names as the wrong route: *a
+record that supersedes §3.4, never a reinterpretation inside a later record*. So
+the exceptions move into the bullet that states the rule.
+
+**Nothing else changes.** §1 through §6 and §8 stand as accepted, R1 and R2 are
+untouched, and the imprint model — a stand-in in the source until
+[#90](https://github.com/nanatsusaya/dot-panic/issues/90) replaces it, with
+publishing gated on the real value — belongs to 0003, 0004 and 0011 together and
+was not in question.
+
+**The C2 link keeps the method's old name**, like the other four in this record.
+That is not this change's to fix: those records keep it because a record is
+immutable, GitHub's redirect holds the links, and finishing the rename is its own
+change.
+
+Authorized by Daniel on 2026-08-05, against
+[#134](https://github.com/nanatsusaya/dot-panic/issues/134) — which is itself the
+answer to an offer made in the comment on
+[PR #52](https://github.com/nanatsusaya/dot-panic/pull/52) and left unanswered
+since: *"0003 §7's strictness is unresolved as a rule, only as a reading."* The
+recommendation was this amendment over changing nothing and over superseding §7,
+because the misreadings ask for a rule that explains itself rather than for a
+different rule; and extended to both bullets rather than the one the ticket
+scoped, because repairing one would have closed the case on the worse half:
+*"wir folgen deiner empfehlung bei beiden."*
 
 ## References
 
