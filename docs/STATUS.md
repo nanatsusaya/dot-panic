@@ -31,14 +31,15 @@ reading is 0003 R1's and the decider's, and 0012 §6 asks independence of ticket
 worked *in parallel* rather than of a whole set at once. A later session finding
 those conflicts again should read the resolved questions before believing them.
 
-**What did survive is a defect no command here can see.** 0010 §7 claims the
-coverage floor gives 0002 §5 its first enforcement — logic moved out of the Core
+**The one defect that survived them is corrected.** 0010 §7 claimed the coverage
+floor gave 0002 §5 its first enforcement — logic moved out of the Core
 *"shrinks the numerator and leaves the denominator alone"* — and the arithmetic
 does not work: lines leaving `core/` leave both, and logic written straight into
-the Shell is never measured, because §7 excludes it by name.
-[#119](https://github.com/nanatsusaya/dot-panic/issues/119) carries the
-amendment. **Until it lands, *no domain logic outside the Core* is carried by
-review exactly as it was before 0010 existed**, and a green run says nothing
+the Shell or the View is never measured, because §7 excludes them by name. 0010
+A1 says so, on the decider's authorization of 2026-08-05 and against
+[#119](https://github.com/nanatsusaya/dot-panic/issues/119). **The state it
+leaves is the state that was always true**: *no domain logic outside the Core* is
+carried by review, exactly as before 0010 existed, and a green run says nothing
 about it. The rest of what the audits found is
 [#117](https://github.com/nanatsusaya/dot-panic/issues/117)'s.
 
@@ -297,10 +298,10 @@ maintainability for agents**, which is what this project is a worked example of 
 and answers the objection by scoping instead of dropping: **90 percent over the
 Core**, with `shell/` and `view/` excluded by name because Bun offers no
 per-directory threshold. It costs no fourth dependency, `bun test` carrying
-coverage itself, and it hands [0002](adr/0002-overall-architecture.md) §5 the
-first enforcement it has ever had — logic moved out of the Core to dodge a test
-shrinks the numerator and reddens the run. What it does not do is prove anything:
-90 percent is reachable by tests that assert nothing, and the record says so.
+coverage itself. What it does not do is prove anything: 90 percent is reachable
+by tests that assert nothing, and the record says so — and it hands
+[0002](adr/0002-overall-architecture.md) §5 no enforcement either, which is what
+A1 corrected and what this file claimed with it.
 
 **How it reaches the public is decided, and nothing is deployed.**
 [0011](adr/0011-delivery.md) puts the page on GitHub Pages at

@@ -19,7 +19,7 @@
   the Core without exception), §5 (watch-first in the View) ·
   [0014](0014-page-layout.md) §9 (the same question, about a rendered page)
 - **Supersedes / amends:** nothing
-- **Amended:** no
+- **Amended:** 2026-08-05 — A1
 
 ## Context
 
@@ -237,12 +237,15 @@ being maintained by agents rather than by the person who wrote it. **The floor
 buys legibility to whoever comes next**, and that is a different good from the one
 tests usually get bought for.
 
-**It also gives [0002](0002-overall-architecture.md) §5 the enforcement it never
-had.** *No domain logic outside the Core* was a rule review had to carry by
-reading. With a floor on the Core and the other two excluded, logic moved into the
-Shell or the View to dodge a test now shrinks the numerator and leaves the
-denominator alone — the number falls, and the run goes red. The pressure points
-the same way the architecture already did.
+**It gives [0002](0002-overall-architecture.md) §5 nothing, and the arithmetic
+is why.** Coverage is a ratio over the files this section did not exclude, so a
+line that leaves `core/` leaves the numerator **and** the denominator together
+and the number does not move; and domain logic written straight into `shell/` or
+`view/` is never measured at all, by the exclusion two paragraphs above. In the
+scenario worth catching — logic placed outside the Core to dodge a test — the
+run stays green. *No domain logic outside the Core* is carried by review,
+exactly as it was before this record existed, and A1 is where that correction is
+logged.
 
 **Ninety and not a hundred, deliberately.** A hundred makes the last few percent
 the point and invites tests written to reach code rather than to assert anything.
@@ -281,7 +284,7 @@ times.
 **What covers it is watching the built page, and only that.** The emitted output
 is exercised exactly once per change that reaches the page, by a person looking
 at it. Whether that happens before publishing rather than after is
-[0011](README.md)'s to decide, and this record does not decide it —
+[0011](0011-delivery.md)'s to decide, and this record does not decide it —
 it only states that after this record, watching is the sole evidence that what
 the browser runs matches what the tests passed.
 
@@ -304,9 +307,9 @@ the browser runs matches what the tests passed.
 - **Nothing here adds a dependency.** [0009](0009-toolchain.md) §7's three survive
   this record intact. §5 and §6 were where the pressure to add a fourth was, and
   §7 would have been a third if `bun test` did not carry coverage itself.
-- **[0002](0002-overall-architecture.md) §5 acquires an enforcement mechanism.**
-  *No domain logic outside the Core* was carried by review alone; §7 makes dodging
-  a test show up as a falling number in a red run.
+- **The floor buys legibility to the next agent.** §7 says what that is worth and
+  what it is not: a Core function no test enters has no executable description of
+  what it was for, and 90 percent is reachable by tests that assert nothing.
 
 **Negative.**
 
@@ -317,6 +320,10 @@ the browser runs matches what the tests passed.
   asserted by nothing.** §3 says so plainly, which does not make it smaller.
 - **The View has no automated protection at all**, and §6's argument for that
   rests entirely on [0002](0002-overall-architecture.md) §5 continuing to hold.
+- **[0002](0002-overall-architecture.md) §5 gains no enforcement here**, which
+  matters most to the bullet above it. §7 says why the floor cannot see logic
+  placed outside the Core, and nothing else in this record looks for it. This
+  record once claimed the opposite; A1 has the wording and the arithmetic.
 - **The purity test can be evaded.** §4 says how, and a reader who takes it for a
   proof of purity is reading more than it says.
 - **A whole register depends on people writing things down.** §8 is a discipline
@@ -398,13 +405,81 @@ is the stronger of the two arguments.
 
 The second clause is a design instruction and is taken as one: **code is written
 to be testable.** In this architecture that is not a new rule but pressure behind
-an existing one, and §7 says where the pressure lands —
-[0002](0002-overall-architecture.md) §5 stops being carried by review alone.
+an existing one, and §7 says where the pressure lands: on a Core function that no
+test enters. Where it does not land is [0002](0002-overall-architecture.md) §5,
+which this record leaves carried by review — see A1.
 
 Three things were verified before the number was written down rather than
 assumed: that `bun test` measures coverage without a fourth dependency, that a
 threshold can fail the run, and that no per-directory threshold exists — which is
 why the scope is set by exclusion. The sources are below.
+
+## Amendments
+
+**A1 — the coverage floor does not enforce 0002 §5. 2026-08-05.**
+
+§7's fifth paragraph read:
+
+> **It also gives [0002](0002-overall-architecture.md) §5 the enforcement it never
+> had.** *No domain logic outside the Core* was a rule review had to carry by
+> reading. With a floor on the Core and the other two excluded, logic moved into the
+> Shell or the View to dodge a test now shrinks the numerator and leaves the
+> denominator alone — the number falls, and the run goes red. The pressure points
+> the same way the architecture already did.
+
+**The correction is arithmetic rather than judgment.** Coverage is a ratio over
+the files §7 does not exclude. A line that leaves `core/` leaves the numerator
+and the denominator together, so the number does not fall; and logic written
+straight into `shell/` or `view/` is never measured, because the same section
+excludes both by name. In the scenario the paragraph describes, the run stays
+green.
+
+Two echoes go with it. *Consequences* listed as positive:
+
+> - **[0002](0002-overall-architecture.md) §5 acquires an enforcement mechanism.**
+>   *No domain logic outside the Core* was carried by review alone; §7 makes dodging
+>   a test show up as a falling number in a red run.
+
+That bullet is replaced by one about legibility, which is what the floor does
+buy, and a negative bullet now states that §5 gains no enforcement here. R2's
+closing clause read:
+
+> §7 says where the pressure lands —
+> [0002](0002-overall-architecture.md) §5 stops being carried by review alone.
+
+It now says where the pressure lands and where it does not.
+
+**Nothing else changes.** The floor is still 90 percent, the exclusions are still
+`shell/` and `view/`, [0009](0009-toolchain.md) §7's three dependencies still
+survive, and R2's reason for the number — testability as maintainability, for
+agents — is untouched. What this removes is a second justification the record
+gave itself and could not deliver. [0002](0002-overall-architecture.md) §5 is not
+weakened either: it decides where domain logic lives, and only the claim about
+what checks it was wrong.
+
+**What found it was not a check.** The coherence check passed this record,
+review passed it, and one of the two audits of 2026-08-03 called it consistent.
+The other recalculated the ratio. The [method log](../method-log.md) carries the
+consequence — that a claim about a mechanism is checked by working the
+mechanism — and it was written before this amendment rather than after.
+
+**One repair is batched in, and it is mechanical.** §9 read:
+
+> Whether that happens before publishing rather than after is
+> [0011](README.md)'s to decide
+
+The link named the record and pointed at the index. It now points at
+[0011](0011-delivery.md), and nothing else in that sentence moves. It travels
+here on the precedent [#58](https://github.com/nanatsusaya/dot-panic/issues/58)
+set — a repair that changes nothing a record decides costs less inside an
+amendment already being written than as one of its own — and it is in this log
+rather than merged silently into the body, because an accepted record is not
+edited even for a link.
+
+Authorized by Daniel on 2026-08-05, against
+[#119](https://github.com/nanatsusaya/dot-panic/issues/119): *"#119 zuerst, das
+Amendment ist autorisiert"*, and the batched repair on the same day: *"zu O1:
+wir folgen deiner Empfehlung"*.
 
 ## References
 
