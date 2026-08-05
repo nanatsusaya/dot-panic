@@ -23,13 +23,21 @@ names the project; it does not define it.
 
 ## Commands
 
-**This project has no toolchain yet, and that is not an oversight.** It is now
-decided rather than open — [0009](docs/adr/0009-toolchain.md) fixes Bun,
-TypeScript, `bun test`, `tsc` and Biome — and **deciding is not building.** There
-is no manifest, no `tsconfig`, no `node_modules` and no build output, and
-creating any of it is work with its own ticket. Do not introduce a piece of it as
-a side effect of some other task, and do not add a dependency 0009 §7 does not
-name; §7 explicitly leaves the stop-and-ask below in force.
+**The toolchain exists now**, and what it is is
+[0009](docs/adr/0009-toolchain.md)'s — Bun, TypeScript, `bun test`, `tsc` and
+Biome. `package.json`, `tsconfig.json` and `bunfig.toml` are here and
+`bun install` restores the three development dependencies §7 names. **Still do
+not add a dependency §7 does not name**; §7 explicitly leaves the stop-and-ask
+below in force, and deciding a policy is not authorizing an install.
+
+**What is here is the toolchain and not the toy.** `core/`, `shell/` and `view/`
+are empty, so the type check and the test run each end on *nothing to read* until
+the first Core file arrives with its test — which is
+[#91](https://github.com/nanatsusaya/dot-panic/issues/91), under 0012 §4. That is
+the state, not a fault to hunt. **The strings that invoke the four checks are
+deliberately not here**: 0009 §8 fixes that there are four and what each decides,
+and [#71](https://github.com/nanatsusaya/dot-panic/issues/71) is where they
+become commands.
 
 One command does exist, because it belongs to the method rather than to the
 toy. It runs out of the method repository, which is not vendored here and has

@@ -1,0 +1,19 @@
+# The coverage floor 0010 §7 decides: 90 percent, over the Core.
+#
+# `shell/` and `view/` are named rather than left out by accident. Bun documents
+# no per-directory threshold, and coverage only tracks files a test loads — so
+# without this the scope of the number would be whatever nobody happened to
+# import. 0002 §7 is where the three directories come from.
+
+# 0009 §3 emits a `.js` beside every `.ts`, and §6's discovery patterns include
+# `*.test.js` — so after a build the runner finds each test twice, once as source
+# and once as its own output. Neither record saw the collision; this line is what
+# keeps a build from doubling the suite.
+
+[test]
+pathIgnorePatterns = ["**/*.test.js"]
+
+coverage = true
+coverageThreshold = { lines = 0.9, functions = 0.9, statements = 0.9 }
+coveragePathIgnorePatterns = ["shell/**", "view/**"]
+coverageSkipTestFiles = true

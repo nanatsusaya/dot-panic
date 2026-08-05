@@ -6,10 +6,12 @@
 
 ## Position
 
-The method has been adopted. **Nothing of the toy exists yet** — no simulation
-code, no page, no rendering. Everything built so far is the way of working:
-the operating rules, the decision set, seventeen accepted records, and the five
-session procedures in [`.claude/skills/`](../.claude/skills/README.md).
+The method has been adopted, and **the first thing here that is not a document
+now exists**: the toolchain [0009](adr/0009-toolchain.md) decides.
+**Nothing of the toy exists yet** — no simulation code, no page, no rendering.
+The rest of what is built is the way of working: the operating rules, the
+decision set, seventeen accepted records, and the five session procedures in
+[`.claude/skills/`](../.claude/skills/README.md).
 
 The procedures have now been used. `/moin`, `/weiterimtext` and `/adr` ran on
 2026-08-02 and `/feierabend` on 2026-08-03, all behaving as their files
@@ -246,14 +248,46 @@ day, while this file's row for it was right — the same drift as 2026-08-02, fr
 the other side. That is why *the ticket is simply the reliable one* was not the
 answer: it moves the staleness rather than ending it. The header is corrected.
 
+**The analysis phase is over, and what ended it was the decider naming a
+ticket.** 0012 §1 gives that phase no end condition and puts leaving it in one
+person's judgment;
+[#69](https://github.com/nanatsusaya/dot-panic/issues/69) is what he named on
+2026-08-05. `package.json`, `tsconfig.json` and `bunfig.toml` are here, the three
+development dependencies 0009 §7 names are installed and pinned exactly, and
+`core/`, `shell/` and `view/` exist and are empty.
+
+**`target` and `lib` are ES2023, and the reasoning is worth more than the
+value.** A year is only as available as its **last** feature. ES2024 looks a
+month away — three of its proposals become Baseline widely available on
+2026-09-05 — but `Atomics.waitAsync` reached the fourth browser only on
+2025-11-11, so ES2024 cannot qualify before **2028-05-11**. ES2023 cleared the
+floor on 2026-01-04, on *Change Array by Copy*. The Baseline data was read on
+2026-08-05 and the working is in #69, per 0008 R1; [the maintenance
+list](maintenance.md) carries the date. One line is unverified and says so: the
+feature catalog has no row for *Symbols as WeakMap keys*.
+
+**Two of 0009 §8's four checks are red, and that is the toolchain existing
+before the toy does.** `tsc` ends on *no inputs were found* and `bun test` on *0
+test files matching*, because the three directories are empty — both end when
+[#91](https://github.com/nanatsusaya/dot-panic/issues/91) writes the first Core
+file with its test, which is 0012 §4. **A placeholder would have made both green
+and said nothing**, which is the trade 0010 §7 already warns about in its own
+terms.
+
+**Building it turned two written rules into machine-held ones and found one
+collision.** `moduleResolution: node16` rejects an import specifier that lacks an
+extension **and** one ending in `.ts` — both halves of 0009 §5, which §9 lists as
+decidable by reading the repository and which a command now decides. The
+collision is between §3 and §6: emitting a `.js` beside every `.ts` produces
+`*.test.js`, which §6's discovery patterns also match, so a build doubled the
+suite until `pathIgnorePatterns` was set. Neither record saw it.
+
 **The architecture is decided and none of it is built.**
 [0002](adr/0002-overall-architecture.md) fixes a functional core inside an
-imperative shell, three parts, and the directory layout that goes with them —
-but `core/`, `shell/` and `view/` do not exist, and creating them is work that
-needs a ticket, not a side effect of reading the record. There is still **no
-toolchain at all** — no runtime, no test runner, no package manifest — but that
-is no longer an open question. 0009 decides it and
-[#69](https://github.com/nanatsusaya/dot-panic/issues/69) is the work.
+imperative shell, three parts, and the directory layout that goes with them.
+**The three directories exist now and hold nothing**, which #69 created and
+0002 §7 fixes; what goes in them is still work that needs a ticket rather than a
+side effect of reading the record.
 
 **0002 §2 now says what a type-only import is**, which is the first thing the
 architecture record has had to settle about a language rather than about parts.
@@ -480,7 +514,7 @@ closes the question in 0015 rather than on 0001 §5's out-of-scope list, so that
 the later addition the decider left open costs a record superseding 0015 and not
 one superseding 0001.
 
-**What runs the code is decided, and none of it is installed.**
+**What runs the code is decided, and it is installed now.**
 [0009](adr/0009-toolchain.md) fixes Bun, TypeScript and `bun test` — the decider's
 choice, taken against a recommendation of no toolchain at all. **Its §4 is the
 load-bearing part**, because 0001 R1 sent the Baseline floor there and the two
@@ -621,20 +655,22 @@ creates no monitoring. **What that promises is attention, not uptime** — the
 only one of the two a single person can keep.
 
 **The list its §2 decides exists now.**
-[docs/maintenance.md](maintenance.md) carries the four commitments that depend
-on time, each pointing at the record that owns it, so `/moin` step 5 and
+[docs/maintenance.md](maintenance.md) carries every commitment that depends on
+time, one row each, pointing at the record that owns it, so `/moin` step 5 and
 `/feierabend` step 4 have an object for the first time. **The list decides
 nothing**; a row that disagrees with the record it names is wrong by
 construction.
 
-**Writing it split the four rows two and two, not three and one.** 0016's
-*Context* counts three commitments that move with time, but §3 splits on
-whether a **date** makes a row due, and 2028-06-12 is the only such date any
-record carries — so which browser features are Baseline widely available is a
-standing row, and calling it dated would have meant inventing the review
-interval §3 refuses for the standing row it names. **One dated row carries no
-date at all**: no slowdown factor has been chosen, because nothing has been
-measured and there is no toolchain to measure with.
+**Writing it split the rows two standing and two dated, not three and one**, and
+#69 has since added a third dated row. 0016's *Context* counts three commitments
+that move with time, but §3 splits on whether a **date** makes a row due — so
+which browser features are Baseline widely available stayed standing, and
+calling it dated would have meant inventing the review interval §3 refuses for
+the standing row it names. **That row and the new one are the same floor at two
+grains**: 0001 §3.4's ECMAScript half now has a compiler setting with a version
+in it and therefore a date, 2028-05-11, while the DOM half has no version
+anywhere and stays a person reading. **One dated row still carries no date at
+all**: no slowdown factor has been chosen, because nothing has been measured.
 
 **Seventeen decisions stand in [docs/adr/](adr/README.md), and all seventeen
 are Accepted.** There is no `Planned` row left, which has not been true
@@ -680,14 +716,13 @@ is why each row exists, which nothing else here says.
 | [#87](https://github.com/nanatsusaya/dot-panic/issues/87) The flock's motion | 6 tickets | 0006's motion rules, cut one per ticket |
 | [#88](https://github.com/nanatsusaya/dot-panic/issues/88) The pointer | 3 tickets | 0007's input model — the toy's one interaction |
 | [#89](https://github.com/nanatsusaya/dot-panic/issues/89) The finished page | 3 tickets | 0005's rendering, plus the palette and the dot count no record fixes |
-| [#117](https://github.com/nanatsusaya/dot-panic/issues/117) The meta-audit corrections | 18 tickets | the 2026-08-03 audits' findings; it builds nothing, which is what 0012 A2 widened *epic* to allow |
+| [#117](https://github.com/nanatsusaya/dot-panic/issues/117) The meta-audit corrections | 19 tickets | the 2026-08-03 audits' findings; it builds nothing, which is what 0012 A2 widened *epic* to allow |
 
 Outside the epics:
 
 | Ticket | Why it exists |
 |---|---|
-| [#69](https://github.com/nanatsusaya/dot-panic/issues/69) Create the toolchain 0009 decides | 0009 is Accepted and none of it is installed |
-| [#70](https://github.com/nanatsusaya/dot-panic/issues/70) Biome | 0009 §7's third development dependency, deciding format and lint in one run |
+| [#70](https://github.com/nanatsusaya/dot-panic/issues/70) Biome | 0009 §7's third development dependency is installed and unconfigured; this decides its rule groups |
 | [#71](https://github.com/nanatsusaya/dot-panic/issues/71) The check chain as commands | 0009 §8's four checks, as commands a person can run |
 | [#77](https://github.com/nanatsusaya/dot-panic/issues/77) The hosting notice 0011 §4 puts beside the imprint | the host logs the visitor's IP address, and the page says so inside 0014 §4's dialog |
 
@@ -749,14 +784,16 @@ outside tends to find — and one of the sixteen,
 [#134](https://github.com/nanatsusaya/dot-panic/issues/134), exists because
 three readers misread one section three different ways.
 
-**#69 has grown a requirement it was not filed with**: 0010 §7 puts the coverage
-floor and its two exclusions in `bunfig.toml`, so the file that ticket creates
-carries a number as well as a toolchain. It was missing from its criteria while
-this file already claimed it, and the breakdown is what caught that.
+**#69 grew a requirement it was not filed with, and it shipped with it**: 0010
+§7 put the coverage floor and its two exclusions in `bunfig.toml`, so that file
+carries a number as well as a toolchain. The breakdown caught the gap; the floor
+is in place and was watched failing a run at 18.18 percent, which is how a
+threshold is shown to be more than a line.
 
-**None of it starts by existing.** 0012 §1's analysis phase has no end
-condition, and leaving it is a decision rather than a consequence of a record
-being Accepted — or of a ticket being written.
+**None of it started by existing**, and the analysis phase is what ended
+instead. 0012 §1 gave that phase no end condition and put leaving it in the
+decider's judgment rather than in a record being Accepted or a ticket being
+written — and on 2026-08-05 he named #69.
 
 **The tables above used to restate what the tickets already say**, and
 [#46](https://github.com/nanatsusaya/dot-panic/issues/46) is what took the column
@@ -850,24 +887,25 @@ What a change description must contain is no longer among the gaps here.
 
 ## The single clearest next step
 
-**It is a call rather than a ticket, and the call is the decider's.** #46 was the
-last open ticket that was ready and needed no phase call. Everything still open
-is behind 0012 §1's analysis phase, which has no end condition — and neither a
-record becoming Accepted, nor a ticket being written, nor this file supplies one.
+**[#70](https://github.com/nanatsusaya/dot-panic/issues/70) — Biome's rule
+groups, and the configuration that follows from them.** The package is installed
+and configured by nothing, which is the one part of 0009 §7 that #69 left half
+done. **No record fixes the set** — §7 names the dependency, §8 fixes that there
+are four checks and what each decides, and neither reaches a rule group — so #70
+decides it and lists each group with one line saying why it is on, before the
+file is written. Then [#71](https://github.com/nanatsusaya/dot-panic/issues/71)
+turns 0009 §8's four into commands.
 
-**[#132](https://github.com/nanatsusaya/dot-panic/issues/132) is what runs the
-moment the call comes.** 0012 §2 makes a sprint a set of tickets brought to
-Definition of Ready **together** and §6 puts their independence at that same
-moment, and that activity has never run here. It is the sixth Ready condition —
-the one [the template](../.github/ISSUE_TEMPLATE/task.md) says no ticket can
-acquire by being edited — so it cannot be reached by editing tickets, which is
-exactly why it is an activity. It is phase 4's opening move rather than more
-phase 3.
-
-**[#69](https://github.com/nanatsusaya/dot-panic/issues/69) is the same call from
-the other side**: it is ready, nothing blocks it, and starting it is what leaves
-the analysis phase. #70 and #71 wait on it; #77 and #90 wait on a page that does
-not exist; every epic member waits on one of those.
+**[#132](https://github.com/nanatsusaya/dot-panic/issues/132) is the other thing
+now open, and the order between them is the decider's.** 0012 §2 makes a sprint
+a set of tickets brought to Definition of Ready **together** and §6 puts their
+independence at that same moment; that activity has never run, and it is what
+stands between here and [#91](https://github.com/nanatsusaya/dot-panic/issues/91)
+writing the first Core file. The argument for #70 and #71 first is that they are
+small, they finish what #69 started, and they mean the first code arrives into a
+chain that can check it. The argument for #132 first is 0001 §6.2 — *the toy is
+never finished because the process ate the work* — and it is the stronger one if
+the toolchain starts growing.
 
 ## Implementation scale
 
@@ -888,12 +926,14 @@ is there.** It was held on `planned` because the core is two records — 0006
 decides the rules it runs, and [0013](adr/0013-origin-of-the-core.md) owned where
 the code comes from. Both exist now.
 
-**Six areas at `decided` and none at `built` is the state this table was built to
-make visible**, and it is the one 0001 §6.2 warns about: a project that has
-decided everything and made nothing. It is also why 0011 §7 puts the first
-deployment at the walking skeleton rather than at *good enough*.
-[#13](https://github.com/nanatsusaya/dot-panic/issues/13) is what moves the first
-row off `decided`, and it moves several at once.
+**Five areas at `decided` and one at `built` is the first time this table has not
+read as the warning it was made to carry.** Six at `decided` and none at `built`
+is exactly 0001 §6.2 — a project that has decided everything and made nothing —
+and it is why 0011 §7 puts the first deployment at the walking skeleton rather
+than at *good enough*. **One row moving is not the end of that exposure**, since
+the row that moved runs no simulation and appears on no screen.
+[#13](https://github.com/nanatsusaya/dot-panic/issues/13) is what moves the rest,
+and it moves several at once.
 
 **Pointer handling moves for the same reason rendering did**, and one thing it
 leaves open is not part of it: 0007 §8's requirement that the imprint stay
@@ -905,13 +945,21 @@ until a record owned it, and 0014 is the whole of that question the way 0005 is
 for rendering. 0015 has since decided that nothing joins what 0014 put in the
 dialog, which leaves this row exactly where it was.
 
-**Toolchain moves to `decided`, and it is the row where that word is easiest to
-misread.** 0009 is the whole of that question the way 0005 is for rendering, so
-the move is the ordinary one — but *decided* here means there is no `package.json`
-and no `node_modules`, not that a `bun install` has been run. CLAUDE.md carries the
-same sentence for the same reason.
-[#69](https://github.com/nanatsusaya/dot-panic/issues/69) is what would move it
-again.
+**Toolchain moves to `built`, and it is the first row ever to leave `decided`.**
+`package.json`, `tsconfig.json` and `bunfig.toml` exist, the three dependencies
+are installed and pinned, and each claim was exercised rather than assumed:
+`tsc` emitted one `.js` beside each `.ts` in place, `bun test` failed a test for
+a real reason and then passed it, and the coverage floor failed a run at 18.18
+percent with every test green. **The third word in this scale's definition of
+`built` is *watched*, and here it is empty by the record's own decision** —
+0009 §9 says nothing it decides appears on a screen, and calls that emptiness
+deliberate. It is the only row for which that can be true.
+
+**What `built` does not mean here is that the chain is green.** Two of 0009 §8's
+four checks end on having nothing to read, because the three directories are
+empty; [#91](https://github.com/nanatsusaya/dot-panic/issues/91) is what gives
+them something. And Biome is installed and configured by nothing, which is
+[#70](https://github.com/nanatsusaya/dot-panic/issues/70).
 
 **0015 adds no row and moves none**, for a reason no other record has had: it
 decided that the area does not exist. There is nothing to build, so there is
@@ -927,8 +975,8 @@ running page and whatever applies §8's slowdown factor — which §8 hands to 0
 **0010 adds no row and moves none either**, for 0008's reason: a testing strategy
 is a constraint on the areas that get built rather than an area itself. One part
 of it does arrive with a row, though, and it is the toolchain — 0010 §7's coverage
-floor is a line in `bunfig.toml`, so it reaches `built` when
-[#69](https://github.com/nanatsusaya/dot-panic/issues/69) does and not before.
+floor is a line in `bunfig.toml`, and it arrived with
+[#69](https://github.com/nanatsusaya/dot-panic/issues/69).
 
 **Deployment moves to `decided`**, which is the ordinary move: 0011 is the whole
 of that question the way 0005 is for rendering. *Decided* here means there is no
@@ -939,7 +987,7 @@ this scale reaches `live`.
 
 | Area | Stage |
 |---|---|
-| Toolchain | `decided` |
+| Toolchain | `built` |
 | Simulation core | `decided` |
 | Rendering | `decided` |
 | Pointer handling | `decided` |
