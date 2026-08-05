@@ -1,3 +1,9 @@
+/**
+ * A world is what its seed and its two numbers say it is — 0002 §4 for the
+ * seed, 0008 R1 for the numbers — and those numbers leave 0006 §2 satisfiable,
+ * which is a row in 0008 §9's asserted list.
+ */
+
 import { describe, expect, test } from "bun:test";
 
 import { createWorld, DOT_COUNT, DOT_RADIUS } from "./world.js";

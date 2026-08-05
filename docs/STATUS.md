@@ -386,6 +386,36 @@ chosen, and what it costs is an amendment on 0002 A2's precedent — authorized 
 [#176](https://github.com/nanatsusaya/dot-panic/issues/176) rather than folded
 into the change that found it.
 
+**How code documents itself is written down now, and the form came from outside
+this repository.** CLAUDE.md carried one sentence — *comments explain why, not
+what* — and nothing about shape, so #91's three files arrived with two of them
+lacking a file header and not one exported function carrying `@param`. The form
+is [grimora](https://github.com/nanatsusaya/grimora/blob/main/CLAUDE.md)'s,
+which the decider already keeps, adapted on his call of 2026-08-05 under
+[#177](https://github.com/nanatsusaya/dot-panic/issues/177): a block header on
+every file and every exported symbol, `@param` for every parameter, `//` for one
+to three lines and a block beyond that, and verbose accepted where it buys the
+next session clarity.
+
+**Three of its clauses are this project's rather than grimora's.** A why here
+usually ends at a record's section, because the reason a line exists at all is
+normally something that was decided. *Prefer the smaller, more boring artifact*
+is about the documents and not about a comment — the decider's reading,
+confirmed, and without the sentence a later session reconciles the two by
+guessing. And **nothing under `core/` may name one of 0002 §3's fifteen,
+comments included**, because 0010 §4 makes the purity test a text search over
+that directory. **That clause caught the change that wrote it**: 0008 §6's own
+reasoning is about screen size and the window, and two comments quoting it sat
+in `core/world.ts` until this. What the match may be — a token and not a
+substring, since *allocation* contains one of the fifteen — is
+[#92](https://github.com/nanatsusaya/dot-panic/issues/92)'s, and that ticket now
+carries it.
+
+**Nothing checks any of it**, and
+[#178](https://github.com/nanatsusaya/dot-panic/issues/178) is the one that
+would — presence rather than quality, which is 0010 §2's third kind of claim and
+needs no record to permit it.
+
 **The architecture is decided and one of its three parts has been started.**
 [0002](adr/0002-overall-architecture.md) fixes a functional core inside an
 imperative shell, three parts, and the directory layout that goes with them.
@@ -827,6 +857,8 @@ Outside the epics:
 | Ticket | Why it exists |
 |---|---|
 | [#77](https://github.com/nanatsusaya/dot-panic/issues/77) The hosting notice 0011 §4 puts beside the imprint | the host logs the visitor's IP address, and the page says so inside 0014 §4's dialog |
+| [#177](https://github.com/nanatsusaya/dot-panic/issues/177) The code documentation convention | CLAUDE.md said why-not-what and nothing about form, and #91's files showed what that leaves open |
+| [#178](https://github.com/nanatsusaya/dot-panic/issues/178) A test that decides the convention is followed | #177's rule has no command behind it; presence is 0010 §2's third kind and needs no record |
 
 **[#90](https://github.com/nanatsusaya/dot-panic/issues/90) is the one thing
 nobody here can work, and it stops the URL rather than the code.** 0004 R2 makes
@@ -1005,7 +1037,9 @@ source for 0002 §3's fifteen names;
 canvas. 0012 §6's activity found those two independent of each other, and
 nothing else in the epic may be worked beside them.
 
-**Two small things are open outside the epic and neither blocks this.**
+**Three small things are open outside the epic and none of them blocks this.**
+[#178](https://github.com/nanatsusaya/dot-panic/issues/178) waits on
+[#92](https://github.com/nanatsusaya/dot-panic/issues/92) by design.
 [#166](https://github.com/nanatsusaya/dot-panic/issues/166) asks whether the
 Definition-of-Ready activity covered #90 or the eight build tickets alone — the
 activity found the answer changes nothing it produced, since #90 is not-ready
