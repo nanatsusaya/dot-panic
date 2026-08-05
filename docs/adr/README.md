@@ -82,6 +82,7 @@ longer supports.
 | [0006](0006-motion-rules.md) | Motion rules | Bounded frame, minimum speed, non-overlap as a constraint | Accepted |
 | [0007](0007-pointer-and-input-model.md) | Pointer and input model | Mouse and touch, radius of effect, how it decays | Accepted |
 | [0014](0014-page-layout.md) | Page layout | How the flock, the imprint and the explanation are arranged; how the canvas is sized against them | Accepted |
+| [0017](0017-the-pages-language.md) | The page's language | Which language the page is written in, what `lang` says, and where the words themselves live | Accepted |
 | [0015](0015-settings-surface.md) | Settings surface | Whether the visitor may change the flock, which values are exposed, and what bounds them | Accepted |
 | [0008](0008-performance-budget.md) | Performance budget | How many dots at what frame rate on which device | Accepted |
 | [0009](0009-toolchain.md) | Toolchain | What runs the code, what tests it, what builds it | Accepted |

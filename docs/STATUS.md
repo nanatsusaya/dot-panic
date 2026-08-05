@@ -8,7 +8,7 @@
 
 The method has been adopted. **Nothing of the toy exists yet** — no simulation
 code, no page, no rendering. Everything built so far is the way of working:
-the operating rules, the decision set, sixteen accepted records, and the five
+the operating rules, the decision set, seventeen accepted records, and the five
 session procedures in [`.claude/skills/`](../.claude/skills/README.md).
 
 The procedures have now been used. `/moin`, `/weiterimtext` and `/adr` ran on
@@ -29,7 +29,7 @@ declare adaptations that switch checks off for rules that are in force.
 **What the review did find is one rule in force and failing, and one nobody has
 verified.** A3 — *scale ceremony to the stage* — describes this project in the
 catalog's own words: *a decision phase with no end condition* is how a project
-accumulates a complete architecture and no running code. Sixteen records, no
+accumulates a complete architecture and no running code. Seventeen records, no
 code, and [0012](adr/0012-how-software-gets-developed.md) §1 says the analysis
 phase has no end condition. None of that is news here —
 [0001](adr/0001-purpose-scope-and-success.md) §6.2 ranks it as a failure and
@@ -119,6 +119,20 @@ and [#93](https://github.com/nanatsusaya/dot-panic/issues/93) cites it.
 **No ticket owns the command that would decide it.** §2 says one can, and the
 purity test [#92](https://github.com/nanatsusaya/dot-panic/issues/92) plans is a
 different command — it reads `core/` for fifteen names, not `view/` for imports.
+
+**The page's language is decided, in the seventeenth record.**
+[0017](adr/0017-the-pages-language.md) puts the page in English, keeps
+`Impressum` on the control 0014 §6 requires and on the heading it opens, gives
+the document `lang="en"` and that one word `lang="de"`, and puts the canonical
+copy in the page source so that tickets cite it rather than restate it.
+**The German word is not decoration.** 0014 §6 makes the control's label the
+whole of whether a person finds the imprint and takes that reading from 0004
+§10, so tidying it into English would remove a piece of what 0004 §1 asks for.
+[#77](https://github.com/nanatsusaya/dot-panic/issues/77),
+[#95](https://github.com/nanatsusaya/dot-panic/issues/95) and
+[#96](https://github.com/nanatsusaya/dot-panic/issues/96) cite it now. **`lang`
+is on neither of 0004 §10's accessibility lists**, and 0017 says so in its
+*Consequences* rather than quietly filling a gap in another record.
 
 **How the work gets built is decided as well, and nothing has been built under
 it.** [0012](adr/0012-how-software-gets-developed.md) fixes seven phases running
@@ -473,14 +487,15 @@ interval §3 refuses for the standing row it names. **One dated row carries no
 date at all**: no slowdown factor has been chosen, because nothing has been
 measured and there is no toolchain to measure with.
 
-**Sixteen decisions are planned in [docs/adr/](adr/README.md), and all sixteen
+**Seventeen decisions stand in [docs/adr/](adr/README.md), and all seventeen
 are Accepted.** There is no `Planned` row left, which has not been true
 before — and it says nothing about what exists: every area on the scale at the
 end of this file is `decided` and none is `built`. Which record answers what is
 the index's to say, and enumerating them here would be a second copy of it.
-**The table runs by meaning and not by number**, and four numbers have a
+**The table runs by meaning and not by number**, and five numbers have a
 history it carries rather than this file: 0012 was reserved as unused until
-2026-08-02, and 0014, 0015 and 0016 were all added after the set was planned.
+2026-08-02, and 0014, 0015, 0016 and 0017 were all added after the set was
+planned.
 
 What is awaiting review is not repeated here. The
 [pull request list](https://github.com/nanatsusaya/dot-panic/pulls) is the
@@ -685,24 +700,23 @@ What a change description must contain is no longer among the gaps here.
 
 ## The single clearest next step
 
-**Answer [#121](https://github.com/nanatsusaya/dot-panic/issues/121) — the
-page's language, its `lang` value, and where canonical copy lives.** Nothing
-decides any of the three. #77 says so in its own words, and
-[#95](https://github.com/nanatsusaya/dot-panic/issues/95) and
-[#96](https://github.com/nanatsusaya/dot-panic/issues/96) both need visible copy
-before anything can be written for them.
+**Answer [#134](https://github.com/nanatsusaya/dot-panic/issues/134) — whether
+0003 §7 stays a reading.** Three professional readers misread that one section
+three different ways during the audits, and separately the decider once called
+it *zu extrem und zu streng*. The comment on PR #52 offered to file a ticket for
+that and recorded no answer anywhere; this ticket is that offer, filed on
+2026-08-03 on the decider's instruction.
 
-**It is the next step for the reason #120 was**, one ticket earlier on the same
-path: without an answer the first page ticket decides it silently, and a later
-change then touches copy, accessibility and watch criteria across three tickets
-at once. This one is outward-facing as well, which puts it in the decider's
-domain by CLAUDE.md rather than only by D1.
+**It is the next step because it is the oldest thing nobody has answered**, and
+because one of its three options is the only one left in the ticket list that
+would change a decision: (c) loosens §7 by a superseding record, never an edit.
+(a) and (b) change none, and (b) is the recommendation.
 
 **It is a decision ticket, so what a session does with it is put the question
-and stop.** The recommendation is in the ticket. It carries a second choice
-under the first — whether the answer becomes a small record of its own or an
-authorized addition to an existing one — and that one is worth settling before
-the writing starts rather than after.
+and stop.** [#126](https://github.com/nanatsusaya/dot-panic/issues/126) and
+[#125](https://github.com/nanatsusaya/dot-panic/issues/125) are the same shape
+and both smaller — two records giving the word *asserted* two extensions, and
+two rows in 0015's table that no command can decide.
 
 **The two tickets that need nobody are
 [#123](https://github.com/nanatsusaya/dot-panic/issues/123) and
