@@ -123,6 +123,19 @@ what the tests passed, because four named properties are not a match. The
 vocabulary moved in 0010 rather than 0011 because §1 says every record uses these
 names, and no check changes either way.
 
+**Two rows in 0015's asserted table now say what a command can decide.** One
+promised the Shell *makes no call except* 0014 §5's `showModal()` — contradicted
+by three accepted records on the day it was written, since the Shell runs the
+loop, calls `requestAnimationFrame` and listens for four pointer events — and it
+was a second copy of 0014 §9's row besides, so 0015 A1 drops that half rather
+than repairing it. The other counted the page's controls without defining
+*control*, which a reviewer applying it literally fails on `<details>` and a
+close button; the count is anchored to the strip, where 0014 §2 already put it.
+**Nothing 0015 decides moves**, and its prose is untouched — the rows had turned
+one sentence into a number and another into a superset. A1 also records one
+thing that was checked and needed nothing: 0005 §3's color hand-off sits inside
+0002 §2's *wiring* by that record's own reading, so 0002's list is not amended.
+
 **The architecture is decided and none of it is built.**
 [0002](adr/0002-overall-architecture.md) fixes a functional core inside an
 imperative shell, three parts, and the directory layout that goes with them —
@@ -726,23 +739,23 @@ What a change description must contain is no longer among the gaps here.
 
 ## The single clearest next step
 
-**Answer [#125](https://github.com/nanatsusaya/dot-panic/issues/125) — two rows
-in 0015's asserted table promise what no command can decide.** One says the
-Shell *makes no call except* `showModal()`, which three accepted records
-contradict: it runs the loop (0002 §2), calls `requestAnimationFrame` (0008 §2)
-and listens for four pointer events (0007 §1). The other counts the page's
-controls without defining *control*, and 0014 §5's markup contains `<details>`
-sections and a close button.
+**[#130](https://github.com/nanatsusaya/dot-panic/issues/130) — four British
+spellings survived, and a claim says none did.** `monetised` twice in 0004 §13's
+own prose, `authorisation` twice in `/adr`, `Summarise` in `/moin`, `judgement`
+in `/weiterimtext`. The skills README says *the check found all twenty-five
+instances*, and three of the four survivors sit in the files that sentence is
+about.
 
-**It is the next step because the vocabulary it needs is now settled.** 0010 A2
-fixed what *asserted* means, which is what #126 was for; re-scoping an asserted
-table was the thing waiting on it.
+**It is the next step because the false claim is about verification itself.** A
+document that overstates what a command checks is worse than the four words: it
+tells every later session the regime is machine-held when the check prints its
+own limit — word pairs are scanned, the general `-ise` ending is not. CLAUDE.md's
+*machine-checked* needs the same softening.
 
-**It is a decision ticket, so what a session does with it is put the question
-and stop.** It carries a second question the first one drags in: whether 0005
-§3's color hand-off sits inside 0002 §2's *wiring* or costs an amendment to that
-list — 0015 §4's argument leans on the list being exhaustive, and it is not
-obviously so.
+**It is a build ticket with one decision inside it.** The three skill files are
+ordinary documentation; 0004's two instances sit in an accepted record and need
+an authorized amendment on the #58 precedent, which the ticket asks for rather
+than assumes.
 
 **The two tickets that need nobody are
 [#123](https://github.com/nanatsusaya/dot-panic/issues/123) and
