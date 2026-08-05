@@ -142,7 +142,13 @@ first.
   tidying folded into other work. A change too large to answer those two
   questions about is a change that gets waved through.
 - **Commit messages** follow `type(scope): summary`, lowercase, describing what
-  the change is rather than commanding. The body says why.
+  the change is rather than commanding. The body says why. **Agent assistance is
+  disclosed as an `Assisted-by:` trailer** naming what assisted — a trailer
+  survives a squash merge and cannot be edited afterwards, where a line in a
+  description can be, which makes that a claim rather than a record. A commit
+  written by an agent here also carries a `Co-Authored-By:` trailer, which its
+  harness requires; the two say different things and curl's keyword list, where
+  `Assisted-by:` comes from, carries both.
 - **The shape of a change description** is
   [.github/pull_request_template.md](.github/pull_request_template.md) — the
   form an author actually sees. It is not restated here.
@@ -162,8 +168,12 @@ questions above the whole of the gate.
 - **Surface decisions that belong to a person before acting**: direction and
   sequencing, anything legal, anything outward-facing, anything expensive to
   reverse. Number them `O1..On`, recommend a default for each, and **do not
-  answer them yourself**. Once answered, rewrite them in place as `R1..Rn` with
-  what was decided and why.
+  answer them yourself**. **Where the answer goes depends on the artifact.** In a
+  decision record it is folded in and the questions become `R1..Rn`, with what
+  was decided and why. In a pull request it arrives as a comment naming the
+  `O`-number and nothing already written is rewritten —
+  [the template](.github/pull_request_template.md) is the authority for that, and
+  says why, and it is not restated here.
 - **Stop and ask** before: amending an accepted decision · publishing or
   deploying · changing the public URL · adding any dependency · introducing
   network calls or telemetry.
