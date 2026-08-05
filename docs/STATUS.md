@@ -381,8 +381,10 @@ Shell is the only file that does* beside it, is the direction between the three
 parts. Read as a rule about every file, it forbids `core/world.ts` importing
 `core/random.js` — and it forbids a test importing the Core at all, which is
 what 0010 §4 and 0012 §4 both require. So the reading is forced rather than
-chosen. Whether it costs an amendment on 0002 A2's precedent is a question this
-change put and did not answer.
+chosen, and what it costs is an amendment on 0002 A2's precedent — authorized on
+2026-08-05 and carried by
+[#176](https://github.com/nanatsusaya/dot-panic/issues/176) rather than folded
+into the change that found it.
 
 **The architecture is decided and one of its three parts has been started.**
 [0002](adr/0002-overall-architecture.md) fixes a functional core inside an
@@ -818,7 +820,7 @@ is why each row exists, which nothing else here says.
 | [#87](https://github.com/nanatsusaya/dot-panic/issues/87) The flock's motion | 6 tickets | 0006's motion rules, cut one per ticket |
 | [#88](https://github.com/nanatsusaya/dot-panic/issues/88) The pointer | 3 tickets | 0007's input model — the toy's one interaction |
 | [#89](https://github.com/nanatsusaya/dot-panic/issues/89) The finished page | 3 tickets | 0005's rendering, plus the palette and the dot count no record fixes |
-| [#117](https://github.com/nanatsusaya/dot-panic/issues/117) The meta-audit corrections | 19 tickets | the 2026-08-03 audits' findings; it builds nothing, which is what 0012 A2 widened *epic* to allow |
+| [#117](https://github.com/nanatsusaya/dot-panic/issues/117) The meta-audit corrections | 20 tickets | the 2026-08-03 audits' findings, and two of the same class found by building instead; it builds nothing, which is what 0012 A2 widened *epic* to allow |
 
 Outside the epics:
 
