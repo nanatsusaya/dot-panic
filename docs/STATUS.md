@@ -645,33 +645,38 @@ list, and what would make any of them decidable by a command is no longer only a
 number: 0009 §8 fixes four checks and
 [#71](https://github.com/nanatsusaya/dot-panic/issues/71) is what turns them into
 commands. CLAUDE.md and `/feierabend` refer to the template and state nothing.
-**One bar beside it is still stated twice**, though — *correct, complete and
-safe, or name the specific uncertainty* is in both, named as a leftover in three
-merged changes and finally ticketed as
-[#128](https://github.com/nanatsusaya/dot-panic/issues/128).
+
+**The bar beside it now has one authority too.** *Correct, complete and safe, or
+name the specific uncertainty* was in CLAUDE.md's *Delivery* and in
+`/feierabend` step 2, where the copy introduced itself as something the
+procedure **adds** — which is how it survived three merged changes that each
+named it. CLAUDE.md keeps it, because it governs every hand-back and not only a
+wind-down, and [#128](https://github.com/nanatsusaya/dot-panic/issues/128) is
+what closed it. **It is the seventh adaptation of the copied procedures**, and
+[`.claude/skills/README.md`](../.claude/skills/README.md) carries it, because
+that list is what a later comparison against the plugin must not overwrite.
 
 What a change description must contain is no longer among the gaps here.
 [The pull request template](../.github/pull_request_template.md) fixes it.
 
 ## The single clearest next step
 
-**Give the hand-back bar one authority, against
-[#128](https://github.com/nanatsusaya/dot-panic/issues/128).** *Correct,
-complete and safe, or name the specific uncertainty* is stated in both
-CLAUDE.md and [the ticket template](../.github/ISSUE_TEMPLATE/task.md), which
-is the one-authority rule broken inside the file that states it. It waits on
-nothing, it needs no decision, and it was named as a leftover in three merged
-changes before it was finally ticketed.
+**Put into Definition of Ready what 0012 hangs on it, against
+[#124](https://github.com/nanatsusaya/dot-panic/issues/124).**
+[0012](adr/0012-how-software-gets-developed.md) §2 makes a sprint a set of
+tickets brought to Ready **together** and §6 settles their independence at that
+same moment — while the sole authority for Ready, [the ticket
+template](../.github/ISSUE_TEMPLATE/task.md), names three conditions and none
+of them is about blockers, deferred numbers or the set. A ticket whose header
+says *waits on #91* satisfies Ready as written.
 
-**What makes it the clearest of the four that wait on nothing** — the others
-are [#123](https://github.com/nanatsusaya/dot-panic/issues/123),
-[#124](https://github.com/nanatsusaya/dot-panic/issues/124) and
-[#129](https://github.com/nanatsusaya/dot-panic/issues/129) — is that it is a
-defect in the operating rules rather than in what they describe. Everything
-else ready either waits on the toolchain
-[#69](https://github.com/nanatsusaya/dot-panic/issues/69) opens, or needs an
-authorized amendment first, which is
-[#130](https://github.com/nanatsusaya/dot-panic/issues/130)'s position.
+**It is the one of the three remaining that something else waits on.**
+[#123](https://github.com/nanatsusaya/dot-panic/issues/123) and
+[#129](https://github.com/nanatsusaya/dot-panic/issues/129) also wait on
+nothing and unblock nothing;
+[#132](https://github.com/nanatsusaya/dot-panic/issues/132) — the last ticket
+before phase 4 — waits on #124. **Closing it is referencing rather than
+deciding**, and 0012 is not amended: the template catches up to it.
 
 **What stands between here and code is one activity, and it is still not this
 one.**

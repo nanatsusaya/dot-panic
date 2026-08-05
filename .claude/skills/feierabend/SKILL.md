@@ -54,13 +54,14 @@ it is not restated here.** Read it and apply it before calling anything done.
 This section used to carry its own copy, which required a green local check
 chain — something this project does not have and says so.
 
-One thing this procedure adds, because it is about stopping rather than about a
-ticket:
+**The bar for handing work back is CLAUDE.md's**, in
+[*Delivery*](../../../CLAUDE.md#delivery), **and it is not restated here
+either.** It governs every hand-back rather than only a wind-down, so a copy in
+this file would be the narrower authority for the wider rule.
 
-- Claim a task done only if you believe it is correct, complete and safe. If
-  you are not there, park it and hand off the **specific** uncertainty — what
-  exactly is unverified, and what would settle it — rather than declaring it
-  finished.
+This section used to carry that copy too, introduced as something the procedure
+*adds* — which is why it read as an addition rather than as the duplicate it
+was.
 
 ## 3. Bring the living documents current
 
