@@ -284,7 +284,7 @@ times.
 **What covers it is watching the built page, and only that.** The emitted output
 is exercised exactly once per change that reaches the page, by a person looking
 at it. Whether that happens before publishing rather than after is
-[0011](README.md)'s to decide, and this record does not decide it —
+[0011](0011-delivery.md)'s to decide, and this record does not decide it —
 it only states that after this record, watching is the sole evidence that what
 the browser runs matches what the tests passed.
 
@@ -463,9 +463,23 @@ The other recalculated the ratio. The [method log](../method-log.md) carries the
 consequence — that a claim about a mechanism is checked by working the
 mechanism — and it was written before this amendment rather than after.
 
+**One repair is batched in, and it is mechanical.** §9 read:
+
+> Whether that happens before publishing rather than after is
+> [0011](README.md)'s to decide
+
+The link named the record and pointed at the index. It now points at
+[0011](0011-delivery.md), and nothing else in that sentence moves. It travels
+here on the precedent [#58](https://github.com/nanatsusaya/dot-panic/issues/58)
+set — a repair that changes nothing a record decides costs less inside an
+amendment already being written than as one of its own — and it is in this log
+rather than merged silently into the body, because an accepted record is not
+edited even for a link.
+
 Authorized by Daniel on 2026-08-05, against
 [#119](https://github.com/nanatsusaya/dot-panic/issues/119): *"#119 zuerst, das
-Amendment ist autorisiert"*.
+Amendment ist autorisiert"*, and the batched repair on the same day: *"zu O1:
+wir folgen deiner Empfehlung"*.
 
 ## References
 
