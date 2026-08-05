@@ -6,6 +6,57 @@ session would decide worse without it.
 
 Newest first.
 
+## 2026-08-03 — Two audits agreed, and the agreement was worth nothing
+
+The decider had the project read from outside twice, and then had the two
+readings checked against the records rather than against each other. The
+instruction that made it work was one sentence: **agreement between the audits is
+not evidence; the sources decide.** It earned its place twice in the same
+afternoon, in opposite directions.
+
+**Three release blockers dissolved on a fuller read.** One audit found the
+imprint model self-contradictory — 0003 §7 forbids a placeholder, 0004 §3
+requires one — and the contradiction is not there: 0003 R1 names the *model* it
+rejects, which is a permanent stand-in with injection at deploy time, and 0004's
+stand-in is temporary with the gate on publishing. The other two went the same
+way. Each blocker came from reading a *Decision* section and stopping before the
+*Resolved questions* underneath it, where this project keeps the reasoning that
+makes a categorical sentence precise.
+
+**One defect survived, and nothing here could have found it.** 0010 §7 claims the
+coverage floor gives 0002 §5 its first enforcement, because logic moved out of
+the Core *"shrinks the numerator and leaves the denominator alone"*. Coverage is
+measured per file over `core/` alone, so lines leaving that directory leave both
+— and logic written straight into the Shell is excluded by name and never
+measured at all. The claim is persuasive to read and false to compute. The
+coherence check passed it, review passed it, the second audit called the record
+consistent, and one reader doing the arithmetic did not.
+
+**Two consequences.**
+
+- **A claim about a mechanism is checked by working the mechanism.** The
+  operating rules already say to run a command before writing a claim it settles;
+  this is the half that has no command. Where a record says *this enforces that*,
+  the reviewer's job is to construct the case it forbids and see whether the
+  mechanism actually fires. Reading it cannot find this class, and neither can
+  another reader agreeing.
+- **Read a record's answers before believing its rules conflict.** A decision
+  section here states prohibitions flatly on purpose, and the resolved question
+  underneath is where the exception, the reason and the rejected alternative
+  live. An outside reader who stops at the heading manufactures conflicts that
+  cost days — and the cheaper repair may belong on the sentence rather than on
+  the reader: three readings of 0003 §7 went wrong three different ways, which is
+  evidence about the wording, and
+  [#134](https://github.com/nanatsusaya/dot-panic/issues/134) is where that gets
+  decided.
+
+**What this says about the audits is not that they were poor.** The one that
+raised the three false blockers is also the one that found the arithmetic, and
+the one that got the verdict right is the one that testified the broken record
+consistent. Breadth and caution came apart, which is the argument for reading
+twice from different angles rather than for trusting the reader who agrees with
+you.
+
 ## 2026-08-03 — A denial of a closing keyword closed the ticket
 
 A pull request that added an index row said, in its own description, that it did
