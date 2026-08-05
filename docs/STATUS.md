@@ -2,15 +2,23 @@
 
 *Brought current before a session ends. Read first when one starts.*
 
-*Last brought current: 2026-08-05.*
+*Last brought current: 2026-08-06.*
 
 ## Position
 
 The method has been adopted, the toolchain [0009](adr/0009-toolchain.md)
-decides exists, and **the first file of the toy exists now**: `core/` holds a
-world, a step and a seeded generator. **Nothing is on a screen** — there is no
-page and no rendering, so nothing here has ever been watched, which is the half
-of this project that no command reaches.
+decides exists, and **the toy runs**: `core/` holds a world, a step and a seeded
+generator, `view/` draws one, `shell/` runs the loop that moves it, and the page
+carries the control that stops it.
+
+**No watching has been recorded, and that sentence stood here when there was
+nothing to watch.** It is still true now that there is: the flock's motion has
+been driven with a supplied clock and measured pixel by pixel, and nobody has
+written down what it looks like. That is the half of this project no command
+reaches — [0001](adr/0001-purpose-scope-and-success.md) §3.1 puts *it reads as a
+flock* beyond any of them — and it is the one condition of Done that
+[#94](https://github.com/nanatsusaya/dot-panic/issues/94) merged without.
+
 The rest of what is built is the way of working: the operating rules, the
 decision set, seventeen accepted records, and the five session procedures in
 [`.claude/skills/`](../.claude/skills/README.md).

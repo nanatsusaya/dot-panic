@@ -6,6 +6,36 @@ session would decide worse without it.
 
 Newest first.
 
+## 2026-08-06 — When the instrument cannot watch, say so and supply the clock
+
+The first change that moved anything could not be watched. The browser pane the
+session had reported `visibilityState: "hidden"` for its whole life and
+composited no frames, so **`requestAnimationFrame` never fired once** and a
+screenshot failed outright. A loop that runs on that callback does nothing at
+all under those conditions.
+
+**It looked like a defect three times before it was understood.** The canvas
+read back 0×0, then read back fully transparent, then a hand-rolled
+`requestAnimationFrame` probe returned zero calls — each of which has an obvious
+wrong reading, and the first two were nearly written down as findings about the
+code.
+
+**What worked was to supply the clock.** The shipped module was imported into
+the loaded page with `requestAnimationFrame` replaced by a collector, and its
+callback then called with timestamps chosen for the case: sixty at 16.7 ms for
+ordinary motion, one 60-second jump for the catch-up cap, and a faked
+`matchMedia` for the reduced-motion branch. The canvas was read back with
+`getImageData` after each. That decided the loop's arithmetic exactly — a
+60-second gap advances the flock three pixels rather than four thousand — on the
+file that ships rather than on a copy of its logic.
+
+**The entry is here for the boundary, not the technique.** Driving a loop with a
+supplied clock is measuring, which [0010](adr/0010-testing-strategy.md) §1 keeps
+distinct from watching for a reason: none of it says whether the motion is
+smooth, and *it reads as a flock* is the thing this project exists to get right.
+A session that mistakes the one for the other has a green report and an unseen
+page. Say which of the two happened.
+
 ## 2026-08-05 — The failing test is its own commit
 
 [0012](adr/0012-how-software-gets-developed.md) §4 requires every rule of the
