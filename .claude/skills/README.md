@@ -64,12 +64,21 @@ noticed by reading. One word had to be put back by hand: `artefacts` is the
 literal key in `method.json` and keeps the spelling of the interface it names,
 not the one this project writes in.
 
-The same regime reaches one value rather than a word. `/passtdas` shows a
-`method.json` template, and its `"language"` line reads `"american"` here where
-the plugin's reads `"british"` — a copy of that file declaring the other regime
-would contradict the declaration this project actually carries. Named here
-because the comparison of 2026-08-05 found it outside the six above, and a
-difference nothing accounts for is one a later comparison overwrites.
+**Two values in one template are ours, and neither is a word.** `/passtdas`
+shows a `method.json` template, and this copy of it carries the declaration
+this project actually holds rather than the plugin's example:
+
+- `"language"` reads `"american"` where the plugin's reads `"british"`, which
+  is the spelling regime above reaching a value.
+- `"version"` reads `"0.5"` where the plugin's still reads `"0.4"`. The
+  decider's call on 2026-08-05: a procedure of this repository shows the
+  catalog this repository declares. **It moves when `method.json` moves**, and
+  nothing checks that — the version is in no link, so the coherence check
+  cannot see it.
+
+Both are named here because the comparison of 2026-08-05 found them outside the
+six above, and a difference nothing accounts for is one a later comparison
+overwrites.
 
 ## The cost
 
