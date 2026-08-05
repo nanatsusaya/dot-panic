@@ -1,6 +1,6 @@
 # 0016 — Maintainability and maintenance
 
-- **Status:** Proposed
+- **Status:** Accepted
 - **Date:** 2026-08-05
 - **Deciders:** Daniel Wagner
 - **Ticket:** [#83](https://github.com/nanatsusaya/dot-panic/issues/83)
@@ -183,6 +183,13 @@ that is *good enough* by a definition it wrote down is finished being improved,
 and continuing to improve it is [0001](0001-purpose-scope-and-success.md) §6.2's
 failure arriving after delivery instead of before it.
 
+**The third kind has no end date and nothing watching for it, and both halves
+are deliberate.** A platform change is repaired whenever it is noticed, for as
+long as the page is up. There is no state that ends the obligation, because the
+project has none to reach; and §1 creates no monitoring, so *noticed* means
+somebody opened the page. **What this promises is attention, not uptime** — the
+only one of the two a single person can keep. R3.
+
 **And the phase does not end, because this repository is the demonstration.**
 It stays visible for as long as
 [agent-driven-development](https://github.com/nanatsusaya/agent-driven-development)
@@ -276,23 +283,6 @@ what happens to them once nobody is building: nothing happens to them.
 - **Archiving superseded records into a subdirectory.** Rejected in §7: the set is
   the artifact, and a tidy set is worth less than a complete one.
 
-## Open questions
-
-**O3 — When the platform moves under a page that was correct when it shipped, how
-far does the obligation reach?** The subject is the platform changing under this
-project — a browser altering behavior an accepted record relies on, or the host
-changing what it serves — and not this project moving to another platform, which
-[0011](0011-delivery.md) §1 and §3 already close. §6.3 admits the work and does
-not bound it, and R1 has removed the boundary the earlier options leaned on:
-there is no archived state to end it at. Options: **(a)** it is fixed whenever it
-is noticed, for as long as the page is up, and nothing watches for it — §1
-creates no monitoring, so *noticed* means somebody opened the page; **(b)** it is
-fixed while the method this project demonstrates is itself maintained, and left
-standing or broken afterwards, with the records carrying the demonstration on
-their own. *Recommended default: (a)* — it follows R1, since a broken page is
-worse here than in an ordinary toy, and it promises attention rather than uptime,
-which is the only thing one person can promise.
-
 ## Resolved questions
 
 **R1 — The project does not end, because the project is the demonstration.**
@@ -308,8 +298,8 @@ forever. That treats this repository as a finished product, and it is not one:
 [agent-driven-development](https://github.com/nanatsusaya/agent-driven-development)
 points at it, so a repository marked archived would be the method's worked example
 carrying a badge that says *nobody works this way anymore*. The cost is real and
-stays: **no state ever ends the obligations §6 admits**, which is why O3 has to
-answer that on its own rather than by leaning on an archiving date.
+stays: **no state ever ends the obligations §6 admits**, which is why R3 had to
+be answered on its own terms rather than by leaning on an archiving date.
 
 **R2 — A session re-reads and reports; the decider authorizes what follows.**
 Answered with the recommendation on 2026-08-05: *"zu O2: wir folgen deiner
@@ -319,6 +309,22 @@ down what it said is cheap and reversible, and it is also the whole of what a
 in §2's list points at an accepted record, so a reading that comes out the wrong
 way produces an amendment, and CLAUDE.md makes that a stop-and-ask rather than a
 consequence.
+
+**R3 — a platform change is repaired whenever it is noticed, for as long as the
+page is up.** Answered with the recommendation on 2026-08-05 — *"zu O3: a"* —
+after the question was rewritten: the first version read as *this project changes
+platform*, which
+[0011](0011-delivery.md) §1 and §3 had already closed, and the misreading was the
+question's fault rather than the reader's. §6's third paragraph is the answer.
+
+**It is an unbounded promise, and R1 is what makes it the right one.** The
+alternative — repair while the method itself is maintained, and leave the page as
+it falls afterwards — was the safer commitment and the wrong artifact: a broken
+page costs more here than in an ordinary toy, because this one is what a reader
+looks at before deciding whether the records were worth writing. What keeps the
+promise payable is that it is a promise of **attention** and not of uptime.
+Nothing watches, §1 creates no monitoring, and a break nobody notices is a break
+nobody owes anything about until they open the page.
 
 ## References
 
