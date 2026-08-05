@@ -175,6 +175,29 @@ nothing checks either kind of citation, so the requirement would add a line to t
 shape without adding a mechanism, and review is what catches both. The disposition
 sits where the entry promised one, counter-argument included.
 
+**The breakdown's ticket metadata agrees with itself again.** Thirteen quoted
+mismatches from the day the work was cut into tickets — a header and its own
+*Related* section naming different blockers, an epic table disagreeing with a
+member's header and with the row in this file, a cross-reference to a ticket that
+touches nothing it claims, a constraint pointing at an epic where 0012 §7 says a
+change is never made against one, and a duty cited to 0013 §7 that belongs to
+§5 — all corrected against
+[#123](https://github.com/nanatsusaya/dot-panic/issues/123). Four open tickets
+gained the `Ready:` header every other one carries. The fifth the ticket named,
+#38, got none: it is closed, and readiness is a claim about work still to do.
+
+**One item resolved the opposite way from the way it was filed.** #123 offered
+either #90 gaining a dependency note or #96 dropping its claim to block it —
+but the claim is true, because #96 fixes that the imprint carries the placeholder
+*until #90 replaces it*. So #90 gained the note and nothing was dropped. **The
+two items marked as the decider's both moved a boundary rather than a word**,
+answered on 2026-08-05: #90 joined #13's table, and **Biome's enabled rule groups
+are [#70](https://github.com/nanatsusaya/dot-panic/issues/70)'s**. No record
+fixes that set — 0009 §7 names the dependency and §8 fixes that there are four
+checks and what each decides, and neither reaches a rule group — so
+[#71](https://github.com/nanatsusaya/dot-panic/issues/71)'s constraint now says
+where the set is decided instead of implying a record does.
+
 **The architecture is decided and none of it is built.**
 [0002](adr/0002-overall-architecture.md) fixes a functional core inside an
 imperative shell, three parts, and the directory layout that goes with them —
@@ -606,8 +629,8 @@ stop.
 
 | Epic | Holds | State |
 |---|---|---|
-| [#13](https://github.com/nanatsusaya/dot-panic/issues/13) Walking skeleton | 8 tickets | not ready — 0012 §2 makes it the first increment, and no set has been brought to Ready |
-| [#87](https://github.com/nanatsusaya/dot-panic/issues/87) The flock's motion | 6 tickets | not ready — every member waits on #91 |
+| [#13](https://github.com/nanatsusaya/dot-panic/issues/13) Walking skeleton | 9 tickets | not ready — 0012 §2 makes it the first increment, and no set has been brought to Ready |
+| [#87](https://github.com/nanatsusaya/dot-panic/issues/87) The flock's motion | 6 tickets | not ready — every member waits on #91, and #103 and #104 each on one thing more |
 | [#88](https://github.com/nanatsusaya/dot-panic/issues/88) The pointer | 3 tickets | not ready — waits on the Shell and the page |
 | [#89](https://github.com/nanatsusaya/dot-panic/issues/89) The finished page | 3 tickets | not ready — two of the three can only be chosen by watching |
 | [#117](https://github.com/nanatsusaya/dot-panic/issues/117) The meta-audit corrections | 16 tickets | its own table carries each member's state — 0012 §7 applied rather than restated here |
@@ -621,14 +644,15 @@ Outside the epics:
 | [#70](https://github.com/nanatsusaya/dot-panic/issues/70) Biome | waits on #69 |
 | [#71](https://github.com/nanatsusaya/dot-panic/issues/71) The check chain as commands | waits on #69 and #70 |
 | [#77](https://github.com/nanatsusaya/dot-panic/issues/77) The hosting notice 0011 §4 puts beside the imprint | not ready — waits on #96 for a dialog to sit in |
-| [#90](https://github.com/nanatsusaya/dot-panic/issues/90) The real imprint address | not ready — the decider supplies the content |
 
 **[#90](https://github.com/nanatsusaya/dot-panic/issues/90) is the one thing
 nobody here can work, and it stops the URL rather than the code.** 0004 R2 makes
 a real address a precondition of publishing and 0011 §6 turns that into a check
 over the built artifact, so the first increment can be finished and cannot be
 deployed until the decider supplies one. It is the only hand-off in the whole
-breakdown.
+breakdown — and it is a **member of #13** rather than a row here, decided on
+2026-08-05: that epic's prose already called it the single hand-off in the whole
+epic while its table left it out, and 0012 §7 makes the table the authority.
 
 **What phase 3 deliberately did not do is establish readiness.** 0012 §6 puts
 that at the moment a set is brought to Definition of Ready **together**, every
@@ -778,31 +802,22 @@ What a change description must contain is no longer among the gaps here.
 
 ## The single clearest next step
 
-**[#123](https://github.com/nanatsusaya/dot-panic/issues/123) — the breakdown's
-ticket metadata disagrees with itself.** Thirteen items, every one of them
-quoted: a header and its own *Related* section naming different blockers, an epic
-table disagreeing with a member's header and with the row here, a
-cross-reference to a ticket that touches nothing it claims, a constraint pointing
-at an epic where 0012 §7 says a change is never made against one, a duty cited to
-0013 §7 that belongs to §5, and a set of tickets the breakdown left without the
-`Ready:` block every other one carries. **No record is touched and no criterion
-is invented**, which is what makes it the ticket to take without an answer
-waiting.
+**[#129](https://github.com/nanatsusaya/dot-panic/issues/129) — nine default
+labels the rule says do not exist.** CLAUDE.md admits three labels and no more;
+the tracker carries twelve, because GitHub creates nine of its own with every
+repository. None of them is on any issue, so deleting them moves no ticket — it
+removes nine things a fresh session has to look at and classify before finding
+out they mean nothing here.
 
-**Two of its items are the decider's**, and they are marked as such rather than
-guessed: whether [#90](https://github.com/nanatsusaya/dot-panic/issues/90) joins
-[#13](https://github.com/nanatsusaya/dot-panic/issues/13)'s table — that epic's
-prose already calls it the single hand-off while the table omits it and this file
-files it outside the epics — and whether the enabled lint rule set is
-[#70](https://github.com/nanatsusaya/dot-panic/issues/70)'s call or
-[#71](https://github.com/nanatsusaya/dot-panic/issues/71)'s, because each ticket
-currently says it is the other's.
+**It needs nobody, and it is the last member of
+[#117](https://github.com/nanatsusaya/dot-panic/issues/117) that does.** What
+remains after it is [#132](https://github.com/nanatsusaya/dot-panic/issues/132),
+which waits on the phase call below — so this epic ends where the analysis phase
+does.
 
-**[#129](https://github.com/nanatsusaya/dot-panic/issues/129) needs nobody at
-all** — nine default labels the rule says do not exist — and after those two,
-[#117](https://github.com/nanatsusaya/dot-panic/issues/117) holds only
-[#132](https://github.com/nanatsusaya/dot-panic/issues/132), which waits on the
-phase call below.
+**It happens in the tracker rather than in the repository**, which makes it the
+first ticket here whose done state no file records. The criterion is what the
+label list returns.
 
 **What stands between here and code is one activity, and it is still not this
 one.**
