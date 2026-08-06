@@ -11,15 +11,26 @@ decides exists, and **the toy runs**: `core/` holds a world, a step and a seeded
 generator, `view/` draws one, `shell/` runs the loop that moves it, and the page
 carries the control that stops it.
 
-**Watching has been recorded once, and the sentence that stood here said it never
-had.** [#108](https://github.com/nanatsusaya/dot-panic/issues/108) is the first
-change to close a *Watched and seen* criterion with somebody's eyes: the page was
-served from disk, the **decider** opened it in his own browser, and three states
-came back — the full window, the same window at 200 percent, and one dragged to a
-third of its width. [PR #189](https://github.com/nanatsusaya/dot-panic/pull/189)'s
-*Watched* section is read from those, and says whose they are. The session's own
-browser pane still composites nothing, which is why the looking was handed over
-rather than done here; the [method log](method-log.md) carries both halves.
+**Watching has been recorded twice**, and until 2026-08-06 the sentence here said
+it never had. [#108](https://github.com/nanatsusaya/dot-panic/issues/108) is the
+first change to close a *Watched and seen* criterion with somebody's eyes: the
+page was served from disk, the **decider** opened it in his own browser, and three
+states came back — the full window, the same window at 200 percent, and one
+dragged to a third of its width.
+[PR #189](https://github.com/nanatsusaya/dot-panic/pull/189)'s *Watched* section
+is read from those, and says whose they are. The session's own browser pane still
+composites nothing, which is why the looking was handed over rather than done
+here; the [method log](method-log.md) carries both halves.
+
+**The second is [#109](https://github.com/nanatsusaya/dot-panic/issues/109), and
+it is recorded where a merged description could not be.** The decider looked at
+the two palettes in his own browser and reported them good, after
+[PR #193](https://github.com/nanatsusaya/dot-panic/pull/193) had merged saying the
+criterion was still open — so the evidence is
+[a comment on that pull request](https://github.com/nanatsusaya/dot-panic/pull/193#issuecomment-5207934925)
+rather than an edit to it, which is the rule #185 exists to give a home. Read it
+as the criterion met and **not** as its four falsifiers separately checked: none
+was raised, and *sah gut aus* is what there is.
 
 **What is still unwatched is the criterion that matters most.** Smoothness — *it
 reads as a flock*, which [0001](adr/0001-purpose-scope-and-success.md) §3.1 puts
@@ -29,8 +40,16 @@ pixel, and never seen. It remains the one condition of Done that
 change since has been the one to close it.
 
 The rest of what is built is the way of working: the operating rules, the
-decision set, seventeen accepted records, and the five session procedures in
-[`.claude/skills/`](../.claude/skills/README.md).
+decision set, eighteen accepted records with a nineteenth proposed, and the five
+session procedures in [`.claude/skills/`](../.claude/skills/README.md).
+
+**[0018](adr/0018-where-a-test-lives.md) is the eighteenth and it unblocked
+three tickets.** A source-reading test lives in `tests/`, a fourth top-level
+directory that is not one of 0002 §7's parts — because what decides where a test
+sits is what it *reads*, and a test whose subject is source text cannot sit inside
+the directory it reads without finding itself. **Nothing of it is built**: the
+directory does not exist, and `tsconfig.json`, `bunfig.toml` and `.gitignore` are
+untouched. The first ticket to need it is what writes it.
 
 The procedures have now been used. `/moin`, `/weiterimtext` and `/adr` ran on
 2026-08-02 and `/feierabend` on 2026-08-03, all behaving as their files
@@ -546,12 +565,22 @@ the case where it should not have been able to, and 0014 §9 makes the scrollabl
 height something a person measures. A rule that makes its own failure invisible
 is worth less than the failure being visible.
 
-**Two things the ticket had not listed arrived with it.** The three colors 0005
-§3 puts in the stylesheet as custom properties exist, provisional, because a
-page with no surface color cannot be watched at all and 0005 R1 fixes none — the
-colors ticket under #89 chooses them. And `prefers-color-scheme` is not honored
-yet, which is a gap rather than a defect only because 0005 §4 says in terms that
-a change may ship in one mode and follow with the other.
+**Two things the ticket had not listed arrived with it, and
+[#109](https://github.com/nanatsusaya/dot-panic/issues/109) has closed both.** The
+three colors 0005 §3 puts in the stylesheet as custom properties arrived
+provisional, because a page with no surface color cannot be watched at all and
+0005 R1 fixes none. And `prefers-color-scheme` was not honored, which 0005 §4
+permits for one change and no longer than that.
+
+**Both modes are first-class in the stylesheet now and not only in the record.**
+There are two complete triples, one per mode, and **neither is a base the other
+overrides** — a `:root` block plus a single override would contradict 0005 §4
+through the cascade, because a visitor expressing no preference matches `light`.
+The Shell needed no change at all: `readColors()` already runs inside `frame()`,
+so a mode switched while the page is open is followed with no rule of its own,
+which is what defining the colors once buys. Whether the values stay as they are
+is [#194](https://github.com/nanatsusaya/dot-panic/issues/194)'s and open; that
+they were chosen by looking rather than by writing is done.
 
 **The flock moves, and the control that stops it landed with it.**
 [#94](https://github.com/nanatsusaya/dot-panic/issues/94) and
@@ -691,7 +720,10 @@ Content-Security-Policy alone, which 0003 §6 had permitted it to widen. **No
 color value is fixed**, and R1 says why: 0001 §3.1 and 0012 §5 put *it reads as a
 flock* beyond what any document can settle, so a palette argued onto a page
 before anything has been on a screen would be decided by writing rather than by
-looking.
+looking. **The values exist now and the record still carries none**, which is the
+arrangement working: [#109](https://github.com/nanatsusaya/dot-panic/issues/109)
+wrote the expected picture before the work, chose against a screen, and left the
+six numbers in the stylesheet where 0008 R1 puts a number.
 
 **`devicePixelRatio` is not Baseline widely available**, so 0005 §5 sizes the
 drawing through the `resolution` media feature, which is. Safari has shipped
@@ -1221,37 +1253,41 @@ What a change description must contain is no longer among the gaps here.
 
 ## The single clearest next step
 
-**[#109](https://github.com/nanatsusaya/dot-panic/issues/109) — the three colors,
-and `prefers-color-scheme`.** It is the other half of the pair #108 has just
-finished, and #108 is what removed the reason it was waiting: its header says it
-waits on #93 *and on something worth looking at*, and there is now a page that has
-been looked at. Two of the three criteria this section once listed as missing from
-#94 — who sizes the backing store, and what happens on a resize — landed with
-#108; the third is this ticket, and it was never missing, only owned elsewhere.
+**[#92](https://github.com/nanatsusaya/dot-panic/issues/92) — the purity list
+asserted by a test that reads the source.** It is the outstanding member of
+[#13](https://github.com/nanatsusaya/dot-panic/issues/13)'s step 2. Its partner
+#93 landed, everything after it in that epic is built except the two the decider
+holds, and this one has been waiting since #91 gave it something to read.
 
-**Its header is stale on the tracker, and this file is not where that is
-repaired.** [The ticket template](../.github/ISSUE_TEMPLATE/task.md) makes the
-header the one place readiness is stated, and readiness going stale on somebody
-else's merge is the case it concedes rather than the case it failed.
+**[0018](adr/0018-where-a-test-lives.md) is what unblocked it, and #92 is the
+ticket that forced the record.** The fifteen names it searches for are the fifteen
+names its own file has to contain, so inside `core/` it finds itself. 0018 §6
+dissolves that by placement rather than by an exclusion rule — under `tests/` the
+file may contain all fifteen, because the purity scan reads `core/`. **So this
+ticket is also what builds `tests/`**: the directory, the `tsconfig.json` line,
+the `.gitignore` entry and the `bunfig.toml` exclusion, none of which exists.
 
-**It is the ticket 0005 R1 says cannot be done by writing.** No color value is
-fixed anywhere, on purpose, and #109's own third criterion asks for the expected
-picture to be written down **before** the work — 0012 §5's watch-first, which is
-what replaces test-first where no command can decide. So the palette is chosen
-against a screen, and **the screen is the decider's**: the session's browser pane
-composites nothing, and the [method log](method-log.md) carries what that costs.
+**Its header says it waits on #91**, which landed on 2026-08-05. That is the
+staleness [the ticket template](../.github/ISSUE_TEMPLATE/task.md) concedes rather
+than the case it failed, and this file is not where it is repaired.
 
-**Two things are the decider's and one of them gates three tickets.**
-[#181](https://github.com/nanatsusaya/dot-panic/issues/181) decides where a
-source-reading test lives, and until it is answered
-[#92](https://github.com/nanatsusaya/dot-panic/issues/92),
+**One of its criteria is the kind this project keeps meeting from both sides.**
+0010 §4 makes the assertion a text search and asks the test file to write down, in
+a comment, what a text search cannot catch. CLAUDE.md reaches the same file from
+the other direction: nothing under `core/` may name one of the fifteen, **comments
+included** — which is why the file lives outside that directory instead of being
+excluded from a scan.
+
+**Nothing gates it any more, and two things still sit with the decider.** #181
+closed with 0018, which also freed
 [#96](https://github.com/nanatsusaya/dot-panic/issues/96)'s label check and
-[#178](https://github.com/nanatsusaya/dot-panic/issues/178) all wait on it —
-writing any of them first would settle #181 by typing. And **G1's binding has
-still never been verified**, which the coherence check says it cannot decide and
-names the address for.
+[#178](https://github.com/nanatsusaya/dot-panic/issues/178). What remains his is
+**G1's binding, still never verified** — the coherence check says it cannot decide
+it and names the address — and
+[#90](https://github.com/nanatsusaya/dot-panic/issues/90), the real imprint
+address 0011 §6 makes a precondition of publishing.
 
-**What is left outside all of that is small and named**:
+**What is left inside the epics is small and named**:
 [#166](https://github.com/nanatsusaya/dot-panic/issues/166),
 [#167](https://github.com/nanatsusaya/dot-panic/issues/167) and
 [#170](https://github.com/nanatsusaya/dot-panic/issues/170) under #117, and #13's
@@ -1264,17 +1300,36 @@ own table, which still shows four closed members as waiting on something.
 Definition-of-Ready activity covered #90 or the eight build tickets alone — the
 activity found the answer changes nothing it produced, since #90 is not-ready
 either way and in the order either way.
-[#185](https://github.com/nanatsusaya/dot-panic/issues/185) and
-[#186](https://github.com/nanatsusaya/dot-panic/issues/186) are both one edit to
-CLAUDE.md and both about a rule with no home: *do not edit a merged pull
-request*, which lives only in #171's constraints, and which of the four checks
-decides 0009 §5, which the *Commands* section does not say.
+[#185](https://github.com/nanatsusaya/dot-panic/issues/185) is one edit to
+CLAUDE.md about a rule with no home: *do not edit a merged pull request*, which
+lives only in #171's constraints. **Its twin
+[#186](https://github.com/nanatsusaya/dot-panic/issues/186) closed on 2026-08-06**
+— the *Commands* section now says that `check:types` is the only one of the four
+deciding 0009 §5, and why the error reads as an awkward toolchain rather than as a
+decision holding.
 **[#190](https://github.com/nanatsusaya/dot-panic/issues/190) and
 [#191](https://github.com/nanatsusaya/dot-panic/issues/191) came out of #108**,
 and each carries one `O`-question and no answer: where the test run's inputs are
 decided, and where the sentence about zoom goes. A third follow-up — a density
 change that changes no box and so fires no `resize` — was declined rather than
 filed, and the pull request says so where somebody looking for it would ask.
+
+**[#194](https://github.com/nanatsusaya/dot-panic/issues/194) came out of #109**:
+whether a dot's color stays one value, once there is a flock to judge it against.
+The decider named speed-dependent color as the example. It is `type:decision` and
+not `type:build` on purpose — 0005 §2 says every dot is the same and §3 defines the
+three colors once, so anything varying a dot's color is a record's work, while
+changing six hex digits needs no ticket at all under 0008 R1.
+
+**[#197](https://github.com/nanatsusaya/dot-panic/issues/197) and
+[#199](https://github.com/nanatsusaya/dot-panic/issues/199) came out of reading the
+documents on 2026-08-06**, and both are about what this project says it is. The
+README introduced the toy first and its status section had been false since the
+walking skeleton landed; and no record said the method runs here unadapted,
+leaving `method.json`'s empty list as the only place the fact appeared and the
+[method log](method-log.md) as the only place it was reasoned. Both have changes
+open, and 0019 carries three `O`-questions — including whether it should be a
+record at all.
 
 ## Implementation scale
 
