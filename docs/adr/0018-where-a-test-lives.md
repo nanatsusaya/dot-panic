@@ -1,6 +1,6 @@
 # 0018 — Where a test lives
 
-- **Status:** Proposed
+- **Status:** Accepted
 - **Date:** 2026-08-06
 - **Deciders:** Daniel Wagner
 - **Ticket:** [#181](https://github.com/nanatsusaya/dot-panic/issues/181)
@@ -162,7 +162,7 @@ the Core.
   shape as the rules [0011](0011-delivery.md) §6 counts, and this adds one.
 - **`tests/` will read as *all the tests* to somebody.** The Core's four test
   files stay where they are, so the directory's name is broader than its
-  contents, and O3 is where that is weighed.
+  contents, and R3 is where that was weighed and taken.
 - **It takes `include` from nobody.** 0009 does not decide it, so this record is
   not overruling that one — but a later session looking for the authority on
   `tsconfig.json` will find two records touching one file, and only this sentence
@@ -190,37 +190,48 @@ the Core.
 - **Leave 0010 §2's third kind to review.** Rejected because
   [0014](0014-page-layout.md) §9 lists three invariants as *decidable by reading
   the page's source* and 0010 §2 names the kind — so choosing this would make an
-  accepted classification describe nothing. It is O1 below rather than a closed
-  door, because #181's own constraint says it is a legitimate answer if it is
-  written down as one.
+  accepted classification describe nothing. It was put to the decider rather
+  than closed by the author, because #181's own constraint says it is a
+  legitimate answer if it is written down as one — R1 is where it was rejected.
 - **A second `tsconfig.json` for the tests.** Rejected because 0009 §4's whole
   point is one answer to what the settings are; a second file is a second answer
   that can drift, in the check that exists to stop exactly that.
 
-## Open questions
+## Resolved questions
 
-**O1 — is this built at all, or does 0010 §2's third kind stay with review?**
-Four tests are owed and none exists; the alternative is that
-[0014](0014-page-layout.md) §9's first table describes claims a person checks by
-reading rather than claims a command decides. **Recommended: build it.** An
-accepted record naming a kind that nothing can be is worse than either answer
-honestly taken, and the four tests are small. If the answer is review, it is
-written into this record as §1 and the rest of the record goes.
+All three were answered with the recommendation on 2026-08-06: *"wir folgen bei
+allen drei fragen deiner empfehlung"*. **None of the sections above changed
+wording as a result**, which is worth saying rather than leaving to be inferred:
+the record was drafted around the recommended answers, so agreement is what left
+it as written. A different answer to R1 would have removed everything except §1.
 
-**O2 — a fourth top-level directory, or a file at the root?** The directory costs
-a reader one paragraph of explanation against 0002 §7's three; the root costs a
-`.gitignore` pattern per test file and puts emitted JavaScript beside
-`index.html`. **Recommended: the directory**, which is what this record is
-written for. `shell/` is the third option and is argued against above.
+**R1 — this is built; 0010 §2's third kind does not stay with review.** The
+alternative was that [0014](0014-page-layout.md) §9's first table describes
+claims a person checks by reading rather than claims a command decides — a
+legitimate answer, and [#181](https://github.com/nanatsusaya/dot-panic/issues/181)
+required it to be written down as one rather than arrived at by nobody getting
+round to it. It was rejected because an accepted record naming a kind of claim
+that nothing in the repository can be is worse than either answer honestly taken,
+and because the four owed tests are small. **What it costs is what §1 and the
+*Consequences* already say**: a fourth directory, and a split nothing enforces.
 
-**O3 — is `tests/` the right name?** It is broader than its contents: the Core's
-behavior tests stay beside the Core, so the directory holds one kind of test and
-is named for all of them. TypeScript's own `include` documentation uses
-`["src/**/*", "tests/**/*"]` as its example, so the name is the least surprising
-one available. **Recommended: `tests/`.** The alternatives each cost something:
+**R2 — a fourth top-level directory, not a file at the root.** The directory
+costs a reader one paragraph against [0002](0002-overall-architecture.md) §7's
+three, paid once. The root would have cost a `.gitignore` pattern maintained per
+test file and put emitted JavaScript beside `index.html`, and `shell/` would have
+put a test of `styles.css` in a directory named after the loop and the clock.
+**The guardrail this answers is CLAUDE.md's** — *do not invent structures no
+decision covers* — and §2 is now the decision that covers it.
+
+**R3 — `tests/`.** It is broader than its contents, because the Core's behavior
+tests stay beside the Core under §1, so the directory holds one kind of test and
+is named for all of them. That cost was taken rather than overlooked: it is the
+least surprising name available, and TypeScript's own `include` documentation
+uses `["src/**/*", "tests/**/*"]` as its example. The alternatives each cost more.
 `checks/` collides with CLAUDE.md's four checks, which are commands and not a
-directory; `source/` reads as *the source* rather than as *tests about the
-source*; `meta/` says nothing to a reader who has not already read this record.
+directory. `source/` reads as *the source* rather than as *tests about the
+source*. `meta/` says nothing at all to a reader who has not already read this
+record.
 
 ## References
 

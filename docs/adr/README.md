@@ -87,7 +87,7 @@ longer supports.
 | [0008](0008-performance-budget.md) | Performance budget | How many dots at what frame rate on which device | Accepted |
 | [0009](0009-toolchain.md) | Toolchain | What runs the code, what tests it, what builds it | Accepted |
 | [0010](0010-testing-strategy.md) | Testing strategy | What is asserted by a command, what a person measures, and what is only ever watched | Accepted |
-| [0018](0018-where-a-test-lives.md) | Where a test lives | Which directory a test file sits in, what a source-reading test may read, and what a build does with it | Proposed |
+| [0018](0018-where-a-test-lives.md) | Where a test lives | Which directory a test file sits in, what a source-reading test may read, and what a build does with it | Accepted |
 | [0011](0011-delivery.md) | Delivery | How it reaches the public URL, and when | Accepted |
 | [0013](0013-origin-of-the-core.md) | Origin of the core | Written here or taken from a package, and what may be read while it is written | Accepted |
 | [0016](0016-maintainability-and-maintenance.md) | Maintainability and maintenance | What keeps this maintainable, who re-reads the commitments that depend on time, and what the project is once delivery ends | Accepted |
