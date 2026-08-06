@@ -76,6 +76,7 @@ longer supports.
 | [0001](0001-purpose-scope-and-success.md) | Purpose, scope and success | What is this, who for, when is it good enough, what is explicitly out | Accepted |
 | [0002](0002-overall-architecture.md) | Overall architecture | Which layers exist, which may depend on which, what the core may not touch | Accepted |
 | [0012](0012-how-software-gets-developed.md) | How software gets developed here | The seven phases and which of them has no end; where test-first applies and what replaces it where it cannot; when work may run in parallel | Accepted |
+| [0019](0019-fidelity-to-the-method.md) | Fidelity to the method | What an empty adaptation list asserts, who may change it, and what may never be the reason | Proposed |
 | [0003](0003-security-and-privacy-by-design.md) | Security and privacy by design | What is worth protecting, where the trust boundaries are, what never runs or is stored | Accepted |
 | [0004](0004-compliance-accessibility-and-rights.md) | Compliance, accessibility and rights | Motion and reduced-motion, license, provenance of the model, what law applies | Accepted |
 | [0005](0005-rendering-and-visual-design.md) | Rendering and visual design | Canvas, SVG or DOM; color, light and dark, pixel density | Accepted |
@@ -137,12 +138,20 @@ whose subject is source text and does not place it either, so four owed tests ha
 no directory between them. It sits beside 0010 because that is the record it
 completes.
 
-**Four rows have now been added after the set was planned**, and that is the
-mechanism working rather than the plan failing. Each came from a record finding a
-topic no existing row owned, and each took the next free number. Three arrived
-with a ticket in the same change; 0018's ticket,
-[#181](https://github.com/nanatsusaya/dot-panic/issues/181), was filed first, by
-the change that met the gap. It is the numbering in
+**0019 was added by neither**, and it is the first row that was not. No record
+found the gap: the decider read the set on 2026-08-06 and asked whether anything
+in it says the method is followed unadapted, and nothing did. It sits after 0012
+because both are about how the work is done, and after rather than before because
+0012's *sits third* above is a fact about this table that a new row must not
+falsify.
+
+**Five rows have now been added after the set was planned**, and that is the
+mechanism working rather than the plan failing. Each took the next free number.
+Four came from a record finding a topic no existing row owned; the fifth came
+from a question. Three arrived with a ticket in the same change; the tickets for
+0018 and 0019 — [#181](https://github.com/nanatsusaya/dot-panic/issues/181) and
+[#199](https://github.com/nanatsusaya/dot-panic/issues/199) — were filed first,
+by the change that met the gap. It is the numbering in
 [0012](0012-how-software-gets-developed.md)'s paragraph above that is closed, not
 the set.
 
