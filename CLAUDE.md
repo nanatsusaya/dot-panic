@@ -67,6 +67,15 @@ emits nothing while deciding it. A failure is either a type error or a rule of
 §4's holding: `target` and `lib` are bounded versions, so an API newer than
 ES2023 fails here rather than in a browser.
 
+**It is also the only one of the four that decides 0009 §5** — an import names
+the emitted file, never the source and never an extensionless path. Both halves
+fail here as compiler errors: one says a relative import needs an explicit
+extension, the other that a `.ts` extension needs `allowImportingTsExtensions`.
+**The second is the trap**, because that option is what §5 forecloses by name and
+what Bun's own recommended configuration enables — so the error reads as the
+toolchain being awkward rather than as a decision holding. `bun test` decides
+neither half: it resolves both specifiers and reports nothing.
+
 ```bash
 bun run check:lint
 ```
