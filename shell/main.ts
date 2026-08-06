@@ -38,6 +38,22 @@ const MAX_STEPS_PER_DRAW = 3;
 const MILLISECONDS = 1000;
 
 /*
+ * The bounds of the search in `readResolution` below, and both are #108's under
+ * 0008 R1 rather than any record's.
+ *
+ * Eight is an upper bound rather than a display anybody owns: the densest
+ * screens in the wild are near 4 dppx, and a visitor zooming in doubles what
+ * the page sees. A search needs a bound it can start from, and one nothing
+ * reaches costs the twenty questions below and nothing else.
+ *
+ * Twenty halvings of that bound leave the answer short by less than 1e-5 dppx.
+ * Across a 4000-pixel canvas that is 0.04 of a pixel, which cannot change a
+ * rounded size — so the precision is spent where it is free rather than tuned.
+ */
+const MAX_RESOLUTION = 8;
+const RESOLUTION_STEPS = 20;
+
+/*
  * Read once at load. #97's criterion is the preference as it stands when the
  * page opens rather than one toggled mid-visit, so nothing here listens for a
  * change.
@@ -70,16 +86,59 @@ function readColors(): Colors {
 }
 
 /*
+ * How many device pixels the display puts in one CSS pixel, read through the
+ * `resolution` media feature because 0005 §5 requires that route.
+ *
+ * **The property everyone reaches for first is not named anywhere in this
+ * file**, which is #108's criterion rather than squeamishness: this project
+ * already reads *appears nowhere in the source* as reaching comments too, which
+ * is what 0002 §3's fifteen names cost `core/`. 0005 §5 and its R2 are where it
+ * is named and where the reason sits — Baseline marks it limited because Safari
+ * does not follow the page's zoom with it, 0001 §3.4 admits only what is widely
+ * available, and a fallback to it is that floor loosened by another name.
+ *
+ * A media feature answers a question instead of returning a number, so the
+ * number is found by asking: each answer halves the interval the display's
+ * resolution lies in. `low` is only ever set to a value the display met, so
+ * what comes back is a lower bound — a backing store a hair smaller than the
+ * display can show is invisible, where one a hair larger is a picture the
+ * browser scales down.
+ */
+function readResolution(): number {
+  let low = 0;
+  let high = MAX_RESOLUTION;
+
+  for (let asked = 0; asked < RESOLUTION_STEPS; asked += 1) {
+    const middle = (low + high) / 2;
+
+    if (window.matchMedia(`(min-resolution: ${middle}dppx)`).matches) {
+      low = middle;
+    } else {
+      high = middle;
+    }
+  }
+
+  return low;
+}
+
+/*
  * The frame is the Shell's (0002 §2), and 0014 §2 leaves it as the viewport
  * minus the strip — which is what the canvas's own box already measures.
  *
- * This is CSS pixels. Sizing the backing store in device pixels is #108's, by
- * the `resolution` route 0005 §5 fixes, and so is keeping it current when the
- * window changes or the page is zoomed.
+ * That box is in CSS pixels and the backing store is set in device pixels,
+ * which is the whole of 0005 §5: on the mid-range phone 0001 §3.5 makes the
+ * floor, a canvas sized in CSS pixels is one the display scales up, and every
+ * dot's rim goes soft.
+ *
+ * **The world does not learn that any of this happened.** 0008 §6 makes every
+ * length in it a fraction of the frame's shorter side, so the Core is the same
+ * whether it is drawn onto 700 pixels or 2100.
  */
 function sizeCanvas(): void {
-  canvas.width = canvas.clientWidth;
-  canvas.height = canvas.clientHeight;
+  const resolution = readResolution();
+
+  canvas.width = Math.round(canvas.clientWidth * resolution);
+  canvas.height = Math.round(canvas.clientHeight * resolution);
 }
 
 /*
@@ -175,6 +234,22 @@ control.addEventListener("click", () => {
 function label(): void {
   control.textContent = running ? "Stop the flock" : "Start the flock";
 }
+
+/*
+ * Both halves of what #108 asks to stay current arrive here. A window that
+ * changes size changes the canvas's box; a page that is zoomed changes how many
+ * CSS pixels the viewport holds, so it changes that box as well — and the
+ * resolution is read again either way, because the sizing is one operation
+ * rather than two.
+ *
+ * Setting the backing store clears it, and the next frame redraws it whole
+ * (0005 §1), which is also true while the flock is stopped: the loop keeps
+ * drawing, only the Core stops being called (0006 §9).
+ *
+ * **No browser fires this event on page load**, so the call below is what sizes
+ * the canvas the first time and is not something this listener would have done.
+ */
+window.addEventListener("resize", sizeCanvas);
 
 sizeCanvas();
 label();
