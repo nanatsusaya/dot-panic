@@ -141,6 +141,10 @@ first.
 - **One concern per change.** No refactors, formatting churn or unrelated
   tidying folded into other work. A change too large to answer those two
   questions about is a change that gets waved through.
+  **[docs/STATUS.md](docs/STATUS.md) and [docs/method-log.md](docs/method-log.md)
+  may travel together where the same moment produced both** — the decider's call
+  of 2026-08-06. It is a permission and not a rule: they travel together when the
+  log entry is about the seam the status change closes, and separately otherwise.
 - **Commit messages** follow `type(scope): summary`, lowercase, describing what
   the change is rather than commanding. The body says why. **Agent assistance is
   disclosed as an `Assisted-by:` trailer** naming what assisted — a trailer
