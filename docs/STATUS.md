@@ -40,7 +40,7 @@ pixel, and never seen. It remains the one condition of Done that
 change since has been the one to close it.
 
 The rest of what is built is the way of working: the operating rules, the
-decision set, eighteen accepted records with a nineteenth proposed, and the five
+decision set, nineteen accepted records, and the five
 session procedures in [`.claude/skills/`](../.claude/skills/README.md).
 
 **[0018](adr/0018-where-a-test-lives.md) is the eighteenth and it unblocked
@@ -1327,9 +1327,13 @@ documents on 2026-08-06**, and both are about what this project says it is. The
 README introduced the toy first and its status section had been false since the
 walking skeleton landed; and no record said the method runs here unadapted,
 leaving `method.json`'s empty list as the only place the fact appeared and the
-[method log](method-log.md) as the only place it was reasoned. Both have changes
-open, and 0019 carries three `O`-questions — including whether it should be a
-record at all.
+[method log](method-log.md) as the only place it was reasoned. **Both are
+answered.** #197 closed with the README that leads with the method, and
+[0019](adr/0019-fidelity-to-the-method.md) is accepted: the empty list is a claim
+rather than an unfilled field, what this project *adds* is never declared,
+declaring an adaptation stands where an amendment stands, and **a finding is never
+the reason** — which is the section that matters, because three of the four kinds
+switch a rule's check off and A3 is failing today.
 
 ## Implementation scale
 
