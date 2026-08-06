@@ -4,6 +4,9 @@
 # no per-directory threshold, and coverage only tracks files a test loads — so
 # without this the scope of the number would be whatever nobody happened to
 # import. 0002 §7 is where the three directories come from.
+#
+# `tests/**` joins them by 0018 §7 and for the same reason: a helper module
+# there is not Core code, and must not move a number that describes the Core.
 
 # 0009 §3 emits a `.js` beside every `.ts`, and §6's discovery patterns include
 # `*.test.js` — so after a build the runner finds each test twice, once as source
@@ -15,5 +18,5 @@ pathIgnorePatterns = ["**/*.test.js"]
 
 coverage = true
 coverageThreshold = { lines = 0.9, functions = 0.9, statements = 0.9 }
-coveragePathIgnorePatterns = ["shell/**", "view/**"]
+coveragePathIgnorePatterns = ["shell/**", "view/**", "tests/**"]
 coverageSkipTestFiles = true

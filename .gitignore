@@ -3,9 +3,11 @@ node_modules/
 Thumbs.db
 
 # 0009 R1 — the emitted JavaScript is not committed. §3 puts one `.js` beside
-# each `.ts`, so the pattern is the three directories 0002 §7 fixes and nothing
-# broader: two copies of every module is what 0001 §6.1 punishes, and a reader
-# cannot tell which one is authoritative.
+# each `.ts`, so the pattern is one entry per directory holding TypeScript and
+# nothing broader: two copies of every module is what 0001 §6.1 punishes, and a
+# reader cannot tell which one is authoritative. Three of them are 0002 §7's
+# parts; the fourth is `tests/`, which 0018 §2 adds and §4 sends here.
 core/**/*.js
 shell/**/*.js
 view/**/*.js
+tests/**/*.js

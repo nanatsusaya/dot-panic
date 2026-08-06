@@ -13,5 +13,5 @@
     "noEmitOnError": true,
     "verbatimModuleSyntax": true
   },
-  "include": ["core", "shell", "view"]
+  "include": ["core", "shell", "view", "tests"]
 }
