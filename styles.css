@@ -7,19 +7,63 @@
  * own failure and it happens at a width nobody is looking at.
  */
 
-:root {
-  /*
-   * 0005 §3 puts the page's three colors in one place, as custom properties,
-   * and has the Shell hand them to the View rather than the View read them.
-   *
-   * Every value here is provisional. 0005 R1 fixes no color and says why: a
-   * palette argued into a file before anything has been on a screen is settled
-   * by writing rather than by looking, which is the move this project exists to
-   * avoid. The colors ticket under #89 is where they are chosen.
-   */
-  --surface: #101014;
-  --dot: #e8e8ec;
-  --text: #e8e8ec;
+/*
+ * 0005 §3's three colors in one place, as custom properties, with the Shell
+ * handing the surface and the dot to the View rather than the View reading
+ * them. All six values are #109's under 0008 R1, and each was written down
+ * before it was on a screen: 0012 §5 makes the View watch-first, and 0005 R1
+ * refuses to fix a color in a record for the same reason. What the picture was
+ * meant to be, and what would falsify it, is in the ticket.
+ *
+ * **Both modes are complete triples in queries of their own, and neither is a
+ * base the other overrides.** 0005 §4 makes them first-class and says in terms
+ * that neither is the design with the other bolted on — a `:root` block plus one
+ * override is that sentence contradicted by the cascade, and the next session
+ * reads the cascade. Nothing is lost by writing both out: `light` matches a
+ * visitor who has expressed no preference at all, so the two queries between
+ * them cover everyone.
+ *
+ * The hue is one violet-grey at two lightnesses. That is what should make these
+ * one design rather than two, and it is the first thing to call wrong if they
+ * look like two.
+ */
+@media (prefers-color-scheme: light) {
+  :root {
+    /*
+     * Not white, for the mirror of the dark surface's reason: a white page
+     * under dark dots is the harsher of the two, and the eye is on it for as
+     * long as the flock is watched.
+     */
+    --surface: #f4f3f8;
+
+    /*
+     * Ink rather than black. Dark marks on a light surface read as printing,
+     * which is a different picture from points of light and is meant to be.
+     */
+    --dot: #3a3852;
+
+    --text: #1c1b26;
+  }
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    /*
+     * Not black. A pure black surface clips on an OLED display and takes the
+     * frame's edge with it, and the flock is then floating in nothing rather
+     * than moving on something.
+     */
+    --surface: #12121a;
+
+    /*
+     * Deliberately not white. Two hundred near-white points on near-black
+     * shimmer as they move, and that shimmer is motion the flock did not
+     * make — which is the one thing 0001 §3.1 is judging.
+     */
+    --dot: #c8c6e0;
+
+    --text: #eceaf4;
+  }
 }
 
 /*
@@ -93,8 +137,8 @@ body {
  * label is the browser's small default and 0014 §9's *doubling the text size
  * leaves both controls on screen* would be measuring the wrong thing.
  *
- * The colors are the page's two, and provisional for the same reason every
- * value in `:root` is — #109 chooses them by looking.
+ * The colors are the page's own, so the control follows the mode without a rule
+ * of its own — which is what defining them once buys (0005 §3).
  */
 #motion {
   background: var(--surface);
