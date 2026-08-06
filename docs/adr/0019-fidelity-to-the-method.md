@@ -1,6 +1,6 @@
 # 0019 — Fidelity to the method
 
-- **Status:** Proposed
+- **Status:** Accepted
 - **Date:** 2026-08-06
 - **Deciders:** Daniel Wagner
 - **Ticket:** [#199](https://github.com/nanatsusaya/dot-panic/issues/199)
@@ -132,9 +132,15 @@ not narrowed — and it stays that way until the decider ends the analysis phase
 decides something else. **This record does not resolve A3**; it removes one wrong
 way of resolving it.
 
+**It is the motive that is forbidden, not a kind, so all four are covered** —
+narrowing included, though narrowing alone leaves a rule's check running and hides
+nothing. What a failing finding is usually *about* is reach, so *this rule does not
+apply to X*, where X is the thing failing, is the same move made quietly. R2.
+
 The corollary, so the rule cannot be read as *never adapt*: a rule may be adapted
 for the reason A1 gives — its reasoning does not hold for this project — and that
-reason has to be statable without reference to any finding the rule produced.
+reason has to be statable without reference to any finding the rule produced. That
+route stays open for every one of the four kinds.
 
 ### 5. Fidelity is not the goal, and re-examination is what stands in for it
 
@@ -209,37 +215,42 @@ authority this project spends most of its rules avoiding.
   third session inherits the reasoning only if it reads two documents that do not
   claim to hold it.
 
-## Open questions
+## Resolved questions
 
-Three. **None is answered here.**
+All three answered on 2026-08-06 against
+[#199](https://github.com/nanatsusaya/dot-panic/issues/199): *"wir folgen bei
+allen drei fragen deiner empfehlung."*
 
-**O1 — Does §3 really put an adaptation at the standing of an amendment?** The
-alternative is that it is ordinary work an author may propose and write, reviewed
-like anything else. **Recommended: the amendment standing.** An amendment and an
-adaptation share the property that makes the ceremony worth it — both are
-permanent, both are read by every later session as settled, and both are
-invisible once they are a week old. The cost is named in *Consequences*.
+**R1 — An adaptation stands where an amendment stands.** The recommendation. The
+alternative was not *who decides* — with one decider that is the same person
+either way — but **what trace the decision leaves**. An amendment has to quote its
+authorization, and that quotation is the only evidence a later session has that it
+was ever given; a merge leaves a different trace, one that says a change landed and
+not that anybody weighed it. The property the two share is what makes the weight
+proportionate: both are permanent, both read as settled, and both are invisible a
+week later. §3 carries the consequence an author feels — a rule that does not fit
+cannot be resolved inside the change that met it.
 
-**O2 — Does §4's prohibition cover `narrowed` as well?** Narrowing keeps a rule's
-check running, so it does not silence a finding the way the other three kinds do;
-it shrinks what the rule reaches. **Recommended: yes, all four.** What a failing
-finding is usually about is scope, so narrowing is the subtler version of the
-same move rather than a different one. If the answer is no, §4 says *three kinds*
-and names narrowing as the one route a finding may motivate.
+**R2 — All four kinds, because the prohibition is on the motive.** The
+recommendation, and the closest of the three. Narrowing is genuinely different in
+kind: it leaves the rule's check running, the method gives it its own mechanism for
+naming what falls outside, and nothing is hidden by it. What decided it is that
+**§4 never forbade a kind.** It forbids a reason, and the corollary keeps every
+kind available for the reason A1 gives. So the question was only whether the motive
+test applies to narrowing too — and it does, because what a failing finding is
+usually about is reach, which makes *this rule does not apply to X* the same move
+made quietly. §4 says so in terms rather than leaving it to be inferred.
 
-**O3 — A record, or a section of CLAUDE.md?** This is
-[0017](0017-the-pages-language.md) R5's question again, and it went the same way
-there. **Recommended: a record**, for the reason in *Alternatives considered* —
-CLAUDE.md is edited by ordinary work, and a rule about what may not be changed
-should not sit where changing it is ordinary. Against it: a nineteenth record for
-something with no code behind it is ceremony, and ceremony is
+**R3 — A record, not a section of CLAUDE.md.** The recommendation, and
+[0017](0017-the-pages-language.md) R5's question a second time. CLAUDE.md is edited
+by ordinary work in ordinary changes, and a rule about what may not be changed
+quietly is weakest exactly there. **The three answers also interact**, which is why
+this one was not free: had it gone the other way, R1's amendment standing would
+have lost its anchor — a rule living somewhere ordinary work edits cannot carry the
+weight of one that does not — and §4 would have been left holding the record alone.
+The argument against is unchanged and is in *Consequences*: a nineteenth record
+with no code behind it is ceremony, and ceremony is
 [0001](0001-purpose-scope-and-success.md) §6's second-ranked failure.
-
-**The answer arrives as a comment naming the `O`-number**, and nothing written
-here is rewritten. When all three are answered they are folded in as `R1..Rn`,
-the status flips to `Accepted` in this file **and** in the index on this branch
-before the merge, and the closing keyword for #199 is added then — a merge while
-this still says `Proposed` would put a false status on the trunk.
 
 ## References
 

@@ -76,7 +76,7 @@ longer supports.
 | [0001](0001-purpose-scope-and-success.md) | Purpose, scope and success | What is this, who for, when is it good enough, what is explicitly out | Accepted |
 | [0002](0002-overall-architecture.md) | Overall architecture | Which layers exist, which may depend on which, what the core may not touch | Accepted |
 | [0012](0012-how-software-gets-developed.md) | How software gets developed here | The seven phases and which of them has no end; where test-first applies and what replaces it where it cannot; when work may run in parallel | Accepted |
-| [0019](0019-fidelity-to-the-method.md) | Fidelity to the method | What an empty adaptation list asserts, who may change it, and what may never be the reason | Proposed |
+| [0019](0019-fidelity-to-the-method.md) | Fidelity to the method | What an empty adaptation list asserts, who may change it, and what may never be the reason | Accepted |
 | [0003](0003-security-and-privacy-by-design.md) | Security and privacy by design | What is worth protecting, where the trust boundaries are, what never runs or is stored | Accepted |
 | [0004](0004-compliance-accessibility-and-rights.md) | Compliance, accessibility and rights | Motion and reduced-motion, license, provenance of the model, what law applies | Accepted |
 | [0005](0005-rendering-and-visual-design.md) | Rendering and visual design | Canvas, SVG or DOM; color, light and dark, pixel density | Accepted |
