@@ -6,6 +6,29 @@ session would decide worse without it.
 
 Newest first.
 
+## 2026-08-06 — When the agent cannot watch, the decider watches
+
+The entry below says the session's browser pane composites nothing and that
+measuring is not watching. It leaves the question it raises unanswered: how
+anything here is ever watched at all.
+[#108](https://github.com/nanatsusaya/dot-panic/issues/108) answered it by
+handing the looking over. The page was served from disk on a local port, **the
+decider opened it in his own browser**, and three states came back as
+screenshots — the full window, the same window at 200 percent, and one dragged to
+a third of its width. The change's *Watched* section is read from those and says
+whose eyes they are.
+
+**What that bought was not confirmation.** The three states closed the criterion,
+and one of them produced a question no criterion had asked: the dots do not grow
+when the page is zoomed. That is correct, deliberate, and was written down
+nowhere — now [#191](https://github.com/nanatsusaya/dot-panic/issues/191). A
+measurement would have agreed with the code and asked nothing.
+
+**The cost is that watching is synchronous with one person.** A change whose
+criterion is visual cannot be finished while he is away, and the tempting way out
+is a *Watched* section written from a measurement, which reads identically and is
+not the same claim. Name whose eyes, or say the criterion is open.
+
 ## 2026-08-06 — When the instrument cannot watch, say so and supply the clock
 
 The first change that moved anything could not be watched. The browser pane the

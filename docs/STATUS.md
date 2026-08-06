@@ -11,13 +11,22 @@ decides exists, and **the toy runs**: `core/` holds a world, a step and a seeded
 generator, `view/` draws one, `shell/` runs the loop that moves it, and the page
 carries the control that stops it.
 
-**No watching has been recorded, and that sentence stood here when there was
-nothing to watch.** It is still true now that there is: the flock's motion has
-been driven with a supplied clock and measured pixel by pixel, and nobody has
-written down what it looks like. That is the half of this project no command
-reaches — [0001](adr/0001-purpose-scope-and-success.md) §3.1 puts *it reads as a
-flock* beyond any of them — and it is the one condition of Done that
-[#94](https://github.com/nanatsusaya/dot-panic/issues/94) merged without.
+**Watching has been recorded once, and the sentence that stood here said it never
+had.** [#108](https://github.com/nanatsusaya/dot-panic/issues/108) is the first
+change to close a *Watched and seen* criterion with somebody's eyes: the page was
+served from disk, the **decider** opened it in his own browser, and three states
+came back — the full window, the same window at 200 percent, and one dragged to a
+third of its width. [PR #189](https://github.com/nanatsusaya/dot-panic/pull/189)'s
+*Watched* section is read from those, and says whose they are. The session's own
+browser pane still composites nothing, which is why the looking was handed over
+rather than done here; the [method log](method-log.md) carries both halves.
+
+**What is still unwatched is the criterion that matters most.** Smoothness — *it
+reads as a flock*, which [0001](adr/0001-purpose-scope-and-success.md) §3.1 puts
+beyond any command — has been driven with a supplied clock and measured pixel by
+pixel, and never seen. It remains the one condition of Done that
+[#94](https://github.com/nanatsusaya/dot-panic/issues/94) merged without, and no
+change since has been the one to close it.
 
 The rest of what is built is the way of working: the operating rules, the
 decision set, seventeen accepted records, and the five session procedures in
@@ -291,6 +300,19 @@ decidable by reading the repository and which a command now decides. The
 collision is between §3 and §6: emitting a `.js` beside every `.ts` produces
 `*.test.js`, which §6's discovery patterns also match, so a build doubled the
 suite until `pathIgnorePatterns` was set. Neither record saw it.
+
+**The same emission has a second effect and it is quieter.** An import names the
+emitted file (0009 §5), so `./world.js` resolves to the source until a build has
+run and to the emitted file afterwards — which makes 0009 §6's *`bun test` runs
+the source* true of the four test files and false of everything they load, and
+leaves 0010 §9's premise holding of the repository rather than of the working tree
+the tests run in. Proven on 2026-08-06 with a `throw` in the emitted
+`core/world.js`, which the run picked up; the only tell is the coverage table
+naming `core\world.js` where it named `core\world.ts`. **`bun run check` never
+causes it** — `check:types` is `tsc --noEmit`. What causes it is **watching**,
+which 0012 §5 makes the View's evidence.
+[#190](https://github.com/nanatsusaya/dot-panic/issues/190) carries it, with the
+route left to the decider.
 
 **Biome is configured, and the set of rules is a ticket's call rather than a
 record's.** Seven groups on, `nursery` off — a rule still under development turns
@@ -678,6 +700,25 @@ change when the page is zoomed — and Baseline does not count partials. R2 reco
 that this is not a reading of [0001](adr/0001-purpose-scope-and-success.md) §3.4
 but the plain text of it: the sentence names a status, and loosening that floor
 would need a record superseding 0001 rather than an argument about what it meant.
+
+**That route is built, and the backing store is in device pixels now.**
+[#108](https://github.com/nanatsusaya/dot-panic/issues/108) reads the display's
+resolution by asking the media feature about twenty times, each answer halving
+the interval the true value lies in, and multiplies the canvas's own box by what
+comes back. A `resize` listener re-runs it, and **no browser fires that event on
+load**, so the first sizing is an explicit call rather than something the listener
+is trusted to do. Both bounds of the search are #108's under 0008 R1: eight dppx,
+twenty questions. **The identifier §5 avoids appears in no file, comments
+included** — the criterion read the way 0002 §3's fifteen names are read under
+`core/`, so a later session restoring it has to argue rather than assume.
+
+**The Core cannot tell**, because 0008 §6 makes every length in the world a
+fraction of the frame's shorter side: the same world is the same world drawn onto
+700 pixels or 2100. That is also why **zoom does not magnify the flock**, which is
+the one thing the watching produced that no criterion had asked for. It is
+correct, it surprises everyone who sees it, and the only place it is written down
+is a merged pull request —
+[#191](https://github.com/nanatsusaya/dot-panic/issues/191).
 
 **How the dots move is decided.** [0006](adr/0006-motion-rules.md) takes
 Reynolds' three steering behaviors as the base and drops his angular
@@ -1180,27 +1221,25 @@ What a change description must contain is no longer among the gaps here.
 
 ## The single clearest next step
 
-**[#108](https://github.com/nanatsusaya/dot-panic/issues/108) — the drawing
-sized in device pixels, and re-sized when the frame changes.** #94 sizes the
-canvas's backing store once, in CSS pixels, from the box the canvas already
-occupies; #108 owns both halves of what is missing, and its scope carries them
-in its own words — the `resolution` route 0005 §5 fixes in place of
-`devicePixelRatio`, and *it re-sizes when the window changes and when the page is
-zoomed*. Until it lands, a window resized after load leaves the flock drawn at
-the old size, which is the most visible thing wrong with the page.
+**[#109](https://github.com/nanatsusaya/dot-panic/issues/109) — the three colors,
+and `prefers-color-scheme`.** It is the other half of the pair #108 has just
+finished, and #108 is what removed the reason it was waiting: its header says it
+waits on #93 *and on something worth looking at*, and there is now a page that has
+been looked at. Two of the three criteria this section once listed as missing from
+#94 — who sizes the backing store, and what happens on a resize — landed with
+#108; the third is this ticket, and it was never missing, only owned elsewhere.
 
-[#109](https://github.com/nanatsusaya/dot-panic/issues/109) is the other half of
-the same pair and is now genuinely ready: its header waited on *something worth
-looking at*, and there is something worth looking at. Both are part of #89
-rather than of #13, so which comes first is a sequencing call rather than a
-dependency.
+**Its header is stale on the tracker, and this file is not where that is
+repaired.** [The ticket template](../.github/ISSUE_TEMPLATE/task.md) makes the
+header the one place readiness is stated, and readiness going stale on somebody
+else's merge is the case it concedes rather than the case it failed.
 
-**Three criteria were expected here and are not needed.** They were written down
-while watching #93 — who sizes the backing store, who reads 0005 §3's colors and
-hands them to the View, and what happens on a resize — as criteria missing from
-#94. They are not missing: #108 and #109 own all three, in tickets written on
-2026-08-02. What was actually missing was a reading of the tracker before the
-claim, and the claim stood in this file for a day.
+**It is the ticket 0005 R1 says cannot be done by writing.** No color value is
+fixed anywhere, on purpose, and #109's own third criterion asks for the expected
+picture to be written down **before** the work — 0012 §5's watch-first, which is
+what replaces test-first where no command can decide. So the palette is chosen
+against a screen, and **the screen is the decider's**: the session's browser pane
+composites nothing, and the [method log](method-log.md) carries what that costs.
 
 **Two things are the decider's and one of them gates three tickets.**
 [#181](https://github.com/nanatsusaya/dot-panic/issues/181) decides where a
@@ -1218,7 +1257,7 @@ names the address for.
 [#170](https://github.com/nanatsusaya/dot-panic/issues/170) under #117, and #13's
 own table, which still shows four closed members as waiting on something.
 
-**Three small things are open outside the epic and none of them blocks this.**
+**What is open outside the epics is small, named, and none of it blocks this.**
 [#178](https://github.com/nanatsusaya/dot-panic/issues/178) waits on
 [#92](https://github.com/nanatsusaya/dot-panic/issues/92) by design.
 [#166](https://github.com/nanatsusaya/dot-panic/issues/166) asks whether the
@@ -1230,6 +1269,12 @@ either way and in the order either way.
 CLAUDE.md and both about a rule with no home: *do not edit a merged pull
 request*, which lives only in #171's constraints, and which of the four checks
 decides 0009 §5, which the *Commands* section does not say.
+**[#190](https://github.com/nanatsusaya/dot-panic/issues/190) and
+[#191](https://github.com/nanatsusaya/dot-panic/issues/191) came out of #108**,
+and each carries one `O`-question and no answer: where the test run's inputs are
+decided, and where the sentence about zoom goes. A third follow-up — a density
+change that changes no box and so fires no `resize` — was declined rather than
+filed, and the pull request says so where somebody looking for it would ask.
 
 ## Implementation scale
 
