@@ -87,6 +87,7 @@ longer supports.
 | [0008](0008-performance-budget.md) | Performance budget | How many dots at what frame rate on which device | Accepted |
 | [0009](0009-toolchain.md) | Toolchain | What runs the code, what tests it, what builds it | Accepted |
 | [0010](0010-testing-strategy.md) | Testing strategy | What is asserted by a command, what a person measures, and what is only ever watched | Accepted |
+| [0018](0018-where-a-test-lives.md) | Where a test lives | Which directory a test file sits in, what a source-reading test may read, and what a build does with it | Proposed |
 | [0011](0011-delivery.md) | Delivery | How it reaches the public URL, and when | Accepted |
 | [0013](0013-origin-of-the-core.md) | Origin of the core | Written here or taken from a package, and what may be read while it is written | Accepted |
 | [0016](0016-maintainability-and-maintenance.md) | Maintainability and maintenance | What keeps this maintainable, who re-reads the commitments that depend on time, and what the project is once delivery ends | Accepted |
@@ -129,10 +130,19 @@ what the project is once delivery ends, needs a record of its own. It sits last
 because it is about the project after everything above it has been built, which
 is the one position in this table that is chronological rather than by meaning.
 
-**Three rows have now been added after the set was planned**, and that is the
+**0018 was added by [0002](0002-overall-architecture.md) §2**, which says a test
+belongs to no part and then says in terms that where such a file sits is not that
+section's question. [0010](0010-testing-strategy.md) §2 names a kind of claim
+whose subject is source text and does not place it either, so four owed tests had
+no directory between them. It sits beside 0010 because that is the record it
+completes.
+
+**Four rows have now been added after the set was planned**, and that is the
 mechanism working rather than the plan failing. Each came from a record finding a
-topic no existing row owned, each took the next free number, and each arrived
-with a ticket in the same change. It is the numbering in
+topic no existing row owned, and each took the next free number. Three arrived
+with a ticket in the same change; 0018's ticket,
+[#181](https://github.com/nanatsusaya/dot-panic/issues/181), was filed first, by
+the change that met the gap. It is the numbering in
 [0012](0012-how-software-gets-developed.md)'s paragraph above that is closed, not
 the set.
 
