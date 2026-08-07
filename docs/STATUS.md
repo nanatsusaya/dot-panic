@@ -47,9 +47,21 @@ session procedures in [`.claude/skills/`](../.claude/skills/README.md).
 three tickets.** A source-reading test lives in `tests/`, a fourth top-level
 directory that is not one of 0002 §7's parts — because what decides where a test
 sits is what it *reads*, and a test whose subject is source text cannot sit inside
-the directory it reads without finding itself. **Nothing of it is built**: the
-directory does not exist, and `tsconfig.json`, `bunfig.toml` and `.gitignore` are
-untouched. The first ticket to need it is what writes it.
+the directory it reads without finding itself. **All of it is built now**, by the
+first ticket to need it: the directory, `tsconfig.json`'s fourth `include` entry,
+`.gitignore`'s fourth pattern and `bunfig.toml`'s third coverage exclusion.
+
+**The first source-reading test is 0002 §3's fifteen**, and
+[#92](https://github.com/nanatsusaya/dot-panic/issues/92) is what wrote it: every
+`.ts` under `core/` read as text, failing with the file, the line and the name it
+found. **The match is a token and not a substring**, which is not fastidiousness —
+`core/step.ts` says *the allocation it costs on every frame*, and `allocation`
+carries one of the fifteen, so a substring match would be repaired by rewording
+correct prose. `Math.random` is matched whole for the opposite reason: `random` is
+not on the list, and the Core has a seeded generator because 0002 §4 requires one.
+**It was made to fail twice on purpose** — once on a forbidden name in code and in
+a comment together, and once on a scan that read nothing, which is the way a test
+like this passes forever while asserting nothing.
 
 The procedures have now been used. `/moin`, `/weiterimtext` and `/adr` ran on
 2026-08-02 and `/feierabend` on 2026-08-03, all behaving as their files
@@ -464,15 +476,16 @@ guessing. And **nothing under `core/` may name one of 0002 §3's fifteen,
 comments included**, because 0010 §4 makes the purity test a text search over
 that directory. **That clause caught the change that wrote it**: 0008 §6's own
 reasoning is about screen size and the window, and two comments quoting it sat
-in `core/world.ts` until this. What the match may be — a token and not a
-substring, since *allocation* contains one of the fifteen — is
-[#92](https://github.com/nanatsusaya/dot-panic/issues/92)'s, and that ticket now
-carries it.
+in `core/world.ts` until this. What the match may be was left to
+[#92](https://github.com/nanatsusaya/dot-panic/issues/92) and is decided there,
+in the test rather than in a record.
 
-**Nothing checks any of it**, and
+**Nothing checks the shape of a comment**, and
 [#178](https://github.com/nanatsusaya/dot-panic/issues/178) is the one that
 would — presence rather than quality, which is 0010 §2's third kind of claim and
-needs no record to permit it.
+needs no record to permit it. **The third clause is the exception**: a comment
+under `core/` naming one of the fifteen reddens #92's test, so that one clause is
+held by a command and the rest by review.
 
 **Answering a question by editing it has stopped, and the operating rules no
 longer tell the next session to do it.**
@@ -616,10 +629,10 @@ knowing before someone reads the empty band on the right as a drawing bug.
 **One thing this change could not do is assert its own criterion.** 0014 §9
 makes *the stylesheet contains no width breakpoint and no container query*
 decidable by reading the source, which is 0010 §2's third kind — but
-`tsconfig.json` includes `core`, `shell` and `view`, so a test about a root file
-would run under `bun test` and never be type-checked. Two of 0014 §9's three
+`tsconfig.json` included `core`, `shell` and `view` alone, so a test about a root
+file would run under `bun test` and never be type-checked. Two of 0014 §9's three
 asserted invariants are about root files, and
-[#96](https://github.com/nanatsusaya/dot-panic/issues/96) meets the same wall.
+[#96](https://github.com/nanatsusaya/dot-panic/issues/96) met the same wall.
 
 **It turned out to be one question asked four times**, and
 [#181](https://github.com/nanatsusaya/dot-panic/issues/181) carries it, to be
@@ -628,7 +641,8 @@ obligation runs through. The fourth asking is the sharpest:
 [#92](https://github.com/nanatsusaya/dot-panic/issues/92)'s test fails if any of
 0002 §3's fifteen names appears under `core/`, and **its own file has to contain
 all fifteen**, because they are what it searches for. A test cannot naively sit
-inside its own subject.
+inside its own subject. **0018 answered all four askings at once**, and `include`
+gained its fourth entry when #92 built the first of them.
 
 **0002 §2 now says what a type-only import is**, which is the first thing the
 architecture record has had to settle about a language rather than about parts.
@@ -641,7 +655,7 @@ reading statements rather than specifiers. 0002 A2 carries it, authorized on
 2026-08-05 against [#120](https://github.com/nanatsusaya/dot-panic/issues/120),
 and [#93](https://github.com/nanatsusaya/dot-panic/issues/93) cites it.
 **No ticket owns the command that would decide it.** §2 says one can, and the
-purity test [#92](https://github.com/nanatsusaya/dot-panic/issues/92) plans is a
+purity test [#92](https://github.com/nanatsusaya/dot-panic/issues/92) built is a
 different command — it reads `core/` for fifteen names, not `view/` for imports.
 
 **The page's language is decided, in the seventeenth record.**
@@ -1253,39 +1267,36 @@ What a change description must contain is no longer among the gaps here.
 
 ## The single clearest next step
 
-**[#92](https://github.com/nanatsusaya/dot-panic/issues/92) — the purity list
-asserted by a test that reads the source.** It is the outstanding member of
-[#13](https://github.com/nanatsusaya/dot-panic/issues/13)'s step 2. Its partner
-#93 landed, everything after it in that epic is built except the two the decider
-holds, and this one has been waiting since #91 gave it something to read.
+**[#96](https://github.com/nanatsusaya/dot-panic/issues/96) — the dialog: the
+explanation and the imprint.** It is step 4 of
+[#13](https://github.com/nanatsusaya/dot-panic/issues/13), and every step before
+it is built now that #92 has closed step 2. Steps 5 and 6 are the two the decider
+holds, so this is the last member of that epic anybody here can work.
 
-**[0018](adr/0018-where-a-test-lives.md) is what unblocked it, and #92 is the
-ticket that forced the record.** The fifteen names it searches for are the fifteen
-names its own file has to contain, so inside `core/` it finds itself. 0018 §6
-dissolves that by placement rather than by an exclusion rule — under `tests/` the
-file may contain all fifteen, because the purity scan reads `core/`. **So this
-ticket is also what builds `tests/`**: the directory, the `tsconfig.json` line,
-the `.gitignore` entry and the `bunfig.toml` exclusion, none of which exists.
+**It is the ticket the imprint obligation runs through**, which is why 0018 was
+answered before it rather than after. 0004 §1 reaches the page through a label:
+0014 §6 makes the control's wording the whole of whether a person finds the
+imprint, and 0017 §2 keeps that one word German on an English page.
+[#77](https://github.com/nanatsusaya/dot-panic/issues/77) and
+[#90](https://github.com/nanatsusaya/dot-panic/issues/90) both wait behind it.
 
-**Its header says it waits on #91**, which landed on 2026-08-05. That is the
-staleness [the ticket template](../.github/ISSUE_TEMPLATE/task.md) concedes rather
-than the case it failed, and this file is not where it is repaired.
+**One `showModal()` call and no more.** 0014 §5 could not use markup — the
+mechanism that opens a dialog does not reach 0001 §3.4's floor until 2028-06-12 —
+so 0002 A1 paid for one call in the Shell. Its price is a button that does nothing
+where no script runs, with a legal obligation behind it, and 0014 took that
+knowingly: mitigating it here is a decision that record made the other way.
 
-**One of its criteria is the kind this project keeps meeting from both sides.**
-0010 §4 makes the assertion a text search and asks the test file to write down, in
-a comment, what a text search cannot catch. CLAUDE.md reaches the same file from
-the other direction: nothing under `core/` may name one of the fifteen, **comments
-included** — which is why the file lives outside that directory instead of being
-excluded from a scan.
+**Its last criterion is watched rather than asserted**, and that is where this
+project's evidence keeps having to come from somebody else's browser: `Escape`
+closes it, the backdrop is there, focus does not leave it, and the flock is
+visible but still behind it. The session's own browser pane composites nothing,
+which is the seam the [method log](method-log.md) carries.
 
-**Nothing gates it any more, and two things still sit with the decider.** #181
-closed with 0018, which also freed
-[#96](https://github.com/nanatsusaya/dot-panic/issues/96)'s label check and
-[#178](https://github.com/nanatsusaya/dot-panic/issues/178). What remains his is
-**G1's binding, still never verified** — the coherence check says it cannot decide
-it and names the address — and
-[#90](https://github.com/nanatsusaya/dot-panic/issues/90), the real imprint
-address 0011 §6 makes a precondition of publishing.
+**Two things still sit with the decider**, both unchanged. **G1's binding has
+never been verified** — the coherence check says it cannot decide it and names the
+address — and [#90](https://github.com/nanatsusaya/dot-panic/issues/90) is the
+real imprint address 0011 §6 makes a precondition of publishing, which is what
+this next step unblocks rather than what it needs.
 
 **What is left inside the epics is small and named**:
 [#166](https://github.com/nanatsusaya/dot-panic/issues/166),
@@ -1294,8 +1305,11 @@ address 0011 §6 makes a precondition of publishing.
 own table, which still shows four closed members as waiting on something.
 
 **What is open outside the epics is small, named, and none of it blocks this.**
-[#178](https://github.com/nanatsusaya/dot-panic/issues/178) waits on
-[#92](https://github.com/nanatsusaya/dot-panic/issues/92) by design.
+[#178](https://github.com/nanatsusaya/dot-panic/issues/178) waited on
+[#92](https://github.com/nanatsusaya/dot-panic/issues/92) by design and no longer
+does: `tests/` exists, and the test that would decide the documentation
+convention now has both a home and a worked example of reading the repository as
+text.
 [#166](https://github.com/nanatsusaya/dot-panic/issues/166) asks whether the
 Definition-of-Ready activity covered #90 or the eight build tickets alone — the
 activity found the answer changes nothing it produced, since #90 is not-ready
@@ -1334,6 +1348,16 @@ rather than an unfilled field, what this project *adds* is never declared,
 declaring an adaptation stands where an amendment stands, and **a finding is never
 the reason** — which is the section that matters, because three of the four kinds
 switch a rule's check off and A3 is failing today.
+
+**[#202](https://github.com/nanatsusaya/dot-panic/issues/202) came out of the same
+reading**, and it is the one open ticket a record has to answer before anything is
+built: whether the four checks gate a pull request. Nothing runs automatically
+here and 0011 §2 decided that in terms — *what gates a merge is review* — while
+the method this project demonstrates gates its own markdown in CI. The comparison
+does not carry everywhere, and the ticket says where it stops. **`check:method`
+is the awkward one**: it invokes a script from a sibling clone, so gating it means
+checking out a second repository and pinning which version of it decides a merge
+here.
 
 ## Implementation scale
 
