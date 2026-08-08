@@ -116,12 +116,15 @@ body {
  * 0014 §2 gives the strip the height its two controls need and refuses a
  * fraction of the viewport, because a visitor who enlarges text is using an
  * accessibility mechanism and a fixed fraction fights it. So every length here
- * is in `em` and the strip is as tall as what it holds. The second control
- * arrives with #96.
+ * is in `em` and the strip is as tall as what it holds. Both controls are here
+ * now, which is why it wraps: on the floor device two labels do not fit on one
+ * line, and 0014 §2's *the height its two controls need* is what a second line
+ * is.
  */
 #strip {
   display: flex;
   flex: 0 0 auto;
+  flex-wrap: wrap;
   gap: 0.5em;
   padding: 0.5em;
 }
@@ -139,8 +142,13 @@ body {
  *
  * The colors are the page's own, so the control follows the mode without a rule
  * of its own — which is what defining them once buys (0005 §3).
+ *
+ * **The selector is the element rather than the one id it used to be.** There
+ * are three buttons on this page now — the two 0014 §2 puts on the strip, and
+ * the one that closes the dialog — and 0005 §7's requirements read the same for
+ * each. Three copies of one rule is the thing that drifts.
  */
-#motion {
+button {
   background: var(--surface);
   border: 1px solid var(--text);
   color: var(--text);
@@ -157,9 +165,75 @@ body {
  * 2024-09-14, so 0001 §3.4 permits it, and it shows the ring to the visitor
  * navigating by keyboard without putting one around a button that was clicked.
  */
-#motion:focus-visible {
+button:focus-visible {
   outline: 2px solid var(--text);
   outline-offset: 2px;
+}
+
+/*
+ * 0014 §4's dialog. Two things are decided here and nothing else is:
+ *
+ * **The line length**, which that section requires and can only express in
+ * characters, because 0005 §6 gives the page whatever fonts the visitor already
+ * has. 66 is #96's under 0008 R1 and provisional until it has been read on a
+ * screen. `min()` rather than a query: a narrow viewport takes the second term
+ * and nothing switches, so 0014 §8's *no breakpoint* survives a dialog that has
+ * to fit a phone.
+ *
+ * It is `width` and not `max-width`, which was found by opening it. A dialog
+ * shrink-wraps its contents, and both sections start collapsed (0014 §4), so a
+ * maximum alone gives a box the width of the word `Impressum` that jumps to
+ * reading width the moment a section is opened. A line length is only a line
+ * length if the box is that wide.
+ *
+ * `4em` in the second term where the box is padded by `1em`: two of them are
+ * this rule's own padding, which sits outside `width`, and the other two are
+ * what is left around the box. Without them the dialog is exactly as wide as a
+ * phone and touches both edges, which is also how this was found.
+ *
+ * **That it scrolls where the page does not**, which is what 0014 §1 leans on —
+ * the page is exactly as tall as the viewport, and the text that displaces has
+ * to go somewhere at every text size. `svh` for the same reason §7 gives.
+ *
+ * The colors are the page's own. A dialog defaults to the browser's own canvas
+ * color, which is not this page's surface, so without these two lines a dark
+ * page opens a white box.
+ */
+dialog {
+  background: var(--surface);
+  color: var(--text);
+  max-height: 80svh;
+  overflow: auto;
+  padding: 1em;
+  width: min(66ch, calc(100% - 4em));
+}
+
+/*
+ * Deliberately no `::backdrop` rule. The standard's own is
+ * `rgba(0, 0, 0, 0.1)` — ten percent — and 0008 §10 rests on exactly that: it
+ * records that the flock *stays plainly visible behind the text*, and stops the
+ * stepping for two other reasons instead. A darker backdrop written here would
+ * quietly falsify the reasoning of an accepted record.
+ */
+
+/*
+ * Space between the sections and the way out, in `em` for the reason the strip
+ * uses it. Nothing here is a second layout: there is one arrangement at every
+ * width (0014 §8).
+ */
+dialog > * + * {
+  margin-top: 1em;
+}
+
+/*
+ * A link is text, and 0005 §3 gives this page three colors. Left alone a browser
+ * brings a fourth of its own, chosen against its own assumed background rather
+ * than this one — the same argument §7's fourth bullet makes about a focus ring.
+ * So it takes the page's own color and is told from a sentence by the underline
+ * the user agent already draws.
+ */
+a {
+  color: var(--text);
 }
 
 /*

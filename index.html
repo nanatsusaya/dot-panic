@@ -3,9 +3,9 @@
   The page. One screen, and it carries the policy.
 
   It holds two regions and nothing else: a canvas, and a strip along the bottom
-  for the two controls 0014 §2 puts there. The controls themselves arrive with
-  #96 and #97, and the flock with #93 and #94 — this file is the container all
-  four land in.
+  for the two controls 0014 §2 puts there. The dialog below them is not a third
+  region — a modal dialog is in the top layer rather than in the flow, and it
+  exists only while the Shell's one call has opened it.
 -->
 <html lang="en">
   <head>
@@ -60,9 +60,11 @@
 
     <!--
       The strip. It carries 0004 §5's control and the button that opens
-      0014 §4's dialog, and nothing else. The second of the two arrives with
-      #96; 0014 §2 gives the strip the height its controls need rather than a
-      fraction of the viewport, so it grows when that one lands.
+      0014 §4's dialog, and nothing else — 0015 §1 is what says there is no
+      third, and that the dialog's third section stays empty. 0014 §2 gives the
+      strip the height its two controls need rather than a fraction of the
+      viewport, because a visitor who enlarges text is using an accessibility
+      mechanism and a fixed fraction fights it.
     -->
     <footer id="strip">
       <!--
@@ -79,6 +81,121 @@
         unlabeled button would add to it for nothing.
       -->
       <button id="motion" type="button">Stop the flock</button>
+
+      <!--
+        0014 §6: the label names the imprint, and that is a requirement of that
+        record rather than a matter of wording. 0004 §10 makes *leicht
+        erkennbar* a question about a person finding it, and behind a control
+        the label is the whole of the finding. 0017 §2 keeps the word German
+        for the reader the obligation protects, and §3 puts `lang` on that word
+        and on nothing else.
+
+        It names the explanation as well, because 0014's own Consequences
+        record what this layout costs — *a visitor who never presses the button
+        never learns what the page is* — and a label reading only `Impressum`
+        is that cost at its largest. No symbol and no separator character: §6
+        rules out a symbol, and words are what 0005 §6 leaves anyway.
+      -->
+      <button id="about" type="button">
+        What this is, and the <span lang="de">Impressum</span>
+      </button>
     </footer>
+
+    <!--
+      0014 §4's dialog: the explanation and the imprint, one collapsible
+      section each. It holds the text §1's one screen displaces, and it scrolls
+      where the page does not — which is what lets the page be exactly as tall
+      as the viewport at every text size without clipping anything.
+
+      **Two sections and no third.** 0015 §1 keeps the third empty, and 0014's
+      Consequences describe the reader who *opens it and finds two sections* —
+      so the emptiness is the absence of an element rather than an element with
+      nothing in it.
+
+      Opened by the Shell's single `showModal()` call (0014 §5, 0002 A1) and by
+      nothing else. It has to be modal: the backdrop, focus containment, the
+      inertness of everything outside it and dismissal by `Escape` belong to a
+      modal dialog only, and `<dialog open>` written here would have none of
+      them and could never be reopened once closed.
+    -->
+    <dialog id="about-dialog">
+      <!--
+        The way out, and it is markup rather than script. A form with
+        `method="dialog"` closes the dialog it finds itself in, which is what
+        0014 §5 leaves after A1 removed the mechanism that would have opened
+        one: script opens, markup closes, and `close()` appears nowhere.
+
+        It comes first so that it is reachable without scrolling on the floor
+        device, and so that the focus `showModal()` moves into the dialog lands
+        on the way out rather than part-way down somebody else's text.
+      -->
+      <form method="dialog">
+        <button type="submit">Close</button>
+      </form>
+
+      <!--
+        0001 §4's short explanation of what the page is. 0017 §4 puts the
+        canonical copy here rather than in a record or a ticket, so this is the
+        text itself and not a copy of one.
+      -->
+      <details>
+        <summary>What this is</summary>
+        <p>
+          Two hundred dots, moving on their own. In time they will flock, and
+          scatter when your pointer comes near — today they only drift, and the
+          page is published anyway. Publishing early, while there is almost
+          nothing here to go wrong, is one of the things this project is trying
+          to show.
+        </p>
+        <p>
+          It is a worked example of agent-project-rules, a published ruleset for
+          running projects with AI agents. What the dots may do, what may be
+          drawn, and what a test is allowed to claim were all decided in writing
+          before any of it was built. The documentation is the point; the toy is
+          what the documentation is about.
+        </p>
+        <!--
+          The page's one link, on the decider's answer to #204's O1. It closes a
+          gap the paragraph above opens: naming a ruleset a reader cannot reach
+          is a page that asks to be judged on documents it does not point at,
+          and 0001 §2 makes judging a method what a reader is here for.
+
+          **It is a link and not a request.** 0003 §5 forbids the page making
+          any network request after load, and following a link is the visitor
+          navigating rather than this page fetching — the same reading #77's
+          constraints already state for 0011 §4's privacy-statement link.
+        -->
+        <p>
+          <a href="https://github.com/nanatsusaya/dot-panic">The repository</a>
+          holds all of it — the decisions, what each of them cost, and where the
+          ruleset itself lives.
+        </p>
+      </details>
+
+      <!--
+        0004 R2 fixes the shape: a name, an email address and an address line.
+        § 18 Abs. 1 MStV asks for *Name und Anschrift* and no more; the email
+        is voluntary (0004 R1) and is the address the method repository already
+        publishes, so somebody who meets either project reaches the same place.
+
+        **The address is deliberately and visibly false** — no German postal
+        code has four digits — and replacing it is a precondition of publishing
+        rather than of building. #90 is that ticket and 0011 §6 is the check
+        that fails a deployment still carrying it.
+
+        This is the one place the imprint appears (0003 §7). The copy in 0004
+        §3 is a stand-in named as a stand-in, which that section excepts by
+        name, and it stops existing when a real address arrives.
+      -->
+      <details>
+        <summary lang="de">Impressum</summary>
+        <p>
+          Daniel Wagner<br />
+          Musterstraße 1<br />
+          0001 Musterstadt<br />
+          nanatsusaya@mein.gmx
+        </p>
+      </details>
+    </dialog>
   </body>
 </html>

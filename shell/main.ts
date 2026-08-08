@@ -67,6 +67,15 @@ const control = document.getElementById("motion") as HTMLButtonElement;
 const context = canvas.getContext("2d");
 
 /*
+ * 0014 §4's dialog and the control that opens it. This is the whole of the page
+ * chrome any part of this project owns: 0002 A1 gave the Shell exactly one call
+ * and says in terms that what it licenses is one call rather than page chrome as
+ * a category, so 0014 §9 can have a command count instead of a reviewer arguing.
+ */
+const about = document.getElementById("about") as HTMLButtonElement;
+const dialog = document.getElementById("about-dialog") as HTMLDialogElement;
+
+/*
  * 0005 §3 defines the colors once in the stylesheet and has the Shell hand them
  * to the View, so that a mode change is a different argument rather than a
  * different View. Reading them inside the View is the alternative that record
@@ -193,7 +202,20 @@ function frame(timestamp: number): void {
 
   previousTimestamp = timestamp;
 
-  if (running) {
+  /*
+   * 0008 §10: the Core is not stepped while the dialog is open. That record is
+   * explicit that the reason is not wasted work — the standard's backdrop is ten
+   * percent, so the flock stays plainly visible — but that motion sits behind
+   * text somebody is reading, and 0004 §5's control is inert exactly then,
+   * because everything outside a modal dialog is.
+   *
+   * Reading `open` is not opening, closing or toggling anything, so 0014 §9's
+   * invariant is untouched. And nothing is owed on the way back: `owed` only
+   * grows inside this branch, so a dialog left open for a minute resumes from
+   * the world it stopped on with no catch-up at all — which is inside what §4's
+   * cap already allows rather than a second rule.
+   */
+  if (running && !dialog.open) {
     owed += elapsed;
 
     let taken = 0;
@@ -223,6 +245,22 @@ function frame(timestamp: number): void {
 control.addEventListener("click", () => {
   running = !running;
   label();
+});
+
+/*
+ * The one call, and the whole of it. 0014 §5 could not use markup: a form with
+ * `method="dialog"` closes rather than opens, and invoker commands are Baseline
+ * newly available until 2028-06-12, which 0001 §3.4 does not admit. **It is a
+ * bridge with an end date** — on that date the markup becomes permitted and this
+ * handler goes, without anyone deciding anything.
+ *
+ * `showModal` rather than `show`, and that is not a preference either: the
+ * backdrop, focus containment, the inertness 0008 §10 relies on and dismissal by
+ * `Escape` are properties of a modal dialog only. Closing is markup's, from the
+ * form inside the dialog, so `close` appears nowhere in this project.
+ */
+about.addEventListener("click", () => {
+  dialog.showModal();
 });
 
 /*

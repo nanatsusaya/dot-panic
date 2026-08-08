@@ -566,17 +566,62 @@ leaves, heights in `svh`, no breakpoint and no container query, and 0003 §6's
 policy verbatim in a `meta` element — which is the whole of what ships, because
 0011 §5 found that GitHub Pages sets no response headers. **Watched at 1280×720
 and at 375×812**: the document's scrollable height equals the viewport's at
-both, which is the first of 0014 §9's three measured claims. The other two need
-controls on the strip and wait for #96 and #97.
+both, which is the first of 0014 §9's three measured claims.
 
-**The strip is empty and has no height, which is 0014 §2 rather than an
+**All three of those are measured now**, the other two by
+[#96](https://github.com/nanatsusaya/dot-panic/issues/96) once the strip had both
+its controls. At 375×812 both are on screen, and both stay on screen with the
+root font size doubled — the strip grows from 86 to 210 pixels and the canvas
+gives up the difference, which is 0014 §2 working rather than the layout
+breaking. The document is exactly as tall as the viewport in every one of those
+states, with the dialog open and closed.
+
+**The strip carries both controls, which is 0014 §2 rather than an
 omission.** That section gives it the height its two controls need and refuses a
 fraction of the viewport, because a visitor who enlarges text is using an
-accessibility mechanism and a fixed fraction fights it. And **`overflow: hidden`
-is deliberately absent**: it would guarantee the page cannot scroll while hiding
+accessibility mechanism and a fixed fraction fights it — so it **wraps to a
+second line** on the floor device rather than shrinking its labels, and that is
+the same sentence rather than a concession to it. And **`overflow: hidden` is
+deliberately absent**: it would guarantee the page cannot scroll while hiding
 the case where it should not have been able to, and 0014 §9 makes the scrollable
 height something a person measures. A rule that makes its own failure invisible
 is worth less than the failure being visible.
+
+**The dialog exists, and with it the imprint is on the page.**
+[#96](https://github.com/nanatsusaya/dot-panic/issues/96) puts the explanation
+and the imprint in a `<dialog>` opened from the strip, one `<details>` each and
+**no third** — 0015 §1 keeps that empty, and 0014's own *Consequences* describe
+the reader who *opens it and finds two sections*, so the emptiness is the absence
+of an element rather than an element with nothing in it. The Shell makes exactly
+one `showModal()` call (0002 A1) and closes nothing: a form with
+`method="dialog"` inside the dialog is the way out, and `close` appears nowhere.
+**The label names the imprint in German**, which 0014 §6 makes a requirement
+rather than a wording preference and 0017 §2 keeps German for the reader the
+obligation protects. **The explanation carries the page's first link**, to this
+repository, on the decider's answer to PR #204's O1 — no record decided it either
+way, and what it closes is a page that names a ruleset it gives no way to reach.
+
+**That form survives `form-action 'none'`**, which was worth checking rather than
+assuming: 0003 §6's policy forbids form submission, and the close button was the
+one mechanism 0014 §5 leaves after its A1. It closed the dialog with nothing
+reported, because a dialog-method form closes rather than navigates. **The
+backdrop is the standard's own ten percent**, measured rather than taken from the
+record — 0008 §10 rests on the flock staying visible behind the text, so the
+stylesheet deliberately writes no `::backdrop` rule at all.
+
+**Three of 0014 §9's source-readable invariants are asserted now**, in the second
+file under `tests/`, and 0017 §3's two `lang` claims with them. **What is
+asserted is narrower than each row and says so**: *nothing else on the page is
+opened, closed or toggled by script* is not a thing a text search decides, and
+0014 §9 already splits the label into *that it names the imprint*, asserted, and
+*what it says*, watched.
+
+**The flock stops while the dialog is open** (0008 §10), and the evidence is the
+supplied clock rather than an eye. Seventy-one frames driven with it open
+produced one identical picture, and the frame after it closed continued from
+exactly that world. Nothing is owed on the way back, because the time a frame
+carries is only accumulated in the branch that steps — that half is read from
+five lines rather than measured, and 0008 §4's cap would bound it either way.
 
 **Two things the ticket had not listed arrived with it, and
 [#109](https://github.com/nanatsusaya/dot-panic/issues/109) has closed both.** The
@@ -642,7 +687,9 @@ obligation runs through. The fourth asking is the sharpest:
 0002 §3's fifteen names appears under `core/`, and **its own file has to contain
 all fifteen**, because they are what it searches for. A test cannot naively sit
 inside its own subject. **0018 answered all four askings at once**, and `include`
-gained its fourth entry when #92 built the first of them.
+gained its fourth entry when #92 built the first of them. #96 wrote the other
+three, which is why `tests/` holds two files and not four: the three that read
+the page are one file, because one file is what they are about.
 
 **0002 §2 now says what a type-only import is**, which is the first thing the
 architecture record has had to settle about a language rather than about parts.
@@ -1267,36 +1314,42 @@ What a change description must contain is no longer among the gaps here.
 
 ## The single clearest next step
 
-**[#96](https://github.com/nanatsusaya/dot-panic/issues/96) — the dialog: the
-explanation and the imprint.** It is step 4 of
-[#13](https://github.com/nanatsusaya/dot-panic/issues/13), and every step before
-it is built now that #92 has closed step 2. Steps 5 and 6 are the two the decider
-holds, so this is the last member of that epic anybody here can work.
+**[#77](https://github.com/nanatsusaya/dot-panic/issues/77) — the hosting notice
+0011 §4 puts beside the imprint.** Two sentences and a link, inside the imprint
+section #96 just built, saying that GitHub hosts the page and logs visitors' IP
+addresses. It was the one ticket whose `Ready:` header read **no**, and the thing
+it waited for now exists.
 
-**It is the ticket the imprint obligation runs through**, which is why 0018 was
-answered before it rather than after. 0004 §1 reaches the page through a label:
-0014 §6 makes the control's wording the whole of whether a person finds the
-imprint, and 0017 §2 keeps that one word German on an English page.
-[#77](https://github.com/nanatsusaya/dot-panic/issues/77) and
-[#90](https://github.com/nanatsusaya/dot-panic/issues/90) both wait behind it.
+**It is small and it is a precondition of the thing after it.** 0011 §8 asserts
+that the deployed page links the privacy statement, so nothing can be published
+until those two sentences are there — and 0011 §7 puts the first deployment at
+this epic. **It amends nothing**: the notice is not part of the imprint, because
+§ 18 MStV asks for the operator and who hosts the operator's page is a different
+fact, so 0004 R2 and 0003 §7 are untouched.
 
-**One `showModal()` call and no more.** 0014 §5 could not use markup — the
-mechanism that opens a dialog does not reach 0001 §3.4's floor until 2028-06-12 —
-so 0002 A1 paid for one call in the Shell. Its price is a button that does nothing
-where no script runs, with a legal obligation behind it, and 0014 took that
-knowingly: mitigating it here is a decision that record made the other way.
+**It is the page's second link rather than its first**, which #96 changed under
+that pull request's O1: the explanation now points at this repository, because
+naming a ruleset a reader cannot reach is a page asking to be judged on documents
+it does not point at. The reading both links rest on is the same one — 0003 §5
+forbids any request after load, and a visitor following a link is navigation
+rather than this page fetching. What #77 must not do is turn two sentences about
+logging into the consent banner 0004 rules out.
 
-**Its last criterion is watched rather than asserted**, and that is where this
-project's evidence keeps having to come from somebody else's browser: `Escape`
-closes it, the backdrop is there, focus does not leave it, and the flock is
-visible but still behind it. The session's own browser pane composites nothing,
-which is the seam the [method log](method-log.md) carries.
+**What is left of [#13](https://github.com/nanatsusaya/dot-panic/issues/13) is
+the decider's and the workflow.** #96 closed step 4, so steps 5 and 6 are all
+that remain: [#90](https://github.com/nanatsusaya/dot-panic/issues/90), the real
+imprint address 0011 §6 makes a precondition of publishing, and
+[#98](https://github.com/nanatsusaya/dot-panic/issues/98), whose file may be
+written at any point after step 3 but whose deployment is a stop-and-ask twice
+over. **G1's binding has still never been verified** — the coherence check says
+it cannot decide it and names the address.
 
-**Two things still sit with the decider**, both unchanged. **G1's binding has
-never been verified** — the coherence check says it cannot decide it and names the
-address — and [#90](https://github.com/nanatsusaya/dot-panic/issues/90) is the
-real imprint address 0011 §6 makes a precondition of publishing, which is what
-this next step unblocks rather than what it needs.
+**And #96 left one criterion open**, which is the one this project keeps having
+to hand over: whether the dialog *looks* right. What a command and a supplied
+clock could decide was decided — the modality, the inertness, the freeze, the
+line length, the two measured layout claims — and what an eye decides was not.
+[PR #204](https://github.com/nanatsusaya/dot-panic/pull/204) names it precisely,
+in the same shape #108 and #109 used.
 
 **What is left inside the epics is small and named**:
 [#166](https://github.com/nanatsusaya/dot-panic/issues/166),
@@ -1402,6 +1455,14 @@ input model. The model itself is one record and that record is Accepted.
 until a record owned it, and 0014 is the whole of that question the way 0005 is
 for rendering. 0015 has since decided that nothing joins what 0014 put in the
 dialog, which leaves this row exactly where it was.
+
+**It stays at `decided` with the whole of 0014 built**, which is the third word
+of this scale's definition doing its job rather than a bookkeeping quibble.
+[#95](https://github.com/nanatsusaya/dot-panic/issues/95) and
+[#96](https://github.com/nanatsusaya/dot-panic/issues/96) between them have put
+every section of that record on the page, every claim a command can decide is
+asserted and every claim a measurement can decide is measured — and nobody has
+looked at it. A row does not move because the list is complete.
 
 **Toolchain moves to `built`, and it is the first row ever to leave `decided`.**
 `package.json`, `tsconfig.json` and `bunfig.toml` exist, the three dependencies
