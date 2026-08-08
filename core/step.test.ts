@@ -112,25 +112,35 @@ function boundingBox(world: World): {
 }
 
 /**
- * The same world with every dot squeezed into the corner at the origin, keeping
- * the velocities it already had.
+ * The same world with every dot squeezed into the corner at the origin and
+ * still heading into it.
  *
  * 0006 §7 asks what happens *after* a pointer has driven a flock into a corner,
  * and there is no pointer until #106 — so the state is built rather than
  * produced, which is the only way to assert the section before then.
+ *
+ * **The velocities are turned into the corner and that is what gives the test
+ * teeth.** Keeping the headings the dots already had made it a test nothing
+ * could fail: dots at the speed floor pointing in every direction leave a
+ * corner whatever the edge does, so the assertion reported the same thing
+ * whether §7 held or not. Pointed inward, only a force can bring them back.
  *
  * @param world  the world whose dots are moved
  */
 function pileIntoCorner(world: World): World {
   return {
     ...world,
-    dots: world.dots.map((dot) => ({
-      velocity: dot.velocity,
-      position: {
-        x: (dot.position.x / world.frame.width) * CORNER,
-        y: (dot.position.y / world.frame.height) * CORNER,
-      },
-    })),
+    dots: world.dots.map((dot) => {
+      const speed = speedOf(dot.velocity);
+
+      return {
+        position: {
+          x: (dot.position.x / world.frame.width) * CORNER,
+          y: (dot.position.y / world.frame.height) * CORNER,
+        },
+        velocity: { x: -speed / Math.SQRT2, y: -speed / Math.SQRT2 },
+      };
+    }),
   };
 }
 
