@@ -417,9 +417,10 @@ where that rule leaves its trace, and that it is evidence rather than a check.
 **What `core/` held after #91 is the shape every later ticket adds to.** A world
 of dots with a position and a velocity each, a step taking a world and a time and
 returning a new one, and the generator's state carried in the world — 0002 §4
-entire. **One rule of the flock is in it now and the rest are not**: nothing
-steers, nothing separates, and there is no frame; each of those arrives with its
-own ticket under [#87](https://github.com/nanatsusaya/dot-panic/issues/87). **The
+entire. **Two rules of the flock are in it now and the rest are not**: nothing
+steers, nothing separates, and no bound holds a change in velocity down; each of
+those arrives with its own ticket under
+[#87](https://github.com/nanatsusaya/dot-panic/issues/87). **The
 generator is SplitMix64, named rather than invented** — 0013 §5 permits taking a
 published algorithm where §1 forbids taking anyone's file, and §7's obligation
 to name what was consulted is met in the ticket. It is that generator and not
@@ -432,10 +433,11 @@ algorithm chosen only to expand it.
 them on a frame also needs a speed to leave at, and no record fixes one. It is
 0.1 shorter sides per second, provisional, and
 [#100](https://github.com/nanatsusaya/dot-panic/issues/100) has since put it
-inside 0006 §3's band rather than superseding it. The starting arrangement is
-provisional in the same way: dots are scattered over one square of the frame's
-shorter side, because the frame itself is
-[#103](https://github.com/nanatsusaya/dot-panic/issues/103)'s.
+inside 0006 §3's band rather than superseding it. The starting arrangement was
+provisional in the same way, and
+[#103](https://github.com/nanatsusaya/dot-panic/issues/103) has since replaced
+it: the dots are scattered over the frame now, inset by the margin, rather than
+over one square of its shorter side.
 
 **0006 §3's band is the first rule of the flock to arrive.** #100 holds every
 dot's speed inside `[0.04, 0.16]` shorter sides per second, and the floor is
@@ -448,6 +450,42 @@ under `reduce` and that world is all some visitors ever see. **Nothing was
 watched, and the ticket defers that by name**: *nothing parks, nothing shoots*
 needs forces that vary a speed, and nothing varies one until
 [#99](https://github.com/nanatsusaya/dot-panic/issues/99).
+
+**0006 §6's frame is the second, and it is the first force rather than a second
+constraint on the result.** #103 puts a margin of 0.08 at each edge and a push
+toward the interior inside it, zero at the margin's inner boundary and 1.2 at the
+edge — **and no stronger outside it**, because a ramp that kept growing is a
+spring, and a stray the Shell hands in after a shrink would get a change in
+velocity §4 forbids by any number. The frame is carried in the world and a resize
+replaces it without rebuilding anything. `createWorld` scatters over it, inset by
+the margin: a dot spawned against an edge is one the force has almost no room to
+turn, and under §8 it would sit there for the whole visit.
+
+**The order inside a step is the design.** The force changes the velocity, the
+band holds the result inside itself, and only then is the dot moved — after the
+force, because a velocity outside the band would make §3 false of the world that
+comes back; before the move, because a displacement has to match the velocity the
+step ends with.
+
+**Two things that work found are worth more than the rule.** One of #103's
+asserted criteria was **unsatisfiable as written** and provably: §6 forbids a
+clamp on position, so a dot a hair inside the edge at the ceiling speed pointing
+out is outside after one step. The record needed nothing — §10's row is about the
+worlds this Core produces, and that is what is asserted — and
+[the ticket carries the correction](https://github.com/nanatsusaya/dot-panic/issues/103#issuecomment-5228390661).
+And **a dot moving exactly perpendicular to an edge never turns**, because one
+step of the force takes less speed out of a velocity than the floor puts back:
+[#216](https://github.com/nanatsusaya/dot-panic/issues/216) carries the relation
+that would remove it, the measurements, and why nothing was changed for a state
+no world here can reach.
+
+**A test that could not fail was found by mutating the code rather than by
+reading it.** The corner-dispersal assertion 0006 §7 asks for stayed green while
+the edge force was reversed to drive dots *out* of the frame — because a pile
+whose dots point in every direction leaves a corner whatever the edge does. It
+reports something only now that the piled velocities are turned into the corner.
+That is the 2026-08-08 [method log](method-log.md)'s question applied to a test
+written after it.
 
 **One sentence in 0002 §2 had to be read rather than applied**, and #91 could
 not avoid it. *The Core imports nothing from this project*, with *the Shell is
@@ -791,13 +829,15 @@ where it stood, with no burst of owed time; and under a faked `reduce` the world
 does not advance until the button is pressed. **Smoothness is still unwatched**,
 and it is the one thing on #94's list that no clock decides.
 
-**The flock occupies a square, not the frame.** At 1280×673 the dots span 674
-pixels across and stop. That is not the View: `createWorld` scatters over a unit
-square because the Core has no frame yet, and 0006 §6 — the bounded frame whose
-edge is a turning force — is [#103](https://github.com/nanatsusaya/dot-panic/issues/103),
-unbuilt. 0008 §6 makes every length a fraction of the shorter side, so the
-world's own extent has to become the frame's when that ticket lands. Worth
-knowing before someone reads the empty band on the right as a drawing bug.
+**The flock occupied a square and not the frame**, which the watch found and no
+criterion had asked about: at 1280×673 the dots spanned 674 pixels across and
+stopped, and the empty band on the right read as a drawing bug when it was
+`createWorld` scattering over a unit square for want of a rectangle.
+[#103](https://github.com/nanatsusaya/dot-panic/issues/103) is what ended it, and
+**the View did not move for it** — 0008 §6 makes every length a fraction of the
+shorter side, so the frame's longer side maps to exactly the canvas's own
+dimension. **Nobody has looked at the result**, because that ticket defers its
+watching to [#101](https://github.com/nanatsusaya/dot-panic/issues/101).
 
 **One thing this change could not do is assert its own criterion.** 0014 §9
 makes *the stylesheet contains no width breakpoint and no container query*
@@ -1514,20 +1554,23 @@ What a change description must contain is no longer among the gaps here.
 
 ## The single clearest next step
 
-**[#103](https://github.com/nanatsusaya/dot-panic/issues/103), the frame's edge
-as a turning force — second of the five in the sprint over
+**[#101](https://github.com/nanatsusaya/dot-panic/issues/101), the bound on how
+far a velocity may change — third of the five in the sprint over
 [#87](https://github.com/nanatsusaya/dot-panic/issues/87), opened 2026-08-08.**
-[#100](https://github.com/nanatsusaya/dot-panic/issues/100) closed the same day
-and is the first of them. That activity is 0012 §2's and it ran with the
-decider, which §6 requires *before any agent starts*. **The order lives in that
-epic's table**, because 0012 §7 makes it the authority for its own members and a
-copy here would be a second one.
+[#100](https://github.com/nanatsusaya/dot-panic/issues/100) and
+[#103](https://github.com/nanatsusaya/dot-panic/issues/103) closed the same day
+and are the first two. That activity is 0012 §2's and it ran with the decider,
+which §6 requires *before any agent starts*. **The order lives in that epic's
+table**, because 0012 §7 makes it the authority for its own members and a copy
+here would be a second one.
 
-**#103 is the ticket that gives the Core a frame at all**, which is why the
-flock occupies a square today and stops at its edge. It is also the first
-**force**, and that is what puts it ahead of
-[#101](https://github.com/nanatsusaya/dot-panic/issues/101): a bound on how far
-a velocity may change has nothing to bound until something changes one.
+**#101 has a subject now, which is the whole reason it is third.** 0006 §4
+bounds a change in velocity, and until #103 nothing changed one — so the ticket
+had nothing to bound and no test that could fail. What it inherits is a corner:
+two edges act at once there, so their sum reaches `1.2·√2`, deliberately left
+uncapped by the ticket that produced it. **It is also the first of the three
+watch points** 0006 asks for, and the first sitting owed to the decider — #100's
+and #103's own watching is deferred onto it by name.
 
 **Its finding is that there is no independence to have.** §6 calls two tickets
 independent when they touch no file in common and neither's criteria depend on
@@ -1545,11 +1588,12 @@ second time, because the region the band allows is an annulus and is not convex.
 The reading is that §4's bound is on the **steering forces** and the band is a
 result-constraint like §2's non-overlap, with the observed change bounded by
 `2·amax` and asserted rather than hidden;
-[#101](https://github.com/nanatsusaya/dot-panic/issues/101) carries the worked
-example. **The frame is carried in the world** and a resize changes it rather
-than rebuilding it, so containment is asserted as *a world with every dot inside
-returns one with every dot inside*
-([#103](https://github.com/nanatsusaya/dot-panic/issues/103)). And **the world
+#101 carries the worked example. **The frame is carried in the world** and a
+resize changes it rather than rebuilding it, which #103 built as decided — but
+the containment that activity settled was a conditional one-step claim, and
+**building it found that form false**;
+[the ticket carries the correction](https://github.com/nanatsusaya/dot-panic/issues/103#issuecomment-5228390661)
+and 0006 needed nothing. And **the world
 `createWorld` returns has to satisfy the positional constraints itself**, because
 0006 §8 keeps the Shell from stepping under `reduce` — so that one world is all
 some visitors ever see, and they are the audience 0004 §4 exists to protect.
@@ -1562,10 +1606,12 @@ with the arithmetic in each ticket.
 [#216](https://github.com/nanatsusaya/dot-panic/issues/216) is the superseder,
 triggered by the fifth landing, and it is the arrangement
 [#110](https://github.com/nanatsusaya/dot-panic/issues/110) already has for the
-count. **The watching is three sittings and not five** — #100's and #101's own
-criteria are not judgeable before there are forces, so both tickets defer them by
-name rather than merging with a criterion nobody looked at, which has happened
-three times here.
+count. **The watching is three sittings and not five** — #100's and #103's own
+criteria are not judgeable before a force is capped, so both tickets defer them
+onto #101 by name rather than merging with a criterion nobody looked at, which
+has happened three times here. **Both have now merged that way**, which is the
+arrangement working rather than a fourth instance: neither claimed a watch, and
+the sitting they were deferred onto is the next step above.
 
 **[#178](https://github.com/nanatsusaya/dot-panic/issues/178) is done and the
 convention has a command behind it.**
