@@ -178,6 +178,22 @@ first.
   the durable consequence in the artifact that owns the fact — a decision
   record, a ticket, or [docs/STATUS.md](docs/STATUS.md). Where an answer to an
   `O`-question goes is the template's and is not restated here.
+- **A linking keyword is read in a commit message, not only in a description.**
+  GitHub names exactly two places — *"in the pull request's description or in a
+  commit message"*
+  ([documentation](https://docs.github.com/en/issues/tracking-your-work-with-issues/using-issues/linking-a-pull-request-to-an-issue)).
+  A file in this repository is neither, which is why this file and
+  [docs/method-log.md](docs/method-log.md) may write the string and a commit
+  message may not. **The mechanism and its traps are
+  [the template's](.github/pull_request_template.md) opening comment**, and are
+  not restated here; what that comment cannot say, being about a description,
+  is that every word of it holds for each commit in the change as well.
+  Decided 2026-08-08 after
+  [#210](https://github.com/nanatsusaya/dot-panic/issues/210), where the commits
+  describing an accidental closure quoted the sentence that had caused it and
+  shut the same ticket a second time. **The escape that comment names is
+  untested here**: those quotations carried no backticks, and the documentation
+  above describes no escape at all.
 - **The definition of done** is
   [.github/ISSUE_TEMPLATE/task.md](.github/ISSUE_TEMPLATE/task.md) — the same
   authority the Tickets section names, for the same reason. It is not restated
