@@ -19,16 +19,15 @@ reader can tell a change somebody made from one that drifted in:
   string. That file is the authority for the four checks and what each decides,
   and a string copied here goes stale the first time a script is renamed.
 - The spelling is American, which is this repository's regime.
-- The warning below about closing keywords is ours. The handbook has none.
+- The pointer below about closing keywords is ours. The handbook has neither it
+  nor the rule it points at.
 
-A closing keyword next to an issue number — closes, fixes, resolves — closes
-that issue when the pull request merges, and the parser does not read a negation
-in front of it: "this does not close #NN" closes it. It is also silently inert
-inside a code span, so write the line as plain text and never in backticks. It
-goes once, at the end of the description. Write one only when the merge should
-close the ticket; to mention an issue otherwise, name it with no verb in front
-of it. Then check the issue's state after the merge rather than trusting the
-description.
+A closing keyword next to an issue number shuts that issue, and the rule about
+writing one is CLAUDE.md's Delivery section — which words, the two places they
+are read, and when to write one at all. It is not repeated here. It lived here
+until 2026-08-08, and moved because it holds for every commit in a change as
+much as for this file, and because an agent creating a pull request never opens
+this file to read it.
 -->
 
 ## What
