@@ -6,12 +6,26 @@
 import { describe, expect, test } from "bun:test";
 
 import { step } from "./step.js";
-import { createWorld, DOT_COUNT, DOT_RADIUS, type World } from "./world.js";
+import {
+  createWorld,
+  DOT_COUNT,
+  DOT_RADIUS,
+  type Frame,
+  type World,
+} from "./world.js";
 
 const SECONDS_PER_STEP = 1 / 60;
 
+/** A 16:9 frame; its shorter side is 1 by 0008 §6's definition. */
+const WIDE: Frame = { width: 16 / 9, height: 1 };
+
 function run(seed: number, steps: number): World {
-  let world = createWorld({ count: DOT_COUNT, radius: DOT_RADIUS, seed });
+  let world = createWorld({
+    count: DOT_COUNT,
+    radius: DOT_RADIUS,
+    frame: WIDE,
+    seed,
+  });
 
   for (let taken = 0; taken < steps; taken += 1) {
     world = step(world, SECONDS_PER_STEP);
