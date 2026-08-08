@@ -360,6 +360,12 @@ and no color.
   measurement rather than on principle: weighting cohesion up leaves the lattice
   almost unchanged until it passes groups altogether and collapses the flock into
   one clump. The middle is not somewhere in the weights.
+- **A bound on how much shorter the shorter reach is.** Rejected in §1 by A1,
+  though the measurement supports one: at half the neighborhood the flock is
+  indistinguishable from a random scatter, and grouping begins below that. It is
+  a measurement at one dot count, one frame and one set of weights, where §6's
+  relation is arithmetic that holds at any numbers — so writing it in would fix a
+  number in the disguise of a relation, which §10 forbids in terms.
 - **Slower motion under `reduce`.** Rejected in §8: still sustained, still
   automatic.
 - **A paused flag in the world.** Rejected in §9: it puts a Shell concern in the
@@ -477,13 +483,26 @@ so §2 is untouched and separation is still not asked to carry it. **No number
 enters this record**, which is the line §10 draws and A1 does not cross: both
 reaches are watched, and where they live is 0008 R1's.
 
+**Two things this amendment was asked to do and did not**, both put to the
+decider while it was under review and both confirmed as written. It does not say
+how much shorter the shorter reach is — *Alternatives considered* carries what
+the measurement said and why it stays out. And **§1's locality sentence is left
+alone** although groups make it read differently: a dot in an evenly spread world
+has about six neighbors and a dot inside a group has forty or more, over the same
+radius. The claim is that a dot reacts only to what is *near*, and the radius is
+what defines near; reading it as a claim about a count would make it a number,
+which no section here states. The cost is in *Consequences* rather than in the
+sentence.
+
 Authorized by Daniel on 2026-08-09, after watching ten browsers side by side for
 a minute and reading the frames back: *"sie verhalten sich eher wie partikel im
 raum die versuchen abstand zu halten … es ist ein guter anfang aber kein schönes
 schwarm bewegungs verhalten"*, and then, against the recommendation that a second
 reach be taken as an amendment here rather than as a number under
 [#216](https://github.com/nanatsusaya/dot-panic/issues/216): *"ja, mach das per
-/adr"*.
+/adr"*. The two things this amendment was asked to do and did not were put to him
+the same day and answered with the recommendation, in that order: *"zu O1: keine
+schranke, zu O2: §1 lassen"*.
 
 ## References
 
