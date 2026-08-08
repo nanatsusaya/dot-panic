@@ -6,7 +6,13 @@
 
 import { describe, expect, test } from "bun:test";
 
-import { createWorld, DOT_COUNT, DOT_RADIUS } from "./world.js";
+import {
+  createWorld,
+  DOT_COUNT,
+  DOT_RADIUS,
+  SPEED_MAX,
+  SPEED_MIN,
+} from "./world.js";
 
 const ordinary = { count: DOT_COUNT, radius: DOT_RADIUS, seed: 1 };
 
@@ -33,6 +39,22 @@ describe("a world", () => {
       const speed = Math.hypot(dot.velocity.x, dot.velocity.y);
 
       expect(speed).toBeGreaterThan(0);
+    }
+  });
+
+  /*
+   * 0006 §3 over the world nothing has stepped yet. It holds by construction
+   * today, and it is asserted because of 0006 §8: under `prefers-reduced-motion`
+   * the Shell never steps, so this world is the whole of what some visitors ever
+   * see — and an invariant that only arrives with the first step does not reach
+   * them at all.
+   */
+  test("gives every dot a speed inside the band", () => {
+    for (const dot of createWorld(ordinary).dots) {
+      const speed = Math.hypot(dot.velocity.x, dot.velocity.y);
+
+      expect(speed).toBeGreaterThanOrEqual(SPEED_MIN);
+      expect(speed).toBeLessThanOrEqual(SPEED_MAX);
     }
   });
 
