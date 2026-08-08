@@ -480,10 +480,10 @@ in `core/world.ts` until this. What the match may be was left to
 [#92](https://github.com/nanatsusaya/dot-panic/issues/92) and is decided there,
 in the test rather than in a record.
 
-**Nothing checks the shape of a comment**, and
-[#178](https://github.com/nanatsusaya/dot-panic/issues/178) is the one that
-would — presence rather than quality, which is 0010 §2's third kind of claim and
-needs no record to permit it. **The third clause is the exception**: a comment
+**A command checks that a block is there and nothing about what it says**, which
+is [#178](https://github.com/nanatsusaya/dot-panic/issues/178)'s test and 0010
+§2's third kind of claim, needing no record to permit it. **The third clause is
+the exception**: a comment
 under `core/` naming one of the fifteen reddens #92's test, so that one clause is
 held by a command and the rest by review.
 
@@ -1322,16 +1322,18 @@ Outside the epics:
 
 | Ticket | Why it exists |
 |---|---|
-| [#178](https://github.com/nanatsusaya/dot-panic/issues/178) A test that decides the convention is followed | #177's rule has no command behind it; presence is 0010 §2's third kind and needs no record |
 | [#202](https://github.com/nanatsusaya/dot-panic/issues/202) Whether the four checks gate a pull request | 0011 §2 says review gates a merge, while the method this project demonstrates gates its own markdown in CI |
 
 **The two rows that left were closed and the table had not noticed** — #177,
 whose convention is in CLAUDE.md, and #181, whose answer is
 [0018](adr/0018-where-a-test-lives.md). #185 never had a row and asked for one in
 its own last line; it is not here either, because it closed with the change that
-added it. **Two more rows came and went inside one evening** — #210 and #212,
-each added while open and removed by the change that shut it, which is the table
-working rather than failing. **This table is a list of open tickets and nothing
+added it. **Three more rows came and went inside one evening** — #210, #212 and
+#178, each removed by the change that shut it, which is the table working rather
+than failing. **One row is left, and that is not the same as three tickets being
+open outside the epics**: several are, and whether each belongs to one was not
+checked here, because it is not this change's concern. **This table is a list of
+open tickets and nothing
 checks that it is one**, which is the same class as the readiness column
 [#46](https://github.com/nanatsusaya/dot-panic/issues/46) removed and is worth
 knowing before trusting a row.
@@ -1499,22 +1501,33 @@ What a change description must contain is no longer among the gaps here.
 
 ## The single clearest next step
 
-**[#178](https://github.com/nanatsusaya/dot-panic/issues/178) — a test that
-decides the documentation convention is followed.** Both things it was sequenced
-after are done: [#177](https://github.com/nanatsusaya/dot-panic/issues/177) wrote
-the convention into CLAUDE.md and
-[#92](https://github.com/nanatsusaya/dot-panic/issues/92) is the worked example of
-reading this repository as text. What it asserts is **presence** — a block header
-on every exported symbol, a `@param` for every parameter — which is 0010 §2's
-third kind and needs no record to permit it. Whether a why is a why stays with
-review, there as in `grimora`, where the convention and the test both come from.
+**Opening a sprint over [#87](https://github.com/nanatsusaya/dot-panic/issues/87)'s
+six tickets, which is an activity and not a ticket — and it is the decider's.**
+0012 §2 makes a sprint the moment independence is established, and §6 says that
+is settled *at the start of a sprint, before any agent starts, and not
+discovered by a merge conflict afterward*. Six tickets sit there —
+[#99](https://github.com/nanatsusaya/dot-panic/issues/99) to
+[#104](https://github.com/nanatsusaya/dot-panic/issues/104) — every one of them
+touching `core/step.ts`, so the property that activity establishes is exactly
+the one in doubt. **The blockers are gone**: #91 and #95 are closed, and the
+`waits on` column in that epic is state from before they were. What has not
+happened is the activity, and no session can hold it alone.
 
-**One errand comes before it and is not a change to this repository.** The
-keyword case goes to `agent-project-rules` as a ticket, answered on 2026-08-08
-as *yes, once the local change has landed* — the handbook has no warning of any
-kind, and after [#212](https://github.com/nanatsusaya/dot-panic/issues/212) this
-project has both a rule and four instances to describe. It is named here rather
-than promoted, because it costs one ticket and settles nothing about the toy.
+**[#178](https://github.com/nanatsusaya/dot-panic/issues/178) is done and the
+convention has a command behind it.**
+[`tests/documented-exports.test.ts`](../tests/documented-exports.test.ts) reads
+`core/`, `shell/` and `view/` and reddens on a missing block, a one-line block
+or a parameter with no `@param` — 0010 §2's third kind, needing no record to
+permit it. `tests/` is not read, and that is 0018 §6's reason rather than a hole:
+this test's subject is a text pattern, so reading its own directory would have it
+find itself. **Whether a why is a why stays with review**, and CLAUDE.md now says
+where the line is instead of saying no command decides any of it.
+
+**The errand is done as well.** The keyword case is
+[agent-project-rules#22](https://github.com/nanatsusaya/agent-project-rules/issues/22),
+filed 2026-08-08 on the answer of that day: the handbook instructs *the ticket
+closed from the change description* and warns of none of the behavior behind it,
+and its own templates keep their instructions in comments an agent never opens.
 
 **It is not the thing that unblocks the URL, and nothing a session can do is.**
 #98 wrote the workflow, so **every remaining piece of
@@ -1568,11 +1581,10 @@ so the looking and the address are the same hand-off.
 own table, which still shows four closed members as waiting on something.
 
 **What is open outside the epics is small, named, and none of it blocks this.**
-[#178](https://github.com/nanatsusaya/dot-panic/issues/178) waited on
-[#92](https://github.com/nanatsusaya/dot-panic/issues/92) by design and no longer
-does: `tests/` exists, and the test that would decide the documentation
-convention now has both a home and a worked example of reading the repository as
-text.
+[#178](https://github.com/nanatsusaya/dot-panic/issues/178) is closed: it waited
+on [#92](https://github.com/nanatsusaya/dot-panic/issues/92) by design, and once
+`tests/` existed alongside a worked example of reading the repository as text,
+the documentation convention got the command it had been missing.
 [#166](https://github.com/nanatsusaya/dot-panic/issues/166) asks whether the
 Definition-of-Ready activity covered #90 or the eight build tickets alone — the
 activity found the answer changes nothing it produced, since #90 is not-ready
