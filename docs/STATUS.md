@@ -1501,17 +1501,51 @@ What a change description must contain is no longer among the gaps here.
 
 ## The single clearest next step
 
-**Opening a sprint over [#87](https://github.com/nanatsusaya/dot-panic/issues/87)'s
-six tickets, which is an activity and not a ticket — and it is the decider's.**
-0012 §2 makes a sprint the moment independence is established, and §6 says that
-is settled *at the start of a sprint, before any agent starts, and not
-discovered by a merge conflict afterward*. Six tickets sit there —
-[#99](https://github.com/nanatsusaya/dot-panic/issues/99) to
-[#104](https://github.com/nanatsusaya/dot-panic/issues/104) — every one of them
-touching `core/step.ts`, so the property that activity establishes is exactly
-the one in doubt. **The blockers are gone**: #91 and #95 are closed, and the
-`waits on` column in that epic is state from before they were. What has not
-happened is the activity, and no session can hold it alone.
+**[#100](https://github.com/nanatsusaya/dot-panic/issues/100), the speed band —
+first of the five in the sprint over
+[#87](https://github.com/nanatsusaya/dot-panic/issues/87), opened 2026-08-08.**
+That activity is 0012 §2's and it ran with the decider, which §6 requires
+*before any agent starts*. **The order lives in that epic's table**, because
+0012 §7 makes it the authority for its own members and a copy here would be a
+second one.
+
+**Its finding is that there is no independence to have.** §6 calls two tickets
+independent when they touch no file in common and neither's criteria depend on
+the other's result. All five write `core/step.ts`, and all five write
+`core/step.test.ts` beside it, so the first half fails for every pair — and the
+second fails too where #103's margin relation reads #100's and #101's numbers.
+Five tickets, strictly one after another, and §6's cap of three open changes
+never binds. **#104 is outside the sprint**: its blocker closed, its trigger did
+not, and 0010 R1 makes the absence of an index explicitly not one.
+
+**Three things that activity settled are worth more than the order.** 0006 §3
+and §4 cannot both hold strictly — a dot at `vmin` decelerating by the full
+bound ends below the floor, and the clamp restoring it moves the velocity a
+second time, because the region the band allows is an annulus and is not convex.
+The reading is that §4's bound is on the **steering forces** and the band is a
+result-constraint like §2's non-overlap, with the observed change bounded by
+`2·amax` and asserted rather than hidden;
+[#101](https://github.com/nanatsusaya/dot-panic/issues/101) carries the worked
+example. **The frame is carried in the world** and a resize changes it rather
+than rebuilding it, so containment is asserted as *a world with every dot inside
+returns one with every dot inside*
+([#103](https://github.com/nanatsusaya/dot-panic/issues/103)). And **the world
+`createWorld` returns has to satisfy the positional constraints itself**, because
+0006 §8 keeps the Shell from stepping under `reduce` — so that one world is all
+some visitors ever see, and they are the audience 0004 §4 exists to protect.
+
+**Every number was chosen blind, and a ticket exists to choose them again.** 0006
+§10 puts all of them in the register only watching decides, while Ready condition
+5 requires them before the work; they were fixed the way
+[#91](https://github.com/nanatsusaya/dot-panic/issues/91) fixed 200 and 0.005,
+with the arithmetic in each ticket.
+[#216](https://github.com/nanatsusaya/dot-panic/issues/216) is the superseder,
+triggered by the fifth landing, and it is the arrangement
+[#110](https://github.com/nanatsusaya/dot-panic/issues/110) already has for the
+count. **The watching is three sittings and not five** — #100's and #101's own
+criteria are not judgeable before there are forces, so both tickets defer them by
+name rather than merging with a criterion nobody looked at, which has happened
+three times here.
 
 **[#178](https://github.com/nanatsusaya/dot-panic/issues/178) is done and the
 convention has a command behind it.**
