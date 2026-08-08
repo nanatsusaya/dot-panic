@@ -550,10 +550,23 @@ it: `method/rules.md` G2 still says *rewrite them in place as `R1..Rn`* naming
 no artifact, while that repository's handbook and its own operating rules both
 scope it. The normative file is the one that did not move.
 
-**#185 closes by hand rather than by keyword.** Every bullet of its scope is met
-once PR #209 merges, and the sentence in that description saying why it carries
-no closing keyword stays exactly as written — rewriting it is the thing the
-change is about.
+**#185 shut itself, by the mechanism nothing here warned about.** It went closed
+at 20:08:11, one second after PR #209 merged, because two of that change's
+commit messages quote #205's sentence — and a linking keyword is read *"in the
+pull request's description or in a commit message"*
+([GitHub](https://docs.github.com/en/issues/tracking-your-work-with-issues/using-issues/linking-a-pull-request-to-an-issue)),
+of which this project had only the half about descriptions. **The post-mortem of
+an accidental closure was written in the medium that causes one.** That is the
+fourth here and the first of its kind, and
+[#210](https://github.com/nanatsusaya/dot-panic/issues/210) is where the rule
+goes so a session reads it rather than the template's comment.
+
+**The state is right by luck, which is the part to distrust.** Every bullet of
+#185's scope was met by that same merge, so `COMPLETED` is what it should have
+been. What was owed instead of a keyword is a comment, and it is there: the
+durable pointers to PR #209 and to #21, and what actually shut the ticket. The
+sentence in that description saying why it carries no keyword stays exactly as
+written.
 
 **Three divergences from the published file are declared, and one of them was
 stale.** *Verified* named `node ../agent-project-rules/checks/check-method.mjs`,
@@ -1303,6 +1316,7 @@ Outside the epics:
 |---|---|
 | [#178](https://github.com/nanatsusaya/dot-panic/issues/178) A test that decides the convention is followed | #177's rule has no command behind it; presence is 0010 §2's third kind and needs no record |
 | [#202](https://github.com/nanatsusaya/dot-panic/issues/202) Whether the four checks gate a pull request | 0011 §2 says review gates a merge, while the method this project demonstrates gates its own markdown in CI |
+| [#210](https://github.com/nanatsusaya/dot-panic/issues/210) A linking keyword is read in a commit message too | the warning this project keeps covers descriptions, and the fourth accidental closure came the other way |
 
 **The two rows that left were closed and the table had not noticed** — #177,
 whose convention is in CLAUDE.md, and #181, whose answer is
