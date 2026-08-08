@@ -165,6 +165,19 @@ first.
 - **The shape of a change description** is
   [.github/pull_request_template.md](.github/pull_request_template.md) — the
   form an author actually sees. It is not restated here.
+- **Never edit a merged pull request.** A description is a claim about a change
+  somebody reviewed; after the merge nobody reviews it again, so an edit is a
+  claim with no reader — and it races whoever is looking at the same page.
+  Decided 2026-08-05 after
+  [#168](https://github.com/nanatsusaya/dot-panic/pull/168), where an agent
+  rewrote one without re-checking whether it had merged while the work was
+  going on. **Check the state before writing, not after**; the window is
+  minutes wide and this project has walked into it twice.
+  **What to do instead** is two things, not one: say it in a **comment** on the
+  pull request, which carries a timestamp and a permalink and notifies, and put
+  the durable consequence in the artifact that owns the fact — a decision
+  record, a ticket, or [docs/STATUS.md](docs/STATUS.md). Where an answer to an
+  `O`-question goes is the template's and is not restated here.
 - **The definition of done** is
   [.github/ISSUE_TEMPLATE/task.md](.github/ISSUE_TEMPLATE/task.md) — the same
   authority the Tickets section names, for the same reason. It is not restated

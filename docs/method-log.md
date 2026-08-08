@@ -6,6 +6,41 @@ session would decide worse without it.
 
 Newest first.
 
+## 2026-08-08 — A warning nobody reads is a warning nobody has
+
+**[The pull request template](../.github/pull_request_template.md) carries a
+warning about closing keywords**, written here after
+[#83](https://github.com/nanatsusaya/dot-panic/issues/83) was closed by accident
+twice in one evening. It says, in those words, that the parser does not read a
+negation: *this does not close #NN* closes it.
+
+**[PR #205](https://github.com/nanatsusaya/dot-panic/pull/205) wrote
+`Nothing here closes #185`**, and closed
+[#185](https://github.com/nanatsusaya/dot-panic/issues/185). The ticket whose
+whole subject is careless mechanics around merged pull requests was closed with
+none of its scope done, by the sentence written to say it had not been.
+
+**The warning is in an HTML comment in the template.** That is the right place
+for the shape of a description — CLAUDE.md says so and calls it *the form an
+author actually sees*. **An agent creating a pull request does not see it.**
+`gh pr create --body-file` never opens the template, never renders the comment
+and never passes the text through anything that would show it. So the rule holds
+for a person typing in a browser and reaches nobody else, which is not a
+weakness of the rule.
+
+**Two things follow, and only the first is cheap.** A prohibition an author
+cannot encounter belongs where the author does look — for an agent that is
+CLAUDE.md, and for a human it is still the template. And **the general form is
+worth more than this instance**: every warning this project keeps in a template
+comment should be asked the same question, *who opens the file this lives in?*
+
+**The window is the other half.** #205's author had no way to know it would
+matter, but the same afternoon a session edited a merged description four minutes
+after the merge, and #168 is a third instance. All three are the same shape: the
+world moved while work was going on, and nothing re-read it before writing. That
+is what CLAUDE.md's new *Delivery* bullet says out loud rather than leaving to
+the template.
+
 ## 2026-08-08 — Two verifications that would have passed either way
 
 **A check whose result does not depend on the thing it checks looks exactly like
