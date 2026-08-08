@@ -112,6 +112,33 @@ function boundingBox(world: World): {
 }
 
 /**
+ * The largest change in velocity any dot underwent between two worlds, which is
+ * the quantity 0006 §4 bounds.
+ *
+ * @param before  the world that went into a step
+ * @param after   the world that came out of it
+ */
+function largestChange(before: World, after: World): number {
+  let largest = 0;
+
+  before.dots.forEach((dot, index) => {
+    const moved = after.dots[index];
+
+    if (moved !== undefined) {
+      largest = Math.max(
+        largest,
+        Math.hypot(
+          moved.velocity.x - dot.velocity.x,
+          moved.velocity.y - dot.velocity.y,
+        ),
+      );
+    }
+  });
+
+  return largest;
+}
+
+/**
  * The same world with every dot squeezed into the corner at the origin and
  * still heading into it.
  *
@@ -381,23 +408,23 @@ describe("the frame's edge", () => {
   });
 
   /*
-   * In a corner both edges act, so their sum reaches `MAX_ACCELERATION·√2`.
-   * That is deliberate and it is exactly what #101 clamps — this test is what
-   * that ticket's own failing test will be written against, and capping it here
-   * would take its subject away.
+   * In a corner both edges act, so the push runs along the diagonal rather than
+   * along either axis. **What this used to assert was the size of it** — one
+   * `MAX_ACCELERATION` per edge, so `MAX_ACCELERATION·√2` together — and #101
+   * has since capped exactly that, which is what it exists for. The direction
+   * is the half that is the edge's own and survives the cap.
    *
    * **The incoming speed is low on purpose**, because the band is downstream of
    * the force and would otherwise be what this measured: at 0.1 in each
-   * component the corner's sum carries the dot to 0.1697, above the ceiling,
-   * and the number that comes back is the band's rather than the edge's. That
-   * is the next test.
+   * component the corner's sum carries the dot past the ceiling, and the number
+   * that comes back is the band's rather than the edge's. That is the next test.
    */
   test("fires both edges in a corner", () => {
     const world = dotIn(WIDE, { x: 0, y: 0 }, { x: 0.05, y: 0.05 });
 
     for (const dot of step(world, seconds).dots) {
-      expect(dot.velocity.x).toBeCloseTo(0.05 + perStep, 12);
-      expect(dot.velocity.y).toBeCloseTo(0.05 + perStep, 12);
+      expect(dot.velocity.x).toBeGreaterThan(0.05);
+      expect(dot.velocity.x).toBeCloseTo(dot.velocity.y, 12);
     }
   });
 
@@ -455,5 +482,95 @@ describe("the frame's edge", () => {
     const box = boundingBox(world);
 
     expect(Math.max(box.right, box.bottom)).toBeGreaterThan(CORNER);
+  });
+});
+
+/*
+ * 0006 §4, and the rule the frame's edge was derived from: a wall changes a
+ * velocity by `2v` in one step and no bound survives that, so §6 has a turning
+ * force instead.
+ *
+ * **What is bounded is the change the forces produce.** §2's non-overlap and
+ * §3's band are constraints on the result and are exempt — the reading settled
+ * on 2026-08-08, with §2's own *"a constraint on the result, not a force among
+ * the others"* as the precedent, and #101 carries the worked example.
+ */
+describe("the bound on a change in velocity", () => {
+  const seconds = 1 / 60;
+  const bound = MAX_ACCELERATION * seconds;
+  const inCorner = dotIn(WIDE, { x: 0, y: 0 }, { x: 0.05, y: 0.05 });
+
+  // The failing test this ticket exists for. Two edges at MAX_ACCELERATION each
+  // sum to MAX_ACCELERATION·√2, which is 41 percent above the bound — 0006 §7's
+  // corner arriving from the arithmetic rather than from the picture.
+  test("caps the corner, where two edges together exceed it", () => {
+    expect(largestChange(inCorner, step(inCorner, seconds))).toBeCloseTo(
+      bound,
+      12,
+    );
+  });
+
+  test("leaves one edge alone, which is already at the bound", () => {
+    const atOneEdge = dotIn(WIDE, { x: 0, y: 0.5 }, { x: 0, y: SPEED_MIN });
+
+    expect(largestChange(atOneEdge, step(atOneEdge, seconds))).toBeCloseTo(
+      bound,
+      12,
+    );
+  });
+
+  // A cap on the size and not on the heading: the corner still pushes along its
+  // diagonal, which is what makes it a corner rather than one edge.
+  test("keeps the direction the forces pointed while it caps", () => {
+    for (const dot of step(inCorner, seconds).dots) {
+      expect(dot.velocity.x - 0.05).toBeCloseTo(dot.velocity.y - 0.05, 12);
+    }
+  });
+
+  /*
+   * An acceleration and not an amount per call, which 0006 §6's own formula
+   * settles: `vmax² / (2·MAX_ACCELERATION)` has the dimension of a length only
+   * if the bound is a length per second squared. Written per step instead, a
+   * change to 0008 §3's step rate would silently change the motion.
+   */
+  test("scales with the length of the step, being an acceleration", () => {
+    const short = largestChange(inCorner, step(inCorner, seconds));
+    const long = largestChange(inCorner, step(inCorner, 2 * seconds));
+
+    expect(long).toBeCloseTo(2 * short, 12);
+  });
+
+  /*
+   * 0006 §10's §4 row, over a run rather than over one hand-built world.
+   *
+   * **The factor of two is 0006 §3's exempt correction and not slack.** A dot
+   * at the floor decelerated by the full bound ends below it, and the band
+   * restoring it moves the velocity a second time — the region the band allows
+   * is an annulus and is not convex, so the two corrections need not point the
+   * same way. The band can add at most one further `MAX_ACCELERATION · seconds`,
+   * which is where the two comes from and why it is asserted rather than hidden.
+   */
+  test("changes no velocity by more than twice the bound over a run", () => {
+    let world = createWorld({ ...ordinary, seed: 11 });
+
+    for (let taken = 0; taken < DISPERSAL_STEPS; taken += 1) {
+      const stepped = step(world, seconds);
+
+      expect(largestChange(world, stepped)).toBeLessThanOrEqual(2 * bound);
+      world = stepped;
+    }
+  });
+
+  // The same over the state that produces the largest changes there are, since
+  // a corner is where two edges act at once and the band fires most often.
+  test("holds the same over a run out of a corner", () => {
+    let world = pileIntoCorner(createWorld({ ...ordinary, seed: 13 }));
+
+    for (let taken = 0; taken < DISPERSAL_STEPS; taken += 1) {
+      const stepped = step(world, seconds);
+
+      expect(largestChange(world, stepped)).toBeLessThanOrEqual(2 * bound);
+      world = stepped;
+    }
   });
 });
