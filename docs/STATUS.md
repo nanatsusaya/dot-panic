@@ -601,6 +601,26 @@ obligation protects. **The explanation carries the page's first link**, to this
 repository, on the decider's answer to PR #204's O1 — no record decided it either
 way, and what it closes is a page that names a ruleset it gives no way to reach.
 
+**The hosting notice is inside that imprint section, and it is the last thing
+0004 §8 handed forward.** [#77](https://github.com/nanatsusaya/dot-panic/issues/77)
+writes 0011 §4's two sentences — the site is hosted by GitHub Pages, GitHub logs
+the visitor's IP address for security — and the link to GitHub's privacy
+statement, which is the one part of them 0011 §8 asserts of the deployed page.
+**It amends nothing and adds no section**: § 18 MStV asks for the operator and
+who hosts the operator's page is a different fact, so the notice is not part of
+the imprint, and putting it inside 0014 §4's second `<details>` leaves 0015 §1's
+empty third section where it is. What GitHub's statement says is deliberately not
+restated — that goes stale on somebody else's edit and a link does not.
+
+**A collapsed `<details>` does not hide its contents the way the obvious
+measurement expects**, and a session watching this page should know it before
+reading a false positive as a defect. Chrome renders a closed section's contents
+with `content-visibility: hidden` rather than `display: none`, so `offsetParent`
+is non-null and `getBoundingClientRect()` returns a height for text nobody can
+see. `checkVisibility()` is the question that answers it, and it answered
+correctly in both states — which is the 2026-08-08 [method log](method-log.md)
+entry arriving in a browser API rather than in a test.
+
 **That form survives `form-action 'none'`**, which was worth checking rather than
 assuming: 0003 §6's policy forbids form submission, and the close button was the
 one mechanism 0014 §5 leaves after its A1. It closed the dialog with nothing
@@ -1017,14 +1037,15 @@ response headers, stated as what was found rather than as a capability claim, so
 the policy ships as a `meta` element alone and `report-uri`, `frame-ancestors`
 and `sandbox` stay unsent.
 
-**The host logs the visitor's IP address, and the page will say so.** GitHub
+**The host logs the visitor's IP address, and the page says so.** GitHub
 documents it plainly, which answers what 0004 §8 handed forward and contradicts
 nothing 0004 decided — the page still collects nothing, and the host does, before
 a line of the page runs. Two sentences and a link go **inside** the imprint
 section of 0014 §4's dialog rather than becoming a section of their own, which is
 what leaves 0004 R2's imprint content, 0003 §7's *one place* and 0015 §1's
-deliberately empty third section untouched; writing them is
-[#77](https://github.com/nanatsusaya/dot-panic/issues/77). **The disclosure rests
+deliberately empty third section untouched, and
+[#77](https://github.com/nanatsusaya/dot-panic/issues/77) is what wrote them.
+**The disclosure rests
 on no legal determination.** R4 records that the question was whether disclosure
 was *owed*, that 0004 §13's GDPR row reached nothing on the page because no host
 was chosen then, and that the answer is the cheap side of an asymmetry rather
@@ -1155,7 +1176,6 @@ Outside the epics:
 
 | Ticket | Why it exists |
 |---|---|
-| [#77](https://github.com/nanatsusaya/dot-panic/issues/77) The hosting notice 0011 §4 puts beside the imprint | the host logs the visitor's IP address, and the page says so inside 0014 §4's dialog |
 | [#177](https://github.com/nanatsusaya/dot-panic/issues/177) The code documentation convention | CLAUDE.md said why-not-what and nothing about form, and #91's files showed what that leaves open |
 | [#178](https://github.com/nanatsusaya/dot-panic/issues/178) A test that decides the convention is followed | #177's rule has no command behind it; presence is 0010 §2's third kind and needs no record |
 | [#181](https://github.com/nanatsusaya/dot-panic/issues/181) Where a test lives when its subject is source text | four such tests are owed and none has a place; #92's cannot sit inside its own subject |
@@ -1323,35 +1343,30 @@ What a change description must contain is no longer among the gaps here.
 
 ## The single clearest next step
 
-**[#77](https://github.com/nanatsusaya/dot-panic/issues/77) — the hosting notice
-0011 §4 puts beside the imprint.** Two sentences and a link, inside the imprint
-section #96 just built, saying that GitHub hosts the page and logs visitors' IP
-addresses. It was the one ticket whose `Ready:` header read **no**, and the thing
-it waited for now exists.
+**[#98](https://github.com/nanatsusaya/dot-panic/issues/98) — the Actions
+workflow that builds and deploys, the file and not the deployment.** It runs
+0009 §8's four checks, emits with `tsc`, fails if the built artifact still
+carries `Musterstadt` (0011 §6), and calls `actions/deploy-pages` only if
+everything before it passed (0011 §2). Its own header splits it: **ready for the
+file, not for the deployment**, and the two are not one act.
 
-**It is small and it is a precondition of the thing after it.** 0011 §8 asserts
-that the deployed page links the privacy statement, so nothing can be published
-until those two sentences are there — and 0011 §7 puts the first deployment at
-this epic. **It amends nothing**: the notice is not part of the imprint, because
-§ 18 MStV asks for the operator and who hosts the operator's page is a different
-fact, so 0004 R2 and 0003 §7 are untouched.
+**It is the last member of [#13](https://github.com/nanatsusaya/dot-panic/issues/13)
+anybody here can work.** #77 closed step 4's last piece, so what remains beside
+this file is [#90](https://github.com/nanatsusaya/dot-panic/issues/90) — the real
+imprint address, which is the decider's — and running the workflow against the
+URL, which is a stop-and-ask twice over: publishing, and the public URL. **G1's
+binding has still never been verified** — the coherence check says it cannot
+decide it and names the address.
 
-**It is the page's second link rather than its first**, which #96 changed under
-that pull request's O1: the explanation now points at this repository, because
-naming a ruleset a reader cannot reach is a page asking to be judged on documents
-it does not point at. The reading both links rest on is the same one — 0003 §5
-forbids any request after load, and a visitor following a link is navigation
-rather than this page fetching. What #77 must not do is turn two sentences about
-logging into the consent banner 0004 rules out.
-
-**What is left of [#13](https://github.com/nanatsusaya/dot-panic/issues/13) is
-the decider's and the workflow.** #96 closed step 4, so steps 5 and 6 are all
-that remain: [#90](https://github.com/nanatsusaya/dot-panic/issues/90), the real
-imprint address 0011 §6 makes a precondition of publishing, and
-[#98](https://github.com/nanatsusaya/dot-panic/issues/98), whose file may be
-written at any point after step 3 but whose deployment is a stop-and-ask twice
-over. **G1's binding has still never been verified** — the coherence check says
-it cannot decide it and names the address.
+**One thing to carry into it rather than discover.** The workflow has to run
+`check:method`, and that check invokes a script from a **sibling clone** of
+`agent-project-rules` — so it means checking out a second repository and pinning
+which version of it decides a deployment here.
+[#202](https://github.com/nanatsusaya/dot-panic/issues/202) names exactly that
+awkwardness for a different gate, the pull request, and is open and unanswered.
+Nothing makes #202 a blocker of #98 — 0011 §2 already decided that deployment
+runs after the checks pass — but whoever writes the workflow answers the sibling
+question first, and #202 is where the answer will be read.
 
 **#96 merged with its *Watched and seen* criterion unmet, and nothing records
 that anyone looked.** What a command and a supplied clock could decide was
@@ -1367,6 +1382,14 @@ were closed afterwards by a comment on the merged pull request —
 has no written home. **`Escape` is the sharp one**: it could not be decided in
 the session's own browser at all, where the key arrives trusted and unprevented
 and the dialog stays open.
+
+**#77 split its own criterion rather than closing or dropping it.** Everything in
+it that is geometry was measured on the floor device with the notice in place:
+the section still collapses and expands, the dialog scrolls where the page does
+not, and the document is exactly as tall as the viewport in every state including
+the root font size doubled. What was not decided is whether the paragraph *reads*
+right in the section — five lines at 375 pixels, with the link's own text
+breaking across two of them. **That is the same hand-off, one ticket later.**
 
 **A page nobody has looked at is what 0011 §7 is about to publish.** The first
 deployment is this epic, and two of its remaining three items are the decider's,
