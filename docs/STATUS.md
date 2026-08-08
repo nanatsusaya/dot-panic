@@ -506,6 +506,32 @@ which. **Practice had moved on 2026-08-05 with #174 and every change since; the
 operating rules had not** — a session starting fresh would have read the old rule
 and followed it, which is the seam this closes.
 
+**A merged description may not be edited, and CLAUDE.md's *Delivery* is where
+that now lives.** [#185](https://github.com/nanatsusaya/dot-panic/issues/185)
+moved it out of #171's constraints, which is not a place a session reads its
+operating rules from. The rule was decided on 2026-08-05 after
+[PR #168](https://github.com/nanatsusaya/dot-panic/pull/168), and **it was broken
+the day it got its home**: a session edited PR #206's description four minutes
+after that merged, to add the answered-`O1` line, and reverted it. What the rule
+says to do instead is two things and not one — a comment, which carries a
+timestamp and a permalink, and the durable consequence in the artifact that owns
+the fact. **What the section does when an answer is later than the merge is
+deliberately not settled here**: that is the shape's, and the shape is
+[agent-project-rules#13](https://github.com/nanatsusaya/agent-project-rules/issues/13)'s.
+
+**That ticket had itself been closed by a sentence saying it was not.**
+[PR #205](https://github.com/nanatsusaya/dot-panic/pull/205) wrote *Nothing here
+closes #185* and closed it, with none of its scope done — GitHub reads the
+keyword and not the negation, which is exactly what the template warns about in
+those words. It is the third accidental closure here, after
+[#83](https://github.com/nanatsusaya/dot-panic/issues/83) twice on 2026-08-02,
+and it was reopened on 2026-08-08. **The warning could not have reached the
+author**: it lives in an HTML comment in the template, and an agent running
+`gh pr create --body-file` never opens the file it is in. The
+[method log](method-log.md) carries the general form, which is worth more than
+this instance — every warning kept in a template comment should be asked who
+opens the file it lives in.
+
 **Three divergences from the published file are declared, and one of them was
 stale.** *Verified* named `node ../agent-project-rules/checks/check-method.mjs`,
 which [#71](https://github.com/nanatsusaya/dot-panic/issues/71) had already
@@ -1053,7 +1079,7 @@ response headers, stated as what was found rather than as a capability claim, so
 the policy ships as a `meta` element alone and `report-uri`, `frame-ancestors`
 and `sandbox` stay unsent.
 
-**That file exists now, and nothing has ever run it.**
+**That file exists now, and it has run once.**
 [#98](https://github.com/nanatsusaya/dot-panic/issues/98) wrote
 `.github/workflows/deploy.yml`: one job, thirteen steps, the four checks one step
 each rather than through `bun run check`, because the aggregate's exit status
@@ -1098,6 +1124,20 @@ that way: the runner image carries no Bun, so the alternative was an unpinned
 install script fetched at run time into a shell holding `pages: write`. **If it
 should bind rather than be a precedent, it is 0009's**, and that route was in the
 question and stays open.
+
+**The first run happened on the merge, and 0011 §2 stopped being a claim about a
+file.** Eleven steps green — both checkouts, Bun, the four checks, the emit and
+the assembly — then `The imprint carries no placeholder` red on
+`_site/index.html`, and `Upload` and `Deploy` **skipped**. That is the record's
+sentence observed rather than argued: a red step produces no deployment rather
+than a deployed page with a warning beside it. **Nothing was published**, and
+nothing will be until [#90](https://github.com/nanatsusaya/dot-panic/issues/90).
+
+**The pin and a person's clone agreed, which was worth knowing rather than
+assuming.** `check:method` at `v0.5.3` in the runner reported 32 rules in force,
+539 references resolved and `OK` — the same three numbers the unpinned local
+clone reported four commits later. They can disagree; today they do not, and
+nothing checks that they still will.
 
 **The host logs the visitor's IP address, and the page says so.** GitHub
 documents it plainly, which answers what 0004 §8 handed forward and contradicts
@@ -1238,9 +1278,17 @@ Outside the epics:
 
 | Ticket | Why it exists |
 |---|---|
-| [#177](https://github.com/nanatsusaya/dot-panic/issues/177) The code documentation convention | CLAUDE.md said why-not-what and nothing about form, and #91's files showed what that leaves open |
 | [#178](https://github.com/nanatsusaya/dot-panic/issues/178) A test that decides the convention is followed | #177's rule has no command behind it; presence is 0010 §2's third kind and needs no record |
-| [#181](https://github.com/nanatsusaya/dot-panic/issues/181) Where a test lives when its subject is source text | four such tests are owed and none has a place; #92's cannot sit inside its own subject |
+| [#202](https://github.com/nanatsusaya/dot-panic/issues/202) Whether the four checks gate a pull request | 0011 §2 says review gates a merge, while the method this project demonstrates gates its own markdown in CI |
+
+**The two rows that left were closed and the table had not noticed** — #177,
+whose convention is in CLAUDE.md, and #181, whose answer is
+[0018](adr/0018-where-a-test-lives.md). #185 never had a row and asked for one in
+its own last line; it is not here either, because it closed with the change that
+added it. **This table is a list of open tickets and nothing checks that it is
+one**, which is the same class as the readiness column
+[#46](https://github.com/nanatsusaya/dot-panic/issues/46) removed and is worth
+knowing before trusting a row.
 
 **[#90](https://github.com/nanatsusaya/dot-panic/issues/90) is the one thing
 nobody here can work, and it stops the URL rather than the code.** 0004 R2 makes
@@ -1405,19 +1453,15 @@ What a change description must contain is no longer among the gaps here.
 
 ## The single clearest next step
 
-**[#185](https://github.com/nanatsusaya/dot-panic/issues/185) — one edit to
-CLAUDE.md, for a rule that has no home and was broken the day this was
-written.** *Do not edit a merged pull request* lives only in
-[#171](https://github.com/nanatsusaya/dot-panic/issues/171)'s constraints, which
-is not where a session reads its operating rules — and on 2026-08-08 a session
-edited PR #206's description four minutes after it merged, to add the line
-recording an answered `O`-question. It was reverted; the answer belongs in the
-comment, which is timestamped and permanent, and in this file. **The rule already
-had its reason written down** in [the pull request
-template](../.github/pull_request_template.md) — an answer edited into a
-description has no permalink, notifies nobody and races whoever else is
-editing — and what was missing is the sentence that reaches a session before the
-edit rather than after.
+**[#178](https://github.com/nanatsusaya/dot-panic/issues/178) — a test that
+decides the documentation convention is followed.** Both things it was sequenced
+after are done: [#177](https://github.com/nanatsusaya/dot-panic/issues/177) wrote
+the convention into CLAUDE.md and
+[#92](https://github.com/nanatsusaya/dot-panic/issues/92) is the worked example of
+reading this repository as text. What it asserts is **presence** — a block header
+on every exported symbol, a `@param` for every parameter — which is 0010 §2's
+third kind and needs no record to permit it. Whether a why is a why stays with
+review, there as in `grimora`, where the convention and the test both come from.
 
 **It is not the thing that unblocks the URL, and nothing a session can do is.**
 #98 wrote the workflow, so **every remaining piece of
