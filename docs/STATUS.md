@@ -559,7 +559,7 @@ of which this project had only the half about descriptions. **The post-mortem of
 an accidental closure was written in the medium that causes one.** That is the
 fourth here and the first of its kind, and
 [#210](https://github.com/nanatsusaya/dot-panic/issues/210) is where the rule
-goes so a session reads it rather than the template's comment.
+went, so a session reads it rather than the template's comment.
 
 **The state is right by luck, which is the part to distrust.** Every bullet of
 #185's scope was met by that same merge, so `COMPLETED` is what it should have
@@ -1556,9 +1556,9 @@ precisely and carries no *Watched* evidence, so the ticket is closed and the
 condition of Done is open. **That is the third time**, after
 [#94](https://github.com/nanatsusaya/dot-panic/issues/94)'s smoothness and
 [#109](https://github.com/nanatsusaya/dot-panic/issues/109), and the second two
-were closed afterwards by a comment on the merged pull request —
-[#185](https://github.com/nanatsusaya/dot-panic/issues/185) is where that route
-has no written home. **`Escape` is the sharp one**: it could not be decided in
+were closed afterwards by a comment on the merged pull request — the route
+[#185](https://github.com/nanatsusaya/dot-panic/issues/185) has since given a
+written home. **`Escape` is the sharp one**: it could not be decided in
 the session's own browser at all, where the key arrives trusted and unprevented
 and the dialog stays open.
 
@@ -1589,9 +1589,8 @@ the documentation convention got the command it had been missing.
 Definition-of-Ready activity covered #90 or the eight build tickets alone — the
 activity found the answer changes nothing it produced, since #90 is not-ready
 either way and in the order either way.
-[#185](https://github.com/nanatsusaya/dot-panic/issues/185) is one edit to
-CLAUDE.md about a rule with no home: *do not edit a merged pull request*, which
-lives only in #171's constraints. **Its twin
+[#185](https://github.com/nanatsusaya/dot-panic/issues/185) closed on 2026-08-08,
+and the rule it was filed for lives in CLAUDE.md's *Delivery*. **Its twin
 [#186](https://github.com/nanatsusaya/dot-panic/issues/186) closed on 2026-08-06**
 — the *Commands* section now says that `check:types` is the only one of the four
 deciding 0009 §5, and why the error reads as an awkward toolchain rather than as a
