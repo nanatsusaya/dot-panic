@@ -284,10 +284,16 @@ rather than copied on his call of 2026-08-05.
   than it sounds**: 0008 §6's own reasoning is about screen size and the window,
   and quoting it inside `core/` is what this rule was written after.
 
-**No command decides any of this.**
-[#178](https://github.com/nanatsusaya/dot-panic/issues/178) is the one that
-would, and it would decide presence rather than quality — whether a why is a why
-is review's either way.
+**One command decides part of it, and only presence.**
+[`tests/documented-exports.test.ts`](tests/documented-exports.test.ts) reads
+`core/`, `shell/` and `view/` and reddens when an exported symbol carries no
+block, when the block is the one-line form, or when a parameter has no
+`@param`. **Everything else here is review's** — whether a why is a why, whether
+a property's line earns itself, whether the form fits the length. A green run
+says the blocks are there.
+[#178](https://github.com/nanatsusaya/dot-panic/issues/178) is where that line
+was drawn, and it is the same line 0010 §2 draws between a fact about the text
+and a judgment about it.
 
 ## Tickets
 
