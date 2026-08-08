@@ -18,6 +18,7 @@
   [0012](0012-how-software-gets-developed.md) §4 (test-first in the Core, without
   exception), §5 (watch-first in the View)
 - **Supersedes:** nothing
+- **Amended:** 2026-08-09 — A1
 
 ## Context
 
@@ -69,19 +70,38 @@ for every dot.** Reynolds' neighborhood is a distance *and an angle*: a boid
 disregards flockmates outside a cone, modeling an animal that cannot see behind
 itself.
 
-**The cone is dropped, deliberately.** It is a fourth number that has to be
+**The cone is dropped, deliberately.** It is one more number that has to be
 chosen by watching, and its effect on what a person sees is the least separable
-of the four — a watcher can tell that the flock looks wrong and cannot tell that
-the cone is why. Nothing here has eyes; 0004 records the model as reimplemented
+of them — a watcher can tell that the flock looks wrong and cannot tell that the
+cone is why. Nothing here has eyes; 0004 records the model as reimplemented
 rather than copied, and a simplification is a legitimate part of that. Adding it
 later changes a number, not the structure.
+
+**Separation acts over a shorter reach than the other two.** Alignment and
+cohesion take the whole neighborhood; separation answers only the neighbors
+inside a smaller circle around the dot, concentric with it. **The shorter reach
+is strictly shorter**, which is a relation a command decides once the two numbers
+exist, in the way §6's margin condition is.
+
+**One reach for all three does not produce a flock, and that is measured rather
+than argued.** Separation and cohesion oppose each other, so over one reach the
+spacing at which they balance is fixed by their weights alone — and a flock whose
+preferred spacing is the spacing it already has at uniform density is in
+equilibrium when it is spread evenly. It then has no reason to form a group
+anywhere. That is what the first implementation did: over a minute it moved from
+a near-random scatter to most of the way toward a lattice, and weighting cohesion
+up did not recover the middle but fell straight past groups into a single clump.
+Giving separation the shorter reach puts the balance point well inside the
+spacing a uniform scatter already has, which is what leaves groups somewhere to
+form.
 
 **The three weights are not fixed here**, for the reason 0005 §3 gives about
 color and R1 there records: 0001 §3.1 puts *it reads as a flock* beyond what any
 command can decide, and the weights are the numbers that decide it. They are
-chosen by watching, under 0012 §5. **The neighborhood radius is not fixed here
-either**, and it has a second reason as well as that one: it drives the cost of
-neighbor search, which is 0008's.
+chosen by watching, under 0012 §5. **Neither reach is fixed here either**, and
+the neighborhood's has a second reason as well as that one: it drives the cost of
+neighbor search, which is 0008's. Separation's does not — it is the smaller of
+the two, so a search that answers the neighborhood answers it as well.
 
 ### 2. Non-overlap is a hard constraint, applied after the step
 
@@ -244,6 +264,7 @@ motion that left its own side of it implicit would be the wrong example.
 
 | | Invariant |
 |---|---|
+| §1 | Separation's reach is shorter than the neighborhood's |
 | §2 | No two dots closer than `2r` in a returned world |
 | §3 | Every dot's speed in `[vmin, vmax]`, with `vmin > 0` |
 | §4 | Change in velocity across a step at most `amax` |
@@ -255,7 +276,7 @@ motion that left its own side of it implicit would be the wrong example.
 into the ticket before the work starts:
 
 - Whether it reads as a flock — 0001 §3.1, which no command will ever decide
-- The three weights in §1, the neighborhood radius, and every number above
+- The three weights in §1, both of its reaches, and every number above
 - Whether speed visibly varies, which §4 produces rather than guarantees
 
 **Every number in this record is in the second list.** The record fixes relations
@@ -266,9 +287,10 @@ and no color.
 
 **Positive.**
 
-- **Six invariants, on the day the record is written.** 0012 §4 requires the
-  Core to be built test-first, and §10 hands it the list to start from rather
-  than asking the first implementer to invent one.
+- **Seven invariants, six of them on the day the record is written.** 0012 §4
+  requires the Core to be built test-first, and §10 hands it the list to start
+  from rather than asking the first implementer to invent one. The seventh
+  arrived with A1, once there was a flock to look at.
 - **The boundary rule is derived, not chosen.** §6 follows from §4, so a later
   session that wants a bounce has to argue with an invariant instead of with a
   preference.
@@ -304,6 +326,17 @@ and no color.
 - **§7 is the softest section.** It commits to a flock leaving a corner without
   saying what force makes it leave, resting on the claim that a speed floor is
   enough. That claim is plausible and untested.
+- **Separation's reach has nothing arguing for a value.** The neighborhood's has
+  0008's search cost pulling on it from one side; the shorter one has only what
+  the flock looks like. It is also the number here most able to be wrong
+  quietly — a flock too even and a flock too clumped both satisfy every invariant
+  in §10.
+- **Groups make the neighborhood hold more of the flock, which is the price of
+  having groups at all.** A dot in an evenly spread world has a handful of
+  neighbors; a dot inside a group has many, over the same radius. That pulls
+  against this section's own reason for calling locality load-bearing, and it
+  pulls on 0008 §7, whose scan is over whatever the radius returns. Nothing here
+  bounds it, and §10 leaves the number to watching.
 
 ## Alternatives considered
 
@@ -319,6 +352,20 @@ and no color.
   every test.
 - **Reynolds' angular neighborhood.** Rejected in §1 as a fourth number tuned
   blind, and recorded as dropped rather than left unmentioned.
+- **One reach for all three behaviors.** Rejected in §1 by A1, and it is the only
+  thing this record has rejected after building it: over one reach the balance
+  between separation and cohesion sits at the spacing a uniform scatter already
+  has, and the flock spreads into a lattice rather than forming groups.
+- **Reaching the same result by the weights alone.** Rejected in §1 by A1, on
+  measurement rather than on principle: weighting cohesion up leaves the lattice
+  almost unchanged until it passes groups altogether and collapses the flock into
+  one clump. The middle is not somewhere in the weights.
+- **A bound on how much shorter the shorter reach is.** Rejected in §1 by A1,
+  though the measurement supports one: at half the neighborhood the flock is
+  indistinguishable from a random scatter, and grouping begins below that. It is
+  a measurement at one dot count, one frame and one set of weights, where §6's
+  relation is arithmetic that holds at any numbers — so writing it in would fix a
+  number in the disguise of a relation, which §10 forbids in terms.
 - **Slower motion under `reduce`.** Rejected in §8: still sustained, still
   automatic.
 - **A paused flag in the world.** Rejected in §9: it puts a Shell concern in the
@@ -373,6 +420,89 @@ holds the pile open is the speed floor in §3 and nothing else, and the assertio
 is the first thing worth writing as a failing test under
 [0012](0012-how-software-gets-developed.md) §4, because it is the claim here most
 likely to be wrong.
+
+## Amendments
+
+**A1 — separation acts over a shorter reach than alignment and cohesion.
+2026-08-09.**
+
+§1 ended:
+
+> **The neighborhood radius is not fixed here either**, and it has a second
+> reason as well as that one: it drives the cost of neighbor search, which is
+> 0008's.
+
+§1's paragraph on the cone opened:
+
+> **The cone is dropped, deliberately.** It is a fourth number that has to be
+> chosen by watching, and its effect on what a person sees is the least separable
+> of the four
+
+§10's watched list read:
+
+> - The three weights in §1, the neighborhood radius, and every number above
+
+*Consequences* opened:
+
+> - **Six invariants, on the day the record is written.** 0012 §4 requires the
+>   Core to be built test-first, and §10 hands it the list to start from rather
+>   than asking the first implementer to invent one.
+
+**What replaced them.** §1 gains two paragraphs — separation acting over a
+shorter, concentric circle, and why one reach does not work — and its closing
+paragraph now speaks of both reaches, saying that only the neighborhood's carries
+0008's cost. §10 gains a row in the asserted table, *separation's reach is
+shorter than the neighborhood's*, and its watched list names both reaches instead
+of one. *Consequences* counts seven invariants and gains two negatives; two
+entries were added to *Alternatives considered*, both rejected on measurement.
+
+**The cone's paragraph loses a count and keeps its argument.** It called the cone
+*a fourth number* and the amendment adds one, so it now says *one more number*
+and compares it against the watched numbers rather than against four of them.
+Nothing about dropping the cone changes, and the paragraph moved up to sit
+directly under the sentence it explains.
+
+**Why, and this is the first thing this record has changed because it was built
+and looked at.** The three behaviors were implemented under
+[#99](https://github.com/nanatsusaya/dot-panic/issues/99) with a single reach,
+every invariant in §10 held, seventy tests passed, and the flock was wrong in a
+way no command here was ever going to report: it spread itself evenly and formed
+no groups. Over sixty seconds its Clark-Evans index — the mean distance to the
+nearest other dot against what a random scatter of the same density gives — went
+from 0.831 to 1.735, where 1 is random and 2.15 a perfect lattice. Separation and
+cohesion oppose each other over one reach, so their balance point is fixed by
+their weights, and at any weights that keep the flock from collapsing it lands
+near the spacing a uniform scatter already has. Weighting cohesion up does not
+find a middle; it leaves the lattice almost untouched and then falls past groups
+into one clump. The measurements are on
+[the change that found it](https://github.com/nanatsusaya/dot-panic/pull/225#issuecomment-5228780323).
+
+**What did not change.** The cone stays dropped, and for the reason §1 already
+gives. Non-overlap stays a constraint on the result rather than a fourth force,
+so §2 is untouched and separation is still not asked to carry it. **No number
+enters this record**, which is the line §10 draws and A1 does not cross: both
+reaches are watched, and where they live is 0008 R1's.
+
+**Two things this amendment was asked to do and did not**, both put to the
+decider while it was under review and both confirmed as written. It does not say
+how much shorter the shorter reach is — *Alternatives considered* carries what
+the measurement said and why it stays out. And **§1's locality sentence is left
+alone** although groups make it read differently: a dot in an evenly spread world
+has about six neighbors and a dot inside a group has forty or more, over the same
+radius. The claim is that a dot reacts only to what is *near*, and the radius is
+what defines near; reading it as a claim about a count would make it a number,
+which no section here states. The cost is in *Consequences* rather than in the
+sentence.
+
+Authorized by Daniel on 2026-08-09, after watching ten browsers side by side for
+a minute and reading the frames back: *"sie verhalten sich eher wie partikel im
+raum die versuchen abstand zu halten … es ist ein guter anfang aber kein schönes
+schwarm bewegungs verhalten"*, and then, against the recommendation that a second
+reach be taken as an amendment here rather than as a number under
+[#216](https://github.com/nanatsusaya/dot-panic/issues/216): *"ja, mach das per
+/adr"*. The two things this amendment was asked to do and did not were put to him
+the same day and answered with the recommendation, in that order: *"zu O1: keine
+schranke, zu O2: §1 lassen"*.
 
 ## References
 
