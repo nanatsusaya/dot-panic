@@ -375,13 +375,32 @@ describe("the frame's edge", () => {
    * That is deliberate and it is exactly what #101 clamps — this test is what
    * that ticket's own failing test will be written against, and capping it here
    * would take its subject away.
+   *
+   * **The incoming speed is low on purpose**, because the band is downstream of
+   * the force and would otherwise be what this measured: at 0.1 in each
+   * component the corner's sum carries the dot to 0.1697, above the ceiling,
+   * and the number that comes back is the band's rather than the edge's. That
+   * is the next test.
    */
   test("fires both edges in a corner", () => {
+    const world = dotIn(WIDE, { x: 0, y: 0 }, { x: 0.05, y: 0.05 });
+
+    for (const dot of step(world, seconds).dots) {
+      expect(dot.velocity.x).toBeCloseTo(0.05 + perStep, 12);
+      expect(dot.velocity.y).toBeCloseTo(0.05 + perStep, 12);
+    }
+  });
+
+  // What #101 is for, visible before it exists. A dot crossing a corner near
+  // the ceiling is already being held back by 0006 §3's band rather than by
+  // §4's bound — the band changes the speed and keeps the heading, where the
+  // bound will limit the change itself.
+  test("hands the corner's sum to the band at the ceiling", () => {
     const world = dotIn(WIDE, { x: 0, y: 0 }, { x: 0.1, y: 0.1 });
 
     for (const dot of step(world, seconds).dots) {
-      expect(dot.velocity.x).toBeCloseTo(0.1 + perStep, 12);
-      expect(dot.velocity.y).toBeCloseTo(0.1 + perStep, 12);
+      expect(speedOf(dot.velocity)).toBeCloseTo(SPEED_MAX, 12);
+      expect(dot.velocity.x).toBeCloseTo(dot.velocity.y, 12);
     }
   });
 

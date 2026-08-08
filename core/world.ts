@@ -151,10 +151,19 @@ const FULL_TURN = 2 * Math.PI;
 /**
  * Build the world a visit starts from.
  *
- * The dots are scattered over one square of the frame's shorter side, because
- * the frame is #103's: until 0006 §6's edge exists the Core has no rectangle to
- * spread them over. Each leaves in a direction drawn from the generator, which
- * assumes as little about a heading as anything can.
+ * The dots are scattered over the frame, inset by `EDGE_MARGIN` on every side,
+ * and each leaves in a direction drawn from the generator — which assumes as
+ * little about a heading as anything can.
+ *
+ * **The inset is not tidiness.** A dot spawned against an edge is one 0006 §6's
+ * turning force has almost no room to turn, and under §8 the Shell never steps
+ * at all — so that dot would sit on the edge for the whole visit, for the
+ * audience 0004 §4 exists to protect. Insetting is also what makes containment
+ * a property of every world this Core produces rather than of the first few
+ * seconds of a run.
+ *
+ * The inset always fits: the frame's shorter side is 1 (0008 §6) and twice the
+ * margin is 0.16, so neither side can be consumed by it.
  *
  * @param options         what the world is made of, all of it chosen outside
  *                        the Core
@@ -177,6 +186,8 @@ export function createWorld(options: {
   readonly seed: number;
 }): World {
   const dots: Dot[] = [];
+  const spreadX = options.frame.width - 2 * EDGE_MARGIN;
+  const spreadY = options.frame.height - 2 * EDGE_MARGIN;
   let random = randomFromSeed(options.seed);
 
   for (let made = 0; made < options.count; made += 1) {
@@ -186,7 +197,10 @@ export function createWorld(options: {
     const heading = turn * FULL_TURN;
 
     dots.push({
-      position: { x, y },
+      position: {
+        x: EDGE_MARGIN + x * spreadX,
+        y: EDGE_MARGIN + y * spreadY,
+      },
       velocity: {
         x: Math.cos(heading) * INITIAL_SPEED,
         y: Math.sin(heading) * INITIAL_SPEED,

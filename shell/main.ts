@@ -13,7 +13,13 @@
  */
 
 import { step } from "../core/step.js";
-import { createWorld, DOT_COUNT, DOT_RADIUS } from "../core/world.js";
+import {
+  createWorld,
+  DOT_COUNT,
+  DOT_RADIUS,
+  type Frame,
+  withFrame,
+} from "../core/world.js";
 import { type Colors, draw } from "../view/draw.js";
 
 /*
@@ -151,6 +157,28 @@ function sizeCanvas(): void {
 }
 
 /*
+ * The same box read as 0006 §6's frame. 0008 §6 makes every length in the world
+ * a fraction of the shorter side, so one of the two numbers below is 1 and the
+ * other is the ratio — which is the whole of what the Core learns about size.
+ *
+ * **A box of zero would put NaN in every position and nothing recovers from
+ * that**: the world carries it forward for the rest of the visit. The square
+ * below is a frame nothing is ever drawn into, replaced by the next resize.
+ */
+function readFrame(): Frame {
+  const shorter = Math.min(canvas.clientWidth, canvas.clientHeight);
+
+  if (shorter === 0) {
+    return { width: 1, height: 1 };
+  }
+
+  return {
+    width: canvas.clientWidth / shorter,
+    height: canvas.clientHeight / shorter,
+  };
+}
+
+/*
  * The seed is the Shell's under 0002 §2, and it is drawn fresh on every visit
  * so that no two loads start from the same arrangement. The Core stays
  * deterministic either way (0002 §4): given this seed it produces exactly one
@@ -162,6 +190,7 @@ function chooseSeed(): number {
 
 let world = createWorld({
   count: DOT_COUNT,
+  frame: readFrame(),
   radius: DOT_RADIUS,
   seed: chooseSeed(),
 });
@@ -284,11 +313,21 @@ function label(): void {
  * (0005 §1), which is also true while the flock is stopped: the loop keeps
  * drawing, only the Core stops being called (0006 §9).
  *
+ * **The world's frame moves with it and the world is not rebuilt** (0006 §6).
+ * Dots the new frame leaves outside are brought back by the turning force,
+ * which is why that force is a force: a flock that started over whenever
+ * somebody dragged an edge would read as broken.
+ *
  * **No browser fires this event on page load**, so the call below is what sizes
  * the canvas the first time and is not something this listener would have done.
  */
-window.addEventListener("resize", sizeCanvas);
+function fitToCanvas(): void {
+  sizeCanvas();
+  world = withFrame(world, readFrame());
+}
 
-sizeCanvas();
+window.addEventListener("resize", fitToCanvas);
+
+fitToCanvas();
 label();
 requestAnimationFrame(frame);
