@@ -1046,12 +1046,47 @@ because a branch leaves 0009 §8's checks with nothing to gate: the checks run,
 `tsc` emits, and `actions/deploy-pages` runs only if everything before it passed,
 so a red check produces no deployment rather than a deployed page with a warning
 beside it. **This is not continuous integration** — what gates a merge is still
-review — and **the workflow is a file nobody has written**, so that ordering is a
-claim about a file rather than a property of the project. Its §5 settles 0003
+review — and **the workflow is a file now**, so that ordering has stopped being a
+claim about a file and become the step order of one job. Its §5 settles 0003
 §6's conditional the unwanted way: GitHub's documentation provides no way to set
 response headers, stated as what was found rather than as a capability claim, so
 the policy ships as a `meta` element alone and `report-uri`, `frame-ancestors`
 and `sandbox` stay unsent.
+
+**That file exists now, and nothing has ever run it.**
+[#98](https://github.com/nanatsusaya/dot-panic/issues/98) wrote
+`.github/workflows/deploy.yml`: one job, thirteen steps, the four checks one step
+each rather than through `bun run check`, because the aggregate's exit status
+tells a person which one failed and a workflow tells them by which step is red.
+**Pages is deliberately not configured by it.** `actions/configure-pages` would
+enable it on the first run, which is a repository setting and a publishing
+decision at once, and CLAUDE.md makes both a stop-and-ask — so the last step
+fails until somebody has set the source by hand, which is the failure worth
+having.
+
+**Three things it had to derive rather than read.** The artifact is **not** the
+repository, and 0011 §6 forces that rather than permitting it: that check runs
+against the artifact *because the source is supposed to carry the placeholder*,
+so a tree containing `docs/` would fail for ever on 0004 §3's stand-in. The
+sibling clone `check:method` needs is reproduced by **two checkouts side by
+side** — `path` is documented as relative to the workspace and cannot leave it,
+so the trunk goes into a subdirectory and the ruleset beside it. And the copy
+excludes `*.test.js`, because 0010 §4 puts the Core's tests beside its source and
+`core/*.js` is therefore test code too; a naive copy publishes the suite.
+
+**0011 §6's check was run both ways before it was believed.** Against the
+artifact as it stands it fails, which is #90 not having landed and is the
+expected state; against the same artifact with the placeholder replaced in the
+copy it passes. A gate that only ever fails is not a gate, and today this one
+can only fail.
+
+**The version of another repository now decides whether this one deploys**, and
+that is new. `check:method` runs a script from `agent-project-rules`, pinned to
+`v0.5.3` — the newest release carrying catalog 0.5, which is what `method.json`
+declares. [The maintenance list](maintenance.md) gains a row for it, on the same
+trigger 0016 §6 already gives the five procedure copies. **A person's clone is
+not pinned**, so a local `check:method` and the workflow's can disagree; the
+clone that ran the checks for this change was four commits past `v0.5.3`.
 
 **The host logs the visitor's IP address, and the page says so.** GitHub
 documents it plainly, which answers what 0004 §8 handed forward and contradicts
@@ -1359,30 +1394,37 @@ What a change description must contain is no longer among the gaps here.
 
 ## The single clearest next step
 
-**[#98](https://github.com/nanatsusaya/dot-panic/issues/98) — the Actions
-workflow that builds and deploys, the file and not the deployment.** It runs
-0009 §8's four checks, emits with `tsc`, fails if the built artifact still
-carries `Musterstadt` (0011 §6), and calls `actions/deploy-pages` only if
-everything before it passed (0011 §2). Its own header splits it: **ready for the
-file, not for the deployment**, and the two are not one act.
+**[#185](https://github.com/nanatsusaya/dot-panic/issues/185) — one edit to
+CLAUDE.md, for a rule that has no home and was broken the day this was
+written.** *Do not edit a merged pull request* lives only in
+[#171](https://github.com/nanatsusaya/dot-panic/issues/171)'s constraints, which
+is not where a session reads its operating rules — and on 2026-08-08 a session
+edited PR #206's description four minutes after it merged, to add the line
+recording an answered `O`-question. It was reverted; the answer belongs in the
+comment, which is timestamped and permanent, and in this file. **The rule already
+had its reason written down** in [the pull request
+template](../.github/pull_request_template.md) — an answer edited into a
+description has no permalink, notifies nobody and races whoever else is
+editing — and what was missing is the sentence that reaches a session before the
+edit rather than after.
 
-**It is the last member of [#13](https://github.com/nanatsusaya/dot-panic/issues/13)
-anybody here can work.** #77 closed step 4's last piece, so what remains beside
-this file is [#90](https://github.com/nanatsusaya/dot-panic/issues/90) — the real
-imprint address, which is the decider's — and running the workflow against the
-URL, which is a stop-and-ask twice over: publishing, and the public URL. **G1's
-binding has still never been verified** — the coherence check says it cannot
-decide it and names the address.
+**It is not the thing that unblocks the URL, and nothing a session can do is.**
+#98 wrote the workflow, so **every remaining piece of
+[#13](https://github.com/nanatsusaya/dot-panic/issues/13) is the decider's**:
+[#90](https://github.com/nanatsusaya/dot-panic/issues/90)'s real imprint address,
+setting the Pages publishing source and 0011 §2's environment protection rule,
+and the first deployment — a stop-and-ask twice over, for publishing and for the
+public URL. The looking nobody has done is his too. **G1's binding has still
+never been verified**, and the coherence check says it cannot decide it and names
+the address.
 
-**One thing to carry into it rather than discover.** The workflow has to run
-`check:method`, and that check invokes a script from a **sibling clone** of
-`agent-project-rules` — so it means checking out a second repository and pinning
-which version of it decides a deployment here.
-[#202](https://github.com/nanatsusaya/dot-panic/issues/202) names exactly that
-awkwardness for a different gate, the pull request, and is open and unanswered.
-Nothing makes #202 a blocker of #98 — 0011 §2 already decided that deployment
-runs after the checks pass — but whoever writes the workflow answers the sibling
-question first, and #202 is where the answer will be read.
+**What #98 could not settle it did not decide.** The workflow pins
+`agent-project-rules` at `v0.5.3` because something had to be named for the file
+to exist, and which version of another repository decides a deployment here is
+the question [#202](https://github.com/nanatsusaya/dot-panic/issues/202) asks
+about the other gate, still open and unanswered. Nothing makes #202 a blocker —
+0011 §2 already fixed that deployment runs after the checks pass — but an answer
+there moves this pin, and the pin is where it will be read.
 
 **#96 merged with its *Watched and seen* criterion unmet, and nothing records
 that anyone looked.** What a command and a supplied clock could decide was
