@@ -573,8 +573,16 @@ stale.** *Verified* named `node ../agent-project-rules/checks/check-method.mjs`,
 which [#71](https://github.com/nanatsusaya/dot-panic/issues/71) had already
 replaced with a script; it now points at CLAUDE.md's *Commands* rather than
 carrying a string that goes stale the first time one is renamed. The other two
-are American spelling and the closing-keyword warning, which the handbook has
-none of.
+are American spelling and the closing-keyword paragraph, which the handbook has
+none of. **The third is a pointer now rather than the rule.**
+[#212](https://github.com/nanatsusaya/dot-panic/issues/212) moved the rule to
+CLAUDE.md's *Delivery*, where an agent looks, and left the template a sentence
+saying where it went and that it moved — a warning about commit messages was
+being kept in a file only a person opens, which is
+[#185](https://github.com/nanatsusaya/dot-panic/issues/185)'s finding applied to
+the artifact that carried it. **The count stays three**: what
+differs from the published file is that a paragraph is here at all, not what it
+says.
 
 **That warning records a trap and was carrying a third round of it.** The
 tracker's own timeline says
@@ -1316,15 +1324,15 @@ Outside the epics:
 |---|---|
 | [#178](https://github.com/nanatsusaya/dot-panic/issues/178) A test that decides the convention is followed | #177's rule has no command behind it; presence is 0010 §2's third kind and needs no record |
 | [#202](https://github.com/nanatsusaya/dot-panic/issues/202) Whether the four checks gate a pull request | 0011 §2 says review gates a merge, while the method this project demonstrates gates its own markdown in CI |
-| [#210](https://github.com/nanatsusaya/dot-panic/issues/210) A linking keyword is read in a commit message too | the warning this project keeps covers descriptions, and the fourth accidental closure came the other way |
-| [#212](https://github.com/nanatsusaya/dot-panic/issues/212) The keyword warning moves to CLAUDE.md | a rule an agent reaches only through a pointer into a template comment is one indirection past what #185 found safe |
 
 **The two rows that left were closed and the table had not noticed** — #177,
 whose convention is in CLAUDE.md, and #181, whose answer is
 [0018](adr/0018-where-a-test-lives.md). #185 never had a row and asked for one in
 its own last line; it is not here either, because it closed with the change that
-added it. **This table is a list of open tickets and nothing checks that it is
-one**, which is the same class as the readiness column
+added it. **Two more rows came and went inside one evening** — #210 and #212,
+each added while open and removed by the change that shut it, which is the table
+working rather than failing. **This table is a list of open tickets and nothing
+checks that it is one**, which is the same class as the readiness column
 [#46](https://github.com/nanatsusaya/dot-panic/issues/46) removed and is worth
 knowing before trusting a row.
 
@@ -1500,6 +1508,13 @@ reading this repository as text. What it asserts is **presence** — a block hea
 on every exported symbol, a `@param` for every parameter — which is 0010 §2's
 third kind and needs no record to permit it. Whether a why is a why stays with
 review, there as in `grimora`, where the convention and the test both come from.
+
+**One errand comes before it and is not a change to this repository.** The
+keyword case goes to `agent-project-rules` as a ticket, answered on 2026-08-08
+as *yes, once the local change has landed* — the handbook has no warning of any
+kind, and after [#212](https://github.com/nanatsusaya/dot-panic/issues/212) this
+project has both a rule and four instances to describe. It is named here rather
+than promoted, because it costs one ticket and settles nothing about the toy.
 
 **It is not the thing that unblocks the URL, and nothing a session can do is.**
 #98 wrote the workflow, so **every remaining piece of
