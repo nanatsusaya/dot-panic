@@ -6,6 +6,40 @@ session would decide worse without it.
 
 Newest first.
 
+## 2026-08-09 — A watch that cannot be judged yet is deferred by name, not skipped
+
+**Three changes here merged with a *Watched and seen* criterion nobody had met** —
+[#94](https://github.com/nanatsusaya/dot-panic/issues/94)'s smoothness,
+[#109](https://github.com/nanatsusaya/dot-panic/issues/109)'s palettes and
+[#96](https://github.com/nanatsusaya/dot-panic/issues/96)'s dialog. Two were met
+afterwards by a comment on the merged pull request; one is still open. **It is not
+carelessness.** The definition of done asks for the watch and CLAUDE.md asks for it
+of anything touching motion, so an author holding a criterion that is not yet
+judgeable is choosing between merging without it and stopping.
+
+**There is a third option, and the sprint over
+[#87](https://github.com/nanatsusaya/dot-panic/issues/87) used it.**
+[#100](https://github.com/nanatsusaya/dot-panic/issues/100)'s *nothing parks,
+nothing shoots* needs a force that varies a speed;
+[#103](https://github.com/nanatsusaya/dot-panic/issues/103)'s frame criteria need
+that force capped. Neither could be judged at its own merge. Both named
+[#101](https://github.com/nanatsusaya/dot-panic/issues/101) inside their own scope
+as the ticket that makes them judgeable, both merged saying so, and one sitting on
+2026-08-09 discharged all three.
+
+**What makes it a deferral rather than a skip is that it is named in both
+directions.** The waiting ticket says which ticket it waits on, the receiving
+ticket's scope says whose criteria it is carrying, and the sitting's evidence names
+all three. A watch pushed forward without a named receiver is a watch nobody owes,
+which is what the three above turned out to be.
+
+**It costs one thing, and the cost is worth writing down.** Three scopes closed on
+one person's *sieht gut aus*, so the evidence is a single judgment covering three
+tickets rather than three judgments. That is the reading #109 already established —
+the criterion met, and not its falsifiers separately checked — and it is the price
+of judging a thing when it becomes judgeable instead of when its ticket happens to
+merge.
+
 ## 2026-08-08 — The questions were asked before the branch existed
 
 **An open question in a pull request is answered in a window minutes wide**, and

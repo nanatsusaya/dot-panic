@@ -2,7 +2,7 @@
 
 *Brought current before a session ends. Read first when one starts.*
 
-*Last brought current: 2026-08-08.*
+*Last brought current: 2026-08-09.*
 
 ## Position
 
@@ -11,7 +11,7 @@ decides exists, and **the toy runs**: `core/` holds a world, a step and a seeded
 generator, `view/` draws one, `shell/` runs the loop that moves it, and the page
 carries the control that stops it.
 
-**Watching has been recorded twice**, and until 2026-08-06 the sentence here said
+**Watching has been recorded three times**, and until 2026-08-06 the sentence here said
 it never had. [#108](https://github.com/nanatsusaya/dot-panic/issues/108) is the
 first change to close a *Watched and seen* criterion with somebody's eyes: the
 page was served from disk, the **decider** opened it in his own browser, and three
@@ -32,12 +32,29 @@ rather than an edit to it, which is the rule #185 exists to give a home. Read it
 as the criterion met and **not** as its four falsifiers separately checked: none
 was raised, and *sah gut aus* is what there is.
 
-**What is still unwatched is the criterion that matters most.** Smoothness — *it
-reads as a flock*, which [0001](adr/0001-purpose-scope-and-success.md) §3.1 puts
-beyond any command — has been driven with a supplied clock and measured pixel by
-pixel, and never seen. It remains the one condition of Done that
-[#94](https://github.com/nanatsusaya/dot-panic/issues/94) merged without, and no
-change since has been the one to close it.
+**The third is the first sitting in which anything moved, and it discharged three
+tickets at once.** [#100](https://github.com/nanatsusaya/dot-panic/issues/100) and
+[#103](https://github.com/nanatsusaya/dot-panic/issues/103) each merged with their
+*Watched and seen* criterion deferred by name onto
+[#101](https://github.com/nanatsusaya/dot-panic/issues/101), because neither is
+judgeable before a force is capped. On 2026-08-09 the decider opened the page in
+his own browser, was handed four falsifiers — turns that look like turns rather
+than snaps, a corner pileup dispersing, the dots staying in the frame with the
+flock filling it, and nothing parking or shooting — and reported it good.
+[The comment on PR #223](https://github.com/nanatsusaya/dot-panic/pull/223#issuecomment-5228500458)
+is the evidence, read the way #109's is: the criteria met, and none of the four
+raised. **It is the arrangement running to its end for the first time** — three
+changes merged with no watch each, one sitting, and not one of them left holding a
+condition of Done nobody looked at.
+
+**What is still unwatched is the criterion that matters most.** *It reads as a
+flock*, which [0001](adr/0001-purpose-scope-and-success.md) §3.1 puts beyond any
+command, cannot be judged before there is a flock: nothing steers yet, and the
+sitting above was about four things that are not it. The motion itself has been
+seen now, and the gait with it — which is the half of smoothness 0006 §5 owns —
+but the whole remains the one condition of Done that
+[#94](https://github.com/nanatsusaya/dot-panic/issues/94) merged without, and
+[#99](https://github.com/nanatsusaya/dot-panic/issues/99) is where it is judged.
 
 The rest of what is built is the way of working: the operating rules, the
 decision set, nineteen accepted records, and the five
@@ -417,9 +434,8 @@ where that rule leaves its trace, and that it is evidence rather than a check.
 **What `core/` held after #91 is the shape every later ticket adds to.** A world
 of dots with a position and a velocity each, a step taking a world and a time and
 returning a new one, and the generator's state carried in the world — 0002 §4
-entire. **Two rules of the flock are in it now and the rest are not**: nothing
-steers, nothing separates, and no bound holds a change in velocity down; each of
-those arrives with its own ticket under
+entire. **Three rules of the flock are in it now and the rest are not**: nothing
+steers and nothing separates, and each of those arrives with its own ticket under
 [#87](https://github.com/nanatsusaya/dot-panic/issues/87). **The
 generator is SplitMix64, named rather than invented** — 0013 §5 permits taking a
 published algorithm where §1 forbids taking anyone's file, and §7's obligation
@@ -446,10 +462,10 @@ so `0.1` is the middle of the band now rather than a free-standing number. **The
 clamp runs before the dot is moved**, so a dot's displacement is the velocity it
 ends the step with rather than the one it came in at. The world `createWorld`
 returns satisfies the band itself, because 0006 §8 keeps the Shell from stepping
-under `reduce` and that world is all some visitors ever see. **Nothing was
-watched, and the ticket defers that by name**: *nothing parks, nothing shoots*
-needs forces that vary a speed, and nothing varies one until
-[#99](https://github.com/nanatsusaya/dot-panic/issues/99).
+under `reduce` and that world is all some visitors ever see. **Its watching was
+deferred by name and has since happened**: *nothing parks, nothing shoots* needs a
+force that varies a speed, and none existed until #103's edge — so the criterion
+was judged in #101's sitting, where the deferral pointed.
 
 **0006 §6's frame is the second, and it is the first force rather than a second
 constraint on the result.** #103 puts a margin of 0.08 at each edge and a push
@@ -461,11 +477,30 @@ replaces it without rebuilding anything. `createWorld` scatters over it, inset b
 the margin: a dot spawned against an edge is one the force has almost no room to
 turn, and under §8 it would sit there for the whole visit.
 
-**The order inside a step is the design.** The force changes the velocity, the
-band holds the result inside itself, and only then is the dot moved — after the
-force, because a velocity outside the band would make §3 false of the world that
-comes back; before the move, because a displacement has to match the velocity the
-step ends with.
+**0006 §4's bound is the third, and it is what makes a gait a consequence rather
+than a property.** [#101](https://github.com/nanatsusaya/dot-panic/issues/101) sums
+the forces, holds the sum to 1.2 in size with its direction kept, and only then
+lets it change a velocity — so the corner, where two edges act at once and their
+sum reaches `1.2·√2`, no longer pushes 41 percent harder than anywhere else. **The
+bound is on the acceleration and not on the change**, which is the same statement
+while every force is multiplied by the same step length: written that way it
+carries the dimension §6's own margin formula needs, and a change to 0008 §3's step
+rate cannot silently change the motion.
+
+**The factor of two in what is asserted was measured rather than assumed.** §10's
+row bounds an observed change by `2·amax·seconds`, and the second one is §3's
+exempt correction rather than slack — over 40 seeds and 600 steps the largest
+change any dot underwent was **0.5644 ×** the bound ordinarily and **1.0353 ×**
+in cornered piles, where only the band can carry it past 1 because the forces
+alone are capped there. **The headroom between 1.0353 and 2 is unexercised**, and
+[#99](https://github.com/nanatsusaya/dot-panic/issues/99)'s three forces are what
+would use it.
+
+**The order inside a step is the design.** The forces are summed and bounded, the
+bounded acceleration changes the velocity, the band holds the result inside
+itself, and only then is the dot moved — after the force, because a velocity
+outside the band would make §3 false of the world that comes back; before the
+move, because a displacement has to match the velocity the step ends with.
 
 **Two things that work found are worth more than the rule.** One of #103's
 asserted criteria was **unsatisfiable as written** and provably: §6 forbids a
@@ -836,8 +871,9 @@ stopped, and the empty band on the right read as a drawing bug when it was
 [#103](https://github.com/nanatsusaya/dot-panic/issues/103) is what ended it, and
 **the View did not move for it** — 0008 §6 makes every length a fraction of the
 shorter side, so the frame's longer side maps to exactly the canvas's own
-dimension. **Nobody has looked at the result**, because that ticket defers its
-watching to [#101](https://github.com/nanatsusaya/dot-panic/issues/101).
+dimension. **Somebody has looked at the result**: that ticket deferred its watching
+onto [#101](https://github.com/nanatsusaya/dot-panic/issues/101), and the flock
+filling the frame was one of the four things that sitting was handed.
 
 **One thing this change could not do is assert its own criterion.** 0014 §9
 makes *the stylesheet contains no width breakpoint and no container query*
@@ -1554,25 +1590,27 @@ What a change description must contain is no longer among the gaps here.
 
 ## The single clearest next step
 
-**[#101](https://github.com/nanatsusaya/dot-panic/issues/101), the bound on how
-far a velocity may change — third of the five in the sprint over
+**[#99](https://github.com/nanatsusaya/dot-panic/issues/99), Reynolds' three
+steering behaviors over a radius — fourth of the five in the sprint over
 [#87](https://github.com/nanatsusaya/dot-panic/issues/87), opened 2026-08-08.**
-[#100](https://github.com/nanatsusaya/dot-panic/issues/100) and
-[#103](https://github.com/nanatsusaya/dot-panic/issues/103) closed the same day
-and are the first two. That activity is 0012 §2's and it ran with the decider,
+[#100](https://github.com/nanatsusaya/dot-panic/issues/100),
+[#103](https://github.com/nanatsusaya/dot-panic/issues/103) and
+[#101](https://github.com/nanatsusaya/dot-panic/issues/101) are the first three
+and all three are closed. That activity is 0012 §2's and it ran with the decider,
 which §6 requires *before any agent starts*. **The order lives in that epic's
 table**, because 0012 §7 makes it the authority for its own members and a copy
 here would be a second one.
 
-**#101 has a subject now, which is the whole reason it is third.** 0006 §4
-bounds a change in velocity, and until #103 nothing changed one — so the ticket
-had nothing to bound and no test that could fail. What it inherits is a corner:
-two edges act at once there, so their sum reaches `1.2·√2`, deliberately left
-uncapped by the ticket that produced it. **It is also the first of the three
-watch points** 0006 asks for, and the first sitting owed to the decider — #100's
-and #103's own watching is deferred onto it by name.
+**#99 sits fourth because it is the first thing that can be judged.** There is a
+bounded frame, a speed band and a cap on how fast a velocity may change by the
+time it starts, so *it reads as a flock* is watchable and the three weights are
+chosen against something moving rather than against a blank screen. **It is the
+only one of the five with no row in 0006 §10**: what a command decides here is
+each behavior's directional effect in isolation — neighbors all to one side,
+steer away from them, toward their average heading, toward their average
+position — and everything past that is the watching.
 
-**Its finding is that there is no independence to have.** §6 calls two tickets
+**The activity's finding is that there is no independence to have.** §6 calls two tickets
 independent when they touch no file in common and neither's criteria depend on
 the other's result. All five write `core/step.ts`, and all five write
 `core/step.test.ts` beside it, so the first half fails for every pair — and the
@@ -1609,9 +1647,10 @@ triggered by the fifth landing, and it is the arrangement
 count. **The watching is three sittings and not five** — #100's and #103's own
 criteria are not judgeable before a force is capped, so both tickets defer them
 onto #101 by name rather than merging with a criterion nobody looked at, which
-has happened three times here. **Both have now merged that way**, which is the
-arrangement working rather than a fourth instance: neither claimed a watch, and
-the sitting they were deferred onto is the next step above.
+had happened three times here. **The first sitting has happened**, on 2026-08-09,
+and it discharged all three tickets at once; the *Position* section above carries
+what was seen and where the evidence is. **The second is this next step's**, and
+it is the one 0001 §3.1 puts beyond any command.
 
 **[#178](https://github.com/nanatsusaya/dot-panic/issues/178) is done and the
 convention has a command behind it.**
