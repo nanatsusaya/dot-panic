@@ -33,10 +33,15 @@ import {
 
 /*
  * What the three weights add up to, which is what the weighted sum is divided
- * by. Each behavior is dimensionless and no longer than one, so the quotient is
- * too — and scaling it by `MAX_ACCELERATION` leaves the steering already inside
- * 0006 §4's bound. The cap one call later is therefore about the edge joining
- * in, not about the three disagreeing.
+ * by. Dividing is what makes the three numbers ratios of influence rather than
+ * sizes: separation and cohesion are dimensionless and no longer than one, so
+ * the quotient is close to one and scaling it by `MAX_ACCELERATION` puts the
+ * steering at roughly 0006 §4's bound rather than far past it.
+ *
+ * **Roughly, and not inside it.** Alignment reaches two where a dot and its
+ * neighbors are at the ceiling and exactly opposed, which lifts the quotient to
+ * 1.286 — so `withBoundedSize` is what holds §4, here as everywhere else, and
+ * this division is about the weights meaning what they say.
  */
 const TOTAL_WEIGHT = SEPARATION_WEIGHT + ALIGNMENT_WEIGHT + COHESION_WEIGHT;
 
@@ -154,10 +159,30 @@ function neighborsOf(dot: Dot, dots: readonly Dot[]): Dot[] {
  * Reynolds' separation: steer away from the neighbors, hardest from the nearest
  * (0006 §1).
  *
- * The push from one neighbor is a unit vector away from it, faded linearly to
- * nothing at `NEIGHBORHOOD_RADIUS`. **The fade is what gives a flock a spacing
- * to settle at**: cohesion grows over the same distance, so the two balance
- * somewhere inside the neighborhood instead of one of them always winning.
+ * The push from one neighbor is `NEIGHBORHOOD_RADIUS / gap − 1` along the unit
+ * vector away from it: nothing at the edge of what a dot can see, one at half
+ * the radius, and without limit as two dots approach each other. **Cohesion is
+ * its reciprocal**, growing to one over the same distance, so the two balance
+ * at 0.686 of the radius rather than one of them always winning — which is
+ * where a flock's spacing comes from.
+ *
+ * **The shape, the sum and the limit below were each chosen by measuring, and
+ * the first shape tried was wrong.** A push fading linearly to nothing,
+ * averaged over the neighbors, let the flock collapse into one clump: after
+ * thirty seconds a dot had 105 of the other 199 inside its neighborhood and the
+ * heading agreement across neighbors was 0.97, which is a flock moving as one
+ * block. 0006 §1 makes locality the load-bearing detail, so that was the rule
+ * failing rather than a number wanting a turn. Growing without limit up close
+ * is what holds dots apart; summing rather than averaging is what stops a crowd
+ * diluting its own escape. The same measurement now reports 6.4 neighbors and
+ * 0.76.
+ *
+ * **The limit exists because an unbounded force makes the frame's edge
+ * invisible.** Summed and unheld, separation reaches thousands where 0006 §6's
+ * edge reaches 1.2 — so after `withBoundedSize` the direction is separation's
+ * alone, and a dot in a tight crowd against an edge leaves the frame. Three
+ * seeds of twenty did, first at step 894. Held to one, none of the twenty left
+ * it in 1,800 steps.
  *
  * **A neighbor at exactly the same position is skipped**, because there is no
  * direction to steer away in and the Core may not draw one — the generator
@@ -178,14 +203,18 @@ function separationFrom(dot: Dot, neighbors: readonly Dot[]): Vector {
     const gap = Math.hypot(awayX, awayY);
 
     if (gap > 0) {
-      const urgency = (1 - gap / NEIGHBORHOOD_RADIUS) / gap;
+      // The push divided by `gap` once more, because `awayX` and `awayY` carry
+      // a length of `gap` rather than a length of one.
+      const urgency = (NEIGHBORHOOD_RADIUS - gap) / (gap * gap);
 
       x += awayX * urgency;
       y += awayY * urgency;
     }
   }
 
-  return { x: x / neighbors.length, y: y / neighbors.length };
+  const reach = Math.hypot(x, y);
+
+  return reach <= 1 ? { x, y } : { x: x / reach, y: y / reach };
 }
 
 /**

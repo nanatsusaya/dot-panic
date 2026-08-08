@@ -187,13 +187,18 @@ function speedOf(velocity: Vector): number {
 const MIDDLE: Vector = { x: WIDE.width / 2, y: 0.5 };
 
 /*
- * A seventh of the neighborhood, which is the unit every world below places its
- * neighbors on. **Sevenths are not decoration**: separation fades linearly to
- * zero at `NEIGHBORHOOD_RADIUS`, so a neighbor at `k` sevenths pushes with
- * `(7 − k)/7` of full strength — and whole sevenths are what let one neighbor's
- * push cancel two others' exactly, in integers, at any radius #216 chooses.
+ * Every world below places a neighbor at the neighborhood's radius over a whole
+ * number, and the whole numbers are not decoration. Separation pushes with
+ * `NEIGHBORHOOD_RADIUS / gap − 1`, so a neighbor at the radius over `k` pushes
+ * with exactly `k − 1` — which is what lets one neighbor's push cancel two
+ * others' in integers, at whatever radius #216 chooses. Sevenths, fifths and
+ * thirds give six, four and two, and six is four plus two.
+ *
+ * @param divisor  what to divide the radius by
  */
-const SPACING = NEIGHBORHOOD_RADIUS / 7;
+function radiusOver(divisor: number): number {
+  return NEIGHBORHOOD_RADIUS / divisor;
+}
 
 /*
  * The speed the dot under test carries, in the middle of 0006 §3's band.
@@ -346,6 +351,14 @@ describe("a step", () => {
    * returns rather than a fourth force, and it arrives with #102 — which is
    * also what makes two dots at one position a case the Core may leave alone
    * rather than a state it has to resolve.
+   *
+   * **It reports less than its name suggests, and mutating the code is what
+   * showed that.** Two identical dots stay identical under any rule that treats
+   * them the same, so a separation that invented one fixed direction for a zero
+   * distance left this green. What it does report is a rule that breaks the tie
+   * — by array order, which is what a real non-overlap pass has to do — and
+   * that is the shape #102 will arrive in. Read it as *nothing here separates
+   * two dots that coincide*, not as *nothing here could*.
    */
   test("moves no dot to resolve an overlap, which #102 is what adds", () => {
     const together = worldOf([CARRIED, CARRIED]);
@@ -560,19 +573,29 @@ describe("the frame's edge", () => {
    * edge with the ceiling speed pointing out is outside after one step and no
    * force acting over that step can prevent it. What holds is that no world
    * this Core builds contains such a dot, and that stepping never creates one.
+   *
+   * **Four seeds and three times #103's run, because #99 made this negotiable.**
+   * Until steering existed the edge was the only force acting inside a margin
+   * and one short run reported the whole rule. Now another force can point out
+   * of the frame while the edge points in, and an early shape of separation did
+   * exactly that — seeds 4, 11 and 15 lost a dot, the first at step 894, which
+   * one seed over 600 steps saw nothing of. Those three are here as the cases
+   * that were found rather than as a wider net for its own sake.
    */
   test("keeps every dot inside the frame over a run", () => {
-    let world = createWorld({ ...ordinary, seed: 5 });
+    for (const seed of [4, 5, 11, 15]) {
+      let world = createWorld({ ...ordinary, seed });
 
-    for (let taken = 0; taken < DISPERSAL_STEPS; taken += 1) {
-      world = step(world, seconds);
+      for (let taken = 0; taken < 3 * DISPERSAL_STEPS; taken += 1) {
+        world = step(world, seconds);
 
-      const box = boundingBox(world);
+        const box = boundingBox(world);
 
-      expect(box.left).toBeGreaterThanOrEqual(0);
-      expect(box.right).toBeLessThanOrEqual(WIDE.width);
-      expect(box.top).toBeGreaterThanOrEqual(0);
-      expect(box.bottom).toBeLessThanOrEqual(WIDE.height);
+        expect(box.left).toBeGreaterThanOrEqual(0);
+        expect(box.right).toBeLessThanOrEqual(WIDE.width);
+        expect(box.top).toBeGreaterThanOrEqual(0);
+        expect(box.bottom).toBeLessThanOrEqual(WIDE.height);
+      }
     }
   });
 
@@ -702,8 +725,14 @@ describe("the neighborhood", () => {
   // Both halves in one test, because the claim is where the boundary sits and
   // one side of it says nothing on its own.
   test("steers by a dot inside the radius and not by one outside it", () => {
-    const inside = flockAround([{ x: 6.5 * SPACING, y: 0 }], CARRIED);
-    const outside = flockAround([{ x: 7.5 * SPACING, y: 0 }], CARRIED);
+    const inside = flockAround(
+      [{ x: 0.99 * NEIGHBORHOOD_RADIUS, y: 0 }],
+      CARRIED,
+    );
+    const outside = flockAround(
+      [{ x: 1.01 * NEIGHBORHOOD_RADIUS, y: 0 }],
+      CARRIED,
+    );
 
     expect(steered(inside, seconds).x).not.toBeCloseTo(CARRIED.x, 12);
     expect(steered(outside, seconds)).toEqual(CARRIED);
@@ -717,7 +746,7 @@ describe("the neighborhood", () => {
    * between the two and can say nothing about `y`.
    */
   test("counts a neighbor behind exactly as one ahead", () => {
-    const behind = flockAround([{ x: -5 * SPACING, y: 0 }], {
+    const behind = flockAround([{ x: -radiusOver(2), y: 0 }], {
       x: CARRIED.x,
       y: CARRIED.x,
     });
@@ -741,23 +770,23 @@ describe("the neighborhood", () => {
  * - **cohesion** says nothing when the neighbors' average position is the dot
  *   itself;
  * - **separation** says nothing when the pushes away from the neighbors cancel,
- *   which takes three of them — its fade to zero at the radius is what lets one
- *   near neighbor balance two far ones, in exact sevenths.
+ *   which takes three of them and works out in whole numbers: a neighbor at the
+ *   radius over `k` pushes with `k − 1`, and six is four plus two.
  */
 describe("the three steering behaviors", () => {
   const seconds = 1 / 60;
 
   /*
-   * Neighbors at one, five and four sevenths, two on the left and one on the
-   * right: their positions average to the dot's own, so cohesion has nothing to
-   * say, and what is left pushes away from the nearer side.
+   * Two neighbors on the left and one on the right as far away as both of them
+   * together, so their positions average to the dot's own and cohesion has
+   * nothing to say. What is left pushes away from the crowded side.
    */
   test("steers away from its neighbors, cohesion being silent", () => {
     const world = flockAround(
       [
-        { x: -SPACING, y: 0 },
-        { x: 5 * SPACING, y: 0 },
-        { x: -4 * SPACING, y: 0 },
+        { x: -radiusOver(7), y: 0 },
+        { x: -radiusOver(3), y: 0 },
+        { x: radiusOver(7) + radiusOver(3), y: 0 },
       ],
       CARRIED,
     );
@@ -769,17 +798,18 @@ describe("the three steering behaviors", () => {
   });
 
   /*
-   * The mirror of it. At one, three and five sevenths the fades are six, four
-   * and two sevenths, and six equals four plus two — so separation cancels
-   * exactly and the dot is left with the pull toward where its neighbors
-   * average out, which is behind it.
+   * The mirror of it, and the reason the distances are the radius over a whole
+   * number. The near neighbor on the right pushes with `7 − 1`; the two on the
+   * left push with `5 − 1` and `3 − 1`, which is the same six. Separation
+   * cancels exactly and the dot is left with the pull toward where its
+   * neighbors average out, which is behind it.
    */
   test("steers toward their average position, separation being silent", () => {
     const world = flockAround(
       [
-        { x: SPACING, y: 0 },
-        { x: -3 * SPACING, y: 0 },
-        { x: -5 * SPACING, y: 0 },
+        { x: radiusOver(7), y: 0 },
+        { x: -radiusOver(5), y: 0 },
+        { x: -radiusOver(3), y: 0 },
       ],
       CARRIED,
     );
@@ -798,8 +828,8 @@ describe("the three steering behaviors", () => {
   test("steers toward their average heading, the other two being silent", () => {
     const world = flockAround(
       [
-        { x: -3 * SPACING, y: 0 },
-        { x: 3 * SPACING, y: 0 },
+        { x: -radiusOver(2), y: 0 },
+        { x: radiusOver(2), y: 0 },
       ],
       { x: CARRIED.x, y: CARRIED.x },
     );
@@ -812,14 +842,14 @@ describe("the three steering behaviors", () => {
 
   /*
    * The crossover, which is what the three weights are for. Separation is
-   * weighted above cohesion but fades to nothing at the radius while cohesion
-   * grows to its full value there — so the same neighbor is pushed away from up
-   * close and steered toward far off, and a flock has a spacing to settle at
-   * rather than collapsing or drifting apart.
+   * weighted above cohesion but falls away with distance while cohesion grows
+   * to its full value at the radius — so the same neighbor is pushed away from
+   * up close and steered toward far off. That is where a flock's spacing comes
+   * from, and at these three numbers the two balance at 0.686 of the radius.
    */
   test("pushes away from a near neighbor and pulls toward a far one", () => {
-    const near = flockAround([{ x: SPACING, y: 0 }], CARRIED);
-    const far = flockAround([{ x: 6 * SPACING, y: 0 }], CARRIED);
+    const near = flockAround([{ x: radiusOver(7), y: 0 }], CARRIED);
+    const far = flockAround([{ x: 0.9 * NEIGHBORHOOD_RADIUS, y: 0 }], CARRIED);
 
     expect(steered(near, seconds).x).toBeLessThan(CARRIED.x);
     expect(steered(far, seconds).x).toBeGreaterThan(CARRIED.x);
