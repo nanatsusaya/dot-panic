@@ -2,7 +2,8 @@
  * A step returns a new world and changes nothing in the one it was given
  * (0002 §4), and the count it was given survives it — a row in 0008 §9's
  * asserted list. What a step does *not* do is asserted here as well, because
- * every rule of the flock is still absent and its arrival must be visible.
+ * the rules of the flock arrive one ticket at a time and each arrival has to be
+ * visible in what stops being true here.
  */
 
 import { describe, expect, test } from "bun:test";
@@ -20,14 +21,6 @@ import {
 } from "./world.js";
 
 const ordinary = { count: DOT_COUNT, radius: DOT_RADIUS, seed: 3 };
-
-/*
- * The band is a rule about real numbers and the clamp does its arithmetic in
- * binary floating point, so a speed scaled to an end of the band can miss it by
- * an ulp or two. This is that and nothing more: it is not room for a rule to be
- * approximately followed.
- */
-const SLACK = 8 * Number.EPSILON * SPEED_MAX;
 
 /**
  * A world whose dots differ in velocity and in nothing else, so that a rule
@@ -103,9 +96,10 @@ describe("a step", () => {
     expect(moved).toEqual(expected);
   });
 
-  // Nothing steers yet. 0006 §1's three behaviors, its speed band, its bound
-  // on acceleration, its non-overlap and its frame edge each arrive with their
-  // own ticket under #87, and every one of them changes a velocity.
+  // Nothing steers yet. 0006 §1's three behaviors, its bound on how far a
+  // velocity may change, its non-overlap and its frame edge each arrive with
+  // their own ticket under #87. The speed band has arrived and does not fire
+  // here: every dot in a new world starts at one speed inside it.
   test("leaves every velocity alone", () => {
     const world = createWorld(ordinary);
     const before = world.dots.map((dot) => [dot.velocity.x, dot.velocity.y]);
@@ -165,7 +159,16 @@ describe("the speed band", () => {
     expect(after).toEqual([velocity]);
   });
 
-  // 0006 §10's second row, over the world a step returns.
+  /*
+   * 0006 §10's second row, over the world a step returns.
+   *
+   * **The bounds carry no tolerance**, and that was measured rather than
+   * assumed: the band is a rule about real numbers and the clamp does its
+   * arithmetic in binary floating point, so a scaled speed could miss the end it
+   * was scaled to by an ulp. At these four velocities and these two numbers it
+   * does not. A tolerance written in on the chance it might would make exactly
+   * that failure invisible.
+   */
   test("holds every dot in a returned world inside the band", () => {
     const world = worldOf([
       { x: 1, y: 0 },
@@ -177,8 +180,8 @@ describe("the speed band", () => {
     for (const dot of step(world, 1 / 60).dots) {
       const speed = speedOf(dot.velocity);
 
-      expect(speed).toBeGreaterThanOrEqual(SPEED_MIN - SLACK);
-      expect(speed).toBeLessThanOrEqual(SPEED_MAX + SLACK);
+      expect(speed).toBeGreaterThanOrEqual(SPEED_MIN);
+      expect(speed).toBeLessThanOrEqual(SPEED_MAX);
     }
   });
 

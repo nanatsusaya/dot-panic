@@ -91,8 +91,13 @@ export const SPEED_MAX = 0.16;
  * A third number the work needed and #91 had not named — recorded in a comment
  * on that ticket rather than added to its criteria afterward. Every dot leaves
  * at one speed, in shorter sides per second, so a dot crosses the frame in ten
- * seconds. #100 supersedes it with 0006 §3's band, which is where a speed
- * belongs.
+ * seconds.
+ *
+ * #100 superseded it in the sense that mattered. It is the middle of
+ * `[SPEED_MIN, SPEED_MAX]` now rather than a free-standing number, so the world
+ * this builds satisfies 0006 §3 without anything having to clamp it. It stays
+ * one speed for every dot: §4 rejects a dot carrying a speed of its own, and R2
+ * keeps the route back an amendment.
  */
 const INITIAL_SPEED = 0.1;
 
