@@ -1,16 +1,17 @@
 /**
  * Advancing the world, which is the one thing the Core does (0002 §2).
  *
- * Two of 0006's rules are here: §3's speed band, and §6's frame edge, which is
- * the first **force** in this project rather than a second constraint on the
- * result. Nothing steers yet — the three behaviors, the bound on how far a
- * velocity may change and the non-overlap each arrive with their own ticket
- * under #87, in the order that epic's table fixes.
+ * Three of 0006's rules are here: §3's speed band, §6's frame edge — the first
+ * **force** in this project rather than a second constraint on the result — and
+ * §4's bound on what the forces may do in one step. Nothing steers yet: the
+ * three behaviors and the non-overlap each arrive with their own ticket under
+ * #87, in the order that epic's table fixes.
  *
- * **The order inside a step is the whole design.** A force changes the
- * velocity, the band then holds the result inside itself, and only then is the
- * dot moved — so a dot's displacement is always the velocity it ends the step
- * with, and every world that leaves here satisfies §3.
+ * **The order inside a step is the whole design.** The forces are summed and
+ * bounded, the bounded acceleration changes the velocity, the band then holds
+ * the result inside itself, and only then is the dot moved — so a dot's
+ * displacement is always the velocity it ends the step with, and every world
+ * that leaves here satisfies §3.
  */
 
 import type { Frame, Vector, World } from "./world.js";
@@ -86,9 +87,10 @@ function edgePush(distance: number): number {
  * 0006 §6's turning force, summed over the four edges.
  *
  * **In a corner two edges act at once**, so the sum reaches `MAX_ACCELERATION`
- * times the square root of two. That is deliberate and it is left uncapped
- * here: §4's bound is #101's, and the corner is the case that makes it
- * necessary rather than an accident to smooth over now.
+ * times the square root of two — and it is still summed that way here, because
+ * what the edges want is not the same question as what §4 allows. Bounding it
+ * is `withBoundedSize`'s, one call later, and the corner is the case that made
+ * that bound necessary rather than an accident smoothed over here.
  *
  * @param position  where the dot is, which may be outside the frame
  * @param frame     the rectangle the flock stays inside
@@ -99,6 +101,42 @@ function edgeForce(position: Vector, frame: Frame): Vector {
   return {
     x: edgePush(position.x) - edgePush(frame.width - position.x),
     y: edgePush(position.y) - edgePush(frame.height - position.y),
+  };
+}
+
+/**
+ * Hold an acceleration inside 0006 §4's bound, keeping the direction it points.
+ *
+ * **The bound is on the acceleration and not on the change**, which is the same
+ * statement: every force here is multiplied by the same `seconds`, so capping
+ * the acceleration at `MAX_ACCELERATION` caps the change at
+ * `MAX_ACCELERATION · seconds`. Written that way it carries the dimension 0006
+ * §6's own formula needs, and a change to 0008 §3's step rate cannot silently
+ * change the motion.
+ *
+ * **What is bounded is what the forces produce.** §2's non-overlap and §3's
+ * band are constraints on the result and are exempt — the reading #101 settled,
+ * with §2's own *"a constraint on the result, not a force among the others"* as
+ * the precedent. The band's correction is why the asserted bound over a step is
+ * twice this one.
+ *
+ * A force of exactly zero has no direction to keep and needs none: nothing is
+ * scaled, because nothing is over the bound.
+ *
+ * @param force  the acceleration the forces produced together
+ * @returns an acceleration pointing the same way, of size at most
+ *          `MAX_ACCELERATION`
+ */
+function withBoundedSize(force: Vector): Vector {
+  const size = Math.hypot(force.x, force.y);
+
+  if (size <= MAX_ACCELERATION) {
+    return force;
+  }
+
+  return {
+    x: (force.x / size) * MAX_ACCELERATION,
+    y: (force.y / size) * MAX_ACCELERATION,
   };
 }
 
@@ -121,7 +159,7 @@ export function step(world: World, seconds: number): World {
   return {
     ...world,
     dots: world.dots.map((dot) => {
-      const force = edgeForce(dot.position, world.frame);
+      const force = withBoundedSize(edgeForce(dot.position, world.frame));
 
       /*
        * The band is applied after the force and before the dot is moved. After,
