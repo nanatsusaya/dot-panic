@@ -597,7 +597,9 @@ one `showModal()` call (0002 A1) and closes nothing: a form with
 `method="dialog"` inside the dialog is the way out, and `close` appears nowhere.
 **The label names the imprint in German**, which 0014 §6 makes a requirement
 rather than a wording preference and 0017 §2 keeps German for the reader the
-obligation protects.
+obligation protects. **The explanation carries the page's first link**, to this
+repository, on the decider's answer to PR #204's O1 — no record decided it either
+way, and what it closes is a page that names a ruleset it gives no way to reach.
 
 **That form survives `form-action 'none'`**, which was worth checking rather than
 assuming: 0003 §6's policy forbids form submission, and the close button was the
@@ -1325,11 +1327,13 @@ this epic. **It amends nothing**: the notice is not part of the imprint, because
 § 18 MStV asks for the operator and who hosts the operator's page is a different
 fact, so 0004 R2 and 0003 §7 are untouched.
 
-**It is also the first link this page carries anywhere**, which is worth knowing
-before it is written rather than after. 0003 §5 forbids any request after load
-and the link makes none — a visitor may follow it, the page never fetches it —
-and 0004 rules out a consent banner, which is what two sentences about logging
-must not turn into.
+**It is the page's second link rather than its first**, which #96 changed under
+that pull request's O1: the explanation now points at this repository, because
+naming a ruleset a reader cannot reach is a page asking to be judged on documents
+it does not point at. The reading both links rest on is the same one — 0003 §5
+forbids any request after load, and a visitor following a link is navigation
+rather than this page fetching. What #77 must not do is turn two sentences about
+logging into the consent banner 0004 rules out.
 
 **What is left of [#13](https://github.com/nanatsusaya/dot-panic/issues/13) is
 the decider's and the workflow.** #96 closed step 4, so steps 5 and 6 are all

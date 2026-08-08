@@ -226,6 +226,17 @@ dialog > * + * {
 }
 
 /*
+ * A link is text, and 0005 §3 gives this page three colors. Left alone a browser
+ * brings a fourth of its own, chosen against its own assumed background rather
+ * than this one — the same argument §7's fourth bullet makes about a focus ring.
+ * So it takes the page's own color and is told from a sentence by the underline
+ * the user agent already draws.
+ */
+a {
+  color: var(--text);
+}
+
+/*
  * There is no transition, animation or easing anywhere in this file, and that
  * is 0004 §4 rather than restraint: that record is about the page and not only
  * about the flock, so a `reduce` visitor must meet no motion at all. Nothing is
