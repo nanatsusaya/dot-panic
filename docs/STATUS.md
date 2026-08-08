@@ -1088,6 +1088,17 @@ trigger 0016 §6 already gives the five procedure copies. **A person's clone is
 not pinned**, so a local `check:method` and the workflow's can disagree; the
 clone that ran the checks for this change was four commits past `v0.5.3`.
 
+**Both of those were put to the decider and both came back with the
+recommendation**, on 2026-08-08 against PR #208. The pin stays. And
+`oven-sh/setup-bun` stays — **which settles one action and writes no rule**: the
+publisher of the tool 0009 §7 names, pinned by commit SHA, in the job that can
+publish the page. CLAUDE.md's stop-and-ask on a dependency stands as written and
+the next action asks again. What it was weighed against is the reason it went
+that way: the runner image carries no Bun, so the alternative was an unpinned
+install script fetched at run time into a shell holding `pages: write`. **If it
+should bind rather than be a precedent, it is 0009's**, and that route was in the
+question and stays open.
+
 **The host logs the visitor's IP address, and the page says so.** GitHub
 documents it plainly, which answers what 0004 §8 handed forward and contradicts
 nothing 0004 decided — the page still collects nothing, and the host does, before
