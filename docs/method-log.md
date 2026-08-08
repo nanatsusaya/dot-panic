@@ -6,6 +6,37 @@ session would decide worse without it.
 
 Newest first.
 
+## 2026-08-08 — The post-mortem is written in the medium that caused the accident
+
+**The entry below says a warning has to be somewhere the author looks. It was
+written into commit messages that carried the accident with them**, and
+[#185](https://github.com/nanatsusaya/dot-panic/issues/185) shut a second time
+one second after those commits reached the trunk.
+
+**A linking keyword is read in a commit message, and this project knew only the
+half about descriptions.** GitHub names both places in one sentence, and the
+warning kept here names one of them. So the change describing the first
+accident quoted the sentence that caused it — which a post-mortem has to do,
+because paraphrasing the evidence is how a record stops being one — and the
+parser read the quotation exactly like the original.
+
+**The general form is not about this parser.** *A rule learned from an incident
+has to survive being written down*, and it often has to survive being written
+down **in the medium that caused the incident**: a post-mortem of a bad commit
+message is a commit message, of a bad description is a description, of a bad
+migration is a migration. The moment to ask is while writing the record, not
+after — does the artifact I am about to write do the thing it describes?
+
+**What that costs here is one habit.** Never place a keyword immediately before
+a `#`-reference, in a quotation or otherwise; write the number apart from the
+word. CLAUDE.md's *Delivery* carries it, because that is where an agent looks,
+and this entry does not restate what it says.
+
+**The state was right by accident, which is the part to distrust.** #185's scope
+was met by that same merge, so the ticket was correctly closed by a mechanism
+that had no idea what it was doing. A wrong outcome would have been cheaper: it
+would have been noticed by somebody other than the author reading a timestamp.
+
 ## 2026-08-08 — A warning nobody reads is a warning nobody has
 
 **[The pull request template](../.github/pull_request_template.md) carries a

@@ -178,6 +178,21 @@ first.
   the durable consequence in the artifact that owns the fact — a decision
   record, a ticket, or [docs/STATUS.md](docs/STATUS.md). Where an answer to an
   `O`-question goes is the template's and is not restated here.
+- **A linking keyword is read in a commit message as well as in a description.**
+  GitHub names both places, and only those two: a keyword works *"in the pull
+  request's description or in a commit message"*
+  ([documentation](https://docs.github.com/en/issues/tracking-your-work-with-issues/using-issues/linking-a-pull-request-to-an-issue)).
+  The nine are `close`, `closes`, `closed`, `fix`, `fixes`, `fixed`, `resolve`,
+  `resolves` and `resolved`. A file in this repository is not one of the two
+  places, so this file and [docs/method-log.md](docs/method-log.md) may quote
+  the string; a commit message may not. **Never write one of the nine
+  immediately before a `#`-reference unless you mean it** — a quotation is not
+  an exception, because the parser reads it exactly like the original, and the
+  documentation names no way to escape one. Write the number apart from the
+  word, or paraphrase the sentence. Decided 2026-08-08 after
+  [#210](https://github.com/nanatsusaya/dot-panic/issues/210), where the commits
+  describing an accidental closure quoted the sentence that had caused it and
+  shut the same ticket a second time.
 - **The definition of done** is
   [.github/ISSUE_TEMPLATE/task.md](.github/ISSUE_TEMPLATE/task.md) — the same
   authority the Tickets section names, for the same reason. It is not restated
