@@ -532,6 +532,29 @@ author**: it lives in an HTML comment in the template, and an agent running
 this instance — every warning kept in a template comment should be asked who
 opens the file it lives in.
 
+**The case is filed upstream, and measuring it changed what it is.**
+[agent-project-rules#21](https://github.com/nanatsusaya/agent-project-rules/issues/21)
+carries it, on the decider's answer to PR #209's `O1` — a long ticket that
+describes the case and decides nothing, because the shape belongs to that
+repository. #13 is closed, so #21 refers to it rather than reopening it.
+**What the question turned out to be is not what `O1` assumed.** The answer does
+arrive before the merge, in eleven of the twelve pull requests here that carry
+an *Open questions* section and postdate the shape. What fails is the half of
+the mechanism carrying a deadline: all twelve have the answer comment, seven
+have the pointer line, and the five without are #184, #187, #195, #200 and
+#206. For those eleven the window between answer and merge is **median 4.4
+minutes wide and 1.1 at its narrowest** — and #184 had no window at all, its
+comment arriving 2.1 minutes after the merge, so the link the line needs had no
+target while the description could still be edited. A second finding went with
+it: `method/rules.md` G2 still says *rewrite them in place as `R1..Rn`* naming
+no artifact, while that repository's handbook and its own operating rules both
+scope it. The normative file is the one that did not move.
+
+**#185 closes by hand rather than by keyword.** Every bullet of its scope is met
+once PR #209 merges, and the sentence in that description saying why it carries
+no closing keyword stays exactly as written — rewriting it is the thing the
+change is about.
+
 **Three divergences from the published file are declared, and one of them was
 stale.** *Verified* named `node ../agent-project-rules/checks/check-method.mjs`,
 which [#71](https://github.com/nanatsusaya/dot-panic/issues/71) had already
