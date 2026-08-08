@@ -1317,6 +1317,7 @@ Outside the epics:
 | [#178](https://github.com/nanatsusaya/dot-panic/issues/178) A test that decides the convention is followed | #177's rule has no command behind it; presence is 0010 §2's third kind and needs no record |
 | [#202](https://github.com/nanatsusaya/dot-panic/issues/202) Whether the four checks gate a pull request | 0011 §2 says review gates a merge, while the method this project demonstrates gates its own markdown in CI |
 | [#210](https://github.com/nanatsusaya/dot-panic/issues/210) A linking keyword is read in a commit message too | the warning this project keeps covers descriptions, and the fourth accidental closure came the other way |
+| [#212](https://github.com/nanatsusaya/dot-panic/issues/212) The keyword warning moves to CLAUDE.md | a rule an agent reaches only through a pointer into a template comment is one indirection past what #185 found safe |
 
 **The two rows that left were closed and the table had not noticed** — #177,
 whose convention is in CLAUDE.md, and #181, whose answer is
