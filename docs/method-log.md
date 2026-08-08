@@ -6,6 +6,40 @@ session would decide worse without it.
 
 Newest first.
 
+## 2026-08-08 — Two verifications that would have passed either way
+
+**A check whose result does not depend on the thing it checks looks exactly like
+one that does.** Two arrived in consecutive tickets, and neither was noticed by
+writing it.
+
+[#92](https://github.com/nanatsusaya/dot-panic/issues/92)'s purity test reads
+`core/` and fails on any of 0002 §3's fifteen names. Pointed at a directory that
+matches nothing it reports nothing and passes — for ever, silently, and printing
+the same green line as a clean Core. What caught it was a second assertion that
+the scan had read anything at all, and then making that one fail: with the glob
+changed to `**/*.tsx`, the purity assertion **passed over zero files**.
+
+[#96](https://github.com/nanatsusaya/dot-panic/issues/96) had to show that
+everything outside a modal dialog is inert, which is what 0008 §10 leans on. The
+first attempt called `motion.click()` from the console, watched the label change,
+and read that as inertness broken. **A scripted click is not what inertness
+stops.** It removes an element from hit-testing and from focus;
+`element.click()` dispatches straight at the element and asks neither. The real
+click, through the coordinates a person would use, left the label alone.
+
+**The two are the same mistake from opposite sides.** One would have passed while
+the property was false; the other failed while the property was true. Both were
+verifications whose outcome was independent of what they claimed to decide.
+
+**One question finds both, and it is cheap: what would this report if the
+property were false?** If the answer is *the same thing*, it is decoration. That
+question is the only thing that caught either of these, and it belongs before
+believing a green result rather than after a session has been built on one.
+
+**It costs an assertion that looks redundant.** *The scan read something* reads
+as ceremony beside *the scan found nothing forbidden*, and it is the one of the
+two that can fail for a reason worth knowing.
+
 ## 2026-08-06 — When the agent cannot watch, the decider watches
 
 The entry below says the session's browser pane composites nothing and that
