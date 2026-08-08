@@ -428,10 +428,10 @@ describe("the frame's edge", () => {
     }
   });
 
-  // What #101 is for, visible before it exists. A dot crossing a corner near
-  // the ceiling is already being held back by 0006 §3's band rather than by
-  // §4's bound — the band changes the speed and keeps the heading, where the
-  // bound will limit the change itself.
+  // Both of the other two rules act here and it is worth seeing them apart:
+  // 0006 §4's bound decides how much of the corner's push survives, and §3's
+  // band then decides what the speed may be. The bound caps a change and keeps
+  // its direction; the band caps a speed and keeps its heading.
   test("hands the corner's sum to the band at the ceiling", () => {
     const world = dotIn(WIDE, { x: 0, y: 0 }, { x: 0.1, y: 0.1 });
 
