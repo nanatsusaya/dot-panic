@@ -6,6 +6,45 @@ session would decide worse without it.
 
 Newest first.
 
+## 2026-08-08 — The questions were asked before the branch existed
+
+**An open question in a pull request is answered in a window minutes wide**, and
+[agent-project-rules#22](https://github.com/nanatsusaya/agent-project-rules/issues/22)
+carries the measurement. The obvious repair is a better pointer line in the
+description. It is not the repair.
+
+**The sprint over [#87](https://github.com/nanatsusaya/dot-panic/issues/87) was
+opened with the questions asked first.** 0012 §2 puts an activity at the start of
+a sprint and §6 gives it one job — establishing independence, which is a property
+of a set rather than of any one ticket. Working five tickets through it surfaced
+eight decisions belonging to the decider, all eight answered before a branch
+existed. [PR #218](https://github.com/nanatsusaya/dot-panic/pull/218), the first
+of the five, carries no *Open questions* section at all, and three of the eight
+are load-bearing in it.
+
+**They were discoverable there because that is where the set is read.** Whether
+0006 §3's speed band is a force or a constraint on the result, whether the world
+`createWorld` returns has to satisfy the positional rules itself, what the order
+is and what fixes it — none of those is a question about one ticket. Each came
+out of holding five against each other, which is exactly what §6's activity makes
+somebody do.
+
+**One answer invalidated the plan, and that is the finding rather than the
+count.** The recommended order put
+[#101](https://github.com/nanatsusaya/dot-panic/issues/101) second; the answer to
+`O3` — the bound is on the steering forces, and the band is a result-constraint —
+took its subject away, because a ticket bounding change has nothing to bound
+before something changes a velocity. Asking cost a sentence. Building it would
+have cost a branch that could not produce a failing test, which is where 0012 §4
+would have stopped it.
+
+**This makes no rule, and none of it is checked.** §6 names one job for that
+activity and this is not it; the ticket template names six Ready conditions and
+this is not one. The habit is the whole of it: while establishing independence,
+ask what else the set decides, and put those to the decider in the same sitting.
+A question only the implementation can raise still belongs in the pull request —
+most of these were not that kind.
+
 ## 2026-08-08 — The post-mortem is written in the medium that caused the accident
 
 **The entry below says a warning has to be somewhere the author looks. It was
