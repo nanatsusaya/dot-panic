@@ -17,8 +17,9 @@ names is wrong by construction, and the row is what gets repaired.
 | The ECMAScript year `target` and `lib` name | [0009](adr/0009-toolchain.md) §4 | Dated | 2026-08-05, in [#69](https://github.com/nanatsusaya/dot-panic/issues/69) | **2028-05-11.** ES2023 is the highest year fully Baseline widely available; ES2024 waits on `Atomics.waitAsync`, which reached the fourth browser only on 2025-11-11. Raising the setting is a change somebody makes, never something that happens |
 | The `showModal()` bridge the Shell holds open | [0014](adr/0014-page-layout.md) §5 | Dated | 2026-08-02 | **2028-06-12.** Invoker commands reach Baseline widely available, the markup becomes permitted, and the handler can go |
 | Provenance of the Core, and both halves of *read but do not copy* | [0013](adr/0013-origin-of-the-core.md) §7, §8 | Standing | Nothing has entered `core/` | Code being written into the Core. The question is answered while it is written and by nobody afterwards |
+| The ruleset version the deploy workflow pins | [0016](adr/0016-maintainability-and-maintenance.md) §6 | Standing | 2026-08-08, in [#98](https://github.com/nanatsusaya/dot-panic/issues/98) — pinned at `v0.5.3` | A release of `agent-project-rules`, which is §6's fourth kind of maintenance work. That trigger already moves the five procedure copies; this is the second thing on it, and the two are read together or the workflow decides a deployment against a catalog this project has not adopted |
 
-**Two rows are standing and three are dated**, where 0016's *Context* table
+**Three rows are standing and three are dated**, where 0016's *Context* table
 counts three commitments that move with time. Moving with time is not what §3
 splits on: a dated row is one that a **date** makes due. Calling the
 browser-feature row dated would mean inventing a review interval, which is what
