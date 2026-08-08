@@ -414,12 +414,12 @@ files in a commit of their own, reporting *0 pass, 4 fail*, and the code in the
 next one. The [method log](method-log.md) carries why the commit sequence is
 where that rule leaves its trace, and that it is evidence rather than a check.
 
-**What `core/` holds is the shape every later ticket adds to, and no rule of the
-flock.** A world of dots with a position and a velocity each, a step taking a
-world and a time and returning a new one, and the generator's state carried in
-the world — 0002 §4 entire. Nothing steers, nothing holds a speed in a band,
-nothing separates, and there is no frame; each of those arrives with its own
-ticket under [#87](https://github.com/nanatsusaya/dot-panic/issues/87). **The
+**What `core/` held after #91 is the shape every later ticket adds to.** A world
+of dots with a position and a velocity each, a step taking a world and a time and
+returning a new one, and the generator's state carried in the world — 0002 §4
+entire. **One rule of the flock is in it now and the rest are not**: nothing
+steers, nothing separates, and there is no frame; each of those arrives with its
+own ticket under [#87](https://github.com/nanatsusaya/dot-panic/issues/87). **The
 generator is SplitMix64, named rather than invented** — 0013 §5 permits taking a
 published algorithm where §1 forbids taking anyone's file, and §7's obligation
 to name what was consulted is met in the ticket. It is that generator and not
@@ -431,10 +431,23 @@ algorithm chosen only to expand it.
 0.005 were settled before the work started, which is what 0008 R1 asks; putting
 them on a frame also needs a speed to leave at, and no record fixes one. It is
 0.1 shorter sides per second, provisional, and
-[#100](https://github.com/nanatsusaya/dot-panic/issues/100) supersedes it with
-0006 §3's band. The starting arrangement is provisional in the same way: dots
-are scattered over one square of the frame's shorter side, because the frame
-itself is [#103](https://github.com/nanatsusaya/dot-panic/issues/103)'s.
+[#100](https://github.com/nanatsusaya/dot-panic/issues/100) has since put it
+inside 0006 §3's band rather than superseding it. The starting arrangement is
+provisional in the same way: dots are scattered over one square of the frame's
+shorter side, because the frame itself is
+[#103](https://github.com/nanatsusaya/dot-panic/issues/103)'s.
+
+**0006 §3's band is the first rule of the flock to arrive.** #100 holds every
+dot's speed inside `[0.04, 0.16]` shorter sides per second, and the floor is
+above zero because that section rejects a flock in which something has stopped —
+so `0.1` is the middle of the band now rather than a free-standing number. **The
+clamp runs before the dot is moved**, so a dot's displacement is the velocity it
+ends the step with rather than the one it came in at. The world `createWorld`
+returns satisfies the band itself, because 0006 §8 keeps the Shell from stepping
+under `reduce` and that world is all some visitors ever see. **Nothing was
+watched, and the ticket defers that by name**: *nothing parks, nothing shoots*
+needs forces that vary a speed, and nothing varies one until
+[#99](https://github.com/nanatsusaya/dot-panic/issues/99).
 
 **One sentence in 0002 §2 had to be read rather than applied**, and #91 could
 not avoid it. *The Core imports nothing from this project*, with *the Shell is
@@ -1313,7 +1326,7 @@ is why each row exists, which nothing else here says.
 | Epic | Holds | Why it exists |
 |---|---|---|
 | [#13](https://github.com/nanatsusaya/dot-panic/issues/13) Walking skeleton | 9 tickets | 0012 §2 makes it the first increment, and 0011 §7 puts the first deployment here |
-| [#87](https://github.com/nanatsusaya/dot-panic/issues/87) The flock's motion | 6 tickets | 0006's motion rules, cut one per ticket |
+| [#87](https://github.com/nanatsusaya/dot-panic/issues/87) The flock's motion | 7 tickets | 0006's motion rules, cut one per ticket, plus the numbers they fix blind |
 | [#88](https://github.com/nanatsusaya/dot-panic/issues/88) The pointer | 3 tickets | 0007's input model — the toy's one interaction |
 | [#89](https://github.com/nanatsusaya/dot-panic/issues/89) The finished page | 3 tickets | 0005's rendering, plus the palette and the dot count no record fixes |
 | [#117](https://github.com/nanatsusaya/dot-panic/issues/117) The meta-audit corrections | 20 tickets | the 2026-08-03 audits' findings, and two of the same class found by building instead; it builds nothing, which is what 0012 A2 widened *epic* to allow |
@@ -1501,13 +1514,20 @@ What a change description must contain is no longer among the gaps here.
 
 ## The single clearest next step
 
-**[#100](https://github.com/nanatsusaya/dot-panic/issues/100), the speed band —
-first of the five in the sprint over
+**[#103](https://github.com/nanatsusaya/dot-panic/issues/103), the frame's edge
+as a turning force — second of the five in the sprint over
 [#87](https://github.com/nanatsusaya/dot-panic/issues/87), opened 2026-08-08.**
-That activity is 0012 §2's and it ran with the decider, which §6 requires
-*before any agent starts*. **The order lives in that epic's table**, because
-0012 §7 makes it the authority for its own members and a copy here would be a
-second one.
+[#100](https://github.com/nanatsusaya/dot-panic/issues/100) closed the same day
+and is the first of them. That activity is 0012 §2's and it ran with the
+decider, which §6 requires *before any agent starts*. **The order lives in that
+epic's table**, because 0012 §7 makes it the authority for its own members and a
+copy here would be a second one.
+
+**#103 is the ticket that gives the Core a frame at all**, which is why the
+flock occupies a square today and stops at its edge. It is also the first
+**force**, and that is what puts it ahead of
+[#101](https://github.com/nanatsusaya/dot-panic/issues/101): a bound on how far
+a velocity may change has nothing to bound until something changes one.
 
 **Its finding is that there is no independence to have.** §6 calls two tickets
 independent when they touch no file in common and neither's criteria depend on
