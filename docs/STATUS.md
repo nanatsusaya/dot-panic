@@ -636,6 +636,22 @@ opened, closed or toggled by script* is not a thing a text search decides, and
 0014 §9 already splits the label into *that it names the imprint*, asserted, and
 *what it says*, watched.
 
+**A row of 0011 §8 joined them, and it is the first claim in this project
+asserted in two places on purpose.** That table is about the **deployed** page,
+and #98 builds the workflow that reads the built artifact; the same file now
+reads committed source for the same link, on the decider's answer to PR #206's
+O1. **They are not one claim written twice** — two objects at the two places a
+command runs, which is the difference 0010 A2 named as context rather than kind.
+What it closes is the window between now and a deployment that waits on #90:
+until then nothing else guards the link, and 0011 §8's own reason for asserting
+it is that those two sentences are what a page rewrite drops unnoticed.
+
+**It strips comments before it reads**, and that is the half worth knowing. A URL
+inside a comment is not a link a visitor can follow, so the test was made to fail
+with the anchor moved into one — the file still contains the address and the
+assertion still finds nothing. It is the `showModal` count's trap from the other
+side: there a comment reddens a true check, here one would green a false one.
+
 **The flock stops while the dialog is open** (0008 §10), and the evidence is the
 supplied clock rather than an eye. Seventy-one frames driven with it open
 produced one identical picture, and the frame after it closed continued from

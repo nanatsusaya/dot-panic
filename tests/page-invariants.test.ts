@@ -1,15 +1,17 @@
 /**
  * What the page claims about itself and a command can decide by reading it:
- * 0014 §9's first table entire, plus 0017 §3.
+ * 0014 §9's first table entire, 0017 §3, and one row of 0011 §8.
  *
- * Both records name these as decidable by reading the source with no browser,
- * which is 0010 §2's third kind of claim, and until `tests/` existed there was
- * nowhere to put one — 0018 §1. The rest of each record's list is measured or
- * watched, and nothing here pretends otherwise.
+ * All three records name these as decidable by reading the source with no
+ * browser, which is 0010 §2's third kind of claim, and until `tests/` existed
+ * there was nowhere to put one — 0018 §1. The rest of each record's list is
+ * measured or watched, and nothing here pretends otherwise.
  *
  * [#96](https://github.com/nanatsusaya/dot-panic/issues/96) is the change that
  * made three of the four true; the fourth was true from #95 and is asserted here
- * because this change edits the file it is about.
+ * because that change edits the file it is about.
+ * [#77](https://github.com/nanatsusaya/dot-panic/issues/77) adds the 0011 §8 row
+ * on the decider's answer to PR #206's O1.
  */
 
 import { describe, expect, test } from "bun:test";
@@ -110,6 +112,40 @@ describe("the page's source-readable invariants", () => {
    * A second German word would have to arrive inside one of these elements or
    * in a third one, and either fails here.
    */
+  /*
+   * 0011 §8's third asserted row, arriving early and over a different object.
+   * That table is about the **deployed** page, and #98 builds the workflow that
+   * reads it there; until that lands the link is guarded by nothing at all,
+   * while §8's own reason for asserting it is that §4's two sentences are the
+   * kind of thing a page rewrite drops without anyone noticing.
+   *
+   * **This is not that claim twice.** One command reads committed source and the
+   * other a built artifact, which is the difference 0010 A2 named as context
+   * rather than kind — the same claim at the two places a command runs.
+   *
+   * Comments are stripped before anything is read. A URL inside one is not a
+   * link a visitor can follow, and what the page offers the visitor is the whole
+   * subject here. It is the `showModal` count's trap from the other side: there
+   * a comment reddens a true check, here one would green a false one.
+   *
+   * **What it cannot decide is whether the sentences are true** — 0011 §8 says
+   * so of this row itself, and that is a person reading them.
+   */
+  test("the page links GitHub's privacy statement", async () => {
+    const markup = (await read("index.html")).replace(/<!--[\s\S]*?-->/g, "");
+    const hrefs = [...markup.matchAll(/<a[^>]*href="([^"]*)"/g)].map(
+      (anchor) => anchor[1] ?? "",
+    );
+
+    expect(
+      hrefs.filter(
+        (href) =>
+          href.startsWith("https://docs.github.com/") &&
+          href.includes("privacy"),
+      ),
+    ).toHaveLength(1);
+  });
+
   test("lang is en on the document and de on nothing but the one word", async () => {
     const page = await read("index.html");
     const german = [
