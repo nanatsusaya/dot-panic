@@ -65,6 +65,28 @@ export const DOT_COUNT = 200;
  */
 export const DOT_RADIUS = 0.005;
 
+/**
+ * The floor a dot's speed is held above, as a fraction of the frame's shorter
+ * side per second (0008 §6). Provisional; #216 supersedes it by watching.
+ *
+ * It is above zero because 0006 §3 requires it — a flock in which something has
+ * stopped reads as broken, and a floor is cheaper than explaining why. A dot
+ * here crosses the shorter side in twenty-five seconds: plainly moving, and
+ * slow. Fixed in #100 before the work started, which is where 0008 R1 puts a
+ * number.
+ */
+export const SPEED_MIN = 0.04;
+
+/**
+ * The ceiling, provisional in the same way and superseded by the same watching.
+ *
+ * A dot here crosses the shorter side in a little over six seconds. The 4:1
+ * ratio against the floor is the room 0006 §4 leaves the forces to produce
+ * variation in, rather than a dot carrying a speed of its own — which §4
+ * rejects and R2 keeps rejected.
+ */
+export const SPEED_MAX = 0.16;
+
 /*
  * A third number the work needed and #91 had not named — recorded in a comment
  * on that ticket rather than added to its criteria afterward. Every dot leaves
