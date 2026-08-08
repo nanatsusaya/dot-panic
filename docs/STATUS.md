@@ -2,7 +2,7 @@
 
 *Brought current before a session ends. Read first when one starts.*
 
-*Last brought current: 2026-08-06.*
+*Last brought current: 2026-08-08.*
 
 ## Position
 
@@ -622,6 +622,15 @@ produced one identical picture, and the frame after it closed continued from
 exactly that world. Nothing is owed on the way back, because the time a frame
 carries is only accumulated in the branch that steps — that half is read from
 five lines rather than measured, and 0008 §4's cap would bound it either way.
+
+**That change named a browser feature and read none**, which is
+[the maintenance list](maintenance.md)'s second row failing rather than working.
+CSS `min()` bounds the dialog against the viewport and nothing had ever checked
+it against 0001 §3.4's floor. **It clears it comfortably** — Baseline widely
+available, low 2020-07-28 and high **2023-01-28**, read on 2026-08-08 — and so
+does the `flex-wrap` the strip gained, at high 2018-03-30. Everything else the
+dialog uses was read on 2026-08-02 for 0014 §5. The reading was made after the
+merge instead of inside it, and the row says *after* for that reason.
 
 **Two things the ticket had not listed arrived with it, and
 [#109](https://github.com/nanatsusaya/dot-panic/issues/109) has closed both.** The
@@ -1344,12 +1353,24 @@ written at any point after step 3 but whose deployment is a stop-and-ask twice
 over. **G1's binding has still never been verified** — the coherence check says
 it cannot decide it and names the address.
 
-**And #96 left one criterion open**, which is the one this project keeps having
-to hand over: whether the dialog *looks* right. What a command and a supplied
-clock could decide was decided — the modality, the inertness, the freeze, the
-line length, the two measured layout claims — and what an eye decides was not.
-[PR #204](https://github.com/nanatsusaya/dot-panic/pull/204) names it precisely,
-in the same shape #108 and #109 used.
+**#96 merged with its *Watched and seen* criterion unmet, and nothing records
+that anyone looked.** What a command and a supplied clock could decide was
+decided — the modality, the inertness, the freeze, the line length, the two
+measured layout claims — and what an eye decides was not.
+[PR #204](https://github.com/nanatsusaya/dot-panic/pull/204) names the six things
+precisely and carries no *Watched* evidence, so the ticket is closed and the
+condition of Done is open. **That is the third time**, after
+[#94](https://github.com/nanatsusaya/dot-panic/issues/94)'s smoothness and
+[#109](https://github.com/nanatsusaya/dot-panic/issues/109), and the second two
+were closed afterwards by a comment on the merged pull request —
+[#185](https://github.com/nanatsusaya/dot-panic/issues/185) is where that route
+has no written home. **`Escape` is the sharp one**: it could not be decided in
+the session's own browser at all, where the key arrives trusted and unprevented
+and the dialog stays open.
+
+**A page nobody has looked at is what 0011 §7 is about to publish.** The first
+deployment is this epic, and two of its remaining three items are the decider's,
+so the looking and the address are the same hand-off.
 
 **What is left inside the epics is small and named**:
 [#166](https://github.com/nanatsusaya/dot-panic/issues/166),
