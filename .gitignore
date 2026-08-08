@@ -11,3 +11,9 @@ core/**/*.js
 shell/**/*.js
 view/**/*.js
 tests/**/*.js
+
+# The site the deploy workflow assembles, for the same reason as the four
+# patterns above: it is a copy of files that already exist here, and 0011 §6
+# reads it rather than the source tree. It is only ever built in CI — this
+# entry is for the session that runs those steps by hand to see what deploys.
+_site/
