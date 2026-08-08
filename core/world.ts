@@ -131,6 +131,59 @@ export const EDGE_MARGIN = 0.08;
  */
 export const MAX_ACCELERATION = 1.2;
 
+/**
+ * How far a dot looks for others to steer by, as a fraction of the frame's
+ * shorter side (0008 §6). Provisional; #216 supersedes it by watching.
+ *
+ * 200 dots over a 16:9 frame's ≈1.778 square units is a density of ≈112 per
+ * unit², so `π·0.14²·112 ≈ 7` puts about six others inside it — enough for an
+ * average to mean something, few enough that the flock stays local instead of
+ * moving as one block.
+ *
+ * **It is a radius and nothing else.** 0006 §1 drops Reynolds' angular
+ * neighborhood deliberately, so one behind counts exactly as much as one ahead,
+ * and restoring the angle is an amendment's business rather than a knob. Fixed
+ * in #99 before the work started, which is where 0008 R1 puts a number.
+ */
+export const NEIGHBORHOOD_RADIUS = 0.14;
+
+/**
+ * How much separation counts against the other two behaviors (0006 §1).
+ * Provisional; #216 supersedes it by watching.
+ *
+ * Above the other two because that is the usual starting point for Reynolds'
+ * three. **It is a bias and not a guarantee**: 0006 §2 deliberately refuses to
+ * let separation carry non-overlap, which is a constraint on the result and
+ * #102's. Fixed in #99 before the work started, which is where 0008 R1 puts a
+ * number.
+ */
+export const SEPARATION_WEIGHT = 1.5;
+
+/**
+ * How much alignment counts, on the same scale. Provisional in the same way and
+ * superseded by the same watching.
+ *
+ * **The three are ratios rather than sizes.** Each behavior produces a
+ * dimensionless vector no longer than one, the weighted sum is divided by the
+ * three weights' total, and what comes out is scaled by `MAX_ACCELERATION` — so
+ * a dot whose behaviors disagree accelerates gently and one whose behaviors
+ * agree accelerates hard. That is the variation 0006 §4 asks the forces to
+ * produce, rather than a dot carrying a gait of its own.
+ */
+export const ALIGNMENT_WEIGHT = 1;
+
+/**
+ * How much cohesion counts, on the same scale. Provisional in the same way and
+ * superseded by the same watching.
+ *
+ * Equal to alignment's and below separation's, which is what gives a pair of
+ * dots a spacing to settle at rather than a collision or a drift apart:
+ * separation fades to zero at `NEIGHBORHOOD_RADIUS` while cohesion grows to one
+ * there, and at these three numbers they balance at 0.6 of that radius — 0.084,
+ * against the 0.094 that 200 dots over a 16:9 frame are apart on average.
+ */
+export const COHESION_WEIGHT = 1;
+
 /*
  * A third number the work needed and #91 had not named — recorded in a comment
  * on that ticket rather than added to its criteria afterward. Every dot leaves
