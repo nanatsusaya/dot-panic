@@ -1830,6 +1830,14 @@ closest pair at 0.022 or wider. So this watch gets **weaker as a test** the mome
 [#216](https://github.com/nanatsusaya/dot-panic/issues/216) writes a number in,
 and there is nothing to look at afterwards. It is owed before that, not after.
 
+**The deadline is no longer hypothetical, because #216's numbers are on the
+ticket.** They were measured over two minutes and three seeds and written down
+before any code, which is 0008 R1's ask; the one that matters here is that **the
+closest pair moves from 0.0106 to 0.0296**, so the correction firing exactly once
+today would fire not at all there. **The code is deliberately not written.**
+Everything that ticket needs is on it, and what holds it is this watch and nothing
+else.
+
 **It is now the only watch owed**, because
 [#106](https://github.com/nanatsusaya/dot-panic/issues/106)'s has happened —
 [the *Watched* comment on PR #237](https://github.com/nanatsusaya/dot-panic/pull/237#issuecomment-5232024738)
@@ -1983,6 +1991,15 @@ carries what the two changes found and what the recording showed.
 watching, opening from `S 10 : A 0.25 : C 1` instead of from nothing. Its header
 still reads *triggered by #102 landing*, and that is the ticket above rather than
 a second thing to wait for.
+
+**All seven are written onto it now**, two of them moved and five kept with a
+reason each, and the candidate arrives as `S 40 : A 1 : C 4` — the same simulation
+as `S 10 : A 0.25 : C 1` and checked to be, because the three weights are divided
+by their own sum and a common factor cancels exactly. **What the measuring is
+worth is what it rules out**: lowering alignment alone does not hold the flock in
+groups, and neither does raising separation moderately, so the working region is
+separation dominant *while* the other two are both small. None of that decides
+anything — 0006 §10 leaves these to watching, and the ticket says so on itself.
 
 **What that ticket must not do is settle by measuring.** #238's candidate is the
 best of a grid over three seeds and one frame ratio, and 0006 §10 puts every one
