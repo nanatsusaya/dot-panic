@@ -72,9 +72,23 @@ scatter, and the shorter reach brings it to 0.714. The
 merge, and a group arriving at an edge reorients and leaves — 0006 §6 under a
 crowd for the first time. **What the minute was too short to show is on
 [#216](https://github.com/nanatsusaya/dot-panic/issues/216)**: the groups merge
-and never split, so by sixty seconds all 200 dots are one connected mass covering
-19 percent of the frame, traveling as a block with a heading agreement of 0.94
-and an internal lattice. **The reservation's own fix is not available to that
+and never split, so by half a minute all 200 dots are one connected mass and stay
+one.
+
+**It has since been measured off the rendered page rather than off the Core**, by
+pulling the dot centers back out of 300 images of one browser — the first time the
+thing watched and the thing measured were the same thing. The settled flock covers
+about 11 percent of the frame, reads 2.09 on the Clark-Evans index against 2.15
+for a perfect hexagonal packing and a **measured** 1.04 for the same 200 dots
+scattered over the same disc, and travels at a heading agreement of 0.998 with the
+whole flock's speed equal to the mean speed of a dot inside it. **One browser
+agrees with the Core**, which the sitting of ten did not — so that discrepancy was
+about running ten on one screen rather than about the simulation, and 0008 §4's
+step-abandonment is left unproven rather than refuted. #216 carries the numbers,
+and the [method log](method-log.md) carries how the first run of that measurement
+read as its own opposite.
+
+**The reservation's own fix is not available to that
 ticket** — 0006 §4 rejects a preferred speed per dot by name and R2 fixes that it
 arrives by an authorized amendment or not at all — so
 [#228](https://github.com/nanatsusaya/dot-panic/issues/228) asks it, waiting on
@@ -1622,32 +1636,56 @@ What a change description must contain is no longer among the gaps here.
 
 ## The single clearest next step
 
-**[#102](https://github.com/nanatsusaya/dot-panic/issues/102), non-overlap applied
-after the step — the last of the five in the sprint over
-[#87](https://github.com/nanatsusaya/dot-panic/issues/87), opened 2026-08-08.**
+**The third watch — whether the non-overlap correction shows as a jitter — and it
+is the decider's eyes rather than a session's.** Every other condition of Done on
+[#102](https://github.com/nanatsusaya/dot-panic/issues/102) is met and that one is
+not, so the ticket is open with its code merged. **The sprint over
+[#87](https://github.com/nanatsusaya/dot-panic/issues/87) is complete in code and
+not in its criteria**, which is the same shape #99 was in yesterday and the reason
+a merge is not what closes a ticket here.
+
+**All five landed on 2026-08-08 and 2026-08-09** —
 [#100](https://github.com/nanatsusaya/dot-panic/issues/100),
 [#103](https://github.com/nanatsusaya/dot-panic/issues/103),
-[#101](https://github.com/nanatsusaya/dot-panic/issues/101) and
-[#99](https://github.com/nanatsusaya/dot-panic/issues/99) are the first four and
-all four are closed. That activity is 0012 §2's and it ran with the decider,
-which §6 requires *before any agent starts*. **The order lives in that epic's
-table**, because 0012 §7 makes it the authority for its own members and a copy
-here would be a second one.
+[#101](https://github.com/nanatsusaya/dot-panic/issues/101),
+[#99](https://github.com/nanatsusaya/dot-panic/issues/99) and #102, in that order.
+That activity is 0012 §2's and it ran with the decider, which §6 requires *before
+any agent starts*. **The order lives in that epic's table**, because 0012 §7 makes
+it the authority for its own members and a copy here would be a second one.
 
-**#102 sits last because *the correction is not visible as a jitter* needs a
-crowd, and only cohesion produces one.** It is 0006 §2's hard constraint — no two
-dots closer than `2r` in a returned world — applied to the result rather than
-added as a fourth force, which is the strongest invariant in that record and the
-one §10 makes a command decide for any world, any seed and any number of steps.
+**#102 sat last because *the correction is not visible as a jitter* needs a crowd,
+and only cohesion produces one.** It is 0006 §2's hard constraint — no two dots
+closer than `2r` in a returned world — applied to the result rather than added as
+a fourth force, which is the strongest invariant in that record and the one §10
+makes a command decide for any world, any seed and any number of steps. It lives
+in `core/overlap.ts` rather than in the step, because `createWorld` owes the same
+guarantee: under 0006 §8 the Shell never steps where the visitor asked for reduced
+motion, so that one world is all those visitors ever see.
 
-**It may find little to do, and that is a finding rather than a reason to skip
-it.** Separation holds the closest pair at 0.021 to 0.030 against two radii of
-0.010 in every world measured under #99, so there is no violation waiting to be
-repaired at today's numbers — but the constraint still has to hold of the world a
-step returns, and [#216](https://github.com/nanatsusaya/dot-panic/issues/216) may
-move the numbers that make it true. **What it must not do is take the route 0006
-§2 forbids in terms**: a heavily weighted separation force guarantees nothing, and
-0012 §4 needs something to assert.
+**It finds nothing to do at today's numbers, and that is the measurement rather
+than a guess.** Over 3,600 steps of a settled flock no step had a dot to correct,
+and over the whole of a recorded minute in a browser the closest any two dots came
+was 0.0106 against a floor of 0.0100 — once, during the crowding of the first five
+seconds. So the whole of its cost is a scan that finds nothing: a step went from
+0.646 to **0.895 ms** over 200 dots, which is 2.68 ms of a 16.67 ms frame at 0008
+§4's worst case of three steps in one draw.
+[#104](https://github.com/nanatsusaya/dot-panic/issues/104) has the numbers and is
+now a second consumer of the same sweep. **What
+[#216](https://github.com/nanatsusaya/dot-panic/issues/216) must hold on to** is
+that a smaller separation reach would put the constraint into every step and that
+cost stops being the cost.
+
+**Three things the work found that the ticket had not named**, each on #102 or in
+the code that answers it. A pair aimed at exactly `2r` comes back a few ulps
+short, because placing a dot rounds — so the separation goes a hair past the
+floor, nine femtometers of a shorter side, reasoned the way `withSpeedInBand`
+reasons about binary floating point. A corner test's pile of 200 dots in a square
+of 0.1 was **a packing with no solution**, and the correction answered it by
+pushing dots out of the frame; the world was what changed, to 0.25. And a row of
+dots on one line does not settle inside the pass cap, which is 0006 §2's own
+*unbounded number of passes* arriving as arithmetic — **the cap was not raised**,
+which #102 forbids in terms, and the test asserting iteration was rebuilt on a
+configuration that settles.
 
 **The activity's finding is that there is no independence to have.** §6 calls two tickets
 independent when they touch no file in common and neither's criteria depend on
@@ -1690,8 +1728,23 @@ had happened three times here. **Two of the three sittings have happened**, both
 on 2026-08-09: the first discharged #100, #101 and #103 at once, and the second
 was #99's, which is the one 0001 §3.1 puts beyond any command and which took two
 attempts. The *Position* section above carries what was seen, where the evidence
-is, and what the failed attempt cost. **The third is this next step's**, and it is
-the narrowest of them — whether the correction shows as a jitter.
+is, and what the failed attempt cost. **The third is owed**, and it is the
+narrowest of them: it asks about a thing that should be invisible rather than
+about a thing that should look right, and the measurement says there should be
+nothing to see. That is the reason to look rather than a reason not to — a jitter
+visible there is coming from somewhere this change did not measure.
+
+**What comes after it has not been decided.** Two things are available and each
+needs the decider rather than a session.
+[#216](https://github.com/nanatsusaya/dot-panic/issues/216) is triggered by #102
+landing and is a watching pass, so it is his eyes again; the measurement on it now
+says what the numbers in its table can and cannot move, which is where the flock
+sits between a random scatter and that lattice, and not whether the lattice has
+any internal motion. And **[#88](https://github.com/nanatsusaya/dot-panic/issues/88),
+the pointer, has no blocker left** — #105, #106 and #107 name #91, #94 and #95, all
+closed — but no sprint-opening activity has run for that set, and 0012 §6 requires
+one *before any agent starts*. **The sequencing is his**, and this file does not
+guess it.
 
 **[#178](https://github.com/nanatsusaya/dot-panic/issues/178) is done and the
 convention has a command behind it.**
