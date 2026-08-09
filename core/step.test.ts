@@ -1328,6 +1328,49 @@ describe("the pointer's force", () => {
   });
 
   /*
+   * That the peak is a real magnitude and not only a constant, which is what
+   * makes the relation above mean anything.
+   *
+   * **It was found by mutation and nothing else here reported it.** Leaving the
+   * away vector unnormalized scales every force by the gap, so the pointer's
+   * strongest push becomes about a thousandth of what this number names — and
+   * every other assertion in this block stays green, because zero past the
+   * radius, a push straight away, growing as it nears and reaching zero
+   * continuously are all still true of it. The flock would simply not react.
+   *
+   * A thousandth of the radius in, so both falloffs 0007 §5 permits are within
+   * a percent of the peak there and the tolerance does not choose one.
+   */
+  test("reaches that peak as a dot comes close to the pointer", () => {
+    expect(pushAt(POINTER_RADIUS / 1000)).toBeCloseTo(POINTER_STRENGTH / 60, 3);
+  });
+
+  /*
+   * 0006 §4's bound, asserted with the pointer inside the sum — and the reason
+   * the sum is where it joins. A dot deep in the margin with the pointer just
+   * outside it has two forces pointing the same way, 1.05 and 1.13, so what
+   * comes out says which of the two arrangements the code has: summed and then
+   * bounded gives the bound, bounded and then added gives 2.18.
+   *
+   * **The containment run below does not report this and was tried first.** At
+   * a peak equal to `MAX_ACCELERATION` neither arrangement puts a dot outside
+   * the frame — over 600 steps, three seeds and seven pointer placements — so
+   * the difference is only visible in one step's change and not in where the
+   * flock ends up. That is what makes the relation worth asserting rather than
+   * watching.
+   */
+  test("holds the sum inside the bound when the pointer and an edge agree", () => {
+    const seconds = 1 / 60;
+    const deepInTheMargin: Vector = { x: EDGE_MARGIN / 8, y: 0.5 };
+    const behind: Vector = { x: deepInTheMargin.x / 2, y: 0.5 };
+    const world = dotIn(WIDE, deepInTheMargin, ACROSS);
+
+    expect(
+      largestChange(world, step(world, seconds, behind)),
+    ).toBeLessThanOrEqual(MAX_ACCELERATION * seconds);
+  });
+
+  /*
    * 0007 §5's other half, and the one a reader is most likely to build the
    * wrong way: *it contributes a force and never constrains position*. A dot
    * moving toward the pointer keeps moving toward it for a while, because one
@@ -1356,6 +1399,12 @@ describe("the pointer's force", () => {
    * so what it reports is the worst moment of the whole run and not the last
    * one. Five seconds at 0008 §3's rate, which is what the sprint-opening
    * activity measured this relation over.
+   *
+   * **The pointer sits on the edge, and inside it is no worse.** Ten seconds
+   * over three seeds at seven placements from the edge to twice the margin put
+   * nothing outside the frame at any of them, so this is the case rather than
+   * the worst case — and the assertion above is where the arrangement of the
+   * sum is actually decided.
    */
   test("holds every dot inside the frame with a pointer parked on an edge", () => {
     const parked: Vector = { x: 0, y: WIDE.height / 2 };
