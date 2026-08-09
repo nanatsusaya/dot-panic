@@ -8,6 +8,11 @@
  * §2's non-overlap, which lives in `overlap.ts` because `createWorld` owes the
  * same guarantee.
  *
+ * **And one force that is not 0006's.** 0007 §5's pointer is the only thing
+ * here that comes from outside the flock — the visitor, arriving as an argument
+ * — and it joins the same sum the others do, so §4's bound holds all four
+ * together rather than the flock's three and then this one.
+ *
  * **The order inside a step is the whole design.** The forces are summed and
  * bounded, the bounded acceleration changes the velocity, the band then holds
  * the result inside itself, the dot is moved, and only then is §2's correction
@@ -32,6 +37,8 @@ import {
   EDGE_MARGIN,
   MAX_ACCELERATION,
   NEIGHBORHOOD_RADIUS,
+  POINTER_RADIUS,
+  POINTER_STRENGTH,
   SEPARATION_RADIUS,
   SEPARATION_WEIGHT,
   SPEED_MAX,
@@ -328,6 +335,59 @@ function steeringFor(dot: Dot, dots: readonly Dot[]): Vector {
 }
 
 /**
+ * 0007 §5's pointer force: a push straight away from the visitor's pointer,
+ * reaching exactly zero at `POINTER_RADIUS`.
+ *
+ * **Zero past the radius and not merely small**, which §5 calls the strongest
+ * invariant it adds. An unbounded falloff would have every dot react on every
+ * step, and that is a flock drifting whenever the visitor exists rather than
+ * one moving out of the way when the pointer approaches (0001 §1).
+ *
+ * **The falloff is squared, and §5 leaves the shape to watching.** Squared
+ * reaches zero with a zero slope, so a dot drifting across the boundary is not
+ * pushed, released and pushed again — §5's own requirement, which a linear
+ * falloff satisfies more weakly. Which one the flock reads better under is
+ * #233's.
+ *
+ * **It is a force and never a rule about where a dot may be.** No exclusion
+ * zone, no clamp, nothing moved directly: 0006 §4 bounds how much a velocity
+ * may change in a step, and a hard zone around a moving pointer is a position
+ * jump wearing a different name.
+ *
+ * **A dot standing exactly where the pointer is has no direction to be pushed
+ * in**, and the Core may not draw one — the generator belongs to the world
+ * (0002 §4). It is the same reasoning `separationFrom` uses for a neighbor at
+ * the same position, and the same reasoning `withSpeedInBand` uses for a dot at
+ * rest.
+ *
+ * @param position  where the dot is, in the world's own coordinates
+ * @param pointer   where the visitor's pointer is, in the same coordinates, or
+ *                  `undefined` where there is none — which 0007 §7 makes the
+ *                  ordinary case rather than an error state
+ * @returns an acceleration away from the pointer, so what it does to a velocity
+ *          depends on how long the step is
+ */
+function pointerForce(position: Vector, pointer: Vector | undefined): Vector {
+  if (pointer === undefined) {
+    return { x: 0, y: 0 };
+  }
+
+  const awayX = position.x - pointer.x;
+  const awayY = position.y - pointer.y;
+  const gap = Math.hypot(awayX, awayY);
+
+  if (gap === 0 || gap >= POINTER_RADIUS) {
+    return { x: 0, y: 0 };
+  }
+
+  // Divided by `gap` once more, because `awayX` and `awayY` carry a length of
+  // `gap` rather than a length of one — `separationFrom`'s arithmetic exactly.
+  const push = (POINTER_STRENGTH * (1 - gap / POINTER_RADIUS) ** 2) / gap;
+
+  return { x: awayX * push, y: awayY * push };
+}
+
+/**
  * Hold an acceleration inside 0006 §4's bound, keeping the direction it points.
  *
  * **The bound is on the acceleration and not on the change**, which is the same
@@ -375,24 +435,31 @@ function withBoundedSize(force: Vector): Vector {
  * @param seconds  how much time one step covers. Time arrives as an argument
  *                 because 0002 §3 forbids the Core to read a clock, and 0002 R1
  *                 leaves the Shell driving fixed steps
- * @param _pointer  where the visitor's pointer is, in the world's own
- *                  coordinates, or `undefined` where there is none — which 0007
- *                  §7 makes the ordinary argument rather than an error state.
- *                  **Nothing reads it yet**, and the underscore is Biome's own
- *                  way of saying so: 0007 §2 puts everything derived from a
- *                  pointer inside the Core, and the force that derives something
- *                  is #106's. This is #105 giving the Shell somewhere to hand
- *                  the raw fact, and #106 is what drops the underscore
+ * @param pointer  where the visitor's pointer is, in the world's own
+ *                 coordinates, or `undefined` where there is none — which 0007
+ *                 §7 makes the ordinary argument rather than an error state.
+ *                 It is the raw fact and nothing else (0007 §2): the Shell
+ *                 converts an event and does no arithmetic on the world, so
+ *                 every rule about how the flock reacts is here
  * @returns a new world with the same dot count (0008 §9), the same radius, the
  *          same frame and the same generator state — nothing here draws from it
  */
-export function step(world: World, seconds: number, _pointer?: Vector): World {
+export function step(world: World, seconds: number, pointer?: Vector): World {
   const moved = world.dots.map((dot) => {
     const edge = edgeForce(dot.position, world.frame);
     const steering = steeringFor(dot, world.dots);
+    const pushed = pointerForce(dot.position, pointer);
+
+    /*
+     * All three summed before anything is bounded, which is what makes 0006
+     * §4's cap one budget rather than three. It is also the relation #106's
+     * peak strength is chosen against: a pointer pushing outward is subtracted
+     * from §6's edge force here, before `withBoundedSize` sees either, so a
+     * peak above the bound could cancel an edge the margin was sized against.
+     */
     const force = withBoundedSize({
-      x: edge.x + steering.x,
-      y: edge.y + steering.y,
+      x: edge.x + steering.x + pushed.x,
+      y: edge.y + steering.y + pushed.y,
     });
 
     /*
