@@ -1455,9 +1455,12 @@ bought or registered. An Actions workflow publishes it rather than a branch,
 because a branch leaves 0009 §8's checks with nothing to gate: the checks run,
 `tsc` emits, and `actions/deploy-pages` runs only if everything before it passed,
 so a red check produces no deployment rather than a deployed page with a warning
-beside it. **This is not continuous integration** — what gates a merge is still
-review — and **the workflow is a file now**, so that ordering has stopped being a
-claim about a file and become the step order of one job. Its §5 settles 0003
+beside it. **What gates a merge is no longer review alone**, since
+[0020](adr/0020-whether-the-checks-gate-a-merge.md): the same four run on every
+pull request, in a second workflow that publishes nothing, and 0011 §2 carries
+that as its A1. **This one still gates only the deployment** — and **the workflow
+is a file now**, so that ordering has stopped being a claim about a file and
+become the step order of one job. Its §5 settles 0003
 §6's conditional the unwanted way: GitHub's documentation provides no way to set
 response headers, stated as what was found rather than as a capability claim, so
 the policy ships as a `meta` element alone and `report-uri`, `frame-ancestors`
