@@ -18,6 +18,7 @@ import {
   DOT_COUNT,
   DOT_RADIUS,
   type Frame,
+  type Vector,
   withFrame,
 } from "../core/world.js";
 import { type Colors, draw } from "../view/draw.js";
@@ -219,6 +220,20 @@ let previousTimestamp: number | undefined;
  */
 let owed = 0;
 
+/*
+ * Where the visitor's pointer is, in the world's coordinates, or `undefined`
+ * where there is none — which 0007 §7 makes the ordinary case rather than a
+ * degraded one. A device that never produces a pointer leaves this exactly as
+ * it starts.
+ *
+ * **This is the whole of what the Shell keeps about input**, and 0007 §2 is why:
+ * no velocity, no smoothing, no decay, no strength. Each of those is derived,
+ * and derived is the Core's — a Shell handing over an already-decayed influence
+ * would be deciding how the flock reacts, in the part of the system no test
+ * reaches.
+ */
+let pointer: Vector | undefined;
+
 function frame(timestamp: number): void {
   if (context === null) {
     return;
@@ -250,7 +265,7 @@ function frame(timestamp: number): void {
     let taken = 0;
 
     while (owed >= STEP_SECONDS && taken < MAX_STEPS_PER_DRAW) {
-      world = step(world, STEP_SECONDS);
+      world = step(world, STEP_SECONDS, pointer);
       owed -= STEP_SECONDS;
       taken += 1;
     }
@@ -327,6 +342,76 @@ function fitToCanvas(): void {
 }
 
 window.addEventListener("resize", fitToCanvas);
+
+/*
+ * An event's position in the **world's** coordinates, which is the raw fact 0007
+ * §2 lets this file hand over and the only arithmetic it does.
+ *
+ * It divides by the same shorter side `readFrame` divides by, so the pointer and
+ * the frame are in one coordinate system by construction rather than by two
+ * places agreeing. The offset comes from the box because that is the only thing
+ * carrying where the canvas sits on the page; the canvas has no border and no
+ * padding, so the two measurements are the same rectangle.
+ *
+ * **A box of zero has no coordinates to give**, and the answer is that there is
+ * no pointer rather than a position built from a division by zero — the same
+ * state `readFrame` guards, reached the same way.
+ *
+ * @param event  the pointer event to place
+ * @returns where it happened, in the world's coordinates, or `undefined` where
+ *          the canvas has no size
+ */
+function inWorld(event: PointerEvent): Vector | undefined {
+  const shorter = Math.min(canvas.clientWidth, canvas.clientHeight);
+
+  if (shorter === 0) {
+    return undefined;
+  }
+
+  const box = canvas.getBoundingClientRect();
+
+  return {
+    x: (event.clientX - box.left) / shorter,
+    y: (event.clientY - box.top) / shorter,
+  };
+}
+
+/*
+ * 0007 §1's one code path: Pointer Events, and no mouse or touch listener beside
+ * them.
+ *
+ * **The page listens rather than the canvas**, so that a pointer crossing onto
+ * the strip stays a pointer instead of disappearing at an edge the visitor
+ * cannot see. The world's coordinates simply run past the frame there, which
+ * 0006 §6's edge already deals with for dots and 0007 §5 makes harmless for a
+ * force that falls to zero.
+ *
+ * **`pointerup` and `pointercancel` both end it**, which is 0007 §4 exactly: a
+ * browser taking over the gesture has to be treated like a finger lifting. What
+ * happens *after* presence ends is the decay, and that is derived — so it is the
+ * Core's and it is #107's, not a timer here.
+ *
+ * **The four names are written out rather than looped over.** A loop over an
+ * array of them is shorter and defeats the command that decides this section: it
+ * reads literal event names out of this file, so a name it cannot see is a path
+ * nothing checks. Writing them out also gives each handler its event type from
+ * `WindowEventMap` instead of a cast.
+ */
+window.addEventListener("pointerdown", (event) => {
+  pointer = inWorld(event);
+});
+
+window.addEventListener("pointermove", (event) => {
+  pointer = inWorld(event);
+});
+
+window.addEventListener("pointerup", () => {
+  pointer = undefined;
+});
+
+window.addEventListener("pointercancel", () => {
+  pointer = undefined;
+});
 
 fitToCanvas();
 label();

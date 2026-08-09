@@ -1106,3 +1106,33 @@ describe("non-overlap in a returned world", () => {
     );
   });
 });
+
+/*
+ * 0007 §2: the Shell hands the step a pointer position or the fact that there is
+ * no pointer, and everything derived from it is the Core's.
+ *
+ * **#105 adds only the argument.** What the Core does with a pointer is #106's,
+ * so the one thing to assert here is that the two ways of saying *there is no
+ * pointer* are one thing — which stays true after #106 puts a force behind the
+ * other case, and would be the first thing to break if absence ever grew a
+ * second meaning.
+ */
+describe("the pointer the Shell hands over", () => {
+  test("says the same thing whether absence is passed or omitted", () => {
+    const world = createWorld(ordinary);
+
+    expect(step(world, 1 / 60, undefined)).toEqual(step(world, 1 / 60));
+  });
+
+  test("leaves a run reproducible when no pointer is ever present", () => {
+    let named = createWorld(ordinary);
+    let omitted = createWorld(ordinary);
+
+    for (let taken = 0; taken < 120; taken += 1) {
+      named = step(named, 1 / 60, undefined);
+      omitted = step(omitted, 1 / 60);
+    }
+
+    expect(named).toEqual(omitted);
+  });
+});

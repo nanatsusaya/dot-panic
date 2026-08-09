@@ -375,10 +375,18 @@ function withBoundedSize(force: Vector): Vector {
  * @param seconds  how much time one step covers. Time arrives as an argument
  *                 because 0002 §3 forbids the Core to read a clock, and 0002 R1
  *                 leaves the Shell driving fixed steps
+ * @param _pointer  where the visitor's pointer is, in the world's own
+ *                  coordinates, or `undefined` where there is none — which 0007
+ *                  §7 makes the ordinary argument rather than an error state.
+ *                  **Nothing reads it yet**, and the underscore is Biome's own
+ *                  way of saying so: 0007 §2 puts everything derived from a
+ *                  pointer inside the Core, and the force that derives something
+ *                  is #106's. This is #105 giving the Shell somewhere to hand
+ *                  the raw fact, and #106 is what drops the underscore
  * @returns a new world with the same dot count (0008 §9), the same radius, the
  *          same frame and the same generator state — nothing here draws from it
  */
-export function step(world: World, seconds: number): World {
+export function step(world: World, seconds: number, _pointer?: Vector): World {
   const moved = world.dots.map((dot) => {
     const edge = edgeForce(dot.position, world.frame);
     const steering = steeringFor(dot, world.dots);

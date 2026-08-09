@@ -1,8 +1,9 @@
 /**
  * What the page claims about itself and a command can decide by reading it:
- * 0014 §9's first table entire, 0017 §3, and one row of 0011 §8.
+ * 0014 §9's first table entire, 0017 §3, one row of 0011 §8, and 0007's input
+ * model where it is a fact about the source rather than about a browser.
  *
- * All three records name these as decidable by reading the source with no
+ * All those records name these as decidable by reading the source with no
  * browser, which is 0010 §2's third kind of claim, and until `tests/` existed
  * there was nowhere to put one — 0018 §1. The rest of each record's list is
  * measured or watched, and nothing here pretends otherwise.
@@ -12,6 +13,9 @@
  * because that change edits the file it is about.
  * [#77](https://github.com/nanatsusaya/dot-panic/issues/77) adds the 0011 §8 row
  * on the decider's answer to PR #206's O1.
+ * [#105](https://github.com/nanatsusaya/dot-panic/issues/105) adds 0007 §1's one
+ * code path, §7's refusal of the interaction media queries and §8's
+ * `touch-action`.
  */
 
 import { describe, expect, test } from "bun:test";
@@ -144,6 +148,90 @@ describe("the page's source-readable invariants", () => {
           href.includes("privacy"),
       ),
     ).toHaveLength(1);
+  });
+
+  /*
+   * 0007 §1: one code path, and it is Pointer Events. The four names that
+   * section lists are what the page listens for, and **the assertion that
+   * carries the decision is the second half** — that no mouse or touch event is
+   * listened for beside them. Two paths is what §1 rejects, and two paths is
+   * what a later change would add without noticing.
+   */
+  test("the Shell listens for pointer events and for no mouse or touch event", async () => {
+    const listened = (await shellSources()).flatMap((source) =>
+      [...source.matchAll(/addEventListener\(\s*"([^"]+)"/g)].map(
+        (call) => call[1] ?? "",
+      ),
+    );
+
+    for (const event of [
+      "pointerdown",
+      "pointermove",
+      "pointerup",
+      "pointercancel",
+    ]) {
+      expect(listened).toContain(event);
+    }
+
+    expect(listened.filter((event) => /^(mouse|touch)/.test(event))).toEqual(
+      [],
+    );
+  });
+
+  /*
+   * 0007 §3: the flock reacts to where the pointer is, not to how it moves.
+   *
+   * **This is narrower than that section and deliberately so.** What a text
+   * search decides is that the Shell never reads the browser's own answer to
+   * *how is it moving* — `movementX` and `movementY`, and the coalesced path
+   * §1's *Alternatives considered* rejects on 0001 §3.4. A Shell computing a
+   * velocity from two positions of its own would pass this and fail §3, and
+   * review is what carries that, exactly as it carries 0014 §9's other half.
+   */
+  test("the Shell reads no pointer velocity and no coalesced path", async () => {
+    for (const source of await shellSources()) {
+      expect(source).not.toContain("movementX");
+      expect(source).not.toContain("movementY");
+      expect(source).not.toContain("getCoalescedEvents");
+    }
+  });
+
+  /*
+   * 0007 §7 records the interaction media queries as a **no** in the way 0005 §8
+   * records one, so that a later change does not have to work out whether they
+   * were considered. All four are Baseline widely available, so 0001 §3.4 would
+   * permit any of them — which is what makes this a decision rather than a
+   * limit, and worth a command.
+   *
+   * Only an at-rule's condition is read, for the same reason the breakpoint test
+   * above reads only those: `pointer-events` is a CSS property this page may
+   * legitimately use one day, and it differs from the feature name by three
+   * characters — the trap §1's own table exists to record.
+   */
+  test("the stylesheet uses no interaction media query", async () => {
+    const conditions = (await read("styles.css")).match(/@media[^{]*/g) ?? [];
+
+    for (const condition of conditions) {
+      for (const feature of ["hover", "any-hover", "pointer", "any-pointer"]) {
+        expect(condition).not.toContain(feature);
+      }
+    }
+  });
+
+  /*
+   * 0007 §8, and it is the one row here whose absence breaks the toy outright
+   * rather than degrading it: without it a finger dragged across the canvas
+   * scrolls the page, the browser takes the gesture, and `pointercancel` arrives
+   * mid-stroke.
+   *
+   * It applies to the drawing surface and to nothing else, which that section
+   * says in terms — so the rule is read rather than the file, and a
+   * `touch-action` somewhere else would not satisfy this.
+   */
+  test("the drawing surface sets touch-action to none", async () => {
+    const rule = /#flock\s*\{([^}]*)\}/.exec(await read("styles.css"));
+
+    expect(rule?.[1] ?? "").toMatch(/touch-action:\s*none/);
   });
 
   test("lang is en on the document and de on nothing but the one word", async () => {
