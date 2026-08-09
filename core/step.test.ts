@@ -647,6 +647,15 @@ describe("the frame's edge", () => {
    * forty-five of the other 199 rather than six — so the same 7,200 steps went
    * from under five seconds to over them. The run is not narrowed to fit the
    * default, because its width is what found the escape at step 894.
+   *
+   * **The ceiling is 60,000 because 30,000 was read off one machine.** The
+   * hosted runner takes 30.2 seconds where this one takes 12.5, so a ceiling set
+   * from a local run had no headroom at all, and every run of the deploy
+   * workflow failed on this one test. It is the number the long run below
+   * already carries, rather than a third one invented here. **A ceiling like
+   * this guards against a run that never ends; it is not a budget for how fast
+   * anything is** — 0008 §1 owns that, and it is about one frame on a device
+   * rather than about a suite.
    */
   test("keeps every dot inside the frame over a run", () => {
     for (const seed of [4, 5, 11, 15]) {
@@ -663,7 +672,7 @@ describe("the frame's edge", () => {
         expect(box.bottom).toBeLessThanOrEqual(WIDE.height);
       }
     }
-  }, 30_000);
+  }, 60_000);
 
   /*
    * 0006 §7's row, and R3 calls it *"the first thing worth writing as a failing
