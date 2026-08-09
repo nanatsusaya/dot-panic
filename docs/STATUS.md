@@ -847,6 +847,72 @@ with the anchor moved into one — the file still contains the address and the
 assertion still finds nothing. It is the `showModal` count's trap from the other
 side: there a comment reddens a true check, here one would green a false one.
 
+**The page listens for a pointer now, and four of those invariants are 0007's.**
+[#105](https://github.com/nanatsusaya/dot-panic/issues/105) is the first of #88's
+set: §1's four Pointer Events with no mouse or touch listener beside them, §3's
+refusal of a velocity the browser would have supplied, §7's four interaction
+media queries absent from the stylesheet, and §8's `touch-action: none` on the
+drawing surface **alone** — which computes to `none` on the canvas and `auto` on
+the strip and the body, so it is that section rather than a file containing the
+words. **The listeners are on the window rather than on the canvas**, so a
+pointer crossing onto the strip stays a pointer instead of vanishing at an edge
+nobody can see; the world's coordinates simply run past the frame there, which
+0006 §6 already handles for dots and 0007 §5 will make harmless for a force that
+falls to zero.
+
+**`step` takes a third parameter and nothing reads it**, which is the shape of
+splitting the wiring from the force: 0007 §2 puts everything derived from a
+pointer inside the Core, and deriving is
+[#106](https://github.com/nanatsusaya/dot-panic/issues/106)'s. Something is
+unused for exactly one ticket either way — in the Shell if the parameter is left
+out, in the Core if it is not — and the underscore Biome asks for is the smaller
+of the two.
+
+**The red run did not tell the whole story, and that is worth more than the
+change.** Two of the four source-reading claims reddened and two were already
+true, which the test file says of them: a guard against a later change rather
+than a description of this one. **And the Core's half reddens nowhere `bun test`
+can see it** — a step taking a third argument is a *type* error, so `check:types`
+reported it while `bun test` ran both new Core tests green against a signature
+that did not exist. That is the same shape CLAUDE.md's *Commands* already records
+for 0009 §5, arriving at a signature instead of at an import.
+
+**The mutation worth keeping is the one that shortens the code.** Writing the
+four event names as a loop over an array defeats the check entirely, because what
+it reads is literal names in the source — so writing them out is a decision the
+comment records rather than a style. **And the loop that ran the mutations
+destroyed uncommitted work**: `git checkout --` reverted two files that had not
+been committed yet, so the implementation was written twice. Mutate against a
+committed state.
+
+**What that change could not verify is the coordinate conversion**, and the
+[method log](method-log.md)'s entry on the browser pane is why: it reports
+`visibilityState: "hidden"` with a window of 0×0, so the canvas has no box and
+nothing runs the conversion — which incidentally exercises the guard returning
+*no pointer* rather than dividing by zero, and nothing else. **#106's watch is
+what decides it**, cheaply: a force centered where the pointer is not is the most
+visible failure this could have.
+
+**0007 §1's list of four turned out not to be a closed one**, on the decider's
+answer to [PR #235](https://github.com/nanatsusaya/dot-panic/pull/235)'s O1. §1
+decides *one code path, and it is Pointer Events*, so a fifth name from that same
+API reopens nothing it settled where a second set of listeners would.
+**[#107](https://github.com/nanatsusaya/dot-panic/issues/107) owns both cases
+the four cannot produce**: a cursor leaving the window, which §4 names as the one
+case where a mouse loses its position, and a mouse losing presence on
+`pointerup`, which §4's touch paragraph implies and R2's parked cursor
+contradicts. Neither is visible until #106 reads the pointer at all.
+
+**Reading the specification sharpened the first and settled the second.**
+[Pointer Events Level 3](https://www.w3.org/TR/pointerevents3/#the-pointerout-event)
+gives `pointerout` and `pointerleave` four firing circumstances each and *leaving
+the window* is not among them, so that case arrives as the pointer leaving the
+document element — a browser's behavior rather than a guarantee, which #107
+watches instead of asserting. But both events also fire *after* a `pointerup`
+**from a device that does not support hover**, so a lifted finger produces one
+and a released mouse button does not. That is the line §4 draws between the two
+paths, expressible in one code path where the four names were not.
+
 **The flock stops while the dialog is open** (0008 §10), and the evidence is the
 supplied clock rather than an eye. Seventy-one frames driven with it open
 produced one identical picture, and the frame after it closed continued from
@@ -1773,7 +1839,16 @@ the escape by a factor of five where doubling the pointer's strength or 0006 §4
 bound changes it by almost nothing. That number is #216's, and knowing it in
 advance is what #99 cost two sittings to learn the hard way.
 
-**The third watch is still ahead of all of it.**
+**The first of the three has landed.** #105 wires the pointer and derives nothing
+from it — the four events, the `touch-action`, and a third parameter on `step`
+that no code reads — so **#106 is what a session picks up next**, carrying its own
+watching and #105's. The *Position* section above carries what the change found,
+including the two cases 0007 §1's four events cannot produce and which #107 now
+owns.
+
+**The third watch is still ahead of all of it**, and #105 landing does not move
+it: nothing in that change touches motion, so a difference from the last sitting
+would itself be the finding.
 
 **[#178](https://github.com/nanatsusaya/dot-panic/issues/178) is done and the
 convention has a command behind it.**
