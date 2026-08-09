@@ -1630,11 +1630,24 @@ Outside the epics:
 | [#202](https://github.com/nanatsusaya/dot-panic/issues/202) Whether the four checks gate a pull request | 0011 §2 says review gates a merge, while the method this project demonstrates gates its own markdown in CI |
 | [#194](https://github.com/nanatsusaya/dot-panic/issues/194) Whether a dot's color stays one value | 0005 §2 and §3 make anything varying a dot's color a record's work, where six hex digits need no ticket at all |
 | [#228](https://github.com/nanatsusaya/dot-panic/issues/228) Whether a dot carries variation of its own | 0006 §4 rejects a preferred speed per dot by name, and R2 fixes that it returns by an authorized amendment or not at all |
+| [#190](https://github.com/nanatsusaya/dot-panic/issues/190) `bun test` runs the source or the emitted output | 0009 §6 fixes which tree the suite reads, and whether that sentence is true is decided by whether somebody has built the page |
+| [#191](https://github.com/nanatsusaya/dot-panic/issues/191) Zoom does not magnify the flock | the behavior is correct and deliberate, and the only place saying so is a merged description nobody edits afterwards |
 
 **Both rows were owed rather than noticed**, and each ticket says so in its own
 last line: #194 asked the next change touching this file to add one, and #228 named
 this change. That is the table's failure mode working the safe way round — a
 ticket that knows it is missing here.
+
+**And the same mechanism failed thirty times before it worked twice.**
+[#190](https://github.com/nanatsusaya/dot-panic/issues/190) and
+[#191](https://github.com/nanatsusaya/dot-panic/issues/191) close with that
+identical line, filed six seconds apart on 2026-08-06, and **thirty changes have
+touched this file since** with neither row arriving. A last line in a ticket
+reaches whoever opens the ticket, and a change editing this file has no reason to
+open one it is not about — the same shape as
+[#185](https://github.com/nanatsusaya/dot-panic/issues/185)'s warning kept in a
+template only a person opens. **The rows are here now**, and what the paragraphs
+below say still holds: nothing checks that this table lists what is open.
 
 **The two rows that left were closed and the table had not noticed** — #177,
 whose convention is in CLAUDE.md, and #181, whose answer is
