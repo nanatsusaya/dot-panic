@@ -6,6 +6,37 @@ session would decide worse without it.
 
 Newest first.
 
+## 2026-08-09 — The fifth ticket shut by accident, and the first not by a keyword
+
+[#216](https://github.com/nanatsusaya/dot-panic/issues/216) went to closed at
+19:21:20 while a screenshot was being attached to it. The timeline puts the close
+and the comment carrying that screenshot on the **same second**, which is GitHub's
+split *Comment / Close with comment* button hit on the wrong half. Nothing about
+the ticket was finished: its Ready header reads *triggered by #102 landing*, #102
+had landed an hour earlier, and none of its seven numbers had been looked at.
+
+**CLAUDE.md's *Delivery* section is long on this hazard and misses this instance
+entirely.** It names the nine linking keywords, records four accidental closures,
+warns that the parser reads no negation, and tells a session to read the issue's
+state after the merge. Here there was no keyword and no merge. **What generalizes
+is the second half with the first detached from it** — read the state back,
+whatever the interaction was — and the warning as written invites the opposite
+reading, that keywords are the mechanism to watch.
+
+**What caught it was reading every ticket's state before writing the state
+artifact rather than after.** The session was about to name that ticket as the
+single clearest next step, and had it trusted the state it held from twenty
+minutes earlier, `docs/STATUS.md` would now say the motion numbers had been
+chosen. A state artifact is exactly where a wrong ticket state becomes durable,
+because the next session reads it first and has no reason to check.
+
+**The cost is not the ticket, it is what the ticket holds.** #216 is where *the
+flock does not read as a flock yet* lives — the gap between what the toy does and
+[0001](adr/0001-purpose-scope-and-success.md) §3.1's only judge of it. Shut, the
+tracker describes a project with nothing left to do in its motion. That is the
+class of error worth a rule: an accidental close is invisible in proportion to how
+much the ticket was carrying.
+
 ## 2026-08-09 — The command answered a narrower question than the claim written from it
 
 `gh run list` reported thirty-four failed runs of the deploy workflow. I opened
