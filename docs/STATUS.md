@@ -1575,7 +1575,13 @@ the standing row it names. **That row and the new one are the same floor at two
 grains**: 0001 §3.4's ECMAScript half now has a compiler setting with a version
 in it and therefore a date, 2028-05-11, while the DOM half has no version
 anywhere and stays a person reading. **One dated row still carries no date at
-all**: no slowdown factor has been chosen, because nothing has been measured.
+all**: no slowdown factor has been chosen, and what is missing is the **ratio**
+rather than a measurement — steps have been timed here more than once, while
+0008 §8's factor is a ratio against 0001 §3.5's floor device and nothing here has
+run on one. [#226](https://github.com/nanatsusaya/dot-panic/issues/226) took the
+same claim out of [the maintenance list](maintenance.md), where it read *because
+there is no toolchain*; this file was carrying the second copy, which is why a
+repair to one document is not a repair to the fact.
 
 **Seventeen decisions stand in [docs/adr/](adr/README.md), and all seventeen
 are Accepted.** There is no `Planned` row left, which has not been true
