@@ -11,8 +11,12 @@ decides exists, and **the toy runs**: `core/` holds a world, a step and a seeded
 generator, `view/` draws one, `shell/` runs the loop that moves it, and the page
 carries the control that stops it.
 
-**Watching has been recorded three times**, and until 2026-08-06 the sentence here said
-it never had. [#108](https://github.com/nanatsusaya/dot-panic/issues/108) is the
+**Watching is recorded routinely now, and this file has stopped counting the
+sittings.** The number here read *three* and went stale twice inside a week, which
+is [#131](https://github.com/nanatsusaya/dot-panic/issues/131)'s lesson reaching a
+second count: a figure that a tracker settles has no business being prose. What
+belongs here is why each sitting mattered. Until 2026-08-06 the sentence said it
+had never happened at all. [#108](https://github.com/nanatsusaya/dot-panic/issues/108) is the
 first change to close a *Watched and seen* criterion with somebody's eyes: the
 page was served from disk, the **decider** opened it in his own browser, and three
 states came back — the full window, the same window at 200 percent, and one
@@ -1698,7 +1702,6 @@ Outside the epics:
 
 | Ticket | Why it exists |
 |---|---|
-| [#202](https://github.com/nanatsusaya/dot-panic/issues/202) Whether the four checks gate a pull request | 0011 §2 said review gates a merge, while the method this project demonstrates gates its own markdown in CI. Answered by [0020](adr/0020-whether-the-checks-gate-a-merge.md) and built; what holds it open is a setting no command here reaches |
 | [#194](https://github.com/nanatsusaya/dot-panic/issues/194) Whether a dot's color stays one value | 0005 §2 and §3 make anything varying a dot's color a record's work, where six hex digits need no ticket at all |
 | [#228](https://github.com/nanatsusaya/dot-panic/issues/228) Whether a dot carries variation of its own | 0006 §4 rejects a preferred speed per dot by name, and R2 fixes that it returns by an authorized amendment or not at all |
 | [#190](https://github.com/nanatsusaya/dot-panic/issues/190) `bun test` runs the source or the emitted output | 0009 §6 fixes which tree the suite reads, and whether that sentence is true is decided by whether somebody has built the page |
@@ -1726,9 +1729,11 @@ whose convention is in CLAUDE.md, and #181, whose answer is
 its own last line; it is not here either, because it closed with the change that
 added it. **Three more rows came and went inside one evening** — #210, #212 and
 #178, each removed by the change that shut it, which is the table working rather
-than failing. **One row is left, and that is not the same as three tickets being
-open outside the epics**: several are, and whether each belongs to one was not
-checked here, because it is not this change's concern. **This table is a list of
+than failing. **A fourth left on 2026-08-09** — #202, whose answer is
+[0020](adr/0020-whether-the-checks-gate-a-merge.md) and whose last scope item was
+a setting outside this repository. **Four rows are left, and that is not the same
+as four tickets being open outside the epics**: several more are, and whether each
+belongs to one was not checked here, because it is not this change's concern. **This table is a list of
 open tickets and nothing
 checks that it is one**, which is the same class as the readiness column
 [#46](https://github.com/nanatsusaya/dot-panic/issues/46) removed and is worth
@@ -1897,49 +1902,54 @@ What a change description must contain is no longer among the gaps here.
 
 ## The single clearest next step
 
-**The third watch — whether the non-overlap correction shows as a jitter — and it
-is the decider's eyes rather than a session's.** Every other condition of Done on
-[#102](https://github.com/nanatsusaya/dot-panic/issues/102) is met and that one is
-not, so the ticket is open with its code merged. **The sprint over
-[#87](https://github.com/nanatsusaya/dot-panic/issues/87) is complete in code and
-not in its criteria**, which is the same shape #99 was in yesterday and the reason
-a merge is not what closes a ticket here.
+**Choosing the seven motion numbers again by watching —
+[#216](https://github.com/nanatsusaya/dot-panic/issues/216).** Its Ready header
+reads *triggered by #102 landing*, and
+[#102](https://github.com/nanatsusaya/dot-panic/issues/102) landed on 2026-08-09
+when its watch came back empty. Every number it needs is on the ticket, measured
+over two minutes and three seeds before any code, which is 0008 R1's ask — so it
+is build work that settles nothing a record owns, and the first step in a week
+that is neither a decision nor a pair of eyes waiting on the decider.
 
-**It has acquired a deadline, which it did not have yesterday.** The correction
-fires exactly once at today's numbers — the closest two dots came over a recorded
-minute was 0.0106 against a floor of 0.0100, during the crowding of the first five
-seconds — and the numbers
-[#238](https://github.com/nanatsusaya/dot-panic/issues/238) measured hold the
-closest pair at 0.022 or wider. So this watch gets **weaker as a test** the moment
-[#216](https://github.com/nanatsusaya/dot-panic/issues/216) writes a number in,
-and there is nothing to look at afterwards. It is owed before that, not after.
+**What it chooses against is a picture now and not an index.** The evening of
+2026-08-09 put three observations on it, none of them a measurement: the flock is
+**one or two traveling crystals** with most of the frame empty; the lattice
+crosses the frame **without reordering inside itself**; and the frame's edge
+**splits a body in two**, which is where the second crystal comes from. The
+Clark-Evans index reads 0.67 and is blind to all three — it says the dots sit
+closer together than a random scatter of the same density, and nothing about
+whether the arrangement is alive.
 
-**The deadline is no longer hypothetical, because #216's numbers are on the
-ticket.** They were measured over two minutes and three seeds and written down
-before any code, which is 0008 R1's ask; the one that matters here is that **the
-closest pair moves from 0.0106 to 0.0296**, so the correction firing exactly once
-today would fire not at all there. **The code is deliberately not written.**
-Everything that ticket needs is on it, and what holds it is this watch and nothing
-else.
+**The two states this project has produced sit either side of what it wants.**
+Evenly spread everywhere at an index of 1.74 over a single separation reach, which
+is the failure 0006 §1's A1 was authorized against; one or two traveling crystals
+at 0.67 over two reaches. Groups that form and break are 0.90 to 1.10 on the same
+scale. **Neither produced state reads as a flock**, and 0001 §3.1 makes that the
+only judge there is — so this is the gap between the toy and *good enough*, named
+rather than deferred.
 
-**Three watches are owed and this is the one with a deadline**, which is why it
-is still the step rather than the newest.
-[#106](https://github.com/nanatsusaya/dot-panic/issues/106)'s has happened —
-[the *Watched* comment on PR #237](https://github.com/nanatsusaya/dot-panic/pull/237#issuecomment-5232024738)
-carries it — and
-[#107](https://github.com/nanatsusaya/dot-panic/issues/107)'s two arrived with
-its merge and need a device: a lifted finger that neither snaps the flock nor
-leaves it fleeing something that is gone, and a mouse leaving the window
-releasing the flock while a mouse clicked once and then left still holds 0007
-R2's hole. **Neither of those two expires**, and this one does, so it goes first
-even where the other pair is newer. **One of #106's criteria is left unjudged
-rather than forced**: *about
-half the flock inside the reach* was arithmetic against an even distribution,
-there is none after three seconds, and it moves to
-[#233](https://github.com/nanatsusaya/dot-panic/issues/233). A second could not be
-decided by a recording at two frames per second — whether a dot is visibly picked
-up and dropped crossing the boundary — and the static evidence points the right
-way without settling it.
+**`SPEED_MAX` is pointed at twice, by evidence of two different kinds.** The
+prototype measured before any of this was built that doubling it takes dots
+overtaken by a sweeping pointer from 37/36/40 to 7/8/7, where doubling the
+pointer's strength or `MAX_ACCELERATION` changes almost nothing; and watching on
+2026-08-09 found that a fast pointer barely disturbs the flock and that a wake
+never closes behind a moving one.
+[#106](https://github.com/nanatsusaya/dot-panic/issues/106) and
+[#233](https://github.com/nanatsusaya/dot-panic/issues/233) each say to bring that
+back here rather than reach for the number, and both have.
+
+**No watch is owed.** All three that stood at the start of 2026-08-09 came back
+that evening — #102's jitter, and
+[#107](https://github.com/nanatsusaya/dot-panic/issues/107)'s two — and both
+tickets closed on them. #107's mouse-leaves-the-window case is the one that could
+have failed, because [Pointer Events Level 3](https://www.w3.org/TR/pointerevents3/#the-pointerout-event)
+does not list leaving the window among the firing circumstances and the ticket
+watched it rather than asserting it; Chrome produced `pointerleave` with
+`pointerType` `mouse`, recorded from the console, and produced it **once** across
+forty seconds of ordinary movement — which is what choosing that event over
+`pointerout` was for. **One of #106's criteria stays unjudged rather than forced**:
+*about half the flock inside the reach* was arithmetic against an even
+distribution, there is none after three seconds, and it moves to #233.
 
 **All five landed on 2026-08-08 and 2026-08-09** —
 [#100](https://github.com/nanatsusaya/dot-panic/issues/100),
@@ -2221,7 +2231,8 @@ runs automatically here* has stopped being true and 0011 §2's *what gates a mer
 is review* carries the amendment that says so. **`check:method` was the awkward
 one and is a solved problem rather than an avoided one**: the workflow checks out
 `agent-project-rules` beside this repository at the pinned release, which is what
-#98 already had to do.
+#98 already had to do. **The ticket closed on 2026-08-09**, once the setting below
+existed and all five of its scope items had an answer.
 
 **What was left of it is not in this repository, and it was done the same
 evening.** 0020 §6 makes the result required rather than advisory, which is a
