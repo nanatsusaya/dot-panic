@@ -104,11 +104,21 @@ body {
  * lets a flex item shrink below its content instead of pushing the strip off
  * the bottom, and `display: block` removes the line-box gap an inline element
  * leaves underneath itself.
+ *
+ * **`touch-action: none` is 0007 §8 and the toy does not work on touch without
+ * it.** A finger dragged across this surface would otherwise scroll the page,
+ * the browser would take the gesture, and `pointercancel` would arrive
+ * mid-stroke — the flock twitching and stopping, which is the *reads as a bug*
+ * case that record names. It costs nothing here because 0014 §1 leaves the page
+ * with nothing to scroll, and it is on this rule alone: §8 says in terms that it
+ * applies to the drawing surface and to nothing else, so that the imprint and
+ * the explanation stay reachable by a gesture that does not begin on the canvas.
  */
 #flock {
   display: block;
   flex: 1 1 auto;
   min-height: 0;
+  touch-action: none;
   width: 100%;
 }
 
