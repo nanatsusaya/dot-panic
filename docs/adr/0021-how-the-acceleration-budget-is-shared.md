@@ -1,6 +1,6 @@
 # 0021 — How the acceleration budget is shared
 
-- **Status:** Proposed
+- **Status:** Accepted
 - **Date:** 2026-08-09
 - **Deciders:** Daniel Wagner
 - **Ticket:** [#261](https://github.com/nanatsusaya/dot-panic/issues/261)
@@ -12,8 +12,10 @@
   and containment is claimed to survive it) ·
   [0002](0002-overall-architecture.md) §4 (the step is a function of a world) ·
   [0012](0012-how-software-gets-developed.md) §5 (what watching decides)
-- **Supersedes / amends:** nothing — §3 is why, and `O1` asks whether that
-  reading survives review
+- **Supersedes / amends:** supersedes nothing. Amends
+  [0006](0006-motion-rules.md) §10, recorded there as its A2, and
+  [0007](0007-pointer-and-input-model.md) §5, recorded there as its A2 —
+  neither of them a rule this record changes, which is §3
 - **Amended:** no
 
 ## Context
@@ -58,7 +60,7 @@ the argument this record needs and which did not exist before that recording.
 §4 cap speed and acceleration whatever the forces are, so no force added there
 can carry a dot through the margin. The reasoning holds for a dot's *speed* and
 does not hold for the *direction* the bounded sum ends up pointing, which is what
-#106 measured. `O1` is what that leaves.
+#106 measured. `R1` is what that left.
 
 ## Decision
 
@@ -94,7 +96,7 @@ is decided here is where its contribution sits relative to containment, which
 0007 does not say and could not have said — §5's containment paragraph assumes
 the answer rather than choosing it.
 
-### 3. This amends nothing, and the reason is that §4 constrains a result
+### 3. No rule in 0006 or 0007 changes, and the reason is that §4 constrains a result
 
 0006 §4 fixes what the change in velocity may be. It does not fix how the forces
 divide the budget, and the sections around it do not either: §1 gives the three
@@ -108,6 +110,12 @@ the distance a dot at the ceiling needs while being turned under the bound in §
 
 **§4's second half is untouched.** A gait stays a consequence, no dot carries a
 preferred speed, and nothing here gives a dot state of its own.
+
+**Two amendments follow from this record and neither one is a rule.** 0007 §5's
+containment paragraph keeps its claim and loses a reasoning that
+[#106](https://github.com/nanatsusaya/dot-panic/issues/106) falsified, and 0006
+§10's table gains the row §5 names. `R1` and `R3` carry both, with the
+authorization that permitted them.
 
 ### 4. A cornered pile is dispersed by the speed floor and the non-overlap correction, not by separation
 
@@ -126,8 +134,11 @@ larger number than it was. It stays bounded and it stays asserted.
 
 **A command decides one thing more than it did**: that the containment force and
 the steering sum are bounded separately, and that their magnitudes satisfy
-`|s| ≤ amax − |c|` for every dot in a returned world. 0006 §10's table gains that
-row.
+`|s| ≤ amax − |c|` for every dot in a returned world. **0006 §10's table carries
+that row**, added as that record's A2. Like the six §10 was written with, it is a
+list handed to the implementer under 0012 §4 rather than a claim that a command
+already decides it — 0006's own *Consequences* says so, and the ticket that
+builds this is what makes it true.
 
 **It does not make *no dot outside the frame* provable**, and claiming otherwise
 would be the kind of reassurance the shape of a record warns about. What §1
@@ -197,45 +208,39 @@ to choose by watching.
   the conservative form is strictly safer. It is the obvious refinement if the
   stiffness in *Consequences* turns out to be visible.
 
-## Open questions
+## Resolved questions
 
-**O1 — does 0007 §5's containment paragraph get an amendment?**
+**All three answered by the decider on 2026-08-09**, against
+[PR #262](https://github.com/nanatsusaya/dot-panic/pull/262): *"Zu #262 folgen
+wir deiner Empfehlung"* — the recommendation being (a) in each case. Two of them
+are amendments, and that sentence is the authorization they exist under; each
+quotes it where it lives.
 
-Its claim — *containment survives this* — becomes true under this record. Its
-reasoning — *and it needs no new rule* — is what #106 falsified, and a new rule is
-exactly what makes the claim hold. **(a) Amend it**, quoting the superseded
-wording and pointing at this record. **(b) Leave it**, on the ground that an
-accepted record's sections state what is true and this one's claim is true.
+**R1 — 0007 §5's containment paragraph is amended.** Its claim, *containment
+survives this*, becomes true under §1 above. Its reasoning, *and it needs no new
+rule*, is what #106 falsified: 0006 §3 and §4 cap a dot's speed and the size of
+the change, and neither fixes the **direction** the bounded sum ends up pointing.
+The sentence was load-bearing in the wrong direction — a later session reading
+*it needs no new rule* has been told it may add a force without thinking about
+containment, which is the mistake #106 made and paid for. Recorded as 0007's A2,
+where the superseded wording is quoted.
 
-**Recommended: (a).** The sentence is load-bearing in the wrong direction: a
-later session reading *it needs no new rule* has been told it may add a force
-without thinking about containment, which is the mistake #106 made and paid for.
-An amendment needs the decider's authorization, which is why this is a question
-rather than part of the change.
+**R2 — steering receives nothing at the very edge, and §1 stands as drafted.** A
+reserved floor was rejected rather than deferred: it reintroduces the
+cancellation this record removes, smaller and harder to reason about, and it
+needs a number whose only job is to weaken an invariant — which 0006 §10 would
+then have to put in the register only watching decides. **The answer if it turns
+out to look wrong is not that floor.** It is the vector-exact budget in
+*Alternatives considered*, which recovers the same headroom without giving
+anything back to a force pointing outward. Nothing in this record changed for
+R2, which is the outcome a recommended default is supposed to have.
 
-**O2 — is steering receiving nothing at the very edge acceptable, or should a
-floor be reserved for it?**
-
-**(a) Nothing, as §1 says.** Simple, and the case both findings failed on is the
-one where containment gets everything. **(b) Reserve a fraction of `amax` for
-steering at all times**, so a dot at the edge still separates from its neighbors.
-
-**Recommended: (a).** (b) reintroduces the cancellation this record removes,
-smaller and harder to reason about, and it needs a number that 0006 §10 would put
-in the watched register — a number whose whole job is to weaken an invariant. If
-the flock reads as stiff at the edges, that is what the watch reports, and the
-vector-exact budget in *Alternatives considered* is the better answer to it.
-
-**O3 — does 0006 §10's asserted table gain the row in §5, or does the assertion
-live only in the test?**
-
-**(a) Add the row.** §10 is where that record says what a command decides, and a
-new invariant that is not in it is invisible to the next session. **(b) Leave
-§10 alone** and let this record's §5 carry it.
-
-**Recommended: (a) — but it is an amendment to 0006**, and the same
-authorization O1 needs. If both are given, they are one amendment to two records
-rather than two changes.
+**R3 — 0006 §10's asserted table gains the row.** §10 is where that record says
+what a command decides about motion, and an invariant absent from it is invisible
+to a session reading only 0006. Recorded as 0006's A2, which also takes that
+record's count of invariants from seven to eight. **The two amendments were
+authorized in one sentence and are written as two**, one per affected record,
+because that is where each of them is read.
 
 ## References
 

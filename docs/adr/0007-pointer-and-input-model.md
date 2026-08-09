@@ -17,7 +17,7 @@
   always visible, not hover-revealed) ·
   [0012](0012-how-software-gets-developed.md) §4, §5
 - **Supersedes:** nothing
-- **Amended:** 2026-08-02 — A1
+- **Amended:** 2026-08-02 — A1 · 2026-08-09 — A2
 
 ## Context
 
@@ -142,11 +142,15 @@ clamp, no dot moved directly. 0006 §4 bounds how much a velocity may change in 
 step, and a hard exclusion zone around a moving pointer is a position jump
 wearing a different name.
 
-**Containment survives this, and it needs no new rule.** 0006 §3 caps speed and
-§4 caps acceleration whatever the forces are, so a force added here cannot carry
-a dot through the margin 0006 §6 sized against those caps. The pointer can push
-the flock into a corner; 0006 §7 already decided that is tolerated and must
-dissolve.
+**Containment survives this, and
+[0021](0021-how-the-acceleration-budget-is-shared.md) §1 is what makes it
+survive.** 0006 §3 caps a dot's speed and §4 caps the size of the change whatever
+the forces are — but neither fixes the **direction** the bounded sum ends up
+pointing, so a force added here is subtracted from 0006 §6's edge force before
+anything is capped. 0021 §1 gives containment first claim on that budget and
+bounds this record's force to what is left, so at the edge the change in velocity
+is the edge force alone. The pointer can still push the flock into a corner;
+0006 §7 already decided that is tolerated and must dissolve.
 
 ### 6. The radius of effect is a fraction of the frame's shorter side
 
@@ -349,6 +353,43 @@ Authorized by Daniel on 2026-08-02, against
 [#58](https://github.com/nanatsusaya/dot-panic/issues/58): *"wir folgen bei allen
 drei deinen empfehlungen"* — of which the first was one authorized amendment per
 affected record, quoting the superseded wording verbatim.
+
+**A2 — the containment paragraph keeps its claim and loses its reasoning.
+2026-08-09.**
+
+§5 ended:
+
+> **Containment survives this, and it needs no new rule.** 0006 §3 caps speed and
+> §4 caps acceleration whatever the forces are, so a force added here cannot carry
+> a dot through the margin 0006 §6 sized against those caps. The pointer can push
+> the flock into a corner; 0006 §7 already decided that is tolerated and must
+> dissolve.
+
+**What replaced it.** The same paragraph, naming
+[0021](0021-how-the-acceleration-budget-is-shared.md) §1 as what makes
+containment survive, and saying which step of the old reasoning does not hold.
+Its last sentence is unchanged except for the word *still*.
+
+**Why, and it was measured rather than argued.** Under
+[#106](https://github.com/nanatsusaya/dot-panic/issues/106) this record's force
+was built and a pointer at a peak of 3.0 put a dot **0.0432** of the shorter side
+outside the frame — with 0006 §3 and §4 both holding, which is exactly what the
+old reasoning said was sufficient. The two caps bound a dot's speed and the
+**size** of the change in its velocity; neither bounds the **direction** the
+bounded sum ends up pointing, and a force aimed outward is subtracted from the
+edge force before the cap is applied. 0021 §1 removes that subtraction, so the
+claim this paragraph makes is true again — by a new rule, which is the half of
+the old sentence that was wrong.
+
+**Nothing this record decides changes.** The falloff, the finite radius in §5's
+own first paragraph, the refusal to constrain position, and every number here
+stay as they were. What moves is where this force sits relative to containment,
+which 0021 owns and this record never stated.
+
+Authorized by Daniel on 2026-08-09, against
+[PR #262](https://github.com/nanatsusaya/dot-panic/pull/262): *"Zu #262 folgen
+wir deiner Empfehlung"*, the recommendation being that this paragraph be amended
+rather than left standing on the ground that its claim had become true.
 
 ## References
 
