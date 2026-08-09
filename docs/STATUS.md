@@ -99,6 +99,50 @@ arrives by an authorized amendment or not at all — so
 the pointer, because a flock nothing ever disturbs merges monotonically whatever
 else is true of it.
 
+**The fifth watch is the first to show a flock, and it shows the old fault in the
+same run.** #216's first pass is on `main`: separation's weight at 3, alignment's
+at **0.25**, cohesion unchanged. **Alignment was the lever and the one weight
+nobody had moved** — at 1 a body of 200 averages every velocity to the same one,
+which is a lattice crossing the frame without reordering inside itself.
+[#238](https://github.com/nanatsusaya/dot-panic/issues/238) found that first and
+this reproduced it independently. **The separation reach is not the lever, and
+that was swept before anything was written**: from 0.05 to 0.14 the Clark-Evans
+index runs 0.67 to 1.79, straight through the wanted band, while **every setting
+ends as one body of all 200 dots**. The sweep is in the constant's own comment so
+the next session does not repeat it.
+
+**A test decided how far it could go, and that ceiling is shared with the
+pointer.** The three weights are divided by their own total, so what reaches an
+edge is separation's **share**: 0.706 keeps a cornered pile inside the frame and
+0.762 loses a dot, because `withBoundedSize` holds the **sum** and a large enough
+share cancels 0006 §6's turning force. The mix that behaves best sits at 0.889 and
+is inadmissible. **That is the wall
+[#106](https://github.com/nanatsusaya/dot-panic/issues/106) hit from the other
+side**, where a pointer at peak 3.0 put a dot 0.0432 outside — two tickets, two
+different forces, one structural cause, which is that the margin was sized against
+the edge force acting alone. `EDGE_MARGIN` cannot pay for it, measured rather than
+assumed: doubling it takes the worst excursion from 0.00046 to 0.00036 and never
+to zero, because a pile placed in a corner starts at the edge with no distance to
+be turned in.
+
+**What 120 frames showed on 2026-08-09 is two bodies, then three, then one
+again.** At frame 90 the large one is a **crescent with two loose satellites** —
+the first picture this project has produced that reads as a flock, and nothing at
+the old weights looked like it. By frame 115 it is a single loose lattice, which
+is the measurement's own prediction arriving in the run that was watched: one seed
+in three still pins at 200 and stays. **So the reading is intermittent**, which is
+neither a pass nor a failure of 0001 §3.1's criterion, and #216 stays open on it.
+[The watch](https://github.com/nanatsusaya/dot-panic/pull/259#issuecomment-5233808134)
+is a comment on the merged pull request, read the way #109's is.
+
+**What it settles is that the record after it is worth writing.** The watch was
+framed before the build so that either outcome would decide something: if the
+working seeds read as a flock, the direction is right and only the strength is
+capped — which is the argument for changing how the edge force enters the sum. If
+they did not, that record would not be worth writing. They did. **The other half
+of the criterion has not happened**: it names 1280×720 **and** the floor device
+0001 §3.5 names, and the decider deferred the second to 2026-08-10.
+
 The rest of what is built is the way of working: the operating rules, the
 decision set, nineteen accepted records, and the five
 session procedures in [`.claude/skills/`](../.claude/skills/README.md).
@@ -1902,16 +1946,23 @@ What a change description must contain is no longer among the gaps here.
 
 ## The single clearest next step
 
-**Choosing the seven motion numbers again by watching —
-[#216](https://github.com/nanatsusaya/dot-panic/issues/216).** Its Ready header
-reads *triggered by #102 landing*, and
-[#102](https://github.com/nanatsusaya/dot-panic/issues/102) landed on 2026-08-09
-when its watch came back empty. Every number it needs is on the ticket, measured
-over two minutes and three seeds before any code, which is 0008 R1's ask — so it
-is build work that settles nothing a record owns, and the first step in a week
-that is neither a decision nor a pair of eyes waiting on the decider.
+**The record that stops containment and steering sharing one budget.** 0006 §4
+bounds the **sum** of the forces, so separation strong enough to break the flock
+into groups cancels §6's turning force at an edge, and a pile in a corner leaves
+the frame. That is what capped
+[#216](https://github.com/nanatsusaya/dot-panic/issues/216)'s first pass at a
+separation share of 0.706, and it is the same wall
+[#106](https://github.com/nanatsusaya/dot-panic/issues/106) hit from the other
+side at a pointer peak of 3.0 — **two tickets, two different forces, one cause**,
+which is that the margin was sized against the edge force acting alone. The watch
+of 2026-08-09 supplied the argument it needs: where the flock comes apart it
+**does** read as a flock, so the direction is right and what is capped is the
+strength. **Nothing carries it yet.** It is a `type:decision` with no ticket, and
+it amends or supersedes an accepted record rather than adding one — so it is the
+decider's to authorize before it is written, which is why this step is named here
+rather than started.
 
-**What it chooses against is a picture now and not an index.** The evening of
+**What #216 chooses against is a picture now and not an index.** The evening of
 2026-08-09 put three observations on it, none of them a measurement: the flock is
 **one or two traveling crystals** with most of the frame empty; the lattice
 crosses the frame **without reordering inside itself**; and the frame's edge
@@ -1920,12 +1971,15 @@ Clark-Evans index reads 0.67 and is blind to all three — it says the dots sit
 closer together than a random scatter of the same density, and nothing about
 whether the arrangement is alive.
 
-**The two states this project has produced sit either side of what it wants.**
-Evenly spread everywhere at an index of 1.74 over a single separation reach, which
-is the failure 0006 §1's A1 was authorized against; one or two traveling crystals
-at 0.67 over two reaches. Groups that form and break are 0.90 to 1.10 on the same
-scale. **Neither produced state reads as a flock**, and 0001 §3.1 makes that the
-only judge there is — so this is the gap between the toy and *good enough*, named
+**The two states this project had produced sat either side of what it wants, and
+there is a third now.** Evenly spread everywhere at an index of 1.74 over a single
+separation reach, which is the failure 0006 §1's A1 was authorized against; one or
+two traveling crystals at 0.67 over two reaches. Groups that form and break are
+0.90 to 1.10 on the same scale, and the weights on `main` measure **0.80 to 0.86**
+— short of that band, and the first state to reach toward it from the crowded
+side. **Neither of the first two read as a flock and the third does so
+intermittently**, which 0001 §3.1 makes the only judge there is — so the gap
+between the toy and *good enough* is narrower than it was and is still named
 rather than deferred.
 
 **`SPEED_MAX` is pointed at twice, by evidence of two different kinds.** The
@@ -1938,10 +1992,13 @@ never closes behind a moving one.
 [#233](https://github.com/nanatsusaya/dot-panic/issues/233) each say to bring that
 back here rather than reach for the number, and both have.
 
-**No watch is owed.** All three that stood at the start of 2026-08-09 came back
-that evening — #102's jitter, and
+**One watch is owed, and it is half of one criterion.** All three that stood at
+the start of 2026-08-09 came back that evening — #102's jitter, and
 [#107](https://github.com/nanatsusaya/dot-panic/issues/107)'s two — and both
-tickets closed on them. #107's mouse-leaves-the-window case is the one that could
+tickets closed on them. **What is owed is the floor-device half of #216's**,
+deferred by the decider to 2026-08-10; the 1280×720 half happened the same
+evening and the *Position* section carries what it showed. #107's
+mouse-leaves-the-window case is the one that could
 have failed, because [Pointer Events Level 3](https://www.w3.org/TR/pointerevents3/#the-pointerout-event)
 does not list leaving the window among the firing circumstances and the ticket
 watched it rather than asserting it; Chrome produced `pointerleave` with
@@ -2020,7 +2077,8 @@ and 0006 needed nothing. And **the world
 0006 §8 keeps the Shell from stepping under `reduce` — so that one world is all
 some visitors ever see, and they are the audience 0004 §4 exists to protect.
 
-**Every number was chosen blind, and a ticket exists to choose them again.** 0006
+**Every number was chosen blind, and a ticket exists to choose them again — three
+of the seven now have been.** 0006
 §10 puts all of them in the register only watching decides, while Ready condition
 5 requires them before the work; they were fixed the way
 [#91](https://github.com/nanatsusaya/dot-panic/issues/91) fixed 200 and 0.005,
@@ -2035,11 +2093,13 @@ had happened three times here. **Two of the three sittings have happened**, both
 on 2026-08-09: the first discharged #100, #101 and #103 at once, and the second
 was #99's, which is the one 0001 §3.1 puts beyond any command and which took two
 attempts. The *Position* section above carries what was seen, where the evidence
-is, and what the failed attempt cost. **The third is owed**, and it is the
-narrowest of them: it asks about a thing that should be invisible rather than
-about a thing that should look right, and the measurement says there should be
-nothing to see. That is the reason to look rather than a reason not to — a jitter
-visible there is coming from somewhere this change did not measure.
+is, and what the failed attempt cost. **The third came back the same evening**,
+and it was the narrowest of them: it asked about a thing that should be invisible
+rather than about a thing that should look right, and the measurement said there
+should be nothing to see. There was nothing to see, and #102 closed on it — which
+is why looking was worth it rather than a reason to have skipped it, because a
+jitter visible there would have been coming from somewhere that change did not
+measure.
 
 **What comes after it is [#88](https://github.com/nanatsusaya/dot-panic/issues/88),
 the pointer**, decided by the decider on 2026-08-09 against
@@ -2090,26 +2150,31 @@ is one crystal in a corner spends the watching that is the scarcest thing here.
 #233 stays behind it, because #233 *is* the tuning. The *Position* section above
 carries what the three changes found and what the recordings showed.
 
-**#238 has run and its finding is a starting point rather than a value**, so
-**#216 is what a session picks up next** — the seven motion numbers, chosen by
-watching, opening from `S 10 : A 0.25 : C 1` instead of from nothing. Its header
-still reads *triggered by #102 landing*, and that is the ticket above rather than
-a second thing to wait for.
+**#238 has run, #216's first pass is built on its finding, and the candidate did
+not survive the tests.** `S 10 : A 0.25 : C 1` was written into `core/world.ts`,
+`check:test` came back red on the cornered pile, and the change was reverted
+rather than carried — which is what that ticket's *Constraints* ask in terms: a
+number that breaks a relation is a finding to bring back, not a value to write.
+**The finding is on the ticket**, with the share table, the `EDGE_MARGIN` sweep
+and the two ways out it left. `S 3 : A 0.25 : C 1` is what landed instead, on the
+decider's answer of 2026-08-09, and **four of the seven numbers still stand as
+they were chosen blind.**
 
-**All seven are written onto it now**, two of them moved and five kept with a
-reason each, and the candidate arrives as `S 40 : A 1 : C 4` — the same simulation
-as `S 10 : A 0.25 : C 1` and checked to be, because the three weights are divided
-by their own sum and a common factor cancels exactly. **What the measuring is
-worth is what it rules out**: lowering alignment alone does not hold the flock in
-groups, and neither does raising separation moderately, so the working region is
-separation dominant *while* the other two are both small. None of that decides
-anything — 0006 §10 leaves these to watching, and the ticket says so on itself.
+**What the measuring was worth is what it ruled out.** Lowering alignment alone
+does not hold the flock in groups, and neither does raising separation
+moderately, so the working region is separation dominant *while* the other two
+are both small. It also ruled out the lever everyone reaches for first: the
+separation reach moves the index across the whole of the wanted band and leaves
+the flock one body of 200 at every setting. None of that decided anything, and
+0006 §10 is why.
 
-**What that ticket must not do is settle by measuring.** #238's candidate is the
-best of a grid over three seeds and one frame ratio, and 0006 §10 puts every one
-of those numbers in the register only watching decides. A statistic that says
-*groups* is not a flock reading as a flock, which is exactly the distance 0001
-§3.1 names and the whole reason #216 exists as a watching ticket.
+**What that ticket must not do is settle by measuring, and it did not.** #238's
+candidate was the best of a grid over three seeds and one frame ratio; 0006 §10
+puts every one of those numbers in the register only watching decides, and a
+statistic that says *groups* is not a flock reading as a flock. **The watch is
+what carried both halves of the answer** — that the weights on `main` do read as
+a flock where they come apart, and that they still settle back into a lattice
+inside the same run, which no statistic had said about the run that was recorded.
 
 **[#178](https://github.com/nanatsusaya/dot-panic/issues/178) is done and the
 convention has a command behind it.**

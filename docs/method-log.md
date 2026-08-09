@@ -6,6 +6,35 @@ session would decide worse without it.
 
 Newest first.
 
+## 2026-08-09 — A partial fix was worth watching because the reading was fixed first
+
+[#216](https://github.com/nanatsusaya/dot-panic/issues/216)'s first pass was known
+to be partial before it was opened: measured over three seeds, one of them still
+ended as a single body of all 200 dots, which is the fault the change existed to
+remove. The ordinary move is to keep working until the measurement is clean,
+because a watch that reports the fault reads as a wasted sitting. **What was done
+instead was to write down what each outcome would license, in the change
+description, before anyone looked** — if the two working seeds read as a flock the
+direction is right and only the strength is capped, which is the argument the next
+record needs; if they did not, that record is not worth writing.
+
+**That turns a partial fix into an experiment, and it is the reason the mixed
+result was usable.** The watch came back mixed in the way the measurement
+predicted — a flock at one point in the recording and a lattice at another — and a
+mixed result is precisely what has no meaning unless its reading was fixed in
+advance. Read afterwards it says *not done*, which is a sentence nobody needed a
+sitting for. Read against what was written first it says *the direction is right*,
+which is a finding, and it came from the one evidence source
+[0001](adr/0001-purpose-scope-and-success.md) §3.1 accepts.
+
+**Watching is the scarcest thing in this project** — one person, his own eyes, no
+second reviewer — and this is what stops a sitting being spent on a yes-or-no
+question when the honest answer is neither. **The cost is three sentences in a
+description.** An agent proposing a change it already knows to be incomplete
+should spend them, and say plainly in the same place that the fault may well show
+up; the alternative is holding the work back until a measurement is clean, and a
+measurement was never what decides this.
+
 ## 2026-08-09 — The fifth ticket shut by accident, and the first not by a keyword
 
 [#216](https://github.com/nanatsusaya/dot-panic/issues/216) went to closed at
