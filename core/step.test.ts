@@ -6,6 +6,11 @@
  * visible in what stops being true here. #99 is the fourth of those arrivals
  * and one such assertion left with it: *leaves every velocity alone* was true
  * only while nothing steered.
+ *
+ * **The last block is the first force from outside the flock.** 0007 §5's
+ * pointer is not one of 0006's rules and does not arrive under #87 — it comes
+ * from the visitor, through the argument #105 added, and it is the only force
+ * here a dot cannot see coming from another dot.
  */
 
 import { describe, expect, test } from "bun:test";
@@ -20,6 +25,8 @@ import {
   type Frame,
   MAX_ACCELERATION,
   NEIGHBORHOOD_RADIUS,
+  POINTER_RADIUS,
+  POINTER_STRENGTH,
   SEPARATION_RADIUS,
   SPEED_MAX,
   SPEED_MIN,
@@ -1134,5 +1141,241 @@ describe("the pointer the Shell hands over", () => {
     }
 
     expect(named).toEqual(omitted);
+  });
+});
+
+/**
+ * A velocity across the push rather than along it, so that a step's change to
+ * the dot's velocity is the pointer's whole contribution and not a number 0006
+ * §3's band has already edited.
+ *
+ * Its speed is the middle of the band, and the largest change one step can add
+ * is `MAX_ACCELERATION / 60`, which is 0.02 — so the result stays inside the
+ * band by a wide margin and comes back untouched.
+ */
+const ACROSS: Vector = { x: 0, y: (SPEED_MIN + SPEED_MAX) / 2 };
+
+/**
+ * What one step changes about a lone dot's velocity, with a pointer `gap` away
+ * from it.
+ *
+ * The dot sits at the frame's middle, where 0006 §6's edge force is zero, and
+ * it is alone, so nothing steers it — which leaves the pointer as the only
+ * force acting and makes this the size of that force times the step.
+ *
+ * **A world that came back without its dot gives `NaN` here**, and every
+ * comparison against `NaN` is false, so a step that lost the dot reddens rather
+ * than passing quietly.
+ *
+ * @param gap  how far the pointer is from the dot, in shorter sides. It sits at
+ *             a lower `x`, so the push is toward a higher one
+ * @returns how far the velocity moved, in shorter sides per second
+ */
+function pushAt(gap: number): number {
+  const [after] = step(dotIn(WIDE, MIDDLE, ACROSS), 1 / 60, {
+    x: MIDDLE.x - gap,
+    y: MIDDLE.y,
+  }).dots;
+
+  return Math.hypot(
+    (after?.velocity.x ?? Number.NaN) - ACROSS.x,
+    (after?.velocity.y ?? Number.NaN) - ACROSS.y,
+  );
+}
+
+/*
+ * 0007 §5 and §6, which is #106: the pointer is a force that falls to exactly
+ * zero at a finite radius and is never a rule about where a dot may be.
+ *
+ * **What is asserted here is 0007 §9's table and not the numbers.** The radius,
+ * the peak strength and the falloff's shape are #106's under 0008 R1,
+ * provisional, and §9 puts all three in the register only watching decides — so
+ * nothing below pins a value that watching is meant to move. What it pins is
+ * the shape of the rule: zero past the radius, a push directly away, growing as
+ * the pointer nears, continuous where it ends, and a force rather than an
+ * exclusion zone.
+ */
+describe("the pointer's force", () => {
+  /*
+   * §5's strongest invariant, and the one that section says a command decides:
+   * *not a small contribution — zero*. Asserted as the whole world coming back
+   * identical, which is stricter than measuring one dot and is what an
+   * unbounded falloff would break at any distance.
+   */
+  test("leaves a dot beyond the radius stepped as if there were none", () => {
+    const world = createWorld(ordinary);
+    const far: Vector = { x: -POINTER_RADIUS, y: -POINTER_RADIUS };
+
+    expect(step(world, 1 / 60, far)).toEqual(step(world, 1 / 60));
+  });
+
+  /*
+   * The boundary itself belongs to the outside. A radius that included its own
+   * edge would make the zero above true only past it, which is where a `<` and
+   * a `<=` stop being the same rule.
+   *
+   * **The gap is placed rather than offset, and the first attempt to write this
+   * failed for that reason.** Putting the pointer at `MIDDLE.x - POINTER_RADIUS`
+   * gives a gap a few ulps *inside* the radius, because that subtraction and the
+   * one inside the force do not round the same way — a push of 2.2e-33 came back
+   * where zero was asserted. Anchored at 0 the difference is the radius exactly,
+   * which is the finding #102 recorded about a pair aimed at exactly `2r`,
+   * arriving in a test instead of in a world.
+   */
+  test("gives a dot at exactly the radius nothing", () => {
+    const onTheEdgeOfEffect: Vector = { x: POINTER_RADIUS, y: 0.5 };
+    const world = dotIn(WIDE, onTheEdgeOfEffect, ACROSS);
+
+    expect(step(world, 1 / 60, { x: 0, y: 0.5 })).toEqual(step(world, 1 / 60));
+  });
+
+  /*
+   * 0001 §1's *moves out of the way*, in the narrowest form a command can hold
+   * it: the push is along the line from the pointer to the dot, and adds
+   * nothing across that line. A force with a sideways component would make the
+   * flock swirl around the pointer rather than part in front of it, and that is
+   * a different toy.
+   */
+  test("pushes a dot inside the radius directly away from the pointer", () => {
+    const world = dotIn(WIDE, MIDDLE, ACROSS);
+    const near: Vector = { x: MIDDLE.x - POINTER_RADIUS / 2, y: MIDDLE.y };
+
+    const [after] = step(world, 1 / 60, near).dots;
+
+    expect(after?.velocity.x).toBeGreaterThan(0);
+    expect(after?.velocity.y).toBe(ACROSS.y);
+  });
+
+  // Monotone rather than a shape. 0007 §5 leaves the falloff to watching and
+  // #106's table names a squared one, so what is held here is only that nearer
+  // means harder — which a sign error or an inverted falloff breaks and a
+  // change of shape does not.
+  test("pushes harder the nearer the pointer is", () => {
+    const far = pushAt(POINTER_RADIUS * 0.75);
+    const middling = pushAt(POINTER_RADIUS * 0.5);
+    const close = pushAt(POINTER_RADIUS * 0.25);
+
+    expect(middling).toBeGreaterThan(far);
+    expect(close).toBeGreaterThan(middling);
+  });
+
+  /*
+   * §5's *reaches zero continuously*, so that a dot drifting across the
+   * boundary is not pushed, released and pushed again.
+   *
+   * **The threshold is generous on purpose**, because it has to pass a linear
+   * falloff as well as a squared one — §5 permits either and #106 chooses by
+   * watching. A linear falloff a thousandth inside the radius still gives a
+   * thousandth of the peak, which clears one percent comfortably; a force that
+   * held its strength and then stopped would not.
+   */
+  test("falls to nothing rather than stopping at the radius", () => {
+    expect(pushAt(POINTER_RADIUS * 0.999)).toBeLessThan(
+      pushAt(POINTER_RADIUS * 0.1) / 100,
+    );
+  });
+
+  /*
+   * A dot standing exactly where the pointer is has no direction to be pushed
+   * in, and the Core may not draw one — the generator belongs to the world
+   * (0002 §4), and a step that consumed it would change the generator's state
+   * on every frame. It is the reasoning `separationFrom` already uses for a
+   * neighbor at the same position, arriving from the other side.
+   */
+  test("steers a dot standing exactly where the pointer is by nothing", () => {
+    const world = dotIn(WIDE, MIDDLE, ACROSS);
+
+    expect(step(world, 1 / 60, MIDDLE)).toEqual(step(world, 1 / 60));
+  });
+
+  /*
+   * 0007 §6: the radius is a fraction of the frame's shorter side and of
+   * nothing else, which under 0008 §6 means it is a plain length in the world's
+   * own units. What that forbids is a radius scaled by the frame — the same
+   * geometry in a frame turned on its side would then push differently, and the
+   * toy would read as one thing on a phone and another on a desk.
+   *
+   * Both middles are more than `EDGE_MARGIN` from every edge, so 0006 §6 is
+   * silent in both and the only force left is this one.
+   */
+  test("uses a radius the frame's proportions do not change", () => {
+    const tall: Frame = { width: 1, height: 16 / 9 };
+    const middleOfTall: Vector = { x: 0.5, y: tall.height / 2 };
+    const gap = POINTER_RADIUS / 2;
+
+    const [inWide] = step(dotIn(WIDE, MIDDLE, ACROSS), 1 / 60, {
+      x: MIDDLE.x - gap,
+      y: MIDDLE.y,
+    }).dots;
+    const [inTall] = step(dotIn(tall, middleOfTall, ACROSS), 1 / 60, {
+      x: middleOfTall.x - gap,
+      y: middleOfTall.y,
+    }).dots;
+
+    expect(inWide?.velocity).toEqual(inTall?.velocity);
+  });
+
+  /*
+   * #106's relation, measured before the work rather than preferred: 0006 §4's
+   * bound holds the **sum** of the forces, so a pointer pushing outward is
+   * subtracted from §6's edge force before anything is capped. A peak above the
+   * bound can therefore cancel the edge entirely, and the margin was sized
+   * against the edge acting alone. At 3.0 a dot left the frame by 0.0432; at
+   * this value none did.
+   */
+  test("keeps its peak inside the bound on acceleration", () => {
+    expect(POINTER_STRENGTH).toBeLessThanOrEqual(MAX_ACCELERATION);
+  });
+
+  /*
+   * 0007 §5's other half, and the one a reader is most likely to build the
+   * wrong way: *it contributes a force and never constrains position*. A dot
+   * moving toward the pointer keeps moving toward it for a while, because one
+   * step of a bounded force cannot reverse a velocity — an exclusion zone, a
+   * clamp or a dot moved directly would all end the step farther away instead.
+   */
+  test("lets a dot moving toward the pointer still end the step nearer it", () => {
+    const gap = POINTER_RADIUS / 9;
+    const pointer: Vector = { x: MIDDLE.x - gap, y: MIDDLE.y };
+    const toward: Vector = { x: -CARRIED.x, y: 0 };
+
+    const [after] = step(dotIn(WIDE, MIDDLE, toward), 1 / 60, pointer).dots;
+
+    expect((after?.position.x ?? Number.NaN) - pointer.x).toBeLessThan(gap);
+    expect((after?.position.x ?? Number.NaN) - pointer.x).toBeGreaterThan(0);
+  });
+
+  /*
+   * §5: *containment survives this, and it needs no new rule*. That is a claim
+   * about 0006's caps holding whatever the forces are, and the case that tests
+   * it is the one where the pointer pushes against the edge rather than with
+   * it — a pointer parked on an edge, with the whole flock crowded between the
+   * two.
+   *
+   * The run is read as one number rather than as an assertion per dot per step,
+   * so what it reports is the worst moment of the whole run and not the last
+   * one. Five seconds at 0008 §3's rate, which is what the sprint-opening
+   * activity measured this relation over.
+   */
+  test("holds every dot inside the frame with a pointer parked on an edge", () => {
+    const parked: Vector = { x: 0, y: WIDE.height / 2 };
+    let world = createWorld(ordinary);
+    let outside = 0;
+
+    for (let taken = 0; taken < 300; taken += 1) {
+      world = step(world, 1 / 60, parked);
+
+      for (const dot of world.dots) {
+        outside = Math.max(
+          outside,
+          -dot.position.x,
+          dot.position.x - WIDE.width,
+          -dot.position.y,
+          dot.position.y - WIDE.height,
+        );
+      }
+    }
+
+    expect(outside).toBeLessThanOrEqual(0);
   });
 });

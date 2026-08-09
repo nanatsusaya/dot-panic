@@ -225,6 +225,42 @@ export const ALIGNMENT_WEIGHT = 1;
  */
 export const COHESION_WEIGHT = 1;
 
+/**
+ * How far the visitor's pointer reaches, as a fraction of the frame's shorter
+ * side (0007 §6). Provisional; #233 supersedes it by watching.
+ *
+ * **0007 §6 fixes that it is a fraction of the shorter side and leaves the
+ * fraction open**, because a fixed distance would clear a phone's canvas and
+ * barely dent a desktop one. Under 0008 §6 that shorter side is 1, so this
+ * number is the fraction and needs no arithmetic to become one.
+ *
+ * 0.18 is 97 px on a 540 px canvas. A parked pointer at that reach has 84 to
+ * 105 of the 200 dots inside it — about half the flock, which is a hole the
+ * flock parts around. At 0.12 it is 38 to 51 and reads as small; at 0.25 it is
+ * 141 to 176, which displaces the flock rather than parting it. Fixed in #106
+ * before the work started, which is where 0008 R1 puts a number.
+ */
+export const POINTER_RADIUS = 0.18;
+
+/**
+ * The largest acceleration the pointer applies, in shorter sides per second
+ * squared, reached as a dot approaches it. Provisional in the same way and
+ * superseded by the same watching.
+ *
+ * **It may not exceed `MAX_ACCELERATION`, and that is a relation rather than a
+ * preference.** 0006 §4's bound holds the *sum* of the forces, so a pointer
+ * pushing outward is subtracted from §6's edge force before anything is capped,
+ * and a peak above the bound can cancel that edge entirely — where the margin
+ * was sized against the edge acting alone. Measured on 2026-08-09 with a
+ * pointer held against an edge over three seeds: at 3.0 one seed put a dot
+ * 0.0432 outside the frame, and at this value every dot stayed inside.
+ *
+ * Equal to the bound rather than below it, because doubling it moves how far a
+ * dot escapes hardly at all — what limits that is `SPEED_MAX`, and that number
+ * is #216's.
+ */
+export const POINTER_STRENGTH = MAX_ACCELERATION;
+
 /*
  * A third number the work needed and #91 had not named — recorded in a comment
  * on that ticket rather than added to its criteria afterward. Every dot leaves
