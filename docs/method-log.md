@@ -6,6 +6,52 @@ session would decide worse without it.
 
 Newest first.
 
+## 2026-08-09 — An amendment moved a premise, and a number derived from it rode across unchanged
+
+[0006](adr/0006-motion-rules.md) A1 gave separation a shorter reach than alignment
+and cohesion. Four comments under `core/` carried a spacing that had been worked
+out when those two reaches were **one** reach, and not one of them was worked out
+again: *separation and cohesion balance at 0.686 of the reach* became *0.686 of
+separation's reach*, which is 0.034 where the arithmetic gives 0.042.
+
+**That ratio is the root of an equation both radii appear in**, so it belongs to
+the pair rather than to the weights, and shortening one radius moves it — to 0.834
+here. Nobody had reason to write that down before A1, because before A1 there was
+one radius and the distinction did not exist.
+
+**What let it survive is that it agreed with the text around it.** A1's argument is
+that the balance point sits well inside the spacing a uniform scatter already has,
+which leaves a group room to be denser than its surroundings — and 0.042 against
+0.094 says that as plainly as 0.034 did. **A wrong number supporting a right
+conclusion raises nothing.** Had it pointed the other way the first reader would
+have stopped at it.
+
+**No command here reads arithmetic in a comment, and that is the design rather than
+a hole.** `check:types` reads types, Biome reads style, the Core's tests read
+behavior, and the coherence check reads links and a word list.
+[#178](https://github.com/nanatsusaya/dot-panic/issues/178)'s test decides that a
+block is present and deliberately not what it says. This is what sits on the other
+side of that line, and review is the only thing over there.
+
+**What found it is [0008](adr/0008-performance-budget.md) R1.** Numbers go on the
+ticket before the work, so preparing
+[#216](https://github.com/nanatsusaya/dot-panic/issues/216) meant deriving the
+balance point instead of quoting it — and a derivation from the radii as they are
+disagrees with a quotation from the radii as they were, immediately and without
+anyone looking for it. Quoting would have put the same number in a fifth place.
+
+**The replacement was checked against the old case before it was believed.** The
+solver reproduces 0.0961 and 0.686 for the one-reach configuration the records
+already carry, which is what makes its answer for the two-reach configuration
+evidence rather than a second quotation.
+
+**So the thing to carry: an amendment's blast radius is not the sentences it
+replaces.** It is everything derived from the sentence being replaced, and
+derivations live in comments, in a ticket's arithmetic and in reasoning nobody
+indexed. Ask which numbers rested on the premise **while the amendment is being
+written**, when the old premise is still in front of somebody — not three days
+later, when all that is left is a figure that looks like it was always there.
+
 ## 2026-08-09 — The window was shorter than the process, and a one-sided reading called overshoot an arrival
 
 **The entry below is about a measurement that was broken. This one is about two
