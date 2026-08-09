@@ -47,14 +47,39 @@ raised. **It is the arrangement running to its end for the first time** — thre
 changes merged with no watch each, one sitting, and not one of them left holding a
 condition of Done nobody looked at.
 
-**What is still unwatched is the criterion that matters most.** *It reads as a
-flock*, which [0001](adr/0001-purpose-scope-and-success.md) §3.1 puts beyond any
-command, cannot be judged before there is a flock: nothing steers yet, and the
-sitting above was about four things that are not it. The motion itself has been
-seen now, and the gait with it — which is the half of smoothness 0006 §5 owns —
-but the whole remains the one condition of Done that
-[#94](https://github.com/nanatsusaya/dot-panic/issues/94) merged without, and
-[#99](https://github.com/nanatsusaya/dot-panic/issues/99) is where it is judged.
+**The fourth watch is the criterion that matters most, and it took two sittings
+because the first one failed.** *It reads as a flock* is
+[0001](adr/0001-purpose-scope-and-success.md) §3.1's and beyond any command;
+[#99](https://github.com/nanatsusaya/dot-panic/issues/99) is where it was judged,
+and it is closed. **The first look said no.** The decider watched ten browsers for
+a minute on 2026-08-09 and reported *"eher wie partikel im raum die versuchen
+abstand zu halten"* — a flock that spread itself evenly and formed no group, over
+an implementation in which every invariant in 0006 §10 held and all four checks
+were green.
+
+**That is the first time a record was wrong rather than an implementation**, and
+[0006](adr/0006-motion-rules.md) A1 is the amendment: separation acts over a
+shorter, concentric reach than alignment and cohesion. **The retune was tried
+first and could not work** — over one reach those two behaviors balance at a
+spacing their weights alone fix, so a flock already spread evenly is at
+equilibrium, and weighting cohesion up passes groups altogether and collapses the
+flock into one clump. Measured before the record moved rather than after: the
+Clark-Evans index over a minute went from 0.831 to 1.735, where 1 is a random
+scatter, and the shorter reach brings it to 0.714. The
+[method log](method-log.md) carries what the sequence teaches.
+
+**The second look said yes, with a reservation.** Groups form, travel, meet and
+merge, and a group arriving at an edge reorients and leaves — 0006 §6 under a
+crowd for the first time. **What the minute was too short to show is on
+[#216](https://github.com/nanatsusaya/dot-panic/issues/216)**: the groups merge
+and never split, so by sixty seconds all 200 dots are one connected mass covering
+19 percent of the frame, traveling as a block with a heading agreement of 0.94
+and an internal lattice. **The reservation's own fix is not available to that
+ticket** — 0006 §4 rejects a preferred speed per dot by name and R2 fixes that it
+arrives by an authorized amendment or not at all — so
+[#228](https://github.com/nanatsusaya/dot-panic/issues/228) asks it, waiting on
+the pointer, because a flock nothing ever disturbs merges monotonically whatever
+else is true of it.
 
 The rest of what is built is the way of working: the operating rules, the
 decision set, nineteen accepted records, and the five
@@ -1412,6 +1437,13 @@ Outside the epics:
 | Ticket | Why it exists |
 |---|---|
 | [#202](https://github.com/nanatsusaya/dot-panic/issues/202) Whether the four checks gate a pull request | 0011 §2 says review gates a merge, while the method this project demonstrates gates its own markdown in CI |
+| [#194](https://github.com/nanatsusaya/dot-panic/issues/194) Whether a dot's color stays one value | 0005 §2 and §3 make anything varying a dot's color a record's work, where six hex digits need no ticket at all |
+| [#228](https://github.com/nanatsusaya/dot-panic/issues/228) Whether a dot carries variation of its own | 0006 §4 rejects a preferred speed per dot by name, and R2 fixes that it returns by an authorized amendment or not at all |
+
+**Both rows were owed rather than noticed**, and each ticket says so in its own
+last line: #194 asked the next change touching this file to add one, and #228 named
+this change. That is the table's failure mode working the safe way round — a
+ticket that knows it is missing here.
 
 **The two rows that left were closed and the table had not noticed** — #177,
 whose convention is in CLAUDE.md, and #181, whose answer is
@@ -1590,25 +1622,32 @@ What a change description must contain is no longer among the gaps here.
 
 ## The single clearest next step
 
-**[#99](https://github.com/nanatsusaya/dot-panic/issues/99), Reynolds' three
-steering behaviors over a radius — fourth of the five in the sprint over
+**[#102](https://github.com/nanatsusaya/dot-panic/issues/102), non-overlap applied
+after the step — the last of the five in the sprint over
 [#87](https://github.com/nanatsusaya/dot-panic/issues/87), opened 2026-08-08.**
 [#100](https://github.com/nanatsusaya/dot-panic/issues/100),
-[#103](https://github.com/nanatsusaya/dot-panic/issues/103) and
-[#101](https://github.com/nanatsusaya/dot-panic/issues/101) are the first three
-and all three are closed. That activity is 0012 §2's and it ran with the decider,
+[#103](https://github.com/nanatsusaya/dot-panic/issues/103),
+[#101](https://github.com/nanatsusaya/dot-panic/issues/101) and
+[#99](https://github.com/nanatsusaya/dot-panic/issues/99) are the first four and
+all four are closed. That activity is 0012 §2's and it ran with the decider,
 which §6 requires *before any agent starts*. **The order lives in that epic's
 table**, because 0012 §7 makes it the authority for its own members and a copy
 here would be a second one.
 
-**#99 sits fourth because it is the first thing that can be judged.** There is a
-bounded frame, a speed band and a cap on how fast a velocity may change by the
-time it starts, so *it reads as a flock* is watchable and the three weights are
-chosen against something moving rather than against a blank screen. **It is the
-only one of the five with no row in 0006 §10**: what a command decides here is
-each behavior's directional effect in isolation — neighbors all to one side,
-steer away from them, toward their average heading, toward their average
-position — and everything past that is the watching.
+**#102 sits last because *the correction is not visible as a jitter* needs a
+crowd, and only cohesion produces one.** It is 0006 §2's hard constraint — no two
+dots closer than `2r` in a returned world — applied to the result rather than
+added as a fourth force, which is the strongest invariant in that record and the
+one §10 makes a command decide for any world, any seed and any number of steps.
+
+**It may find little to do, and that is a finding rather than a reason to skip
+it.** Separation holds the closest pair at 0.021 to 0.030 against two radii of
+0.010 in every world measured under #99, so there is no violation waiting to be
+repaired at today's numbers — but the constraint still has to hold of the world a
+step returns, and [#216](https://github.com/nanatsusaya/dot-panic/issues/216) may
+move the numbers that make it true. **What it must not do is take the route 0006
+§2 forbids in terms**: a heavily weighted separation force guarantees nothing, and
+0012 §4 needs something to assert.
 
 **The activity's finding is that there is no independence to have.** §6 calls two tickets
 independent when they touch no file in common and neither's criteria depend on
@@ -1647,10 +1686,12 @@ triggered by the fifth landing, and it is the arrangement
 count. **The watching is three sittings and not five** — #100's and #103's own
 criteria are not judgeable before a force is capped, so both tickets defer them
 onto #101 by name rather than merging with a criterion nobody looked at, which
-had happened three times here. **The first sitting has happened**, on 2026-08-09,
-and it discharged all three tickets at once; the *Position* section above carries
-what was seen and where the evidence is. **The second is this next step's**, and
-it is the one 0001 §3.1 puts beyond any command.
+had happened three times here. **Two of the three sittings have happened**, both
+on 2026-08-09: the first discharged #100, #101 and #103 at once, and the second
+was #99's, which is the one 0001 §3.1 puts beyond any command and which took two
+attempts. The *Position* section above carries what was seen, where the evidence
+is, and what the failed attempt cost. **The third is this next step's**, and it is
+the narrowest of them — whether the correction shows as a jitter.
 
 **[#178](https://github.com/nanatsusaya/dot-panic/issues/178) is done and the
 convention has a command behind it.**

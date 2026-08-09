@@ -6,6 +6,47 @@ session would decide worse without it.
 
 Newest first.
 
+## 2026-08-09 — The first record amended because what it decided was built, passed everything, and was wrong
+
+**[0006](adr/0006-motion-rules.md) A1 is the first amendment here caused by
+looking at the thing rather than by reading about it.**
+[#99](https://github.com/nanatsusaya/dot-panic/issues/99) implemented §1's three
+behaviors over one neighborhood radius. Every invariant in §10 held, seventy tests
+passed, all four checks were green — and the decider watched it and reported
+particles keeping their distance rather than a flock. The record was wrong, and
+nothing this project runs was ever going to say so.
+
+**That much is 0001 §3.1 working as designed.** The entry worth keeping is what
+came after it, because the obvious response was the wrong one.
+
+**A watch that fails does not say whether the numbers are wrong or the record
+is**, and those have opposite routes: a number is
+[#216](https://github.com/nanatsusaya/dot-panic/issues/216)'s and needs no record
+at all, while a structure is an amendment on the stop-and-ask list. The first
+instinct was to retune, and retuning could not have worked: a sweep showed two
+regimes and nothing between them, because over one reach separation and cohesion
+balance at a spacing fixed by their weights alone. **What told the two apart was a
+measurement rather than a judgment** — and the measurement was worth making
+precisely because the answer decided which procedure to follow.
+
+**Then the fix was measured before it was recorded, not after.** A1 was written
+after a two-radius sweep, against a Core copied out of the repository and mutated
+there. The previous failure had come from choosing a shape and checking it
+afterwards; writing an accepted record and then finding out is the same mistake
+with a worse artifact, because a record is immutable and a branch is not.
+
+**And a green suite after a behavior change is not the suite you had.** Mutating
+the code found an assertion that had gone quiet: the containment run used to
+redden when the hold on separation was removed, and after the change it did not,
+because the world it runs on had moved out from under it. That is the 2026-08-08
+entry's question asked of a test that already existed rather than of a new one,
+and it is the reason to re-run the mutations after a change and not only after
+writing a test.
+
+**What this costs to say plainly: the check chain cannot see a wrong decision.**
+It sees a wrong implementation of whatever was decided. Four green checks meant
+the Core did exactly what 0006 §1 said, and 0006 §1 was the defect.
+
 ## 2026-08-09 — A watch that cannot be judged yet is deferred by name, not skipped
 
 **Three changes here merged with a *Watched and seen* criterion nobody had met** —
