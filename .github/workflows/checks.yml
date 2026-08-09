@@ -1,0 +1,113 @@
+# The workflow that gates a merge. What it gates is this repository's trunk, and
+# it publishes nothing.
+#
+# 0020 §1 fixes that this is a second file and never `deploy.yml`. That one
+# carries 0011 §6's placeholder gate, which is *correct* when it is red and will
+# be until #90 lands — and a signal expected to be red cannot also be the signal
+# that something is wrong. Thirty-seven runs of it demonstrated that rather than
+# predicted it: eleven real check failures sat unnoticed inside twenty-six that
+# were red by design.
+#
+# **0020 §6 makes the result required rather than advisory, and this file cannot
+# do that.** A ruleset is a repository setting on the decider's account; §7
+# records that no command here decides whether it was made.
+#
+# Nothing below is new. The two checkouts, the pin, the Bun version and the
+# four-steps-not-one shape are `deploy.yml`'s, copied with their reasons under
+# 0020 §2 — which also names the cost: two files now carry the same pins, and
+# nothing checks that they agree.
+
+name: checks
+
+# The default activity types, which GitHub documents as `opened`, `synchronize`
+# and `reopened`. No branch filter: a required check that never runs for some
+# pull request blocks it for ever, and every change here targets the trunk
+# anyway.
+on:
+  pull_request:
+
+# Two repositories are read and neither is written. Nothing here deploys, so
+# `deploy.yml`'s `pages` and `id-token` have no counterpart.
+permissions:
+  contents: read
+
+# The opposite of `deploy.yml`'s rule, for the opposite reason. There the
+# artifact a run publishes is the tree it checked out, so canceling would
+# silently decide which commit is live. Here a second push makes the first run's
+# answer worthless before it finishes, and nothing is published either way.
+concurrency:
+  group: checks-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  # The job's name is the name a ruleset has to type to require this. Keep it.
+  checks:
+    runs-on: ubuntu-latest
+
+    steps:
+      # Two checkouts side by side, because `check:method` invokes a script from
+      # a sibling clone — the `../agent-project-rules` CLAUDE.md tells a person
+      # to create. `path` is documented as relative to the workspace and cannot
+      # leave it, so the trunk goes into a subdirectory of its own and the
+      # sibling beside it, which reproduces that layout exactly.
+      #
+      # What is checked out for a pull request is the *merge* commit:
+      # `GITHUB_REF` is `refs/pull/N/merge`, so these four decide the merged
+      # result rather than the branch. That is 0020 §3's second half and it is
+      # the half neither a local run nor `deploy.yml` reaches.
+      - name: The project
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          path: dot-panic
+
+      # Pinned to a release rather than to `main`, because this is another
+      # repository deciding whether this one may merge. `v0.5.3` is the newest
+      # release carrying catalog 0.5, which is the version `method.json`
+      # declares — the two move together or the check is deciding against a
+      # catalog this project has not adopted. `docs/maintenance.md` is where
+      # that pairing is due.
+      - name: The method it is checked against
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          repository: nanatsusaya/agent-project-rules
+          ref: v0.5.3
+          path: agent-project-rules
+
+      # 0009 §7's runtime, pinned to the version the lockfile was written by.
+      # Node is not installed here: the runner image already carries one, and
+      # the only thing that needs it is the method check's `.mjs` script.
+      - name: Bun
+        uses: oven-sh/setup-bun@0c5077e51419868618aeaa5fe8019c62421857d6 # v2.2.0
+        with:
+          bun-version: 1.3.14
+
+      - name: The three development dependencies
+        run: bun install --frozen-lockfile
+        working-directory: dot-panic
+
+      # 0009 §8's four, one step each and in that order. Not `bun run check`:
+      # the aggregate stops at the first failure and carries its exit status,
+      # which is right for a person and wrong here, because the step that failed
+      # is the finding. CLAUDE.md's *Commands* is the authority for what each
+      # decides and what its failure means.
+      #
+      # No `tsc` runs in this job, and that is load-bearing rather than an
+      # omission. 0009 §3 keeps the emitted tree out of the repository, so a
+      # fresh checkout has none — and `bun test` therefore reads `core/*.ts`
+      # every time. On a development machine it reads whichever of the two a
+      # build has left behind, which is #190.
+      - name: Does the documentation still describe the project
+        run: bun run check:method
+        working-directory: dot-panic
+
+      - name: Does the source type-check
+        run: bun run check:types
+        working-directory: dot-panic
+
+      - name: Format and lint
+        run: bun run check:lint
+        working-directory: dot-panic
+
+      - name: Tests, and the coverage floor
+        run: bun run check:test
+        working-directory: dot-panic

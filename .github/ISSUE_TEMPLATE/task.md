@@ -7,11 +7,17 @@ labels: ''
 
 <!--
 Adapted from agent-manual/issue-templates/task.md in agent-project-rules.
-Three changes: the handbook's "CI is green" condition is dropped, because there
-is no CI here and no check chain to be green — decision 0009 owns creating one;
-the "Watched and seen" criterion is ours, because the failures that matter here
-are visual; and conditions 4 to 6 of Ready are ours, because 0012 §2 and §6 hang
-a set-level activity on Ready that the handbook's template knows nothing about.
+Three changes: the handbook's "CI is green" condition is dropped; the "Watched
+and seen" criterion is ours, because the failures that matter here are visual;
+and conditions 4 to 6 of Ready are ours, because 0012 §2 and §6 hang a set-level
+activity on Ready that the handbook's template knows nothing about.
+
+The first was dropped because there was no CI and no check chain to be green.
+Decision 0020 has since made one, and the condition stays dropped for a
+different reason: a required check means a change that merged is one whose
+checks passed, so the condition would restate Done's fourth below rather than
+add to it. What nothing here verifies is the setting that makes it required —
+0020 §7 says so.
 
 This file is the one authority for what makes a ticket ready and done. CLAUDE.md
 and the session procedures refer to it and state nothing.
