@@ -2223,16 +2223,24 @@ one and is a solved problem rather than an avoided one**: the workflow checks ou
 `agent-project-rules` beside this repository at the pinned release, which is what
 #98 already had to do.
 
-**What is left of it is not in this repository, and it is not done.** 0020 §6
-makes the result required rather than advisory, which is a ruleset setting; §7
-records that no command here decides whether it was made. Read on 2026-08-09, the
-`protect main` ruleset is active and holds three rules — deletion,
-non-fast-forward, and a pull request with zero required approving reviews — and
-**no required status check**. **The string it has to name is `checks`**, read off
+**What was left of it is not in this repository, and it was done the same
+evening.** 0020 §6 makes the result required rather than advisory, which is a
+ruleset setting, and §7 records that no command here decides whether it was made.
+The `protect main` ruleset was read from GitHub's API twice on 2026-08-09: at
+18:30 it held three rules — deletion, non-fast-forward, and a pull request with
+zero required approving reviews — and **no required status check**; at 20:42 it
+holds a fourth, naming **`checks`**. That string was read off
 [the workflow's first run](https://github.com/nanatsusaya/dot-panic/actions/runs/31328455405)
-rather than assumed, and that run is what made the name exist. Until the setting
-names it, the workflow reports and does not block — which is 0020 §6 decided and
-not yet in force, and the ticket's state is the decider's for that reason.
+rather than assumed, and that run is what made the name exist at all.
+
+**So the gate blocks rather than reports, and it blocks the decider too.** The
+ruleset lists no bypass actor and reports that the owner may never bypass it, so
+a change whose run is red cannot reach the trunk — not by a merge somebody makes
+anyway, and not by the one account that writes and merges here. **G1's binding
+still cannot be decided from inside this repository**, which is what the coherence
+check says and what 0020 §7 repeats; the two readings above came from outside it,
+which is the only place they could come from. What has changed is what the setting
+enforces once verified: more than *a person merged this*.
 
 ## Implementation scale
 
