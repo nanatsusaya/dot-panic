@@ -25,6 +25,7 @@ import {
   type Frame,
   MAX_ACCELERATION,
   NEIGHBORHOOD_RADIUS,
+  POINTER_DECAY_STEPS,
   POINTER_RADIUS,
   POINTER_STRENGTH,
   SEPARATION_RADIUS,
@@ -1213,15 +1214,21 @@ function pushAt(gap: number): number {
 describe("the pointer's force", () => {
   /*
    * §5's strongest invariant, and the one that section says a command decides:
-   * *not a small contribution — zero*. Asserted as the whole world coming back
-   * identical, which is stricter than measuring one dot and is what an
-   * unbounded falloff would break at any distance.
+   * *not a small contribution — zero*. Asserted over every dot at once rather
+   * than one of them, which is what an unbounded falloff would break at any
+   * distance.
+   *
+   * **It compares the dots and no longer the whole world**, because #107 put
+   * the influence in the world: a step handed a pointer carries one out even
+   * where that pointer reaches nothing, so the worlds differ by a fact about
+   * the visitor while the flock is identical. The dots are what §5's sentence
+   * is about.
    */
   test("leaves a dot beyond the radius stepped as if there were none", () => {
     const world = createWorld(ordinary);
     const far: Vector = { x: -POINTER_RADIUS, y: -POINTER_RADIUS };
 
-    expect(step(world, 1 / 60, far)).toEqual(step(world, 1 / 60));
+    expect(step(world, 1 / 60, far).dots).toEqual(step(world, 1 / 60).dots);
   });
 
   /*
@@ -1241,7 +1248,9 @@ describe("the pointer's force", () => {
     const onTheEdgeOfEffect: Vector = { x: POINTER_RADIUS, y: 0.5 };
     const world = dotIn(WIDE, onTheEdgeOfEffect, ACROSS);
 
-    expect(step(world, 1 / 60, { x: 0, y: 0.5 })).toEqual(step(world, 1 / 60));
+    expect(step(world, 1 / 60, { x: 0, y: 0.5 }).dots).toEqual(
+      step(world, 1 / 60).dots,
+    );
   });
 
   /*
@@ -1296,11 +1305,14 @@ describe("the pointer's force", () => {
    * (0002 §4), and a step that consumed it would change the generator's state
    * on every frame. It is the reasoning `separationFrom` already uses for a
    * neighbor at the same position, arriving from the other side.
+   *
+   * Over the dots rather than the whole world, for the reason given above the
+   * first test in this block.
    */
   test("steers a dot standing exactly where the pointer is by nothing", () => {
     const world = dotIn(WIDE, MIDDLE, ACROSS);
 
-    expect(step(world, 1 / 60, MIDDLE)).toEqual(step(world, 1 / 60));
+    expect(step(world, 1 / 60, MIDDLE).dots).toEqual(step(world, 1 / 60).dots);
   });
 
   /*
@@ -1441,5 +1453,176 @@ describe("the pointer's force", () => {
     }
 
     expect(outside).toBeLessThanOrEqual(0);
+  });
+});
+
+/*
+ * 0007 §4, and the one row of §9's table #107 adds: *with presence ended, the
+ * influence reaches zero in a bounded number of steps.*
+ *
+ * **What is asserted is the bound and never the length.** `POINTER_DECAY_STEPS`
+ * is provisional under 0008 R1 and §9 puts the decay length among the things
+ * only watching decides, so nothing below pins 18 — they read the constant. What
+ * they pin is the shape: full strength while presence lasts, monotone down
+ * afterwards, zero within the bound, and a count of steps rather than of
+ * seconds.
+ *
+ * **Whether a release *reads* as a release is not here at all.** That is §9's
+ * other list and it needs a finger and a browser.
+ */
+describe("the influence after presence ends", () => {
+  /*
+   * The dot is placed inside the reach and alone, so the pointer is the only
+   * force acting on it and a change in its velocity is the influence itself.
+   */
+  const NEAR: Vector = { x: MIDDLE.x - POINTER_RADIUS / 2, y: MIDDLE.y };
+
+  test("is carried in the world rather than by the Shell", () => {
+    const held = step(dotIn(WIDE, MIDDLE, ACROSS), 1 / 60, NEAR);
+
+    expect(held.pointer).toEqual({
+      position: NEAR,
+      remainingSteps: POINTER_DECAY_STEPS,
+    });
+  });
+
+  test("stays at full strength while the pointer is there", () => {
+    let world = dotIn(WIDE, MIDDLE, ACROSS);
+
+    for (let taken = 0; taken < 4 * POINTER_DECAY_STEPS; taken += 1) {
+      world = step(world, 1 / 60, NEAR);
+    }
+
+    expect(world.pointer?.remainingSteps).toBe(POINTER_DECAY_STEPS);
+  });
+
+  test("reaches zero within the bound once presence ends", () => {
+    let world = step(dotIn(WIDE, MIDDLE, ACROSS), 1 / 60, NEAR);
+
+    for (let taken = 0; taken < POINTER_DECAY_STEPS; taken += 1) {
+      expect(world.pointer).toBeDefined();
+      world = step(world, 1 / 60);
+    }
+
+    expect(world.pointer).toBeUndefined();
+  });
+
+  test("fades from where the pointer was last seen", () => {
+    const released = step(
+      step(dotIn(WIDE, MIDDLE, ACROSS), 1 / 60, NEAR),
+      1 / 60,
+    );
+
+    expect(released.pointer?.position).toEqual(NEAR);
+  });
+
+  /**
+   * What one step of a fading influence does to a lone dot's velocity, with the
+   * influence set to `remainingSteps` before that step rather than reached by
+   * stepping there.
+   *
+   * **Placed rather than accumulated, and the first attempt to write this failed
+   * for that reason.** Stepping eighteen times from a released world measures
+   * something else by the end: the dot is pushed to 0006 §3's ceiling, the band
+   * clamps it, and a velocity that has stopped growing reads as a fade that has
+   * stopped fading. Each level gets a fresh dot, so what is compared is the
+   * force and not what eighteen steps of it did.
+   *
+   * The dot is alone and in the middle, so 0006 §6's edge is silent and nothing
+   * steers it, which leaves the influence as the only force acting.
+   *
+   * @param remainingSteps  what the world carries going in. The step fades it
+   *                        before the force is taken, so this is one more than
+   *                        the level being measured
+   * @returns how far the velocity moved along the push, in shorter sides per
+   *          second
+   */
+  function pushAfter(remainingSteps: number): number {
+    const released: World = {
+      ...dotIn(WIDE, MIDDLE, ACROSS),
+      pointer: { position: NEAR, remainingSteps },
+    };
+
+    const [after] = step(released, 1 / 60).dots;
+
+    return (after?.velocity.x ?? Number.NaN) - ACROSS.x;
+  }
+
+  /*
+   * The bug 0007 §4 names first: an influence that outlives its cause leaves the
+   * flock fleeing nothing. Asserted as *strictly weaker at every level, and zero
+   * at the end*, which a fade that plateaued would break as surely as one that
+   * never started.
+   */
+  test("weakens at every level, and is gone at the last", () => {
+    let previous = Number.POSITIVE_INFINITY;
+
+    for (let left = POINTER_DECAY_STEPS; left > 1; left -= 1) {
+      const push = pushAfter(left);
+
+      expect(push).toBeGreaterThan(0);
+      expect(push).toBeLessThan(previous);
+      previous = push;
+    }
+
+    expect(pushAfter(1)).toBe(0);
+  });
+
+  /*
+   * The other bug §4 names: dropped in one step, the flock is snapped back, and
+   * 0006 §4's bound turns that snap into a slow drift home through a region the
+   * visitor has already left. So the first step after a release still pushes.
+   */
+  test("does not drop to nothing in the step after the release", () => {
+    const held = step(dotIn(WIDE, MIDDLE, ACROSS), 1 / 60, NEAR);
+    const [before] = held.dots;
+    const [after] = step(held, 1 / 60).dots;
+
+    expect(
+      (after?.velocity.x ?? Number.NaN) - (before?.velocity.x ?? 0),
+    ).toBeGreaterThan(0);
+  });
+
+  /*
+   * The constraint #107 carries in from 0006 §4, arrived at from the other side:
+   * the fade counts steps, so a step rate that changes under 0008 §3 changes how
+   * long a release takes on a clock and not how it is shaped.
+   */
+  test("counts steps and not seconds", () => {
+    let quick = step(dotIn(WIDE, MIDDLE, ACROSS), 1 / 60, NEAR);
+    let slow = step(dotIn(WIDE, MIDDLE, ACROSS), 1 / 30, NEAR);
+
+    for (let taken = 0; taken < POINTER_DECAY_STEPS - 1; taken += 1) {
+      quick = step(quick, 1 / 60);
+      slow = step(slow, 1 / 30);
+
+      expect(quick.pointer?.remainingSteps).toBe(slow.pointer?.remainingSteps);
+    }
+
+    expect(step(quick, 1 / 60).pointer).toBeUndefined();
+    expect(step(slow, 1 / 30).pointer).toBeUndefined();
+  });
+
+  test("returns to full strength when the pointer comes back", () => {
+    const faded = step(step(dotIn(WIDE, MIDDLE, ACROSS), 1 / 60, NEAR), 1 / 60);
+
+    expect(step(faded, 1 / 60, NEAR).pointer?.remainingSteps).toBe(
+      POINTER_DECAY_STEPS,
+    );
+  });
+
+  /*
+   * 0007 §7: stepping with no pointer produces valid worlds indefinitely. A
+   * world that never had one has nothing to fade, so the absence stays absence
+   * rather than becoming a fade from a position nobody set.
+   */
+  test("never starts from a world that never had a pointer", () => {
+    let world = createWorld(ordinary);
+
+    for (let taken = 0; taken < POINTER_DECAY_STEPS; taken += 1) {
+      world = step(world, 1 / 60);
+    }
+
+    expect(world.pointer).toBeUndefined();
   });
 });

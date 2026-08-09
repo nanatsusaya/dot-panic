@@ -386,10 +386,20 @@ function inWorld(event: PointerEvent): Vector | undefined {
  * 0006 §6's edge already deals with for dots and 0007 §5 makes harmless for a
  * force that falls to zero.
  *
- * **`pointerup` and `pointercancel` both end it**, which is 0007 §4 exactly: a
- * browser taking over the gesture has to be treated like a finger lifting. What
- * happens *after* presence ends is the decay, and that is derived — so it is the
- * Core's and it is #107's, not a timer here.
+ * **What happens after presence ends is the Core's** — 0007 §2 puts the fade in
+ * the world, so nothing here counts anything down and there is no timer.
+ *
+ * **`pointerup` does not end presence, and that is 0007 §4 read with §4's own
+ * device split.** Its *`pointerup` and `pointercancel` both end it* stands in
+ * the touch paragraph; applied to a mouse it would leave a click followed by a
+ * perfectly still cursor with no pointer at all, which is R2's parked cursor
+ * contradicted by a sentence naming no device. So a release records where the
+ * pointer is, like a move, and what ends presence is `pointerleave` below —
+ * which [Pointer Events Level 3](https://www.w3.org/TR/pointerevents3/#the-pointerout-event)
+ * fires *"after the user agent fires the pointerup event for a device that does
+ * not support hover"*, so a lifted finger produces one and a released button
+ * does not. §4's line between the two paths, in one code path where the four
+ * names could not express it.
  *
  * **The four names are written out rather than looped over.** A loop over an
  * array of them is shorter and defeats the command that decides this section: it
@@ -405,11 +415,34 @@ window.addEventListener("pointermove", (event) => {
   pointer = inWorld(event);
 });
 
-window.addEventListener("pointerup", () => {
-  pointer = undefined;
+window.addEventListener("pointerup", (event) => {
+  pointer = inWorld(event);
 });
 
 window.addEventListener("pointercancel", () => {
+  pointer = undefined;
+});
+
+/*
+ * The fifth Pointer Event, and 0007 §1 is untouched by it: that section decides
+ * *one code path, and it is Pointer Events*, so a fifth name from the same API
+ * reopens nothing — where a second set of listeners would. The decider settled
+ * that against PR #235's O1 on 2026-08-09.
+ *
+ * **It carries two cases the four cannot produce**, both required by 0007 §4. A
+ * finger lifted or a gesture taken over reaches it through the specification's
+ * *after the user agent fires the pointerup event for a device that does not
+ * support hover*. And a cursor leaving the window — §4's one case where a mouse
+ * loses its position — arrives as the pointer leaving the document element,
+ * which is **a browser's behavior rather than a guarantee that list makes**, so
+ * #107 watches it rather than asserting it.
+ *
+ * **On the document element and not on `window`**, because `pointerleave` does
+ * not bubble: on the root it means the pointer left the page and all of it,
+ * where `pointerout` would fire every time a cursor crossed from the canvas onto
+ * the strip and release the flock in the middle of a visit.
+ */
+document.documentElement.addEventListener("pointerleave", () => {
   pointer = undefined;
 });
 
