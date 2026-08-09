@@ -19,7 +19,7 @@
   [0012](0012-how-software-gets-developed.md) §2 (the walking skeleton is the
   first increment)
 - **Supersedes / amends:** nothing
-- **Amended:** no
+- **Amended:** 2026-08-09 — A1
 
 ## Context
 
@@ -87,10 +87,14 @@ event here. GitHub recommends a deployment protection rule restricting the
 without it, any branch could deploy and §6's gate would be one workflow file away
 from being bypassed.
 
-**This is not continuous integration and does not become it.** The checks run
-here because they gate a deployment, not because they gate a merge. What gates a
-merge is review, [0010](0010-testing-strategy.md) invents no CI condition, and
-this record does not either.
+**This is not the only place the checks run, and they no longer gate only a
+deployment.** They gate one here, and that part is unchanged: the order above is
+what makes a red check produce no page rather than a page with a warning beside
+it. What gates a **merge** is review *and* the four checks, which
+[0020](0020-whether-the-checks-gate-a-merge.md) decides and keeps in a workflow of
+its own rather than in this one. [0010](0010-testing-strategy.md) invents no
+condition of its own and neither does this record; the merge gate is 0020's and is
+read there.
 
 ### 3. The URL is the default one, and there is no custom domain
 
@@ -309,6 +313,41 @@ sentences and a link cost no mechanism, no request and nothing stored; being wro
 in the other direction costs a duty unmet. That is why the recommendation was made
 without the determination behind it, and why the record says so instead of
 dressing the choice up as settled law.
+
+## Amendments
+
+**A1 — the checks gate a merge as well, and where that is decided is not here.
+2026-08-09.**
+
+§2 ended:
+
+> **This is not continuous integration and does not become it.** The checks run
+> here because they gate a deployment, not because they gate a merge. What gates a
+> merge is review, [0010](0010-testing-strategy.md) invents no CI condition, and
+> this record does not either.
+
+**What replaced it** is the paragraph now standing in its place at the end of §2:
+the checks still gate a deployment here, a merge is gated as well, and where that
+is decided is [0020](0020-whether-the-checks-gate-a-merge.md) rather than this
+record. **Nothing else in §2 changed** — the publishing source, the fixed order,
+the trigger and the environment protection rule are all untouched, and so is §8's
+row asserting that deployment runs only after the checks pass.
+
+**Why.** [#202](https://github.com/nanatsusaya/dot-panic/issues/202) asked what
+gating a pull request would cost this section, and 0020 is the answer. The
+evidence is thirty-seven runs of this record's own workflow in which eleven real
+check failures sat unnoticed inside twenty-six that were red by design; 0020's
+*Context* carries it and it is not repeated here.
+
+**The authorization**, from the decider on 2026-08-09, answering 0020's two open
+questions in the review of
+[PR #253](https://github.com/nanatsusaya/dot-panic/pull/253):
+
+> Wir folgen in O1 und O2 im PR #253 deinen empfehlungen
+
+The two recommendations it follows are 0020's R1 and R2: that this section is
+amended and the four checks run on `pull_request`, and that their result is
+required rather than advisory.
 
 ## References
 

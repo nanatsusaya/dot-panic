@@ -90,6 +90,7 @@ longer supports.
 | [0010](0010-testing-strategy.md) | Testing strategy | What is asserted by a command, what a person measures, and what is only ever watched | Accepted |
 | [0018](0018-where-a-test-lives.md) | Where a test lives | Which directory a test file sits in, what a source-reading test may read, and what a build does with it | Accepted |
 | [0011](0011-delivery.md) | Delivery | How it reaches the public URL, and when | Accepted |
+| [0020](0020-whether-the-checks-gate-a-merge.md) | Whether the checks gate a merge | When the four checks run, what their result may block, and what a local run cannot decide | Accepted |
 | [0013](0013-origin-of-the-core.md) | Origin of the core | Written here or taken from a package, and what may be read while it is written | Accepted |
 | [0016](0016-maintainability-and-maintenance.md) | Maintainability and maintenance | What keeps this maintainable, who re-reads the commitments that depend on time, and what the project is once delivery ends | Accepted |
 
@@ -145,13 +146,25 @@ because both are about how the work is done, and after rather than before becaus
 0012's *sits third* above is a fact about this table that a new row must not
 falsify.
 
-**Five rows have now been added after the set was planned**, and that is the
+**0020 was added from the other end again**, and by neither of the two routes
+above. No record found the gap and no reading of the set did:
+[#202](https://github.com/nanatsusaya/dot-panic/issues/202) was filed on
+2026-08-06 after the decider noticed that the method's own repository gates its
+markdown in CI while this one gates nothing. It sits after
+[0011](0011-delivery.md) because that is the record it changes: 0011 §2 decided
+that the checks gate a deployment and **not** a merge, and 0020 amends that
+sentence so a merge is gated as well — logged in 0011 as its A1, which is where
+the superseded wording and the authorization are read.
+
+**Six rows have now been added after the set was planned**, and that is the
 mechanism working rather than the plan failing. Each took the next free number.
-Four came from a record finding a topic no existing row owned; the fifth came
-from a question. Three arrived with a ticket in the same change; the tickets for
-0018 and 0019 — [#181](https://github.com/nanatsusaya/dot-panic/issues/181) and
+Four came from a record finding a topic no existing row owned, the fifth from a
+question about the set, and the sixth from a ticket. Three arrived with a ticket
+in the same change; the tickets for 0018 and 0019 —
+[#181](https://github.com/nanatsusaya/dot-panic/issues/181) and
 [#199](https://github.com/nanatsusaya/dot-panic/issues/199) — were filed first,
-by the change that met the gap. It is the numbering in
+by the change that met the gap, and 0020's was filed three days before anything
+met one. It is the numbering in
 [0012](0012-how-software-gets-developed.md)'s paragraph above that is closed, not
 the set.
 
