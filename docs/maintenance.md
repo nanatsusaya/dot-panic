@@ -13,7 +13,7 @@ names is wrong by construction, and the row is what gets repaired.
 | The commitment | Owner | Kind | Last read | What makes it due |
 |---|---|---|---|---|
 | The slowdown factor standing in for the device floor | [0008](adr/0008-performance-budget.md) §8 | Dated | Never — no factor has been chosen | The first measurement chooses one and writes down the date it was read. The floor rolls forward every year, so that date is the only thing that later shows it has moved |
-| Which browser features are Baseline widely available | [0009](adr/0009-toolchain.md) §4 | Standing | 2026-08-08, after [#96](https://github.com/nanatsusaya/dot-panic/issues/96) | A change that names a browser feature. No compiler setting reaches this half of the floor, so the reading is made where the feature is used |
+| Which browser features are Baseline widely available | [0009](adr/0009-toolchain.md) §4 | Standing | 2026-08-09, after [#105](https://github.com/nanatsusaya/dot-panic/issues/105); 2026-08-08, after [#96](https://github.com/nanatsusaya/dot-panic/issues/96) | A change that names a browser feature. No compiler setting reaches this half of the floor, so the reading is made where the feature is used |
 | The ECMAScript year `target` and `lib` name | [0009](adr/0009-toolchain.md) §4 | Dated | 2026-08-05, in [#69](https://github.com/nanatsusaya/dot-panic/issues/69) | **2028-05-11.** ES2023 is the highest year fully Baseline widely available; ES2024 waits on `Atomics.waitAsync`, which reached the fourth browser only on 2025-11-11. Raising the setting is a change somebody makes, never something that happens |
 | The `showModal()` bridge the Shell holds open | [0014](adr/0014-page-layout.md) §5 | Dated | 2026-08-02 | **2028-06-12.** Invoker commands reach Baseline widely available, the markup becomes permitted, and the handler can go |
 | Provenance of the Core, and both halves of *read but do not copy* | [0013](adr/0013-origin-of-the-core.md) §7, §8 | Standing | 2026-08-09, in [#99](https://github.com/nanatsusaya/dot-panic/issues/99) — nothing consulted; 2026-08-05, in [#91](https://github.com/nanatsusaya/dot-panic/issues/91) — Vigna's `splitmix64.c` | Code being written into the Core. The question is answered while it is written and by nobody afterwards |
@@ -32,13 +32,26 @@ against; the DOM half has no version anywhere, so it stays standing and is read
 where a feature is used. A session that repairs one without the other has
 repaired half of 0001 §3.4.
 
-**The word *after* in one Last-read cell is the row failing rather than
-working.** Every other reading in this file was made inside the change that
-needed it, which is what *the reading is made where the feature is used* asks
-for. [#96](https://github.com/nanatsusaya/dot-panic/issues/96) named a feature no
-reading had covered and merged without one; the reading was made at the wind-down
-that followed, and the cell says so instead of borrowing the ticket's credit.
-**Nothing here catches that**, and 0016 §4 puts the noticing in a person.
+**The word *after* in one Last-read cell is the row failing rather than working,
+and it now says so twice.** Every other reading in this file was made inside the
+change that needed it, which is what *the reading is made where the feature is
+used* asks for. [#96](https://github.com/nanatsusaya/dot-panic/issues/96) named a
+feature no reading had covered and merged without one; the reading was made at
+the wind-down that followed, and the cell says so instead of borrowing the
+ticket's credit. **[#105](https://github.com/nanatsusaya/dot-panic/issues/105)
+did it again three days later**, naming Pointer Events and `touch-action: none`
+— and [0009](adr/0009-toolchain.md) §4 uses the first of those as its own example
+of the half no compiler setting reaches. Read 2026-08-09, both clear 0001 §3.4
+comfortably: the Pointer Events API is Baseline widely available, low 2020-07-28
+and high **2023-01-28**, and `touch-action` low 2019-09-19 and high
+**2022-03-19**. **The feature is `pointer-events-api`**, not the CSS property
+`pointer-events`, which is a separate row carrying 2015-07-29 and 2018-01-29 —
+one name, two answers.
+
+**Nothing here catches that**, and 0016 §4 puts the noticing in a person. What
+noticed the second one was
+[#226](https://github.com/nanatsusaya/dot-panic/issues/226) checking the four
+rows it had not been filed about, which is luck rather than a mechanism.
 
 **One dated row carries no date yet**, and that is the state rather than a gap
 in this file. [0008](adr/0008-performance-budget.md) §8 fixes that the factor
