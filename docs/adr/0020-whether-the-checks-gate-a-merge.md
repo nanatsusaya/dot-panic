@@ -1,6 +1,6 @@
 # 0020 — Whether the checks gate a merge
 
-- **Status:** Proposed
+- **Status:** Accepted
 - **Date:** 2026-08-09
 - **Deciders:** Daniel Wagner
 - **Ticket:** [#202](https://github.com/nanatsusaya/dot-panic/issues/202)
@@ -13,8 +13,8 @@
   [#90](https://github.com/nanatsusaya/dot-panic/issues/90)), §8 (what a command
   decides about a deployment) · [0019](0019-fidelity-to-the-method.md) §2 (a rule
   this project invents is not an adaptation), §3 (declaring one is the decider's)
-- **Supersedes / amends:** nothing yet. O1 is whether it amends
-  [0011](0011-delivery.md) §2
+- **Supersedes / amends:** amends [0011](0011-delivery.md) §2, recorded there as
+  its A1
 - **Amended:** no
 
 ## Context
@@ -89,12 +89,17 @@ check, and no page has been published.
 
 ## Decision
 
-### 1. If anything runs before a merge, it is a second workflow and never this one
+### 1. The four checks run on every pull request, in a workflow of their own
+
+Before the merge rather than after it, on the `pull_request` event, and in a file
+that is not `deploy.yml`. The first half is what [0011](0011-delivery.md) §2 had
+decided otherwise, and its A1 carries the superseded wording; the second half is
+this record's alone.
 
 `deploy.yml` carries [0011](0011-delivery.md) §6's gate, which is **correct when
 it is red** and will be until #90 lands. A signal that is expected to be red
 cannot also be the signal that something is wrong; that is not a prediction, it
-is what the thirty-seven runs did. Requiring this file would block every merge
+is what the thirty-seven runs did. Requiring that file would block every merge
 rather than the wrong ones.
 
 **A command decides the weaker half of this**: the two are different files, and
@@ -163,10 +168,27 @@ already correct reproduces exactly what happened, whether or not it also blocks 
 merge.
 
 **Checkable by reading**: the four checks and the publishing steps do not share a
-workflow file. That is §1 from the other side, and it is why §1 holds even under
-the answer to O1 that changes nothing about merging.
+workflow file. That is §1 from the other side, and it stands independently of §6
+— a signal worth reading is worth having whether or not it also blocks.
 
-### 6. What is asserted, and what is not
+### 6. The result is required, and a change does not merge without it
+
+Not advisory. GitHub documents that *"all required status checks must pass before
+collaborators can merge changes into the branch or tag"*, and the alternative — a
+mark that reports and blocks nothing — is the state this record exists because of.
+
+**§1 is what makes this safe rather than obstructive.** A required check that is
+sometimes correctly red would stop every merge; the workflow §1 describes is never
+expected to be red, which is the whole difference between it and the file it is
+kept out of.
+
+**It does not touch
+[G1](https://github.com/nanatsusaya/agent-project-rules/blob/main/method/rules.md#g1),
+and saying so is not a formality.** A required check decides whether a change
+*may* merge; a person still decides whether it *does*, and no check approves
+anything. The review boundary is exactly where it was.
+
+### 7. What is asserted, and what is not
 
 The registers are [0010](0010-testing-strategy.md) §1's.
 
@@ -181,6 +203,13 @@ The registers are [0010](0010-testing-strategy.md) §1's.
 
 The fourth is worth more than the other three: it is the only one that fails when
 something outside this repository moves, and it is the failure mode §2 names.
+
+**§6 is decidable nowhere in this repository.** Whether a check is required is a
+repository setting, which puts it in the same class as
+[G1](https://github.com/nanatsusaya/agent-project-rules/blob/main/method/rules.md#g1)'s
+binding — the coherence check states on every run that it cannot decide that one
+and names the page to verify it on, and this is the second entry for the same
+page.
 
 **Measured** — nothing. **Watched** — nothing. This record moves nothing on
 screen, and no criterion of it belongs to an eye.
@@ -202,13 +231,14 @@ screen, and no criterion of it belongs to an eye.
 
 **Negative.**
 
-- **[0011](0011-delivery.md) §2 stops being true** if O1 is answered yes, six days
-  after it was accepted, and an accepted record acquires an amendment. That is the
-  cost the ticket asked to have weighed and it is a real one.
+- **[0011](0011-delivery.md) §2 has stopped being true**, seven days after it was
+  accepted, and 0011 has acquired its first amendment. That is the
+  cost the ticket asked to have weighed, it is a real one, and 0011 A1 is where it
+  is paid.
 - **Another repository's release enters this one's merge path.** If
   `agent-project-rules` moves its catalog, or the pinned tag is deleted, nothing
-  merges here until a workflow file changes — and under O2's blocking answer that
-  is a stop rather than a warning.
+  merges here until a workflow file changes — and because §6 makes the result
+  required, that is a stop rather than a warning.
 - **Most runs will be redundant by construction**, because the author runs the
   same four before opening anything. The gate earns itself on a narrow class and
   spends runner minutes on every other change.
@@ -237,35 +267,44 @@ screen, and no criterion of it belongs to an eye.
   dropping it would gate the toy and not the thing the project is for. The
   cross-repository hazard it brings is named in *Consequences* instead.
 
-## Open questions
+## Resolved questions
 
-**O1 — is [0011](0011-delivery.md) §2 amended so that something may run before a
-merge, or does it stand as written and this ticket end with the arrangement
-unchanged?** *Recommended: amend, and run the four on `pull_request`.* The
-sentence to be superseded is *"This is not continuous integration and does not
-become it. The checks run here because they gate a deployment, not because they
-gate a merge."* An amendment rather than a superseding record is not a question:
-[docs/adr/README.md](README.md) makes superseding flip the whole record's status,
-and 0011 §1 and §3 to §8 are untouched and right. **This needs the authorization
-itself, quoted with its date**, which is what §3 of
-[0019](0019-fidelity-to-the-method.md) requires of the neighboring case and what
-the README requires here.
+**R1 — [0011](0011-delivery.md) §2 is amended, and the four checks run on
+`pull_request`.** Decided by the decider on 2026-08-09, following the two
+recommendations this record carried. §1 is what the answer became.
 
-If the answer is no, §1 and §5 of this record still hold and shrink to one thing:
-the checks move to a workflow of their own on push to `main`, so that a red mark
-means something. That is the smaller half and it needs no amendment — except that
-§2's *this is not continuous integration* reaches it too, which is why it is
-inside O1 rather than beside it.
+**The route was never in question; only the authorization was.**
+[docs/adr/README.md](README.md) makes a superseding record flip the superseded
+one's whole status, and 0011 §1 and §3 to §8 are untouched and right — so an
+amendment was the only available shape, and what an amendment needs is the
+decider's explicit word quoted with its date. It is quoted in
+[0011](0011-delivery.md) A1 together with the superseded wording, because an
+amendment logs itself inside the record it changes rather than in the one that
+caused it.
 
-**O2 — does the result report, or is it required by a ruleset?** *Recommended:
-required.* GitHub documents that *"all required status checks must pass before
-collaborators can merge changes into the branch or tag"*, and a mark nobody has
-to act on is precisely what has just failed for a day. **The cost is named
-above**: a required check puts another repository's release in the merge path,
-and it is a repository setting — the same setting G1's binding lives in, which
-has never been verified here. Reporting first and requiring later is the
-defensible other answer, and the reason it is not the recommendation is that the
-reporting-only state is the one this record exists because of.
+**The other answer would have been defensible, and why it lost is worth more than
+that it did.** The eleven failures had a single cause,
+[#249](https://github.com/nanatsusaya/dot-panic/pull/249) removed it, and a
+project whose author runs all four checks before opening anything could
+reasonably call a workflow ceremony with a runtime. What decided against it is
+that the eleven were **invisible** rather than unfixed: fixing them leaves the
+arrangement that hid them exactly as it was, and the next failure of that class
+would be hidden the same way.
+
+**R2 — the result is required by a ruleset rather than advisory.** Decided in the
+same answer, and §6 is what it became. The cost stands where this record named it
+before the question was put: another repository's release now sits in this one's
+merge path, and *required* makes that a stop rather than a warning.
+
+**Reporting first and requiring later was the defensible other answer**, and it
+lost to the plainest fact available — a mark nobody has to act on is what has just
+failed for a day. What makes the strict answer safe rather than obstructive is §1:
+the workflow being required is the one that is never correctly red.
+
+**This half is not finished by merging.** A ruleset is a repository setting on the
+decider's account and not a file in this change; §7 records that no command here
+can decide it, and the check a ruleset would name does not exist until the
+workflow does. So the order is the workflow first, then the setting.
 
 ## References
 
