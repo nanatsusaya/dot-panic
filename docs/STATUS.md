@@ -1442,7 +1442,7 @@ is why each row exists, which nothing else here says.
 |---|---|---|
 | [#13](https://github.com/nanatsusaya/dot-panic/issues/13) Walking skeleton | 9 tickets | 0012 §2 makes it the first increment, and 0011 §7 puts the first deployment here |
 | [#87](https://github.com/nanatsusaya/dot-panic/issues/87) The flock's motion | 7 tickets | 0006's motion rules, cut one per ticket, plus the numbers they fix blind |
-| [#88](https://github.com/nanatsusaya/dot-panic/issues/88) The pointer | 3 tickets | 0007's input model — the toy's one interaction |
+| [#88](https://github.com/nanatsusaya/dot-panic/issues/88) The pointer | 4 tickets | 0007's input model — the toy's one interaction, plus the numbers it fixes blind |
 | [#89](https://github.com/nanatsusaya/dot-panic/issues/89) The finished page | 3 tickets | 0005's rendering, plus the palette and the dot count no record fixes |
 | [#117](https://github.com/nanatsusaya/dot-panic/issues/117) The meta-audit corrections | 20 tickets | the 2026-08-03 audits' findings, and two of the same class found by building instead; it builds nothing, which is what 0012 A2 widened *epic* to allow |
 
@@ -1749,13 +1749,31 @@ scatter and that lattice, and none of them puts internal motion back into it.
 number in 0006 §10's register stays provisional through the whole of the pointer's
 work, which is longer than anyone has left one provisional here so far.
 
-**Its blockers are gone and its activity has not run.** #105, #106 and #107 name
-#91, #94 and #95, all closed — but 0012 §6 requires the sprint-opening activity
-*before any agent starts*, and none has run for that set. For
-[#87](https://github.com/nanatsusaya/dot-panic/issues/87) that activity ran with
-the decider and surfaced eight decisions before a branch existed, one of which
-took a ticket's subject away. **It is the next thing owed to #88, and the third
-watch is ahead of all of it.**
+**Its sprint-opening activity has run, on 2026-08-09**, which is 0012 §6's
+requirement *before any agent starts* and the thing that was owed. Three
+questions went to the decider and all three came back as the recommended
+default: 0007's numbers get a superseder of their own rather than widening #216,
+#105's watching is deferred rather than coupling two tickets into one increment,
+and the ordering does not change. **The order is #105, then #106, then #107**,
+and independence is again zero — all three write `core/step.ts` — which is the
+same answer #87 got for the same reason.
+
+**Four numbers were fixed before the work and two relations came out of
+measuring them.** The radius of effect, the peak strength, the falloff shape and
+the decay length are in #106 and #107 with the arithmetic, provisional, and
+[#233](https://github.com/nanatsusaya/dot-panic/issues/233) is the superseder.
+**The peak strength may not exceed `MAX_ACCELERATION`**, because the bound holds
+the *sum* of the forces and a pointer pushing outward is subtracted from 0006
+§6's edge force before anything is capped — measured at 0.0432 outside the frame
+at a peak of 3.0, where 0007 §5 asserts containment survives the pointer and
+names no such condition. **And if the flock cannot get out of the way, the number
+that decides it is `SPEED_MAX`**: a dot's ceiling is 86 px/s on a 540 px canvas,
+so it needs eleven seconds to cross the frame, and doubling that ceiling changes
+the escape by a factor of five where doubling the pointer's strength or 0006 §4's
+bound changes it by almost nothing. That number is #216's, and knowing it in
+advance is what #99 cost two sittings to learn the hard way.
+
+**The third watch is still ahead of all of it.**
 
 **[#178](https://github.com/nanatsusaya/dot-panic/issues/178) is done and the
 convention has a command behind it.**
