@@ -6,6 +6,56 @@ session would decide worse without it.
 
 Newest first.
 
+## 2026-08-09 — The window was shorter than the process, and a one-sided reading called overshoot an arrival
+
+**The entry below is about a measurement that was broken. This one is about two
+that were correct and were read wrong**, on the same day and about the same
+flock, which is the reason to write it down: nothing here failed loudly enough to
+notice.
+
+[0006](adr/0006-motion-rules.md) A1 gave separation a shorter reach because over
+one reach the flock spread evenly and formed no groups. What confirmed the repair
+was **three seeds of thirty seconds**, reading a Clark-Evans index of 0.67 where
+one reach had drifted to 1.74. Both numbers are right. Neither says what it was
+taken to say.
+
+**Thirty seconds ends before the process finishes.** The flock coarsens — bodies
+merge and do not split — and at thirty seconds there are still three or four of
+them, which is what groups look like. The collapse to a single body holding all
+200 dots happens in the second half-minute, at twenty to fifty seconds depending
+on the seed. **The window was picked from what is convenient to run, and the
+process it was certifying is slower than that.**
+
+**The proof that this is a rule and not an anecdote is that it fired again while
+being written up.** Inside the sweep that
+[#238](https://github.com/nanatsusaya/dot-panic/issues/238) ran, two settings read
+as groups at thirty seconds and were one crystal at sixty — a largest body of 50
+going to 180, and one of 20 going to 160. Both would have been recorded as
+candidates. The trap does not need anyone to be careless; it needs only a window
+chosen before the process is understood.
+
+**And the index was read as having a direction when it has a target.** *Below 1
+means clustered* is true, and it makes 0.67 look like arrival. It is not: the
+state that reads as a flock sits near **1.0**, and 0.67 is as far past it on one
+side as 1.74 is short of it on the other. A quantity with a best value in the
+middle, read as *lower is better*, certifies overshoot as success — and it does it
+silently, because the number moved the way it was supposed to.
+
+**What it did see correctly is worth keeping**, because the fault was not the
+statistic. It separates all three states cleanly: one crystal at 0.67, groups that
+form and break at 0.90 to 1.10, the even lattice at 1.74. What it cannot do is
+report progress *within* the collapse — it read 0.64 at four bodies and 0.69 at
+one, because nearest-neighbor spacing inside a crystal does not care how many
+crystals there are. **A statistic about neighbors cannot see the frame emptying**,
+and that took a body count and an occupancy grid.
+
+**So, two things before a measurement rather than after it.** Run it until the
+quantity stops moving and check that it stopped, instead of running it for a round
+number — and where the answer is an equilibrium, the window is a finding of its
+own. And when a statistic is quoted, name the **target** and not the direction: a
+one-sided reading of a two-sided quantity has no way to report having gone too
+far.
+
 ## 2026-08-09 — A broken measurement of structure reads as an absence of structure
 
 **Everything here so far has run one direction: a watch decides what no command
