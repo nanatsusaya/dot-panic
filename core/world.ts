@@ -172,8 +172,18 @@ export const NEIGHBORHOOD_RADIUS = 0.14;
  * evenly, and it spread evenly: its Clark-Evans index, the mean distance to the
  * nearest other dot over what a random scatter of the same density gives, went
  * from 0.83 to 1.74 in a minute, where 1 is random and 2.15 a perfect lattice.
- * At 0.05 the same two balance at 0.034 instead, about a third of the spacing a
- * uniform scatter has, which is the room a group forms in.
+ * At 0.05 the same two balance at 0.042 instead, a little under half the spacing
+ * a uniform scatter has, which is the room a group forms in.
+ *
+ * **0.686 is a ratio of the one-reach case and does not carry over**, which is
+ * what this comment said until 2026-08-09: it read 0.034, which is 0.686 × 0.05.
+ * The factor is not a property of separation's shape — it comes out of solving
+ * `SEPARATION_WEIGHT · (r/d − 1) = COHESION_WEIGHT · d/NEIGHBORHOOD_RADIUS`, and
+ * shortening one of the two radii without the other moves it. At 0.14 for both
+ * the root is 0.0961, at 0.05 against 0.14 it is 0.0417, so the factor goes from
+ * 0.686 to 0.834. **The argument A1 rests on is unaffected** — 0.042 against a
+ * uniform spacing of 0.094 still leaves a group room to be denser than what
+ * surrounds it — and only the figure was wrong.
  *
  * Chosen by measuring rather than before the work, which is the one number here
  * 0008 R1 could not have in the ticket first — nothing could be measured until
@@ -214,8 +224,10 @@ export const ALIGNMENT_WEIGHT = 1;
  * Equal to alignment's and below separation's, which is what gives a pair of
  * dots a spacing to settle at rather than a collision or a drift apart:
  * cohesion grows to one over `NEIGHBORHOOD_RADIUS` while separation falls away
- * over `SEPARATION_RADIUS`, and at these numbers the two balance at 0.686 of
- * the shorter one.
+ * over `SEPARATION_RADIUS`, and at these numbers the two balance at 0.834 of
+ * the shorter one — 0.042. **Not 0.686 of it**, which is this pair's ratio when
+ * both radii are 0.14; `SEPARATION_RADIUS` carries the arithmetic and what the
+ * correction of 2026-08-09 did and did not change.
  *
  * **The weights decide where that balance sits and not whether there is one.**
  * Over a single reach it sat at the spacing the flock already had, no weighting
