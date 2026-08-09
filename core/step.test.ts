@@ -348,10 +348,32 @@ describe("a step", () => {
    * This read *along its velocity* until #99, which was the same claim while
    * nothing changed one in the middle of a frame. It is not the same claim any
    * more, and stating it the weaker way would now assert that nothing steers.
+   *
+   * **The world is built rather than scattered, and #102 is why.** 0006 §2's
+   * correction moves a dot off that line whenever two come closer than `2r`, so
+   * this claim holds of a step and not of every dot in one. Three dots at 0.06
+   * are inside the neighborhood, so cohesion steers them and the velocity that
+   * matters is not the one they came in with — and they are six times `2r`
+   * apart, which one step at 0008 §3's rate cannot close.
    */
   test("moves every dot along the velocity it ends the step with", () => {
-    const world = createWorld(ordinary);
-    const seconds = 0.5;
+    const world: World = {
+      dots: [
+        { position: { x: MIDDLE.x, y: MIDDLE.y }, velocity: CARRIED },
+        {
+          position: { x: MIDDLE.x + 0.06, y: MIDDLE.y },
+          velocity: { x: 0, y: CARRIED.x },
+        },
+        {
+          position: { x: MIDDLE.x + 0.03, y: MIDDLE.y + 0.06 },
+          velocity: { x: -CARRIED.x, y: 0 },
+        },
+      ],
+      frame: WIDE,
+      radius: DOT_RADIUS,
+      random: randomFromSeed(1),
+    };
+    const seconds = 1 / 60;
     const stepped = step(world, seconds);
 
     const expected = stepped.dots.map((dot, index) => {
@@ -371,27 +393,25 @@ describe("a step", () => {
   });
 
   /*
-   * The one rule of the flock still absent, and the last one this file asserts
-   * the absence of. 0006 §2's non-overlap is a constraint on the world a step
-   * returns rather than a fourth force, and it arrives with #102 — which is
-   * also what makes two dots at one position a case the Core may leave alone
-   * rather than a state it has to resolve.
+   * The last of the five rules to arrive, and the last absence this file used
+   * to assert. Until #102 two dots at one position came out of a step still at
+   * one position; now 0006 §2 is a constraint on the world a step returns and
+   * they do not.
    *
-   * **It reports less than its name suggests, and mutating the code is what
-   * showed that.** Two identical dots stay identical under any rule that treats
-   * them the same, so a separation that invented one fixed direction for a zero
-   * distance left this green. What it does report is a rule that breaks the tie
-   * — by array order, which is what a real non-overlap pass has to do — and
-   * that is the shape #102 will arrive in. Read it as *nothing here separates
-   * two dots that coincide*, not as *nothing here could*.
+   * The old test read *moves no dot to resolve an overlap*, and it is worth
+   * knowing what it reported before it was inverted: mutating showed it green
+   * under a separation that invented a fixed direction for a zero distance,
+   * because two identical dots stay identical under any rule treating them the
+   * same. What it caught was a tiebreak by array order — which is exactly the
+   * shape this rule arrived in.
    */
-  test("moves no dot to resolve an overlap, which #102 is what adds", () => {
+  test("moves a dot to resolve an overlap, which #102 is what added", () => {
     const together = worldOf([CARRIED, CARRIED]);
 
     const [first, second] = step(together, 1 / 60).dots;
 
     expect(first).toBeDefined();
-    expect(second?.position).toEqual(first?.position);
+    expect(second?.position).not.toEqual(first?.position);
   });
 
   test("carries the radius and the generator forward untouched", () => {
@@ -965,6 +985,116 @@ describe("the three steering behaviors", () => {
     expect(changeOfSubject(crowded, step(crowded, seconds))).toBeCloseTo(
       bound,
       12,
+    );
+  });
+});
+
+/*
+ * 0006 §2 over a whole world, which is the row §10 calls the strongest
+ * invariant in that record: it holds for any world, any seed and any number of
+ * steps. What the correction itself does is `overlap.test.ts`'s; what is here
+ * is that a step applies it, and that applying it did not turn it into a fourth
+ * force.
+ */
+describe("non-overlap in a returned world", () => {
+  /**
+   * The closest any two dots in a world are to each other.
+   *
+   * @param world  the world to measure
+   */
+  function closest(world: World): number {
+    let smallest = Number.POSITIVE_INFINITY;
+
+    world.dots.forEach((one, index) => {
+      for (const other of world.dots.slice(index + 1)) {
+        smallest = Math.min(
+          smallest,
+          Math.hypot(
+            one.position.x - other.position.x,
+            one.position.y - other.position.y,
+          ),
+        );
+      }
+    });
+
+    return smallest;
+  }
+
+  /*
+   * Any world, any seed, any number of steps — so this runs long enough for the
+   * flock to settle into groups, which is where dots are close enough for the
+   * constraint to be doing something. #99's measurements put a settled flock's
+   * closest pair at two or three times `2r`; a run that never approached the
+   * floor would report nothing, so the seeds run to a minute rather than to a
+   * few steps.
+   */
+  test("holds at every step of a run, over several seeds", () => {
+    for (const seed of [3, 4, 11, 15]) {
+      let world = createWorld({ ...ordinary, seed });
+
+      for (let taken = 0; taken < 900; taken += 1) {
+        world = step(world, 1 / 60);
+
+        expect(closest(world)).toBeGreaterThanOrEqual(2 * world.radius);
+      }
+    }
+  }, 60_000);
+
+  /*
+   * The correction is positional, asserted without duplicating the forces.
+   * `world.radius` is read by nothing that steers — only by 0006 §2 — so two
+   * worlds differing in it alone must come out of a step with **the same
+   * velocities** and different positions. A correction that nudged a velocity
+   * would break the first half; one that did nothing would break the second.
+   */
+  test("changes positions and not velocities", () => {
+    const dots = [
+      { position: { x: MIDDLE.x, y: MIDDLE.y }, velocity: CARRIED },
+      { position: { x: MIDDLE.x + 0.04, y: MIDDLE.y }, velocity: CARRIED },
+    ];
+    const roomy: World = {
+      dots,
+      frame: WIDE,
+      radius: DOT_RADIUS,
+      random: randomFromSeed(1),
+    };
+    const crowded: World = { ...roomy, radius: 0.03 };
+
+    const loose = step(roomy, 1 / 60);
+    const tight = step(crowded, 1 / 60);
+
+    expect(tight.dots.map((dot) => dot.velocity)).toEqual(
+      loose.dots.map((dot) => dot.velocity),
+    );
+    expect(tight.dots.map((dot) => dot.position)).not.toEqual(
+      loose.dots.map((dot) => dot.position),
+    );
+    expect(closest(tight)).toBeGreaterThanOrEqual(2 * tight.radius);
+  });
+
+  /*
+   * A world that violates the constraint before the step comes out satisfying
+   * it. The Shell can hand one in — 0006 §6's own reasoning about a stray after
+   * a resize is the same shape — and §2 is a claim about what leaves here
+   * rather than about what arrives.
+   */
+  test("satisfies it from a world that arrives violating it", () => {
+    const overlapping: World = {
+      dots: [
+        { position: { x: MIDDLE.x, y: MIDDLE.y }, velocity: CARRIED },
+        {
+          position: { x: MIDDLE.x + DOT_RADIUS, y: MIDDLE.y },
+          velocity: CARRIED,
+        },
+      ],
+      frame: WIDE,
+      radius: DOT_RADIUS,
+      random: randomFromSeed(1),
+    };
+
+    expect(closest(overlapping)).toBeLessThan(2 * DOT_RADIUS);
+    expect(closest(step(overlapping, 1 / 60))).toBeGreaterThanOrEqual(
+      2 * DOT_RADIUS,
     );
   });
 });
