@@ -913,6 +913,92 @@ watches instead of asserting. But both events also fire *after* a `pointerup`
 and a released mouse button does not. That is the line §4 draws between the two
 paths, expressible in one code path where the four names were not.
 
+**The pointer pushes now and the flock parts around it.**
+[#106](https://github.com/nanatsusaya/dot-panic/issues/106) is 0007 §5's force —
+straight away from the pointer, exactly zero at `POINTER_RADIUS`, squared so it
+reaches zero with a zero slope, and summed with the edge and the steering before
+anything is bounded, so 0006 §4's cap is one budget rather than three. The third
+parameter loses its underscore, which is what #105 said this ticket would do.
+
+**Two mutations passed every assertion and needed two more.** Dropping the
+normalization of the away vector scales the whole force by the gap, so the peak
+becomes about a thousandth of what the constant names — and *zero past the
+radius*, *straight away*, *stronger as it nears* and *continuous where it ends*
+all stay true of a force that does nothing. Moving the pointer outside the bound
+is this ticket's own relation, and **containment cannot decide it**: at a peak
+equal to `MAX_ACCELERATION` neither arrangement puts a dot outside the frame,
+measured over 600 steps, three seeds and seven pointer placements. One step's
+change with the pointer and an edge agreeing is what reports it. **A third is
+excused rather than caught** — `>` where the code has `>=` reddens nothing,
+because a falloff reaching zero at the radius gives zero either way, so the
+comparison is defensive and the shape is what holds the invariant.
+
+**The coordinate conversion #105 could not verify is decided**, on a canvas that
+had a real box this time. With a pointer dispatched where a dot sat 8.5 px away,
+the nearest dot went to 33.8, 62.2 and 102.2 px over two seconds while the spot
+the pointer had left refilled from 78.8 px back to 1. A conversion off by the
+strip's height or by the wrong side would have opened the gap somewhere else.
+**And the reach is observable**: 0.18 of the shorter side is 121.1 px there, and
+a parked pointer settles with the nearest dot at 127.
+
+**A minute of it was recorded in a browser on 2026-08-09** — 120 frames, started
+from the stopped state — and it says two things at once. The force works and is
+visible: a parked pointer cuts a clean crescent out of the flock, and at about 47
+seconds it **split the single body in two**, which by 58 seconds were two
+separate crystals. **And that is the only thing in the whole minute that undid
+any merging.** Eight nests at 2.5 seconds, five at 7.5, four at 12.5, everything
+in one quarter of the frame at 27.5, one body at 42.5. Not one group came apart
+on its own.
+
+**Which tests the reason recorded below for putting #88 ahead of #216, and it
+does not hold.** That reason is that #216's subject is a flock nothing disturbs
+and that numbers chosen against it would be chosen against a state that stops
+existing. The state does not stop existing: a visitor's pointer is intermittent
+and the merging is not, so the flock reverts within seconds of the pointer moving
+on. The decider reordered on 2026-08-09 — the coarsening ahead of
+[#107](https://github.com/nanatsusaya/dot-panic/issues/107) and
+[#233](https://github.com/nanatsusaya/dot-panic/issues/233), and measured before
+any number is chosen.
+
+**[#238](https://github.com/nanatsusaya/dot-panic/issues/238) is that
+measurement, and its finding is that a weighting holds the flock in groups.**
+Sixty seconds, three seeds, no pointer, the Core driven from outside the
+repository. Every setting at or below `SEPARATION_WEIGHT` 4 ends at one body of
+all 200 dots. The shorter reach is **a cliff rather than a dial** — 0.05
+collapses, 0.08 disperses to 200 singletons, 0.11 is the even lattice A1 was
+written against, and the gap between is bistable across seeds. Crossing the two
+surviving regions gives nothing. **What holds is the weight nobody had moved**:
+alignment, which stood at 1 in every measurement this project has taken.
+`S 10 : A 0.25 : C 1` at the reach A1 left alone runs two minutes across three
+seeds at 4 to 10 groups, 39 to 60 percent of the frame occupied and a closest
+pair never below 0.022 against the 0.010 0006 §2 forbids — and its largest body
+grows and comes apart again where the current numbers never come apart at all.
+**No number went into the code**; that is #216's, by watching.
+
+**Alignment matches velocities rather than distances, so it cannot move where
+separation and cohesion balance.** That reasoning is correct and it is beside the
+point, which is why it held for three days: it does not decide where two bodies
+meet, it decides whether two that have met stay met.
+
+**Two things that ticket got wrong are worth more than what it got right.** It
+claimed the collapse had not been measured — it had, on this page, from 300
+browser images the same day, as *eleven percent of the frame* and *2.09 on the
+Clark-Evans index*. And it read that index as unable to tell the wanted state
+from the unwanted one. **The two Clark-Evans numbers normalize differently and
+both are right**: 2.09 is over the disc the flock occupies and says the inside is
+a lattice, 0.67 is over the whole frame and says the body is small against it.
+What survives is narrower and is the part worth keeping — **the frame-normalized
+index is flat while the collapse happens**, 0.64 at four bodies and 0.69 at one,
+because nearest-neighbor spacing inside a crystal does not care how many crystals
+there are. The body count and the occupancy are what see it. **And thirty seconds
+ends before the finding**: inside #238's own sweep, two settings read as groups
+at thirty seconds and were one crystal at sixty.
+
+**Nothing of it has been watched moving.** Arrangements were rendered at 0, 15,
+30, 45 and 60 seconds for the candidate and for the numbers as they stand, and a
+still picture cannot say whether either reads as a flock. That is 0001 §3.1's and
+it needs the numbers in the code.
+
 **The flock stops while the dialog is open** (0008 §10), and the evidence is the
 supplied clock rather than an eye. Seventy-one frames driven with it open
 produced one identical picture, and the frame after it closed continued from
@@ -1710,6 +1796,23 @@ not, so the ticket is open with its code merged. **The sprint over
 not in its criteria**, which is the same shape #99 was in yesterday and the reason
 a merge is not what closes a ticket here.
 
+**It has acquired a deadline, which it did not have yesterday.** The correction
+fires exactly once at today's numbers — the closest two dots came over a recorded
+minute was 0.0106 against a floor of 0.0100, during the crowding of the first five
+seconds — and the numbers
+[#238](https://github.com/nanatsusaya/dot-panic/issues/238) measured hold the
+closest pair at 0.022 or wider. So this watch gets **weaker as a test** the moment
+[#216](https://github.com/nanatsusaya/dot-panic/issues/216) writes a number in,
+and there is nothing to look at afterwards. It is owed before that, not after.
+
+**A second watch is owed beside it and it is the larger one**:
+[#106](https://github.com/nanatsusaya/dot-panic/issues/106)'s, listed on
+[PR #237](https://github.com/nanatsusaya/dot-panic/pull/237), where 0001 §1's one
+interaction becomes visible for the first time. Its trap is written there — **park
+the mouse without clicking**, because #105 ends presence on `pointerup`, so a
+click followed by a still cursor has no pointer at all and that is #107's seam
+rather than a finding against the force.
+
 **All five landed on 2026-08-08 and 2026-08-09** —
 [#100](https://github.com/nanatsusaya/dot-panic/issues/100),
 [#103](https://github.com/nanatsusaya/dot-panic/issues/103),
@@ -1839,16 +1942,25 @@ the escape by a factor of five where doubling the pointer's strength or 0006 §4
 bound changes it by almost nothing. That number is #216's, and knowing it in
 advance is what #99 cost two sittings to learn the hard way.
 
-**The first of the three has landed.** #105 wires the pointer and derives nothing
-from it — the four events, the `touch-action`, and a third parameter on `step`
-that no code reads — so **#106 is what a session picks up next**, carrying its own
-watching and #105's. The *Position* section above carries what the change found,
-including the two cases 0007 §1's four events cannot produce and which #107 now
-owns.
+**Two of the three have landed and the third is no longer next.** #105 wires the
+pointer and derives nothing from it; #106 is the force that reads it. **#107 and
+#233 both moved behind the coarsening**, on the decider's answer of 2026-08-09
+after a minute of the flock was watched in a browser — both of them tune a
+pointer, and tuning a pointer against a flock that is one crystal in a corner
+spends the watching that is the scarcest thing here. The *Position* section above
+carries what the two changes found and what the recording showed.
 
-**The third watch is still ahead of all of it**, and #105 landing does not move
-it: nothing in that change touches motion, so a difference from the last sitting
-would itself be the finding.
+**#238 has run and its finding is a starting point rather than a value**, so
+**#216 is what a session picks up next** — the seven motion numbers, chosen by
+watching, opening from `S 10 : A 0.25 : C 1` instead of from nothing. Its header
+still reads *triggered by #102 landing*, and that is the ticket above rather than
+a second thing to wait for.
+
+**What that ticket must not do is settle by measuring.** #238's candidate is the
+best of a grid over three seeds and one frame ratio, and 0006 §10 puts every one
+of those numbers in the register only watching decides. A statistic that says
+*groups* is not a flock reading as a flock, which is exactly the distance 0001
+§3.1 names and the whole reason #216 exists as a watching ticket.
 
 **[#178](https://github.com/nanatsusaya/dot-panic/issues/178) is done and the
 convention has a command behind it.**
