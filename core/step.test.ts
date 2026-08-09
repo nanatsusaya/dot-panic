@@ -940,9 +940,15 @@ describe("the three steering behaviors", () => {
    * weighted above cohesion but falls away with distance while cohesion grows
    * to its full value at the neighborhood's radius — so the same neighbor is
    * pushed away from up close and steered toward far off. That is where a
-   * flock's spacing comes from, and at these numbers the two balance at 0.686
-   * of separation's reach rather than of the neighborhood's, which is the whole
-   * of what A1 changed and the reason a group has room to form.
+   * flock's spacing comes from, and at these numbers the two balance at 0.042 —
+   * inside separation's reach rather than out at the neighborhood's, which is
+   * the whole of what A1 changed and the reason a group has room to form.
+   *
+   * **Not 0.686 of separation's reach**, which is what this comment said until
+   * 2026-08-09. That factor belongs to the case where both radii are 0.14;
+   * `SEPARATION_RADIUS` carries why. Nothing below asserts the crossover's
+   * position — only its sign on either side of it — so the two assertions are
+   * unaffected either way.
    */
   test("pushes away from a near neighbor and pulls toward a far one", () => {
     const near = flockAround([{ x: separationOver(7), y: 0 }], CARRIED);

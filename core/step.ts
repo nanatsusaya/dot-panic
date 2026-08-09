@@ -180,8 +180,10 @@ function neighborsOf(dot: Dot, dots: readonly Dot[]): Dot[] {
  * their balance sits at 0.686 of it — the spacing the flock already has when it
  * is spread evenly, which leaves nothing to pull a group together. It spread
  * evenly and stayed that way. Over the shorter reach the same balance sits at
- * 0.686 of *that*, about a third of the spacing a uniform scatter has, and a
- * group has room to be denser than its surroundings.
+ * 0.042, a little under half the spacing a uniform scatter has, and a group has
+ * room to be denser than its surroundings. **The 0.686 does not travel with the
+ * radius** — it is the root of an equation both radii appear in, so shortening
+ * one moves it to 0.834; `SEPARATION_RADIUS` carries that arithmetic.
  *
  * The push from one neighbor is `SEPARATION_RADIUS / gap − 1` along the unit
  * vector away from it: nothing at the edge of that reach, one at half of it,
