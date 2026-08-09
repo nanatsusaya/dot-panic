@@ -6,6 +6,44 @@ session would decide worse without it.
 
 Newest first.
 
+## 2026-08-09 — The command answered a narrower question than the claim written from it
+
+`gh run list` reported thirty-four failed runs of the deploy workflow. I opened
+**one**, read `check:test` at the bottom of it, and wrote *all thirty-four failed
+at `check:test`* into a change description and onto a ticket. Twenty-three of them
+had failed three steps later, at the imprint gate — which is the expected state
+and not a defect at all.
+
+**CLAUDE.md already says to run the command before writing the claim, and the
+command was run.** It answered *how many runs failed*. What got written was
+*where they failed*, which nothing had been asked. That gap is invisible at the
+moment of writing, because the command did return and the number in the sentence
+is the number it returned. **The check that would have caught it is a loop and a
+minute** — ask each run for its failing step — and it was skipped because the
+claim did not feel like a guess.
+
+**What made the wrong claim comfortable is that this workflow is red by design.**
+[0011](adr/0011-delivery.md) §6 fails a deployment whose artifact still carries
+the placeholder address, and [#90](https://github.com/nanatsusaya/dot-panic/issues/90)
+has not landed, so every run is red and has been since the workflow existed. A
+red badge therefore carries no information here — it has a true and sufficient
+explanation before anybody looks. That is what let eleven genuine failures sit
+inside twenty-three expected ones for a day, and why they surfaced through a
+notification count rather than through anyone reading a run.
+[#202](https://github.com/nanatsusaya/dot-panic/issues/202) owns whether the
+checks should gate a change at all; this is evidence for that record and decides
+nothing here.
+
+**The two halves protect each other.** A gate that is always red offers nothing
+worth sampling, and a session that samples one of thirty-four writes a claim that
+gate cannot contradict. Neither would have been noticed by the other.
+
+**So the thing to carry: when a tool reports N of something, what you have earned
+is a claim about what you read — not about N.** Either write the question the
+command actually answered, or spend the minute that turns the sample into the
+population. It is the same minute either way, and only one of them is spent
+before the sentence is public.
+
 ## 2026-08-09 — An amendment moved a premise, and a number derived from it rode across unchanged
 
 [0006](adr/0006-motion-rules.md) A1 gave separation a shorter reach than alignment

@@ -1482,6 +1482,29 @@ sentence observed rather than argued: a red step produces no deployment rather
 than a deployed page with a warning beside it. **Nothing was published**, and
 nothing will be until [#90](https://github.com/nanatsusaya/dot-panic/issues/90).
 
+**Thirty-five runs have fired to date and every one of them is red**, which is
+two different facts wearing one color. **Twenty-four stopped at that same imprint
+gate** and are the expected state. **Eleven stopped earlier, at the checks**, on
+one test whose ceiling had been read off a development machine — and the eleven
+are **interleaved** with the others rather than forming a block, because that
+timeout was marginal rather than certain: two runs fifteen seconds apart on
+near-identical source took 30806 ms and 21075 ms.
+[#249](https://github.com/nanatsusaya/dot-panic/pull/249) raised the ceiling to
+the 60,000 the file's other long run already carried, and on its own merge run
+**all four checks passed on the hosted runner for the first time** — 103 tests in
+63.96 s, where the same suite takes 28 s here. The run then stopped where it is
+meant to.
+
+**None of it reached anybody for a day, and the gate is why rather than
+anyone's attention.** A workflow that is *supposed* to be red until #90 lands
+gives every red run a true and sufficient explanation in advance, so eleven real
+failures sat inside twenty-three expected ones until the notification count was
+noticed by eye on 2026-08-09.
+[#202](https://github.com/nanatsusaya/dot-panic/issues/202) owns whether the
+checks gate a change at all, and this is its third scope item observed rather
+than argued — its *Context* is also now false, because it says there is no
+workflow directory and was written before #98 landed one.
+
 **The pin and a person's clone agreed, which was worth knowing rather than
 assuming.** `check:method` at `v0.5.3` in the runner reported 32 rules in force,
 539 references resolved and `OK` — the same three numbers the unpinned local
