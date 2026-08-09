@@ -208,23 +208,37 @@ export const NEIGHBORHOOD_RADIUS = 0.14;
  * evenly, and it spread evenly: its Clark-Evans index, the mean distance to the
  * nearest other dot over what a random scatter of the same density gives, went
  * from 0.83 to 1.74 in a minute, where 1 is random and 2.15 a perfect lattice.
- * At 0.05 the same two balance at 0.042 instead, a little under half the spacing
- * a uniform scatter has, which is the room a group forms in.
+ * At 0.05 the same two balance well inside that — 0.0451 at the weights this
+ * file now carries, a little under half the 0.094 — which is the room a group
+ * forms in.
  *
- * **0.686 is a ratio of the one-reach case and does not carry over**, which is
- * what this comment said until 2026-08-09: it read 0.034, which is 0.686 × 0.05.
- * The factor is not a property of separation's shape — it comes out of solving
- * `SEPARATION_WEIGHT · (r/d − 1) = COHESION_WEIGHT · d/NEIGHBORHOOD_RADIUS`, and
- * shortening one of the two radii without the other moves it. At 0.14 for both
- * the root is 0.0961, at 0.05 against 0.14 it is 0.0417, so the factor goes from
- * 0.686 to 0.834. **The argument A1 rests on is unaffected** — 0.042 against a
- * uniform spacing of 0.094 still leaves a group room to be denser than what
- * surrounds it — and only the figure was wrong.
+ * **The factor is not a property of separation's shape**, which is what this
+ * comment got wrong twice. It is the root of
+ * `SEPARATION_WEIGHT · (r/d − 1) = COHESION_WEIGHT · d/NEIGHBORHOOD_RADIUS`, so
+ * every term in it moves the answer: 0.686 of the reach when both radii were
+ * 0.14, 0.834 once only one of them shortened, 0.903 once the weights changed
+ * as well. **The argument A1 rests on survives all three**, because what it
+ * needs is a preferred spacing below the one a uniform scatter already has.
+ *
+ * **That root is a two-body figure and a settled flock is not two bodies.** The
+ * mean distance to a nearest neighbor measures 0.039 against the 0.0451 above,
+ * because inside a group a dot is pulled toward many neighbors at once and
+ * pushed by its nearest few. The equation says which way a change moves things;
+ * it does not predict the flock.
+ *
+ * **Do not reach for this number to break the flock into groups.** Swept over a
+ * minute and three seeds at #99's weights, 0.05, 0.07, 0.09, 0.11 and 0.14 put
+ * the index at 0.67, 0.86–1.14, 1.34–1.41, 1.54–1.62 and 1.71–1.79 — passing
+ * cleanly through the wanted band while **every setting ended as one body of all
+ * 200 dots**. What the reach moves is how far that one body is inflated, from a
+ * tight crystal to wallpaper. #238 found the same cliff from the other side, and
+ * the weights are what answered it.
  *
  * Chosen by measuring rather than before the work, which is the one number here
  * 0008 R1 could not have in the ticket first — nothing could be measured until
- * A1 existed. Three seeds of thirty seconds put the index at 0.67, and the
- * closest pair at 0.020 against the 0.010 that 0006 §2 forbids. Recorded on #99.
+ * A1 existed. Recorded on #99 at the weights of that day, where three seeds of
+ * thirty seconds put the index at 0.67 and the closest pair at 0.020 against the
+ * 0.010 that 0006 §2 forbids.
  */
 export const SEPARATION_RADIUS = 0.05;
 
@@ -237,8 +251,29 @@ export const SEPARATION_RADIUS = 0.05;
  * let separation carry non-overlap, which is a constraint on the result and
  * #102's. Fixed in #99 before the work started, which is where 0008 R1 puts a
  * number.
+ *
+ * **3 rather than #99's 1.5, and it is #216's first pass rather than its
+ * answer.** At 1.5 the flock merged into one body of all 200 dots and stayed
+ * that way: over two minutes and three seeds the largest body reached 200 and
+ * never came apart again. `SEPARATION_RADIUS` records why reaching for the
+ * reach instead is worthless, and `ALIGNMENT_WEIGHT` carries the other half of
+ * what changed.
+ *
+ * **3 is a ceiling and not a preference, and the ceiling is not on this number.**
+ * The three weights are divided by their own total before the sum is scaled by
+ * `MAX_ACCELERATION`, so what reaches an edge is separation's **share** — and
+ * `withBoundedSize` holds the sum, so a share large enough cancels 0006 §6's
+ * turning force. Measured against a pile placed in a corner: at 0.706 every dot
+ * stays inside, at 0.762 one leaves. These three weights put it at 0.706, which
+ * is why a stronger separation needs a larger `COHESION_WEIGHT` beside it rather
+ * than a larger number here.
+ *
+ * **What that ceiling costs is on the ticket rather than hidden**: the mix that
+ * came apart in all three seeds sits at a share of 0.889 and is not admissible,
+ * and at these numbers one seed in three still ends as a single body. #216
+ * carries the measurement and the question of what to do about it.
  */
-export const SEPARATION_WEIGHT = 1.5;
+export const SEPARATION_WEIGHT = 3;
 
 /**
  * How much alignment counts, on the same scale. Provisional in the same way and
@@ -250,20 +285,43 @@ export const SEPARATION_WEIGHT = 1.5;
  * behaviors disagree accelerates gently and one whose behaviors agree
  * accelerates hard. That is the variation 0006 §4 asks the forces to produce,
  * rather than a dot carrying a gait of its own.
+ *
+ * **0.25 rather than 1, and of the three this is the one that decides whether
+ * anything ever comes apart.** It stood at 1 in every measurement taken here
+ * until #238, and at 1 a body of two hundred dots averages every velocity to
+ * the same one — so the arrangement crosses the frame as a block, without
+ * reordering inside itself, which is what watching it on 2026-08-09 found and
+ * what a Clark-Evans figure cannot see.
+ *
+ * **It does not decide where two bodies meet; it decides whether two that have
+ * met stay met.** That distinction is why the number went unexamined while the
+ * radii were swept: alignment matches velocities rather than distances, which
+ * is true, and is beside the point.
+ *
+ * **Lowering it is also what buys the separation above its room.** The share
+ * that reaches an edge is over the three weights' total, so a small alignment
+ * spends less of the budget 0006 §6's turning force has to win back.
  */
-export const ALIGNMENT_WEIGHT = 1;
+export const ALIGNMENT_WEIGHT = 0.25;
 
 /**
  * How much cohesion counts, on the same scale. Provisional in the same way and
  * superseded by the same watching.
  *
- * Equal to alignment's and below separation's, which is what gives a pair of
- * dots a spacing to settle at rather than a collision or a drift apart:
+ * **The one of the three that has not moved**, so the other two are read
+ * against it: separation is three times it and alignment a quarter of it. What
+ * it buys is a spacing to settle at rather than a collision or a drift apart —
  * cohesion grows to one over `NEIGHBORHOOD_RADIUS` while separation falls away
- * over `SEPARATION_RADIUS`, and at these numbers the two balance at 0.834 of
- * the shorter one — 0.042. **Not 0.686 of it**, which is this pair's ratio when
- * both radii are 0.14; `SEPARATION_RADIUS` carries the arithmetic and what the
- * correction of 2026-08-09 did and did not change.
+ * over `SEPARATION_RADIUS`, and at these three the two balance at 0.903 of the
+ * shorter one, which is 0.0451. **Not 0.834 of it**, which is the same pair of
+ * radii at #99's weights, and not 0.686, which is the one-reach case;
+ * `SEPARATION_RADIUS` carries the arithmetic and what each revision did to it.
+ *
+ * **It is also what holds separation's room open.** The share of the steering
+ * that reaches an edge is over the three weights' total, so raising this number
+ * is how a stronger separation stays inside the ceiling `SEPARATION_WEIGHT`
+ * describes — which is a reason to move it that has nothing to do with cohesion
+ * itself, and is worth knowing before it looks like an idle 1.
  *
  * **The weights decide where that balance sits and not whether there is one.**
  * Over a single reach it sat at the spacing the flock already had, no weighting
