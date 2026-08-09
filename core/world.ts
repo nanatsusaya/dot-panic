@@ -136,9 +136,16 @@ export const MAX_ACCELERATION = 1.2;
  * shorter side (0008 §6). Provisional; #216 supersedes it by watching.
  *
  * 200 dots over a 16:9 frame's ≈1.778 square units is a density of ≈112 per
- * unit², so `π·0.14²·112 ≈ 7` puts about six others inside it — enough for an
- * average to mean something, few enough that the flock stays local instead of
- * moving as one block.
+ * unit², so `π·0.14²·112 ≈ 7` puts about six others inside it **while the flock
+ * is spread evenly** — enough for an average to mean something.
+ *
+ * **A settled flock is not spread evenly, and the arithmetic above is about the
+ * one that is.** With groups a dot has forty or more of the other 199 inside
+ * this radius, because the radius has not changed and the density inside a
+ * group has. That is the cost 0006 §1 records rather than a number wanting a
+ * turn: a dot still reacts only to what is near it, and near is what this
+ * number defines. Deriving the radius from the even case is also what pinned
+ * the flock to it — see `SEPARATION_RADIUS`.
  *
  * **It is a radius and nothing else.** 0006 §1 drops Reynolds' angular
  * neighborhood deliberately, so one behind counts exactly as much as one ahead,
@@ -205,11 +212,15 @@ export const ALIGNMENT_WEIGHT = 1;
  *
  * Equal to alignment's and below separation's, which is what gives a pair of
  * dots a spacing to settle at rather than a collision or a drift apart:
- * cohesion grows to one at `NEIGHBORHOOD_RADIUS` while separation is its
- * reciprocal there, and at these three numbers they balance at 0.686 of that
- * radius — 0.096, against the 0.094 that 200 dots over a 16:9 frame are apart
- * on average. **That the two agree was not designed**; it is what made these
- * numbers worth keeping when the shape of separation had to be measured again.
+ * cohesion grows to one over `NEIGHBORHOOD_RADIUS` while separation falls away
+ * over `SEPARATION_RADIUS`, and at these numbers the two balance at 0.686 of
+ * the shorter one.
+ *
+ * **The weights decide where that balance sits and not whether there is one.**
+ * Over a single reach it sat at the spacing the flock already had, no weighting
+ * moved it into the middle, and the shape rather than the ratio is what had to
+ * change — 0006 §1's amendment of 2026-08-09. These three are what the first
+ * measurement over two reaches was taken at, and #216 chooses them again.
  */
 export const COHESION_WEIGHT = 1;
 

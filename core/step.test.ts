@@ -606,6 +606,12 @@ describe("the frame's edge", () => {
    * exactly that — seeds 4, 11 and 15 lost a dot, the first at step 894, which
    * one seed over 600 steps saw nothing of. Those three are here as the cases
    * that were found rather than as a wider net for its own sake.
+   *
+   * **The explicit timeout is what a flock with groups in it costs.** Separation
+   * on its own reach is what lets a dot have neighbors, and a dot in a group has
+   * forty-five of the other 199 rather than six — so the same 7,200 steps went
+   * from under five seconds to over them. The run is not narrowed to fit the
+   * default, because its width is what found the escape at step 894.
    */
   test("keeps every dot inside the frame over a run", () => {
     for (const seed of [4, 5, 11, 15]) {
@@ -622,7 +628,7 @@ describe("the frame's edge", () => {
         expect(box.bottom).toBeLessThanOrEqual(WIDE.height);
       }
     }
-  });
+  }, 30_000);
 
   /*
    * 0006 §7's row, and R3 calls it *"the first thing worth writing as a failing

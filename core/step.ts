@@ -26,6 +26,7 @@ import {
   EDGE_MARGIN,
   MAX_ACCELERATION,
   NEIGHBORHOOD_RADIUS,
+  SEPARATION_RADIUS,
   SEPARATION_WEIGHT,
   SPEED_MAX,
   SPEED_MIN,
@@ -159,30 +160,34 @@ function neighborsOf(dot: Dot, dots: readonly Dot[]): Dot[] {
  * Reynolds' separation: steer away from the neighbors, hardest from the nearest
  * (0006 §1).
  *
- * The push from one neighbor is `NEIGHBORHOOD_RADIUS / gap − 1` along the unit
- * vector away from it: nothing at the edge of what a dot can see, one at half
- * the radius, and without limit as two dots approach each other. **Cohesion is
- * its reciprocal**, growing to one over the same distance, so the two balance
- * at 0.686 of the radius rather than one of them always winning — which is
- * where a flock's spacing comes from.
+ * **It answers only what is inside `SEPARATION_RADIUS`**, where the other two
+ * answer the whole neighborhood. 0006 §1 requires that, by the amendment of
+ * 2026-08-09, and the requirement came out of building this function without
+ * it. Over one reach separation and cohesion oppose each other everywhere, so
+ * their balance sits at 0.686 of it — the spacing the flock already has when it
+ * is spread evenly, which leaves nothing to pull a group together. It spread
+ * evenly and stayed that way. Over the shorter reach the same balance sits at
+ * 0.686 of *that*, about a third of the spacing a uniform scatter has, and a
+ * group has room to be denser than its surroundings.
+ *
+ * The push from one neighbor is `SEPARATION_RADIUS / gap − 1` along the unit
+ * vector away from it: nothing at the edge of that reach, one at half of it,
+ * and without limit as two dots approach each other.
  *
  * **The shape, the sum and the limit below were each chosen by measuring, and
  * the first shape tried was wrong.** A push fading linearly to nothing,
  * averaged over the neighbors, let the flock collapse into one clump: after
  * thirty seconds a dot had 105 of the other 199 inside its neighborhood and the
  * heading agreement across neighbors was 0.97, which is a flock moving as one
- * block. 0006 §1 makes locality the load-bearing detail, so that was the rule
- * failing rather than a number wanting a turn. Growing without limit up close
- * is what holds dots apart; summing rather than averaging is what stops a crowd
- * diluting its own escape. The same measurement now reports 6.4 neighbors and
- * 0.76.
+ * block. Growing without limit up close is what holds dots apart; summing
+ * rather than averaging is what stops a crowd diluting its own escape.
  *
  * **The limit exists because an unbounded force makes the frame's edge
  * invisible.** Summed and unheld, separation reaches thousands where 0006 §6's
  * edge reaches 1.2 — so after `withBoundedSize` the direction is separation's
  * alone, and a dot in a tight crowd against an edge leaves the frame. Three
  * seeds of twenty did, first at step 894. Held to one, none of the twenty left
- * it in 1,800 steps.
+ * it in 1,800 steps, and none does over the shorter reach either.
  *
  * **A neighbor at exactly the same position is skipped**, because there is no
  * direction to steer away in and the Core may not draw one — the generator
@@ -190,7 +195,8 @@ function neighborsOf(dot: Dot, dots: readonly Dot[]): Dot[] {
  * 0006 §2's non-overlap is a constraint on the result and is #102's.
  *
  * @param dot        the dot being steered
- * @param neighbors  the dots inside its neighborhood, never empty
+ * @param neighbors  the dots inside its neighborhood, never empty. Those past
+ *                   `SEPARATION_RADIUS` are among them and contribute nothing
  * @returns a dimensionless vector no longer than one
  */
 function separationFrom(dot: Dot, neighbors: readonly Dot[]): Vector {
@@ -202,10 +208,10 @@ function separationFrom(dot: Dot, neighbors: readonly Dot[]): Vector {
     const awayY = dot.position.y - neighbor.position.y;
     const gap = Math.hypot(awayX, awayY);
 
-    if (gap > 0) {
+    if (gap > 0 && gap <= SEPARATION_RADIUS) {
       // The push divided by `gap` once more, because `awayX` and `awayY` carry
       // a length of `gap` rather than a length of one.
-      const urgency = (NEIGHBORHOOD_RADIUS - gap) / (gap * gap);
+      const urgency = (SEPARATION_RADIUS - gap) / (gap * gap);
 
       x += awayX * urgency;
       y += awayY * urgency;
