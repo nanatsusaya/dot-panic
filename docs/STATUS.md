@@ -1538,10 +1538,14 @@ anyone's attention.** A workflow that is *supposed* to be red until #90 lands
 gives every red run a true and sufficient explanation in advance, so eleven real
 failures sat inside twenty-three expected ones until the notification count was
 noticed by eye on 2026-08-09.
-[#202](https://github.com/nanatsusaya/dot-panic/issues/202) owns whether the
-checks gate a change at all, and this is its third scope item observed rather
-than argued — its *Context* is also now false, because it says there is no
-workflow directory and was written before #98 landed one.
+[#202](https://github.com/nanatsusaya/dot-panic/issues/202) asked whether the
+checks gate a change at all, and **this paragraph is the observation
+[0020](adr/0020-whether-the-checks-gate-a-merge.md) was written on**: a signal
+that is *supposed* to be red cannot also be the signal that something is wrong,
+which is why the four run in a second workflow rather than as a job here. Its
+third scope item — report or block — is §6's, and its *Context* is now false
+twice over, because it says there is no workflow directory and nothing runs
+automatically.
 
 **The pin and a person's clone agreed, which was worth knowing rather than
 assuming.** `check:method` at `v0.5.3` in the runner reported 32 rules in force,
@@ -1694,7 +1698,7 @@ Outside the epics:
 
 | Ticket | Why it exists |
 |---|---|
-| [#202](https://github.com/nanatsusaya/dot-panic/issues/202) Whether the four checks gate a pull request | 0011 §2 says review gates a merge, while the method this project demonstrates gates its own markdown in CI |
+| [#202](https://github.com/nanatsusaya/dot-panic/issues/202) Whether the four checks gate a pull request | 0011 §2 said review gates a merge, while the method this project demonstrates gates its own markdown in CI. Answered by [0020](adr/0020-whether-the-checks-gate-a-merge.md) and built; what holds it open is a setting no command here reaches |
 | [#194](https://github.com/nanatsusaya/dot-panic/issues/194) Whether a dot's color stays one value | 0005 §2 and §3 make anything varying a dot's color a record's work, where six hex digits need no ticket at all |
 | [#228](https://github.com/nanatsusaya/dot-panic/issues/228) Whether a dot carries variation of its own | 0006 §4 rejects a preferred speed per dot by name, and R2 fixes that it returns by an authorized amendment or not at all |
 | [#190](https://github.com/nanatsusaya/dot-panic/issues/190) `bun test` runs the source or the emitted output | 0009 §6 fixes which tree the suite reads, and whether that sentence is true is decided by whether somebody has built the page |
@@ -2123,13 +2127,15 @@ public URL. The looking nobody has done is his too. **G1's binding has still
 never been verified**, and the coherence check says it cannot decide it and names
 the address.
 
-**What #98 could not settle it did not decide.** The workflow pins
-`agent-project-rules` at `v0.5.3` because something had to be named for the file
-to exist, and which version of another repository decides a deployment here is
-the question [#202](https://github.com/nanatsusaya/dot-panic/issues/202) asks
-about the other gate, still open and unanswered. Nothing makes #202 a blocker —
-0011 §2 already fixed that deployment runs after the checks pass — but an answer
-there moves this pin, and the pin is where it will be read.
+**What #98 could not settle has been settled since, and the answer copied the pin
+rather than moving it.** The workflow pins `agent-project-rules` at `v0.5.3`
+because something had to be named for the file to exist, and which version of
+another repository decides a gate here was the open half of
+[#202](https://github.com/nanatsusaya/dot-panic/issues/202).
+[0020](adr/0020-whether-the-checks-gate-a-merge.md) §2 answers it with the same
+release and writes it a second time, so **the pin now stands in two files and
+nothing checks that they agree** — [maintenance.md](maintenance.md)'s row carries
+that, and 0020 named it as a cost rather than leaving it to be discovered.
 
 **#96 merged with its *Watched and seen* criterion unmet, and nothing records
 that anyone looked.** What a command and a supplied clock could decide was
@@ -2208,14 +2214,25 @@ the reason** — which is the section that matters, because three of the four ki
 switch a rule's check off and A3 is failing today.
 
 **[#202](https://github.com/nanatsusaya/dot-panic/issues/202) came out of the same
-reading**, and it is the one open ticket a record has to answer before anything is
-built: whether the four checks gate a pull request. Nothing runs automatically
-here and 0011 §2 decided that in terms — *what gates a merge is review* — while
-the method this project demonstrates gates its own markdown in CI. The comparison
-does not carry everywhere, and the ticket says where it stops. **`check:method`
-is the awkward one**: it invokes a script from a sibling clone, so gating it means
-checking out a second repository and pinning which version of it decides a merge
-here.
+reading, and both of its halves are done.**
+[0020](adr/0020-whether-the-checks-gate-a-merge.md) is accepted and
+`.github/workflows/checks.yml` runs the four on every pull request, so *nothing
+runs automatically here* has stopped being true and 0011 §2's *what gates a merge
+is review* carries the amendment that says so. **`check:method` was the awkward
+one and is a solved problem rather than an avoided one**: the workflow checks out
+`agent-project-rules` beside this repository at the pinned release, which is what
+#98 already had to do.
+
+**What is left of it is not in this repository, and it is not done.** 0020 §6
+makes the result required rather than advisory, which is a ruleset setting; §7
+records that no command here decides whether it was made. Read on 2026-08-09, the
+`protect main` ruleset is active and holds three rules — deletion,
+non-fast-forward, and a pull request with zero required approving reviews — and
+**no required status check**. **The string it has to name is `checks`**, read off
+[the workflow's first run](https://github.com/nanatsusaya/dot-panic/actions/runs/31328455405)
+rather than assumed, and that run is what made the name exist. Until the setting
+names it, the workflow reports and does not block — which is 0020 §6 decided and
+not yet in force, and the ticket's state is the decider's for that reason.
 
 ## Implementation scale
 
