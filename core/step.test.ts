@@ -89,8 +89,16 @@ const DISPERSAL_STEPS = 600;
  * How large the corner is that a pile has to leave. It is wider than the margin
  * on purpose — a flock that only stepped out of reach of the edge force would
  * satisfy a narrower box while still sitting in the corner.
+ *
+ * **It was 0.1 until #102, and 0006 §2 is what widened it.** Two hundred dots
+ * at a floor of `2r` need about 0.017 square units laid out at their tightest,
+ * and a box of 0.1 holds 0.01 — so the old pile was a packing with no solution,
+ * and the correction answered it by pushing dots out of the frame. That is the
+ * record's unsatisfiability warning firing on a world no force could produce:
+ * a real cornered flock is a crowd at the floor and spreads along the edges
+ * rather than teleporting into a square that cannot hold it.
  */
-const CORNER = 0.1;
+const CORNER = 0.25;
 
 /**
  * The smallest rectangle holding every dot, which is what 0006 §7 asks about a

@@ -135,20 +135,37 @@ describe("the non-overlap correction", () => {
     const separated = withoutOverlap(dots, DOT_RADIUS);
 
     expect(closest(separated)).toBeGreaterThanOrEqual(TOUCHING);
-    expect(reading(separated)).toEqual(reading(withoutOverlap(dots, DOT_RADIUS)));
+    expect(reading(separated)).toEqual(
+      reading(withoutOverlap(dots, DOT_RADIUS)),
+    );
   });
 
   /*
    * One pass is not enough and 0006 §2 says so in terms — *a single pairwise
    * relaxation pass does not generally satisfy it, and the Core may iterate*.
-   * Five dots in a row at half the floor apart: separating a pair moves a dot
-   * into the next one, so the row has to be walked more than once.
+   *
+   * **The world is built so that the second pass is forced and the first is not
+   * undone**, which takes a little care. The first two dots are inside the
+   * floor, so the first pass separates them along their own line and leaves them
+   * exactly on it. The third sits **square to that line** and just outside the
+   * floor — outside it before the pass, inside it after, because the second dot
+   * moved toward it. The second pass then pushes those two apart perpendicular
+   * to the first pair, which *lengthens* the first gap rather than shortening
+   * it, so the row settles instead of trading one violation for another.
+   *
+   * **A row along one line does not settle**, and that is worth knowing rather
+   * than discovering. Each pass halves what is left, so a chain approaches the
+   * floor without reaching it and runs out of passes — which is 0006 §2's
+   * unbounded cost, arriving as arithmetic rather than as a warning.
    */
-  test("resolves a row that one pass cannot", () => {
-    const dots = [0, 1, 2, 3, 4].map((index) =>
-      still(0.5 + (index * TOUCHING) / 2, 0.5),
-    );
+  test("resolves a violation its own first pass created", () => {
+    const dots = [
+      still(0.5, 0.5),
+      still(0.5 + 0.6 * TOUCHING, 0.5),
+      still(0.5 + 0.8 * TOUCHING, 0.5 + 0.99 * TOUCHING),
+    ];
 
+    expect(closest(dots)).toBeLessThan(TOUCHING);
     expect(closest(withoutOverlap(dots, DOT_RADIUS))).toBeGreaterThanOrEqual(
       TOUCHING,
     );
