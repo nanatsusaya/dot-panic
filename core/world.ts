@@ -131,6 +131,99 @@ export const EDGE_MARGIN = 0.08;
  */
 export const MAX_ACCELERATION = 1.2;
 
+/**
+ * How far a dot looks for others to steer by, as a fraction of the frame's
+ * shorter side (0008 §6). Provisional; #216 supersedes it by watching.
+ *
+ * 200 dots over a 16:9 frame's ≈1.778 square units is a density of ≈112 per
+ * unit², so `π·0.14²·112 ≈ 7` puts about six others inside it **while the flock
+ * is spread evenly** — enough for an average to mean something.
+ *
+ * **A settled flock is not spread evenly, and the arithmetic above is about the
+ * one that is.** With groups a dot has forty or more of the other 199 inside
+ * this radius, because the radius has not changed and the density inside a
+ * group has. That is the cost 0006 §1 records rather than a number wanting a
+ * turn: a dot still reacts only to what is near it, and near is what this
+ * number defines. Deriving the radius from the even case is also what pinned
+ * the flock to it — see `SEPARATION_RADIUS`.
+ *
+ * **It is a radius and nothing else.** 0006 §1 drops Reynolds' angular
+ * neighborhood deliberately, so one behind counts exactly as much as one ahead,
+ * and restoring the angle is an amendment's business rather than a knob. Fixed
+ * in #99 before the work started, which is where 0008 R1 puts a number.
+ */
+export const NEIGHBORHOOD_RADIUS = 0.14;
+
+/**
+ * How close another dot has to be before separation answers it, as a fraction
+ * of the frame's shorter side (0008 §6). Provisional; #216 supersedes it by
+ * watching.
+ *
+ * **0006 §1 requires it to be shorter than `NEIGHBORHOOD_RADIUS`**, and that
+ * requirement is A1 on that record — written on 2026-08-09, after the flock was
+ * built over one reach and looked at. Alignment and cohesion take the whole
+ * neighborhood; separation answers roughly its nearest third.
+ *
+ * **What one reach did is why there are two.** Separation and cohesion oppose
+ * each other, so over one reach they balance at 0.686 of it — 0.096, which is
+ * the 0.094 that 200 dots over a 16:9 frame are apart on average. A flock whose
+ * preferred spacing is the spacing it already has is at rest when it is spread
+ * evenly, and it spread evenly: its Clark-Evans index, the mean distance to the
+ * nearest other dot over what a random scatter of the same density gives, went
+ * from 0.83 to 1.74 in a minute, where 1 is random and 2.15 a perfect lattice.
+ * At 0.05 the same two balance at 0.034 instead, about a third of the spacing a
+ * uniform scatter has, which is the room a group forms in.
+ *
+ * Chosen by measuring rather than before the work, which is the one number here
+ * 0008 R1 could not have in the ticket first — nothing could be measured until
+ * A1 existed. Three seeds of thirty seconds put the index at 0.67, and the
+ * closest pair at 0.020 against the 0.010 that 0006 §2 forbids. Recorded on #99.
+ */
+export const SEPARATION_RADIUS = 0.05;
+
+/**
+ * How much separation counts against the other two behaviors (0006 §1).
+ * Provisional; #216 supersedes it by watching.
+ *
+ * Above the other two because that is the usual starting point for Reynolds'
+ * three. **It is a bias and not a guarantee**: 0006 §2 deliberately refuses to
+ * let separation carry non-overlap, which is a constraint on the result and
+ * #102's. Fixed in #99 before the work started, which is where 0008 R1 puts a
+ * number.
+ */
+export const SEPARATION_WEIGHT = 1.5;
+
+/**
+ * How much alignment counts, on the same scale. Provisional in the same way and
+ * superseded by the same watching.
+ *
+ * **The three are ratios rather than sizes.** Each behavior produces a
+ * dimensionless vector, the weighted sum is divided by the three weights'
+ * total, and what comes out is scaled by `MAX_ACCELERATION` — so a dot whose
+ * behaviors disagree accelerates gently and one whose behaviors agree
+ * accelerates hard. That is the variation 0006 §4 asks the forces to produce,
+ * rather than a dot carrying a gait of its own.
+ */
+export const ALIGNMENT_WEIGHT = 1;
+
+/**
+ * How much cohesion counts, on the same scale. Provisional in the same way and
+ * superseded by the same watching.
+ *
+ * Equal to alignment's and below separation's, which is what gives a pair of
+ * dots a spacing to settle at rather than a collision or a drift apart:
+ * cohesion grows to one over `NEIGHBORHOOD_RADIUS` while separation falls away
+ * over `SEPARATION_RADIUS`, and at these numbers the two balance at 0.686 of
+ * the shorter one.
+ *
+ * **The weights decide where that balance sits and not whether there is one.**
+ * Over a single reach it sat at the spacing the flock already had, no weighting
+ * moved it into the middle, and the shape rather than the ratio is what had to
+ * change — 0006 §1's amendment of 2026-08-09. These three are what the first
+ * measurement over two reaches was taken at, and #216 chooses them again.
+ */
+export const COHESION_WEIGHT = 1;
+
 /*
  * A third number the work needed and #91 had not named — recorded in a comment
  * on that ticket rather than added to its criteria afterward. Every dot leaves

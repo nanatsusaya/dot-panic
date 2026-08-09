@@ -3,7 +3,9 @@
  * (0002 §4), and the count it was given survives it — a row in 0008 §9's
  * asserted list. What a step does *not* do is asserted here as well, because
  * the rules of the flock arrive one ticket at a time and each arrival has to be
- * visible in what stops being true here.
+ * visible in what stops being true here. #99 is the fourth of those arrivals
+ * and one such assertion left with it: *leaves every velocity alone* was true
+ * only while nothing steered.
  */
 
 import { describe, expect, test } from "bun:test";
@@ -17,6 +19,8 @@ import {
   EDGE_MARGIN,
   type Frame,
   MAX_ACCELERATION,
+  NEIGHBORHOOD_RADIUS,
+  SEPARATION_RADIUS,
   SPEED_MAX,
   SPEED_MIN,
   type Vector,
@@ -180,6 +184,130 @@ function speedOf(velocity: Vector): number {
   return Math.hypot(velocity.x, velocity.y);
 }
 
+/** The middle of the frame, where 0006 §6's edge force is zero. */
+const MIDDLE: Vector = { x: WIDE.width / 2, y: 0.5 };
+
+/*
+ * A distance inside the neighborhood, for the worlds whose claim is about what
+ * a dot can see at all rather than about what pushes it away.
+ *
+ * @param divisor  what to divide the neighborhood's radius by
+ */
+function radiusOver(divisor: number): number {
+  return NEIGHBORHOOD_RADIUS / divisor;
+}
+
+/*
+ * A distance inside separation's own reach, over a whole number, and the whole
+ * numbers are not decoration. Separation pushes with `SEPARATION_RADIUS / gap −
+ * 1`, so a neighbor at that reach over `k` pushes with exactly `k − 1` — which
+ * is what lets one neighbor's push cancel two others' in integers, at whatever
+ * reach #216 chooses. Sevenths, fifths and thirds give six, four and two, and
+ * six is four plus two.
+ *
+ * @param divisor  what to divide separation's reach by
+ */
+function separationOver(divisor: number): number {
+  return SEPARATION_RADIUS / divisor;
+}
+
+/*
+ * A distance past separation's reach and still inside the neighborhood, which
+ * is the band 0006 §1's A1 opened and where alignment and cohesion act alone.
+ *
+ * The multiplier has to keep the result inside `NEIGHBORHOOD_RADIUS`, so it is
+ * a relation between the two numbers rather than between one of them and a
+ * constant — which is what #216 has to hold on to when it moves either.
+ *
+ * @param multiple  how many of separation's reaches out to sit
+ */
+function pastSeparation(multiple: number): number {
+  return SEPARATION_RADIUS * multiple;
+}
+
+/*
+ * The speed the dot under test carries, in the middle of 0006 §3's band.
+ *
+ * **Not the floor**, which is the trap: a test of a force that slows a dot would
+ * be answered by the band lifting it back rather than by the force, and it would
+ * report the floor's number while looking like it reported the force's.
+ */
+const CARRIED: Vector = { x: (SPEED_MIN + SPEED_MAX) / 2, y: 0 };
+
+/**
+ * A world holding the dot under test and the neighbors it steers by.
+ *
+ * The dot sits in the middle of the frame for the same reason `worldOf`'s do —
+ * so that a test about steering is not also a test about the edge.
+ *
+ * @param offsets           where each neighbor sits relative to the dot under
+ *                          test
+ * @param neighborVelocity  the velocity every neighbor carries. Passing
+ *                          `CARRIED` is what makes alignment say nothing, since
+ *                          it steers toward the difference from the dot's own
+ * @returns a world whose first dot is the one under test
+ */
+function flockAround(
+  offsets: readonly Vector[],
+  neighborVelocity: Vector,
+): World {
+  return {
+    dots: [
+      { position: MIDDLE, velocity: CARRIED },
+      ...offsets.map((offset) => ({
+        position: { x: MIDDLE.x + offset.x, y: MIDDLE.y + offset.y },
+        velocity: neighborVelocity,
+      })),
+    ],
+    frame: WIDE,
+    radius: DOT_RADIUS,
+    random: randomFromSeed(1),
+  };
+}
+
+/**
+ * The velocity the dot under test ends a step with.
+ *
+ * `flockAround` and the worlds beside it always build a first dot, which
+ * `noUncheckedIndexedAccess` cannot know — and a helper that quietly returned
+ * nothing would leave every assertion below passing over an absence.
+ *
+ * @param world    the world to advance
+ * @param seconds  how long the step covers
+ */
+function steered(world: World, seconds: number): Vector {
+  const dot = step(world, seconds).dots[0];
+
+  if (dot === undefined) {
+    throw new Error("the world under test has no first dot");
+  }
+
+  return dot.velocity;
+}
+
+/**
+ * How far the dot under test had its velocity changed by one step.
+ *
+ * `largestChange` narrowed to the first dot: in these worlds the others are
+ * scenery, and what happens to them says nothing about the claim.
+ *
+ * @param before  the world that went into a step
+ * @param after   the world that came out of it
+ */
+function changeOfSubject(before: World, after: World): number {
+  const from = before.dots[0];
+  const to = after.dots[0];
+
+  if (from === undefined || to === undefined) {
+    throw new Error("the world under test has no first dot");
+  }
+
+  return Math.hypot(
+    to.velocity.x - from.velocity.x,
+    to.velocity.y - from.velocity.y,
+  );
+}
+
 /** Every number a world holds about its dots, in one comparable shape. */
 function reading(world: World): number[][] {
   return world.dots.map((dot) => [
@@ -212,37 +340,58 @@ describe("a step", () => {
     expect(step(world, 1 / 60).dots).toHaveLength(world.dots.length);
   });
 
-  test("moves every dot along its velocity", () => {
+  /*
+   * A dot's displacement is the velocity it **ends** the step with, never the
+   * one it came in at — a world where those two disagree draws a dot travelling
+   * at a speed it does not have.
+   *
+   * This read *along its velocity* until #99, which was the same claim while
+   * nothing changed one in the middle of a frame. It is not the same claim any
+   * more, and stating it the weaker way would now assert that nothing steers.
+   */
+  test("moves every dot along the velocity it ends the step with", () => {
     const world = createWorld(ordinary);
     const seconds = 0.5;
-    const expected = world.dots.map((dot) => [
-      dot.position.x + dot.velocity.x * seconds,
-      dot.position.y + dot.velocity.y * seconds,
-    ]);
+    const stepped = step(world, seconds);
 
-    const moved = step(world, seconds).dots.map((dot) => [
-      dot.position.x,
-      dot.position.y,
-    ]);
+    const expected = stepped.dots.map((dot, index) => {
+      const before = world.dots[index];
+
+      return before === undefined
+        ? []
+        : [
+            before.position.x + dot.velocity.x * seconds,
+            before.position.y + dot.velocity.y * seconds,
+          ];
+    });
+
+    const moved = stepped.dots.map((dot) => [dot.position.x, dot.position.y]);
 
     expect(moved).toEqual(expected);
   });
 
-  // Nothing steers yet. 0006 §1's three behaviors, its bound on how far a
-  // velocity may change and its non-overlap each arrive with their own ticket
-  // under #87. The two rules that have arrived do not fire here: every dot in a
-  // new world starts at one speed inside the band, and none of them starts
-  // inside a margin.
-  test("leaves every velocity alone", () => {
-    const world = createWorld(ordinary);
-    const before = world.dots.map((dot) => [dot.velocity.x, dot.velocity.y]);
+  /*
+   * The one rule of the flock still absent, and the last one this file asserts
+   * the absence of. 0006 §2's non-overlap is a constraint on the world a step
+   * returns rather than a fourth force, and it arrives with #102 — which is
+   * also what makes two dots at one position a case the Core may leave alone
+   * rather than a state it has to resolve.
+   *
+   * **It reports less than its name suggests, and mutating the code is what
+   * showed that.** Two identical dots stay identical under any rule that treats
+   * them the same, so a separation that invented one fixed direction for a zero
+   * distance left this green. What it does report is a rule that breaks the tie
+   * — by array order, which is what a real non-overlap pass has to do — and
+   * that is the shape #102 will arrive in. Read it as *nothing here separates
+   * two dots that coincide*, not as *nothing here could*.
+   */
+  test("moves no dot to resolve an overlap, which #102 is what adds", () => {
+    const together = worldOf([CARRIED, CARRIED]);
 
-    const after = step(world, 0.5).dots.map((dot) => [
-      dot.velocity.x,
-      dot.velocity.y,
-    ]);
+    const [first, second] = step(together, 1 / 60).dots;
 
-    expect(after).toEqual(before);
+    expect(first).toBeDefined();
+    expect(second?.position).toEqual(first?.position);
   });
 
   test("carries the radius and the generator forward untouched", () => {
@@ -449,21 +598,37 @@ describe("the frame's edge", () => {
    * edge with the ceiling speed pointing out is outside after one step and no
    * force acting over that step can prevent it. What holds is that no world
    * this Core builds contains such a dot, and that stepping never creates one.
+   *
+   * **Four seeds and three times #103's run, because #99 made this negotiable.**
+   * Until steering existed the edge was the only force acting inside a margin
+   * and one short run reported the whole rule. Now another force can point out
+   * of the frame while the edge points in, and an early shape of separation did
+   * exactly that — seeds 4, 11 and 15 lost a dot, the first at step 894, which
+   * one seed over 600 steps saw nothing of. Those three are here as the cases
+   * that were found rather than as a wider net for its own sake.
+   *
+   * **The explicit timeout is what a flock with groups in it costs.** Separation
+   * on its own reach is what lets a dot have neighbors, and a dot in a group has
+   * forty-five of the other 199 rather than six — so the same 7,200 steps went
+   * from under five seconds to over them. The run is not narrowed to fit the
+   * default, because its width is what found the escape at step 894.
    */
   test("keeps every dot inside the frame over a run", () => {
-    let world = createWorld({ ...ordinary, seed: 5 });
+    for (const seed of [4, 5, 11, 15]) {
+      let world = createWorld({ ...ordinary, seed });
 
-    for (let taken = 0; taken < DISPERSAL_STEPS; taken += 1) {
-      world = step(world, seconds);
+      for (let taken = 0; taken < 3 * DISPERSAL_STEPS; taken += 1) {
+        world = step(world, seconds);
 
-      const box = boundingBox(world);
+        const box = boundingBox(world);
 
-      expect(box.left).toBeGreaterThanOrEqual(0);
-      expect(box.right).toBeLessThanOrEqual(WIDE.width);
-      expect(box.top).toBeGreaterThanOrEqual(0);
-      expect(box.bottom).toBeLessThanOrEqual(WIDE.height);
+        expect(box.left).toBeGreaterThanOrEqual(0);
+        expect(box.right).toBeLessThanOrEqual(WIDE.width);
+        expect(box.top).toBeGreaterThanOrEqual(0);
+        expect(box.bottom).toBeLessThanOrEqual(WIDE.height);
+      }
     }
-  });
+  }, 30_000);
 
   /*
    * 0006 §7's row, and R3 calls it *"the first thing worth writing as a failing
@@ -472,6 +637,33 @@ describe("the frame's edge", () => {
    * edge force is what points the dots out of the corner rather than a fourth
    * force pushing them, which §7 rejects by name.
    */
+  /*
+   * The same pile, asked the other question — and it is here because the run
+   * above stopped reporting it. Holding the summed separation to a length of
+   * one is what keeps 0006 §6's edge visible against a crowd, and while
+   * separation reached the whole neighborhood, removing that hold cost seeds 4,
+   * 11 and 15 a dot. Over its own shorter reach it costs none of them one, in
+   * twenty seeds over a minute at three aspect ratios — so the run above went
+   * green on a mutation it used to redden, and the guard was asserted by
+   * nothing.
+   *
+   * **A corner is where the crowd is**, which is why this world reports it when
+   * a scattered one does not: unheld, every seed tried loses a dot within three
+   * steps.
+   */
+  test("keeps a pile inside the frame, which is what holds separation", () => {
+    let world = pileIntoCorner(createWorld({ ...ordinary, seed: 7 }));
+
+    for (let taken = 0; taken < DISPERSAL_STEPS; taken += 1) {
+      world = step(world, seconds);
+
+      const box = boundingBox(world);
+
+      expect(box.left).toBeGreaterThanOrEqual(0);
+      expect(box.top).toBeGreaterThanOrEqual(0);
+    }
+  });
+
   test("a flock piled into one corner does not stay in it", () => {
     let world = pileIntoCorner(createWorld({ ...ordinary, seed: 7 }));
 
@@ -572,5 +764,207 @@ describe("the bound on a change in velocity", () => {
       expect(largestChange(world, stepped)).toBeLessThanOrEqual(2 * bound);
       world = stepped;
     }
+  });
+});
+
+/*
+ * 0006 §1's neighborhood, which is a radius and nothing else. That section
+ * drops Reynolds' angular term deliberately, and says restoring it changes a
+ * number rather than the structure — so the absence is a rule to assert and not
+ * an omission to leave to review.
+ */
+describe("the neighborhood", () => {
+  const seconds = 1 / 60;
+
+  test("leaves a dot with nobody near it alone", () => {
+    expect(steered(flockAround([], CARRIED), seconds)).toEqual(CARRIED);
+  });
+
+  // Both halves in one test, because the claim is where the boundary sits and
+  // one side of it says nothing on its own.
+  test("steers by a dot inside the radius and not by one outside it", () => {
+    const inside = flockAround(
+      [{ x: 0.99 * NEIGHBORHOOD_RADIUS, y: 0 }],
+      CARRIED,
+    );
+    const outside = flockAround(
+      [{ x: 1.01 * NEIGHBORHOOD_RADIUS, y: 0 }],
+      CARRIED,
+    );
+
+    expect(steered(inside, seconds).x).not.toBeCloseTo(CARRIED.x, 12);
+    expect(steered(outside, seconds)).toEqual(CARRIED);
+  });
+
+  /*
+   * The angular term's absence, asserted where it would show. The one neighbor
+   * sits directly **behind** the dot and carries a heading of its own, so the
+   * dot turns toward that heading only if a dot it is moving away from counts
+   * as a neighbor at all. Separation and cohesion both act along the line
+   * between the two and can say nothing about `y`.
+   */
+  test("counts a neighbor behind exactly as one ahead", () => {
+    const behind = flockAround([{ x: -radiusOver(2), y: 0 }], {
+      x: CARRIED.x,
+      y: CARRIED.x,
+    });
+
+    expect(steered(behind, seconds).y).toBeGreaterThan(0);
+  });
+});
+
+/*
+ * 0006 §1's three steering behaviors — the ticket that makes dots into a flock
+ * rather than particles, and the only one of the five under #87 with no row in
+ * 0006 §10. What a command decides here is each behavior's directional effect;
+ * everything past that is the watching, and *it reads as a flock* is what 0001
+ * §3.1 puts beyond any of this.
+ *
+ * **Each world below silences two of the three**, which is what makes these
+ * claims about one behavior each rather than about their sum:
+ *
+ * - **alignment** says nothing when the neighbors carry the dot's own velocity,
+ *   because it steers toward the difference from it;
+ * - **cohesion** says nothing when the neighbors' average position is the dot
+ *   itself;
+ * - **separation** says nothing when the pushes away from the neighbors cancel,
+ *   which takes three of them and works out in whole numbers: a neighbor at
+ *   separation's reach over `k` pushes with `k − 1`, and six is four plus two.
+ *   It also says nothing about a neighbor past that reach at all, which is the
+ *   band A1 opened on 2026-08-09 and the last test here is about.
+ */
+describe("the three steering behaviors", () => {
+  const seconds = 1 / 60;
+
+  /*
+   * Two neighbors on the left and one on the right as far away as both of them
+   * together, so their positions average to the dot's own and cohesion has
+   * nothing to say. What is left pushes away from the crowded side.
+   */
+  test("steers away from its neighbors, cohesion being silent", () => {
+    const world = flockAround(
+      [
+        { x: -separationOver(7), y: 0 },
+        { x: -separationOver(3), y: 0 },
+        { x: separationOver(7) + separationOver(3), y: 0 },
+      ],
+      CARRIED,
+    );
+
+    const velocity = steered(world, seconds);
+
+    expect(velocity.x).toBeGreaterThan(CARRIED.x);
+    expect(velocity.y).toBeCloseTo(0, 12);
+  });
+
+  /*
+   * The mirror of it, and the reason the distances are separation's reach over
+   * a whole number. The near neighbor on the right pushes with `7 − 1`; the two
+   * on the left push with `5 − 1` and `3 − 1`, which is the same six.
+   * Separation cancels exactly and the dot is left with the pull toward where
+   * its neighbors average out, which is behind it.
+   */
+  test("steers toward their average position, separation being silent", () => {
+    const world = flockAround(
+      [
+        { x: separationOver(7), y: 0 },
+        { x: -separationOver(5), y: 0 },
+        { x: -separationOver(3), y: 0 },
+      ],
+      CARRIED,
+    );
+
+    const velocity = steered(world, seconds);
+
+    expect(velocity.x).toBeLessThan(CARRIED.x);
+    expect(velocity.y).toBeCloseTo(0, 12);
+  });
+
+  /*
+   * Two neighbors placed symmetrically: the pushes away from them cancel and
+   * their average position is the dot, so both of the other behaviors are
+   * silent and only a heading is left to steer by.
+   */
+  test("steers toward their average heading, the other two being silent", () => {
+    const world = flockAround(
+      [
+        { x: -radiusOver(2), y: 0 },
+        { x: radiusOver(2), y: 0 },
+      ],
+      { x: CARRIED.x, y: CARRIED.x },
+    );
+
+    const velocity = steered(world, seconds);
+
+    expect(velocity.y).toBeGreaterThan(0);
+    expect(velocity.x).toBeCloseTo(CARRIED.x, 12);
+  });
+
+  /*
+   * The crossover, which is what the three weights are for. Separation is
+   * weighted above cohesion but falls away with distance while cohesion grows
+   * to its full value at the neighborhood's radius — so the same neighbor is
+   * pushed away from up close and steered toward far off. That is where a
+   * flock's spacing comes from, and at these numbers the two balance at 0.686
+   * of separation's reach rather than of the neighborhood's, which is the whole
+   * of what A1 changed and the reason a group has room to form.
+   */
+  test("pushes away from a near neighbor and pulls toward a far one", () => {
+    const near = flockAround([{ x: separationOver(7), y: 0 }], CARRIED);
+    const far = flockAround([{ x: 0.9 * NEIGHBORHOOD_RADIUS, y: 0 }], CARRIED);
+
+    expect(steered(near, seconds).x).toBeLessThan(CARRIED.x);
+    expect(steered(far, seconds).x).toBeGreaterThan(CARRIED.x);
+  });
+
+  /*
+   * A1's own claim, and the one that says separation's reach is a reach rather
+   * than a weight. Three neighbors past it whose positions average to the dot:
+   * cohesion is silent because they average out, alignment is silent because
+   * they carry the dot's velocity, and separation is silent because none of
+   * them is close enough to answer. Nothing is left, so nothing moves.
+   *
+   * **Over one reach this world steers**, and hard — the three sit at unequal
+   * distances, so pushes that fall away with distance do not cancel the way
+   * positions do. That is what makes this the test A1 is evidenced by rather
+   * than a restatement of the neighborhood's boundary.
+   */
+  test("is not steered by neighbors past separation's reach that average out", () => {
+    const world = flockAround(
+      [
+        { x: -pastSeparation(1.2), y: 0 },
+        { x: -pastSeparation(1.4), y: 0 },
+        { x: pastSeparation(2.6), y: 0 },
+      ],
+      CARRIED,
+    );
+
+    expect(steered(world, seconds)).toEqual(CARRIED);
+  });
+
+  /*
+   * The scope item that ties this ticket to #101: the three vectors are summed
+   * with 0006 §6's edge force and the bound applies to that sum, not to each
+   * force in turn. In the corner below the edge alone already exceeds the bound
+   * and the steering pushes the same way, so a bound applied per force would let
+   * the velocity change by more than one of them allows.
+   */
+  test("hands the forces to #101's bound summed, not one at a time", () => {
+    const bound = MAX_ACCELERATION * seconds;
+    const inward = { x: -0.07, y: -0.07 };
+    const crowded: World = {
+      dots: [
+        { position: { x: 0.02, y: 0.02 }, velocity: inward },
+        { position: { x: 0.013, y: 0.013 }, velocity: inward },
+      ],
+      frame: WIDE,
+      radius: DOT_RADIUS,
+      random: randomFromSeed(1),
+    };
+
+    expect(changeOfSubject(crowded, step(crowded, seconds))).toBeCloseTo(
+      bound,
+      12,
+    );
   });
 });
