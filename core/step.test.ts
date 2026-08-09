@@ -637,6 +637,33 @@ describe("the frame's edge", () => {
    * edge force is what points the dots out of the corner rather than a fourth
    * force pushing them, which §7 rejects by name.
    */
+  /*
+   * The same pile, asked the other question — and it is here because the run
+   * above stopped reporting it. Holding the summed separation to a length of
+   * one is what keeps 0006 §6's edge visible against a crowd, and while
+   * separation reached the whole neighborhood, removing that hold cost seeds 4,
+   * 11 and 15 a dot. Over its own shorter reach it costs none of them one, in
+   * twenty seeds over a minute at three aspect ratios — so the run above went
+   * green on a mutation it used to redden, and the guard was asserted by
+   * nothing.
+   *
+   * **A corner is where the crowd is**, which is why this world reports it when
+   * a scattered one does not: unheld, every seed tried loses a dot within three
+   * steps.
+   */
+  test("keeps a pile inside the frame, which is what holds separation", () => {
+    let world = pileIntoCorner(createWorld({ ...ordinary, seed: 7 }));
+
+    for (let taken = 0; taken < DISPERSAL_STEPS; taken += 1) {
+      world = step(world, seconds);
+
+      const box = boundingBox(world);
+
+      expect(box.left).toBeGreaterThanOrEqual(0);
+      expect(box.top).toBeGreaterThanOrEqual(0);
+    }
+  });
+
   test("a flock piled into one corner does not stay in it", () => {
     let world = pileIntoCorner(createWorld({ ...ordinary, seed: 7 }));
 
