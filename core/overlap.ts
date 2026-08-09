@@ -108,11 +108,18 @@ export function withoutOverlap(
 
         const awayX = there.position.x - here.position.x;
         const awayY = there.position.y - here.position.y;
-        const gap = Math.hypot(awayX, awayY);
 
-        if (gap >= floor) {
+        /*
+         * Compared as squares, so that the pairs with nothing to answer for —
+         * which is nearly all of them, and every pair on most steps — cost two
+         * multiplications instead of a square root. The distance itself is
+         * taken only inside.
+         */
+        if (awayX * awayX + awayY * awayY >= floor * floor) {
           continue;
         }
+
+        const gap = Math.hypot(awayX, awayY);
 
         /*
          * Half the deficit, along the line from this dot to the other one and

@@ -13,7 +13,7 @@
 import { describe, expect, test } from "bun:test";
 
 import { OVERLAP_PASSES, withoutOverlap } from "./overlap.js";
-import { type Dot, DOT_RADIUS } from "./world.js";
+import { DOT_RADIUS, type Dot } from "./world.js";
 
 /** Two radii, which is the distance 0006 §2 makes the floor. */
 const TOUCHING = 2 * DOT_RADIUS;
