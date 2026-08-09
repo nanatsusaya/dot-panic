@@ -82,6 +82,7 @@ longer supports.
 | [0005](0005-rendering-and-visual-design.md) | Rendering and visual design | Canvas, SVG or DOM; color, light and dark, pixel density | Accepted |
 | [0006](0006-motion-rules.md) | Motion rules | Bounded frame, minimum speed, non-overlap as a constraint | Accepted |
 | [0007](0007-pointer-and-input-model.md) | Pointer and input model | Mouse and touch, radius of effect, how it decays | Accepted |
+| [0021](0021-how-the-acceleration-budget-is-shared.md) | How the acceleration budget is shared | Whether containment competes with steering for one bound or claims it first, and where the pointer sits | Proposed |
 | [0014](0014-page-layout.md) | Page layout | How the flock, the imprint and the explanation are arranged; how the canvas is sized against them | Accepted |
 | [0017](0017-the-pages-language.md) | The page's language | Which language the page is written in, what `lang` says, and where the words themselves live | Accepted |
 | [0015](0015-settings-surface.md) | Settings surface | Whether the visitor may change the flock, which values are exposed, and what bounds them | Accepted |
