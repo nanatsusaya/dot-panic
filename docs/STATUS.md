@@ -1734,17 +1734,28 @@ about a thing that should look right, and the measurement says there should be
 nothing to see. That is the reason to look rather than a reason not to — a jitter
 visible there is coming from somewhere this change did not measure.
 
-**What comes after it has not been decided.** Two things are available and each
-needs the decider rather than a session.
-[#216](https://github.com/nanatsusaya/dot-panic/issues/216) is triggered by #102
-landing and is a watching pass, so it is his eyes again; the measurement on it now
-says what the numbers in its table can and cannot move, which is where the flock
-sits between a random scatter and that lattice, and not whether the lattice has
-any internal motion. And **[#88](https://github.com/nanatsusaya/dot-panic/issues/88),
-the pointer, has no blocker left** — #105, #106 and #107 name #91, #94 and #95, all
-closed — but no sprint-opening activity has run for that set, and 0012 §6 requires
-one *before any agent starts*. **The sequencing is his**, and this file does not
-guess it.
+**What comes after it is [#88](https://github.com/nanatsusaya/dot-panic/issues/88),
+the pointer**, decided by the decider on 2026-08-09 against
+[#216](https://github.com/nanatsusaya/dot-panic/issues/216), which was the other
+thing available. **The reason is that #216's whole subject is a flock nothing ever
+disturbs.** Every property measured today — one body by half a minute, a lattice
+at 2.09, a heading agreement of 0.998 — is a property of an undisturbed flock, and
+the pointer is what disturbs it; numbers chosen against that state would be chosen
+against a state that stops existing. The measurement narrows what that ticket
+could have done anyway: its numbers move **where** the flock sits between a random
+scatter and that lattice, and none of them puts internal motion back into it.
+
+**What #88 costs to defer #216 is written down rather than waved past.** Every
+number in 0006 §10's register stays provisional through the whole of the pointer's
+work, which is longer than anyone has left one provisional here so far.
+
+**Its blockers are gone and its activity has not run.** #105, #106 and #107 name
+#91, #94 and #95, all closed — but 0012 §6 requires the sprint-opening activity
+*before any agent starts*, and none has run for that set. For
+[#87](https://github.com/nanatsusaya/dot-panic/issues/87) that activity ran with
+the decider and surfaced eight decisions before a branch existed, one of which
+took a ticket's subject away. **It is the next thing owed to #88, and the third
+watch is ahead of all of it.**
 
 **[#178](https://github.com/nanatsusaya/dot-panic/issues/178) is done and the
 convention has a command behind it.**
