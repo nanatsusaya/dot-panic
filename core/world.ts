@@ -36,6 +36,35 @@ export type Dot = {
 };
 
 /**
+ * The visitor's influence on the flock, as the world carries it (0007 §4).
+ *
+ * **It is here because it is derived, and derived is the Core's** (0007 §2). The
+ * Shell hands a step a position or the fact that there is none, and nothing
+ * else; a Shell that handed over an already-faded influence would be deciding
+ * how the flock reacts, in the part of the system no test reaches.
+ */
+export type PointerInfluence = {
+  /**
+   * Where the force pushes from. While presence lasts this is where the pointer
+   * is; after it ends this is the last position it was seen at, which is what
+   * 0007 §4 fades from rather than dropping.
+   */
+  readonly position: Vector;
+  /**
+   * How many steps of influence are left, in `[1, POINTER_DECAY_STEPS]`. It
+   * scales the force by that many `POINTER_DECAY_STEPS`ths, so the ceiling is
+   * full strength — 0007 R2 keeps a parked pointer pushing for as long as it
+   * sits there — and presence ending is what starts it counting down.
+   *
+   * **A count of steps rather than a fraction**, so that it reaches zero
+   * exactly. Subtracting a step's worth from a fraction eighteen times leaves a
+   * residue near 1e-16, and an influence that is over would last one step longer
+   * than 0007 §9's bound says it may.
+   */
+  readonly remainingSteps: number;
+};
+
+/**
  * The rectangle the flock stays inside (0006 §6).
  *
  * Its shorter side is 1, because 0008 §6 makes every length in the world a
@@ -63,6 +92,13 @@ export type World = {
   readonly radius: number;
   /** Here rather than in the generator, so a world is all a run depends on. */
   readonly random: Random;
+  /**
+   * The visitor's influence, or absent where there is none — which 0007 §7
+   * makes the ordinary case rather than a degraded one. Here for the reason
+   * `random` is here: a world is the whole of what a run depends on, and a fade
+   * held anywhere else would be state a step could not see.
+   */
+  readonly pointer?: PointerInfluence;
 };
 
 /**
@@ -272,6 +308,24 @@ export const POINTER_RADIUS = 0.18;
  * is #216's.
  */
 export const POINTER_STRENGTH = MAX_ACCELERATION;
+
+/**
+ * How many steps the influence takes to reach zero once presence has ended
+ * (0007 §4). Provisional; #233 supersedes it by watching.
+ *
+ * **It counts steps and not seconds**, so a change to 0008 §3's step rate
+ * changes how long a release takes on a clock and not how it is shaped. That is
+ * the reasoning 0006 §4's bound is written with, arrived at from the other side.
+ *
+ * 18 steps is 0.3 s at 0008 §3's rate of 60 a second. A dot at 0006 §3's
+ * ceiling covers 0.048 shorter sides while it fades — 26 px on a 540 px canvas
+ * — so the flock is seen gliding back rather than jumping. Short enough that the
+ * influence is gone by the time the visitor has moved on; long enough that 0006
+ * §4's bound is not what shapes the return, which is the failure 0007 §4 names
+ * for an instant release. Fixed in #107 before the work started, which is where
+ * 0008 R1 puts a number.
+ */
+export const POINTER_DECAY_STEPS = 18;
 
 /*
  * A third number the work needed and #91 had not named — recorded in a comment

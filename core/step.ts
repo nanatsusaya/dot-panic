@@ -30,13 +30,14 @@
  */
 
 import { withoutOverlap } from "./overlap.js";
-import type { Dot, Frame, Vector, World } from "./world.js";
+import type { Dot, Frame, PointerInfluence, Vector, World } from "./world.js";
 import {
   ALIGNMENT_WEIGHT,
   COHESION_WEIGHT,
   EDGE_MARGIN,
   MAX_ACCELERATION,
   NEIGHBORHOOD_RADIUS,
+  POINTER_DECAY_STEPS,
   POINTER_RADIUS,
   POINTER_STRENGTH,
   SEPARATION_RADIUS,
@@ -362,31 +363,85 @@ function steeringFor(dot: Dot, dots: readonly Dot[]): Vector {
  * the same position, and the same reasoning `withSpeedInBand` uses for a dot at
  * rest.
  *
- * @param position  where the dot is, in the world's own coordinates
- * @param pointer   where the visitor's pointer is, in the same coordinates, or
- *                  `undefined` where there is none — which 0007 §7 makes the
- *                  ordinary case rather than an error state
+ * @param position   where the dot is, in the world's own coordinates
+ * @param influence  the visitor's influence as the world carries it, or
+ *                   `undefined` where there is none — which 0007 §7 makes the
+ *                   ordinary case rather than an error state
  * @returns an acceleration away from the pointer, so what it does to a velocity
  *          depends on how long the step is
  */
-function pointerForce(position: Vector, pointer: Vector | undefined): Vector {
-  if (pointer === undefined) {
+function pointerForce(
+  position: Vector,
+  influence: PointerInfluence | undefined,
+): Vector {
+  if (influence === undefined) {
     return { x: 0, y: 0 };
   }
 
-  const awayX = position.x - pointer.x;
-  const awayY = position.y - pointer.y;
+  const awayX = position.x - influence.position.x;
+  const awayY = position.y - influence.position.y;
   const gap = Math.hypot(awayX, awayY);
 
   if (gap === 0 || gap >= POINTER_RADIUS) {
     return { x: 0, y: 0 };
   }
 
+  /*
+   * The fade scales the peak and leaves everything else alone, so a release
+   * changes how hard the pointer pushes and never where it reaches to. 0007
+   * §5's zero past the radius is decided above and is not something a fading
+   * influence can move — a fade that shrank the radius instead would drag the
+   * boundary across dots standing still, which is the swirl §5 rejects arriving
+   * from the other direction.
+   */
+  const strength =
+    (POINTER_STRENGTH * influence.remainingSteps) / POINTER_DECAY_STEPS;
+
   // Divided by `gap` once more, because `awayX` and `awayY` carry a length of
   // `gap` rather than a length of one — `separationFrom`'s arithmetic exactly.
-  const push = (POINTER_STRENGTH * (1 - gap / POINTER_RADIUS) ** 2) / gap;
+  const push = (strength * (1 - gap / POINTER_RADIUS) ** 2) / gap;
 
   return { x: awayX * push, y: awayY * push };
+}
+
+/**
+ * The influence the world a step returns carries (0007 §4).
+ *
+ * Presence pins it at full strength wherever the Shell says the pointer is —
+ * 0007 R2, a parked pointer keeps pushing for as long as it sits there. The
+ * first step after presence ends keeps that last position and starts counting
+ * down, so the flock is released over `POINTER_DECAY_STEPS` steps.
+ *
+ * **Both alternatives are the bugs 0007 §4 names.** An influence kept alive
+ * leaves the flock fleeing nothing; one dropped in a single step snaps it back,
+ * and 0006 §4's bound turns that snap into a slow drift home through a region
+ * the visitor has already left — worse than either.
+ *
+ * **`seconds` is deliberately not an argument.** The fade counts steps, so a
+ * change to 0008 §3's step rate cannot silently change how a release reads.
+ *
+ * @param carried  the influence the world arrived with, or `undefined`
+ * @param pointer  where the visitor's pointer is, or `undefined` where there is
+ *                 none
+ * @returns the influence to carry out, or `undefined` once it has run out
+ */
+function nextInfluence(
+  carried: PointerInfluence | undefined,
+  pointer: Vector | undefined,
+): PointerInfluence | undefined {
+  if (pointer !== undefined) {
+    return { position: pointer, remainingSteps: POINTER_DECAY_STEPS };
+  }
+
+  if (carried === undefined) {
+    return undefined;
+  }
+
+  const remainingSteps = carried.remainingSteps - 1;
+
+  return remainingSteps <= 0
+    ? undefined
+    : { position: carried.position, remainingSteps };
 }
 
 /**
@@ -442,15 +497,24 @@ function withBoundedSize(force: Vector): Vector {
  *                 §7 makes the ordinary argument rather than an error state.
  *                 It is the raw fact and nothing else (0007 §2): the Shell
  *                 converts an event and does no arithmetic on the world, so
- *                 every rule about how the flock reacts is here
+ *                 every rule about how the flock reacts is here — including
+ *                 whether this argument's absence means a release or nothing at
+ *                 all, which the world's own influence is what answers
  * @returns a new world with the same dot count (0008 §9), the same radius, the
  *          same frame and the same generator state — nothing here draws from it
  */
 export function step(world: World, seconds: number, pointer?: Vector): World {
+  /*
+   * Once for the world rather than once for each dot, because it is a fact
+   * about the visitor and not about a dot — and because a fade recomputed
+   * inside the loop would step 200 times a step.
+   */
+  const influence = nextInfluence(world.pointer, pointer);
+
   const moved = world.dots.map((dot) => {
     const edge = edgeForce(dot.position, world.frame);
     const steering = steeringFor(dot, world.dots);
-    const pushed = pointerForce(dot.position, pointer);
+    const pushed = pointerForce(dot.position, influence);
 
     /*
      * All three summed before anything is bounded, which is what makes 0006
@@ -486,5 +550,9 @@ export function step(world: World, seconds: number, pointer?: Vector): World {
     };
   });
 
-  return { ...world, dots: withoutOverlap(moved, world.radius) };
+  return {
+    ...world,
+    dots: withoutOverlap(moved, world.radius),
+    pointer: influence,
+  };
 }
