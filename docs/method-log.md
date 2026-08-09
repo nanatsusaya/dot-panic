@@ -6,6 +6,53 @@ session would decide worse without it.
 
 Newest first.
 
+## 2026-08-09 — A broken measurement of structure reads as an absence of structure
+
+**Everything here so far has run one direction: a watch decides what no command
+can.** The amendment recorded directly below is that, and so is the rule in
+CLAUDE.md that anything touching motion is verified by watching it. **This is the
+other direction**, and it turns out to be the one that is easy to get wrong.
+
+A minute of the running page was recorded as 300 images and the dot centers were
+pulled back out of them, so that the thing being watched and the thing being
+measured would for once be the same thing. The first run reported the settled
+flock at a Clark-Evans index of **1.0** and a hexatic order of **0.29** — a
+random scatter, on both measures, which is the opposite of what the images
+plainly show. The cause was worth nothing: the extraction wrote decimals with a
+comma into a comma-separated file, so every column shifted by one.
+
+**What is worth something is the shape of the failure.** Garbling coordinates
+produces a random point set, and a random point set is exactly what a measure of
+order is built to report as *no order*. So a corrupted run of one does not look
+corrupted. It lands on the textbook value — 1.0 is the Clark-Evans index of a
+random scatter, to two digits — and it lands there **more convincingly than a
+correct run would**, because a correct run of anything real is never quite that
+round.
+
+**A number was about to be written down.** It was going into a comment on
+[#216](https://github.com/nanatsusaya/dot-panic/issues/216), whose whole premise
+is that the settled flock is *too* ordered and that the numbers in its table are
+the lever for it. *The flock is a random scatter* would have reversed that
+premise, in the artifact the next session reads before retuning anything. What
+stopped it was not a check and could not have been: throwaway measurement tooling
+lives outside this repository, so no test covers it, no review sees it, and the
+four checks never run against it. **What stopped it was having looked at the
+pictures first, and refusing to publish a number that disagreed with them.**
+
+**The repair is a positive control, and it is cheap.** The same functions were
+run against the Core over five seeds, which read 2.00 to 2.08 where the page read
+2.09, and the random baseline was *computed* — 200 dots scattered over the same
+disc — rather than quoted as 1.0. Both had to be there. The Core run says the
+pipeline can find order that is known to exist; the computed baseline says how
+much of the reading is the bounded region flattering it, which turned out to be
+four percent. Quoting 1.0 from a textbook instead would have made the corrupted
+run agree with its own control.
+
+**So: give a new measurement something whose answer is already known, before
+giving it the question.** Especially a measurement whose interesting answer is a
+negative one — no order, no difference, no effect — because that is the answer
+every way of breaking it produces.
+
 ## 2026-08-09 — The first record amended because what it decided was built, passed everything, and was wrong
 
 **[0006](adr/0006-motion-rules.md) A1 is the first amendment here caused by
