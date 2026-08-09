@@ -1024,6 +1024,41 @@ at thirty seconds and were one crystal at sixty.
 still picture cannot say whether either reads as a flock. That is 0001 §3.1's and
 it needs the numbers in the code.
 
+**The influence fades now, and the last of #88's three is built.**
+[#107](https://github.com/nanatsusaya/dot-panic/issues/107) is 0007 §4's *it
+decays to zero from the last known position*: the world carries the position the
+pointer was last seen at together with a count of steps left, presence pins that
+count at its ceiling, and the first step after presence ends starts it down. §2
+puts the fade in the Core for the same reason it puts the force there — a Shell
+handing over an already-faded influence would decide how the flock reacts in the
+half of the system no test reaches. **The count is of steps rather than of a
+fraction**, so it reaches zero exactly: subtracting a step's worth eighteen times
+leaves a residue near 1e-16, and an influence that is over would outlast §9's
+bound by one step.
+
+**`pointerup` no longer ends presence, and `pointerleave` on the document element
+is what does.** The specification's line above is what made that expressible in
+0007 §1's one code path — a lifted finger produces the leave and a released
+button does not. **The document element rather than `window` is because the event
+does not bubble**: there it means the pointer left the page, where `pointerout`
+on the canvas would fire whenever a cursor crossed onto the strip and release the
+flock in the middle of a visit.
+
+**Three tests that asserted a whole world coming back identical now compare its
+dots, and that is a weakening stated rather than a tidy.** A step handed a
+pointer carries an influence out even where that pointer reaches nothing, so the
+worlds differ by a fact about the visitor while the flock is identical — which is
+what §5's sentence is about.
+
+**And a test that measured the fade by running it forward could not see one.**
+Stepping eighteen times from a released world and reading the velocity each step
+fails at the end: the dot reaches 0006 §3's ceiling and the band clamps it, so a
+velocity that has stopped growing reads as a fade that has stopped fading. It
+places the level on a fresh dot and steps once instead, which compares the force
+rather than what eighteen steps of it did. **Nothing of it has been watched** —
+the browser pane cannot, and both of that ticket's remaining criteria are watches
+that need a device.
+
 **The flock stops while the dialog is open** (0008 §10), and the evidence is the
 supplied clock rather than an eye. Seventy-one frames driven with it open
 produced one identical picture, and the frame after it closed continued from
@@ -1880,10 +1915,18 @@ today would fire not at all there. **The code is deliberately not written.**
 Everything that ticket needs is on it, and what holds it is this watch and nothing
 else.
 
-**It is now the only watch owed**, because
+**Three watches are owed and this is the one with a deadline**, which is why it
+is still the step rather than the newest.
 [#106](https://github.com/nanatsusaya/dot-panic/issues/106)'s has happened —
 [the *Watched* comment on PR #237](https://github.com/nanatsusaya/dot-panic/pull/237#issuecomment-5232024738)
-carries it. **One of its criteria is left unjudged rather than forced**: *about
+carries it — and
+[#107](https://github.com/nanatsusaya/dot-panic/issues/107)'s two arrived with
+its merge and need a device: a lifted finger that neither snaps the flock nor
+leaves it fleeing something that is gone, and a mouse leaving the window
+releasing the flock while a mouse clicked once and then left still holds 0007
+R2's hole. **Neither of those two expires**, and this one does, so it goes first
+even where the other pair is newer. **One of #106's criteria is left unjudged
+rather than forced**: *about
 half the flock inside the reach* was arithmetic against an even distribution,
 there is none after three seconds, and it moves to
 [#233](https://github.com/nanatsusaya/dot-panic/issues/233). A second could not be
@@ -2020,13 +2063,15 @@ the escape by a factor of five where doubling the pointer's strength or 0006 §4
 bound changes it by almost nothing. That number is #216's, and knowing it in
 advance is what #99 cost two sittings to learn the hard way.
 
-**Two of the three have landed and the third is no longer next.** #105 wires the
-pointer and derives nothing from it; #106 is the force that reads it. **#107 and
-#233 both moved behind the coarsening**, on the decider's answer of 2026-08-09
-after a minute of the flock was watched in a browser — both of them tune a
-pointer, and tuning a pointer against a flock that is one crystal in a corner
-spends the watching that is the scarcest thing here. The *Position* section above
-carries what the two changes found and what the recording showed.
+**All three have landed, and what is left of them is watching.** #105 wires the
+pointer and derives nothing from it; #106 is the force that reads it; #107 is the
+fade after presence ends. **#107 and #233 both moved behind the coarsening**, on
+the decider's answer of 2026-08-09 after a minute of the flock was watched in a
+browser — both of them tune a pointer, and tuning a pointer against a flock that
+is one crystal in a corner spends the watching that is the scarcest thing here.
+**#238 ran and #107 followed it the same day**, so that ordering is spent;
+#233 stays behind it, because #233 *is* the tuning. The *Position* section above
+carries what the three changes found and what the recordings showed.
 
 **#238 has run and its finding is a starting point rather than a value**, so
 **#216 is what a session picks up next** — the seven motion numbers, chosen by
