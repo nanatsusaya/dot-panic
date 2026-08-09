@@ -1,17 +1,22 @@
 /**
  * Advancing the world, which is the one thing the Core does (0002 §2).
  *
- * Four of 0006's rules are here: §3's speed band, §6's frame edge — the first
- * **force** in this project rather than a second constraint on the result —
- * §4's bound on what the forces may do in one step, and §1's three steering
- * behaviors, which are what make these dots a flock rather than particles. Only
- * §2's non-overlap is still absent, and it arrives with #102 under #87.
+ * All five of 0006's rules are here: §3's speed band, §6's frame edge — the
+ * first **force** in this project rather than a second constraint on the result
+ * — §4's bound on what the forces may do in one step, §1's three steering
+ * behaviors, which are what make these dots a flock rather than particles, and
+ * §2's non-overlap, which lives in `overlap.ts` because `createWorld` owes the
+ * same guarantee.
  *
  * **The order inside a step is the whole design.** The forces are summed and
  * bounded, the bounded acceleration changes the velocity, the band then holds
- * the result inside itself, and only then is the dot moved — so a dot's
- * displacement is always the velocity it ends the step with, and every world
- * that leaves here satisfies §3.
+ * the result inside itself, the dot is moved, and only then is §2's correction
+ * applied — so a dot's displacement is the velocity it ends the step with, and
+ * every world that leaves here satisfies §3 and §2 together.
+ *
+ * **§2 comes last because it is a constraint on the result.** A correction
+ * applied before the move would be repaired by the move itself; applied to a
+ * velocity it would be a force, which is what that section refuses to make it.
  *
  * **Every dot is steered by the world that went in**, never by a neighbor that
  * has already moved this step. A dot's new velocity would otherwise depend on
@@ -19,6 +24,7 @@
  * meaning to.
  */
 
+import { withoutOverlap } from "./overlap.js";
 import type { Dot, Frame, Vector, World } from "./world.js";
 import {
   ALIGNMENT_WEIGHT,
@@ -373,36 +379,35 @@ function withBoundedSize(force: Vector): Vector {
  *          same frame and the same generator state — nothing here draws from it
  */
 export function step(world: World, seconds: number): World {
-  return {
-    ...world,
-    dots: world.dots.map((dot) => {
-      const edge = edgeForce(dot.position, world.frame);
-      const steering = steeringFor(dot, world.dots);
-      const force = withBoundedSize({
-        x: edge.x + steering.x,
-        y: edge.y + steering.y,
-      });
+  const moved = world.dots.map((dot) => {
+    const edge = edgeForce(dot.position, world.frame);
+    const steering = steeringFor(dot, world.dots);
+    const force = withBoundedSize({
+      x: edge.x + steering.x,
+      y: edge.y + steering.y,
+    });
 
-      /*
-       * The band is applied after the force and before the dot is moved. After,
-       * because a force that could leave a velocity outside the band would make
-       * 0006 §3 false of the world this returns; before, because a dot's
-       * displacement has to be the velocity it ends the step with — a world
-       * where those two disagree draws a dot travelling at a speed it does not
-       * have.
-       */
-      const velocity = withSpeedInBand({
-        x: dot.velocity.x + force.x * seconds,
-        y: dot.velocity.y + force.y * seconds,
-      });
+    /*
+     * The band is applied after the force and before the dot is moved. After,
+     * because a force that could leave a velocity outside the band would make
+     * 0006 §3 false of the world this returns; before, because a dot's
+     * displacement has to be the velocity it ends the step with — a world
+     * where those two disagree draws a dot travelling at a speed it does not
+     * have.
+     */
+    const velocity = withSpeedInBand({
+      x: dot.velocity.x + force.x * seconds,
+      y: dot.velocity.y + force.y * seconds,
+    });
 
-      return {
-        position: {
-          x: dot.position.x + velocity.x * seconds,
-          y: dot.position.y + velocity.y * seconds,
-        },
-        velocity,
-      };
-    }),
-  };
+    return {
+      position: {
+        x: dot.position.x + velocity.x * seconds,
+        y: dot.position.y + velocity.y * seconds,
+      },
+      velocity,
+    };
+  });
+
+  return { ...world, dots: withoutOverlap(moved, world.radius) };
 }

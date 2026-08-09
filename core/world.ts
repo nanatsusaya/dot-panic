@@ -6,6 +6,7 @@
  * to what is here rather than replacing it.
  */
 
+import { withoutOverlap } from "./overlap.js";
 import type { Random } from "./random.js";
 import { nextFraction, randomFromSeed } from "./random.js";
 
@@ -258,6 +259,13 @@ const FULL_TURN = 2 * Math.PI;
  * The inset always fits: the frame's shorter side is 1 (0008 §6) and twice the
  * margin is 0.16, so neither side can be consumed by it.
  *
+ * **The scatter is then corrected for 0006 §2**, because a random one puts a
+ * handful of pairs inside `2r` at any seed. It is corrected here rather than
+ * left to the first step for the same reason the inset exists: under §8 the
+ * Shell never steps where the visitor asked for reduced motion, so this world is
+ * the whole of what those visitors see. The correction moves positions only, so
+ * every dot still leaves at the speed and heading it was drawn.
+ *
  * @param options         what the world is made of, all of it chosen outside
  *                        the Core
  * @param options.count   how many dots. An argument rather than a constant
@@ -302,7 +310,12 @@ export function createWorld(options: {
     random = afterTurn;
   }
 
-  return { dots, frame: options.frame, radius: options.radius, random };
+  return {
+    dots: withoutOverlap(dots, options.radius),
+    frame: options.frame,
+    radius: options.radius,
+    random,
+  };
 }
 
 /**

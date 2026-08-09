@@ -105,6 +105,29 @@ describe("a world", () => {
     }
   });
 
+  /*
+   * 0006 §2 over the world nothing has stepped yet, and it is here for the same
+   * reason the speed band above is: under `prefers-reduced-motion` the Shell
+   * never steps (0006 §8), so this world is the whole of what some visitors ever
+   * see. **It does not hold by construction** — a random scatter of 200 dots
+   * puts a handful of pairs inside `2r`, which is the number #102 fixed before
+   * the work — so the constructor applies the same correction a step does.
+   */
+  test("leaves no two dots closer than two radii", () => {
+    const { dots, radius } = createWorld(ordinary);
+
+    dots.forEach((one, index) => {
+      for (const other of dots.slice(index + 1)) {
+        expect(
+          Math.hypot(
+            one.position.x - other.position.x,
+            one.position.y - other.position.y,
+          ),
+        ).toBeGreaterThanOrEqual(2 * radius);
+      }
+    });
+  });
+
   test("points the dots in more than one direction", () => {
     const headings = createWorld(ordinary).dots.map((dot) =>
       Math.atan2(dot.velocity.y, dot.velocity.x),
