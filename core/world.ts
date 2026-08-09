@@ -148,6 +148,33 @@ export const MAX_ACCELERATION = 1.2;
 export const NEIGHBORHOOD_RADIUS = 0.14;
 
 /**
+ * How close another dot has to be before separation answers it, as a fraction
+ * of the frame's shorter side (0008 §6). Provisional; #216 supersedes it by
+ * watching.
+ *
+ * **0006 §1 requires it to be shorter than `NEIGHBORHOOD_RADIUS`**, and that
+ * requirement is A1 on that record — written on 2026-08-09, after the flock was
+ * built over one reach and looked at. Alignment and cohesion take the whole
+ * neighborhood; separation answers roughly its nearest third.
+ *
+ * **What one reach did is why there are two.** Separation and cohesion oppose
+ * each other, so over one reach they balance at 0.686 of it — 0.096, which is
+ * the 0.094 that 200 dots over a 16:9 frame are apart on average. A flock whose
+ * preferred spacing is the spacing it already has is at rest when it is spread
+ * evenly, and it spread evenly: its Clark-Evans index, the mean distance to the
+ * nearest other dot over what a random scatter of the same density gives, went
+ * from 0.83 to 1.74 in a minute, where 1 is random and 2.15 a perfect lattice.
+ * At 0.05 the same two balance at 0.034 instead, about a third of the spacing a
+ * uniform scatter has, which is the room a group forms in.
+ *
+ * Chosen by measuring rather than before the work, which is the one number here
+ * 0008 R1 could not have in the ticket first — nothing could be measured until
+ * A1 existed. Three seeds of thirty seconds put the index at 0.67, and the
+ * closest pair at 0.020 against the 0.010 that 0006 §2 forbids. Recorded on #99.
+ */
+export const SEPARATION_RADIUS = 0.05;
+
+/**
  * How much separation counts against the other two behaviors (0006 §1).
  * Provisional; #216 supersedes it by watching.
  *

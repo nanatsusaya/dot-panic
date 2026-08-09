@@ -20,6 +20,7 @@ import {
   type Frame,
   MAX_ACCELERATION,
   NEIGHBORHOOD_RADIUS,
+  SEPARATION_RADIUS,
   SPEED_MAX,
   SPEED_MIN,
   type Vector,
@@ -187,17 +188,41 @@ function speedOf(velocity: Vector): number {
 const MIDDLE: Vector = { x: WIDE.width / 2, y: 0.5 };
 
 /*
- * Every world below places a neighbor at the neighborhood's radius over a whole
- * number, and the whole numbers are not decoration. Separation pushes with
- * `NEIGHBORHOOD_RADIUS / gap − 1`, so a neighbor at the radius over `k` pushes
- * with exactly `k − 1` — which is what lets one neighbor's push cancel two
- * others' in integers, at whatever radius #216 chooses. Sevenths, fifths and
- * thirds give six, four and two, and six is four plus two.
+ * A distance inside the neighborhood, for the worlds whose claim is about what
+ * a dot can see at all rather than about what pushes it away.
  *
- * @param divisor  what to divide the radius by
+ * @param divisor  what to divide the neighborhood's radius by
  */
 function radiusOver(divisor: number): number {
   return NEIGHBORHOOD_RADIUS / divisor;
+}
+
+/*
+ * A distance inside separation's own reach, over a whole number, and the whole
+ * numbers are not decoration. Separation pushes with `SEPARATION_RADIUS / gap −
+ * 1`, so a neighbor at that reach over `k` pushes with exactly `k − 1` — which
+ * is what lets one neighbor's push cancel two others' in integers, at whatever
+ * reach #216 chooses. Sevenths, fifths and thirds give six, four and two, and
+ * six is four plus two.
+ *
+ * @param divisor  what to divide separation's reach by
+ */
+function separationOver(divisor: number): number {
+  return SEPARATION_RADIUS / divisor;
+}
+
+/*
+ * A distance past separation's reach and still inside the neighborhood, which
+ * is the band 0006 §1's A1 opened and where alignment and cohesion act alone.
+ *
+ * The multiplier has to keep the result inside `NEIGHBORHOOD_RADIUS`, so it is
+ * a relation between the two numbers rather than between one of them and a
+ * constant — which is what #216 has to hold on to when it moves either.
+ *
+ * @param multiple  how many of separation's reaches out to sit
+ */
+function pastSeparation(multiple: number): number {
+  return SEPARATION_RADIUS * multiple;
 }
 
 /*
@@ -770,8 +795,10 @@ describe("the neighborhood", () => {
  * - **cohesion** says nothing when the neighbors' average position is the dot
  *   itself;
  * - **separation** says nothing when the pushes away from the neighbors cancel,
- *   which takes three of them and works out in whole numbers: a neighbor at the
- *   radius over `k` pushes with `k − 1`, and six is four plus two.
+ *   which takes three of them and works out in whole numbers: a neighbor at
+ *   separation's reach over `k` pushes with `k − 1`, and six is four plus two.
+ *   It also says nothing about a neighbor past that reach at all, which is the
+ *   band A1 opened on 2026-08-09 and the last test here is about.
  */
 describe("the three steering behaviors", () => {
   const seconds = 1 / 60;
@@ -784,9 +811,9 @@ describe("the three steering behaviors", () => {
   test("steers away from its neighbors, cohesion being silent", () => {
     const world = flockAround(
       [
-        { x: -radiusOver(7), y: 0 },
-        { x: -radiusOver(3), y: 0 },
-        { x: radiusOver(7) + radiusOver(3), y: 0 },
+        { x: -separationOver(7), y: 0 },
+        { x: -separationOver(3), y: 0 },
+        { x: separationOver(7) + separationOver(3), y: 0 },
       ],
       CARRIED,
     );
@@ -798,18 +825,18 @@ describe("the three steering behaviors", () => {
   });
 
   /*
-   * The mirror of it, and the reason the distances are the radius over a whole
-   * number. The near neighbor on the right pushes with `7 − 1`; the two on the
-   * left push with `5 − 1` and `3 − 1`, which is the same six. Separation
-   * cancels exactly and the dot is left with the pull toward where its
-   * neighbors average out, which is behind it.
+   * The mirror of it, and the reason the distances are separation's reach over
+   * a whole number. The near neighbor on the right pushes with `7 − 1`; the two
+   * on the left push with `5 − 1` and `3 − 1`, which is the same six.
+   * Separation cancels exactly and the dot is left with the pull toward where
+   * its neighbors average out, which is behind it.
    */
   test("steers toward their average position, separation being silent", () => {
     const world = flockAround(
       [
-        { x: radiusOver(7), y: 0 },
-        { x: -radiusOver(5), y: 0 },
-        { x: -radiusOver(3), y: 0 },
+        { x: separationOver(7), y: 0 },
+        { x: -separationOver(5), y: 0 },
+        { x: -separationOver(3), y: 0 },
       ],
       CARRIED,
     );
@@ -843,16 +870,43 @@ describe("the three steering behaviors", () => {
   /*
    * The crossover, which is what the three weights are for. Separation is
    * weighted above cohesion but falls away with distance while cohesion grows
-   * to its full value at the radius — so the same neighbor is pushed away from
-   * up close and steered toward far off. That is where a flock's spacing comes
-   * from, and at these three numbers the two balance at 0.686 of the radius.
+   * to its full value at the neighborhood's radius — so the same neighbor is
+   * pushed away from up close and steered toward far off. That is where a
+   * flock's spacing comes from, and at these numbers the two balance at 0.686
+   * of separation's reach rather than of the neighborhood's, which is the whole
+   * of what A1 changed and the reason a group has room to form.
    */
   test("pushes away from a near neighbor and pulls toward a far one", () => {
-    const near = flockAround([{ x: radiusOver(7), y: 0 }], CARRIED);
+    const near = flockAround([{ x: separationOver(7), y: 0 }], CARRIED);
     const far = flockAround([{ x: 0.9 * NEIGHBORHOOD_RADIUS, y: 0 }], CARRIED);
 
     expect(steered(near, seconds).x).toBeLessThan(CARRIED.x);
     expect(steered(far, seconds).x).toBeGreaterThan(CARRIED.x);
+  });
+
+  /*
+   * A1's own claim, and the one that says separation's reach is a reach rather
+   * than a weight. Three neighbors past it whose positions average to the dot:
+   * cohesion is silent because they average out, alignment is silent because
+   * they carry the dot's velocity, and separation is silent because none of
+   * them is close enough to answer. Nothing is left, so nothing moves.
+   *
+   * **Over one reach this world steers**, and hard — the three sit at unequal
+   * distances, so pushes that fall away with distance do not cancel the way
+   * positions do. That is what makes this the test A1 is evidenced by rather
+   * than a restatement of the neighborhood's boundary.
+   */
+  test("is not steered by neighbors past separation's reach that average out", () => {
+    const world = flockAround(
+      [
+        { x: -pastSeparation(1.2), y: 0 },
+        { x: -pastSeparation(1.4), y: 0 },
+        { x: pastSeparation(2.6), y: 0 },
+      ],
+      CARRIED,
+    );
+
+    expect(steered(world, seconds)).toEqual(CARRIED);
   });
 
   /*

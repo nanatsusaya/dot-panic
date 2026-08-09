@@ -13,6 +13,8 @@ import {
   EDGE_MARGIN,
   type Frame,
   MAX_ACCELERATION,
+  NEIGHBORHOOD_RADIUS,
+  SEPARATION_RADIUS,
   SPEED_MAX,
   SPEED_MIN,
   withFrame,
@@ -168,5 +170,15 @@ describe("the numbers this ticket fixed", () => {
     const stoppingDistance = SPEED_MAX ** 2 / (2 * MAX_ACCELERATION);
 
     expect(EDGE_MARGIN).toBeGreaterThanOrEqual(stoppingDistance);
+  });
+
+  /*
+   * §10's seventh row, which A1 added on 2026-08-09. It is the same kind of
+   * claim as the margin's above — a relation between two numbers the record
+   * fixes and does not choose — and it is strict rather than loose, because two
+   * reaches that were equal would be the one reach A1 rejected.
+   */
+  test("leave 0006 §1's two reaches ordered", () => {
+    expect(SEPARATION_RADIUS).toBeLessThan(NEIGHBORHOOD_RADIUS);
   });
 });
