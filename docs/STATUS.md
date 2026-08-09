@@ -950,6 +950,31 @@ any merging.** Eight nests at 2.5 seconds, five at 7.5, four at 12.5, everything
 in one quarter of the frame at 27.5, one body at 42.5. Not one group came apart
 on its own.
 
+**A second recording the same day is #106's watch and it settles 0007 R2 by
+picture.** Two minutes, 218 frames, the mouse parked at one spot without clicking
+for the last fifteen seconds: at 100 seconds the pointer sits at the edge of the
+single body with a notch under it, at 110 seconds it is **inside**, with a clean
+round hole around it. The flock drifted onto a stationary pointer and the pointer
+opened a hole through it — and the hole staying open across ten motionless seconds
+is also presence never being released, from the other side. **The rim carries no
+wall of piled-up dots**, which a hard edge would leave, so the falloff reads right
+as far as a still picture reaches.
+
+**The pointer roughly doubles the time to one body and changes nothing else.**
+Four bodies at 70 seconds and one at about 90, against 42 in the recording with
+little mouse movement. One run against one run on different seeds, so it is an
+observation rather than a measurement — but it sharpens *the flock reverts within
+seconds*: the merging is measurably slowed while the pointer is in use and the end
+state is the same. **What the watching leaves standing is that end state.** After
+two minutes the flock is one disc in about an eighth of the frame and the only
+interaction available is putting a hole in it, which reads as a hole in a material
+rather than as birds parting.
+
+**The hole is about half the radius the constant names**, which is expected rather
+than wrong — the rim sits where the push balances cohesion and separation, not
+where the force reaches zero. Eyeballed off a compressed frame, so #233 measures
+it rather than inheriting it.
+
 **Which tests the reason recorded below for putting #88 ahead of #216, and it
 does not hold.** That reason is that #216's subject is a flock nothing disturbs
 and that numbers chosen against it would be chosen against a state that stops
@@ -1805,13 +1830,16 @@ closest pair at 0.022 or wider. So this watch gets **weaker as a test** the mome
 [#216](https://github.com/nanatsusaya/dot-panic/issues/216) writes a number in,
 and there is nothing to look at afterwards. It is owed before that, not after.
 
-**A second watch is owed beside it and it is the larger one**:
-[#106](https://github.com/nanatsusaya/dot-panic/issues/106)'s, listed on
-[PR #237](https://github.com/nanatsusaya/dot-panic/pull/237), where 0001 §1's one
-interaction becomes visible for the first time. Its trap is written there — **park
-the mouse without clicking**, because #105 ends presence on `pointerup`, so a
-click followed by a still cursor has no pointer at all and that is #107's seam
-rather than a finding against the force.
+**It is now the only watch owed**, because
+[#106](https://github.com/nanatsusaya/dot-panic/issues/106)'s has happened —
+[the *Watched* comment on PR #237](https://github.com/nanatsusaya/dot-panic/pull/237#issuecomment-5232024738)
+carries it. **One of its criteria is left unjudged rather than forced**: *about
+half the flock inside the reach* was arithmetic against an even distribution,
+there is none after three seconds, and it moves to
+[#233](https://github.com/nanatsusaya/dot-panic/issues/233). A second could not be
+decided by a recording at two frames per second — whether a dot is visibly picked
+up and dropped crossing the boundary — and the static evidence points the right
+way without settling it.
 
 **All five landed on 2026-08-08 and 2026-08-09** —
 [#100](https://github.com/nanatsusaya/dot-panic/issues/100),
