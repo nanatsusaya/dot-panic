@@ -10,11 +10,18 @@
  *
  * **And one force that is not 0006's.** 0007 §5's pointer is the only thing
  * here that comes from outside the flock — the visitor, arriving as an argument
- * — and it joins the same sum the others do, so §4's bound holds all four
- * together rather than the flock's three and then this one.
+ * — and 0021 §2 puts it among the steering rather than beside it, so it yields
+ * to containment exactly as separation does.
  *
- * **The order inside a step is the whole design.** The forces are summed and
- * bounded, the bounded acceleration changes the velocity, the band then holds
+ * **Containment claims §4's budget first and the steering takes what is left**
+ * (0021 §1). The edge force is bounded to `MAX_ACCELERATION` on its own, the
+ * three behaviors and the pointer are summed and bounded to what remains of it,
+ * and the two are added. §4 then holds by the triangle inequality rather than by
+ * a bound over the total, which is what stops a steering force pointing outward
+ * being subtracted from containment before anything is capped.
+ *
+ * **The order inside a step is the whole design.** The forces are bounded and
+ * added, the resulting acceleration changes the velocity, the band then holds
  * the result inside itself, the dot is moved, and only then is §2's correction
  * applied — so a dot's displacement is the velocity it ends the step with, and
  * every world that leaves here satisfies §3 and §2 together.
@@ -178,6 +185,10 @@ function edgePush(distance: number): number {
  * what the edges want is not the same question as what §4 allows. Bounding it
  * is `withBoundedSize`'s, one call later, and the corner is the case that made
  * that bound necessary rather than an accident smoothed over here.
+ *
+ * **What this returns is what 0021 §1 calls `c`**, and it is bounded before any
+ * other force is looked at. In a corner it takes the whole budget and the flock
+ * steers a dot there by nothing at all.
  *
  * @param position  where the dot is, which may be outside the frame
  * @param frame     the rectangle the flock stays inside
@@ -345,11 +356,15 @@ function cohesionTo(dot: Dot, neighbors: readonly Dot[]): Vector {
 /**
  * The three behaviors, weighted and summed into one acceleration (0006 §1).
  *
- * **One vector leaves here and not three.** 0006 §4's bound applies to what the
- * forces produce together, so summing before the edge force joins is what makes
- * the corner and a crowd one budget rather than two — and a dot pulled three
- * ways accelerates gently while one whose behaviors agree accelerates hard,
- * which is the variation §4 asks the forces to produce.
+ * **One vector leaves here and not three.** A dot pulled three ways accelerates
+ * gently while one whose behaviors agree accelerates hard, which is the
+ * variation §4 asks the forces to produce — and a bound applied to each behavior
+ * in turn would let the three together change a velocity by more than any one of
+ * them allows.
+ *
+ * **What this returns is part of 0021 §1's `s` and not the whole of it.** 0007
+ * §5's pointer is the other part, and the bound the two share is what is left of
+ * §4's budget after containment has taken its share.
  *
  * A dot with nobody inside its neighborhood is steered by nothing at all, which
  * is a real state rather than a guard: the flock breaks up, and the edge is
@@ -494,7 +509,7 @@ function nextInfluence(
 }
 
 /**
- * Hold an acceleration inside 0006 §4's bound, keeping the direction it points.
+ * Hold an acceleration inside a bound, keeping the direction it points.
  *
  * **The bound is on the acceleration and not on the change**, which is the same
  * statement: every force here is multiplied by the same `seconds`, so capping
@@ -503,33 +518,38 @@ function nextInfluence(
  * §6's own formula needs, and a change to 0008 §3's step rate cannot silently
  * change the motion.
  *
+ * **The bound is an argument because there are two of them** (0021 §1).
+ * Containment is held to `MAX_ACCELERATION`, and the steering sum to what is
+ * left of it — down to nothing at all, which is the case at the frame's edge and
+ * the case the record exists to produce. A bound of zero returns the zero
+ * vector, which is scaling and not a special case.
+ *
  * **What is bounded is what the forces produce.** §2's non-overlap and §3's
  * band are constraints on the result and are exempt — the reading #101 settled,
  * with §2's own *"a constraint on the result, not a force among the others"* as
  * the precedent. The band's correction is why the asserted bound over a step is
- * twice this one.
+ * twice `MAX_ACCELERATION`.
  *
  * A force of exactly zero has no direction to keep and needs none: nothing is
  * scaled, because nothing is over the bound.
  *
  * **`at most` is exact here and was not**, which is `scaledTo`'s doing and
- * #258's. Nothing in this file asserted it that way — the change over one step
- * carries a further rounding, so 0006 §4's own tests compare closely rather than
- * exactly — but the next thing to be built on this subtracts the returned size
- * from the bound, and an ulp too much makes that difference negative.
+ * #258's. It is what makes the second bound safe to compute: an ulp too much on
+ * the first would leave `MAX_ACCELERATION` less that size **negative**, and
+ * scaling a vector by a negative length reverses it.
  *
- * @param force  the acceleration the forces produced together
- * @returns an acceleration pointing the same way, of size at most
- *          `MAX_ACCELERATION`
+ * @param force  the acceleration to hold, which may be zero
+ * @param bound  the largest size it may have, never negative
+ * @returns an acceleration pointing the same way, of size at most `bound`
  */
-function withBoundedSize(force: Vector): Vector {
+function withBoundedSize(force: Vector, bound: number): Vector {
   const size = Math.hypot(force.x, force.y);
 
-  if (size <= MAX_ACCELERATION) {
+  if (size <= bound) {
     return force;
   }
 
-  return scaledTo(force, size, MAX_ACCELERATION, "ceiling");
+  return scaledTo(force, size, bound, "ceiling");
 }
 
 /**
@@ -564,21 +584,41 @@ export function step(world: World, seconds: number, pointer?: Vector): World {
   const influence = nextInfluence(world.pointer, pointer);
 
   const moved = world.dots.map((dot) => {
-    const edge = edgeForce(dot.position, world.frame);
     const steering = steeringFor(dot, world.dots);
     const pushed = pointerForce(dot.position, influence);
 
     /*
-     * All three summed before anything is bounded, which is what makes 0006
-     * §4's cap one budget rather than three. It is also the relation #106's
-     * peak strength is chosen against: a pointer pushing outward is subtracted
-     * from §6's edge force here, before `withBoundedSize` sees either, so a
-     * peak above the bound could cancel an edge the margin was sized against.
+     * 0021 §1, and the whole of what that record decided. Containment is
+     * bounded first and on its own; the steering sum — the flock's three
+     * behaviors and the visitor's pointer together — is bounded to what is left
+     * of `MAX_ACCELERATION` after it. Adding the two then satisfies 0006 §4 by
+     * the triangle inequality, `|c + s| ≤ |c| + |s| ≤ amax`, so there is
+     * deliberately no bound over the total: a third one would hide whether
+     * these two hold.
+     *
+     * **What this replaces is one bound over the sum of all four**, under which
+     * a force pointing outward was subtracted from §6's edge force before
+     * anything was capped. That is what let a separation share of 0.762 and a
+     * pointer peak of 3.0 each carry a dot out of the frame — two findings of
+     * 2026-08-09, two different forces, one cause.
      */
-    const force = withBoundedSize({
-      x: edge.x + steering.x + pushed.x,
-      y: edge.y + steering.y + pushed.y,
-    });
+    const containment = withBoundedSize(
+      edgeForce(dot.position, world.frame),
+      MAX_ACCELERATION,
+    );
+
+    const remaining =
+      MAX_ACCELERATION - Math.hypot(containment.x, containment.y);
+
+    const steered = withBoundedSize(
+      { x: steering.x + pushed.x, y: steering.y + pushed.y },
+      remaining,
+    );
+
+    const force = {
+      x: containment.x + steered.x,
+      y: containment.y + steered.y,
+    };
 
     /*
      * The band is applied after the force and before the dot is moved. After,
