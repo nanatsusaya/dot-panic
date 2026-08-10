@@ -18,7 +18,7 @@
   [0012](0012-how-software-gets-developed.md) §4 (test-first in the Core, without
   exception), §5 (watch-first in the View)
 - **Supersedes:** nothing
-- **Amended:** 2026-08-09 — A1
+- **Amended:** 2026-08-09 — A1, A2
 
 ## Context
 
@@ -268,6 +268,7 @@ motion that left its own side of it implicit would be the wrong example.
 | §2 | No two dots closer than `2r` in a returned world |
 | §3 | Every dot's speed in `[vmin, vmax]`, with `vmin > 0` |
 | §4 | Change in velocity across a step at most `amax` |
+| [0021](0021-how-the-acceleration-budget-is-shared.md) §1 | Containment and steering are bounded separately, the steering sum to at most `amax` less the size of the containment force |
 | §6 | No dot outside the frame; the margin satisfies its relation |
 | §7 | A cornered flock disperses within a bounded number of steps |
 | §9 | The Core does not name pausing |
@@ -287,10 +288,12 @@ and no color.
 
 **Positive.**
 
-- **Seven invariants, six of them on the day the record is written.** 0012 §4
+- **Eight invariants, six of them on the day the record is written.** 0012 §4
   requires the Core to be built test-first, and §10 hands it the list to start
   from rather than asking the first implementer to invent one. The seventh
-  arrived with A1, once there was a flock to look at.
+  arrived with A1, once there was a flock to look at, and the eighth with A2 —
+  which is another record's decision listed here, because this is where a
+  session reads what a command decides about motion.
 - **The boundary rule is derived, not chosen.** §6 follows from §4, so a later
   session that wants a bounce has to argue with an invariant instead of with a
   preference.
@@ -503,6 +506,44 @@ reach be taken as an amendment here rather than as a number under
 /adr"*. The two things this amendment was asked to do and did not were put to him
 the same day and answered with the recommendation, in that order: *"zu O1: keine
 schranke, zu O2: §1 lassen"*.
+
+**A2 — §10's asserted table gains a row, and the invariant in it is another
+record's. 2026-08-09.**
+
+§10's asserted table ran:
+
+> | §4 | Change in velocity across a step at most `amax` |
+> | §6 | No dot outside the frame; the margin satisfies its relation |
+
+*Consequences* opened:
+
+> - **Seven invariants, six of them on the day the record is written.** 0012 §4
+>   requires the Core to be built test-first, and §10 hands it the list to start
+>   from rather than asking the first implementer to invent one. The seventh
+>   arrived with A1, once there was a flock to look at.
+
+**What replaced them.** A row sits between those two, naming
+[0021](0021-how-the-acceleration-budget-is-shared.md) §1 rather than a section of
+this record: *containment and steering are bounded separately, the steering sum
+to at most `amax` less the size of the containment force*. The count in
+*Consequences* reads eight and says where the eighth came from.
+
+**Why it is listed here at all.** §10 is where a session reads what a command
+decides about motion, and 0021 decides an invariant of exactly that kind. Left
+out, it would be invisible to anyone reading this record — which is most readers,
+because §4's bound is what every later question about the forces starts from.
+**Nothing this record decides changes.** §4 still says the change in a dot's
+velocity across a step is at most `amax`; 0021 decides how the forces divide that
+budget, which no section here ever stated.
+
+**The row is a list handed to the implementer, not a claim that a command
+already decides it** — the same standing the six original rows had on the day
+this record was written, and *Consequences* says so in its own words.
+
+Authorized by Daniel on 2026-08-09, against
+[PR #262](https://github.com/nanatsusaya/dot-panic/pull/262): *"Zu #262 folgen
+wir deiner Empfehlung"*, the recommendation being that the row be added here
+rather than left to live only in a test.
 
 ## References
 
