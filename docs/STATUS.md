@@ -2,7 +2,7 @@
 
 *Brought current before a session ends. Read first when one starts.*
 
-*Last brought current: 2026-08-09.*
+*Last brought current: 2026-08-10.*
 
 ## Position
 
@@ -143,9 +143,37 @@ they did not, that record would not be worth writing. They did. **The other half
 of the criterion has not happened**: it names 1280×720 **and** the floor device
 0001 §3.5 names, and the decider deferred the second to 2026-08-10.
 
+**That record is [0021](adr/0021-how-the-acceleration-budget-is-shared.md) and it
+is Accepted.** Containment claims 0006 §4's budget first and the steering sum is
+bounded to what is left, so the total still satisfies §4 by the triangle
+inequality rather than by a second bounding step; 0007 §5's pointer is steering
+for that purpose; and a cornered pile is dispersed by 0006 §3's floor and §2's
+correction, because separation contributes nothing to a dot at the very edge.
+
+**What this file predicted about it was wrong in the useful direction.** The step
+named here said it *amends or supersedes an accepted record rather than adding
+one*, and it added one: §4 bounds **the change in a dot's velocity across a step**
+and says nothing about how the forces divide that budget, so deciding the division
+needs no authorization at all. Reading what an existing record actually constrains
+is what turned a stop-and-ask into a record written the same evening — and
+[#261](https://github.com/nanatsusaya/dot-panic/issues/261) had asked for exactly
+that check rather than the assumption.
+
+**Two amendments came with it, both authorized on 2026-08-09.** 0007 §5's A2
+replaces the sentence that said containment *needs no new rule*, whose reasoning
+was about a dot's **speed** where #106's failure is about the **direction** the
+bounded sum points; and 0006 §10's A2 adds the eighth row to the table that record
+asserts. **Nothing is built against any of it**, and 0021 §5 says in terms what it
+does not buy: the cancellation is gone, and *no dot outside the frame* is still
+not provable.
+
 The rest of what is built is the way of working: the operating rules, the
-decision set, nineteen accepted records, and the five
-session procedures in [`.claude/skills/`](../.claude/skills/README.md).
+[decision set](adr/README.md), and the five session procedures in
+[`.claude/skills/`](../.claude/skills/README.md). **The count that stood here read
+*nineteen* and was two records behind** — the third figure this file has kept and
+the third to go stale, after the sittings and the ticket count, so it is the
+index's now for the reason
+[#131](https://github.com/nanatsusaya/dot-panic/issues/131) gives.
 
 **[0018](adr/0018-where-a-test-lives.md) is the eighteenth and it unblocked
 three tickets.** A source-reading test lives in `tests/`, a fourth top-level
@@ -1946,21 +1974,35 @@ What a change description must contain is no longer among the gaps here.
 
 ## The single clearest next step
 
-**The record that stops containment and steering sharing one budget.** 0006 §4
-bounds the **sum** of the forces, so separation strong enough to break the flock
-into groups cancels §6's turning force at an edge, and a pile in a corner leaves
-the frame. That is what capped
+**The ticket that builds
+[0021](adr/0021-how-the-acceleration-budget-is-shared.md), and
+[#258](https://github.com/nanatsusaya/dot-panic/issues/258) with or before it.**
+The record is Accepted and merged and **nothing is built against it**:
+`core/step.ts` still bounds one sum, so separation strong enough to break the
+flock into groups still cancels 0006 §6's turning force at an edge, and a pile in
+a corner still leaves the frame. That is what capped
 [#216](https://github.com/nanatsusaya/dot-panic/issues/216)'s first pass at a
 separation share of 0.706, and it is the same wall
 [#106](https://github.com/nanatsusaya/dot-panic/issues/106) hit from the other
 side at a pointer peak of 3.0 — **two tickets, two different forces, one cause**,
-which is that the margin was sized against the edge force acting alone. The watch
-of 2026-08-09 supplied the argument it needs: where the flock comes apart it
-**does** read as a flock, so the direction is right and what is capped is the
-strength. **Nothing carries it yet.** It is a `type:decision` with no ticket, and
-it amends or supersedes an accepted record rather than adding one — so it is the
-decider's to authorize before it is written, which is why this step is named here
-rather than started.
+which is that the margin was sized against the edge force acting alone.
+
+**What the build changes is where the bound is applied**, not what it is: the
+containment force to `amax`, the steering sum to `amax` less the size of the
+containment force. It changes the invariant a test asserts, which is 0006 §10's
+new eighth row, and it **chooses no number** — the strength this unlocks is
+#216's, by watching, and 0008 R1 puts it in the ticket that fixes the criteria
+rather than in a record. **#258 belongs with it or before it**: its whole argument
+is that the next session to move a number reads a red run as its own fault, and
+that session is this one. **No ticket carries either of the two consequences 0021
+watches** — a flock that may look stiff near an edge, and a pointer that becomes
+harder to push a flock into a corner with — so the build's `Watched and seen` is
+where they land, and [#233](https://github.com/nanatsusaya/dot-panic/issues/233)
+is where the pointer's numbers are rechosen against the second.
+
+**Nothing carries it yet**, and that is the one thing standing in front of it: it
+is a `type:build` with no ticket, which is what makes writing the ticket the first
+move rather than opening a branch.
 
 **What #216 chooses against is a picture now and not an index.** The evening of
 2026-08-09 put three observations on it, none of them a measurement: the flock is
