@@ -2,7 +2,7 @@
 
 *Brought current before a session ends. Read first when one starts.*
 
-*Last brought current: 2026-08-10.*
+*Last brought current: 2026-08-12.*
 
 ## Position
 
@@ -158,6 +158,17 @@ needs no authorization at all. Reading what an existing record actually constrai
 is what turned a stop-and-ask into a record written the same evening — and
 [#261](https://github.com/nanatsusaya/dot-panic/issues/261) had asked for exactly
 that check rather than the assumption.
+
+**It is built, in two changes on 2026-08-12.** `core/step.ts` bounds containment
+to `amax` on its own, sums the three behaviors with 0007 §5's pointer and bounds
+that to what is left, and adds the two — so there is deliberately no bound over
+the total, because a third one would hide whether the first two hold. Four new
+assertions, **all four red against the arrangement they replace**, including
+#106's own failing step: 1.13 of pointer against 0.9 of containment, which used
+to net outward by 0.234. Before it,
+[#258](https://github.com/nanatsusaya/dot-panic/issues/258) had to make a scaled
+vector land on the side of the length it was asked for, because `amax` less an
+ulp too much is **negative** and scaling by a negative length reverses a vector.
 
 **Two amendments came with it, both authorized on 2026-08-09.** 0007 §5's A2
 replaces the sentence that said containment *needs no new rule*, whose reasoning
@@ -1974,35 +1985,46 @@ What a change description must contain is no longer among the gaps here.
 
 ## The single clearest next step
 
-**The ticket that builds
-[0021](adr/0021-how-the-acceleration-budget-is-shared.md), and
-[#258](https://github.com/nanatsusaya/dot-panic/issues/258) with or before it.**
-The record is Accepted and merged and **nothing is built against it**:
-`core/step.ts` still bounds one sum, so separation strong enough to break the
-flock into groups still cancels 0006 §6's turning force at an edge, and a pile in
-a corner still leaves the frame. That is what capped
-[#216](https://github.com/nanatsusaya/dot-panic/issues/216)'s first pass at a
-separation share of 0.706, and it is the same wall
-[#106](https://github.com/nanatsusaya/dot-panic/issues/106) hit from the other
-side at a pointer peak of 3.0 — **two tickets, two different forces, one cause**,
-which is that the margin was sized against the edge force acting alone.
+**One sitting at the page, closing three criteria that all want it open.** The
+budget is built and the number it was holding down is in a change awaiting
+review, so what is left in front of the flock is not code — it is
+[0001](adr/0001-purpose-scope-and-success.md) §3.1's one judge, and nothing here
+can supply it.
 
-**What the build changes is where the bound is applied**, not what it is: the
-containment force to `amax`, the steering sum to `amax` less the size of the
-containment force. It changes the invariant a test asserts, which is 0006 §10's
-new eighth row, and it **chooses no number** — the strength this unlocks is
-#216's, by watching, and 0008 R1 puts it in the ticket that fixes the criteria
-rather than in a record. **#258 belongs with it or before it**: its whole argument
-is that the next session to move a number reads a red run as its own fault, and
-that session is this one. **No ticket carries either of the two consequences 0021
-watches** — a flock that may look stiff near an edge, and a pointer that becomes
-harder to push a flock into a corner with — so the build's `Watched and seen` is
-where they land, and [#233](https://github.com/nanatsusaya/dot-panic/issues/233)
-is where the pointer's numbers are rechosen against the second.
+**The three are one sitting because they are one page.**
+[#216](https://github.com/nanatsusaya/dot-panic/issues/216)'s *it reads as a
+flock*, at the new weight; and
+[#264](https://github.com/nanatsusaya/dot-panic/issues/264)'s two, which are
+0021's own named negative consequences — whether the flock reads as **stiff**
+near an edge, and whether the pointer reads as the page **resisting** when a
+group is pushed into a corner, which 0006 §7 rejects by name for a different
+force. **What the measurement says to expect of the last two is subtle**: the
+region where steering is suppressed hardest is occupied 0.1 to 0.2 percent of the
+time, so both want arranging deliberately rather than waiting for.
 
-**Nothing carries it yet**, and that is the one thing standing in front of it: it
-is a `type:build` with no ticket, which is what makes writing the ticket the first
-move rather than opening a branch.
+**What each outcome licenses is written down before anyone looks**, on
+[#267](https://github.com/nanatsusaya/dot-panic/pull/267) and not here. That is
+the [method log](method-log.md)'s entry of 2026-08-09 applied on purpose: a
+mixed result read afterwards says *not done*, and read against what was fixed in
+advance it says which lever is next. **The floor-device half of #216's criterion
+is owed on top of all three** and has been since 2026-08-10.
+
+**What got built, in two changes.** 0021 §1 is in `core/step.ts`: containment is
+bounded to `amax` on its own, the three behaviors and 0007 §5's pointer are
+summed and bounded to what is left, and the two are added — so 0006 §4 holds by
+the triangle inequality and there is deliberately no bound over the total. Four
+new assertions, all four red against the arrangement they replace. Before it,
+[#258](https://github.com/nanatsusaya/dot-panic/issues/258): scaling a vector
+rounds twice and could land an ulp on the wrong side of the length it was scaled
+to, which had to be exact first, because `amax` less an ulp too much is
+**negative** and scaling by a negative length reverses a vector.
+
+**The ceiling is gone and it was measured rather than argued.** #216's
+inadmissible mix at a share of 0.889, 600 steps out of a corner, four seeds: every
+one put a dot outside the frame before and none does after, and the pile still
+leaves the corner. The 0.00046 this file records is the same measurement read
+differently — the suite reports the **first** excursion and stops, and seed 7
+gives 4.619e-4 at step 14 when read that way.
 
 **What #216 chooses against is a picture now and not an index.** The evening of
 2026-08-09 put three observations on it, none of them a measurement: the flock is
@@ -2024,6 +2046,15 @@ intermittently**, which 0001 §3.1 makes the only judge there is — so the gap
 between the toy and *good enough* is narrower than it was and is still named
 rather than deferred.
 
+**A fourth is in review and is the first inside that band.**
+[#267](https://github.com/nanatsusaya/dot-panic/pull/267) takes separation's
+weight to 10, a share of 0.889, which is the mix the ceiling was hiding: measured
+over two minutes and three seeds it reads **0.94 to 1.09**, occupies 47 to 76
+percent of the frame against 24 to 35, and its largest body **grows and comes
+apart again** where every mix before it reached 200 dots and stayed. **The index
+is the argument and not the answer**, which is the whole of why the sitting above
+is the next step and not another measurement.
+
 **`SPEED_MAX` is pointed at twice, by evidence of two different kinds.** The
 prototype measured before any of this was built that doubling it takes dots
 overtaken by a sweeping pointer from 37/36/40 to 7/8/7, where doubling the
@@ -2034,12 +2065,18 @@ never closes behind a moving one.
 [#233](https://github.com/nanatsusaya/dot-panic/issues/233) each say to bring that
 back here rather than reach for the number, and both have.
 
-**One watch is owed, and it is half of one criterion.** All three that stood at
-the start of 2026-08-09 came back that evening — #102's jitter, and
-[#107](https://github.com/nanatsusaya/dot-panic/issues/107)'s two — and both
-tickets closed on them. **What is owed is the floor-device half of #216's**,
-deferred by the decider to 2026-08-10; the 1280×720 half happened the same
-evening and the *Position* section carries what it showed. #107's
+**Four watches are owed and three of them are one sitting**, which is the step
+named above: #216's *it reads as a flock* at the new weight, and #264's two. The
+fourth is **the floor-device half of #216's**, deferred by the decider to
+2026-08-10 and outstanding since; the 1280×720 half happened on 2026-08-09 and
+the *Position* section carries what it showed. **This is the first time the count
+has gone up**, and it went up because a record was built rather than because
+anything was skipped: 0021 named two consequences that only eyes decide, and the
+ticket that built it carries them.
+
+**All three that stood at the start of 2026-08-09 came back that evening** —
+#102's jitter, and [#107](https://github.com/nanatsusaya/dot-panic/issues/107)'s
+two — and both tickets closed on them. #107's
 mouse-leaves-the-window case is the one that could
 have failed, because [Pointer Events Level 3](https://www.w3.org/TR/pointerevents3/#the-pointerout-event)
 does not list leaving the window among the firing circumstances and the ticket
