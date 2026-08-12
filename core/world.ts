@@ -252,29 +252,35 @@ export const SEPARATION_RADIUS = 0.05;
  * #102's. Fixed in #99 before the work started, which is where 0008 R1 puts a
  * number.
  *
- * **3 rather than #99's 1.5, and it is #216's first pass rather than its
- * answer.** At 1.5 the flock merged into one body of all 200 dots and stayed
- * that way: over two minutes and three seeds the largest body reached 200 and
- * never came apart again. `SEPARATION_RADIUS` records why reaching for the
- * reach instead is worthless, and `ALIGNMENT_WEIGHT` carries the other half of
- * what changed.
+ * **This number has been three things.** #99's 1.5 merged the flock into one
+ * body of all 200 dots that never came apart: two minutes, three seeds, the
+ * largest body at 200 throughout. #216's first pass raised it to 3, and
+ * `ALIGNMENT_WEIGHT` carries the other half of what changed there —
+ * `SEPARATION_RADIUS` records why reaching for the reach instead is worthless.
  *
- * **3 was a ceiling and is a preference again**, which 0021 §1 is what changed.
- * The three weights are divided by their own total before the sum is scaled by
+ * **3 was a ceiling and not a preference, and 0021 §1 is what removed it.** The
+ * three weights are divided by their own total before the sum is scaled by
  * `MAX_ACCELERATION`, so what reaches an edge is separation's **share** — and
  * while one bound held the sum of every force, a share large enough cancelled
  * 0006 §6's turning force. Measured against a pile placed in a corner: at 0.706
- * every dot stayed inside, at 0.762 one left. These three weights put it at
- * 0.706, which is where the ceiling put them.
+ * every dot stayed inside, at 0.762 one left, and 3 is exactly 0.706. Containment
+ * claims its share of the budget first now, so no share of these three can cancel
+ * an edge and the ceiling is gone.
  *
- * **Containment now claims its share of the budget before steering sees any of
- * it**, so no share of these three can cancel an edge. The mix that came apart
- * in all three seeds sits at 0.889 and was inadmissible for that reason alone;
- * it is admissible now. **Nothing here has moved on the strength of it** — 0021
- * §5 fixes no number and #216 chooses these by watching, which is the only thing
- * that decides whether a flock reads as one.
+ * **10 is the mix that ceiling was hiding**, at a share of 0.889, and it was
+ * measured before it was written. Two minutes, three seeds, against 3 on the same
+ * Core: the Clark-Evans index over the frame runs **0.94 to 1.09** where 3 runs
+ * 0.75 to 0.89, the flock occupies 47 to 76 percent of the frame where 3 occupies
+ * 24 to 35, and the largest body **grows and comes apart again** — 2, 1, 4, 1
+ * bodies across one run — where 3 reaches 200 and stays. The closest pair over
+ * the whole run is 0.0100 against the 0.0100 0006 §2 forbids crossing.
+ *
+ * **The index is the argument and not the answer.** 0.90 to 1.10 is the band
+ * groups that form and break sit in, and every number above is a proxy for the
+ * one thing that decides this — whether it reads as a flock, which is 0001 §3.1's
+ * and #216's to watch. This is still that ticket's first pass and not its answer.
  */
-export const SEPARATION_WEIGHT = 3;
+export const SEPARATION_WEIGHT = 10;
 
 /**
  * How much alignment counts, on the same scale. Provisional in the same way and
