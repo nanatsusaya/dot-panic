@@ -844,6 +844,183 @@ describe("the bound on a change in velocity", () => {
 });
 
 /*
+ * 0021 §1, and the row 0006 §10 gained as that record's A2. Containment claims
+ * §4's budget first and the steering sum — the three behaviors and 0007 §5's
+ * pointer together — is held to what is left of it, so `|c| + |s| ≤ amax` and §4
+ * follows by the triangle inequality rather than from a bound over the total.
+ *
+ * **What it replaces is the arrangement both findings of 2026-08-09 failed on:**
+ * one bound over the sum of all four, under which a force pointing outward was
+ * subtracted from the edge before anything was capped. #216 lost a dot from a
+ * cornered pile at a separation share of 0.762 and #106 put one 0.0432 outside
+ * at a pointer peak of 3.0 — two forces, one cause.
+ *
+ * **Nothing here asserts that no dot leaves the frame**, which 0021 §5 refuses
+ * to claim. The two runs that do are above, and they held before this as well.
+ */
+describe("the share of the budget containment takes first", () => {
+  /*
+   * A tenth of 0008 §3's step. The two halves below are read off velocities, so
+   * the band firing in either run would make the difference something other than
+   * a force — at this length the largest change either can produce is 0.002
+   * against a band 0.12 wide, and `CARRIED` sits in the middle of it.
+   */
+  const SLOW = 1 / 600;
+
+  /*
+   * What reading a force off two velocities costs, and it belongs to the reading
+   * rather than to the step. A change of 0.002 is measured as the difference of
+   * two velocities of about 0.1, which throws away two of the sixteen digits
+   * there are; over every case below the worst overshoot is 9.4e-15, measured.
+   *
+   * **It cannot hide the failure it is asserting against**, which is the test a
+   * tolerance has to pass here. The violation this row exists to catch is of the
+   * order of the forces themselves — 1.13 of steering against 0.9 of containment
+   * in the one step #106 measured — so the gap between what is tolerated and what
+   * would be caught is thirteen orders of magnitude. That makes this a unit of
+   * the measurement and not slack in the rule.
+   */
+  const READING_ERROR = 1e-12;
+
+  /**
+   * The sizes of 0021 §1's two halves, read off two runs of the same world
+   * rather than out of the step.
+   *
+   * Containment depends on the dot's position and on nothing else, so the same
+   * dot alone and with no pointer produces `c` by itself; the whole world with
+   * its pointer produces `c + s`, and the difference is `s`. Neither number is a
+   * force reimplemented here, which is what makes this an assertion about the
+   * step rather than about a copy of it.
+   *
+   * @param world    the world to advance; its first dot is the subject and the
+   *                 rest are what steer it
+   * @param pointer  where the visitor's pointer is, or `undefined`
+   * @returns the size of the containment force and of the steering sum, both as
+   *          accelerations
+   */
+  function budget(world: World, pointer?: Vector): { c: number; s: number } {
+    const subject = world.dots[0];
+
+    if (subject === undefined) {
+      throw new Error("the world under test has no first dot");
+    }
+
+    const alone = steered({ ...world, dots: [subject] }, SLOW);
+    const together = step(world, SLOW, pointer).dots[0];
+
+    if (together === undefined) {
+      throw new Error("the world under test has no first dot");
+    }
+
+    const containment = {
+      x: (alone.x - subject.velocity.x) / SLOW,
+      y: (alone.y - subject.velocity.y) / SLOW,
+    };
+    const total = {
+      x: (together.velocity.x - subject.velocity.x) / SLOW,
+      y: (together.velocity.y - subject.velocity.y) / SLOW,
+    };
+
+    return {
+      c: speedOf(containment),
+      s: Math.hypot(total.x - containment.x, total.y - containment.y),
+    };
+  }
+
+  /**
+   * A dot at `position` with a crowd pressed against its inward side, which is
+   * the arrangement that steers a dot out of the frame: separation is what a
+   * cornered pile has most of, and #216's ceiling on its share is what this
+   * removes.
+   *
+   * @param position  where the subject sits, at or inside the left edge
+   */
+  function pressedFromInside(position: Vector): World {
+    return {
+      dots: [
+        { position, velocity: CARRIED },
+        ...[1, 2, 3].map((nth) => ({
+          position: { x: position.x + separationOver(8) * nth, y: position.y },
+          velocity: CARRIED,
+        })),
+      ],
+      frame: WIDE,
+      radius: DOT_RADIUS,
+      random: randomFromSeed(1),
+    };
+  }
+
+  /*
+   * §1's own sentence, and the case it exists to produce: at the edge `|c|` is
+   * the whole budget and steering receives nothing. Asserted as exactly nothing
+   * rather than as nearly nothing — a crowd this close is what put a dot outside
+   * the frame before, and *nearly* is what that failure would still satisfy.
+   */
+  test("gives a dot at the very edge nothing to steer with", () => {
+    const { c, s } = budget(pressedFromInside({ x: 0, y: 0.5 }));
+
+    expect(c).toBeCloseTo(MAX_ACCELERATION, 12);
+    expect(s).toBe(0);
+  });
+
+  // 0021 §2: the pointer is steering for this purpose and yields the same way.
+  // This is #106's own arrangement — a pointer held against an edge, on the
+  // inward side of a dot that is already at it.
+  test("gives the pointer nothing there either", () => {
+    const atTheEdge = dotIn(WIDE, { x: 0, y: 0.5 }, CARRIED);
+
+    expect(budget(atTheEdge, { x: POINTER_RADIUS / 4, y: 0.5 }).s).toBe(0);
+  });
+
+  /*
+   * The row itself, over the depths at which the two forces actually compete.
+   * `EDGE_MARGIN` over eight is nearly the whole budget to containment, over one
+   * is nothing at all, and the middle of the range is where a share is a share.
+   */
+  test("holds the steering sum to what containment left", () => {
+    for (const divisor of [1, 2, 3, 4, 6, 8]) {
+      const at = { x: EDGE_MARGIN / divisor, y: 0.5 };
+      const pushed = { x: at.x + POINTER_RADIUS / 8, y: 0.5 };
+
+      for (const { c, s } of [
+        budget(pressedFromInside(at)),
+        budget(pressedFromInside(at), pushed),
+        budget(dotIn(WIDE, at, CARRIED), pushed),
+      ]) {
+        expect(s).toBeLessThanOrEqual(MAX_ACCELERATION - c + READING_ERROR);
+      }
+    }
+  });
+
+  /*
+   * 0021 §5's guarantee, which is the one this record does make: the net force
+   * is inward wherever `|c| > amax/2`, whatever the flock or the visitor wants.
+   * That is the outer half of the margin, and it is the region both findings
+   * failed in.
+   *
+   * **The pointer is the outward push here rather than a crowd**, because it is
+   * the only force with no counterpart pulling the other way — a crowd pressed
+   * against the inward side also gives cohesion something to pull toward. At
+   * this gap it pushes with 1.13 against containment's 0.9, so under one bound
+   * over the sum the net was **outward**: `-0.234`, which is #106's failure in
+   * one step.
+   */
+  test("turns a dot in the outer margin inward however hard it is pushed out", () => {
+    const at = { x: EDGE_MARGIN / 4, y: 0.5 };
+    const world = dotIn(WIDE, at, CARRIED);
+    const behind = { x: at.x + EDGE_MARGIN / 16, y: 0.5 };
+
+    const after = step(world, SLOW, behind).dots[0];
+
+    if (after === undefined) {
+      throw new Error("the world under test has no first dot");
+    }
+
+    expect(after.velocity.x - CARRIED.x).toBeGreaterThan(0);
+  });
+});
+
+/*
  * 0006 §1's neighborhood, which is a radius and nothing else. That section
  * drops Reynolds' angular term deliberately, and says restoring it changes a
  * number rather than the structure — so the absence is a rule to assert and not
@@ -1025,11 +1202,18 @@ describe("the three steering behaviors", () => {
   });
 
   /*
-   * The scope item that ties this ticket to #101: the three vectors are summed
-   * with 0006 §6's edge force and the bound applies to that sum, not to each
-   * force in turn. In the corner below the edge alone already exceeds the bound
-   * and the steering pushes the same way, so a bound applied per force would let
-   * the velocity change by more than one of them allows.
+   * The scope item that ties this ticket to #101: a bound is never applied to
+   * each force in turn. In the corner below the edge alone already exceeds it and
+   * the steering pushes the same way, so one bound per force would let the
+   * velocity change by more than any one of them allows.
+   *
+   * **What it no longer says is where the boundaries between forces are.** 0021
+   * §1 draws one between containment and the steering sum, and in this corner
+   * containment takes the whole budget — so the value below is what both
+   * arrangements give and this test stopped discriminating between them. That is
+   * *the share of the budget containment takes first* below, and it is why this
+   * one was rewritten rather than deleted: #101's claim is still true of the
+   * steering sum, and of the total.
    */
   test("hands the forces to #101's bound summed, not one at a time", () => {
     const bound = MAX_ACCELERATION * seconds;
@@ -1374,12 +1558,18 @@ describe("the pointer's force", () => {
   });
 
   /*
-   * #106's relation, measured before the work rather than preferred: 0006 §4's
-   * bound holds the **sum** of the forces, so a pointer pushing outward is
-   * subtracted from §6's edge force before anything is capped. A peak above the
-   * bound can therefore cancel the edge entirely, and the margin was sized
-   * against the edge acting alone. At 3.0 a dot left the frame by 0.0432; at
-   * this value none did.
+   * #106's relation, measured before the work rather than preferred: while 0006
+   * §4's bound held the **sum** of the forces, a pointer pushing outward was
+   * subtracted from §6's edge force before anything was capped, so a peak above
+   * the bound could cancel the edge entirely. At 3.0 a dot left the frame by
+   * 0.0432; at this value none did.
+   *
+   * **0021 §2 is what ended the relation, and the number stays where it is.**
+   * The pointer is steering now and yields to containment, so nothing forces
+   * this comparison — it is kept as a record of where the number came from, and
+   * moving it is #233's by watching rather than this test's by arithmetic. A
+   * green run here no longer says containment is safe; *the share of the budget
+   * containment takes first* is what says that.
    */
   test("keeps its peak inside the bound on acceleration", () => {
     expect(POINTER_STRENGTH).toBeLessThanOrEqual(MAX_ACCELERATION);
@@ -1404,18 +1594,21 @@ describe("the pointer's force", () => {
   });
 
   /*
-   * 0006 §4's bound, asserted with the pointer inside the sum — and the reason
-   * the sum is where it joins. A dot deep in the margin with the pointer just
-   * outside it has two forces pointing the same way, 1.05 and 1.13, so what
-   * comes out says which of the two arrangements the code has: summed and then
-   * bounded gives the bound, bounded and then added gives 2.18.
+   * 0006 §4's bound with the pointer among the forces, whatever the arrangement
+   * behind it. A dot deep in the margin with the pointer just outside it has two
+   * forces pointing the same way, 1.05 and 1.13, and a bound applied to each and
+   * then added would give 2.18.
    *
    * **The containment run below does not report this and was tried first.** At
    * a peak equal to `MAX_ACCELERATION` neither arrangement puts a dot outside
    * the frame — over 600 steps, three seeds and seven pointer placements — so
    * the difference is only visible in one step's change and not in where the
-   * flock ends up. That is what makes the relation worth asserting rather than
-   * watching.
+   * flock ends up. That is what makes it worth asserting rather than watching.
+   *
+   * **The two forces agree here, so this says nothing about 0021 §1.** Where
+   * they agree, one bound over the sum and two bounds adding to it give the same
+   * answer; where they disagree they do not, and that is what the block after
+   * *the bound on a change in velocity* asserts.
    */
   test("holds the sum inside the bound when the pointer and an edge agree", () => {
     const seconds = 1 / 60;

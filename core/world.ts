@@ -259,19 +259,20 @@ export const SEPARATION_RADIUS = 0.05;
  * reach instead is worthless, and `ALIGNMENT_WEIGHT` carries the other half of
  * what changed.
  *
- * **3 is a ceiling and not a preference, and the ceiling is not on this number.**
+ * **3 was a ceiling and is a preference again**, which 0021 §1 is what changed.
  * The three weights are divided by their own total before the sum is scaled by
  * `MAX_ACCELERATION`, so what reaches an edge is separation's **share** — and
- * `withBoundedSize` holds the sum, so a share large enough cancels 0006 §6's
- * turning force. Measured against a pile placed in a corner: at 0.706 every dot
- * stays inside, at 0.762 one leaves. These three weights put it at 0.706, which
- * is why a stronger separation needs a larger `COHESION_WEIGHT` beside it rather
- * than a larger number here.
+ * while one bound held the sum of every force, a share large enough cancelled
+ * 0006 §6's turning force. Measured against a pile placed in a corner: at 0.706
+ * every dot stayed inside, at 0.762 one left. These three weights put it at
+ * 0.706, which is where the ceiling put them.
  *
- * **What that ceiling costs is on the ticket rather than hidden**: the mix that
- * came apart in all three seeds sits at a share of 0.889 and is not admissible,
- * and at these numbers one seed in three still ends as a single body. #216
- * carries the measurement and the question of what to do about it.
+ * **Containment now claims its share of the budget before steering sees any of
+ * it**, so no share of these three can cancel an edge. The mix that came apart
+ * in all three seeds sits at 0.889 and was inadmissible for that reason alone;
+ * it is admissible now. **Nothing here has moved on the strength of it** — 0021
+ * §5 fixes no number and #216 chooses these by watching, which is the only thing
+ * that decides whether a flock reads as one.
  */
 export const SEPARATION_WEIGHT = 3;
 
@@ -353,17 +354,18 @@ export const POINTER_RADIUS = 0.18;
  * squared, reached as a dot approaches it. Provisional in the same way and
  * superseded by the same watching.
  *
- * **It may not exceed `MAX_ACCELERATION`, and that is a relation rather than a
- * preference.** 0006 §4's bound holds the *sum* of the forces, so a pointer
- * pushing outward is subtracted from §6's edge force before anything is capped,
- * and a peak above the bound can cancel that edge entirely — where the margin
- * was sized against the edge acting alone. Measured on 2026-08-09 with a
- * pointer held against an edge over three seeds: at 3.0 one seed put a dot
- * 0.0432 outside the frame, and at this value every dot stayed inside.
+ * **It had to stay at or under `MAX_ACCELERATION` and no longer does.** While
+ * 0006 §4's bound held the *sum* of the forces, a pointer pushing outward was
+ * subtracted from §6's edge force before anything was capped, so a peak above
+ * the bound could cancel that edge entirely — measured on 2026-08-09 with a
+ * pointer held against an edge over three seeds, where 3.0 put a dot 0.0432
+ * outside the frame and this value put none. 0021 §2 makes the pointer steering,
+ * which yields to containment, so the relation that forced this number is gone.
  *
- * Equal to the bound rather than below it, because doubling it moves how far a
- * dot escapes hardly at all — what limits that is `SPEED_MAX`, and that number
- * is #216's.
+ * **It has not moved on the strength of that.** What a bigger push would buy is
+ * a question for eyes: 0021 §5 fixes no number and #233 is where this one is
+ * chosen again. Doubling it moves how far a dot escapes hardly at all in any
+ * case — what limits that is `SPEED_MAX`, and that number is #216's.
  */
 export const POINTER_STRENGTH = MAX_ACCELERATION;
 
