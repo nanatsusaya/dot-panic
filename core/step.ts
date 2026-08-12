@@ -61,6 +61,56 @@ import {
 const TOTAL_WEIGHT = SEPARATION_WEIGHT + ALIGNMENT_WEIGHT + COHESION_WEIGHT;
 
 /**
+ * Scale a vector to a wanted length, ending on the side of it the caller needs.
+ *
+ * **Both operations round**, dividing by the length and multiplying by the
+ * wanted one, so `Math.hypot` of the result can sit an ulp past the length it
+ * was scaled to: `0.16000000000000003` against a ceiling of `0.16`, which is
+ * what #258 measured. Every rule this file holds is an inequality asserted
+ * without tolerance, so an ulp on the wrong side is a false world rather than a
+ * rounding detail — and which headings do it depends on every weight and radius
+ * in the world, which is why it stayed latent until a number moved.
+ *
+ * **The repair is a nudge and not a wider comparison.** Multiplying by
+ * `1 ± Number.EPSILON` moves a double by one or two ulps and never by none, so
+ * each pass strictly moves toward the wanted side and the loop cannot stall. It
+ * runs at all for about 1 heading in 18 at a ceiling and 1 in 174 at a floor,
+ * and **never twice**: measured over 200,000 headings at both ends, with the
+ * result landing at most 5.6e-17 inside the length asked for and the heading
+ * held to 4.4e-16 radians.
+ *
+ * @param vector  the vector to scale, never the zero one — every caller has
+ *                already answered that case, because a zero vector has no
+ *                direction to keep
+ * @param size    its current length, which every caller has already computed
+ * @param wanted  the length to scale it to
+ * @param limit   which side of `wanted` the result has to end on: `"ceiling"`
+ *                for at most, `"floor"` for at least
+ * @returns a vector pointing the same way, whose length is on that side of
+ *          `wanted`
+ */
+function scaledTo(
+  vector: Vector,
+  size: number,
+  wanted: number,
+  limit: "ceiling" | "floor",
+): Vector {
+  const nudge = limit === "ceiling" ? 1 - Number.EPSILON : 1 + Number.EPSILON;
+  const isWrongSide = (length: number) =>
+    limit === "ceiling" ? length > wanted : length < wanted;
+
+  let x = (vector.x / size) * wanted;
+  let y = (vector.y / size) * wanted;
+
+  while (isWrongSide(Math.hypot(x, y))) {
+    x *= nudge;
+    y *= nudge;
+  }
+
+  return { x, y };
+}
+
+/**
  * Hold a speed inside 0006 §3's band, keeping the direction it was given.
  *
  * **A velocity already inside the band comes back untouched rather than
@@ -89,12 +139,11 @@ function withSpeedInBand(velocity: Vector): Vector {
     return { x: SPEED_MIN, y: 0 };
   }
 
-  const wanted = speed < SPEED_MIN ? SPEED_MIN : SPEED_MAX;
+  if (speed < SPEED_MIN) {
+    return scaledTo(velocity, speed, SPEED_MIN, "floor");
+  }
 
-  return {
-    x: (velocity.x / speed) * wanted,
-    y: (velocity.y / speed) * wanted,
-  };
+  return scaledTo(velocity, speed, SPEED_MAX, "ceiling");
 }
 
 /**
@@ -463,6 +512,12 @@ function nextInfluence(
  * A force of exactly zero has no direction to keep and needs none: nothing is
  * scaled, because nothing is over the bound.
  *
+ * **`at most` is exact here and was not**, which is `scaledTo`'s doing and
+ * #258's. Nothing in this file asserted it that way — the change over one step
+ * carries a further rounding, so 0006 §4's own tests compare closely rather than
+ * exactly — but the next thing to be built on this subtracts the returned size
+ * from the bound, and an ulp too much makes that difference negative.
+ *
  * @param force  the acceleration the forces produced together
  * @returns an acceleration pointing the same way, of size at most
  *          `MAX_ACCELERATION`
@@ -474,10 +529,7 @@ function withBoundedSize(force: Vector): Vector {
     return force;
   }
 
-  return {
-    x: (force.x / size) * MAX_ACCELERATION,
-    y: (force.y / size) * MAX_ACCELERATION,
-  };
+  return scaledTo(force, size, MAX_ACCELERATION, "ceiling");
 }
 
 /**

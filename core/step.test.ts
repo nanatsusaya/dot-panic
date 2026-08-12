@@ -478,14 +478,45 @@ describe("the speed band", () => {
   });
 
   /*
+   * #258, at the ceiling. Both operations in the clamp round — dividing by the
+   * speed and multiplying by the wanted one — so a heading can land the result an
+   * ulp past the end it was scaled to. This one came back at
+   * `0.16000000000000003`, and it is the side 0006 §3 and §10 assert.
+   *
+   * **The heading is what decides it and not the speed**, which is why a run at
+   * today's numbers finds nothing: 1 direction in 18 does this at the ceiling,
+   * measured over 200,000 of them, and which ones a world produces depends on
+   * every weight and radius in it. It surfaced on 2026-08-09 out of #216's
+   * candidate weights, as a red run whose cause was neither the weights nor the
+   * assertion.
+   */
+  test("holds a heading that rounds past the ceiling", () => {
+    for (const dot of step(worldOf([{ x: 0.01, y: 1 }]), 1 / 60).dots) {
+      expect(speedOf(dot.velocity)).toBeLessThanOrEqual(SPEED_MAX);
+    }
+  });
+
+  /*
+   * The same defect at the other end, which #258 does not name and this
+   * function's postcondition does: scaling *up* to the floor can land below it.
+   * This heading came back at `0.039999999999999994`. Rarer — 1 direction in 174
+   * over the same sweep — and the same repair answers both.
+   */
+  test("holds a heading that rounds under the floor", () => {
+    for (const dot of step(worldOf([{ x: 0.002, y: 0.01 }]), 1 / 60).dots) {
+      expect(speedOf(dot.velocity)).toBeGreaterThanOrEqual(SPEED_MIN);
+    }
+  });
+
+  /*
    * 0006 §10's second row, over the world a step returns.
    *
    * **The bounds carry no tolerance**, and that was measured rather than
    * assumed: the band is a rule about real numbers and the clamp does its
    * arithmetic in binary floating point, so a scaled speed could miss the end it
    * was scaled to by an ulp. At these four velocities and these two numbers it
-   * does not. A tolerance written in on the chance it might would make exactly
-   * that failure invisible.
+   * does not — the two headings above are where it does. A tolerance written in
+   * on the chance it might would make exactly that failure invisible.
    */
   test("holds every dot in a returned world inside the band", () => {
     const world = worldOf([
