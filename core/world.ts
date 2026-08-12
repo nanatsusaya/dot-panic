@@ -199,48 +199,61 @@ export const NEIGHBORHOOD_RADIUS = 0.14;
  * **0006 §1 requires it to be shorter than `NEIGHBORHOOD_RADIUS`**, and that
  * requirement is A1 on that record — written on 2026-08-09, after the flock was
  * built over one reach and looked at. Alignment and cohesion take the whole
- * neighborhood; separation answers roughly its nearest third.
+ * neighborhood; separation answers roughly its nearest fifth.
  *
  * **What one reach did is why there are two.** Separation and cohesion oppose
- * each other, so over one reach they balance at 0.686 of it — 0.096, which is
- * the 0.094 that 200 dots over a 16:9 frame are apart on average. A flock whose
- * preferred spacing is the spacing it already has is at rest when it is spread
- * evenly, and it spread evenly: its Clark-Evans index, the mean distance to the
- * nearest other dot over what a random scatter of the same density gives, went
- * from 0.83 to 1.74 in a minute, where 1 is random and 2.15 a perfect lattice.
- * At 0.05 the same two balance well inside that — 0.0451 at the weights this
- * file now carries, a little under half the 0.094 — which is the room a group
- * forms in.
+ * each other, so over one reach they balance at 0.686 of it — 0.096, against
+ * the 0.094 that 200 dots arranged evenly over a 16:9 frame are apart. A flock
+ * whose preferred spacing is the spacing it already has is at rest when it is
+ * spread evenly, and it spread evenly: its Clark-Evans index went from 0.83 to
+ * 1.74 in a minute, where 1 is random and 2.15 a perfect lattice.
  *
- * **The factor is not a property of separation's shape**, which is what this
- * comment got wrong twice. It is the root of
+ * **The benchmark that condition is read against is the pitch of an even
+ * arrangement, `√(area / count)` = 0.094 — not the 0.047 a random scatter's
+ * nearest neighbors sit at.** A random scatter is not uniform: it has close
+ * pairs, which is exactly why its nearest-neighbor figure lands at half the
+ * pitch. Compared against that half, every reach ever tried here looks like the
+ * failure case and the amendment looks like it achieved nothing. That reading
+ * was written and corrected on #216 on 2026-08-12, and it is the more expensive
+ * of the two mistakes this comment has recorded.
+ *
+ * **The factor is not a property of separation's shape**, which is the other
+ * one. It is the root of
  * `SEPARATION_WEIGHT · (r/d − 1) = COHESION_WEIGHT · d/NEIGHBORHOOD_RADIUS`, so
  * every term in it moves the answer: 0.686 of the reach when both radii were
  * 0.14, 0.834 once only one of them shortened, 0.903 once the weights changed
- * as well. **The argument A1 rests on survives all three**, because what it
- * needs is a preferred spacing below the one a uniform scatter already has.
+ * as well. At 0.03 that is **0.0271**, under a third of the pitch. **The
+ * argument A1 rests on survives all of it**, because what it needs is a
+ * preferred spacing below the one an even arrangement already has.
  *
  * **That root is a two-body figure and a settled flock is not two bodies.** The
- * mean distance to a nearest neighbor measures 0.039 against the 0.0451 above,
- * because inside a group a dot is pulled toward many neighbors at once and
- * pushed by its nearest few. The equation says which way a change moves things;
- * it does not predict the flock.
+ * mean distance to a nearest neighbor measures about 0.030 against the 0.0271
+ * above, because inside a group a dot is pulled toward many neighbors at once
+ * and pushed by its nearest few. The equation says which way a change moves
+ * things; it does not predict the flock.
  *
- * **Do not reach for this number to break the flock into groups.** Swept over a
- * minute and three seeds at #99's weights, 0.05, 0.07, 0.09, 0.11 and 0.14 put
- * the index at 0.67, 0.86–1.14, 1.34–1.41, 1.54–1.62 and 1.71–1.79 — passing
- * cleanly through the wanted band while **every setting ended as one body of all
- * 200 dots**. What the reach moves is how far that one body is inflated, from a
- * tight crystal to wallpaper. #238 found the same cliff from the other side, and
- * the weights are what answered it.
+ * **This number moves how tightly the one body packs, and at these weights it
+ * moves its texture as well.** Swept at #99's weights, 0.05 through 0.14 passed
+ * cleanly through the wanted Clark-Evans band while every setting ended as one
+ * body of all 200 dots — which is why this comment said for three days not to
+ * reach for it to make groups. At S 10 that sweep does not repeat: over the last
+ * minute of two, three seeds, the coefficient of variation of the
+ * nearest-neighbor distance goes **0.24 at 0.05 to 0.44 at 0.03**, where 0.58 is
+ * a random scatter and 0 a lattice. The flock is measurably less evenly spaced
+ * inside itself, which is the failure the watch of 2026-08-12 reported and the
+ * first thing this number has ever been moved for.
  *
- * Chosen by measuring rather than before the work, which is the one number here
- * 0008 R1 could not have in the ticket first — nothing could be measured until
- * A1 existed. Recorded on #99 at the weights of that day, where three seeds of
- * thirty seconds put the index at 0.67 and the closest pair at 0.020 against the
- * 0.010 that 0006 §2 forbids.
+ * **What it does not do is split the flock into several bodies.** It stands on
+ * 15 to 16 percent of the frame here against 24 to 26 at 0.05 — a smaller,
+ * denser body, and the count of bodies is what the weights answered on #238.
+ *
+ * Chosen by measuring and then by watching, in that order: three candidate
+ * reaches went to the decider as a contact sheet at 15, 30, 60, 90 and 120
+ * seconds, and 0.03 is the row he picked. Below 0.025 it stops being reliable —
+ * at 0.02 the same coefficient runs from 0.13 to 1.99 across three seeds, which
+ * is 0006 §1's other named failure, falling past groups into a single clump.
  */
-export const SEPARATION_RADIUS = 0.05;
+export const SEPARATION_RADIUS = 0.03;
 
 /**
  * How much separation counts against the other two behaviors (0006 §1).
@@ -316,11 +329,11 @@ export const ALIGNMENT_WEIGHT = 0.25;
  * superseded by the same watching.
  *
  * **The one of the three that has not moved**, so the other two are read
- * against it: separation is three times it and alignment a quarter of it. What
+ * against it: separation is ten times it and alignment a quarter of it. What
  * it buys is a spacing to settle at rather than a collision or a drift apart —
  * cohesion grows to one over `NEIGHBORHOOD_RADIUS` while separation falls away
  * over `SEPARATION_RADIUS`, and at these three the two balance at 0.903 of the
- * shorter one, which is 0.0451. **Not 0.834 of it**, which is the same pair of
+ * shorter one, which is 0.0271. **Not 0.834 of it**, which is the same pair of
  * radii at #99's weights, and not 0.686, which is the one-reach case;
  * `SEPARATION_RADIUS` carries the arithmetic and what each revision did to it.
  *
