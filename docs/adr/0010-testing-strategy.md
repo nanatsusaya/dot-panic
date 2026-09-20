@@ -19,7 +19,7 @@
   the Core without exception), §5 (watch-first in the View) ·
   [0014](0014-page-layout.md) §9 (the same question, about a rendered page)
 - **Supersedes / amends:** nothing
-- **Amended:** 2026-08-05 — A1, A2
+- **Amended:** 2026-08-05 — A1, A2 · 2026-09-20 — A3
 
 ## Context
 
@@ -68,8 +68,10 @@ A claim about this project sits in exactly one of three registers:
 - **Asserted** — a command decides it, and a failure is a red test.
 - **Measured** — a number read off a running page, compared against a budget by a
   person. No command decides it (§5).
-- **Watched** — a person looks at the screen and judges. Nothing decides it but
-  the judgment, and §8 says how that judgment is recorded.
+- **Watched** — a watcher, a person or an agent, looks at the screen and
+  judges. Nothing decides it but the judgment; §8 says how that judgment is
+  recorded, and [0022](0022-who-watches.md) says what an agent's watch must
+  consist of to count and what stays the decider's.
 
 [0006](0006-motion-rules.md) §10 and [0007](0007-pointer-and-input-model.md) §9
 use two registers because nothing in them needs measuring;
@@ -266,8 +268,10 @@ Ninety leaves room for the branch that exists only because a type says it could.
 
 ### 8. A watched or measured result is recorded in the change that produced it
 
-Both registers end in a judgment by a person, and a judgment nobody wrote down is
-indistinguishable from one nobody made.
+Both registers end in a judgment by a watcher — a person, or an agent under
+[0022](0022-who-watches.md) §2 — and a judgment nobody wrote down is
+indistinguishable from one nobody made. The record names whose it is
+(0022 §1).
 
 The record is the change description's *Watched* section — already in
 [the pull request template](../../.github/pull_request_template.md), which is its
@@ -546,6 +550,42 @@ Authorized by Daniel on 2026-08-05, against
 [#126](https://github.com/nanatsusaya/dot-panic/issues/126), on a recommendation
 of extending 0010 in preference to giving 0011's list a name of its own:
 *"wir folgen deiner empfehlung."*
+
+**A3 — the watched register admits an agent. 2026-09-20.**
+
+§2's third bullet read:
+
+> - **Watched** — a person looks at the screen and judges. Nothing decides it but
+>   the judgment, and §8 says how that judgment is recorded.
+
+§8 opened:
+
+> Both registers end in a judgment by a person, and a judgment nobody wrote down is
+> indistinguishable from one nobody made.
+
+**What replaced them** is the bullet and the sentence now standing in those
+places: the watcher is a person or an agent, the record names whose judgment it
+is, and what an agent's watch must consist of — and what stays the decider's — is
+[0022](0022-who-watches.md)'s and not this record's. **Nothing else changes.**
+§5 still measures nothing in the repository, §6 still renders nothing under
+test, §8 still records the judgment in the change's *Watched* section against an
+expectation written first, and 0001 §3.1 — *judged by watching, no command
+decides this* — is what both sentences were always carrying.
+
+**Why.** Every watched criterion had been closed by the decider's own eyes,
+because the session's browser pane composites nothing, and on 2026-09-20 he
+declined to go on being the instrument. 0022's *Context* carries the day — an
+agent's watch in his Chrome, and his verdict overriding it — and it is not
+repeated here.
+
+**The authorization**, from the decider on 2026-09-20, in conversation and
+then answering 0022's three open questions on
+[PR #273](https://github.com/nanatsusaya/dot-panic/pull/273#issuecomment-5752165203):
+
+> zu O1: ich schau es mir am ende an, wenn du es für gut empfindest
+> zu O2: wir folgen deiner empfehlung
+
+> wir folgen bei O1 bis O3 deinen Empfehlungen
 
 ## References
 

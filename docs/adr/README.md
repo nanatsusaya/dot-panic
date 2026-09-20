@@ -90,7 +90,7 @@ longer supports.
 | [0009](0009-toolchain.md) | Toolchain | What runs the code, what tests it, what builds it | Accepted |
 | [0010](0010-testing-strategy.md) | Testing strategy | What is asserted by a command, what a person measures, and what is only ever watched | Accepted |
 | [0018](0018-where-a-test-lives.md) | Where a test lives | Which directory a test file sits in, what a source-reading test may read, and what a build does with it | Accepted |
-| [0022](0022-who-watches.md) | Who watches | Whether an agent's judgment may close a watched criterion, what its watch must consist of, and what stays the decider's | Proposed |
+| [0022](0022-who-watches.md) | Who watches | Whether an agent's judgment may close a watched criterion, what its watch must consist of, and what stays the decider's | Accepted |
 | [0011](0011-delivery.md) | Delivery | How it reaches the public URL, and when | Accepted |
 | [0020](0020-whether-the-checks-gate-a-merge.md) | Whether the checks gate a merge | When the four checks run, what their result may block, and what a local run cannot decide | Accepted |
 | [0013](0013-origin-of-the-core.md) | Origin of the core | Written here or taken from a package, and what may be read while it is written | Accepted |

@@ -1,6 +1,6 @@
 # 0022 — Who watches
 
-- **Status:** Proposed
+- **Status:** Accepted
 - **Date:** 2026-09-20
 - **Deciders:** Daniel Wagner
 - **Ticket:** [#272](https://github.com/nanatsusaya/dot-panic/issues/272)
@@ -117,8 +117,10 @@ was — a look at stills, a look with no pointer — and closes nothing.
 
 A ticket that carries one of 0001 §3's criteria is not Done until the decider
 has watched the state the agent calls good enough — once, at the page, in his
-own browser. Intermediate states, and passes that move a number without claiming
-the criterion, need no look from him. His verdict overrides the agent's, and a
+own browser. He may waive that look for a ticket by a comment on the ticket
+saying so, and silence is not a waiver (R1). Intermediate states, and passes
+that move a number without claiming the criterion, need no look from him. His
+verdict overrides the agent's, and a
 state he rejects is recorded on the change with his words, as
 [PR #269](https://github.com/nanatsusaya/dot-panic/pull/269#issuecomment-5752123820)
 was.
@@ -200,20 +202,25 @@ the ticket before the work starts* are what §2.5 above depends on.
 - **The built-in browser pane** — rejected because it composites nothing, which
   the method log of 2026-08-06 records and 2026-09-20 re-confirmed.
 
-## Open questions
+## Resolved questions
 
-- **O1 — Is the decider's one look (§3) required, or may he waive it per
-  ticket?** Default: required for a ticket that carries a 0001 §3 criterion,
-  and waivable only by a comment on that ticket saying so — silence is not a
-  waiver.
-- **O2 — Does the agent's watch have to run in the decider's Chrome, or in any
-  browser that composites?** Default: any browser that composites, named in the
-  *Watched* section; his Chrome is what exists today, and §2 is written so that
-  it is not what the rule depends on.
-- **O3 — Do the three scenes of §2.3 stand as written, or should the corner
-  scene be dropped once #264 closes?** Default: they stand; 0006 §7's rejected
-  end state does not close with #264, and a corner is where the next number's
-  failure will show first.
+All three answered by the decider on 2026-09-20 with the defaults, in
+[a comment on PR #273](https://github.com/nanatsusaya/dot-panic/pull/273#issuecomment-5752165203);
+0010's A3 quotes it.
+
+- **R1 — The decider's one look (§3) is required, and waivable only in
+  writing.** A ticket carrying a 0001 §3 criterion is not Done until he has
+  watched the state the agent calls good enough; he may waive that per ticket
+  by a comment on the ticket saying so, and silence is not a waiver. The
+  alternative — the agent's watch closing the criterion alone — would make the
+  day this record was written its own counterexample.
+- **R2 — Any browser that composites, named in the *Watched* section.** His
+  Chrome is what exists today and is not what §2 depends on; a browser of the
+  agent's own that composites satisfies §2.1 the day one exists, and the
+  negative consequence about driving his browser goes with it.
+- **R3 — The three scenes stand.** 0006 §7's rejected end state does not
+  close with #264, and an edge or corner is where the next number's failure
+  shows first, so the corner scene is not tied to that ticket's life.
 
 ## References
 
