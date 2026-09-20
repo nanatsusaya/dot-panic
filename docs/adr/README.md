@@ -81,7 +81,7 @@ longer supports.
 | [0004](0004-compliance-accessibility-and-rights.md) | Compliance, accessibility and rights | Motion and reduced-motion, license, provenance of the model, what law applies | Accepted |
 | [0005](0005-rendering-and-visual-design.md) | Rendering and visual design | Canvas, SVG or DOM; color, light and dark, pixel density | Accepted |
 | [0006](0006-motion-rules.md) | Motion rules | Bounded frame, minimum speed, non-overlap as a constraint | Accepted |
-| [0023](0023-whether-a-dot-carries-variation-of-its-own.md) | Whether a dot carries variation of its own | Which one value a dot may carry, how it is drawn, and what relations bound it | Proposed |
+| [0023](0023-whether-a-dot-carries-variation-of-its-own.md) | Whether a dot carries variation of its own | Which one value a dot may carry, how it is drawn, and what relations bound it | Accepted |
 | [0007](0007-pointer-and-input-model.md) | Pointer and input model | Mouse and touch, radius of effect, how it decays | Accepted |
 | [0021](0021-how-the-acceleration-budget-is-shared.md) | How the acceleration budget is shared | Whether containment competes with steering for one bound or claims it first, and where the pointer sits | Accepted |
 | [0014](0014-page-layout.md) | Page layout | How the flock, the imprint and the explanation are arranged; how the canvas is sized against them | Accepted |

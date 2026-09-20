@@ -1,6 +1,6 @@
 # 0023 — Whether a dot carries variation of its own
 
-- **Status:** Proposed
+- **Status:** Accepted
 - **Date:** 2026-09-20
 - **Deciders:** Daniel Wagner
 - **Ticket:** [#228](https://github.com/nanatsusaya/dot-panic/issues/228)
@@ -230,23 +230,25 @@ range's maximum (§3.1 above) and says so in A3.
   numbers can move along have been watched and refused, and the decider asked
   for what neither gives.
 
-## Open questions
+## Resolved questions
 
-- **O1 — Reach, and only the reach?** Default: yes — §1 as written. Speed is
-  #228's other half and is rejected in *Alternatives* for reasons that were
-  measured; adding it back is a second record.
-- **O2 — Drawn once, never drifting?** Default: yes — §2 as written. Drift is
-  per-step state; the measured effect did not need it.
-- **O3 — Does the change that builds this move `ALIGNMENT_WEIGHT` in the same
-  pass under #216?** Default: yes. The measurement was taken with both and
-  neither alone reaches the row; a change that lands one without the other
-  lands a state nobody measured. It is two numbers in one change, and the
-  change description names both and why.
-- **O4 — Does the decider's one look (0022 §3) come on the first state the
-  agent calls good, or after the other five numbers of #216 have been looked at
-  as well?** Default: on the first state the agent calls good. He rejected 0.03
-  after one look; a state that clears his bar is worth knowing about before the
-  rest of the table is swept against it.
+All four answered by the decider on 2026-09-20 with the defaults, in
+[a comment on PR #275](https://github.com/nanatsusaya/dot-panic/pull/275#issuecomment-5752389541);
+0006's A3 quotes it.
+
+- **R1 — Reach, and only the reach.** §1 as written. Speed stays a consequence
+  of the forces; #228's other half is rejected in *Alternatives* on measured
+  grounds, and putting it back is a second record.
+- **R2 — Drawn once, never drifting.** §2 as written. Drift is per-step state,
+  the cost 0006 §4 named, and the measured effect did not need it.
+- **R3 — The build moves `ALIGNMENT_WEIGHT` in the same pass under #216.** The
+  measurement was taken with both, and neither alone reaches the row; a change
+  landing one without the other lands a state nobody measured. Two numbers in
+  one change, and the change description names both and why.
+- **R4 — The decider's one look comes on the first state the agent calls
+  good**, not after the rest of #216's table. He refused 0.03 after one look;
+  a state that clears his bar is worth knowing about before the other numbers
+  are swept against it.
 
 ## References
 
