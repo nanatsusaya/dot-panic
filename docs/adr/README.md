@@ -90,6 +90,7 @@ longer supports.
 | [0009](0009-toolchain.md) | Toolchain | What runs the code, what tests it, what builds it | Accepted |
 | [0010](0010-testing-strategy.md) | Testing strategy | What is asserted by a command, what a person measures, and what is only ever watched | Accepted |
 | [0018](0018-where-a-test-lives.md) | Where a test lives | Which directory a test file sits in, what a source-reading test may read, and what a build does with it | Accepted |
+| [0022](0022-who-watches.md) | Who watches | Whether an agent's judgment may close a watched criterion, what its watch must consist of, and what stays the decider's | Proposed |
 | [0011](0011-delivery.md) | Delivery | How it reaches the public URL, and when | Accepted |
 | [0020](0020-whether-the-checks-gate-a-merge.md) | Whether the checks gate a merge | When the four checks run, what their result may block, and what a local run cannot decide | Accepted |
 | [0013](0013-origin-of-the-core.md) | Origin of the core | Written here or taken from a package, and what may be read while it is written | Accepted |
@@ -157,13 +158,22 @@ that the checks gate a deployment and **not** a merge, and 0020 amends that
 sentence so a merge is gated as well — logged in 0011 as its A1, which is where
 the superseded wording and the authorization are read.
 
-**Six rows have now been added after the set was planned**, and that is the
+**0022 was added by the decider declining a role.** Every watched criterion
+had been closed by his own eyes, because the session's browser pane composites
+nothing; on 2026-09-20 he asked for the agent to watch its own work instead, and
+[0010](0010-testing-strategy.md) §2 had put the register in *a person* without
+saying which. It sits after 0018 because it is the third record about how a
+claim here is checked, and it amends 0010 — logged there as A3.
+
+**Seven rows have now been added after the set was planned**, and that is the
 mechanism working rather than the plan failing. Each took the next free number.
 Four came from a record finding a topic no existing row owned, the fifth from a
-question about the set, and the sixth from a ticket. Three arrived with a ticket
-in the same change; the tickets for 0018 and 0019 —
-[#181](https://github.com/nanatsusaya/dot-panic/issues/181) and
-[#199](https://github.com/nanatsusaya/dot-panic/issues/199) — were filed first,
+question about the set, the sixth from a ticket, and the seventh from the
+decider handing a role over. Three arrived with a ticket in the same change; the
+tickets for 0018, 0019 and 0022 —
+[#181](https://github.com/nanatsusaya/dot-panic/issues/181),
+[#199](https://github.com/nanatsusaya/dot-panic/issues/199) and
+[#272](https://github.com/nanatsusaya/dot-panic/issues/272) — were filed first,
 by the change that met the gap, and 0020's was filed three days before anything
 met one. It is the numbering in
 [0012](0012-how-software-gets-developed.md)'s paragraph above that is closed, not
