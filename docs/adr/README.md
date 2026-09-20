@@ -81,6 +81,7 @@ longer supports.
 | [0004](0004-compliance-accessibility-and-rights.md) | Compliance, accessibility and rights | Motion and reduced-motion, license, provenance of the model, what law applies | Accepted |
 | [0005](0005-rendering-and-visual-design.md) | Rendering and visual design | Canvas, SVG or DOM; color, light and dark, pixel density | Accepted |
 | [0006](0006-motion-rules.md) | Motion rules | Bounded frame, minimum speed, non-overlap as a constraint | Accepted |
+| [0023](0023-whether-a-dot-carries-variation-of-its-own.md) | Whether a dot carries variation of its own | Which one value a dot may carry, how it is drawn, and what relations bound it | Accepted |
 | [0007](0007-pointer-and-input-model.md) | Pointer and input model | Mouse and touch, radius of effect, how it decays | Accepted |
 | [0021](0021-how-the-acceleration-budget-is-shared.md) | How the acceleration budget is shared | Whether containment competes with steering for one bound or claims it first, and where the pointer sits | Accepted |
 | [0014](0014-page-layout.md) | Page layout | How the flock, the imprint and the explanation are arranged; how the canvas is sized against them | Accepted |
@@ -165,17 +166,26 @@ nothing; on 2026-09-20 he asked for the agent to watch its own work instead, and
 saying which. It sits after 0018 because it is the third record about how a
 claim here is checked, and it amends 0010 — logged there as A3.
 
-**Seven rows have now been added after the set was planned**, and that is the
+**0023 was added by a record's own trigger firing.** [0006](0006-motion-rules.md)
+§4 rejected a per-dot value and R2 wrote down what would reopen it — *if
+watching shows a settled flock moving uniformly* — and fixed that it comes back
+by an authorized amendment or a superseding record, never by a field added to
+the world. [#228](https://github.com/nanatsusaya/dot-panic/issues/228) filed
+that trigger on 2026-08-09; two watches on 2026-09-20, one the decider's and one
+the agent's under 0022, closed the numbers off from both ends. It sits after
+0006 because it amends it — logged there as A3.
+
+**Eight rows have now been added after the set was planned**, and that is the
 mechanism working rather than the plan failing. Each took the next free number.
 Four came from a record finding a topic no existing row owned, the fifth from a
-question about the set, the sixth from a ticket, and the seventh from the
-decider handing a role over. Three arrived with a ticket in the same change; the
-tickets for 0018, 0019 and 0022 —
+question about the set, the sixth from a ticket, the seventh from the decider
+handing a role over, and the eighth from a record's own reopening clause. Three
+arrived with a ticket in the same change; the tickets for 0018, 0019 and 0022 —
 [#181](https://github.com/nanatsusaya/dot-panic/issues/181),
 [#199](https://github.com/nanatsusaya/dot-panic/issues/199) and
 [#272](https://github.com/nanatsusaya/dot-panic/issues/272) — were filed first,
-by the change that met the gap, and 0020's was filed three days before anything
-met one. It is the numbering in
+by the change that met the gap, 0020's was filed three days before anything met
+one, and 0023's six weeks before. It is the numbering in
 [0012](0012-how-software-gets-developed.md)'s paragraph above that is closed, not
 the set.
 

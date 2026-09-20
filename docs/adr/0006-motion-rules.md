@@ -18,7 +18,7 @@
   [0012](0012-how-software-gets-developed.md) §4 (test-first in the Core, without
   exception), §5 (watch-first in the View)
 - **Supersedes:** nothing
-- **Amended:** 2026-08-09 — A1, A2
+- **Amended:** 2026-08-09 — A1, A2 · 2026-09-20 — A3
 
 ## Context
 
@@ -160,13 +160,21 @@ a preferred speed of its own. Variation in speed is what the forces in §1 and
 the pointer in 0007 produce within the band in §3: a dot fleeing moves near
 `vmax`, a dot deep inside a settled flock near `vmin`.
 
-Rejected the alternative — a preferred speed per dot, drawn from the seed —
-because it is per-dot state whose only job is to make dots differ, and 0002 §4
-would require it to come out of the seeded generator and be carried in the
-world. That is a larger world, a larger test surface, and a rule with no
-counterpart in the model §1 names. **The cost of this choice is real and is in
-*Consequences*:** it is the one thing the decider asked for that no invariant
-here guarantees.
+**One value is a dot's own, and it is not a speed**: the reach its separation
+acts over, drawn once from the seeded generator and carried in the world, as
+[0023](0023-whether-a-dot-carries-variation-of-its-own.md) decides — §1 to §4
+there say what it is, how it is drawn, what bounds it and where it enters the
+step. Nothing else about a dot is its own.
+
+Rejected the alternative for speed — a preferred speed per dot, drawn from the
+seed — because it is per-dot state whose only job is to make dots differ, and
+0002 §4 would require it to come out of the seeded generator and be carried in
+the world. That is a larger world, a larger test surface, and a rule with no
+counterpart in the model §1 names. The reach is the one exception, made on the
+ground this paragraph gave and after both ends of what the weights can reach
+had been watched and refused; 0023's *Context* carries the measurement. **The
+cost of this choice is real and is in *Consequences*:** it is the one thing the
+decider asked for that no invariant here guarantees.
 
 ### 5. Smoothness has two halves, and this record owns one
 
@@ -264,7 +272,7 @@ motion that left its own side of it implicit would be the wrong example.
 
 | | Invariant |
 |---|---|
-| §1 | Separation's reach is shorter than the neighborhood's |
+| §1 | Separation's reach is shorter than the neighborhood's — for every dot, over the largest reach [0023](0023-whether-a-dot-carries-variation-of-its-own.md) §3 lets one carry |
 | §2 | No two dots closer than `2r` in a returned world |
 | §3 | Every dot's speed in `[vmin, vmax]`, with `vmin > 0` |
 | §4 | Change in velocity across a step at most `amax` |
@@ -544,6 +552,55 @@ Authorized by Daniel on 2026-08-09, against
 [PR #262](https://github.com/nanatsusaya/dot-panic/pull/262): *"Zu #262 folgen
 wir deiner Empfehlung"*, the recommendation being that the row be added here
 rather than left to live only in a test.
+
+**A3 — a dot carries one value of its own, and it is its separation reach.
+2026-09-20.**
+
+§4's second and third paragraphs read:
+
+> **A gait is not something a dot carries.** No dot has a mode, a temperament, or
+> a preferred speed of its own. Variation in speed is what the forces in §1 and
+> the pointer in 0007 produce within the band in §3: a dot fleeing moves near
+> `vmax`, a dot deep inside a settled flock near `vmin`.
+>
+> Rejected the alternative — a preferred speed per dot, drawn from the seed —
+> because it is per-dot state whose only job is to make dots differ, and 0002 §4
+> would require it to come out of the seeded generator and be carried in the
+> world. That is a larger world, a larger test surface, and a rule with no
+> counterpart in the model §1 names. **The cost of this choice is real and is in
+> *Consequences*:** it is the one thing the decider asked for that no invariant
+> here guarantees.
+
+§10's first asserted row read:
+
+> | §1 | Separation's reach is shorter than the neighborhood's |
+
+**What replaced them** is the paragraph now between those two in §4 — one value
+is a dot's own, its separation reach, and
+[0023](0023-whether-a-dot-carries-variation-of-its-own.md) is where it is
+decided — the words *for speed* in the rejection that follows, and the §10 row
+now read over the largest reach 0023 §3 lets a dot carry. **Nothing else
+changes.** The bound on change in velocity, the band, the three behaviors and
+the neighborhood that is one radius for every dot all stand; R2 stands as
+history, because 0023 is the *superseding record* it named as the route.
+
+**Why.** R2 said what would reopen this and how: *if watching shows a settled
+flock moving uniformly, the fix is a preferred speed per dot drawn from the
+seed — and §4 decides against exactly that, so it arrives by an authorized
+amendment or a superseding record.*
+[#228](https://github.com/nanatsusaya/dot-panic/issues/228) filed the trigger
+on 2026-08-09. On 2026-09-20 the decider refused reach 0.03 at alignment 0.25
+for the wriggling inside a group, and the agent refused alignment 1 under
+[0022](0022-who-watches.md) §2 as a sliding lattice; between those two nothing
+the weights can reach is both gliding and soft, and a reach that differs per
+dot is the variation alignment cannot consume. 0023's *Context* carries the
+table and it is not repeated here.
+
+**The authorization**, from the decider on 2026-09-20 — first *schreib 0023,
+wir folgen deiner Empfehlung*, then answering 0023's four open questions on
+[PR #275](https://github.com/nanatsusaya/dot-panic/pull/275#issuecomment-5752389541):
+
+> wir folgen bei O1 bis O4 deinen Empfehlungen
 
 ## References
 
