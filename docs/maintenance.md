@@ -16,7 +16,7 @@ names is wrong by construction, and the row is what gets repaired.
 | Which browser features are Baseline widely available | [0009](adr/0009-toolchain.md) §4 | Standing | 2026-08-09, after [#105](https://github.com/nanatsusaya/dot-panic/issues/105); 2026-08-08, after [#96](https://github.com/nanatsusaya/dot-panic/issues/96) | A change that names a browser feature. No compiler setting reaches this half of the floor, so the reading is made where the feature is used |
 | The ECMAScript year `target` and `lib` name | [0009](adr/0009-toolchain.md) §4 | Dated | 2026-08-05, in [#69](https://github.com/nanatsusaya/dot-panic/issues/69) | **2028-05-11.** ES2023 is the highest year fully Baseline widely available; ES2024 waits on `Atomics.waitAsync`, which reached the fourth browser only on 2025-11-11. Raising the setting is a change somebody makes, never something that happens |
 | The `showModal()` bridge the Shell holds open | [0014](adr/0014-page-layout.md) §5 | Dated | 2026-08-02 | **2028-06-12.** Invoker commands reach Baseline widely available, the markup becomes permitted, and the handler can go |
-| Provenance of the Core, and both halves of *read but do not copy* | [0013](adr/0013-origin-of-the-core.md) §7, §8 | Standing | 2026-08-09, in [#99](https://github.com/nanatsusaya/dot-panic/issues/99) — nothing consulted; 2026-08-05, in [#91](https://github.com/nanatsusaya/dot-panic/issues/91) — Vigna's `splitmix64.c` | Code being written into the Core. The question is answered while it is written and by nobody afterwards |
+| Provenance of the Core, and both halves of *read but do not copy* | [0013](adr/0013-origin-of-the-core.md) §7, §8 | Standing | 2026-09-20, at a wind-down, for [#265](https://github.com/nanatsusaya/dot-panic/pull/265), [#266](https://github.com/nanatsusaya/dot-panic/pull/266), [#267](https://github.com/nanatsusaya/dot-panic/pull/267) and [#269](https://github.com/nanatsusaya/dot-panic/pull/269) of 2026-08-12 — nothing consulted, all four written from 0021, 0006 and measurement; 2026-08-09, in [#99](https://github.com/nanatsusaya/dot-panic/issues/99) — nothing consulted; 2026-08-05, in [#91](https://github.com/nanatsusaya/dot-panic/issues/91) — Vigna's `splitmix64.c` | Code being written into the Core. The question is answered while it is written and by nobody afterwards |
 | The ruleset version the two workflows pin | [0016](adr/0016-maintainability-and-maintenance.md) §6 | Standing | 2026-08-09, in [#202](https://github.com/nanatsusaya/dot-panic/issues/202) — `checks.yml` added at the same `v0.5.3`; 2026-08-08, in [#98](https://github.com/nanatsusaya/dot-panic/issues/98) — `deploy.yml` pinned at `v0.5.3` | A release of `agent-project-rules`, which is §6's fourth kind of maintenance work. That trigger already moves the five procedure copies; this is the second thing on it, and the two are read together or a workflow decides against a catalog this project has not adopted — a deployment since [0011](adr/0011-delivery.md) §2, and a merge as well since [0020](adr/0020-whether-the-checks-gate-a-merge.md) §1. **The pin is written twice now and nothing checks that the two agree**, which 0020 names as a consequence rather than hiding |
 
 **Three rows are standing and three are dated**, where 0016's *Context* table
@@ -66,8 +66,13 @@ a date beside a factor nobody measured, and the date is what reads as evidence.
 The row is here so that the session which chooses the factor sees that writing
 the date down is part of choosing it.
 
-**The provenance row carries two readings and cannot tell anyone about the
-changes between them.** [#91](https://github.com/nanatsusaya/dot-panic/issues/91)
+**The provenance row carries three readings now, and the newest is the *after*
+pattern a third time.** The four changes of 2026-08-12 wrote into `core/` —
+a scaling repair, 0021 §1 built, and two constants — and none recorded whether
+anything was consulted; the reading was made at the wind-down five weeks later,
+and the cell says so. Nothing was: every one of them was written from a record
+and a measurement. **The two earlier readings cannot tell anyone about the
+changes between them either.** [#91](https://github.com/nanatsusaya/dot-panic/issues/91)
 named Vigna's `splitmix64.c`, and
 [#99](https://github.com/nanatsusaya/dot-panic/issues/99) recorded that nothing
 was consulted for the three steering behaviors. Five other changes wrote into
