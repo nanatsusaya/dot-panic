@@ -6,6 +6,46 @@ session would decide worse without it.
 
 Newest first.
 
+## 2026-09-20 — The decider handed the watching over, and the agent's first verdict was wrong on the point that matters
+
+Every watched criterion had been closed by the decider's own eyes since
+2026-08-06, when the entry below this one recorded that the session's pane
+composites nothing and the looking was handed to him. Five weeks later he
+declined to go on — *ich hab keine Lust mehr, dass ich mir deine verschiedenen
+dot-Darstellungen selbst anschaue und es bewerte* — and asked for the machine
+to be set up so the agent watches its own work. It was, in one afternoon: his
+Chrome under the agent's control composites, screenshots come back, and
+[0022](adr/0022-who-watches.md) is the record. **What the afternoon is worth
+is not that it worked.** It is what happened next.
+
+**The agent watched reach 0.03 for three minutes and called it a flock. He
+looked once and rejected it** — the dots inside a group *zappeln und zittern*,
+nothing glides. Both were true. Some fifteen stills over three minutes show
+groups forming, crossing and breaking, and show nothing at all about how a dot
+moves relative to the dot beside it; measured afterwards, the answer was *at
+four fifths of its own speed*, and local polarization 0.7 where real flocks read
+above 0.9. The agent had named that exact limit — *Ruckeln und Lag sehe ich in
+Frames nicht* — before looking, and then judged from frames anyway, because the
+frames showed the thing it had been asked about last: grouping. **A limit you
+state and then do not design around is a limit you have not stated.** 0022 §2's
+minute of frames in sequence, and its rule that measurement chooses between
+candidates and closes nothing, are that afternoon written into the method.
+
+**Two smaller things, both found by him and not by the agent.** His cursor over
+the tab changed what was being watched — the instrument is a shared one. And the
+automation's hover produced one `pointermove`, which under 0007's decay is a
+flicker rather than a pointer; the flock ignored the agent's cursor entirely
+until a script streamed events at frame rate to the Shell's listener. The agent
+had read the pointer scene as working. **A scene in which nothing reacts looks
+like a scene in which nothing happened to be near**, and only somebody who knew
+what a pointer does to this flock could tell the two apart at a glance.
+
+**What was handed over and what was not.** He kept one thing: the look at the
+end, on the state the agent calls good enough, with his word prevailing. That
+is the shape of every gate in this project — the loop is the agent's, the
+acceptance is a person's — and 0022 §3 says it in those terms so that the next
+session does not read *the agent watches now* as *the agent decides now*.
+
 ## 2026-08-12 — The number's own header was read after the argument for moving it was posted
 
 A watch failed and a sweep found the lever: at separation's weight of 10 the

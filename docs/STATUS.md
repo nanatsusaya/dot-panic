@@ -24,7 +24,12 @@ dragged to a third of its width.
 [PR #189](https://github.com/nanatsusaya/dot-panic/pull/189)'s *Watched* section
 is read from those, and says whose they are. The session's own browser pane still
 composites nothing, which is why the looking was handed over rather than done
-here; the [method log](method-log.md) carries both halves.
+here; the [method log](method-log.md) carries both halves. **Since 2026-09-20
+the looking is the agent's**, in a browser that composites — the decider's
+Chrome under the agent's control was the first — and what an agent's watch must
+consist of to count, and that the decider looks once at the end with his word
+prevailing, is [0022](adr/0022-who-watches.md). He handed the loop over that day
+and kept the acceptance; the log carries why.
 
 **The second is [#109](https://github.com/nanatsusaya/dot-panic/issues/109), and
 it is recorded where a merged description could not be.** The decider looked at
@@ -2034,19 +2039,34 @@ What a change description must contain is no longer among the gaps here.
 
 ## The single clearest next step
 
-**One sentence from the decider: does the page at a reach of 0.03 read as a
-flock?** He watched it on 2026-08-12 and 120 frames of what he saw exist; what
-does not exist is his word on them, and
-[0001](adr/0001-purpose-scope-and-success.md) §3.1 makes that word the only
-judge there is. Five weeks have passed since, so a fresh minute at the page costs
-less than finding the frames — `bunx tsc`, serve the checkout, open it.
+**`ALIGNMENT_WEIGHT` from 0.25 to 2, under
+[#216](https://github.com/nanatsusaya/dot-panic/issues/216), test-first, and
+watched under [0022](adr/0022-who-watches.md) §2 before it is called.** The
+decider's sentence on 0.03 arrived on 2026-09-20 and it was none of the three
+readings [#269](https://github.com/nanatsusaya/dot-panic/pull/269) had fixed:
+groups, yes — and inside them the dots *zappeln und zittern*, nothing glides,
+and against a real flock the motion has none of its elegance. Measured
+afterwards on the Core: every dot turns ~90°/s in loops of radius ~0.05 inside
+the body, neighbors move relative to one another at ~0.8 of their own speed,
+and local polarization reads 0.7 where Cavagna et al.'s starling flocks read
+0.84–0.99. Alignment is the force that makes members fly alike, and it stands at
+a quarter of cohesion and a fortieth of separation. Swept on scratchpad copies at
+today's reach and weight, 1 to 2 brings polarization to 0.94 and the relative
+motion to a quarter, and it no longer collapses into one block —
+[the comment on #269](https://github.com/nanatsusaya/dot-panic/pull/269#issuecomment-5752123820)
+carries the table. **What the constant's own header warns** is that
+[#238](https://github.com/nanatsusaya/dot-panic/issues/238) lowered it from 1
+*because* at 1 the body crossed the frame as a crystal; that was at the old
+reach, and whether 1–2 at 0.03 is *gliding but soft* or the crystal again is
+watched, not read off a table. One number: mean speed falls toward the floor
+with it, and if a polarized flock reads as sluggish that is `SPEED_MAX`'s turn
+and a separate change.
 
-**What each answer licenses is written down before anyone looks**, on
-[#269](https://github.com/nanatsusaya/dot-panic/pull/269) and not here: a flock
-means #216's reach-and-weight pass is done and what is left of that ticket is the
-other six numbers; one clump means 0.03 is too short and 0.035 is the row above
-it; an even scatter still means neither the weight nor the reach is the lever, and
-what nobody has yet touched is the count of dots or the neighborhood.
+**Whose eyes, this time.** 0022 §2 fixes the watch — the page moving in a
+compositing browser, a minute of frames in sequence, three scenes, a pointer
+that streams — and the agent does it; §3 reserves the decider's one look for
+the state the agent calls good enough, and his verdict prevails. That is what
+he asked for on 2026-09-20 and what the record exists to make honest.
 
 **The same sitting closes two more, because they are the same page.**
 [#264](https://github.com/nanatsusaya/dot-panic/issues/264)'s two are 0021's own
@@ -2098,9 +2118,12 @@ rather than deferred.
 the band's obituary as an argument.** #267's weight of 10 read 0.94 to 1.09 and
 the decider saw an even scatter — one body beside a void gives the same index as
 groups with gaps, and the *Position* section carries what replaced it. **The
-fifth is on `main` and unjudged**: #269's reach of 0.03, which the frames of
-2026-08-12 show as groups with lanes between them and the decider has not yet
-called either way.
+fifth is on `main` and judged**: #269's reach of 0.03, which the frames of
+2026-08-12 showed as groups with lanes between them and the decider rejected on
+2026-09-20 for what happens inside a group — the section above carries the
+verdict and the number it points at. An agent had called it a flock from
+Chrome stills the same afternoon; stills show grouping and cannot show internal
+motion, which is the whole of why 0022 §2 asks for a sequence.
 
 **`SPEED_MAX` is pointed at twice, by evidence of two different kinds.** The
 prototype measured before any of this was built that doubling it takes dots
@@ -2112,14 +2135,16 @@ never closes behind a moving one.
 [#233](https://github.com/nanatsusaya/dot-panic/issues/233) each say to bring that
 back here rather than reach for the number, and both have.
 
-**Four watches are still owed and one of them has been looked at without being
-called.** #216's *it reads as a flock* at a reach of 0.03 — watched on
-2026-08-12, 120 frames sent, no verdict written; #264's two; and **the
-floor-device half of #216's**, deferred by the decider to 2026-08-10 and
-outstanding since, where the 1280×720 half happened on 2026-08-09 and the
-*Position* section carries what it showed. The count stood at four before the
-evening of 2026-08-12 and stands at four after it: one watch was spent on the
-weight and failed, and the reach that replaced it inherited the same criterion.
+**Four watches are still owed, and they have an instrument again.** #216's *it
+reads as a flock* — called on 0.03 on 2026-09-20 and failed, so it moves to the
+alignment pass; #264's two, which the agent looked at in Chrome the same day
+(the group flattened to a band under the pointer and slid out along the edge,
+neither stiff nor resisting) but before 0022 existed, so that look closes
+nothing and is repeated under §2; and **the floor-device half of #216's**,
+deferred by the decider to 2026-08-10 and outstanding since, where the 1280×720
+half happened on 2026-08-09 and the *Position* section carries what it showed.
+The count has stood at four since the evening of 2026-08-12: the weight's watch
+failed, the reach's watch failed, and the alignment pass inherits the criterion.
 
 **All three that stood at the start of 2026-08-09 came back that evening** —
 #102's jitter, and [#107](https://github.com/nanatsusaya/dot-panic/issues/107)'s
