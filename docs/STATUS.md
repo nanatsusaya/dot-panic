@@ -2039,34 +2039,45 @@ What a change description must contain is no longer among the gaps here.
 
 ## The single clearest next step
 
-**`ALIGNMENT_WEIGHT` from 0.25 to 2, under
-[#216](https://github.com/nanatsusaya/dot-panic/issues/216), test-first, and
-watched under [0022](adr/0022-who-watches.md) §2 before it is called.** The
-decider's sentence on 0.03 arrived on 2026-09-20 and it was none of the three
-readings [#269](https://github.com/nanatsusaya/dot-panic/pull/269) had fixed:
-groups, yes — and inside them the dots *zappeln und zittern*, nothing glides,
-and against a real flock the motion has none of its elegance. Measured
-afterwards on the Core: every dot turns ~90°/s in loops of radius ~0.05 inside
-the body, neighbors move relative to one another at ~0.8 of their own speed,
-and local polarization reads 0.7 where Cavagna et al.'s starling flocks read
-0.84–0.99. Alignment is the force that makes members fly alike, and it stands at
-a quarter of cohesion and a fortieth of separation. Swept on scratchpad copies at
-today's reach and weight, 1 to 2 brings polarization to 0.94 and the relative
-motion to a quarter, and it no longer collapses into one block —
-[the comment on #269](https://github.com/nanatsusaya/dot-panic/pull/269#issuecomment-5752123820)
-carries the table. **What the constant's own header warns** is that
-[#238](https://github.com/nanatsusaya/dot-panic/issues/238) lowered it from 1
-*because* at 1 the body crossed the frame as a crystal; that was at the old
-reach, and whether 1–2 at 0.03 is *gliding but soft* or the crystal again is
-watched, not read off a table. One number: mean speed falls toward the floor
-with it, and if a polarized flock reads as sluggish that is `SPEED_MAX`'s turn
-and a separate change.
+**Decide [#228](https://github.com/nanatsusaya/dot-panic/issues/228) — whether
+a dot carries variation of its own — as a record, before any number moves
+again.** Two watches on 2026-09-20 bracket the problem. The decider rejected
+reach 0.03 at `ALIGNMENT_WEIGHT` 0.25: the dots inside a group *zappeln und
+zittern*, nothing glides. The agent then watched 1 under
+[0022](adr/0022-who-watches.md) §2 and rejected it the other way: every group a
+regular hexagonal lattice from the first frame, all 200 one sliding body by
+90 s — the crystal of 2026-08-09, which is what #238 lowered that number
+against. [The record on #216](https://github.com/nanatsusaya/dot-panic/issues/216#issuecomment-5752338023)
+says whose eyes and what was seen. Alignment moves the flock along one axis
+between those two failures — it removes relative motion, and nothing in 0006
+§1's three behaviors puts any back except the wrong kind — so no weight on it
+is both gliding and soft.
 
-**Whose eyes, this time.** 0022 §2 fixes the watch — the page moving in a
-compositing browser, a minute of frames in sequence, three scenes, a pointer
-that streams — and the agent does it; §3 reserves the decider's one look for
-the state the agent calls good enough, and his verdict prevails. That is what
-he asked for on 2026-09-20 and what the record exists to make honest.
+**What is, is measured and posted on #228.** Per-step heading noise is
+wriggling by another name. A per-dot preferred separation reach of ±30 %,
+drawn once, at alignment 2, brings six-fold order from 0.71–0.76 to 0.38–0.41
+— below a random arrangement — while polarization stays 0.90–0.91, relative
+neighbor motion stays at a quarter of own speed, mean speed rises to 0.090
+instead of sinking toward the floor, and the largest body stays short of 200
+through 90 s. That is the polarized, non-lattice combination no setting of
+alignment reaches. #228 had measured *variation moves very little* at #99's
+weights and named alignment as the reason; at today's reach and separation
+weight a reach that differs per dot is variation alignment cannot consume,
+because it lives in the spacing and not in the velocity.
+
+**Why it is a decision and not a pass.** 0006 §4 rejects a per-dot value by
+name and R2 fixes that it arrives by an authorized amendment or a superseding
+record — never by adding a field to the world because the flock looked flat.
+#228's five questions are the decider's: whether at all, reach or speed or
+both, drawn once or drifting, what it is measured against, and whether it
+helps, which is 0001 §3.1's. The evidence points at *reach, drawn once from the
+seeded generator, with alignment raised in the same pass under #216* — and that
+recommendation goes into the record's open questions, not here.
+
+**Whose eyes, next time.** 0022 §2 fixes the watch and the agent does it; §3
+reserves the decider's one look for the state the agent calls good enough. The
+first watch under it refused a state the measurement had chosen, which is the
+order §4 fixes working the way it was written.
 
 **The same sitting closes two more, because they are the same page.**
 [#264](https://github.com/nanatsusaya/dot-panic/issues/264)'s two are 0021's own
@@ -2136,15 +2147,17 @@ never closes behind a moving one.
 back here rather than reach for the number, and both have.
 
 **Four watches are still owed, and they have an instrument again.** #216's *it
-reads as a flock* — called on 0.03 on 2026-09-20 and failed, so it moves to the
-alignment pass; #264's two, which the agent looked at in Chrome the same day
+reads as a flock* — called on 0.03 on 2026-09-20 and failed, and on alignment 1
+the same day by the agent and failed the other way, so it waits on #228; #264's
+two, which the agent looked at in Chrome the same day
 (the group flattened to a band under the pointer and slid out along the edge,
 neither stiff nor resisting) but before 0022 existed, so that look closes
 nothing and is repeated under §2; and **the floor-device half of #216's**,
 deferred by the decider to 2026-08-10 and outstanding since, where the 1280×720
 half happened on 2026-08-09 and the *Position* section carries what it showed.
 The count has stood at four since the evening of 2026-08-12: the weight's watch
-failed, the reach's watch failed, and the alignment pass inherits the criterion.
+failed, the reach's watch failed, alignment's failed under 0022, and whatever
+#228 decides inherits the criterion.
 
 **All three that stood at the start of 2026-08-09 came back that evening** —
 #102's jitter, and [#107](https://github.com/nanatsusaya/dot-panic/issues/107)'s
