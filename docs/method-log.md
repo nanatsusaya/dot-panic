@@ -6,6 +6,49 @@ session would decide worse without it.
 
 Newest first.
 
+## 2026-08-12 — The number's own header was read after the argument for moving it was posted
+
+A watch failed and a sweep found the lever: at separation's weight of 10 the
+reach was what moved the flock's texture, where at 3 or 6 nothing did. The
+comment that argued for shortening it was posted on
+[#216](https://github.com/nanatsusaya/dot-panic/issues/216) from the sweep and
+from one comparison — the balance point against the spacing a uniform scatter
+already has — and that comparison used the wrong benchmark. **The header on
+`SEPARATION_RADIUS` had the right one**, `√(area / count)` and not the
+nearest-neighbor figure of a random scatter, **and it also carried a measured
+warning against the very lever being proposed**, from a sweep at #99's weights
+where every reach ended as one body. Neither was read until after the comment
+was up. The correction followed in a second comment within minutes; it was
+still a correction in public of an argument the code had already answered.
+
+**The lesson is one word longer than the rule that exists.** *Read before
+writing* names the state artifact and the record that owns the area. **A
+constant's header is the third place, and it is where the last session's sweep
+went** — this project writes measurements into the comment on the number they
+were taken at precisely so the next session does not repeat them, and that only
+works if the next session reads it before the next sweep, not after. The check
+is a sentence: before proposing that a number move, say what its header says
+about moving it.
+
+**The warning turned out to be conditioned, and that is the second half.** It
+held at the weights it was measured at and not at the weights in force, which
+the header stated and the recommendation could have used instead of
+contradicting by accident. A measurement in a header is evidence from a
+configuration; when the configuration has changed, the change that moves the
+number is where the old evidence is either re-confirmed or retired with its
+condition named — which is what
+[#269](https://github.com/nanatsusaya/dot-panic/pull/269) then did. **Deleting
+the warning because the sweep disagreed with it would have thrown away the one
+sentence that explained why they disagreed.**
+
+**The numbers under-called the picture, and the picture is what was asked.**
+The reading fixed in advance said to expect a smaller, denser body and not
+groups; the frames showed groups with lanes between them. That is the entry of
+2026-08-06 from the other side — a measurement that points the right way and
+does not know how far — and it is why the reading was fixed as three outcomes
+rather than one prediction: the pessimistic forecast cost nothing, because the
+watch was going to say so either way.
+
 ## 2026-08-09 — A partial fix was worth watching because the reading was fixed first
 
 [#216](https://github.com/nanatsusaya/dot-panic/issues/216)'s first pass was known

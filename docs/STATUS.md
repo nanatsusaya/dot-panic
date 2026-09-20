@@ -2,7 +2,7 @@
 
 *Brought current before a session ends. Read first when one starts.*
 
-*Last brought current: 2026-08-12.*
+*Last brought current: 2026-09-20.*
 
 ## Position
 
@@ -105,11 +105,13 @@ at **0.25**, cohesion unchanged. **Alignment was the lever and the one weight
 nobody had moved** — at 1 a body of 200 averages every velocity to the same one,
 which is a lattice crossing the frame without reordering inside itself.
 [#238](https://github.com/nanatsusaya/dot-panic/issues/238) found that first and
-this reproduced it independently. **The separation reach is not the lever, and
-that was swept before anything was written**: from 0.05 to 0.14 the Clark-Evans
-index runs 0.67 to 1.79, straight through the wanted band, while **every setting
-ends as one body of all 200 dots**. The sweep is in the constant's own comment so
-the next session does not repeat it.
+this reproduced it independently. **At those weights the separation reach was not the
+lever, and that was swept before anything was written**: from 0.05 to 0.14 the
+Clark-Evans index runs 0.67 to 1.79, straight through the wanted band, while
+every setting ends as one body of all 200 dots. **It became the lever once the
+weight moved** — the paragraphs on 2026-08-12 below — and the constant's own
+comment now says at which weights each sweep holds, so the next session repeats
+neither.
 
 **A test decided how far it could go, and that ceiling is shared with the
 pointer.** The three weights are divided by their own total, so what reaches an
@@ -177,6 +179,53 @@ bounded sum points; and 0006 §10's A2 adds the eighth row to the table that rec
 asserts. **Nothing is built against any of it**, and 0021 §5 says in terms what it
 does not buy: the cancellation is gone, and *no dot outside the frame* is still
 not provable.
+
+**The number the ceiling was holding down went in the same day and failed its
+watch the same evening.** [#267](https://github.com/nanatsusaya/dot-panic/pull/267)
+took separation's weight to 10, argued from a Clark-Evans index of 0.94 to 1.09
+over the frame — and the decider watched two minutes and reported that it does
+not read as a flock at all. **The index was blind to that**: one body beside an
+empty half averages to the same figure several groups with gaps would give, so it
+could not tell the two pictures apart and was asked to. What the frames showed was
+a single body, evenly spaced inside itself, standing on a quarter of the frame.
+Measured with a statistic that can tell them apart — the coefficient of variation
+of the nearest-neighbor distance, 0.58 for a random scatter and 0 for a lattice —
+the page read **0.24**.
+
+**The reach was the lever after all, and only at that weight.** Swept across
+weights 3, 6 and 10 against reaches 0.05 to 0.025: every combination at 3 or 6
+sits at 0.11 to 0.21, a lattice tight or loose, whatever the reach; at 10,
+shortening the reach lifts it to 0.44 at 0.03. **The weight sets how uneven the
+spacing is and the reach sets its scale, and both were needed** — so the merged
+weight was right for a reason its change did not give.
+[#269](https://github.com/nanatsusaya/dot-panic/pull/269) took `SEPARATION_RADIUS`
+from 0.05 to **0.03**, the row the decider picked from a contact sheet of four,
+and it merged on 2026-08-12.
+
+**The argument for it was corrected in public before it was built.** The comment
+that made it compared the balance point against 0.047, the mean nearest-neighbor
+distance of a *random* scatter, and read the resulting 1.00 as 0006 §1's failure
+condition met. A random scatter is not uniform — it has close pairs — and the
+spacing §1 means is the pitch of an even arrangement, 0.094, against which the
+balance point sat at 0.48 all along. **The constant's own header had the right
+benchmark and a measured warning against the very lever, and neither was read
+before the recommendation was posted.** The [method log](method-log.md) carries
+that; the correction is
+[a second comment on #216](https://github.com/nanatsusaya/dot-panic/issues/216#issuecomment-5268944302)
+and the first stands as written.
+
+**The decider watched 0.03 the same evening and the verdict is not written down
+anywhere.** He sent 120 frames of two minutes: three or four groups with clear
+lanes between them, of different sizes and densities, and different ones in every
+frame — nothing like the sheet of the run before. The agent read them that way
+and asked for his word, and the session ended before it came. **The merge of #269
+is not that word**: its description says in terms that the build was not watched
+and that #216 stays open. One doubt was checked and is recorded only here, never
+posted: a knot sits in the bottom-right corner at 120 seconds, and five minutes at
+three seeds never holds one — at most 2 percent of the flock within a neighborhood
+of any corner at any minute mark, the group count swinging between 1 and 4 every
+minute, the centroid wandering 0.09 to 1.04 per minute across a frame 1.78 wide.
+0006 §7's forbidden end state does not occur at this reach.
 
 The rest of what is built is the way of working: the operating rules, the
 [decision set](adr/README.md), and the five session procedures in
@@ -1985,29 +2034,28 @@ What a change description must contain is no longer among the gaps here.
 
 ## The single clearest next step
 
-**One sitting at the page, closing three criteria that all want it open.** The
-budget is built and the number it was holding down is in a change awaiting
-review, so what is left in front of the flock is not code — it is
-[0001](adr/0001-purpose-scope-and-success.md) §3.1's one judge, and nothing here
-can supply it.
+**One sentence from the decider: does the page at a reach of 0.03 read as a
+flock?** He watched it on 2026-08-12 and 120 frames of what he saw exist; what
+does not exist is his word on them, and
+[0001](adr/0001-purpose-scope-and-success.md) §3.1 makes that word the only
+judge there is. Five weeks have passed since, so a fresh minute at the page costs
+less than finding the frames — `bunx tsc`, serve the checkout, open it.
 
-**The three are one sitting because they are one page.**
-[#216](https://github.com/nanatsusaya/dot-panic/issues/216)'s *it reads as a
-flock*, at the new weight; and
-[#264](https://github.com/nanatsusaya/dot-panic/issues/264)'s two, which are
-0021's own named negative consequences — whether the flock reads as **stiff**
-near an edge, and whether the pointer reads as the page **resisting** when a
-group is pushed into a corner, which 0006 §7 rejects by name for a different
-force. **What the measurement says to expect of the last two is subtle**: the
-region where steering is suppressed hardest is occupied 0.1 to 0.2 percent of the
-time, so both want arranging deliberately rather than waiting for.
+**What each answer licenses is written down before anyone looks**, on
+[#269](https://github.com/nanatsusaya/dot-panic/pull/269) and not here: a flock
+means #216's reach-and-weight pass is done and what is left of that ticket is the
+other six numbers; one clump means 0.03 is too short and 0.035 is the row above
+it; an even scatter still means neither the weight nor the reach is the lever, and
+what nobody has yet touched is the count of dots or the neighborhood.
 
-**What each outcome licenses is written down before anyone looks**, on
-[#267](https://github.com/nanatsusaya/dot-panic/pull/267) and not here. That is
-the [method log](method-log.md)'s entry of 2026-08-09 applied on purpose: a
-mixed result read afterwards says *not done*, and read against what was fixed in
-advance it says which lever is next. **The floor-device half of #216's criterion
-is owed on top of all three** and has been since 2026-08-10.
+**The same sitting closes two more, because they are the same page.**
+[#264](https://github.com/nanatsusaya/dot-panic/issues/264)'s two are 0021's own
+named negative consequences — whether the flock reads as **stiff** near an edge,
+and whether the pointer reads as the page **resisting** when a group is pushed
+into a corner, which 0006 §7 rejects by name for a different force. The region
+where steering is suppressed hardest is occupied 0.1 to 0.2 percent of the time,
+so both want arranging deliberately rather than waiting for. **The floor-device
+half of #216's criterion is owed on top** and has been since 2026-08-10.
 
 **What got built, in two changes.** 0021 §1 is in `core/step.ts`: containment is
 bounded to `amax` on its own, the three behaviors and 0007 §5's pointer are
@@ -2046,14 +2094,13 @@ intermittently**, which 0001 §3.1 makes the only judge there is — so the gap
 between the toy and *good enough* is narrower than it was and is still named
 rather than deferred.
 
-**A fourth is in review and is the first inside that band.**
-[#267](https://github.com/nanatsusaya/dot-panic/pull/267) takes separation's
-weight to 10, a share of 0.889, which is the mix the ceiling was hiding: measured
-over two minutes and three seeds it reads **0.94 to 1.09**, occupies 47 to 76
-percent of the frame against 24 to 35, and its largest body **grows and comes
-apart again** where every mix before it reached 200 dots and stayed. **The index
-is the argument and not the answer**, which is the whole of why the sitting above
-is the next step and not another measurement.
+**The fourth was the first inside that band and it failed its watch, which is
+the band's obituary as an argument.** #267's weight of 10 read 0.94 to 1.09 and
+the decider saw an even scatter — one body beside a void gives the same index as
+groups with gaps, and the *Position* section carries what replaced it. **The
+fifth is on `main` and unjudged**: #269's reach of 0.03, which the frames of
+2026-08-12 show as groups with lanes between them and the decider has not yet
+called either way.
 
 **`SPEED_MAX` is pointed at twice, by evidence of two different kinds.** The
 prototype measured before any of this was built that doubling it takes dots
@@ -2065,14 +2112,14 @@ never closes behind a moving one.
 [#233](https://github.com/nanatsusaya/dot-panic/issues/233) each say to bring that
 back here rather than reach for the number, and both have.
 
-**Four watches are owed and three of them are one sitting**, which is the step
-named above: #216's *it reads as a flock* at the new weight, and #264's two. The
-fourth is **the floor-device half of #216's**, deferred by the decider to
-2026-08-10 and outstanding since; the 1280×720 half happened on 2026-08-09 and
-the *Position* section carries what it showed. **This is the first time the count
-has gone up**, and it went up because a record was built rather than because
-anything was skipped: 0021 named two consequences that only eyes decide, and the
-ticket that built it carries them.
+**Four watches are still owed and one of them has been looked at without being
+called.** #216's *it reads as a flock* at a reach of 0.03 — watched on
+2026-08-12, 120 frames sent, no verdict written; #264's two; and **the
+floor-device half of #216's**, deferred by the decider to 2026-08-10 and
+outstanding since, where the 1280×720 half happened on 2026-08-09 and the
+*Position* section carries what it showed. The count stood at four before the
+evening of 2026-08-12 and stands at four after it: one watch was spent on the
+weight and failed, and the reach that replaced it inherited the same criterion.
 
 **All three that stood at the start of 2026-08-09 came back that evening** —
 #102's jitter, and [#107](https://github.com/nanatsusaya/dot-panic/issues/107)'s
