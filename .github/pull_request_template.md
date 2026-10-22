@@ -15,16 +15,16 @@ permits. It exists because the failures that matter here are visual: 0001 §3.1
 puts "it reads as a flock" beyond what any command will ever decide, so a change
 that moves something on screen has no other evidence.
 
-Four other things differ from the published file, declared here so that a later
-reader can tell a change somebody made from one that drifted in:
+**This file carries shape and no instructions**, which is catalog 0.6's rule
+and the reason for most of what changed here on 2026-10-23: a template comment
+is read by a person typing in a browser and by no agent writing a description
+from a file. Every rule that used to be stated below is now read in CLAUDE.md,
+and the sections keep only what tells you what belongs under the heading.
 
-- Who merges points at CLAUDE.md's Delivery section rather than stating it, for
-  the reason 0024 §2 gives: the published file's own 0.6 moved a template's
-  instructions into the operating rules, because a template comment is read by a
-  person typing in a browser and by no agent writing a description from a file.
-- Verified points at CLAUDE.md's Commands section rather than naming a command
-  string. That file is the authority for the four checks and what each decides,
-  and a string copied here goes stale the first time a script is renamed.
+Three other things differ from the published file, declared here so that a
+later reader can tell a change somebody made from one that drifted in:
+
+- Watched, as above.
 - The spelling is American, which is this repository's regime.
 - The pointer below about closing keywords is ours. The handbook has neither it
   nor the rule it points at.
@@ -48,32 +48,22 @@ this file to read it.
 
 ## Verified
 
-<!-- How you know it works. Name the commands you ran and what they returned —
-     not what they would have returned. Anything with observable behavior was
-     exercised, not merely built. State what you did NOT verify.
-
-     The four checks, what each decides, and the rule that none of them runs in
-     a pipeline are in CLAUDE.md's Commands section. -->
+<!-- How you know it works, and what you did NOT verify. What a verification
+     has to be here is CLAUDE.md's — the four checks in its Commands section,
+     the bar in Delivery. -->
 
 ## Watched
 
-<!-- Anything touching motion is verified by watching it. Say what was watched,
-     on what, and what was seen. A passing check is not evidence that the toy
-     works. Delete if this change moves nothing on screen. -->
+<!-- What was watched, on what, and what was seen. Delete if this change moves
+     nothing on screen. Why this section exists, and what a watch has to be, is
+     CLAUDE.md's and 0022's. -->
 
 ## Open questions
 
 <!-- Numbered O1..On, each with a recommended default. Delete if none.
-
-     Do not answer them yourself. When the answer comes it arrives as a comment
-     on this pull request, naming the O-number — and nothing already written
-     here is rewritten. This section keeps one line per question:
-     `O1 — answered: … → <link>`.
-
-     An answer edited into this description overwrites the question it answers.
-     It gets no permalink, notifies nobody, carries no timestamp except one
-     typed by hand, and races whoever else is editing. The durable consequence
-     goes where it belongs: the decision record, or docs/STATUS.md. -->
+     Working with the decider in CLAUDE.md is where everything else about them
+     is read: that you do not answer them, how they arrive, and where an answer
+     goes once it comes. -->
 
 ## Follow-ups
 

@@ -61,15 +61,17 @@ jobs:
           path: dot-panic
 
       # Pinned to a release rather than to `main`, because this is another
-      # repository deciding whether this one deploys. `v0.5.3` is the newest
-      # release carrying catalog 0.5, which is the version `method.json`
-      # declares — the two move together or the check is deciding against a
-      # catalog this project has not adopted.
+      # repository deciding whether this one deploys. `v0.7` carries catalog
+      # 0.7, which is the version `method.json` declares — the two move
+      # together or the check is deciding against a catalog this project has
+      # not adopted. The pin is written twice, here and in `checks.yml`, and
+      # nothing checks that the two agree: 0020 §7 names that rather than
+      # hiding it, and #278 moved both in one change for that reason.
       - name: The method it is checked against
         uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
           repository: nanatsusaya/agent-project-rules
-          ref: v0.5.3
+          ref: v0.7
           path: agent-project-rules
 
       # 0009 §7's runtime, pinned to the version the lockfile was written by.

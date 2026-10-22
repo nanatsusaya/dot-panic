@@ -3,8 +3,9 @@
 This file holds the **stable operating rules**, not the current state. Where we
 stand is in [docs/STATUS.md](docs/STATUS.md); what was decided is in
 [docs/adr/](docs/adr/README.md). STATUS.md is always the same
-place, is brought current before a session ends, and names a **single** clearest
-next step — not everything outstanding.
+place, is brought current **by the change that moves the position** rather than
+by a change of its own, and names a **single** clearest next step — not
+everything outstanding. A wind-down writes only what no change carried.
 
 ## What this is
 
@@ -228,12 +229,28 @@ questions above the whole of the gate.
 - **Surface decisions that belong to a person before acting**: direction and
   sequencing, anything legal, anything outward-facing, anything expensive to
   reverse. Number them `O1..On`, recommend a default for each, and **do not
-  answer them yourself**. **Where the answer goes depends on the artifact.** In a
-  decision record it is folded in and the questions become `R1..Rn`, with what
-  was decided and why. In a pull request it arrives as a comment naming the
-  `O`-number and nothing already written is rewritten —
-  [the template](.github/pull_request_template.md) is the authority for that, and
-  says why, and it is not restated here.
+  answer them yourself**. **Several at once arrive in rounds** — every question
+  whose prerequisites are settled, and none that depends on another in the same
+  round. [`/interview`](.claude/skills/interview/SKILL.md) is the procedure and
+  is not restated here.
+- **Where the answer goes depends on the artifact, and this file is the
+  authority for it.** In a decision record the answer is folded in and the
+  questions become `R1..Rn`, with what was decided and why. **In a pull request
+  it arrives as a comment naming the `O`-number, and nothing already written in
+  the description is rewritten** — not the question, and no line added to say it
+  was answered. An answer edited into a description overwrites the question it
+  answers: it gets no permalink, notifies nobody, carries no timestamp except
+  one typed by hand, and races whoever else is editing that page. **The durable
+  consequence goes to the artifact that owns the fact** — the decision record,
+  the ticket, or [docs/STATUS.md](docs/STATUS.md). The template carries the
+  shape of a description and no longer says any of this, which is catalog 0.6's
+  rule: a template comment is read by a person typing in a browser and by no
+  agent writing a description from a file.
+- **An answer given in conversation rather than on the page is still owed a
+  comment.** Whoever next works on the change posts it, quoting what was said
+  and saying when and where it was given. Otherwise the only record of a
+  decision is a chat log no later session reads, and the page goes on asking a
+  question that was settled.
 - **Stop and ask** before: amending an accepted decision · publishing or
   deploying · changing the public URL · adding any dependency · introducing
   network calls or telemetry.

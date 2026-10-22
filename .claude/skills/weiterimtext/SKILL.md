@@ -3,7 +3,7 @@ name: weiterimtext
 description: >-
   Use mid-session to move cleanly from a just-merged change to the next task — the seam between two
   units of work, and the counterpart to moin (bring-up) and feierabend (wind-down). Confirm the
-  change actually landed, tidy the branch state, bring the living documents current, then
+  change actually landed, tidy the branch state, check the state artifact says what is now true, then
   re-validate the next task against current reality and start it ONLY if it is genuinely ready and
   decision-free; otherwise surface the decision and stop. Keeps the session's context; re-verifies
   the external world before writing.
@@ -11,7 +11,7 @@ description: >-
 
 # After merge — the seam between two units of work
 
-*Carries out rules S1, S2, G1 and C4. The
+*Carries out rules S1, S2, S3, G1 and C4. The
 [catalog](https://github.com/nanatsusaya/agent-project-rules/blob/main/method/rules.md)
 is the authority; this file is only the procedure.*
 
@@ -47,8 +47,8 @@ you worked out this session and prevents nothing.
   ask.**
 - **Never merge.** This runs *after* a merge someone else performed. Step 1
   verifies that; if it did not happen, this stops.
-- **Never write to the trunk.** Every change, including the document sync in
-  step 3, goes through review like any other.
+- **Never write to the trunk.** Every change goes through review like any
+  other.
 
 ## 1. Did the unit actually close?
 
@@ -66,20 +66,22 @@ rather than assuming it:
 Sync to the merged state, delete the merged branch locally, prune
 remote-tracking branches. End on the trunk with a clean tree.
 
-## 3. Bring the living documents current — after re-checking
+## 3. Does the state artifact say what is now true?
 
-The finished change may have altered what is true; a **parallel** change may
-have already recorded it. So re-verify before writing:
+The state artifact is brought current by the change that moves the position,
+not by a change of its own. If the change that just merged closed a task, it
+should already have carried the update. Check that it did, on the freshly
+synced trunk:
 
-- Re-read the **current** state artifact on the freshly synced trunk, together
-  with recent merges and open changes, to see whether the state is **already**
-  reflected. If another session got there first, do not duplicate the change —
-  note it and move on.
-- Only if genuinely stale, update the state artifact and any other affected
-  living document. This is a normal change through review, kept to one concern.
-- Add a **method-log** entry only if a genuinely methodological moment occurred:
-  a correction and its reasoning, a workflow experiment, a mistake worth not
-  repeating. Not routine execution.
+- Re-read the **current** state artifact, together with recent merges and open
+  changes. A **parallel** change may have moved the position again or
+  overwritten the line this one wrote.
+- If it is current, move on. If it is not, **do not open a change just for
+  it.** The next change that closes a task carries the correction, or
+  `/feierabend` does if nothing else will. Note the gap so it is not forgotten.
+- The **method log** is not written here. `/feierabend` asks its question once
+  for the whole session, and this project's permission for the two to travel
+  together is read in [CLAUDE.md](../../../CLAUDE.md#delivery).
 
 ## 4. Re-validate the next task against current reality
 
@@ -96,10 +98,11 @@ you formed earlier as a **hypothesis**, because the world may have moved:
 
 - **Ready and decision-free:** cut a fresh branch from the up-to-date trunk and
   begin, carrying your full session context forward and working to the project's
-  definition of done.
+  definition of done. The change that closes the task brings the state artifact
+  current in the same change.
 - **The gate tripped:** do **not** start. Present the specific decision or the
   planning that is needed, recommend a default, and wait. Starting the next task
   is never worth undermining the review boundary.
 
-Either way, report the transition briefly: what closed, what the documents now
-say, and either what you started or what needs an answer.
+Either way, report the transition briefly: what closed, what the state artifact
+now says, and either what you started or what needs an answer.
