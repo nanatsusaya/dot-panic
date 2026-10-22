@@ -47,7 +47,6 @@ import {
   POINTER_DECAY_STEPS,
   POINTER_RADIUS,
   POINTER_STRENGTH,
-  SEPARATION_RADIUS,
   SEPARATION_WEIGHT,
   SPEED_MAX,
   SPEED_MIN,
@@ -246,9 +245,16 @@ function neighborsOf(dot: Dot, dots: readonly Dot[]): Dot[] {
  * radius** — it is the root of an equation both radii appear in, so shortening
  * one moves it to 0.834; `SEPARATION_RADIUS` carries that arithmetic.
  *
- * The push from one neighbor is `SEPARATION_RADIUS / gap − 1` along the unit
- * vector away from it: nothing at the edge of that reach, one at half of it,
- * and without limit as two dots approach each other.
+ * The push from one neighbor is `reach / gap − 1` along the unit vector away
+ * from it: nothing at the edge of that reach, one at half of it, and without
+ * limit as two dots approach each other.
+ *
+ * **The reach is the steering dot's own** (0023 §4), not `SEPARATION_RADIUS`:
+ * a dot answers the neighbors inside its own circle at the urgency its own
+ * reach gives, so two dots may each be inside the other's reach or not. The
+ * asymmetry is what a value of a dot's own means, and it is the shape the
+ * measurement that chose it was taken with. `SEPARATION_RADIUS` is what every
+ * reach is scaled from and what the relations are asserted over.
  *
  * **The shape, the sum and the limit below were each chosen by measuring, and
  * the first shape tried was wrong.** A push fading linearly to nothing,
@@ -270,9 +276,9 @@ function neighborsOf(dot: Dot, dots: readonly Dot[]): Dot[] {
  * belongs to the world (0002 §4). Nothing here resolves that state either:
  * 0006 §2's non-overlap is a constraint on the result and is #102's.
  *
- * @param dot        the dot being steered
+ * @param dot        the dot being steered, whose own reach is read
  * @param neighbors  the dots inside its neighborhood, never empty. Those past
- *                   `SEPARATION_RADIUS` are among them and contribute nothing
+ *                   its reach are among them and contribute nothing
  * @returns a dimensionless vector no longer than one
  */
 function separationFrom(dot: Dot, neighbors: readonly Dot[]): Vector {
@@ -284,10 +290,10 @@ function separationFrom(dot: Dot, neighbors: readonly Dot[]): Vector {
     const awayY = dot.position.y - neighbor.position.y;
     const gap = Math.hypot(awayX, awayY);
 
-    if (gap > 0 && gap <= SEPARATION_RADIUS) {
+    if (gap > 0 && gap <= dot.reach) {
       // The push divided by `gap` once more, because `awayX` and `awayY` carry
       // a length of `gap` rather than a length of one.
-      const urgency = (SEPARATION_RADIUS - gap) / (gap * gap);
+      const urgency = (dot.reach - gap) / (gap * gap);
 
       x += awayX * urgency;
       y += awayY * urgency;
@@ -639,6 +645,7 @@ export function step(world: World, seconds: number, pointer?: Vector): World {
         y: dot.position.y + velocity.y * seconds,
       },
       velocity,
+      reach: dot.reach,
     };
   });
 

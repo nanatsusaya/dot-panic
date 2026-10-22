@@ -27,12 +27,20 @@ export type Vector = {
  * One dot.
  *
  * It carries no gait, no temperament and no preferred speed of its own: 0006 §4
- * rejects per-dot state whose only job is to make dots differ, so variation is
- * something the forces produce rather than something a dot holds.
+ * rejects per-dot state whose only job is to make dots differ, so variation in
+ * speed is something the forces produce rather than something a dot holds.
+ * **One value is its own** (0023 §1), and it is a length rather than a speed.
  */
 export type Dot = {
   readonly position: Vector;
   readonly velocity: Vector;
+  /**
+   * How far this dot's separation reaches (0023 §1): `SEPARATION_RADIUS`
+   * scaled by a factor drawn once from the world's generator (0023 §2), inside
+   * the range `SEPARATION_SPREAD` fixes. Alignment cannot consume variation
+   * that lives in the spacing, which is why this is the one value a dot has.
+   */
+  readonly reach: number;
 };
 
 /**
@@ -256,6 +264,40 @@ export const NEIGHBORHOOD_RADIUS = 0.14;
 export const SEPARATION_RADIUS = 0.03;
 
 /**
+ * How far a dot's own reach may sit from the shared one, as a fraction of it
+ * either way (0023 §3). Provisional; #216 supersedes it by watching.
+ *
+ * A dot's reach is `SEPARATION_RADIUS · (1 ± SEPARATION_SPREAD)` at the ends of
+ * the range and anywhere between, drawn once in `createWorld`. Two relations
+ * bound the number and a test asserts both: the largest reach any dot can
+ * carry is still shorter than `NEIGHBORHOOD_RADIUS`, which is 0006 §1's A1 read
+ * over the range; and the smallest is still positive, so no dot's separation
+ * vanishes.
+ *
+ * **0.3 is the spread the measurement of 2026-09-20 was taken at**, on
+ * throwaway copies of this Core, before 0023 was written — three seeds, twenty
+ * seconds settled, ninety read, at `ALIGNMENT_WEIGHT` 2. With no spread that
+ * weight gives six-fold order 0.71–0.76 inside a group, a hexagonal lattice
+ * sliding as a body; with ±30 % it gives **0.38–0.41**, below the ~0.4 a random
+ * arrangement gives, while polarization stays 0.90–0.91 and neighbors keep
+ * moving relative to each other at only 0.22–0.24 of their own speed. Mean
+ * speed rises to 0.090 from 0.057, and the largest connected body stays short
+ * of all 200 through ninety seconds. The comment on #228 carries the table.
+ *
+ * **What it does is put variation where alignment cannot reach it.** Every
+ * weight on `ALIGNMENT_WEIGHT` between 0.25 and 2 was either wriggling or a
+ * lattice — alignment removes relative motion, and a per-step noise that puts
+ * some back is the wriggling by another name. A reach that differs per dot
+ * varies the *spacing* a group settles at, not the velocity, and that is the
+ * one kind of variation the three behaviors leave alone.
+ *
+ * Chosen by measuring between candidates and then watched, which is the order
+ * 0022 §4 fixes; smaller and larger spreads were not swept, and #216 is where
+ * they would be.
+ */
+export const SEPARATION_SPREAD = 0.3;
+
+/**
  * How much separation counts against the other two behaviors (0006 §1).
  * Provisional; #216 supersedes it by watching.
  *
@@ -306,30 +348,61 @@ export const SEPARATION_WEIGHT = 10;
  * accelerates hard. That is the variation 0006 §4 asks the forces to produce,
  * rather than a dot carrying a gait of its own.
  *
- * **0.25 rather than 1, and of the three this is the one that decides whether
- * anything ever comes apart.** It stood at 1 in every measurement taken here
- * until #238, and at 1 a body of two hundred dots averages every velocity to
- * the same one — so the arrangement crosses the frame as a block, without
- * reordering inside itself, which is what watching it on 2026-08-09 found and
- * what a Clark-Evans figure cannot see.
+ * **This is the number that decides whether a group glides or seethes, and on
+ * its own it cannot do both.** It has been 1, then 0.25, and is 2 now — and 2
+ * lands only together with `SEPARATION_SPREAD`, because the measurement that
+ * chose it was taken with both (0023 R3). Alignment matches velocities: at a
+ * high share neighbors fly alike and a group moves as a body; at a low one each
+ * dot steers its own loop through the group. Both ends were watched on
+ * 2026-09-20. The decider refused 0.25 on the reach of 0.03 — *zappeln und
+ * zittern*, no elegance — and measured afterwards (three seeds, 20 s settled,
+ * 30 s read) every dot was turning 84–101°/s in loops of radius ~0.05 inside
+ * the body, neighbors within 0.05 were moving relative to each other at
+ * 0.68–0.85 of their own speed, and the polarization of a dot's neighborhood
+ * read 0.68–0.76 where starling flocks measure 0.84–0.99 (Cavagna et al.
+ * 2010, Table S1). The agent then refused 1 under 0022 §2: polarization
+ * 0.92–0.93 and a quarter of the relative motion, and every group a hexagonal
+ * lattice from the first frame, one sliding body of 200 by ninety seconds.
+ *
+ * **Swept on copies of this Core at today's reach and separation weight,
+ * without a spread:**
+ *
+ * | weight | turn rate | polarization | relative / own speed | six-fold order |
+ * |---|---|---|---|---|
+ * | 0.25 | 84–101°/s | 0.68–0.76 | 0.68–0.85 | 0.43 |
+ * | 1 | 48–64°/s | 0.90–0.94 | 0.25–0.33 | 0.68–0.70 |
+ * | 2 | 31–34°/s | 0.94–0.95 | 0.15–0.19 | 0.71–0.76 |
+ * | 4 | 10–26°/s | 0.96–0.99 | 0.06–0.13 | — |
+ *
+ * There is no row that is both polarized and not a lattice. `SEPARATION_SPREAD`
+ * is what adds one — at 2 with ±30 % on the reach the six-fold order falls to
+ * 0.38–0.41 while the polarization stays 0.90–0.91 — and 2 rather than 1 is
+ * where that row was measured, with the higher polarization and the lower
+ * relative motion of the two. What this number does on its own is the reason
+ * it is not moved on its own.
+ *
+ * **Why the first 1 was lowered, and why that reason no longer decides.** It
+ * stood at 1 in every measurement taken here until 2026-08-09, and at 1 a body
+ * of two hundred dots averaged every velocity to the same one and crossed the
+ * frame as a block without reordering inside itself — at a separation reach of
+ * 0.05 and #99's weight of 1.5. The pass that lowered this number raised that
+ * one to 3 in the same change; both have moved since. What has not moved is
+ * #238's finding under it: every weight here coarsens over minutes, and that
+ * ticket stays open on it.
  *
  * **It does not decide where two bodies meet; it decides whether two that have
  * met stay met.** That distinction is why the number went unexamined while the
  * radii were swept: alignment matches velocities rather than distances, which
  * is true, and is beside the point.
- *
- * **Lowering it is also what buys the separation above its room.** The share
- * that reaches an edge is over the three weights' total, so a small alignment
- * spends less of the budget 0006 §6's turning force has to win back.
  */
-export const ALIGNMENT_WEIGHT = 0.25;
+export const ALIGNMENT_WEIGHT = 2;
 
 /**
  * How much cohesion counts, on the same scale. Provisional in the same way and
  * superseded by the same watching.
  *
  * **The one of the three that has not moved**, so the other two are read
- * against it: separation is ten times it and alignment a quarter of it. What
+ * against it: separation is ten times it and alignment twice it. What
  * it buys is a spacing to settle at rather than a collision or a drift apart —
  * cohesion grows to one over `NEIGHBORHOOD_RADIUS` while separation falls away
  * over `SEPARATION_RADIUS`, and at these three the two balance at 0.903 of the
@@ -415,8 +488,8 @@ export const POINTER_DECAY_STEPS = 18;
  * #100 superseded it in the sense that mattered. It is the middle of
  * `[SPEED_MIN, SPEED_MAX]` now rather than a free-standing number, so the world
  * this builds satisfies 0006 §3 without anything having to clamp it. It stays
- * one speed for every dot: §4 rejects a dot carrying a speed of its own, and R2
- * keeps the route back an amendment.
+ * one speed for every dot: §4 rejects a dot carrying a speed of its own, and
+ * 0023 §1 keeps that rejection for speed while giving a dot its reach.
  */
 const INITIAL_SPEED = 0.1;
 
@@ -476,6 +549,7 @@ export function createWorld(options: {
     const [x, afterX] = nextFraction(random);
     const [y, afterY] = nextFraction(afterX);
     const [turn, afterTurn] = nextFraction(afterY);
+    const [spread, afterSpread] = nextFraction(afterTurn);
     const heading = turn * FULL_TURN;
 
     dots.push({
@@ -487,8 +561,13 @@ export function createWorld(options: {
         x: Math.cos(heading) * INITIAL_SPEED,
         y: Math.sin(heading) * INITIAL_SPEED,
       },
+      // 0023 §2: the one draw a dot keeps for life, in the same pass that
+      // places and turns it, so the world is still its seed and nothing else.
+      reach:
+        SEPARATION_RADIUS *
+        (1 - SEPARATION_SPREAD + 2 * SEPARATION_SPREAD * spread),
     });
-    random = afterTurn;
+    random = afterSpread;
   }
 
   return {

@@ -62,6 +62,7 @@ function worldOf(velocities: readonly Vector[]): World {
     dots: velocities.map((velocity) => ({
       position: { x: 0.5, y: 0.5 },
       velocity,
+      reach: SEPARATION_RADIUS,
     })),
     frame: WIDE,
     radius: DOT_RADIUS,
@@ -78,7 +79,7 @@ function worldOf(velocities: readonly Vector[]): World {
  */
 function dotIn(frame: Frame, position: Vector, velocity: Vector): World {
   return {
-    dots: [{ position, velocity }],
+    dots: [{ position, velocity, reach: SEPARATION_RADIUS }],
     frame,
     radius: DOT_RADIUS,
     random: randomFromSeed(1),
@@ -186,6 +187,7 @@ function pileIntoCorner(world: World): World {
           y: (dot.position.y / world.frame.height) * CORNER,
         },
         velocity: { x: -speed / Math.SQRT2, y: -speed / Math.SQRT2 },
+        reach: dot.reach,
       };
     }),
   };
@@ -269,10 +271,11 @@ function flockAround(
 ): World {
   return {
     dots: [
-      { position: MIDDLE, velocity: CARRIED },
+      { position: MIDDLE, velocity: CARRIED, reach: SEPARATION_RADIUS },
       ...offsets.map((offset) => ({
         position: { x: MIDDLE.x + offset.x, y: MIDDLE.y + offset.y },
         velocity: neighborVelocity,
+        reach: SEPARATION_RADIUS,
       })),
     ],
     frame: WIDE,
@@ -375,14 +378,20 @@ describe("a step", () => {
   test("moves every dot along the velocity it ends the step with", () => {
     const world: World = {
       dots: [
-        { position: { x: MIDDLE.x, y: MIDDLE.y }, velocity: CARRIED },
+        {
+          position: { x: MIDDLE.x, y: MIDDLE.y },
+          velocity: CARRIED,
+          reach: SEPARATION_RADIUS,
+        },
         {
           position: { x: MIDDLE.x + 0.06, y: MIDDLE.y },
           velocity: { x: 0, y: CARRIED.x },
+          reach: SEPARATION_RADIUS,
         },
         {
           position: { x: MIDDLE.x + 0.03, y: MIDDLE.y + 0.06 },
           velocity: { x: -CARRIED.x, y: 0 },
+          reach: SEPARATION_RADIUS,
         },
       ],
       frame: WIDE,
@@ -938,10 +947,11 @@ describe("the share of the budget containment takes first", () => {
   function pressedFromInside(position: Vector): World {
     return {
       dots: [
-        { position, velocity: CARRIED },
+        { position, velocity: CARRIED, reach: SEPARATION_RADIUS },
         ...[1, 2, 3].map((nth) => ({
           position: { x: position.x + separationOver(8) * nth, y: position.y },
           velocity: CARRIED,
+          reach: SEPARATION_RADIUS,
         })),
       ],
       frame: WIDE,
@@ -1177,6 +1187,39 @@ describe("the three steering behaviors", () => {
   });
 
   /*
+   * 0023 §4: separation reads the steering dot's own reach. A neighbor a fifth
+   * past the shared reach is outside a dot carrying that reach and inside one
+   * carrying half again as much — so the second is pushed harder away from it
+   * than the first, whatever cohesion adds to both. And the neighbor, which
+   * carries the shared reach in both worlds, ends both steps the same: the
+   * asymmetry is the field meaning what it says.
+   */
+  test("reads the steering dot's own reach, and only its own", () => {
+    const shared = flockAround([{ x: pastSeparation(1.2), y: 0 }], CARRIED);
+    const longer: World = {
+      ...shared,
+      dots: shared.dots.map((dot, index) =>
+        index === 0 ? { ...dot, reach: SEPARATION_RADIUS * 1.5 } : dot,
+      ),
+    };
+
+    expect(steered(longer, seconds).x).toBeLessThan(steered(shared, seconds).x);
+    expect(step(longer, seconds).dots[1]).toEqual(
+      step(shared, seconds).dots[1],
+    );
+  });
+
+  // 0023 §2: drawn once, and a step is not where it could change.
+  test("leaves every dot's reach as it was", () => {
+    const before = flockAround([{ x: separationOver(3), y: 0 }], CARRIED);
+    const after = step(before, seconds);
+
+    expect(after.dots.map((dot) => dot.reach)).toEqual(
+      before.dots.map((dot) => dot.reach),
+    );
+  });
+
+  /*
    * A1's own claim, and the one that says separation's reach is a reach rather
    * than a weight. Three neighbors past it whose positions average to the dot:
    * cohesion is silent because they average out, alignment is silent because
@@ -1220,8 +1263,16 @@ describe("the three steering behaviors", () => {
     const inward = { x: -0.07, y: -0.07 };
     const crowded: World = {
       dots: [
-        { position: { x: 0.02, y: 0.02 }, velocity: inward },
-        { position: { x: 0.013, y: 0.013 }, velocity: inward },
+        {
+          position: { x: 0.02, y: 0.02 },
+          velocity: inward,
+          reach: SEPARATION_RADIUS,
+        },
+        {
+          position: { x: 0.013, y: 0.013 },
+          velocity: inward,
+          reach: SEPARATION_RADIUS,
+        },
       ],
       frame: WIDE,
       radius: DOT_RADIUS,
@@ -1295,8 +1346,16 @@ describe("non-overlap in a returned world", () => {
    */
   test("changes positions and not velocities", () => {
     const dots = [
-      { position: { x: MIDDLE.x, y: MIDDLE.y }, velocity: CARRIED },
-      { position: { x: MIDDLE.x + 0.04, y: MIDDLE.y }, velocity: CARRIED },
+      {
+        position: { x: MIDDLE.x, y: MIDDLE.y },
+        velocity: CARRIED,
+        reach: SEPARATION_RADIUS,
+      },
+      {
+        position: { x: MIDDLE.x + 0.04, y: MIDDLE.y },
+        velocity: CARRIED,
+        reach: SEPARATION_RADIUS,
+      },
     ];
     const roomy: World = {
       dots,
@@ -1327,10 +1386,15 @@ describe("non-overlap in a returned world", () => {
   test("satisfies it from a world that arrives violating it", () => {
     const overlapping: World = {
       dots: [
-        { position: { x: MIDDLE.x, y: MIDDLE.y }, velocity: CARRIED },
+        {
+          position: { x: MIDDLE.x, y: MIDDLE.y },
+          velocity: CARRIED,
+          reach: SEPARATION_RADIUS,
+        },
         {
           position: { x: MIDDLE.x + DOT_RADIUS, y: MIDDLE.y },
           velocity: CARRIED,
+          reach: SEPARATION_RADIUS,
         },
       ],
       frame: WIDE,

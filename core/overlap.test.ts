@@ -13,7 +13,7 @@
 import { describe, expect, test } from "bun:test";
 
 import { OVERLAP_PASSES, withoutOverlap } from "./overlap.js";
-import { DOT_RADIUS, type Dot } from "./world.js";
+import { DOT_RADIUS, type Dot, SEPARATION_RADIUS } from "./world.js";
 
 /** Two radii, which is the distance 0006 §2 makes the floor. */
 const TOUCHING = 2 * DOT_RADIUS;
@@ -25,7 +25,11 @@ const TOUCHING = 2 * DOT_RADIUS;
  * @param y  where it sits down the frame
  */
 function still(x: number, y: number): Dot {
-  return { position: { x, y }, velocity: { x: 0, y: 0 } };
+  return {
+    position: { x, y },
+    velocity: { x: 0, y: 0 },
+    reach: SEPARATION_RADIUS,
+  };
 }
 
 /**
@@ -109,10 +113,15 @@ describe("the non-overlap correction", () => {
    */
   test("leaves every velocity exactly as it found it", () => {
     const dots: Dot[] = [
-      { position: { x: 0.5, y: 0.5 }, velocity: { x: 0.1, y: -0.05 } },
+      {
+        position: { x: 0.5, y: 0.5 },
+        velocity: { x: 0.1, y: -0.05 },
+        reach: SEPARATION_RADIUS,
+      },
       {
         position: { x: 0.5 + TOUCHING / 2, y: 0.5 },
         velocity: { x: -0.02, y: 0.09 },
+        reach: SEPARATION_RADIUS,
       },
     ];
 
