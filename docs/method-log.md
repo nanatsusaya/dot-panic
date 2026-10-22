@@ -6,6 +6,47 @@ session would decide worse without it.
 
 Newest first.
 
+## 2026-10-23 — The first granted plan stopped at a permission, and the agent could not grant it
+
+[0024](adr/0024-whether-a-plan-may-be-approved-instead-of-each-change.md) §2
+decided that inside a plan the decider has granted, the agent merges its own
+changes. The first granted plan then stopped at its first change — green, gated,
+nothing left to decide — because the agent's harness refused the merge as a
+self-approval. **The project's rule was satisfied and the merge still did not
+happen**, which is a distinction worth having a name: a record decides who *may*
+merge, and the harness decides who *can*. Neither reads the other.
+
+`/machsdirselbst` step 1 already asked for the tools a run needs to be allowed
+in advance, and it was answered — `git`, the platform commands, the four checks.
+That answer was wrong in a way the step did not prompt for: **what the run
+lacked was not a tool but the right to be the one pressing it.** The step now
+names the merge separately, with this date on it, because the next run will meet
+the same wall and the generic question will not surface it.
+
+**The agent cannot install that permission itself.** Writing
+`.claude/settings.local.json` was refused outright, reason
+`[Self-Modification]`. That refusal is the useful half of the story rather than
+an obstacle to it: a gate an agent can open for itself is not a gate, so
+*allowing the tools in advance* is permanently the decider's act and cannot be
+folded into a procedure the agent runs. Do not plan around it — plan for it,
+before the grant.
+
+**Then the grant broke the gate it existed to use.** The permission file is
+JSON; `biome.json` points Biome at `.gitignore` rather than keeping a second
+list, so an unignored one is a file `biome check` formats. `check:lint` went red
+on a formatting finding, and under
+[0020](adr/0020-whether-the-checks-gate-a-merge.md) §1 that meant no change in
+this repository could pass its own gate until one line in `.gitignore` existed.
+The shape of that is general: **a local file added to make the method work can
+disable the checks that make it safe**, because this project deliberately keeps
+one ignore list and points every tool at it. A new file of a type a check reads
+is a change to the gate, whether or not anybody meant it as one.
+
+The repair went through the ordinary gate and the decider merged it, because the
+plan was a closed list of three entries and this was not one of them. That is
+0024 §1 working as written, in the one case where it would have been most
+tempting to treat a one-line fix as inside the boundary.
+
 ## 2026-10-22 — The first watch that passed began by measuring a frozen page
 
 0022 §2's first condition is *the page, moving*, in a browser that composites,
