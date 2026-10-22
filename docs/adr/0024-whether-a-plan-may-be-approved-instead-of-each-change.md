@@ -1,6 +1,6 @@
 # 0024 — Whether a plan may be approved instead of each change
 
-- **Status:** Proposed
+- **Status:** Accepted
 - **Date:** 2026-10-22
 - **Deciders:** Daniel Wagner
 - **Ticket:** [#278](https://github.com/nanatsusaya/dot-panic/issues/278), whose
@@ -70,8 +70,19 @@ session or with the list, whichever comes first.** Silence is not a grant, an
 earlier session's grant is not a grant, and a grant for one plan does not reach
 the next.
 
+**The grant is written down where the plan is** (R2). The run's first change
+puts the plan into [docs/STATUS.md](../STATUS.md), and it quotes the words that
+granted it with their date in the same place. A plan in the state artifact whose
+authorization sits only in a chat log is the half the next session cannot read.
+
+**No number bounds a plan** (R3). What bounds it is that the list is closed and
+that a budget is stated when it is presented. 0012 §6's cap counts changes open
+for review at once and a run opens one at a time, so a number invented here
+would be a second cap measuring a different thing.
+
 **Checkable by reading:** `method.json` declares no adaptation, and no document
-here says a rule of the method is dropped.
+here says a rule of the method is dropped; and the state artifact carries the
+plan and the words that granted it before the first entry is merged.
 
 ### 2. Inside a granted plan the agent merges; outside one the decider merges
 
@@ -109,6 +120,12 @@ why this is a record rather than a line in CLAUDE.md.**
    criterion closed would be an agent closing it, which 0022 decided against four
    weeks ago.
 
+**A parked entry parks itself and not the run** (R1). The run takes the next
+entry, and the closing report collects everything that waits — the same thing
+the procedure already does with an entry a question parked. Stopping the whole
+run at the first watched entry would make a plan containing one nearly useless,
+and nearly every entry this project has left is one.
+
 **Checkable by reading:** no change a run merged carries a criterion naming
 watching, and every entry that does appears in the closing report as parked.
 
@@ -128,10 +145,12 @@ seventh beside the five, on the terms
 copies: what was taken, what was changed and why, recorded there, with a release
 of the method as the trigger to compare again.
 
-**`autopilot` is named `machsdirselbst`, and `interview` keeps its name.** Both
-are the method's own rename table, where `interview` keeps one name everywhere
-because other procedures call it by that name and a renamed one falls back to the
-few sentences they carry.
+**`autopilot` is named `machsdirselbst`, and `interview` keeps its name** (R4).
+Both are the method's own rename table, where `interview` keeps one name
+everywhere because other procedures call it by that name and a renamed one falls
+back to the few sentences they carry. The five copies here already use that
+table's German column, and a mixed set would read as an oversight rather than as
+a choice.
 
 **`kickoff` is not taken.** It founds a project from a description, and this one
 exists.
@@ -196,28 +215,26 @@ Rejected because 0022 §3 reserves his look for before the criterion closes, and
 the merge is what closes it; looking afterwards makes his verdict a correction
 rather than a gate.
 
-## Open questions
+## Resolved questions
 
-- **O1 — Does a parked watched entry stop the run, or only itself?** §3's fourth
-  exclusion parks the entry before its merge. *Recommended default: only itself.*
-  The run takes the next entry and the closing report collects what waits, which
-  is what the procedure already does with a parked question; stopping the whole
-  run at the first watched entry would make a plan containing one nearly
-  useless.
-- **O2 — Where is the grant recorded?** *Recommended default: in
-  [docs/STATUS.md](../STATUS.md), in the run's first change, quoting the words
-  that granted it with their date.* The procedure writes the plan there before
-  the first entry starts; the grant is what the plan rests on, and a plan in the
-  state artifact whose authorization sits only in a chat log is the half that
-  cannot be read next session.
-- **O3 — Does a plan have a size here?** *Recommended default: no number, and
-  the budget is stated when the plan is presented.* 0012 §6's cap counts changes
-  open for review at once and a run opens one at a time, so a number invented
-  here would be a second cap measuring a different thing.
-- **O4 — `machsdirselbst`, or the English name?** *Recommended default:
-  `machsdirselbst`, from the method's own rename table*, because the five copies
-  here already use that table's German column and a mixed set reads as an
-  oversight rather than as a choice.
+All four answered by the decider on 2026-10-22 with the defaults, in
+[a comment on PR #279](https://github.com/nanatsusaya/dot-panic/pull/279#issuecomment-6349959504).
+
+- **R1 — A parked watched entry parks itself.** §3 as written: the run takes the
+  next entry and the closing report collects what waits. The alternative — the
+  first such entry ends the run — was rejected because what this project has
+  left is mostly watched work, so a plan would end at its first interesting
+  entry.
+- **R2 — The grant is recorded in the state artifact**, in the run's first
+  change, quoted with its date. §1 as written. It is the one half of the
+  arrangement that a later session cannot reconstruct: the plan is written down
+  by the procedure anyway, and the authorization it rests on would otherwise
+  live only in a conversation.
+- **R3 — A plan has no size here.** §1 as written. The closed list and the
+  stated budget are what bound a run; 0012 §6's cap measures something else and
+  a second number would be read as if it measured the same thing.
+- **R4 — `machsdirselbst`.** §5 as written, from the method's own rename table,
+  for consistency with the five copies already here.
 
 ## References
 
