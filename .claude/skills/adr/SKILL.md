@@ -91,13 +91,18 @@ accepted — stale documentation, which [C4](https://github.com/nanatsusaya/agen
 calls a defect rather than untidiness — and it would cost a second trip through
 review to record something that already happened.
 
+**The state artifact moves on this branch too**, if accepting the record
+changes what happens next. S3 puts the update in the change that moves the
+position rather than in a change of its own, and the flip to Accepted *is* that
+change — so it goes in now, before the merge, not afterwards.
+
 Push to the same change under review; leave a short note that it is ready
 again.
 
 ## 6. After it merges
 
-Sync the trunk, delete the branch, and update the state artifact if this changed
-what happens next.
+Sync the trunk and delete the branch. Nothing is written to the state artifact
+here: step 5 carried it.
 
 Remember that **accepted means decided, not built.** Nothing about the status
 says the thing exists.

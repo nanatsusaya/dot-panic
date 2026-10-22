@@ -28,7 +28,8 @@ review, a red build or an overdue task is stated plainly.
 - **Orient, do not start work.** This ends with a **question**, never an action.
   If the briefing surfaces a task, name it and wait. Opening a session by
   starting work chooses the session's direction on the decider's behalf.
-- **Read-only.** No commits, no branches, no edits to living documents.
+- **Read-only.** No commits, no branches, no edits to living documents — not
+  even to repair one that step 4 finds stale. Report it; the repair is work.
 - **The living documents are the source of truth for state** — not this file,
   not memory, not what was true last session.
 - **Do not invent state you could not read.** If an artifact is missing, say it
@@ -82,6 +83,11 @@ methodological moment from the method log only if it bears on today.
   than a stale local view.
 - **Project state:** the *where we stand* section of the state artifact.
   Summarize; do not paste it.
+- **Did the last session end cleanly?** Compare the state artifact with the
+  trunk: merged changes it does not reflect, open changes or branches it does
+  not name, or a plan with entries neither closed nor parked. Any of these means
+  the last session ended without a wind-down. Say so plainly, and for whatever
+  is newer than the artifact trust the trunk, not the artifact.
 
 ## 5. Maintenance that has come due — flag, do not run
 
@@ -93,7 +99,10 @@ due, say so explicitly with the next date — never skip it silently.
 ## 6. The next step
 
 From the state artifact, name the **single clearest next step** — not the
-roadmap — plus any decision that must be settled before it can start.
+roadmap — plus any decision that must be settled before it can start. If step 4
+found the artifact behind, the next step is to bring it current, recording that
+the last session ended without a wind-down; name that instead, and the step it
+would have named after it.
 
 ## 7. Close with a question
 

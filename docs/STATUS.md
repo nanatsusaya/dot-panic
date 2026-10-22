@@ -1,8 +1,9 @@
 # Where we stand
 
-*Brought current before a session ends. Read first when one starts.*
+*Brought current by the change that moves the position; a wind-down writes only
+what no change carried. Read first when a session starts.*
 
-*Last brought current: 2026-10-22.*
+*Last brought current: 2026-10-23.*
 
 ## Position
 
@@ -2075,7 +2076,10 @@ about the gate changes, and the grant ends with the session or with the list.
 3. **[#278](https://github.com/nanatsusaya/dot-panic/issues/278)** — the catalog
    move to 0.7: both workflow pins, `method.json`, the pointer-line instruction,
    S3's wording here and in CLAUDE.md, the three existing procedure copies, and
-   the maintenance row.
+   the maintenance row. **Merged.** All ten of the ticket's scope lines, and the
+   last of them is the evidence: `check:method` no longer reports a version
+   difference. The entry said *three* existing procedure copies and it was
+   **five** — four carry new behavior and `/passtdas` needed one line.
 
 **What the grant does not cover** is §3's four exclusions, and they were read
 against these three before the yes: none writes, amends or accepts a record,
@@ -2100,8 +2104,68 @@ has to settle before the grant rather than after it. `/machsdirselbst` step 1
 now names the merge among the permissions to establish in advance, with this
 date on it.
 
-**#238 is still the step after the plan**, and the paragraph below stands
-unchanged by it.
+### The run is closed, and this is its report
+
+**Every entry merged; none parked.** The plan held three and all three are on
+the trunk: the two procedures ([#281](https://github.com/nanatsusaya/dot-panic/pull/281)),
+who merges inside a plan ([#283](https://github.com/nanatsusaya/dot-panic/pull/283)),
+and the catalog move to 0.7 ([#278](https://github.com/nanatsusaya/dot-panic/issues/278)).
+Nothing was started that was not on the list. **The grant ends here** — the next
+list needs a new one, and being named below as the next step is not a grant.
+
+**One change was worked outside the plan and the decider merged it**:
+[#282](https://github.com/nanatsusaya/dot-panic/pull/282), the one `.gitignore`
+line for `.claude/settings.local.json`. The permission file that let this run
+merge at all is JSON, and `biome.json` points Biome at `.gitignore`, so an
+unignored one reddened `check:lint` — which under
+[0020](adr/0020-whether-the-checks-gate-a-merge.md) §1 meant no change in this
+repository could pass its own gate. It was not on the list, so §2's exception
+did not reach it and it went through the ordinary gate.
+
+**Two merges here are the first in this project that are not the decider's**,
+and the permission that made them possible is one line in a file this agent was
+refused when it tried to write it — reason `[Self-Modification]`. That refusal
+is worth keeping: a gate an agent can grant itself is not one.
+
+**Every judgment call the run made, in one list.** This is what 0024 §1 hands
+the decider in place of the diffs.
+
+- **The judgment-call list has no heading of its own.** It goes at the end of
+  *What*, because the template's headings are the handbook's shape and a run
+  does not add a sixth.
+- **Entry 1 edited CLAUDE.md**, although the entry was about `.claude/skills/`:
+  *Session rituals* said *five procedures* and listed them, and a reference
+  moves in the same change as its authority.
+- **`.claude/skills/README.md` keeps two adaptation lists** rather than one
+  renumbered set, because sentences elsewhere cite an adaptation by number.
+- **`/machsdirselbst` keeps upstream's step 6** on keeping a run alive, with its
+  *untested* warning doubled rather than dropped.
+- **Entry 2 edited the template** although its own wording said *not the
+  template*: the sentence left standing there would have been false after §2.
+  The superseded wording is quoted where it was removed, with its date.
+- **`required_approving_review_count` is not quoted in CLAUDE.md.** The bullet
+  says no platform setting holds any of it and sends the reader to 0024.
+- **Entry 3 swept the template further than the ticket's one line.** Catalog
+  0.6 makes a template shape-only, so *Verified*, *Watched* and *Open questions*
+  became headings with pointers, and the declared differences went from four to
+  three: pointing at CLAUDE.md stopped being a difference once it became the
+  rule.
+- **0.7's rounds binding is pointed at, not restated.** CLAUDE.md names rounds
+  in one clause and sends the reader to `/interview`.
+- **Two procedure copies gained a pointer upstream has no equivalent of**: the
+  decider's permission for the state artifact and the method log to travel
+  together.
+- **The maintenance row keeps its older readings beneath the new one.** A
+  standing row's history is what says whether the trigger has been honored
+  before.
+- **0.8 was read and not pinned.** `H6` is written upstream and this project
+  already satisfies it, but 0.8 carries no tag, and a pin needs a release.
+- **`/passtdas` was not run.** #278 says plainly that it is not that procedure:
+  this moved the declaration to a catalog that moved, and asking whether the
+  declaration still matches how work is done here is a separate question.
+
+**#238 is the step after the plan**, and the paragraph below stands unchanged by
+it.
 
 **Take [#238](https://github.com/nanatsusaya/dot-panic/issues/238) — the flock
 coarsens into one body — because the change of 2026-10-22 made it measurably

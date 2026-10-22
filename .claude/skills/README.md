@@ -11,9 +11,9 @@ terms
 §5 sets. The same section leaves `kickoff` untaken: it founds a project from a
 description, and this one exists.
 
-**The five match `0.5.0`, compared on 2026-08-05 against
+**Before this release they matched `0.5.0`**, compared on 2026-08-05 against
 [#147](https://github.com/nanatsusaya/dot-panic/issues/147) and re-checked
-against the plugin later the same day.** Two things changed in these five files
+against the plugin later the same day. Two things changed in these five files
 since the version they were taken from: the method's own name, which
 [#146](https://github.com/nanatsusaya/dot-panic/pull/146) had already carried
 through them, and the catalog number in the template `/passtdas` shows, which
@@ -21,13 +21,39 @@ this copy had been given half an hour earlier for the same reason. Nothing was
 taken either time — a result of the comparison rather than a reason to skip the
 next one.
 
-**The five have not been compared against `0.7.0`.** That comparison is
-[#278](https://github.com/nanatsusaya/dot-panic/issues/278)'s, the maintenance
-the release is due, and one difference is already known: upstream's
-`session-start` has gained a step that decides whether the last session ended
-without a wind-down, and this copy of `/moin` has not. Until that pass lands,
-the two taken on 2026-10-22 are the only files here that match the current
-plugin.
+**All seven match `0.7.0`, compared file by file on 2026-10-23 in
+[#278](https://github.com/nanatsusaya/dot-panic/issues/278)** — the maintenance
+that `v0.6` and `v0.7` made due, which 0016 §6 puts on the same trigger as the
+two workflow pins. **Four of the five were changed and the fifth by one line**,
+and what came across is behavior, not wording:
+
+- **`/moin`** gains S1's second duty: step 4 decides whether the last session
+  ended without a wind-down, by comparing the state artifact against the trunk,
+  and step 6 names bringing it current as the next step when it did. Its
+  read-only guardrail now says that this holds even for the stale document step
+  4 just found — reporting it is bring-up, repairing it is work.
+- **`/weiterimtext`** carries S3. Step 3 stopped being *bring the living
+  documents current* and became a question — does the artifact already say what
+  is true? — because the change that moves the position is what brings it
+  current. It no longer opens a change for the artifact alone, and the method
+  log is no longer written at a seam.
+- **`/feierabend`** carries S3 and M1. Step 3 writes only what no change
+  carried, writes nothing when the last closing change left the artifact true,
+  and **asks the method-log question every time**, with the answer going into
+  the handoff either way — an entry, or *nothing for the method log*.
+- **`/adr`** moves the state-artifact update onto the branch. The flip to
+  Accepted is the change that moves the position, so S3 puts the update in it
+  rather than after the merge; step 6 now writes nothing.
+- **`/passtdas`** needed one line: the catalog number in the `method.json`
+  template it shows.
+
+Nothing in the seven adaptations below was overwritten, and nothing upstream
+was taken that this project had deliberately left. **Two things upstream now
+says that these copies do not**, both because this project already had an
+authority for them: `/feierabend`'s own definition of done, which 0.7 restated
+and which [`.github/ISSUE_TEMPLATE/task.md`](../../.github/ISSUE_TEMPLATE/task.md)
+owns here, and `/adr`'s description of the shape of a record, which
+[`docs/adr/README.md`](../../docs/adr/README.md) owns.
 
 Copying rather than installing is what that repository recommends for anyone
 who wants to change them, and it is what makes this project self-supporting:
