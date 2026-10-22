@@ -5,16 +5,23 @@ handbook. What, Why and Verified are always answered; Open questions and
 Follow-ups are deleted when there are none — an empty heading reads as
 "considered and found empty".
 
-One concern per change. The decider merges, never the author.
+One concern per change. Who merges is CLAUDE.md's Delivery section — the
+decider, except inside a plan he granted — and it is not repeated here. This
+file said "the decider merges, never the author" until 2026-10-23, which 0024
+§2 made a sentence with an exception it did not carry.
 
 **Watched is this project's one declared section**, and one is what the handbook
 permits. It exists because the failures that matter here are visual: 0001 §3.1
 puts "it reads as a flock" beyond what any command will ever decide, so a change
 that moves something on screen has no other evidence.
 
-Three other things differ from the published file, declared here so that a later
+Four other things differ from the published file, declared here so that a later
 reader can tell a change somebody made from one that drifted in:
 
+- Who merges points at CLAUDE.md's Delivery section rather than stating it, for
+  the reason 0024 §2 gives: the published file's own 0.6 moved a template's
+  instructions into the operating rules, because a template comment is read by a
+  person typing in a browser and by no agent writing a description from a file.
 - Verified points at CLAUDE.md's Commands section rather than naming a command
   string. That file is the authority for the four checks and what each decides,
   and a string copied here goes stale the first time a script is renamed.

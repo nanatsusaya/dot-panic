@@ -2067,7 +2067,11 @@ about the gate changes, and the grant ends with the session or with the list.
    this run met that wall on its first entry. CLAUDE.md's *Session rituals*
    names seven procedures instead of five.
 2. **Who merges inside a plan**, written into CLAUDE.md's *Delivery* and not
-   into the template, which §2 fixes and 0.6's reasoning explains.
+   into the template, which §2 fixes and 0.6's reasoning explains. **Merged.**
+   The template's own sentence had to move in the same change: *the decider
+   merges, never the author* admitted no exception, so after §2 it was a second
+   authority saying something false. It now points at *Delivery* and is the
+   fourth difference the template declares against the published file.
 3. **[#278](https://github.com/nanatsusaya/dot-panic/issues/278)** — the catalog
    move to 0.7: both workflow pins, `method.json`, the pointer-line instruction,
    S3's wording here and in CLAUDE.md, the three existing procedure copies, and

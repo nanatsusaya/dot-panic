@@ -143,6 +143,14 @@ first.
 - **Every change goes on a branch and through a pull request. Never write to
   `main` directly.** No exception — not for a status flip, not for a log entry,
   not for a change that looks mechanical.
+- **The decider merges, never the author — except inside a plan he has
+  granted, where the agent merges its own changes.** That exception is
+  [0024](docs/adr/0024-whether-a-plan-may-be-approved-instead-of-each-change.md)
+  §2, which also fixes why the sentence lives here rather than in the template.
+  What a plan may not contain is §3, what stays his whatever a plan says is §6,
+  the grant itself is §1's, and **no platform setting holds any of it** — §4
+  and that record's *Context* are where those are read. None of it is restated
+  here.
 - **What the review decides is direction and coherence**: does this move toward
   the goal, and does it fit what already exists rather than working by making an
   exception to it. Line-level correctness is not the reviewer's job — that is
