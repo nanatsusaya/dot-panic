@@ -17,3 +17,13 @@ tests/**/*.js
 # reads it rather than the source tree. It is only ever built in CI — this
 # entry is for the session that runs those steps by hand to see what deploys.
 _site/
+
+# The permission file Claude Code writes for this checkout: one person's grant
+# to one agent on one machine, which is not a fact about the project. It is
+# also JSON, and `biome check` reads it — the first one to exist reddened
+# `check:lint` on 2026-10-23, so until this line existed no change in this
+# repository could pass its own gate. `biome.json` points at this file rather
+# than keeping a second list, which is why one line here is the whole fix.
+# What the grant carries out is 0024 §2; the grant itself decides nothing, so
+# it is not committed.
+.claude/settings.local.json
