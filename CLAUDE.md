@@ -313,7 +313,7 @@ epic is, and what it deliberately is not, is
 
 ## Session rituals
 
-Five procedures live in [`.claude/skills/`](.claude/skills/README.md) as
+Seven procedures live in [`.claude/skills/`](.claude/skills/README.md) as
 adapted copies, not as an installed plugin. That file records where they came
 from, what was changed and why, and what to do when the source releases a new
 version. None of it is repeated here.
@@ -325,6 +325,8 @@ version. None of it is repeated here.
 | `/feierabend` | Stopping. **Only when asked for by name** — never on an inference that the session is ending. |
 | `/adr` | Writing a decision and taking it through to Accepted. |
 | `/passtdas` | Checking whether `method.json` still matches how work is actually done. |
+| `/interview` | A series of decisions is needed before anything is written. Asks in rounds, answers none. |
+| `/machsdirselbst` | A plan the decider granted. Works the closed list and merges inside it — what that permits is [0024](docs/adr/0024-whether-a-plan-may-be-approved-instead-of-each-change.md). |
 
 The `agent-method` plugin is disabled for this repository. Two sets of the same
 procedures would be two authorities for one thing.

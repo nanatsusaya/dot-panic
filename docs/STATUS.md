@@ -2060,7 +2060,12 @@ about the gate changes, and the grant ends with the session or with the list.
 
 1. **The two procedures.** `interview` and `machsdirselbst` as adapted copies
    under §5, with [`.claude/skills/README.md`](../.claude/skills/README.md)
-   recording what was taken and changed.
+   recording what was taken and changed. **Merged.** Six adaptations of their
+   own are written down beside the five's seven, the heaviest being that
+   `/machsdirselbst` carries §3's fourth exclusion as a guardrail, and step 1
+   now names the merge among the permissions a run needs in advance — because
+   this run met that wall on its first entry. CLAUDE.md's *Session rituals*
+   names seven procedures instead of five.
 2. **Who merges inside a plan**, written into CLAUDE.md's *Delivery* and not
    into the template, which §2 fixes and 0.6's reasoning explains.
 3. **[#278](https://github.com/nanatsusaya/dot-panic/issues/278)** — the catalog
@@ -2080,6 +2085,16 @@ no change waiting for review, `bun run check` green on the trunk, and the
 sibling checkout moved from an unreleased branch to `v0.7` — so that a local
 `check:method` reads a released catalog, which is the one entry 3 pins. Until
 that move, local runs and CI had been deciding against two different catalogs.
+
+**The run has one deviation, and it is not this project's rule giving way.**
+0024 §2 permits the agent to merge inside a granted plan, and the first change
+was green and gated — but the agent's harness refused the merge as a
+self-approval, because `gh pr merge` is not among the commands allowed to it
+here. The decider pressed it instead. So the run works as decided and **the
+merge is his until that permission exists**, which is the one thing a later run
+has to settle before the grant rather than after it. `/machsdirselbst` step 1
+now names the merge among the permissions to establish in advance, with this
+date on it.
 
 **#238 is still the step after the plan**, and the paragraph below stands
 unchanged by it.
