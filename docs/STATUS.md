@@ -2,7 +2,7 @@
 
 *Brought current before a session ends. Read first when one starts.*
 
-*Last brought current: 2026-09-20.*
+*Last brought current: 2026-10-22.*
 
 ## Position
 
@@ -30,6 +30,19 @@ Chrome under the agent's control was the first — and what an agent's watch mus
 consist of to count, and that the decider looks once at the end with his word
 prevailing, is [0022](adr/0022-who-watches.md). He handed the loop over that day
 and kept the acceptance; the log carries why.
+
+**That arrangement has now run end to end once, on 2026-10-22, and it worked the
+way it was written.** The agent watched three scenes under 0022 §2 in the
+decider's Chrome, called the state good, and the decider looked once and
+reported it good — *es sieht aktuell gut aus*, recorded as
+[a comment on PR #276](https://github.com/nanatsusaya/dot-panic/pull/276#issuecomment-6349226016).
+**What that look covers is how it looks and not a criterion**: #216's names
+1280×720 and the window was 1316×726, and the floor-device half is still owed,
+so the ticket stays open on both. **The first attempt that day was thrown away
+before anything was read**, and the reason is the entry at the top of the
+[method log](method-log.md): the tab was `hidden`, where Chrome throttles
+`requestAnimationFrame` until the renderer freezes, and a frozen page reads as a
+flock holding still.
 
 **The second is [#109](https://github.com/nanatsusaya/dot-panic/issues/109), and
 it is recorded where a merged description could not be.** The decider looked at
@@ -1789,8 +1802,8 @@ same claim out of [the maintenance list](maintenance.md), where it read *because
 there is no toolchain*; this file was carrying the second copy, which is why a
 repair to one document is not a repair to the fact.
 
-**Seventeen decisions stand in [docs/adr/](adr/README.md), and all seventeen
-are Accepted.** There is no `Planned` row left, which has not been true
+**Twenty-three decisions stand in [docs/adr/](adr/README.md), and all
+twenty-three are Accepted.** There is no `Planned` row left, which has not been true
 before — and it says nothing about what exists: every area on the scale at the
 end of this file is `decided` but one. Which record answers what is
 the index's to say, and enumerating them here would be a second copy of it.
@@ -2039,53 +2052,43 @@ What a change description must contain is no longer among the gaps here.
 
 ## The single clearest next step
 
-**Decide [#228](https://github.com/nanatsusaya/dot-panic/issues/228) — whether
-a dot carries variation of its own — as a record, before any number moves
-again.** Two watches on 2026-09-20 bracket the problem. The decider rejected
-reach 0.03 at `ALIGNMENT_WEIGHT` 0.25: the dots inside a group *zappeln und
-zittern*, nothing glides. The agent then watched 1 under
-[0022](adr/0022-who-watches.md) §2 and rejected it the other way: every group a
-regular hexagonal lattice from the first frame, all 200 one sliding body by
-90 s — the crystal of 2026-08-09, which is what #238 lowered that number
-against. [The record on #216](https://github.com/nanatsusaya/dot-panic/issues/216#issuecomment-5752338023)
-says whose eyes and what was seen. Alignment moves the flock along one axis
-between those two failures — it removes relative motion, and nothing in 0006
-§1's three behaviors puts any back except the wrong kind — so no weight on it
-is both gliding and soft.
+**Take [#238](https://github.com/nanatsusaya/dot-panic/issues/238) — the flock
+coarsens into one body — because the change of 2026-10-22 made it measurably
+worse and the decider accepted that cost as #238's.** The largest connected
+body at 90 s reads 89–98 of 200 at the weights that were on `main`, 132–200 at
+alignment 2 alone, and **94–179** at alignment 2 with the spread, which is what
+is on `main` now. The spread buys most of what alignment 2 costs and does not
+buy all of it. **The watch saw it happen**: in an undisturbed run all two
+hundred dots were one body between about 56 and 64 s, in a corner of an
+otherwise empty frame, and had broken into two again by 81 s. That was
+[PR #276](https://github.com/nanatsusaya/dot-panic/pull/276)'s one open
+question, answered *merge it, #238 läuft weiter*.
 
-**What is, is measured and posted on #228.** Per-step heading noise is
-wriggling by another name. A per-dot preferred separation reach of ±30 %,
-drawn once, at alignment 2, brings six-fold order from 0.71–0.76 to 0.38–0.41
-— below a random arrangement — while polarization stays 0.90–0.91, relative
-neighbor motion stays at a quarter of own speed, mean speed rises to 0.090
-instead of sinking toward the floor, and the largest body stays short of 200
-through 90 s. That is the polarized, non-lattice combination no setting of
-alignment reaches. #228 had measured *variation moves very little* at #99's
-weights and named alignment as the reason; at today's reach and separation
-weight a reach that differs per dot is variation alignment cannot consume,
-because it lives in the spacing and not in the velocity.
+**What landed, and what it cost.** 0023 is built: a dot carries one value of its
+own and it is the reach its separation acts over, drawn once in `createWorld`
+from the world's generator, read by the **steering** dot so that two dots may
+each be inside the other's circle or not. `SEPARATION_SPREAD` is ±30 % and
+`ALIGNMENT_WEIGHT` moved from 0.25 to 2 in the same change, which 0023 R3
+requires because the measurement was taken with both. **It is the first state
+here that is polarized without being a lattice**: six-fold order 0.38–0.41,
+below what a random arrangement gives, against 0.71–0.76 at alignment 2 alone.
 
-**Why it is a decision and not a pass.** 0006 §4 rejects a per-dot value by
-name and R2 fixes that it arrives by an authorized amendment or a superseding
-record — never by adding a field to the world because the flock looked flat.
-#228's five questions are the decider's: whether at all, reach or speed or
-both, drawn once or drifting, what it is measured against, and whether it
-helps, which is 0001 §3.1's. The evidence points at *reach, drawn once from the
-seeded generator, with alignment raised in the same pass under #216* — and that
-recommendation goes into the record's open questions, not here.
+**What the watch of 2026-10-22 settles, and what it does not.** It settles the
+question the two failures of 2026-09-20 bracketed: the paths are long smooth
+curves that fan where a group turns, so the state glides rather than seething,
+and the lattice is gone. The pointer is answered the way 0007 asks — a group
+opens into a crescent around it and closes behind it within five to eight
+seconds. It does **not** settle *it reads as a flock*: that is #216's, it names
+a size this watch did not use and a device nobody here has run on, and the
+decider's look of that day was at how it looks rather than at the criterion.
 
-**Whose eyes, next time.** 0022 §2 fixes the watch and the agent does it; §3
-reserves the decider's one look for the state the agent calls good enough. The
-first watch under it refused a state the measurement had chosen, which is the
-order §4 fixes working the way it was written.
-
-**The same sitting closes two more, because they are the same page.**
-[#264](https://github.com/nanatsusaya/dot-panic/issues/264)'s two are 0021's own
-named negative consequences — whether the flock reads as **stiff** near an edge,
-and whether the pointer reads as the page **resisting** when a group is pushed
-into a corner, which 0006 §7 rejects by name for a different force. The region
-where steering is suppressed hardest is occupied 0.1 to 0.2 percent of the time,
-so both want arranging deliberately rather than waiting for. **The floor-device
+**#264's two were watched without either failing**, in the second and third
+scenes — whether the flock reads as **stiff** near an edge, and whether the
+pointer reads as the page **resisting** when a group is pushed into a corner,
+which 0006 §7 rejects by name for a different force. A group driven into the
+bottom-left corner and held there for 24 s lay along the edge loosely and left
+once the pointer withdrew. **Neither is closed**: 0022 §3 keeps that with the
+decider, and his look of 2026-10-22 was not pointed at them. **The floor-device
 half of #216's criterion is owed on top** and has been since 2026-08-10.
 
 **What got built, in two changes.** 0021 §1 is in `core/step.ts`: containment is
@@ -2129,12 +2132,19 @@ rather than deferred.
 the band's obituary as an argument.** #267's weight of 10 read 0.94 to 1.09 and
 the decider saw an even scatter — one body beside a void gives the same index as
 groups with gaps, and the *Position* section carries what replaced it. **The
-fifth is on `main` and judged**: #269's reach of 0.03, which the frames of
+fifth was on `main` until 2026-10-22 and is judged**: #269's reach of 0.03, which the frames of
 2026-08-12 showed as groups with lanes between them and the decider rejected on
 2026-09-20 for what happens inside a group — the section above carries the
 verdict and the number it points at. An agent had called it a flock from
 Chrome stills the same afternoon; stills show grouping and cannot show internal
 motion, which is the whole of why 0022 §2 asks for a sequence.
+
+**The sixth is what is on `main` now, and it is the first the decider has not
+refused.** 0023's per-dot reach at an alignment weight of 2: polarized without
+being a lattice, gliding rather than seething, watched in three scenes on
+2026-10-22 and looked at by the decider the same day. **No index is quoted for
+it**, because the band above stopped being an argument two states ago and
+quoting one here would restart it.
 
 **`SPEED_MAX` is pointed at twice, by evidence of two different kinds.** The
 prototype measured before any of this was built that doubling it takes dots
@@ -2146,18 +2156,19 @@ never closes behind a moving one.
 [#233](https://github.com/nanatsusaya/dot-panic/issues/233) each say to bring that
 back here rather than reach for the number, and both have.
 
-**Four watches are still owed, and they have an instrument again.** #216's *it
-reads as a flock* — called on 0.03 on 2026-09-20 and failed, and on alignment 1
-the same day by the agent and failed the other way, so it waits on #228; #264's
-two, which the agent looked at in Chrome the same day
-(the group flattened to a band under the pointer and slid out along the edge,
-neither stiff nor resisting) but before 0022 existed, so that look closes
-nothing and is repeated under §2; and **the floor-device half of #216's**,
-deferred by the decider to 2026-08-10 and outstanding since, where the 1280×720
-half happened on 2026-08-09 and the *Position* section carries what it showed.
-The count has stood at four since the evening of 2026-08-12: the weight's watch
-failed, the reach's watch failed, alignment's failed under 0022, and whatever
-#228 decides inherits the criterion.
+**Three watches are owed, and two of them want nothing but the decider's eyes.**
+#264's two were watched under 0022 §2 on 2026-10-22 and neither failed — a group
+driven into a corner lay along the edge loosely and left once the pointer
+withdrew — so what they want is §3's look, pointed at them. **The floor-device
+half of #216's** is the third, deferred by the decider to 2026-08-10 and
+outstanding since; the 1280×720 half happened on 2026-08-09, and the window of
+2026-10-22 was 1316×726. **#216's own criterion is not among the three and is
+not closed either**: the decider looked on 2026-10-22 and reported the state
+good, at how it looks rather than at the criterion, and the ticket keeps it.
+**The count stood at four from the evening of 2026-08-12 until that day** — the
+weight's watch failed, the reach's failed, alignment's failed under 0022, and
+whatever #228 decided inherited the criterion. 0023 decided it and the build was
+watched; what remains is three things no run of the Core can answer.
 
 **All three that stood at the start of 2026-08-09 came back that evening** —
 #102's jitter, and [#107](https://github.com/nanatsusaya/dot-panic/issues/107)'s
