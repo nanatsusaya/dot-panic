@@ -15,6 +15,7 @@ import {
   MAX_ACCELERATION,
   NEIGHBORHOOD_RADIUS,
   SEPARATION_RADIUS,
+  SEPARATION_SPREAD,
   SPEED_MAX,
   SPEED_MIN,
   withFrame,
@@ -142,6 +143,28 @@ describe("a world", () => {
       createWorld({ ...ordinary, seed: 2 }),
     );
   });
+
+  /*
+   * 0023 §1 and §2: the one value a dot carries is its separation reach, drawn
+   * once from the seeded generator as a factor on the shared reach. The bounds
+   * are 0023 §3's closed range; that the values differ is what the field is
+   * for, and a generator that handed every dot the same factor would have
+   * built the world 0006 §4 already had.
+   */
+  test("gives every dot a reach of its own, inside the spread", () => {
+    const reaches = createWorld(ordinary).dots.map((dot) => dot.reach);
+
+    for (const reach of reaches) {
+      expect(reach).toBeGreaterThanOrEqual(
+        SEPARATION_RADIUS * (1 - SEPARATION_SPREAD),
+      );
+      expect(reach).toBeLessThanOrEqual(
+        SEPARATION_RADIUS * (1 + SEPARATION_SPREAD),
+      );
+    }
+
+    expect(new Set(reaches).size).toBeGreaterThan(1);
+  });
 });
 
 /*
@@ -203,5 +226,18 @@ describe("the numbers this ticket fixed", () => {
    */
   test("leave 0006 §1's two reaches ordered", () => {
     expect(SEPARATION_RADIUS).toBeLessThan(NEIGHBORHOOD_RADIUS);
+  });
+
+  /*
+   * The same row read the way A3 of 2026-09-20 reads it: over the largest
+   * reach 0023 §3 lets a dot carry, not over the shared number alone. And the
+   * range's other end — 0023 §3's second relation — so that no dot's separation
+   * ever vanishes.
+   */
+  test("leave 0006 §1's ordering true of every dot's own reach", () => {
+    expect(SEPARATION_RADIUS * (1 + SEPARATION_SPREAD)).toBeLessThan(
+      NEIGHBORHOOD_RADIUS,
+    );
+    expect(1 - SEPARATION_SPREAD).toBeGreaterThan(0);
   });
 });

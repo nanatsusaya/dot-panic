@@ -147,6 +147,7 @@ export function withoutOverlap(
           y: here.position.y + shiftY,
         },
         velocity: here.velocity,
+        reach: here.reach,
       };
     });
 
