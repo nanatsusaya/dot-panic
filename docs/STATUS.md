@@ -2052,6 +2052,38 @@ What a change description must contain is no longer among the gaps here.
 
 ## The single clearest next step
 
+**A plan is granted, and this is the first one** — [0024](adr/0024-whether-a-plan-may-be-approved-instead-of-each-change.md)
+is Accepted and this is the arrangement it decided, in use. The decider granted
+a closed list of three entries for the session of 2026-10-22: *nimm v0.7, und ja
+zur liste*. Inside it the agent merges its own changes (§2); outside it nothing
+about the gate changes, and the grant ends with the session or with the list.
+
+1. **The two procedures.** `interview` and `machsdirselbst` as adapted copies
+   under §5, with [`.claude/skills/README.md`](../.claude/skills/README.md)
+   recording what was taken and changed.
+2. **Who merges inside a plan**, written into CLAUDE.md's *Delivery* and not
+   into the template, which §2 fixes and 0.6's reasoning explains.
+3. **[#278](https://github.com/nanatsusaya/dot-panic/issues/278)** — the catalog
+   move to 0.7: both workflow pins, `method.json`, the pointer-line instruction,
+   S3's wording here and in CLAUDE.md, the three existing procedure copies, and
+   the maintenance row.
+
+**What the grant does not cover** is §3's four exclusions, and they were read
+against these three before the yes: none writes, amends or accepts a record,
+none is on CLAUDE.md's stop-and-ask list, and **none carries a criterion that
+needs the decider's eyes** — nothing here moves on screen. **One boundary is
+named in advance**: entry 3 touches `deploy.yml`'s pinned ref and nothing else
+about the deployment path, and anything beyond the pin parks.
+
+**The start was checked rather than assumed**: the trunk at `c8a702a` and clean,
+no change waiting for review, `bun run check` green on the trunk, and the
+sibling checkout moved from an unreleased branch to `v0.7` — so that a local
+`check:method` reads a released catalog, which is the one entry 3 pins. Until
+that move, local runs and CI had been deciding against two different catalogs.
+
+**#238 is still the step after the plan**, and the paragraph below stands
+unchanged by it.
+
 **Take [#238](https://github.com/nanatsusaya/dot-panic/issues/238) — the flock
 coarsens into one body — because the change of 2026-10-22 made it measurably
 worse and the decider accepted that cost as #238's.** The largest connected
