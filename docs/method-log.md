@@ -6,6 +6,38 @@ session would decide worse without it.
 
 Newest first.
 
+## 2026-10-22 — The first watch that passed began by measuring a frozen page
+
+0022 §2's first condition is *the page, moving*, in a browser that composites,
+and it names the decider's Chrome under the agent's control as one. That is the
+browser the watch ran in, and the first three frames were worthless anyway. The
+tab was not the one in front: Chrome reports `document.visibilityState: hidden`
+for a tab nobody is looking at, throttles `requestAnimationFrame` there and
+eventually freezes the renderer. Frames eight and sixteen seconds apart came
+back showing the same arrangement — which is exactly what a settled flock looks
+like — and a `Runtime.evaluate` then timed out after forty-five seconds, which
+is what gave it away. **The condition was read as a property of the browser and
+it is a property of the window.** A browser that composites for the person does
+not composite for a tab they cannot see.
+
+**The guard is two lines and it runs before the first frame is counted**: read
+`visibilityState` and count rAF ticks for two seconds. Visible and sixty to a
+hundred and twenty a second, or it is not a watch. What it cost to find was one
+message asking the decider to bring his window forward, which is the same shape
+as the entry above — the instrument is a shared one, and the half of it that
+only a person can operate is where it fails quietly.
+
+**The glide the watch was for could not be read off frames either, and that was
+foreseeable.** Three watches have now turned on how a dot moves relative to the
+dot beside it, and frames in sequence do not carry it at any interval a tool can
+take them. What carried it was painting each frame over the last with a slow
+fade, so one still holds about four seconds of every dot's path: gliding reads
+as long smooth curves that fan where a group turns, and the wriggling that was
+rejected in September would read as loops. **An instrument that makes the
+question visible is worth more than another pass of the eye that cannot see
+it** — it stays outside the repository under 0022 §4, it closes nothing, and it
+is the difference between a verdict and a guess about one.
+
 ## 2026-09-20 — The decider handed the watching over, and the agent's first verdict was wrong on the point that matters
 
 Every watched criterion had been closed by the decider's own eyes since
