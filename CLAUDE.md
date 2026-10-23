@@ -89,9 +89,22 @@ differently. Neither is advisory.
 bun run check:test
 ```
 
-Decides that the tests pass **and** that coverage clears 0010 §7's floor. Read
-the exit status rather than the summary: a run can print `1 pass 0 fail` and
-still exit 1, because the floor is what failed.
+Decides three things: that **no emitted `.js` sits under the four directories
+`tsconfig.json` names**, that the tests pass, and that coverage clears 0010 §7's
+floor. Read the exit status rather than the summary: a run can print
+`1 pass 0 fail` and still exit 1, because the floor is what failed.
+
+**It reads the source tree, and it refuses rather than read the other one.** An
+import names the emitted file (0009 §5), so a built tree hands the suite
+`world.js` where an unbuilt one hands it `world.ts` — the file system chooses,
+and until 2026-10-23 the only tell was one character per row in the coverage
+table. Now the run stops before the first test, names every emitted file it
+found and exits 1. [#190](https://github.com/nanatsusaya/dot-panic/issues/190)
+is where that was decided and `check-emitted-output.mjs` is what does it — a
+script rather than a test, because 0018 §5 forbids a test under `tests/` from
+reading a path that ends in `.js`. **Looking at the page is what produces that
+state**, since a watch needs a build (0012 §5), so delete those files before
+testing after one. That delete is the cost the answer chose.
 
 ```bash
 bun run check
