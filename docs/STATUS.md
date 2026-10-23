@@ -2053,11 +2053,20 @@ What a change description must contain is no longer among the gaps here.
 
 ## The single clearest next step
 
-**A plan is granted, and this is the first one** — [0024](adr/0024-whether-a-plan-may-be-approved-instead-of-each-change.md)
-is Accepted and this is the arrangement it decided, in use. The decider granted
+**Take [#238](https://github.com/nanatsusaya/dot-panic/issues/238) — the flock
+coarsens into one body.** The paragraph that argues it is further down and
+stands unchanged. **No plan is granted**: the first one ran and is closed, and
+the grant it rested on ended with it, so what comes next is a decision rather
+than a continuation. Everything below this line is what happened, not what is
+owed.
+
+### The first granted plan ran, and it is closed
+
+**A plan was granted, and that was the first one** — [0024](adr/0024-whether-a-plan-may-be-approved-instead-of-each-change.md)
+is Accepted and this was the arrangement it decided, in use. The decider granted
 a closed list of three entries for the session of 2026-10-22: *nimm v0.7, und ja
-zur liste*. Inside it the agent merges its own changes (§2); outside it nothing
-about the gate changes, and the grant ends with the session or with the list.
+zur liste*. Inside it the agent merged its own changes (§2); outside it nothing
+about the gate changed, and the grant ended with the list.
 
 1. **The two procedures.** `interview` and `machsdirselbst` as adapted copies
    under §5, with [`.claude/skills/README.md`](../.claude/skills/README.md)
@@ -2164,8 +2173,12 @@ the decider in place of the diffs.
   this moved the declaration to a catalog that moved, and asking whether the
   declaration still matches how work is done here is a separate question.
 
-**#238 is the step after the plan**, and the paragraph below stands unchanged by
-it.
+**The branches are gone.** Seven local and eleven remote, every one already in
+`main`, deleted at the wind-down of 2026-10-23. The trunk is the only branch in
+either place. It is written down because an earlier count in this session said
+*two* remote and was wrong — the listing had been truncated — and because a
+later session comparing this file against the trunk should not read the absence
+as something unfinished.
 
 **Take [#238](https://github.com/nanatsusaya/dot-panic/issues/238) — the flock
 coarsens into one body — because the change of 2026-10-22 made it measurably
