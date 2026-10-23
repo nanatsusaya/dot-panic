@@ -6,7 +6,7 @@
     "check:method": "node ../agent-project-rules/checks/check-method.mjs .",
     "check:types": "tsc --noEmit",
     "check:lint": "biome check .",
-    "check:test": "bun test",
+    "check:test": "bun ./check-emitted-output.mjs && bun test",
     "check": "bun run check:method && bun run check:types && bun run check:lint && bun run check:test"
   },
   "devDependencies": {
