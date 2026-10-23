@@ -2053,12 +2053,59 @@ What a change description must contain is no longer among the gaps here.
 
 ## The single clearest next step
 
-**Take [#238](https://github.com/nanatsusaya/dot-panic/issues/238) — the flock
-coarsens into one body.** The paragraph that argues it is further down and
-stands unchanged. **No plan is granted**: the first one ran and is closed, and
-the grant it rested on ended with it, so what comes next is a decision rather
-than a continuation. Everything below this line is what happened, not what is
-owed.
+**A second plan is granted, and this is it.** [0024](adr/0024-whether-a-plan-may-be-approved-instead-of-each-change.md)
+§1 requires the plan and the words that granted it to stand here before the
+first entry starts. The decider granted a closed list of four entries for the
+session of 2026-10-23 — *die liste ist in ordnung, fang an* — having answered a
+round of six questions, each carrying a recommended default, with *wir folgen
+deiner empfehlung*. Inside the list the agent merges (§2); outside it nothing
+about the gate changes, and the grant ends with the session or with the list.
+
+**The budget is four changes, one per entry, one open at a time, and 17:00.**
+Whichever comes first ends the run. **The change carrying this paragraph is not
+one of the four**: §1 asks for it before the first entry starts, and a plan and
+the first entry's work are two concerns.
+
+| | Entry | What finishes it | At the end |
+|---|---|---|---|
+| 1 | [#190](https://github.com/nanatsusaya/dot-panic/issues/190) | `check:test` refuses when an emitted `.js` sits beside a `.ts`, naming the files; CLAUDE.md says which tree the run reads and what the other state does; both states shown on one tree | merges |
+| 2 | [#167](https://github.com/nanatsusaya/dot-panic/issues/167) | the `Waits on` column gone from the five epic tables, each keeping membership | **parks** |
+| 3 | [#166](https://github.com/nanatsusaya/dot-panic/issues/166) | #132 agrees that the set is #13's eight build tickets, and says why #90 is out | **parks** |
+| 4 | [#238](https://github.com/nanatsusaya/dot-panic/issues/238) | the series and the sweep taken again on the numbers that are on `main`, the finding recorded beside August's, this file brought current | merges |
+
+**The two that park do so before the close and not before the merge**, which is
+not 0024 §3.4's reason. Both are tracker work and produce no change at all, so
+the ticket template's fourth Done condition — *the change is merged* — has no
+object here. The run does the work, records that every criterion is met, and
+leaves the close to the decider.
+
+**Entry 4 merges on the answer to O2.** It claims none of 0001 §3's criteria and
+moves no number, which 0022 §3 exempts by name, and its last criterion is met by
+rendered arrangements as the August pass already recorded. **If the finding turns
+out to be sayable only at the moving page it parks instead**, under §3.4, and the
+decider's look comes with it.
+
+**What the grant does not cover** is §3's four exclusions, read against these
+four before the yes: none writes, amends or accepts a record; none is on
+CLAUDE.md's stop-and-ask list; none needs a question that is not answered above;
+and the two carrying a watched criterion are entry 4, exempt, and nothing else.
+**Named out of scope**, because these are where a run drifts: #216 and #233, the
+step after entry 4, which need the decider's eyes · any number written into
+`core/world.ts`, which is #216's · #191, which O4's answer puts behind #96 ·
+#170, which needs an amendment · #264's look, which is the decider's and which
+he gave in conversation on 2026-10-23.
+
+**The start was checked rather than assumed.** The trunk at `7ffe3ae` and clean,
+no change waiting for review, all four checks green each run on its own, a Chrome
+connected for a watch, and the five commands a run needs allowed in
+`.claude/settings.local.json` — the permission the first run lacked, written by
+the decider because the agent is refused that file by name.
+
+**The start also found entry 1's subject, live.** `check:test` came back green
+against the **emitted** tree: a `.js` sits beside every `.ts` under all four
+directories and the coverage table named `core\overlap.js`, `core\random.js`,
+`core\step.js` and `core\world.js`. That is what a session walks into today, and
+one character per row is the only thing that says so.
 
 ### The first granted plan ran, and it is closed
 
