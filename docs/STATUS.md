@@ -2053,7 +2053,72 @@ What a change description must contain is no longer among the gaps here.
 
 ## The single clearest next step
 
-**A second plan is granted, and this is it.** [0024](adr/0024-whether-a-plan-may-be-approved-instead-of-each-change.md)
+**Take [#216](https://github.com/nanatsusaya/dot-panic/issues/216) — the motion
+numbers, chosen again by watching.** #238 has run and what it hands #216 is what
+that ticket was waiting for: a starting point with a measurement behind it, the
+lever that decides the coarsening named, and a statistic that sees the failure
+rather than one taken at an instant. **It is not work a granted plan can
+finish.** 0001 §3.1 puts *it reads as a flock* beyond any command and 0022 §3
+keeps the look that closes it with the decider, so 0024 §3.4 parks such an entry
+before the merge. Everything below this line is what happened, not what is owed.
+
+### The second granted plan ran, and it is closed
+
+**All four entries are worked. Two merged, two park before the close, and
+nothing was started that was not on the list.** Entry 1 is
+[#190](https://github.com/nanatsusaya/dot-panic/issues/190), merged — `check:test`
+refuses when the emitted tree is beside the source, which the start of this run
+walked into. Entry 2 is [#167](https://github.com/nanatsusaya/dot-panic/issues/167)
+and entry 3 is [#166](https://github.com/nanatsusaya/dot-panic/issues/166), both
+tracker work that produced no change at all, so the ticket template's fourth Done
+condition has no object for them: the work is done, every criterion is met, and
+the close is the decider's. Entry 4 is #238, merged with the change carrying this
+report.
+
+**Two merges in this run are the agent's**, under 0024 §2, and they are the first
+that have actually gone through: the first granted plan was refused the merge by
+the agent's harness and the decider pressed it instead. What changed is one file
+the agent may not write — `.claude/settings.local.json`, refused by name with
+reason `[Self-Modification]` — which the decider wrote before this run started.
+**That is the one thing the first run said a later one had to settle before the
+grant rather than after it**, and it is settled.
+
+**Every judgment call the run made, in one list.** This is what 0024 §1 hands the
+decider in place of the diffs.
+
+- **#190's reason for *a script rather than a test* was replaced rather than
+  reused.** The ticket argued from #181, which [0018](adr/0018-where-a-test-lives.md)
+  has since settled; §5 of that record forecloses the same answer independently,
+  because a test under `tests/` may not read a path ending in `.js` and such a
+  path is the check's whole subject.
+- **The guard reads its directory list out of `tsconfig.json`'s `include`**
+  rather than naming the four a fourth time after 0009 §3, 0018 §2 and
+  `.gitignore`. An entry that is not a plain directory name stops the run.
+- **It sits at the repository root**, because a `scripts/` or `checks/`
+  directory would be a fifth top-level one and 0018 §2 is what that costs.
+- **Any `.js` is an error, not only one with a `.ts` beside it** — the orphan is
+  the worse half of *nothing ages the emitted tree*.
+- **Entries 2 and 3 were worked while entry 1's checks ran.** Neither opens a
+  change, so *one change open at a time* was not touched; the plan's order was
+  kept for everything that merges.
+- **#117 already carried the authority sentence above its table**, so the line
+  #167 added below it said the same fact twice. Caught on reading the result
+  back, and the added line now records only the removal.
+- **#132 was edited although it is closed.** #166 asked for exactly that, and a
+  closed ticket is still the artifact that owns its own scope — which is not
+  what CLAUDE.md puts out of reach after a merge.
+- **#238's sweep is ranked on the mean largest body over the second half of a
+  run**, not on one instant, and that choice is itself part of the finding.
+- **The spread's own value was measured separately from alignment's**, which is
+  what turned *the spread buys most of what alignment 2 costs* from a reading
+  into a measurement that contradicts it.
+- **#238's rendered arrangements were treated as measurement and not as a
+  watch** (0022 §4), as the August pass already did, which is why entry 4
+  merged rather than parking.
+- **This file's wrong sentence was corrected here rather than only on the
+  ticket**, because it is the artifact that owns the fact.
+
+**A second plan was granted, and this was it.** [0024](adr/0024-whether-a-plan-may-be-approved-instead-of-each-change.md)
 §1 requires the plan and the words that granted it to stand here before the
 first entry starts. The decider granted a closed list of four entries for the
 session of 2026-10-23 — *die liste ist in ordnung, fang an* — having answered a
@@ -2227,17 +2292,38 @@ either place. It is written down because an earlier count in this session said
 later session comparing this file against the trunk should not read the absence
 as something unfinished.
 
-**Take [#238](https://github.com/nanatsusaya/dot-panic/issues/238) — the flock
-coarsens into one body — because the change of 2026-10-22 made it measurably
-worse and the decider accepted that cost as #238's.** The largest connected
-body at 90 s reads 89–98 of 200 at the weights that were on `main`, 132–200 at
-alignment 2 alone, and **94–179** at alignment 2 with the spread, which is what
-is on `main` now. The spread buys most of what alignment 2 costs and does not
-buy all of it. **The watch saw it happen**: in an undisturbed run all two
+**[#238](https://github.com/nanatsusaya/dot-panic/issues/238) has run on the
+numbers that are on `main`, and the coarsening is not reduced — it is total.**
+Over 300 s on three seeds with no pointer, groups of five or more dots stay
+between 1 and 4, the largest body between 88 and 200, and occupancy between 0.12
+and 0.21 against 0.58–0.62 at the start. Nothing ever comes apart and stays
+apart. **A weighting does hold the flock spread, and the lever is alignment**: at
+reach 0.03 with `S 10 : C 1` and the spread, moving alignment from 2 to 0.25
+takes the mean largest body over the second half of a run from **154.4 to 59.4**,
+and every candidate at or below alignment 0.5 held for the full five minutes on
+every seed. The finding is
+[on the ticket](https://github.com/nanatsusaya/dot-panic/issues/238#issuecomment-6361216867)
+with both sweeps, the five-minute check and the rendered arrangements.
+
+**What this file said about the spread was wrong, and the way it was wrong is
+#238's own subject.** It read *the spread buys most of what alignment 2 costs and
+does not buy all of it*, from largest-body figures at 90 s of 89–98, 132–200 and
+94–179. Measured now, `main` reads 198 / 200 / 120 at that instant — and the
+disagreement is not about the harness. **The largest body at one instant cannot
+order two configurations.** On seed 1 it reads 145 at 45 s, 128 at 60 s, 198 at
+90 s, 123 at 105 s and 115 at 120 s: an eighty-dot swing between consecutive
+samples. Reading three such numbers as a direction is the same error as reading
+thirty seconds as a minute, which is the error this ticket was filed about.
+**What the spread is actually worth** is nothing at alignment 2 — 147.1 against
+154.4, inside the seed noise — and nearly half the largest body at alignment
+0.25. It is a lever alignment 2 switches off, rather than a weak one.
+
+**The watch saw the collapse happen**: in an undisturbed run all two
 hundred dots were one body between about 56 and 64 s, in a corner of an
 otherwise empty frame, and had broken into two again by 81 s. That was
 [PR #276](https://github.com/nanatsusaya/dot-panic/pull/276)'s one open
-question, answered *merge it, #238 läuft weiter*.
+question, answered *merge it, #238 läuft weiter* — and the measurement above
+reads that breaking into two as a fluctuation rather than as a recovery.
 
 **What landed, and what it cost.** 0023 is built: a dot carries one value of its
 own and it is the reach its separation acts over, drawn once in `createWorld`
