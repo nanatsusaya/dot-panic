@@ -260,8 +260,16 @@ export const NEIGHBORHOOD_RADIUS = 0.14;
  * seconds, and 0.03 is the row he picked. Below 0.025 it stops being reliable —
  * at 0.02 the same coefficient runs from 0.13 to 1.99 across three seeds, which
  * is 0006 §1's other named failure, falling past groups into a single clump.
+ *
+ * **0.04 is #216's, and it is the smaller half of what that pass moved.** The
+ * lever it found was `ALIGNMENT_WEIGHT`, not this; the reach came up one step
+ * with it because the two together hold groups where either alone does not.
+ * Measured over 300 s on three seeds, 0.04 with the weights below leaves the
+ * largest body fluctuating around 48 of 200 and five to seven groups of five or
+ * more standing at any moment, where 0.03 at the old weights left one body of
+ * 88 to 200 and never came apart. #238 carries the surface both were read off.
  */
-export const SEPARATION_RADIUS = 0.03;
+export const SEPARATION_RADIUS = 0.04;
 
 /**
  * How far a dot's own reach may sit from the shared one, as a fraction of it
@@ -294,6 +302,13 @@ export const SEPARATION_RADIUS = 0.03;
  * Chosen by measuring between candidates and then watched, which is the order
  * 0022 §4 fixes; smaller and larger spreads were not swept, and #216 is where
  * they would be.
+ *
+ * **#216 kept it and did not sweep it either**, which leaves that gap open. What
+ * that pass did measure is that the spread is worth nothing at an alignment
+ * weight of 2 and a great deal below it — at the old weights it moved the mean
+ * largest body from 147 to 154, inside the seed noise, and at a quarter of that
+ * alignment from 107 to 59. So it is a lever a high alignment switches off, and
+ * the paragraph above describes what it does where alignment leaves it room.
  */
 export const SEPARATION_SPREAD = 0.3;
 
@@ -333,7 +348,13 @@ export const SEPARATION_SPREAD = 0.3;
  * **The index is the argument and not the answer.** 0.90 to 1.10 is the band
  * groups that form and break sit in, and every number above is a proxy for the
  * one thing that decides this — whether it reads as a flock, which is 0001 §3.1's
- * and #216's to watch. This is still that ticket's first pass and not its answer.
+ * and #216's to watch. That band stopped being an argument two states later:
+ * the first weighting measured inside it was watched and refused.
+ *
+ * **#216 kept 10 and moved the other two.** Raising it further spreads the flock
+ * a little more and costs nothing measurable, so there was no reason in the
+ * measurement to move it and every reason in review to leave a number alone
+ * that nothing argued against.
  */
 export const SEPARATION_WEIGHT = 10;
 
@@ -394,21 +415,42 @@ export const SEPARATION_WEIGHT = 10;
  * met stay met.** That distinction is why the number went unexamined while the
  * radii were swept: alignment matches velocities rather than distances, which
  * is true, and is beside the point.
+ *
+ * **0.5 is #216's, and it is the middle the table above has no row for.** The
+ * two ends were each refused for the thing the other does: 2 glides and
+ * coarsens to one body, 0.25 stays spread and each dot steers its own loop. The
+ * pass that chose this read four seconds of every dot's path after the flock had
+ * settled — a still says where the dots are and nothing about how they got
+ * there, which is what three watches here have turned on. At 2 the paths are
+ * long parallel curves inside two bodies in an empty frame; at 0.25 they are
+ * loops and scribble across a full one; at 0.5 they are long parallel curves
+ * that fan where a group turns, in several groups spread over the frame.
+ *
+ * **Above 0.5 the coarsening comes back before the gliding improves.** At 0.75
+ * on the same reach and separation the mean largest body runs 83 of 200 against
+ * 48 at 0.5, and occupancy falls from 0.46 to 0.40. So this is a ceiling found
+ * by measuring, in the same sense 3 once was for `SEPARATION_WEIGHT`.
  */
-export const ALIGNMENT_WEIGHT = 2;
+export const ALIGNMENT_WEIGHT = 0.5;
 
 /**
  * How much cohesion counts, on the same scale. Provisional in the same way and
  * superseded by the same watching.
  *
- * **The one of the three that has not moved**, so the other two are read
- * against it: separation is ten times it and alignment twice it. What
- * it buys is a spacing to settle at rather than a collision or a drift apart —
- * cohesion grows to one over `NEIGHBORHOOD_RADIUS` while separation falls away
- * over `SEPARATION_RADIUS`, and at these three the two balance at 0.903 of the
- * shorter one, which is 0.0271. **Not 0.834 of it**, which is the same pair of
- * radii at #99's weights, and not 0.686, which is the one-reach case;
- * `SEPARATION_RADIUS` carries the arithmetic and what each revision did to it.
+ * **It had not moved until #216**, and the other two are still read against it:
+ * separation is twenty times it and alignment equal to it. What it buys is a
+ * spacing to settle at rather than a collision or a drift apart — cohesion grows
+ * to one over `NEIGHBORHOOD_RADIUS` while separation falls away over the
+ * steering dot's own reach, and at these three two dots stop pushing and pulling
+ * at **0.0394**, which is 0.986 of the shared reach.
+ *
+ * **That number is measured from the Core and not derived from these comments.**
+ * Two dots with one velocity, the gap scanned until a step stops changing it.
+ * The figure recorded here until 2026-10-27 was 0.903 of the reach, or 0.0271,
+ * and the same probe puts the weights it described at **0.979**, or 0.0294 — so
+ * what stood here was wrong rather than stale, and it was wrong in the direction
+ * that makes separation look shorter-ranged than it is. Nothing was built on it:
+ * no test asserts it and no other comment reads it.
  *
  * **It is also what holds separation's room open.** The share of the steering
  * that reaches an edge is over the three weights' total, so raising this number
@@ -419,10 +461,16 @@ export const ALIGNMENT_WEIGHT = 2;
  * **The weights decide where that balance sits and not whether there is one.**
  * Over a single reach it sat at the spacing the flock already had, no weighting
  * moved it into the middle, and the shape rather than the ratio is what had to
- * change — 0006 §1's amendment of 2026-08-09. These three are what the first
- * measurement over two reaches was taken at, and #216 chooses them again.
+ * change — 0006 §1's amendment of 2026-08-09.
+ *
+ * **0.5 is #216's, and it moved with `ALIGNMENT_WEIGHT` rather than for a reason
+ * of its own.** The share of the steering that any one behavior gets is over the
+ * three weights' total, so halving alignment alone would have handed its share
+ * to cohesion and pulled the groups back together. Halving both keeps
+ * separation's share where the measurement wanted it. That is the paragraph
+ * above working in the other direction, and it is why this number is not idle.
  */
-export const COHESION_WEIGHT = 1;
+export const COHESION_WEIGHT = 0.5;
 
 /**
  * How far the visitor's pointer reaches, as a fraction of the frame's shorter
