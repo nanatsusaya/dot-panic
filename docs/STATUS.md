@@ -2053,14 +2053,32 @@ What a change description must contain is no longer among the gaps here.
 
 ## The single clearest next step
 
-**Take [#216](https://github.com/nanatsusaya/dot-panic/issues/216) — the motion
-numbers, chosen again by watching.** #238 has run and what it hands #216 is what
-that ticket was waiting for: a starting point with a measurement behind it, the
-lever that decides the coarsening named, and a statistic that sees the failure
-rather than one taken at an instant. **It is not work a granted plan can
-finish.** 0001 §3.1 puts *it reads as a flock* beyond any command and 0022 §3
-keeps the look that closes it with the decider, so 0024 §3.4 parks such an entry
-before the merge. Everything below this line is what happened, not what is owed.
+**Look at [#216](https://github.com/nanatsusaya/dot-panic/issues/216)'s state,
+which is open and parked for exactly that.** The pass is worked and watched: the
+separation reach moved from 0.03 to 0.04, `ALIGNMENT_WEIGHT` from 2 to 0.5 and
+`COHESION_WEIGHT` from 1 to 0.5, on #238's surface rather than on an argument,
+and the agent watched three scenes under 0022 §2 on 2026-10-28. **Nothing else
+here is waiting on anything else.** 0001 §3.1 puts *it reads as a flock* beyond
+any command and 0022 §3 keeps the look that closes it with the decider, so the
+change is parked before the merge rather than finished.
+
+**What the watch found, in one line each.** The gliding survived the move off
+alignment 2 — fourteen seconds of accumulated path are long smooth curves with no
+loops, where the 0.25 of September read as loops and was refused for it. The
+pointer parts a group into a crescent and the wake closes, but in **ten to
+eighteen seconds against the five to eight** that alignment 2 gave, which is this
+pass's cost. A group held in a corner lies along the edge loosely and leaves when
+the pointer withdraws, the same verdict #264's two criteria got on 2026-10-22.
+The flock uses most of the frame for about fifty seconds and then concentrates
+into part of it — not the single dense crystal `main` gives by 45 s, and not the
+even spread either. The ticket carries the whole of it.
+
+**Three things that watch does not settle**, and they are what the look is for:
+whether it reads as a flock, which is his; whether the slower wake is worth the
+groups; and the **floor-device half** of #216's fourth criterion, untouched since
+2026-08-10 because nobody here has that device.
+
+Everything below this line is what happened, not what is owed.
 
 ### The second granted plan ran, and it is closed
 
