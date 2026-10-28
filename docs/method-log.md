@@ -6,6 +6,39 @@ session would decide worse without it.
 
 Newest first.
 
+## 2026-10-28 — Four refusals of a number are a statement about the rule it sits in
+
+Three numbers in [0006](adr/0006-motion-rules.md) §1 were chosen by measurement
+and refused at the page, each time by somebody looking: a separation weight, a
+reach, an alignment weight, and a weighting of all three on the morning of this
+date. Every one of those passes was built the same way — sweep the Core outside
+the repository, rank the runs on a statistic that sees the failure, take the best
+row, watch it. **The method was sound and the answer was not in its range**, and
+nothing in the procedure says when to stop running it.
+
+What found the cause was not a better sweep. It was counting a quantity nobody
+had counted: how many neighbors a dot actually has. Seven at the start, thirty to
+forty-six once the flock settles, and the literature the decider asked for gives
+6.5 in real flocks — so the rule, not the weights, was what the sweeps had been
+working around. **The weights could not reach it, which is why four passes failed
+the same way rather than differently.**
+
+**The rule to take from this: a parameter refused repeatedly is evidence about
+the rule it is a parameter in.** Two refusals are a tuning problem. By the third,
+measure something the parameter does not control and check it against a number
+from outside the project. That is cheap — this one was an afternoon — and it is
+the step no amount of sweeping contains, because a sweep can only vary what it
+was given to vary.
+
+**The expensive half is that the record had already written the answer down.**
+0006's own *Consequences* listed, as a negative accepted knowingly, that *groups
+make the neighborhood hold more of the flock, which is the price of having groups
+at all*. It was read for three months as a price and it was a feedback loop. **A
+negative consequence a record accepts is a hypothesis, not a settled cost** —
+worth re-reading as a list of things to measure whenever the thing it is about
+keeps failing. 0025 is the amendment and the record's own text is quoted inside
+0006's A4.
+
 ## 2026-10-23 — The first granted plan stopped at a permission, and the agent could not grant it
 
 [0024](adr/0024-whether-a-plan-may-be-approved-instead-of-each-change.md) §2

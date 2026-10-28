@@ -18,7 +18,7 @@
   [0012](0012-how-software-gets-developed.md) §4 (test-first in the Core, without
   exception), §5 (watch-first in the View)
 - **Supersedes:** nothing
-- **Amended:** 2026-08-09 — A1, A2 · 2026-09-20 — A3
+- **Amended:** 2026-08-09 — A1, A2 · 2026-09-20 — A3 · 2026-10-28 — A4
 
 ## Context
 
@@ -57,7 +57,7 @@ algorithm and its trigger there. What the control looks like is already 0005 §7
 
 ## Decision
 
-### 1. The base is Reynolds' three steering behaviors, over a neighborhood that is a radius
+### 1. The base is Reynolds' three steering behaviors, over a neighborhood that is a count
 
 Separation, alignment and cohesion, as published: each dot steers away from
 crowding by its neighbors, toward their average heading, and toward their
@@ -65,8 +65,10 @@ average position. All three act on **local** neighbors rather than on the whole
 flock, and that is the load-bearing detail — the aggregate motion emerges from
 each dot reacting only to what is near it.
 
-**The neighborhood is a circle of fixed radius around each dot, the same radius
-for every dot.** Reynolds' neighborhood is a distance *and an angle*: a boid
+**The neighborhood is a fixed number of nearest dots, and the circle it implies
+has a radius per dot per step** — the distance to the furthest of them, a result
+rather than a setting ([0025](0025-whether-the-neighborhood-is-a-radius-or-a-count.md) §1). Reynolds'
+neighborhood is a distance *and an angle*: a boid
 disregards flockmates outside a cone, modeling an animal that cannot see behind
 itself.
 
@@ -75,13 +77,15 @@ chosen by watching, and its effect on what a person sees is the least separable
 of them — a watcher can tell that the flock looks wrong and cannot tell that the
 cone is why. Nothing here has eyes; 0004 records the model as reimplemented
 rather than copied, and a simplification is a legitimate part of that. Adding it
-later changes a number, not the structure.
+later changes a number, not the structure — and [0025](0025-whether-the-neighborhood-is-a-radius-or-a-count.md)
+§4 measured that prediction at 90° and 120° and it held.
 
 **Separation acts over a shorter reach than the other two.** Alignment and
 cohesion take the whole neighborhood; separation answers only the neighbors
 inside a smaller circle around the dot, concentric with it. **The shorter reach
-is strictly shorter**, which is a relation a command decides once the two numbers
-exist, in the way §6's margin condition is.
+is shorter in the typical case rather than as an invariant**: with a radius per
+dot per step there are no two numbers for a command to compare, so [0025](0025-whether-the-neighborhood-is-a-radius-or-a-count.md)
+§5 measures the relation instead and carries the figure.
 
 **One reach for all three does not produce a flock, and that is measured rather
 than argued.** Separation and cohesion oppose each other, so over one reach the
@@ -98,10 +102,12 @@ form.
 **The three weights are not fixed here**, for the reason 0005 §3 gives about
 color and R1 there records: 0001 §3.1 puts *it reads as a flock* beyond what any
 command can decide, and the weights are the numbers that decide it. They are
-chosen by watching, under 0012 §5. **Neither reach is fixed here either**, and
-the neighborhood's has a second reason as well as that one: it drives the cost of
-neighbor search, which is 0008's. Separation's does not — it is the smaller of
-the two, so a search that answers the neighborhood answers it as well.
+chosen by watching, under 0012 §5. **Separation's reach is not fixed here
+either**, and the neighborhood no longer has a reach to fix: [0025](0025-whether-the-neighborhood-is-a-radius-or-a-count.md)
+§2 fixes its count, on a field measurement rather than by watching. The cost of
+neighbor search is still 0008's and still the neighborhood's — a k-nearest
+selection reads the pairs a radius scan read — and separation's reach rides
+along with it, being the smaller.
 
 ### 2. Non-overlap is a hard constraint, applied after the step
 
@@ -272,7 +278,6 @@ motion that left its own side of it implicit would be the wrong example.
 
 | | Invariant |
 |---|---|
-| §1 | Separation's reach is shorter than the neighborhood's — for every dot, over the largest reach [0023](0023-whether-a-dot-carries-variation-of-its-own.md) §3 lets one carry |
 | §2 | No two dots closer than `2r` in a returned world |
 | §3 | Every dot's speed in `[vmin, vmax]`, with `vmin > 0` |
 | §4 | Change in velocity across a step at most `amax` |
@@ -285,7 +290,7 @@ motion that left its own side of it implicit would be the wrong example.
 into the ticket before the work starts:
 
 - Whether it reads as a flock — 0001 §3.1, which no command will ever decide
-- The three weights in §1, both of its reaches, and every number above
+- The three weights in §1, separation's reach, and every number above
 - Whether speed visibly varies, which §4 produces rather than guarantees
 
 **Every number in this record is in the second list.** The record fixes relations
@@ -296,12 +301,14 @@ and no color.
 
 **Positive.**
 
-- **Eight invariants, six of them on the day the record is written.** 0012 §4
+- **Seven invariants, six of them on the day the record is written.** 0012 §4
   requires the Core to be built test-first, and §10 hands it the list to start
   from rather than asking the first implementer to invent one. The seventh
-  arrived with A1, once there was a flock to look at, and the eighth with A2 —
-  which is another record's decision listed here, because this is where a
-  session reads what a command decides about motion.
+  arrived with A2 — which is another record's decision listed here, because this
+  is where a session reads what a command decides about motion. **An eighth
+  arrived with A1 and left with A4**: §1's relation between the two reaches
+  stopped being checkable once the neighborhood stopped having one number, and
+  [0025](0025-whether-the-neighborhood-is-a-radius-or-a-count.md) §5 measures it instead.
 - **The boundary rule is derived, not chosen.** §6 follows from §4, so a later
   session that wants a bounce has to argue with an invariant instead of with a
   preference.
@@ -337,17 +344,23 @@ and no color.
 - **§7 is the softest section.** It commits to a flock leaving a corner without
   saying what force makes it leave, resting on the claim that a speed floor is
   enough. That claim is plausible and untested.
-- **Separation's reach has nothing arguing for a value.** The neighborhood's has
-  0008's search cost pulling on it from one side; the shorter one has only what
-  the flock looks like. It is also the number here most able to be wrong
-  quietly — a flock too even and a flock too clumped both satisfy every invariant
-  in §10.
-- **Groups make the neighborhood hold more of the flock, which is the price of
-  having groups at all.** A dot in an evenly spread world has a handful of
-  neighbors; a dot inside a group has many, over the same radius. That pulls
-  against this section's own reason for calling locality load-bearing, and it
-  pulls on 0008 §7, whose scan is over whatever the radius returns. Nothing here
-  bounds it, and §10 leaves the number to watching.
+- **Separation's reach has nothing arguing for a value.** 0008's search cost used
+  to pull on the neighborhood's radius from one side; a k-nearest selection reads
+  every pair whatever the count is, so that pull moves to the dot count and the
+  neighborhood's own number is argued for by a field measurement instead
+  ([0025](0025-whether-the-neighborhood-is-a-radius-or-a-count.md) §2). Separation's reach has only what the
+  flock looks like, and it is the number here most able to be wrong quietly — a
+  flock too even and a flock too clumped both satisfy every invariant in §10.
+- **This record called that a price, and it was a loop.** The negative A4
+  retired read *groups make the neighborhood hold more of the flock, which is the
+  price of having groups at all* — a dot in a spread world has a handful of
+  neighbors and a dot inside a group has many, over the same radius. Measured, it
+  was 31 to 46 with peaks at 86 against the 7.9 a fresh arrangement has, and
+  [0025](0025-whether-the-neighborhood-is-a-radius-or-a-count.md)'s *Context* is where the loop is read: the
+  count rose with the flock's own density, a high count made the group rigid, and
+  a rigid group coarsened further. A count cannot do that, so the entry is retired
+  rather than reworded. **What it identified correctly was the pull on 0008 §7**,
+  and that stands — the scan is over whatever the neighborhood returns.
 
 ## Alternatives considered
 
@@ -601,6 +614,94 @@ wir folgen deiner Empfehlung*, then answering 0023's four open questions on
 [PR #275](https://github.com/nanatsusaya/dot-panic/pull/275#issuecomment-5752389541):
 
 > wir folgen bei O1 bis O4 deinen Empfehlungen
+
+**A4 — the neighborhood becomes a count of nearest dots, and the relation
+between the two reaches stops being an invariant. 2026-10-28.**
+
+§1's heading read:
+
+> ### 1. The base is Reynolds' three steering behaviors, over a neighborhood that is a radius
+
+§1's second paragraph opened:
+
+> **The neighborhood is a circle of fixed radius around each dot, the same radius
+> for every dot.**
+
+§1's paragraph on the two reaches ended:
+
+> **The shorter reach is strictly shorter**, which is a relation a command decides
+> once the two numbers exist, in the way §6's margin condition is.
+
+§1's closing paragraph ended:
+
+> **Neither reach is fixed here either**, and the neighborhood's has a second
+> reason as well as that one: it drives the cost of neighbor search, which is
+> 0008's. Separation's does not — it is the smaller of the two, so a search that
+> answers the neighborhood answers it as well.
+
+§10's first asserted row read:
+
+> | §1 | Separation's reach is shorter than the neighborhood's — for every dot, over the largest reach [0023](0023-whether-a-dot-carries-variation-of-its-own.md) §3 lets one carry |
+
+§10's watched list read:
+
+> - The three weights in §1, both of its reaches, and every number above
+
+*Consequences* opened:
+
+> - **Eight invariants, six of them on the day the record is written.**
+
+and its last negative read:
+
+> - **Groups make the neighborhood hold more of the flock, which is the price of
+>   having groups at all.** A dot in an evenly spread world has a handful of
+>   neighbors; a dot inside a group has many, over the same radius.
+
+**What replaced them.** §1 now makes the neighborhood a fixed number of nearest
+dots whose radius is a result, per dot and per step; its cone paragraph gains the
+measurement that its own prediction held; its two-reaches paragraph re-grades the
+relation from an invariant to a claim about the typical case; and its closing
+paragraph says the neighborhood has no reach left to fix. §10 loses the asserted
+row and names separation's reach alone in the watched list. *Consequences* counts
+seven invariants, says which one left and why, and replaces the last negative
+with what the measurement found instead of it. **Nothing else changes** — the
+three behaviors, their locality, separation acting over the shorter reach, the
+reasoning about why one reach for all three does not work, and every other
+section stand. A1 and A2 stand as history; the invariant A1 added is the one this
+amendment removes, and A1's reasoning for giving separation the shorter reach is
+untouched.
+
+**The count itself is not written here.**
+[0025](0025-whether-the-neighborhood-is-a-radius-or-a-count.md) §2 fixes it at
+seven and carries the field measurement under it, which is why §10's *every
+number in this record is in the second list* survives the amendment unchanged.
+
+**Why.** Four weightings were chosen by measurement and refused at the page —
+[#267](https://github.com/nanatsusaya/dot-panic/issues/267)'s separation weight,
+[#269](https://github.com/nanatsusaya/dot-panic/issues/269)'s reach, the
+alignment pass of 2026-09-20, and
+[PR #289](https://github.com/nanatsusaya/dot-panic/pull/289) on 2026-10-28, the
+last of them *das verhält sich nicht wie ein scharm*. Four passes failing the
+same way is a statement about the shape rather than about the weights. The
+decider then asked for the literature to be read, and what it found is this
+record's own last negative, measured:
+[Ballerini et al.](https://pmc.ncbi.nlm.nih.gov/articles/PMC2234121/) count
+6.5 ± 0.9 interacting neighbors in real starling flocks where a dot here had 31
+to 46, and
+[Hemelrijk & Hildenbrandt](https://pmc.ncbi.nlm.nih.gov/articles/PMC3150374)
+measured a flock's shape becoming nearly constant at 50 partners. 0025's
+*Context* carries the evidence and it is not repeated here.
+[#290](https://github.com/nanatsusaya/dot-panic/issues/290) is the ticket.
+
+**The authorization**, from the decider on 2026-10-28, answering 0025's three
+open questions in conversation rather than on the page:
+
+> #291 O1-O2: wir folgen deiner Empfehlung
+>
+> #291 O3: ja duz darfst
+
+The third of those is this amendment. 0025 R3 is where it is read from the other
+side, and 0025 O3 deliberately carried no recommended default.
 
 ## References
 

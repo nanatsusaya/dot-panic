@@ -83,6 +83,7 @@ longer supports.
 | [0005](0005-rendering-and-visual-design.md) | Rendering and visual design | Canvas, SVG or DOM; color, light and dark, pixel density | Accepted |
 | [0006](0006-motion-rules.md) | Motion rules | Bounded frame, minimum speed, non-overlap as a constraint | Accepted |
 | [0023](0023-whether-a-dot-carries-variation-of-its-own.md) | Whether a dot carries variation of its own | Which one value a dot may carry, how it is drawn, and what relations bound it | Accepted |
+| [0025](0025-whether-the-neighborhood-is-a-radius-or-a-count.md) | Whether the neighborhood is a radius or a count | Whether a dot answers everyone inside a fixed circle or a fixed number of nearest dots, and what that does to the radius | Accepted |
 | [0007](0007-pointer-and-input-model.md) | Pointer and input model | Mouse and touch, radius of effect, how it decays | Accepted |
 | [0021](0021-how-the-acceleration-budget-is-shared.md) | How the acceleration budget is shared | Whether containment competes with steering for one bound or claims it first, and where the pointer sits | Accepted |
 | [0014](0014-page-layout.md) | Page layout | How the flock, the imprint and the explanation are arranged; how the canvas is sized against them | Accepted |
@@ -176,17 +177,29 @@ that trigger on 2026-08-09; two watches on 2026-09-20, one the decider's and one
 the agent's under 0022, closed the numbers off from both ends. It sits after
 0006 because it amends it — logged there as A3.
 
-**Eight rows have now been added after the set was planned**, and that is the
+**0025 was added by a behavior refused four times at the page.**
+[0006](0006-motion-rules.md) §1 made the neighborhood one radius for every dot
+and listed, among its own negative consequences, that a group makes that radius
+hold more of the flock. Four weightings chosen by measurement were each refused
+by the decider or by the agent's own watch, the last on 2026-10-28; he then asked
+for the literature to be read, and it turned out to have measured that negative
+in real flocks. It sits beside 0006 because it amends it — logged there as A4,
+which is where the superseded wording and the authorization are read.
+
+**Nine rows have now been added after the set was planned**, and that is the
 mechanism working rather than the plan failing. Each took the next free number.
 Four came from a record finding a topic no existing row owned, the fifth from a
 question about the set, the sixth from a ticket, the seventh from the decider
-handing a role over, and the eighth from a record's own reopening clause. Three
-arrived with a ticket in the same change; the tickets for 0018, 0019 and 0022 —
-[#181](https://github.com/nanatsusaya/dot-panic/issues/181),
+handing a role over, the eighth from a record's own reopening clause, and the
+ninth from a record's own negative consequence turning out to be measurable.
+Three arrived with a ticket in the same change; the tickets for 0018, 0019 and
+0022 — [#181](https://github.com/nanatsusaya/dot-panic/issues/181),
 [#199](https://github.com/nanatsusaya/dot-panic/issues/199) and
 [#272](https://github.com/nanatsusaya/dot-panic/issues/272) — were filed first,
 by the change that met the gap, 0020's was filed three days before anything met
-one, and 0023's six weeks before. It is the numbering in
+one, 0023's six weeks before, and 0025's
+([#290](https://github.com/nanatsusaya/dot-panic/issues/290)) a few hours
+before, from the research that produced it. It is the numbering in
 [0012](0012-how-software-gets-developed.md)'s paragraph above that is closed, not
 the set.
 
