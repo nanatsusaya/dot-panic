@@ -3,7 +3,7 @@
 *Brought current by the change that moves the position; a wind-down writes only
 what no change carried. Read first when a session starts.*
 
-*Last brought current: 2026-10-23.*
+*Last brought current: 2026-10-28.*
 
 ## Position
 
@@ -90,6 +90,31 @@ flock into one clump. Measured before the record moved rather than after: the
 Clark-Evans index over a minute went from 0.831 to 1.735, where 1 is a random
 scatter, and the shorter reach brings it to 0.714. The
 [method log](method-log.md) carries what the sequence teaches.
+
+**It happened a second time on 2026-10-28, and this time the record had said so
+itself.** [0006](adr/0006-motion-rules.md) A4 is the amendment: the neighborhood
+is a count of nearest dots rather than one radius for every dot, and its radius
+is a result per dot per step. **What it reverses is one of that record's own
+negative consequences** — *groups make the neighborhood hold more of the flock,
+which is the price of having groups at all* — which measurement turned from a
+price into a loop. A dot had **31 to 46** neighbors over two minutes with peaks
+at **86**, against 7.9 in a fresh arrangement and the 6.5 ± 0.9
+[Ballerini et al.](https://pmc.ncbi.nlm.nih.gov/articles/PMC2234121/) measured in
+real starling flocks: a metric radius makes the count a function of density, the
+density is the flock's own product, and a high count makes a group rigid.
+[0025](adr/0025-whether-the-neighborhood-is-a-radius-or-a-count.md) is the record
+and [#290](https://github.com/nanatsusaya/dot-panic/issues/290) the ticket; the
+count itself is 0025 §2's and is argued for by that field figure rather than by
+watching, which is why it is not one of 0006 §10's numbers.
+
+**Four weightings were refused at the page before the shape was questioned** —
+[#267](https://github.com/nanatsusaya/dot-panic/issues/267)'s separation weight,
+[#269](https://github.com/nanatsusaya/dot-panic/issues/269)'s reach, the
+alignment pass of 2026-09-20, and
+[PR #289](https://github.com/nanatsusaya/dot-panic/pull/289) on the morning of
+2026-10-28. The [method log](method-log.md) carries that lesson. **The research
+that found the cause was the decider's instruction**, not a reading of the
+record: he refused the fourth pass and asked for the literature.
 
 **The second look said yes, with a reservation.** Groups form, travel, meet and
 merge, and a group arriving at an edge reorients and leaves — 0006 §6 under a
@@ -2053,14 +2078,26 @@ What a change description must contain is no longer among the gaps here.
 
 ## The single clearest next step
 
-**Take [#216](https://github.com/nanatsusaya/dot-panic/issues/216) — the motion
-numbers, chosen again by watching.** #238 has run and what it hands #216 is what
-that ticket was waiting for: a starting point with a measurement behind it, the
-lever that decides the coarsening named, and a statistic that sees the failure
-rather than one taken at an instant. **It is not work a granted plan can
-finish.** 0001 §3.1 puts *it reads as a flock* beyond any command and 0022 §3
-keeps the look that closes it with the decider, so 0024 §3.4 parks such an entry
-before the merge. Everything below this line is what happened, not what is owed.
+**Build what [0025](adr/0025-whether-the-neighborhood-is-a-radius-or-a-count.md)
+decided — [#290](https://github.com/nanatsusaya/dot-panic/issues/290).** The
+record is Accepted and nothing in the Core has moved: *accepted means decided,
+not built* is exactly this gap.
+[PR #292](https://github.com/nanatsusaya/dot-panic/pull/292) is the change — all
+four checks green, watched under 0022 §2, and deliberately held behind this
+record rather than folded into it, because CLAUDE.md forbids implementing ahead
+of a decision. **It turns a test red by design**, the block asserting *the
+neighborhood, which is a radius and nothing else*, which is 0010 §2's mechanism
+working rather than a defect.
+
+**[#216](https://github.com/nanatsusaya/dot-panic/issues/216) is behind it and
+its question has changed.** It was choosing weights against a neighborhood that
+moved under them; after #290 it chooses them against one that does not, so the
+four refused passes are evidence about the rule rather than about the numbers
+that ticket will pick. **It is still not work a granted plan can finish** — 0001
+§3.1 puts *it reads as a flock* beyond any command and 0022 §3 keeps the closing
+look with the decider, so 0024 §3.4 parks such an entry before the merge. The
+floor-device half of its fourth criterion is owed and unchanged since
+2026-08-10. Everything below this line is what happened, not what is owed.
 
 ### The second granted plan ran, and it is closed
 

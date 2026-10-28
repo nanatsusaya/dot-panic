@@ -1,6 +1,6 @@
 # 0025 — Whether the neighborhood is a radius or a count
 
-- **Status:** Proposed
+- **Status:** Accepted
 - **Date:** 2026-10-28
 - **Deciders:** Daniel Wagner
 - **Ticket:** [#290](https://github.com/nanatsusaya/dot-panic/issues/290)
@@ -65,18 +65,20 @@ result rather than a setting, it differs per dot, and it changes every step —
 which is how StarDisplay describes the same rule, adjusting a metric radius each
 step to approach a fixed number of partners.
 
-**The amended sentence.** 0006 §1 reads, and until this record is accepted
-continues to read:
+**The amended sentence.** Until this record was accepted, 0006 §1 read:
 
 > **The neighborhood is a circle of fixed radius around each dot, the same
 > radius for every dot.**
 
-After this record the neighborhood is a fixed count of nearest dots, and the
-circle it implies has a radius per dot per step. The section's heading moves
-with it: *over a neighborhood that is a radius* becomes *over a neighborhood
-that is a count*. Everything else in §1 stands — the three behaviors, their
-locality, separation's shorter reach, and the reasoning about one reach for all
-three.
+It now makes the neighborhood a fixed count of nearest dots whose implied circle
+has a radius per dot per step, and its heading moves with it: *over a
+neighborhood that is a radius* became *over a neighborhood that is a count*.
+Everything else in §1 stands — the three behaviors, their locality, separation
+acting over the shorter reach, and the reasoning about one reach for all three —
+except that §5 below re-grades the relation between the two reaches rather than
+removing it. **The amendment is logged in 0006 as A4**, which is where the
+superseded wording and the authorization are read, and R3 below is this side of
+it.
 
 **Checkable by reading:** no module reads a single constant as the neighborhood's
 radius, and the count is the only free parameter of the neighborhood.
@@ -171,6 +173,17 @@ than passing quietly.
 k-nearest selection reads the same pairs a radius scan reads. #104's trigger is
 still a budget found to have drifted.
 
+**Two accepted records describe 0006 §1 as a radius, and neither is edited.**
+0008's dependency line calls the neighborhood *a circle of one radius* and its
+§1 reference sends that radius' cost to itself; 0023 §3 bounds the per-dot reach
+against `NEIGHBORHOOD_RADIUS` by name, and its §4 and §6 call the neighborhood
+one radius for every dot. An accepted record is immutable, so those sentences
+stay as written and are read as of their date — 0006's A4 is where the change is
+logged and this record is where the rule now lives. Neither record's decision is
+disturbed: 0008's is about the cost of the search, which the paragraph above
+leaves where it was, and 0023's is about what one dot may carry, which §5 above
+re-grades the bound on without touching the value.
+
 **This record does not make the toy good enough.** It removes one cause measured
 to be acting; whether what remains reads as a flock is 0001 §3.1's and the
 decider's, and no amendment settles it.
@@ -195,23 +208,27 @@ step toward the target count. Rejected as the same rule with a lag: it reaches
 the k-nearest set asymptotically and adds a smoothing constant that would itself
 need watching.
 
-## Open questions
+## Resolved questions
 
-- **O1 — is seven the number, or is five?** §2 takes seven on the field figure.
-  Five disperses further (largest body 56.5 against 75.5, groups 11.1 against
-  7.7) and looked, in four seconds of path, like more and smaller groups.
-  **Recommended: seven**, because the measurement that motivates the whole change
-  is 6.5 and choosing five would be choosing by preference the record cannot
-  defend. If the watch prefers five, it is a one-character change and this
-  question is where it is recorded.
-- **O2 — does `NEIGHBORHOOD_RADIUS` go, or stay as a search cap?** §3 retires it
-  on the measurement that the cap is slightly worse. **Recommended: it goes.**
-  The alternative keeps a constant whose only reader would be an optimization
-  0008 §7 has not asked for.
-- **O3 — is the amendment to 0006 §1 authorized?** It is the whole of this
-  record and it is the decider's alone. **No default is recommended**, because a
-  recommendation for one's own amendment is what the rule against editing an
-  accepted record exists to prevent.
+Answered in conversation on 2026-10-28 rather than on
+[PR #291](https://github.com/nanatsusaya/dot-panic/pull/291), and posted there as
+a comment because an answer given in conversation is still owed one.
+
+- **R1 — seven, not five.** *wir folgen deiner Empfehlung.* §2 stands as written.
+  Five disperses further on every statistic measured, and it stays a
+  one-character change if a later watch prefers it; what it would not have is a
+  field measurement to stand on, and standing on one is the whole reason this
+  record exists rather than a fifth sweep.
+- **R2 — `NEIGHBORHOOD_RADIUS` goes.** Same answer. §3 stands: the capped variant
+  was measured worse where it differs, and keeping the constant would have left a
+  number whose only reader is an optimization 0008 §7 has not asked for. A later
+  record may reintroduce one as a search bound, which is a question about cost
+  and not about the rule.
+- **R3 — the amendment is authorized.** The decider, verbatim: *ja duz darfst.*
+  It is logged in [0006](0006-motion-rules.md) as A4, with the superseded wording
+  quoted and this authorization beside it, which is the only route an accepted
+  section changes by. **O3 carried no recommended default**, deliberately, and
+  that is the one thing in this record no measurement could have settled.
 
 ## References
 
