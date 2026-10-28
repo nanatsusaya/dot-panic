@@ -177,34 +177,42 @@ export const EDGE_MARGIN = 0.08;
 export const MAX_ACCELERATION = 1.2;
 
 /**
- * How far a dot looks for others to steer by, as a fraction of the frame's
- * shorter side (0008 §6). Provisional; #216 supersedes it by watching.
+ * How many others a dot steers by: its nearest this many, however far away they
+ * are ([0025](../docs/adr/0025-whether-the-neighborhood-is-a-radius-or-a-count.md)
+ * §1). The neighborhood's radius follows from the count rather than fixing it,
+ * so it differs per dot and changes every step.
  *
- * 200 dots over a 16:9 frame's ≈1.778 square units is a density of ≈112 per
- * unit², so `π·0.14²·112 ≈ 7` puts about six others inside it **while the flock
- * is spread evenly** — enough for an average to mean something.
+ * **Seven is a measured figure and not one of 0006 §10's.** Those are the
+ * numbers only watching decides; this one has a field measurement under it —
+ * Ballerini et al. count 6.5 ± 0.9 interacting neighbors in real starling
+ * flocks, with the anisotropy of a flock becoming isotropic between the sixth
+ * and seventh. Seven is the integer that names. 0025 §2 carries what five and
+ * ten do here instead.
  *
- * **A settled flock is not spread evenly, and the arithmetic above is about the
- * one that is.** With groups a dot has forty or more of the other 199 inside
- * this radius, because the radius has not changed and the density inside a
- * group has. That is the cost 0006 §1 records rather than a number wanting a
- * turn: a dot still reacts only to what is near it, and near is what this
- * number defines. Deriving the radius from the even case is also what pinned
- * the flock to it — see `SEPARATION_RADIUS`.
+ * **What it replaced, and why a radius could not stay.** Until 2026-10-28 this
+ * was `NEIGHBORHOOD_RADIUS`, a circle of 0.14 the same for every dot, and that
+ * comment already described the failure without naming it: *with groups a dot
+ * has forty or more of the other 199 inside this radius*. Measured, it ran 31
+ * to 46 with peaks at 86. A metric radius makes the count a function of
+ * density, the density is the flock's own product, and a high count makes a
+ * group rigid — so the coarsening fed itself. A count cannot do that.
  *
- * **It is a radius and nothing else.** 0006 §1 drops Reynolds' angular
- * neighborhood deliberately, so one behind counts exactly as much as one ahead,
- * and restoring the angle is an amendment's business rather than a knob. Fixed
- * in #99 before the work started, which is where 0008 R1 puts a number.
+ * **It is a count and no angle.** 0006 §1 drops Reynolds' angular
+ * neighborhood deliberately and 0025 §4 keeps it dropped, measured: a rear
+ * blind angle of 90° or 120° changes the statistics slightly for the worse and
+ * not the character.
  */
-export const NEIGHBORHOOD_RADIUS = 0.14;
+export const NEIGHBORHOOD_COUNT = 7;
 
 /**
  * How close another dot has to be before separation answers it, as a fraction
  * of the frame's shorter side (0008 §6). Provisional; #216 supersedes it by
  * watching.
  *
- * **0006 §1 requires it to be shorter than `NEIGHBORHOOD_RADIUS`**, and that
+ * **0006 §1 asks it to be shorter than the neighborhood's reach**, which 0025
+ * §5 turns from an invariant into a measured claim — 0.13 % of dot-steps have a
+ * dot's own reach exceeding its seventh neighbor's distance. The relation and
+ * that
  * requirement is A1 on that record — written on 2026-08-09, after the flock was
  * built over one reach and looked at. Alignment and cohesion take the whole
  * neighborhood; separation answers roughly its nearest fifth.
@@ -227,7 +235,8 @@ export const NEIGHBORHOOD_RADIUS = 0.14;
  *
  * **The factor is not a property of separation's shape**, which is the other
  * one. It is the root of
- * `SEPARATION_WEIGHT · (r/d − 1) = COHESION_WEIGHT · d/NEIGHBORHOOD_RADIUS`, so
+ * `SEPARATION_WEIGHT · (r/d − 1) = COHESION_WEIGHT · d/neighborhood`, where the
+ * neighborhood is now the seventh neighbor's distance rather than a constant, so
  * every term in it moves the answer: 0.686 of the reach when both radii were
  * 0.14, 0.834 once only one of them shortened, 0.903 once the weights changed
  * as well. At 0.03 that is **0.0271**, under a third of the pitch. **The
@@ -270,7 +279,8 @@ export const SEPARATION_RADIUS = 0.03;
  * A dot's reach is `SEPARATION_RADIUS · (1 ± SEPARATION_SPREAD)` at the ends of
  * the range and anywhere between, drawn once in `createWorld`. Two relations
  * bound the number and a test asserts both: the largest reach any dot can
- * carry is still shorter than `NEIGHBORHOOD_RADIUS`, which is 0006 §1's A1 read
+ * carry is still shorter than the neighborhood's typical reach, which is
+ * 0006 §1's A1 read
  * over the range; and the smallest is still positive, so no dot's separation
  * vanishes.
  *
@@ -404,7 +414,8 @@ export const ALIGNMENT_WEIGHT = 2;
  * **The one of the three that has not moved**, so the other two are read
  * against it: separation is ten times it and alignment twice it. What
  * it buys is a spacing to settle at rather than a collision or a drift apart —
- * cohesion grows to one over `NEIGHBORHOOD_RADIUS` while separation falls away
+ * cohesion grows to one over the dot's own neighborhood radius while separation
+ * falls away
  * over `SEPARATION_RADIUS`, and at these three the two balance at 0.903 of the
  * shorter one, which is 0.0271. **Not 0.834 of it**, which is the same pair of
  * radii at #99's weights, and not 0.686, which is the one-reach case;

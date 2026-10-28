@@ -24,7 +24,7 @@ import {
   EDGE_MARGIN,
   type Frame,
   MAX_ACCELERATION,
-  NEIGHBORHOOD_RADIUS,
+  NEIGHBORHOOD_COUNT,
   POINTER_DECAY_STEPS,
   POINTER_RADIUS,
   POINTER_STRENGTH,
@@ -206,13 +206,22 @@ function speedOf(velocity: Vector): number {
 const MIDDLE: Vector = { x: WIDE.width / 2, y: 0.5 };
 
 /*
- * A distance inside the neighborhood, for the worlds whose claim is about what
+ * A distance the worlds below place a neighbor at when the claim is about what
  * a dot can see at all rather than about what pushes it away.
  *
- * @param divisor  what to divide the neighborhood's radius by
+ * **It is a fixture and no longer a rule.** Until 0025 it was the
+ * neighborhood's radius over a divisor, and a dot further out than the radius
+ * was invisible. Under a count every dot is visible until seven nearer ones
+ * stand between — so what a test places a neighbor at is now only a distance,
+ * and `the neighborhood` below is where the rule is asserted.
+ */
+const NEARBY = 0.14;
+
+/*
+ * @param divisor  what to divide that fixture by
  */
 function radiusOver(divisor: number): number {
-  return NEIGHBORHOOD_RADIUS / divisor;
+  return NEARBY / divisor;
 }
 
 /*
@@ -233,9 +242,9 @@ function separationOver(divisor: number): number {
  * A distance past separation's reach and still inside the neighborhood, which
  * is the band 0006 §1's A1 opened and where alignment and cohesion act alone.
  *
- * The multiplier has to keep the result inside `NEIGHBORHOOD_RADIUS`, so it is
- * a relation between the two numbers rather than between one of them and a
- * constant — which is what #216 has to hold on to when it moves either.
+ * The multiplier only has to clear separation's reach now. Until 0025 it also
+ * had to stay inside the neighborhood's radius; a count has no outer edge to
+ * stay inside, so what was a relation between two numbers is a relation to one.
  *
  * @param multiple  how many of separation's reaches out to sit
  */
@@ -1031,10 +1040,15 @@ describe("the share of the budget containment takes first", () => {
 });
 
 /*
- * 0006 §1's neighborhood, which is a radius and nothing else. That section
- * drops Reynolds' angular term deliberately, and says restoring it changes a
- * number rather than the structure — so the absence is a rule to assert and not
- * an omission to leave to review.
+ * 0006 §1's neighborhood as 0025 §1 amends it: a count and nothing else. That
+ * section drops Reynolds' angular term deliberately and 0025 §4 keeps it
+ * dropped, so the absence is a rule to assert and not an omission to leave to
+ * review — and the count's own boundary is now the thing to assert beside it.
+ *
+ * **This block asserted a radius until 2026-10-28**, with the boundary at 0.99
+ * and 1.01 of the constant. It went red against 0025's build, which is 0010
+ * §2's mechanism working: a decision reversed in code fails a test rather than
+ * passing quietly.
  */
 describe("the neighborhood", () => {
   const seconds = 1 / 60;
@@ -1043,20 +1057,41 @@ describe("the neighborhood", () => {
     expect(steered(flockAround([], CARRIED), seconds)).toEqual(CARRIED);
   });
 
-  // Both halves in one test, because the claim is where the boundary sits and
-  // one side of it says nothing on its own.
-  test("steers by a dot inside the radius and not by one outside it", () => {
-    const inside = flockAround(
-      [{ x: 0.99 * NEIGHBORHOOD_RADIUS, y: 0 }],
-      CARRIED,
+  /*
+   * Both halves in one test, because the claim is where the boundary sits and
+   * one side of it says nothing on its own. Eight neighbors in a line, each
+   * further than the last: the eighth is the first one outside the count.
+   */
+  test("steers by its nearest and not by the one past the count", () => {
+    const line = (howMany: number): { x: number; y: number }[] =>
+      Array.from({ length: howMany }, (_unused, index) => ({
+        x: NEARBY * (index + 1),
+        y: 0,
+      }));
+
+    const seven = steered(
+      flockAround(line(NEIGHBORHOOD_COUNT), CARRIED),
+      seconds,
     );
-    const outside = flockAround(
-      [{ x: 1.01 * NEIGHBORHOOD_RADIUS, y: 0 }],
-      CARRIED,
+    const eight = steered(
+      flockAround(line(NEIGHBORHOOD_COUNT + 1), CARRIED),
+      seconds,
     );
 
-    expect(steered(inside, seconds).x).not.toBeCloseTo(CARRIED.x, 12);
-    expect(steered(outside, seconds)).toEqual(CARRIED);
+    expect(seven.x).not.toBeCloseTo(CARRIED.x, 12);
+    expect(eight).toEqual(seven);
+  });
+
+  /*
+   * The half a radius could not have: distance alone no longer decides. One
+   * neighbor far away still steers a dot, because there is nobody nearer to
+   * fill the count — which is 0025 §3's no cap, and what keeps a straggler
+   * from being dropped by the flock it has drifted out of.
+   */
+  test("steers by a far neighbor when there is no nearer one", () => {
+    const far = flockAround([{ x: 10 * NEARBY, y: 0 }], CARRIED);
+
+    expect(steered(far, seconds).x).not.toBeCloseTo(CARRIED.x, 12);
   });
 
   /*
@@ -1180,7 +1215,7 @@ describe("the three steering behaviors", () => {
    */
   test("pushes away from a near neighbor and pulls toward a far one", () => {
     const near = flockAround([{ x: separationOver(7), y: 0 }], CARRIED);
-    const far = flockAround([{ x: 0.9 * NEIGHBORHOOD_RADIUS, y: 0 }], CARRIED);
+    const far = flockAround([{ x: 0.9 * NEARBY, y: 0 }], CARRIED);
 
     expect(steered(near, seconds).x).toBeLessThan(CARRIED.x);
     expect(steered(far, seconds).x).toBeGreaterThan(CARRIED.x);

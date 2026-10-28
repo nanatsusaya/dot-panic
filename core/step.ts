@@ -43,7 +43,7 @@ import {
   COHESION_WEIGHT,
   EDGE_MARGIN,
   MAX_ACCELERATION,
-  NEIGHBORHOOD_RADIUS,
+  NEIGHBORHOOD_COUNT,
   POINTER_DECAY_STEPS,
   POINTER_RADIUS,
   POINTER_STRENGTH,
@@ -216,17 +216,47 @@ function edgeForce(position: Vector, frame: Frame): Vector {
  *
  * @param dot   the dot whose neighbors are wanted; it is never its own
  * @param dots  every dot in the world, this one among them
- * @returns those inside `NEIGHBORHOOD_RADIUS`, in the order they were given
+ * @returns its nearest `NEIGHBORHOOD_COUNT`, closest first, and the distance to
+ *          the furthest of them — which is the neighborhood's radius for this
+ *          dot on this step (0025 §1). Fewer than the count only where the
+ *          world holds fewer dots
  */
-function neighborsOf(dot: Dot, dots: readonly Dot[]): Dot[] {
-  return dots.filter(
-    (other) =>
-      other !== dot &&
-      Math.hypot(
+function neighborhoodOf(
+  dot: Dot,
+  dots: readonly Dot[],
+): { neighbors: Dot[]; radius: number } {
+  const byGap: { other: Dot; gap: number }[] = [];
+
+  for (const other of dots) {
+    if (other === dot) {
+      continue;
+    }
+
+    byGap.push({
+      other,
+      gap: Math.hypot(
         other.position.x - dot.position.x,
         other.position.y - dot.position.y,
-      ) <= NEIGHBORHOOD_RADIUS,
-  );
+      ),
+    });
+  }
+
+  byGap.sort((left, right) => left.gap - right.gap);
+  const taken = byGap.slice(0, NEIGHBORHOOD_COUNT);
+  const furthest = taken[taken.length - 1];
+
+  /*
+   * There is no cap, and 0025 §3 is why: the seven nearest wherever they are.
+   * Taking only those inside some radius is what lets a dot that has drifted
+   * out of everything stop being pulled back, and the remainder close without
+   * it — measured here as a largest body reaching 189 against 135.
+   */
+  return {
+    neighbors: taken.map((entry) => entry.other),
+    // Zero only where two dots share a position, which `separationFrom` skips
+    // and cohesion reads as no distance to cover.
+    radius: furthest === undefined ? 0 : furthest.gap,
+  };
 }
 
 /**
@@ -336,7 +366,8 @@ function alignmentTo(dot: Dot, neighbors: readonly Dot[]): Vector {
 /**
  * Reynolds' cohesion: steer toward where the neighbors average out (0006 §1).
  *
- * Divided by `NEIGHBORHOOD_RADIUS`, so it is nothing at the neighbors' own
+ * Divided by the dot's own neighborhood radius, so it is nothing at the
+ * neighbors' own
  * center and one at the edge of what a dot can see — the growth separation's
  * fade is measured against.
  *
@@ -344,7 +375,11 @@ function alignmentTo(dot: Dot, neighbors: readonly Dot[]): Vector {
  * @param neighbors  the dots inside its neighborhood, never empty
  * @returns a dimensionless vector no longer than one
  */
-function cohesionTo(dot: Dot, neighbors: readonly Dot[]): Vector {
+function cohesionTo(
+  dot: Dot,
+  neighbors: readonly Dot[],
+  radius: number,
+): Vector {
   let x = 0;
   let y = 0;
 
@@ -353,9 +388,13 @@ function cohesionTo(dot: Dot, neighbors: readonly Dot[]): Vector {
     y += neighbor.position.y;
   }
 
+  if (radius === 0) {
+    return { x: 0, y: 0 };
+  }
+
   return {
-    x: (x / neighbors.length - dot.position.x) / NEIGHBORHOOD_RADIUS,
-    y: (y / neighbors.length - dot.position.y) / NEIGHBORHOOD_RADIUS,
+    x: (x / neighbors.length - dot.position.x) / radius,
+    y: (y / neighbors.length - dot.position.y) / radius,
   };
 }
 
@@ -382,7 +421,7 @@ function cohesionTo(dot: Dot, neighbors: readonly Dot[]): Vector {
  *          the step is
  */
 function steeringFor(dot: Dot, dots: readonly Dot[]): Vector {
-  const neighbors = neighborsOf(dot, dots);
+  const { neighbors, radius } = neighborhoodOf(dot, dots);
 
   if (neighbors.length === 0) {
     return { x: 0, y: 0 };
@@ -390,7 +429,7 @@ function steeringFor(dot: Dot, dots: readonly Dot[]): Vector {
 
   const separation = separationFrom(dot, neighbors);
   const alignment = alignmentTo(dot, neighbors);
-  const cohesion = cohesionTo(dot, neighbors);
+  const cohesion = cohesionTo(dot, neighbors, radius);
   const scale = MAX_ACCELERATION / TOTAL_WEIGHT;
 
   return {
