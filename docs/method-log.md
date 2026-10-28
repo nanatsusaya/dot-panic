@@ -6,6 +6,35 @@ session would decide worse without it.
 
 Newest first.
 
+## 2026-10-28 — A visible, focused window that renders at one and a half frames a second
+
+The entry below this one put a guard in front of every watch: read
+`visibilityState` and count `requestAnimationFrame` ticks for two seconds, because
+a tab nobody is looking at freezes and a frozen flock looks exactly like a settled
+one. **The guard fired on its first real use, and what it caught is one layer
+deeper than what it was written for.**
+
+```
+visibilityState: visible · hasFocus: true · fps: 1.5
+```
+
+Chrome throttles rendering for a window that is **occluded by another window**,
+and reports neither of the two flags a page can ask about. The tab was the front
+tab of its own window, the document had focus, and the renderer was running at a
+fortieth of its rate. Brought forward, the same probe read **119.6**.
+
+**So the flags are not the check and never were — the tick count is.** Had the
+guard trusted `visibilityState`, this watch would have read a minute of frames
+from a page advancing about one simulated second per ten, and the flock would have
+looked far more settled than it is. That is the same wrong verdict the entry below
+describes, reached through a door it did not know about.
+
+**What it cost to find was one message asking the decider to bring his window
+forward**, which is the same shape again: the instrument is shared, and the half of
+it only a person can operate is where it fails quietly. It is worth saying plainly
+that this is the second time the cost has been exactly that, and the second time
+the fix has been two lines that run before the first frame is counted.
+
 ## 2026-10-23 — The first granted plan stopped at a permission, and the agent could not grant it
 
 [0024](adr/0024-whether-a-plan-may-be-approved-instead-of-each-change.md) §2
